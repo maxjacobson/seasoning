@@ -1,0 +1,14 @@
+{
+  "include": ["app/**/*"],
+
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "noEmit": true,
+    "outDir": "tmp",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx"
+  }
+}

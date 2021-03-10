@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react"
-import { Link, Router } from "@reach/router"
+import { Link, Router, RouteComponentProps } from "@reach/router"
+import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
 import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard"
 
 const App = () => {
   const guestToken = localStorage.getItem("oiva-guest-token")
-  const [guest, setGuest] = useState(null)
+  const [guest, setGuest] = useState<Guest | undefined>(undefined)
 
   useEffect(() => {
     if (!guestToken) {
+      setGuest({} as AnonymousGuest)
       return
     }
 
     fetch("/api/guest.json")
       .then((response) => response.json())
-      .then((data) => setGuest(data))
+      .then((data: AuthenticatedGuest) => setGuest(data))
   }, [guestToken])
-
-  console.log("guest", guest)
 
   return (
     <>
@@ -28,7 +28,7 @@ const App = () => {
 
       <Router>
         <Home path="/" guest={guest} />
-        <Dashboard path="/dashboard" guest={guest} />
+        <Dashboard path="/dashboard" />
       </Router>
     </>
   )

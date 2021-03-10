@@ -1,3 +1,6 @@
 import React from "react"
-const Dashboard = () => <p>Dashboard</p>
+import { RouteComponentProps } from "@reach/router"
+
+const Dashboard = (props: RouteComponentProps) => <p>Dashboard</p>
+
 export default Dashboard

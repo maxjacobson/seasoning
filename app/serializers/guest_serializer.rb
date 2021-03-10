@@ -2,5 +2,5 @@
 
 # Serializes the guest to JSON
 class GuestSerializer < Oj::Serializer
-  attributes :name
+  attributes :authenticated, :name
 end

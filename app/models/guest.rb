@@ -2,7 +2,11 @@
 
 # Someone who is visiting the site
 class Guest
+  def authenticated
+    true
+  end
+
   def name
-    "Unknown..."
+    "Max"
   end
 end
