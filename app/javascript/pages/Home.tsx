@@ -1,74 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { RouteComponentProps } from "@reach/router"
 import Loader from "../components/Loader"
-import { csrfToken } from "../networking/csrf"
+import GetStarted from "./Home/GetStarted"
+import YourShows from "./Home/YourShows"
 
 import { Guest } from "../types"
 
 interface HomeProps extends RouteComponentProps {
   guest?: Guest
-}
-
-const GetStarted = () => {
-  const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [createdMagicLink, setCreatedMagicLink] = useState(false)
-
-  useEffect(() => {
-    if (!loading) {
-      return
-    }
-
-    fetch("/api/magic-links.json", {
-      headers: {
-        "X-CSRF-Token": csrfToken(),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ magic_link: { email: email } }),
-      method: "POST",
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error("Could not create magic link")
-        }
-      })
-      .then((data) => {
-        setLoading(false)
-        setCreatedMagicLink(true)
-      })
-  }, [loading])
-
-  if (createdMagicLink) {
-    return <p>Check your email!</p>
-  } else {
-    return (
-      <div>
-        <p>
-          To sign up or log in, just enter your email address and we'll send you
-          a link to get started:
-        </p>
-        <div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              setLoading(true)
-            }}
-          >
-            <input
-              type="text"
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={loading}
-            />
-            <input type="submit" value="Go" disabled={loading} />
-          </form>
-        </div>
-      </div>
-    )
-  }
 }
 
 const Home = (props: HomeProps) => {
@@ -79,7 +18,12 @@ const Home = (props: HomeProps) => {
   }
 
   if (guest.authenticated) {
-    return <p>Welcome home, {guest.human.handle}</p>
+    return (
+      <>
+        <h1>Welcome to Oiva</h1>
+        <YourShows human={guest.human} token={guest.token} />
+      </>
+    )
   } else {
     return (
       <>

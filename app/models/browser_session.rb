@@ -9,4 +9,6 @@ class BrowserSession < ApplicationRecord
   before_create -> { self.last_seen_at = Time.now }
   before_create -> { self.token = SecureRandom.uuid }
   before_create -> { self.expires_at = 3.months.from_now }
+
+  scope :active, -> { where("expires_at > now()") }
 end

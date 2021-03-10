@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_10_073728) do
+ActiveRecord::Schema.define(version: 2021_03_10_203202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,5 +43,25 @@ ActiveRecord::Schema.define(version: 2021_03_10_073728) do
     t.index ["token"], name: "index_magic_links_on_token", unique: true
   end
 
+  create_table "my_shows", force: :cascade do |t|
+    t.bigint "human_id", null: false, comment: "Which human has saved this show"
+    t.bigint "show_id", null: false, comment: "Which show this human has saved"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true
+    t.index ["human_id"], name: "index_my_shows_on_human_id"
+    t.index ["show_id"], name: "index_my_shows_on_show_id"
+  end
+
+  create_table "shows", force: :cascade do |t|
+    t.string "title", null: false, comment: "The show's official title"
+    t.string "slug", null: false, comment: "The show's title, in slug form, to go in a URL"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_shows_on_slug", unique: true
+  end
+
   add_foreign_key "browser_sessions", "humans", on_delete: :cascade
+  add_foreign_key "my_shows", "humans", on_delete: :cascade
+  add_foreign_key "my_shows", "shows", on_delete: :cascade
 end

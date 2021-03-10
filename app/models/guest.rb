@@ -9,13 +9,14 @@ class Guest
               .where("expires_at > now()")
               .first
 
-    new(session&.human)
+    new(session&.human, token)
   end
 
-  attr_reader :human
+  attr_reader :human, :token
 
-  def initialize(human)
+  def initialize(human, token)
     @human = human
+    @token = token
   end
 
   def authenticated

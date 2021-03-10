@@ -2,7 +2,7 @@
 
 # Serializes the guest to JSON
 class GuestSerializer < Oj::Serializer
-  attributes :authenticated
+  attributes :authenticated, :token
   serializer_attributes :human
 
   def human
