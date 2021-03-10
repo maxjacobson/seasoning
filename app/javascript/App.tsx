@@ -3,6 +3,7 @@ import { Link, Router, RouteComponentProps } from "@reach/router"
 import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
+import RedeemMagicLink from "./pages/RedeemMagicLink"
 
 const App = () => {
   const guestToken = localStorage.getItem("oiva-guest-token")
@@ -28,6 +29,7 @@ const App = () => {
       <Router>
         <NotFound default />
         <Home path="/" guest={guest} />
+        <RedeemMagicLink path="/knock-knock/:token" setGuest={setGuest} />
       </Router>
     </>
   )

@@ -6,4 +6,5 @@ RESERVED_WORDS = %w[
   seasons
   tv
   api
+  knock-knock
 ].freeze

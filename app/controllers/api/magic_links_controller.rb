@@ -18,5 +18,25 @@ module API
         render json: {}, status: 400
       end
     end
+
+    def show
+      magic_link = MagicLink.where("expires_at > now()").find_by!(token: params[:id])
+      human = Human.where(email: magic_link.email).first
+
+      if human.present?
+        browser_session = human.browser_sessions.create!
+        render json: {
+          already_exists: true,
+          session_token: browser_session.token,
+          email: human.email,
+          handle: human.handle
+        }
+      else
+        render json: {
+          already_exists: false,
+          email: magic_link.email
+        }
+      end
+    end
   end
 end
