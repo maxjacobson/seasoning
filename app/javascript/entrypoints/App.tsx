@@ -6,8 +6,7 @@ import Dashboard from "./pages/Dashboard"
 const App = () => (
   <>
     <nav>
-      <Link to="/">Home</Link>{" "}
-      <Link to="dashboard">Dashboard</Link>
+      <Link to="/">Home</Link> <Link to="dashboard">Dashboard</Link>
     </nav>
     <h1>Hello world</h1>
 
@@ -16,6 +15,6 @@ const App = () => (
       <Dashboard path="/dashboard" />
     </Router>
   </>
-);
+)
 
 export default App

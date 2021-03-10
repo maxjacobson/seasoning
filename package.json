@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "prettier": "^2.2.1",
     "vite": "^2.0.5",
     "vite-plugin-ruby": "^1.0.16"
   },
