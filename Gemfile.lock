@@ -67,6 +67,8 @@ GEM
     crass (1.0.6)
     dry-cli (0.6.0)
       concurrent-ruby (~> 1.0)
+    email_validator (2.2.2)
+      activemodel
     erubi (1.10.0)
     ffi (1.15.0)
     globalid (0.4.2)
@@ -193,6 +195,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  email_validator
   listen (~> 3.3)
   oj_serializers
   pg (~> 1.1)

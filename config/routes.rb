@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     defaults format: :json do
       resource :guest, only: [:show]
+      resources :magic_links, only: [:create], path: "/magic-links"
     end
   end
 

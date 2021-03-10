@@ -141,6 +141,60 @@ ALTER SEQUENCE public.humans_id_seq OWNED BY public.humans.id;
 
 
 --
+-- Name: magic_links; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.magic_links (
+    id bigint NOT NULL,
+    email character varying NOT NULL,
+    token character varying NOT NULL,
+    expires_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: COLUMN magic_links.email; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.magic_links.email IS 'The email address that the magic link is sent to. Following the link proves they are this human.';
+
+
+--
+-- Name: COLUMN magic_links.token; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.magic_links.token IS 'The thing that makes this link unique, which will be part of the link';
+
+
+--
+-- Name: COLUMN magic_links.expires_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.magic_links.expires_at IS 'When the magic link stops working';
+
+
+--
+-- Name: magic_links_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.magic_links_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: magic_links_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.magic_links_id_seq OWNED BY public.magic_links.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -161,6 +215,13 @@ ALTER TABLE ONLY public.browser_sessions ALTER COLUMN id SET DEFAULT nextval('pu
 --
 
 ALTER TABLE ONLY public.humans ALTER COLUMN id SET DEFAULT nextval('public.humans_id_seq'::regclass);
+
+
+--
+-- Name: magic_links id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.magic_links ALTER COLUMN id SET DEFAULT nextval('public.magic_links_id_seq'::regclass);
 
 
 --
@@ -185,6 +246,14 @@ ALTER TABLE ONLY public.browser_sessions
 
 ALTER TABLE ONLY public.humans
     ADD CONSTRAINT humans_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: magic_links magic_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.magic_links
+    ADD CONSTRAINT magic_links_pkey PRIMARY KEY (id);
 
 
 --
@@ -217,6 +286,13 @@ CREATE INDEX index_browser_sessions_on_human_id ON public.browser_sessions USING
 
 
 --
+-- Name: index_magic_links_on_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_magic_links_on_token ON public.magic_links USING btree (token);
+
+
+--
 -- Name: browser_sessions fk_rails_994ac30d0f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -233,6 +309,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20210310054759'),
 ('20210310055137'),
-('20210310061023');
+('20210310061023'),
+('20210310073728');
 
 
