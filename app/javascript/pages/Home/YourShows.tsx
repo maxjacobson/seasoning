@@ -54,7 +54,7 @@ const YourShows = (props: Props) => {
 
   return (
     <>
-      <p>{props.human.handle}'s shows</p>
+      <h2>{props.human.handle}'s shows</h2>
       {loading ? <Loader /> : <ListShows shows={shows} />}
     </>
   )
