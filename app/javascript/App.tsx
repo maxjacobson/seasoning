@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Link, Router, RouteComponentProps } from "@reach/router"
 import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
+import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
-import Dashboard from "./pages/Dashboard"
 
 const App = () => {
   const guestToken = localStorage.getItem("oiva-guest-token")
@@ -22,13 +22,12 @@ const App = () => {
   return (
     <>
       <nav>
-        <Link to="/">Home</Link> <Link to="dashboard">Dashboard</Link>
+        <Link to="/">Home</Link>
       </nav>
-      <h1>Hello world</h1>
 
       <Router>
+        <NotFound default />
         <Home path="/" guest={guest} />
-        <Dashboard path="/dashboard" />
       </Router>
     </>
   )

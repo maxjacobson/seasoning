@@ -1,5 +1,6 @@
 import React from "react"
 import { RouteComponentProps } from "@reach/router"
+import Loader from "../components/Loader"
 
 import { Guest } from "../types"
 
@@ -11,7 +12,7 @@ const Home = (props: HomeProps) => {
   const { guest } = props
 
   if (!guest) {
-    return <p>Loading...</p>
+    return <Loader />
   }
 
   if (guest.authenticated) {
