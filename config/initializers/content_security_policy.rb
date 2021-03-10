@@ -10,10 +10,10 @@
 #   policy.img_src     :self, :https, :data
 #   policy.object_src  :none
 #   policy.script_src  :self, :https
-    # Allow @vite/client to hot reload changes in development
+# Allow @vite/client to hot reload changes in development
 #    policy.script_src *policy.script_src, :unsafe_eval, "http://localhost:3036" if Rails.env.development?
 
-    # You may need to enable this in production as well depending on your setup.
+# You may need to enable this in production as well depending on your setup.
 #    policy.script_src *policy.script_src, :blob if Rails.env.test?
 
 #   policy.style_src   :self, :https
