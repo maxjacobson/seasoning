@@ -1,24 +1,10 @@
-# README
+# Oiva
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Playing around with an idea for a website.
+This is mostly an excuse to try out vite.
 
-Things you may want to cover:
+So far I've just built a passwordless signup/signin via magic links.
 
-- Ruby version
+Deploying to: <http://oiva.herokuapp.com/>
 
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+Oiva is my sister's dog.
