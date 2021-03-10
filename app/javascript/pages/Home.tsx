@@ -15,7 +15,7 @@ const Home = (props: HomeProps) => {
   }
 
   if (guest.authenticated) {
-    return <p>Welcome home, {guest.name}</p>
+    return <p>Welcome home, {guest.human.handle}</p>
   } else {
     return <p>Welcome -- sign up?</p>
   }

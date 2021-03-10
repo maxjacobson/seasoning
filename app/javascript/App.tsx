@@ -14,7 +14,7 @@ const App = () => {
       return
     }
 
-    fetch("/api/guest.json")
+    fetch("/api/guest.json", { headers: { "X-OIVA-TOKEN": guestToken } })
       .then((response) => response.json())
       .then((data: AuthenticatedGuest) => setGuest(data))
   }, [guestToken])

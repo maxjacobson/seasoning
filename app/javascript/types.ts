@@ -1,6 +1,10 @@
+export interface Human {
+  handle: string
+}
+
 export interface AuthenticatedGuest {
   authenticated: true
-  name: string
+  human: Human
   token: string
 }
 
