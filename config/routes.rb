@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :magic_links, only: %i[create show], path: "/magic-links"
       resources :humans, only: [:create]
       resources :your_shows, only: [:index], path: "/your-shows"
+      resources :profiles, only: [:show]
     end
   end
 
