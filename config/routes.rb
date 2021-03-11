@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/", to: "frontend#show"
+  get "/", to: "frontend#show", as: :root
   get "/*anything", to: "frontend#show"
 end
