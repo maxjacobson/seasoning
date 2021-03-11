@@ -63,9 +63,11 @@ const App = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault()
-                localStorage.clear()
-                setGuestToken(null)
-                navigate("/")
+                if (confirm("Log out?")) {
+                  localStorage.clear()
+                  setGuestToken(null)
+                  navigate("/")
+                }
               }}
             >
               Log out
