@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "@reach/router"
 
 import { Human, Show } from "../../types"
 import Loader from "../../components/Loader"
@@ -55,7 +56,14 @@ const YourShows = (props: Props) => {
   return (
     <>
       <h2>{props.human.handle}'s shows</h2>
-      {loading ? <Loader /> : <ListShows shows={shows} />}
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <ListShows shows={shows} />
+          <Link to="/add-show">Add show</Link>
+        </>
+      )}
     </>
   )
 }

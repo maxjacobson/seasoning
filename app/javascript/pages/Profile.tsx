@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
 import Loader from "../components/Loader"
-import { Guest, Show } from "../types"
+import { Show } from "../types"
 
 interface StillLoading {
   loading: true
@@ -24,7 +24,6 @@ type ProfileData = StillLoading | LoadedProfileData | ProfileNotFound
 
 interface Props extends RouteComponentProps {
   handle?: string
-  guest?: Guest
 }
 
 const Profile = ({ handle }: Props) => {

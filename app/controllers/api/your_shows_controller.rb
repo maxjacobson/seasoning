@@ -7,7 +7,7 @@ module API
       authorize! { current_human.present? }
 
       render json: {
-        shows: YourShowSerializer.many(current_human.shows)
+        shows: ShowSerializer.many(current_human.shows)
       }
     end
   end

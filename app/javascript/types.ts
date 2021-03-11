@@ -17,4 +17,5 @@ export type Guest = AuthenticatedGuest | AnonymousGuest
 export interface Show {
   id: number
   title: string
+  slug: string
 }

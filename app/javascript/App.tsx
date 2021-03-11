@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, Router, RouteComponentProps, navigate } from "@reach/router"
+import { Link, Router, navigate } from "@reach/router"
 import styled, { createGlobalStyle } from "styled-components"
 
 import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
@@ -7,6 +7,8 @@ import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
 import Discover from "./pages/Discover"
 import About from "./pages/About"
+import AddShow from "./pages/AddShow"
+import Show from "./pages/Show"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 
@@ -91,10 +93,12 @@ const App = () => {
       <Router>
         <NotFound default />
         <Home path="/" guest={guest} />
-        <Discover path="/discover" guest={guest} />
+        <Discover path="/discover" />
         <RedeemMagicLink path="/knock-knock/:token" setToken={setGuestToken} />
         <About path="/about" />
-        <Profile path="/:handle" guest={guest} />
+        <AddShow path="/add-show" guest={guest} />
+        <Show path="/shows/:showSlug" guest={guest} />
+        <Profile path="/:handle" />
       </Router>
 
       <footer></footer>

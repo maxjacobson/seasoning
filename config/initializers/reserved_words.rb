@@ -10,4 +10,5 @@ RESERVED_WORDS = %w[
   knock-knock
   discover
   about
+  add-show
 ].freeze

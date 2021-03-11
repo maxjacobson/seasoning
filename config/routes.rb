@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :humans, only: [:create]
       resources :your_shows, only: [:index], path: "/your-shows"
       resources :profiles, only: [:show]
+      resources :shows, only: [:index]
     end
   end
 
