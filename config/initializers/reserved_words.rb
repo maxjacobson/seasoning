@@ -9,4 +9,5 @@ RESERVED_WORDS = %w[
   api
   knock-knock
   discover
+  about
 ].freeze

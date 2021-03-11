@@ -7,6 +7,11 @@ interface Props extends RouteComponentProps {
 }
 
 const Discover = (props: Props) => {
-  return <p>Discover page</p>
+  return (
+    <>
+      <h2>Discover</h2>
+      <p>Discover page content to come later...</p>
+    </>
+  )
 }
 export default Discover

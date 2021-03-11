@@ -6,6 +6,7 @@ import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
 import Discover from "./pages/Discover"
+import About from "./pages/About"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 
@@ -33,6 +34,11 @@ const Layout = styled.div`
   }
 `
 
+const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+`
+
 const App = () => {
   const [guestToken, setGuestToken] = useState<string | null>(
     localStorage.getItem("seasoning-guest-token")
@@ -54,35 +60,44 @@ const App = () => {
     <Layout>
       <GlobalStyle />
 
-      <nav>
-        <Link to="/">Home</Link> <Link to="/discover">Discover</Link>{" "}
-        {guest && guest.authenticated && (
-          <>
-            <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>{" "}
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault()
-                if (confirm("Log out?")) {
-                  localStorage.clear()
-                  setGuestToken(null)
-                  navigate("/")
-                }
-              }}
-            >
-              Log out
-            </a>
-          </>
-        )}
-      </nav>
+      <Nav>
+        <span>
+          <Link to="/">Home</Link> <Link to="/discover">Discover</Link>{" "}
+          <Link to="/about">About</Link>{" "}
+        </span>
+
+        <span>
+          {guest && guest.authenticated && (
+            <>
+              <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>{" "}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (confirm("Log out?")) {
+                    localStorage.clear()
+                    setGuestToken(null)
+                    navigate("/")
+                  }
+                }}
+              >
+                Log out
+              </a>
+            </>
+          )}
+        </span>
+      </Nav>
 
       <Router>
         <NotFound default />
         <Home path="/" guest={guest} />
         <Discover path="/discover" guest={guest} />
         <RedeemMagicLink path="/knock-knock/:token" setToken={setGuestToken} />
+        <About path="/about" />
         <Profile path="/:handle" guest={guest} />
       </Router>
+
+      <footer></footer>
     </Layout>
   )
 }
