@@ -4,6 +4,8 @@ module API
   # Interactions with the human (aka user) resource
   class HumansController < ApplicationController
     def create
+      authorize! { true }
+
       human_params = params.require(:humans).permit(:magic_link_token, :handle)
       magic_link = MagicLink.where("expires_at > now()").find_by!(token: human_params[:magic_link_token])
 

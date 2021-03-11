@@ -26,15 +26,17 @@ const Layout = styled.div`
     color: #1d2b8a;
     text-decoration: none;
     font-weight: bold;
+    background-color: yellow;
     &:hover {
       color: green;
-      text-decoration: underline;
     }
   }
 `
 
 const App = () => {
-  const guestToken = localStorage.getItem("oiva-guest-token")
+  const [guestToken, setGuestToken] = useState<string | null>(
+    localStorage.getItem("oiva-guest-token")
+  )
   const [guest, setGuest] = useState<Guest | undefined>(undefined)
 
   useEffect(() => {
@@ -55,7 +57,19 @@ const App = () => {
       <nav>
         <Link to="/">Home</Link> <Link to="/discover">Discover</Link>{" "}
         {guest && guest.authenticated && (
-          <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>
+          <>
+            <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>{" "}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                localStorage.clear()
+                setGuestToken(null)
+              }}
+            >
+              Log out
+            </a>
+          </>
         )}
       </nav>
 
@@ -63,7 +77,7 @@ const App = () => {
         <NotFound default />
         <Home path="/" guest={guest} />
         <Discover path="/discover" guest={guest} />
-        <RedeemMagicLink path="/knock-knock/:token" setGuest={setGuest} />
+        <RedeemMagicLink path="/knock-knock/:token" setToken={setGuestToken} />
         <Profile path="/:handle" guest={guest} />
       </Router>
     </Layout>

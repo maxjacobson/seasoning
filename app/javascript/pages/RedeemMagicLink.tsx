@@ -4,7 +4,7 @@ import { Guest, AuthenticatedGuest } from "../types"
 import { csrfToken } from "../networking/csrf"
 
 interface Props extends RouteComponentProps {
-  setGuest: (guest: Guest) => void
+  setToken: (token: string) => void
   token?: string
 }
 
@@ -44,13 +44,7 @@ const RedeemMagicLink = (props: Props) => {
       .then((data: Redemption) => {
         if (data.already_exists) {
           localStorage.setItem("oiva-guest-token", data.session_token)
-          props.setGuest({
-            authenticated: true,
-            human: {
-              handle: data.handle,
-            },
-            token: data.session_token,
-          })
+          props.setToken(data.session_token)
           navigate("/")
         } else {
           setEmail(data.email)
@@ -92,13 +86,7 @@ const RedeemMagicLink = (props: Props) => {
               })
               .then((data: AlreadyExists) => {
                 localStorage.setItem("oiva-guest-token", data.session_token)
-                props.setGuest({
-                  authenticated: true,
-                  human: {
-                    handle: data.handle,
-                  },
-                  token: data.session_token,
-                })
+                props.setToken(data.session_token)
                 navigate("/")
               })
           }}

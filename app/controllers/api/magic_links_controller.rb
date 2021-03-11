@@ -5,6 +5,7 @@ module API
   # If you have access to your email account, you're you.
   class MagicLinksController < ApplicationController
     def create
+      authorize! { true }
       email = params.require(:magic_link).require(:email)
 
       # This is a "loose" validation which I think is fine.
@@ -20,6 +21,8 @@ module API
     end
 
     def show
+      authorize! { true }
+
       magic_link = MagicLink.where("expires_at > now()").find_by!(token: params[:id])
       human = Human.where(email: magic_link.email).first
 
