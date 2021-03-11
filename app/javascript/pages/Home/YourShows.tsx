@@ -36,7 +36,7 @@ const YourShows = (props: Props) => {
   useEffect(() => {
     fetch("/api/your-shows.json", {
       headers: {
-        "X-OIVA-TOKEN": props.token,
+        "X-SEASONING-TOKEN": props.token,
       },
     })
       .then((response) => {

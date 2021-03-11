@@ -35,7 +35,7 @@ const Layout = styled.div`
 
 const App = () => {
   const [guestToken, setGuestToken] = useState<string | null>(
-    localStorage.getItem("oiva-guest-token")
+    localStorage.getItem("seasoning-guest-token")
   )
   const [guest, setGuest] = useState<Guest | undefined>(undefined)
 
@@ -45,7 +45,7 @@ const App = () => {
       return
     }
 
-    fetch("/api/guest.json", { headers: { "X-OIVA-TOKEN": guestToken } })
+    fetch("/api/guest.json", { headers: { "X-SEASONING-TOKEN": guestToken } })
       .then((response) => response.json())
       .then((data: AuthenticatedGuest) => setGuest(data))
   }, [guestToken])

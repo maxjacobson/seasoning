@@ -43,7 +43,7 @@ const RedeemMagicLink = (props: Props) => {
       })
       .then((data: Redemption) => {
         if (data.already_exists) {
-          localStorage.setItem("oiva-guest-token", data.session_token)
+          localStorage.setItem("seasoning-guest-token", data.session_token)
           props.setToken(data.session_token)
           navigate("/")
         } else {
@@ -85,7 +85,10 @@ const RedeemMagicLink = (props: Props) => {
                 }
               })
               .then((data: AlreadyExists) => {
-                localStorage.setItem("oiva-guest-token", data.session_token)
+                localStorage.setItem(
+                  "seasoning-guest-token",
+                  data.session_token
+                )
                 props.setToken(data.session_token)
                 navigate("/")
               })

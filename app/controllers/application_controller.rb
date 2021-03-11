@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def token
-    request.headers["X-OIVA-TOKEN"]
+    request.headers["X-SEASONING-TOKEN"]
   end
 
   def current_human
