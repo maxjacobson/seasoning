@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, Router, RouteComponentProps } from "@reach/router"
+import { Link, Router, RouteComponentProps, navigate } from "@reach/router"
 import styled, { createGlobalStyle } from "styled-components"
 
 import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
@@ -65,6 +65,7 @@ const App = () => {
                 e.preventDefault()
                 localStorage.clear()
                 setGuestToken(null)
+                navigate("/")
               }}
             >
               Log out
