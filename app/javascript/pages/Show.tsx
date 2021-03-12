@@ -1,6 +1,7 @@
 import React from "react"
 import { RouteComponentProps } from "@reach/router"
 import { Guest } from "../types"
+import { setHeadTitle } from "../hooks"
 
 interface Props extends RouteComponentProps {
   showSlug?: string
@@ -8,6 +9,10 @@ interface Props extends RouteComponentProps {
 }
 
 const Show = ({ showSlug, guest }: Props) => {
+  if (showSlug) {
+    setHeadTitle(showSlug)
+  }
+
   return (
     <>
       <h2>{showSlug}</h2>

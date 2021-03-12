@@ -4,6 +4,7 @@ import debounce from "lodash.debounce"
 
 import GoHome from "../components/GoHome"
 import { Guest, Show } from "../types"
+import { setHeadTitle } from "../hooks"
 
 interface NoSearchYet {
   shows: null
@@ -81,6 +82,8 @@ const AddShow = ({ guest }: Props) => {
   if (!guest || !guest.authenticated) {
     return <GoHome />
   }
+
+  setHeadTitle("Add show")
 
   const { token } = guest
   const [title, setTitle] = useState("")

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
 import { Guest, AuthenticatedGuest } from "../types"
 import { csrfToken } from "../networking/csrf"
+import { setHeadTitle } from "../hooks"
 
 interface Props extends RouteComponentProps {
   setToken: (token: string) => void

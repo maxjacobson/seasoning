@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
 import Loader from "../components/Loader"
 import { Show } from "../types"
+import { setHeadTitle } from "../hooks"
 
 interface StillLoading {
   loading: true
@@ -28,6 +29,10 @@ interface Props extends RouteComponentProps {
 
 const Profile = ({ handle }: Props) => {
   const [profile, setProfile] = useState<ProfileData>({ loading: true })
+
+  if (handle) {
+    setHeadTitle(handle)
+  }
 
   useEffect(() => {
     fetch(`/api/profiles/${handle}.json`)

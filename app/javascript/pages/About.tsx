@@ -1,9 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
+
+import { setHeadTitle } from "../hooks"
 
 interface Props extends RouteComponentProps {}
 
 const About = (props: Props) => {
+  setHeadTitle("About")
+
   return (
     <>
       <h2>About</h2>
