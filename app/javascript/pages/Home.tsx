@@ -20,14 +20,12 @@ const Home = (props: HomeProps) => {
   if (guest.authenticated) {
     return (
       <>
-        <h1>Welcome to Seasoning</h1>
         <YourShows human={guest.human} token={guest.token} />
       </>
     )
   } else {
     return (
       <>
-        <h1>Welcome to Seasoning</h1>
         <GetStarted />
       </>
     )

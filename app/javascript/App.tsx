@@ -63,7 +63,7 @@ const App = () => {
 
       <Nav>
         <span>
-          <Link to="/">Home</Link> <Link to="/about">About</Link>{" "}
+          <Link to="/">Seasoning</Link> <Link to="/about">About</Link>{" "}
         </span>
 
         <span>
