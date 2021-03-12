@@ -8,7 +8,6 @@ RESERVED_WORDS = %w[
   tv
   api
   knock-knock
-  discover
   about
   add-show
 ].freeze

@@ -5,7 +5,6 @@ import styled, { createGlobalStyle } from "styled-components"
 import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
-import Discover from "./pages/Discover"
 import About from "./pages/About"
 import AddShow from "./pages/AddShow"
 import Show from "./pages/Show"
@@ -64,8 +63,7 @@ const App = () => {
 
       <Nav>
         <span>
-          <Link to="/">Home</Link> <Link to="/discover">Discover</Link>{" "}
-          <Link to="/about">About</Link>{" "}
+          <Link to="/">Home</Link> <Link to="/about">About</Link>{" "}
         </span>
 
         <span>
@@ -93,7 +91,6 @@ const App = () => {
       <Router>
         <NotFound default />
         <Home path="/" guest={guest} />
-        <Discover path="/discover" />
         <RedeemMagicLink path="/knock-knock/:token" setToken={setGuestToken} />
         <About path="/about" />
         <AddShow path="/add-show" guest={guest} />
