@@ -21,7 +21,11 @@ const ListShows = ({ shows }: ListShowsProps) => {
     return (
       <ul>
         {shows.map((show) => {
-          return <li key={show.id}>{show.title}</li>
+          return (
+            <li key={show.id}>
+              <Link to={`/shows/${show.slug}`}>{show.title}</Link>
+            </li>
+          )
         })}
       </ul>
     )
