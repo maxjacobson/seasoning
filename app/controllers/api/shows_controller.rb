@@ -20,7 +20,8 @@ module API
       show = Show.find_by(title: wikipedia_page.title)
       show ||= Show.create!(
         title: wikipedia_page.title,
-        wikipedia_page_id: wikipedia_page.page_id
+        wikipedia_page_id: wikipedia_page.page_id,
+        number_of_seasons: wikipedia_page.number_of_seasons
       )
 
       render json: {

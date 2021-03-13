@@ -13,6 +13,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 gem "email_validator"
+gem "nokogiri", "~> 1.11", ">= 1.11.2"
 gem "oj_serializers"
 gem "vite_rails"
 

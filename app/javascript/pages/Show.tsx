@@ -54,6 +54,7 @@ const Show = ({ showSlug, guest }: Props) => {
   return (
     <>
       <h2>{show.title}</h2>
+      <p>There are {show.number_of_seasons} seasons</p>
       <p>Show pages goes here!</p>
     </>
   )

@@ -6,6 +6,7 @@ module Wikipedia
     InvalidURLError = Class.new(WikipediaError)
     RequestFailed = Class.new(WikipediaError)
     NotFound = Class.new(WikipediaError)
+    UnexpectedPageStructure = Class.new(WikipediaError)
 
     API_ENDPOINT = "https://en.wikipedia.org/w/api.php"
 
@@ -20,6 +21,23 @@ module Wikipedia
 
     def page_id
       wikipedia_page.fetch("parse").fetch("pageid")
+    end
+
+    def number_of_seasons
+      # <tr><th scope=\"row\"><abbr title=\"Number\">No.</abbr> of seasons</th><td>2</td></tr>
+      html = wikipedia_page.fetch("parse").fetch("text").fetch("*")
+      doc = Nokogiri::HTML(html)
+      doc.css("tr").each do |table_row|
+        table_header = table_row.css("th[scope='row']").first
+        table_detail = table_row.css("td")
+        next if table_header.blank?
+        next unless table_row.to_s.include?("season")
+        next unless table_header.text == "No. of seasons"
+
+        return Integer(table_detail.children.to_s)
+      end
+
+      raise UnexpectedPageStructure, "Could not identify number of seasons"
     end
 
     private
