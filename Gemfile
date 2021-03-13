@@ -11,8 +11,6 @@ gem "rails", "~> 6.1.3"
 gem "pg", "~> 1.1"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
-# Use SCSS for stylesheets
-gem "sass-rails", ">= 6"
 
 gem "email_validator"
 gem "oj_serializers"
