@@ -34,7 +34,7 @@ const GetStarted = () => {
   }, [loading])
 
   if (createdMagicLink) {
-    return <p>Check your email!</p>
+    return <p>Check your email for a link to log in to Seasoning!</p>
   } else {
     return (
       <div>

@@ -9,16 +9,20 @@ class MagicLinkMailer < ApplicationMailer
 
     mail(
       to: recipient,
-      subject: "Welcome"
+      subject: "Welcome to Seasoning!"
     )
   end
 
   def log_in_email(recipient, token)
     @token = token
+    @greeting = [
+      "Oh good, the commercials are over, come back in!",
+      "Welcome back to Seasoning!"
+    ].sample
 
     mail(
       to: recipient,
-      subject: "Welcome back"
+      subject: "Welcome back to Seasoning!"
     )
   end
 end
