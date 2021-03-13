@@ -104,8 +104,9 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "www.seasoning.tv" }
 
   config.action_mailer.smtp_settings = {
-    address: "email-smtp.us-east-1.amazonaws.com",
-    user_name: ENV.fetch("AWS_SES_USERNAME"),
-    password: ENV.fetch("AWS_SES_PASSWORD")
+    address: "smtp.mailgun.org",
+    user_name: ENV.fetch("MAILGUN_USERNAME"),
+    password: ENV.fetch("MAILGUN_PASSWORD"),
+    port: 587
   }
 end
