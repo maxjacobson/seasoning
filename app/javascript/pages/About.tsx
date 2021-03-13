@@ -21,7 +21,14 @@ const About = (props: Props) => {
         life. Then next time you're bored off your gourd, check back in.
       </p>
       <p>
-        &mdash; <a href="https://twitter.com/maxjacobson">Max</a>
+        &mdash;{" "}
+        <a
+          href="https://twitter.com/maxjacobson"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Max
+        </a>
       </p>
     </>
   )
