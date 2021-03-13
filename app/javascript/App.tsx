@@ -18,11 +18,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: sans-serif;
     background-color: #edfff2;
   }
-`
 
-const Layout = styled.div`
-  max-width: 450px;
-  margin: 10px auto;
 
   a {
     color: #1d2b8a;
@@ -33,6 +29,12 @@ const Layout = styled.div`
       color: green;
     }
   }
+`
+
+const Layout = styled.div`
+  max-width: 450px;
+  margin: 10px auto;
+  padding: 0 10px;
 `
 
 const Nav = styled.nav`
