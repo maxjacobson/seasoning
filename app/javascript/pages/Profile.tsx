@@ -30,9 +30,7 @@ interface Props extends RouteComponentProps {
 const Profile = ({ handle }: Props) => {
   const [profile, setProfile] = useState<ProfileData>({ loading: true })
 
-  if (handle) {
-    setHeadTitle(handle)
-  }
+  setHeadTitle(handle)
 
   useEffect(() => {
     fetch(`/api/profiles/${handle}.json`)

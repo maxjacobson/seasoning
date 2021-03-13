@@ -9,9 +9,7 @@ interface Props extends RouteComponentProps {
 }
 
 const Show = ({ showSlug, guest }: Props) => {
-  if (showSlug) {
-    setHeadTitle(showSlug)
-  }
+  setHeadTitle(showSlug)
 
   return (
     <>
