@@ -7,7 +7,7 @@ module API
       authorize! { true }
 
       human_params = params.require(:humans).permit(:magic_link_token, :handle)
-      magic_link = MagicLink.where("expires_at > now()").find_by!(token: human_params[:magic_link_token])
+      magic_link = MagicLink.active.find_by!(token: human_params[:magic_link_token])
 
       human = Human.create!(
         email: magic_link.email,

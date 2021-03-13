@@ -6,7 +6,7 @@ class Guest
     session = BrowserSession
               .includes(:human)
               .where(token: token)
-              .where("expires_at > now()")
+              .active
               .first
 
     new(session&.human, token)

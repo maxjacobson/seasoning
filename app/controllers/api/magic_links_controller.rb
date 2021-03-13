@@ -23,7 +23,7 @@ module API
     def show
       authorize! { true }
 
-      magic_link = MagicLink.where("expires_at > now()").find_by!(token: params[:id])
+      magic_link = MagicLink.active.find_by!(token: params[:id])
       human = Human.where(email: magic_link.email).first
 
       if human.present?

@@ -11,4 +11,5 @@ class BrowserSession < ApplicationRecord
   before_create -> { self.expires_at = 3.months.from_now }
 
   scope :active, -> { where("expires_at > now()") }
+  scope :inactive, -> { where("expires_at < now()") }
 end
