@@ -33,5 +33,15 @@ module API
         }
       }, status: 400
     end
+
+    def show
+      authorize! { true }
+
+      show = Show.find_by(slug: params.fetch(:id))
+
+      render json: {
+        show: ShowSerializer.one(show)
+      }
+    end
   end
 end
