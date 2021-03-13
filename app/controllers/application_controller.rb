@@ -2,9 +2,16 @@
 
 # Base class for all controllers
 class ApplicationController < ActionController::Base
+  before_action :redirect_apex_domain
   after_action :verify_authorization_occurred
 
   private
+
+  def redirect_apex_domain
+    return unless request.host == "seasoning.tv"
+
+    redirect_to("#{request.protocol}www.seasoning.tv#{request.fullpath}", status: 302)
+  end
 
   def authorize!
     raise "Not authorized to do this" unless yield
