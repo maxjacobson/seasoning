@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link, RouteComponentProps } from "@reach/router"
 import debounce from "lodash.debounce"
 
+import ImportNewShow from "./AddShow/ImportNewShow"
 import GoHome from "../components/GoHome"
 import { Guest, Show } from "../types"
 import { setHeadTitle } from "../hooks"
@@ -22,21 +23,28 @@ interface Props extends RouteComponentProps {
 
 interface ListResultsProps {
   searchResults: SearchResults
+  token: string
 }
 
-const ListResults = ({ searchResults }: ListResultsProps) => {
+const ListResults = ({ searchResults, token }: ListResultsProps) => {
   // Haven't searched yet
   if (!searchResults.shows) {
     return (
       <>
         <p>Try searching for a show to add.</p>
+        <ImportNewShow token={token} />
       </>
     )
   }
 
   // No results
   if (!searchResults.shows.length) {
-    return <p>Huh... I don't know that show. Sorry.</p>
+    return (
+      <>
+        <p>Huh... I don't know that show. Sorry.</p>
+        <ImportNewShow token={token} />
+      </>
+    )
   }
 
   return (
@@ -51,6 +59,8 @@ const ListResults = ({ searchResults }: ListResultsProps) => {
           )
         })}
       </ul>
+
+      <ImportNewShow token={token} />
     </>
   )
 }
@@ -114,7 +124,7 @@ const AddShow = ({ guest }: Props) => {
         placeholder="Search for show"
       />
 
-      <ListResults searchResults={searchResults} />
+      <ListResults searchResults={searchResults} token={token} />
     </>
   )
 }

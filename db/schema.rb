@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_10_203202) do
+ActiveRecord::Schema.define(version: 2021_03_13_040214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_03_10_203202) do
     t.string "slug", null: false, comment: "The show's title, in slug form, to go in a URL"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "wikipedia_page_id", null: false
     t.index ["slug"], name: "index_shows_on_slug", unique: true
   end
 
