@@ -23,16 +23,18 @@ module API
       }
     end
 
-    def show
+    def update
       authorize! { current_human.present? }
 
-      show = Show.find_by!(slug: params.require(:id))
+      show = Show.find_by(slug: params.require(:id))
 
-      my_show = MyShow.find_or_initialize_by(human: current_human, show: show)
+      my_show = MyShow.find_by!(human: current_human, show: show)
 
-      render json: {
-        your_show: MyShowSerializer.one(my_show)
-      }
+      if my_show.update(params.require(:show).permit(:note_to_self))
+        render json: {}
+      else
+        render json: {}, status: 400
+      end
     end
   end
 end

@@ -7,7 +7,7 @@ import YourShows from "./Home/YourShows"
 import { Guest } from "../types"
 
 interface HomeProps extends RouteComponentProps {
-  guest?: Guest
+  guest: Guest
 }
 
 const Home: FunctionComponent<HomeProps> = (props: HomeProps) => {

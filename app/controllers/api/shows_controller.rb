@@ -39,10 +39,9 @@ module API
       authorize! { true }
 
       show = Show.find_by!(slug: params.fetch(:id))
+      my_show = MyShow.find_or_initialize_by(human: current_human, show: show)
 
-      render json: {
-        show: ShowSerializer.one(show)
-      }
+      render json: MyShowSerializer.one(my_show)
     end
   end
 end

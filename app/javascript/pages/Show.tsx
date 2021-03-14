@@ -1,22 +1,25 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Guest, Show } from "../types"
+
+import { Guest, YourShow } from "../types"
 import { setHeadTitle } from "../hooks"
 import Loader from "../components/Loader"
 import AddShowButton from "../components/AddShowButton"
+import NoteToSelf from "../components/NoteToSelf"
+
 interface Props extends RouteComponentProps {
   showSlug?: string
-  guest?: Guest
+  guest: Guest
 }
 
 type LoadingShowData = {
   loading: true
-  show: null
+  data: null
 }
 
 type LoadedShowData = {
   loading: false
-  show: Show
+  data: YourShow
 }
 
 type ShowData = LoadingShowData | LoadedShowData
@@ -24,7 +27,7 @@ type ShowData = LoadingShowData | LoadedShowData
 const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
-    show: null,
+    data: null,
   })
 
   useEffect(() => {
@@ -33,39 +36,64 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
     }
 
     ;(async () => {
-      const response = await fetch(`/api/shows/${showSlug}.json`)
+      let headers
+      if (guest.authenticated) {
+        headers = { "X-SEASONING_TOKEN": guest.token }
+      } else {
+        headers = {}
+      }
+      const response = await fetch(`/api/shows/${showSlug}.json`, {
+        headers: headers,
+      })
 
       if (response.ok) {
-        const data = await response.json()
-        setShowData({ loading: false, show: data.show })
+        const data: YourShow = await response.json()
+        setShowData({ loading: false, data: data })
       } else {
         throw new Error("Could not load show")
       }
     })()
   }, [showSlug])
 
-  setHeadTitle(showData.show ? showData.show.title : undefined, [showData.show])
+  setHeadTitle(showData.loading ? undefined : showData.data.show.title, [
+    showData.loading,
+  ])
 
   if (showData.loading) {
     return <Loader />
   }
 
-  const { show } = showData
+  const { data } = showData
 
   return (
     <>
       <h2>
-        {show.title}{" "}
-        {guest?.authenticated ? (
-          <AddShowButton token={guest.token} show={show} />
+        {data.show.title}{" "}
+        {guest.authenticated ? (
+          <AddShowButton
+            token={guest.token}
+            show={data.show}
+            yourRelationship={data.your_relationship}
+            setYourShow={(yourShow) => {
+              setShowData({ loading: false, data: yourShow })
+            }}
+          />
         ) : (
           <></>
         )}
       </h2>
-      {show.number_of_seasons === 1 ? (
+      {guest.authenticated && data.your_relationship && (
+        <NoteToSelf
+          show={data.show}
+          yourRelationship={data.your_relationship}
+          token={guest.token}
+        />
+      )}
+
+      {data.show.number_of_seasons === 1 ? (
         <p>1 season</p>
       ) : (
-        <p>{show.number_of_seasons} seasons</p>
+        <p>{data.show.number_of_seasons} seasons</p>
       )}
     </>
   )

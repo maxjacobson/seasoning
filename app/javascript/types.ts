@@ -21,8 +21,9 @@ export interface Show {
   number_of_seasons: number
 }
 
-interface YourRelationshipToShow {
+export interface YourRelationshipToShow {
   added_at: string
+  note_to_self: string | undefined
 }
 
 export interface YourShow {

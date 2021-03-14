@@ -1,45 +1,24 @@
-import React, { useEffect, useState, FunctionComponent } from "react"
+import React, { FunctionComponent } from "react"
 
-import { Show, YourShow } from "../types"
+import { Show, YourRelationshipToShow, YourShow } from "../types"
 import { csrfToken } from "../networking/csrf"
-
-type Availability =
-  | { loading: true; yourShow: null }
-  | { loading: false; yourShow: YourShow }
 
 interface Props {
   show: Show
+  yourRelationship?: YourRelationshipToShow
   token: string
+  setYourShow: (yourShow: YourShow) => void
 }
 
-const AddShowButton: FunctionComponent<Props> = ({ show, token }: Props) => {
-  const [availability, setAvailability] = useState<Availability>({
-    loading: true,
-    yourShow: null,
-  })
-
-  useEffect(() => {
-    ;(async () => {
-      const response = await fetch(`/api/your-shows/${show.slug}.json`, {
-        headers: {
-          "X-SEASONING-TOKEN": token,
-        },
-      })
-
-      if (response.ok) {
-        const data: { your_show: YourShow } = await response.json()
-        setAvailability({ loading: false, yourShow: data.your_show })
-      } else {
-        throw new Error("Could not load my show")
-      }
-    })()
-  }, [])
-
-  if (availability.loading) {
-    return <button disabled={true}>...</button>
-  }
-
-  if (!availability.yourShow.your_relationship) {
+const AddShowButton: FunctionComponent<Props> = ({
+  show,
+  token,
+  yourRelationship,
+  setYourShow,
+}: Props) => {
+  if (yourRelationship) {
+    return <button disabled={true}>Added</button>
+  } else {
     return (
       <button
         onClick={async (e) => {
@@ -61,7 +40,7 @@ const AddShowButton: FunctionComponent<Props> = ({ show, token }: Props) => {
 
           if (response.ok) {
             const data: { your_show: YourShow } = await response.json()
-            setAvailability({ loading: false, yourShow: data.your_show })
+            setYourShow(data.your_show)
           } else {
             throw new Error("Could not add show")
           }
@@ -71,8 +50,6 @@ const AddShowButton: FunctionComponent<Props> = ({ show, token }: Props) => {
       </button>
     )
   }
-
-  return <button disabled={true}>Added</button>
 }
 
 export default AddShowButton

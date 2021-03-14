@@ -2,9 +2,11 @@ import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
 import { csrfToken } from "../networking/csrf"
 
+import { Guest } from "../types"
+
 interface Props extends RouteComponentProps {
-  setToken: (token: string) => void
   token?: string
+  setGuest: (guest: Guest) => void
 }
 
 interface AlreadyExists {
@@ -21,8 +23,10 @@ interface NewHuman {
 
 type Redemption = AlreadyExists | NewHuman
 
-const RedeemMagicLink: FunctionComponent<Props> = (props: Props) => {
-  const { token } = props
+const RedeemMagicLink: FunctionComponent<Props> = ({
+  token,
+  setGuest,
+}: Props) => {
   const [email, setEmail] = useState<string | null>(null)
   const [handle, setHandle] = useState<string>("")
   const [creating, setCreating] = useState(false)
@@ -43,7 +47,11 @@ const RedeemMagicLink: FunctionComponent<Props> = (props: Props) => {
       .then((data: Redemption) => {
         if (data.already_exists) {
           localStorage.setItem("seasoning-guest-token", data.session_token)
-          props.setToken(data.session_token)
+          setGuest({
+            authenticated: true,
+            human: { handle: data.handle },
+            token: data.session_token,
+          })
           navigate("/")
         } else {
           setEmail(data.email)
@@ -88,7 +96,11 @@ const RedeemMagicLink: FunctionComponent<Props> = (props: Props) => {
                   "seasoning-guest-token",
                   data.session_token
                 )
-                props.setToken(data.session_token)
+                setGuest({
+                  authenticated: true,
+                  human: { handle: data.handle },
+                  token: data.session_token,
+                })
                 navigate("/")
               })
           }}

@@ -4,7 +4,6 @@ import debounce from "lodash.debounce"
 
 import ImportNewShow from "./AddShow/ImportNewShow"
 import GoHome from "../components/GoHome"
-import AddShowButton from "../components/AddShowButton"
 import { Guest, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 
@@ -19,7 +18,7 @@ interface SearchResultsLoaded {
 type SearchResults = NoSearchYet | SearchResultsLoaded
 
 interface Props extends RouteComponentProps {
-  guest?: Guest
+  guest: Guest
 }
 
 interface ListResultsProps {
@@ -61,7 +60,6 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
           return (
             <li key={show.id}>
               <Link to={`/shows/${show.slug}`}>{show.title}</Link>{" "}
-              <AddShowButton show={show} token={token} />
             </li>
           )
         })}

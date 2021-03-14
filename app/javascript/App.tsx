@@ -1,8 +1,8 @@
-import React, { useState, useEffect, FunctionComponent } from "react"
+import React, { FunctionComponent, useState } from "react"
 import { Link, Router, navigate } from "@reach/router"
 import styled, { createGlobalStyle } from "styled-components"
 
-import { AnonymousGuest, AuthenticatedGuest, Guest } from "./types"
+import { Guest } from "./types"
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
 import About from "./pages/About"
@@ -42,22 +42,12 @@ const Nav = styled.nav`
   justify-content: space-between;
 `
 
-const App: FunctionComponent<Record<string, never>> = () => {
-  const [guestToken, setGuestToken] = useState<string | null>(
-    localStorage.getItem("seasoning-guest-token")
-  )
-  const [guest, setGuest] = useState<Guest | undefined>(undefined)
+interface Props {
+  initialGuest: Guest
+}
 
-  useEffect(() => {
-    if (!guestToken) {
-      setGuest({} as AnonymousGuest)
-      return
-    }
-
-    fetch("/api/guest.json", { headers: { "X-SEASONING-TOKEN": guestToken } })
-      .then((response) => response.json())
-      .then((data: AuthenticatedGuest) => setGuest(data))
-  }, [guestToken])
+const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
+  const [guest, setGuest] = useState<Guest>(initialGuest)
 
   return (
     <Layout>
@@ -65,7 +55,7 @@ const App: FunctionComponent<Record<string, never>> = () => {
 
       <Nav>
         <span>
-          <Link to="/">Seasoning</Link> <Link to="/about">About</Link>{" "}
+          <Link to="/">Seasoning</Link> <Link to="/about">About</Link>
         </span>
 
         <span>
@@ -78,7 +68,7 @@ const App: FunctionComponent<Record<string, never>> = () => {
                   e.preventDefault()
                   if (confirm("Log out?")) {
                     localStorage.clear()
-                    setGuestToken(null)
+                    setGuest({ authenticated: false })
                     navigate("/")
                   }
                 }}
@@ -93,14 +83,12 @@ const App: FunctionComponent<Record<string, never>> = () => {
       <Router>
         <NotFound default />
         <Home path="/" guest={guest} />
-        <RedeemMagicLink path="/knock-knock/:token" setToken={setGuestToken} />
+        <RedeemMagicLink path="/knock-knock/:token" setGuest={setGuest} />
         <About path="/about" />
         <AddShow path="/add-show" guest={guest} />
         <Show path="/shows/:showSlug" guest={guest} />
         <Profile path="/:handle" />
       </Router>
-
-      <footer></footer>
     </Layout>
   )
 }

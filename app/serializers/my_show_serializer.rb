@@ -13,7 +13,8 @@ class MyShowSerializer < Oj::Serializer
 
   def your_relationship
     {
-      added_at: my_show.created_at
+      added_at: my_show.created_at,
+      note_to_self: my_show.note_to_self
     }
   end
 end
