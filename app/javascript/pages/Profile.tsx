@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
 import Loader from "../components/Loader"
 import { Show } from "../types"
@@ -27,7 +27,7 @@ interface Props extends RouteComponentProps {
   handle?: string
 }
 
-const Profile = ({ handle }: Props) => {
+const Profile: FunctionComponent<Props> = ({ handle }: Props) => {
   const [profile, setProfile] = useState<ProfileData>({ loading: true })
 
   setHeadTitle(handle)

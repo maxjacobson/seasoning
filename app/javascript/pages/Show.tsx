@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
 import { Guest, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import Loader from "../components/Loader"
 import AddShowButton from "../components/AddShowButton"
-import AddShow from "./AddShow"
 interface Props extends RouteComponentProps {
   showSlug?: string
   guest?: Guest
@@ -22,7 +21,7 @@ type LoadedShowData = {
 
 type ShowData = LoadingShowData | LoadedShowData
 
-const Show = ({ showSlug, guest }: Props) => {
+const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
     show: null,

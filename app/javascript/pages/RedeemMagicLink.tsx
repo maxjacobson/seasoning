@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
 import { csrfToken } from "../networking/csrf"
 
@@ -21,7 +21,7 @@ interface NewHuman {
 
 type Redemption = AlreadyExists | NewHuman
 
-const RedeemMagicLink = (props: Props) => {
+const RedeemMagicLink: FunctionComponent<Props> = (props: Props) => {
   const { token } = props
   const [email, setEmail] = useState<string | null>(null)
   const [handle, setHandle] = useState<string>("")

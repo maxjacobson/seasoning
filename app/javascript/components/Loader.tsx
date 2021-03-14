@@ -1,5 +1,5 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 
-const Loader = () => <p>Loading...</p>
+const Loader: FunctionComponent<Record<string, never>> = () => <p>Loading...</p>
 
 export default Loader

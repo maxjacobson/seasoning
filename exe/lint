@@ -5,3 +5,4 @@ set -e
 npx tsc --build tsconfig.json
 npx prettier --check .
 bin/rubocop
+npx eslint app

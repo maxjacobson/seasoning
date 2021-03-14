@@ -1,7 +1,7 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import { Link } from "@reach/router"
 
-const GoHome = () => {
+const GoHome: FunctionComponent<Record<string, never>> = () => {
   return (
     <>
       <p>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, FunctionComponent } from "react"
 import { Link } from "@reach/router"
 
-import { Human, Show, YourShow } from "../../types"
+import { Human, YourShow } from "../../types"
 import Loader from "../../components/Loader"
 
 interface YourShows {
@@ -32,7 +32,7 @@ const ListShows = ({ shows }: { shows: YourShow[] }) => {
   }
 }
 
-const YourShows = (props: Props) => {
+const YourShows: FunctionComponent<Props> = (props: Props) => {
   const [loading, setLoading] = useState(true)
   const [shows, setShows] = useState<YourShow[]>([])
 
@@ -57,7 +57,7 @@ const YourShows = (props: Props) => {
 
   return (
     <>
-      <h2>{props.human.handle}'s shows</h2>
+      <h2>{props.human.handle}&rsquo;s shows</h2>
       {loading ? (
         <Loader />
       ) : (

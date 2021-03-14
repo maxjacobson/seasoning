@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, FunctionComponent } from "react"
 
 import { Show, YourShow } from "../types"
 import { csrfToken } from "../networking/csrf"
@@ -7,7 +7,12 @@ type Availability =
   | { loading: true; yourShow: null }
   | { loading: false; yourShow: YourShow }
 
-const AddShowButton = ({ show, token }: { show: Show; token: string }) => {
+interface Props {
+  show: Show
+  token: string
+}
+
+const AddShowButton: FunctionComponent<Props> = ({ show, token }: Props) => {
   const [availability, setAvailability] = useState<Availability>({
     loading: true,
     yourShow: null,

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
 import styled from "styled-components"
 
@@ -20,14 +20,14 @@ interface Props extends RouteComponentProps {
   token: string
 }
 
-const ImportNewShow = ({ token }: Props) => {
+const ImportNewShow: FunctionComponent<Props> = ({ token }: Props) => {
   const [url, setURL] = useState("")
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   return (
     <>
-      <p>Enter the URL of the show's English Wikipedia page:</p>
+      <p>Enter the URL of the show&rsquo;s English Wikipedia page:</p>
       <FullWidthSingleInputForm
         onSubmit={async (e) => {
           e.preventDefault()

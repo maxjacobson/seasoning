@@ -1,24 +1,25 @@
-import React, { useEffect } from "react"
+import React, { FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
 
 import { setHeadTitle } from "../hooks"
 
-interface Props extends RouteComponentProps {}
-
-const About = (props: Props) => {
+const About: FunctionComponent<RouteComponentProps> = (
+  _props: RouteComponentProps
+) => {
   setHeadTitle("About")
 
   return (
     <>
       <h2>About</h2>
       <p>
-        This is <strong>Seasoning</strong>. It's a simple website to help you
-        survive the age of <em>Peak TV</em>.
+        This is <strong>Seasoning</strong>. It&rsquo;s a simple website to help
+        you survive the age of <em>Peak TV</em>.
       </p>
       <p>
         Did your coworker recommend some show that will totally change your
-        life? Don't stress. Jot it down, make a note of it, and get back to your
-        life. Then next time you're bored off your gourd, check back in.
+        life? Don&rsquo;t stress. Jot it down, make a note of it, and get back
+        to your life. Then next time you&rsquo;re bored off your gourd, check
+        back in.
       </p>
       <p>
         &mdash;{" "}

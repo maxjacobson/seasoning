@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, FunctionComponent } from "react"
 import { Link, Router, navigate } from "@reach/router"
 import styled, { createGlobalStyle } from "styled-components"
 
@@ -42,7 +42,7 @@ const Nav = styled.nav`
   justify-content: space-between;
 `
 
-const App = () => {
+const App: FunctionComponent<Record<string, never>> = () => {
   const [guestToken, setGuestToken] = useState<string | null>(
     localStorage.getItem("seasoning-guest-token")
   )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, FunctionComponent } from "react"
 import { Link, RouteComponentProps } from "@reach/router"
 import debounce from "lodash.debounce"
 
@@ -43,9 +43,10 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
       <>
         <p>Not found!</p>
         <p>
-          Seasoning is very new. I'm sorry to be the one to tell you, but you're
-          an early adopter. As such, I'm relying on you to help populate our
-          database with interesting shows, which will benefit everyone.
+          Seasoning is very new. I&rsquo;m sorry to be the one to tell you, but
+          you&rsquo;re an early adopter. As such, I&rsquo;m relying on you to
+          help populate our database with interesting shows, which will benefit
+          everyone.
         </p>
         <ImportNewShow token={token} />
       </>
@@ -92,7 +93,7 @@ const searchForShows = (
 }
 const debouncedSearch = debounce(searchForShows, 400, { trailing: true })
 
-const AddShow = ({ guest }: Props) => {
+const AddShow: FunctionComponent<Props> = ({ guest }: Props) => {
   if (!guest || !guest.authenticated) {
     return <GoHome />
   }

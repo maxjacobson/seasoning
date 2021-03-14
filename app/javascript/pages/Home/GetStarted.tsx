@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, FunctionComponent } from "react"
 
 import { csrfToken } from "../../networking/csrf"
 
-const GetStarted = () => {
+const GetStarted: FunctionComponent<Record<string, never>> = () => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [createdMagicLink, setCreatedMagicLink] = useState(false)
@@ -27,7 +27,7 @@ const GetStarted = () => {
           throw new Error("Could not create magic link")
         }
       })
-      .then((data) => {
+      .then(() => {
         setLoading(false)
         setCreatedMagicLink(true)
       })
@@ -39,8 +39,8 @@ const GetStarted = () => {
     return (
       <div>
         <p>
-          To sign up or log in, just enter your email address and we'll send you
-          a link to get started:
+          To sign up or log in, just enter your email address and we&rsquo;ll
+          send you a link to get started:
         </p>
         <div>
           <form
