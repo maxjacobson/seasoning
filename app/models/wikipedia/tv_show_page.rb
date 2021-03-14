@@ -31,8 +31,7 @@ module Wikipedia
         table_header = table_row.css("th[scope='row']").first
         table_detail = table_row.css("td")
         next if table_header.blank?
-        next unless table_row.to_s.include?("season")
-        next unless table_header.text == "No. of seasons"
+        next unless table_header.text.in?(["No. of seasons", "No. of series"])
 
         return Integer(table_detail.children.to_s)
       end
