@@ -16,7 +16,7 @@ module Wikipedia
     end
 
     def title
-      wikipedia_page.fetch("parse").fetch("title").gsub(/ \(TV series\)$/i, "")
+      wikipedia_page.fetch("parse").fetch("title")
     end
 
     def page_id
