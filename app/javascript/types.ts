@@ -23,6 +23,7 @@ export interface Show {
 
 interface YourRelationshipToShow {
   added_at: string
+  note_to_self: string
 }
 
 export interface YourShow {

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
+import ReactMarkdown from "react-markdown"
 import { RouteComponentProps } from "@reach/router"
+
 import { Guest, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import Loader from "../components/Loader"
 import AddShowButton from "../components/AddShowButton"
-import AddShow from "./AddShow"
+
 interface Props extends RouteComponentProps {
   showSlug?: string
   guest?: Guest
@@ -68,6 +70,8 @@ const Show = ({ showSlug, guest }: Props) => {
       ) : (
         <p>{show.number_of_seasons} seasons</p>
       )}
+
+      <ReactMarkdown># foo</ReactMarkdown>
     </>
   )
 }

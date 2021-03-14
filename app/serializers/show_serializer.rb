@@ -2,5 +2,5 @@
 
 # Serializes the show to JSON
 class ShowSerializer < Oj::Serializer
-  attributes :id, :title, :slug, :number_of_seasons
+  attributes :id, :title, :slug, :number_of_seasons, :note_to_self
 end

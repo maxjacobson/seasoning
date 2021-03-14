@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_222947) do
+ActiveRecord::Schema.define(version: 2021_03_14_011830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_03_13_222947) do
     t.bigint "show_id", null: false, comment: "Which show this human has saved"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "note_to_self", comment: "An optional blob of Markdown-formatted text that the human can write to remind themselves why they've added the show, or however they want to use it"
     t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true
     t.index ["human_id"], name: "index_my_shows_on_human_id"
     t.index ["show_id"], name: "index_my_shows_on_show_id"
