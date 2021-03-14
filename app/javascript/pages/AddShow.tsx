@@ -33,7 +33,6 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
     return (
       <>
         <p>Try searching for a show to add.</p>
-        <ImportNewShow token={token} />
       </>
     )
   }
@@ -42,7 +41,12 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
   if (!searchResults.shows.length) {
     return (
       <>
-        <p>Huh... I don't know that show. Sorry.</p>
+        <p>Not found!</p>
+        <p>
+          Seasoning is very new. I'm sorry to be the one to tell you, but you're
+          an early adopter. As such, I'm relying on you to help populate our
+          database with interesting shows, which will benefit everyone.
+        </p>
         <ImportNewShow token={token} />
       </>
     )
@@ -61,8 +65,6 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
           )
         })}
       </ul>
-
-      <ImportNewShow token={token} />
     </>
   )
 }

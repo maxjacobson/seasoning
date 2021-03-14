@@ -27,10 +27,7 @@ const ImportNewShow = ({ token }: Props) => {
 
   return (
     <>
-      <p>
-        If you want Seasoning to include a TV show, just enter the URL of the
-        show's English Wikipedia page:
-      </p>
+      <p>Enter the URL of the show's English Wikipedia page:</p>
       <FullWidthSingleInputForm
         onSubmit={async (e) => {
           e.preventDefault()
