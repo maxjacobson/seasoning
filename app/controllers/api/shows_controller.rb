@@ -38,7 +38,7 @@ module API
     def show
       authorize! { true }
 
-      show = Show.find_by(slug: params.fetch(:id))
+      show = Show.find_by!(slug: params.fetch(:id))
 
       render json: {
         show: ShowSerializer.one(show)

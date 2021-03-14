@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "@reach/router"
 
-import { Human, Show } from "../../types"
+import { Human, Show, YourShow } from "../../types"
 import Loader from "../../components/Loader"
 
 interface YourShows {
-  shows: Show[]
+  your_shows: YourShow[]
 }
 interface Props {
   human: Human
   token: string
 }
 
-interface ListShowsProps {
-  shows: Show[]
-}
-
-const ListShows = ({ shows }: ListShowsProps) => {
+const ListShows = ({ shows }: { shows: YourShow[] }) => {
   if (shows.length) {
     return (
       <ul>
-        {shows.map((show) => {
+        {shows.map((yourShow) => {
           return (
-            <li key={show.id}>
-              <Link to={`/shows/${show.slug}`}>{show.title}</Link>
+            <li key={yourShow.show.id}>
+              <Link to={`/shows/${yourShow.show.slug}`}>
+                {yourShow.show.title}
+              </Link>
             </li>
           )
         })}
@@ -36,7 +34,7 @@ const ListShows = ({ shows }: ListShowsProps) => {
 
 const YourShows = (props: Props) => {
   const [loading, setLoading] = useState(true)
-  const [shows, setShows] = useState<Show[]>([])
+  const [shows, setShows] = useState<YourShow[]>([])
 
   useEffect(() => {
     fetch("/api/your-shows.json", {
@@ -53,7 +51,7 @@ const YourShows = (props: Props) => {
       })
       .then((data: YourShows) => {
         setLoading(false)
-        setShows(data.shows)
+        setShows(data.your_shows)
       })
   }, [])
 

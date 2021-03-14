@@ -7,7 +7,31 @@ module API
       authorize! { current_human.present? }
 
       render json: {
-        shows: ShowSerializer.many(current_human.shows)
+        your_shows: MyShowSerializer.many(current_human.my_shows)
+      }
+    end
+
+    def create
+      authorize! { current_human.present? }
+
+      show = Show.find(params.require(:show).require(:id))
+
+      my_show = MyShow.create_or_find_by(human: current_human, show: show)
+
+      render json: {
+        your_show: MyShowSerializer.one(my_show)
+      }
+    end
+
+    def show
+      authorize! { current_human.present? }
+
+      show = Show.find_by!(slug: params.require(:id))
+
+      my_show = MyShow.find_or_initialize_by(human: current_human, show: show)
+
+      render json: {
+        your_show: MyShowSerializer.one(my_show)
       }
     end
   end

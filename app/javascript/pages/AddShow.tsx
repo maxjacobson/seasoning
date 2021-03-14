@@ -4,6 +4,7 @@ import debounce from "lodash.debounce"
 
 import ImportNewShow from "./AddShow/ImportNewShow"
 import GoHome from "../components/GoHome"
+import AddShowButton from "../components/AddShowButton"
 import { Guest, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 
@@ -54,7 +55,8 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
         {searchResults.shows.map((show) => {
           return (
             <li key={show.id}>
-              <Link to={`/shows/${show.slug}`}>{show.title}</Link>
+              <Link to={`/shows/${show.slug}`}>{show.title}</Link>{" "}
+              <AddShowButton show={show} token={token} />
             </li>
           )
         })}

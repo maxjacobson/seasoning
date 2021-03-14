@@ -20,3 +20,12 @@ export interface Show {
   slug: string
   number_of_seasons: number
 }
+
+interface YourRelationshipToShow {
+  added_at: string
+}
+
+export interface YourShow {
+  show: Show
+  your_relationship?: YourRelationshipToShow
+}
