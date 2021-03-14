@@ -19,9 +19,7 @@ const ListShows = ({ shows }: { shows: YourShow[] }) => {
         {shows.map((yourShow) => {
           return (
             <li key={yourShow.show.id}>
-              <Link to={`/shows/${yourShow.show.slug}`}>
-                {yourShow.show.title}
-              </Link>
+              <Link to={`/shows/${yourShow.show.slug}`}>{yourShow.show.title}</Link>
             </li>
           )
         })}

@@ -23,10 +23,7 @@ interface NewHuman {
 
 type Redemption = AlreadyExists | NewHuman
 
-const RedeemMagicLink: FunctionComponent<Props> = ({
-  token,
-  setGuest,
-}: Props) => {
+const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest }: Props) => {
   const [email, setEmail] = useState<string | null>(null)
   const [handle, setHandle] = useState<string>("")
   const [creating, setCreating] = useState(false)
@@ -92,10 +89,7 @@ const RedeemMagicLink: FunctionComponent<Props> = ({
                 }
               })
               .then((data: AlreadyExists) => {
-                localStorage.setItem(
-                  "seasoning-guest-token",
-                  data.session_token
-                )
+                localStorage.setItem("seasoning-guest-token", data.session_token)
                 setGuest({
                   authenticated: true,
                   human: { handle: data.handle },

@@ -2,10 +2,7 @@ import React, { useEffect } from "react"
 
 const DEFAULT_TITLE = "Seasoning"
 
-export const setHeadTitle = (
-  title: string | undefined,
-  deps?: React.DependencyList
-): void => {
+export const setHeadTitle = (title: string | undefined, deps?: React.DependencyList): void => {
   useEffect(() => {
     document.title = title || DEFAULT_TITLE
 

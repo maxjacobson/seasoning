@@ -23,27 +23,21 @@ interface Props {
   token: string
 }
 
-const NoteToSelf: FunctionComponent<Props> = ({
-  yourRelationship,
-  token,
-  show,
-}: Props) => {
+const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const [persistedNoteToSelf, setPersistedNoteToSelf] = useState<string>(
     yourRelationship.note_to_self || ""
   )
-  const [newNoteToSelf, setNewNoteToSelf] = useState<string>(
-    yourRelationship.note_to_self || ""
-  )
+  const [newNoteToSelf, setNewNoteToSelf] = useState<string>(yourRelationship.note_to_self || "")
 
   if (isEditing) {
     return (
       <Container>
         <p>
-          Add a note to self about this show. Put whatever you want in here.
-          It&rsquo;s just for you. Feel free to use Markdown.
+          Add a note to self about this show. Put whatever you want in here. It&rsquo;s just for
+          you. Feel free to use Markdown.
         </p>
         <Editor
           value={newNoteToSelf}
@@ -94,9 +88,9 @@ const NoteToSelf: FunctionComponent<Props> = ({
         </button>
         <p>
           <em>
-            Tip: I like to use this box to remind myself why I&rsquo;m adding
-            this show. Like, I&rsquo;ll make a note of who recommended it to me,
-            and include some links to articles that piqued my interest.
+            Tip: I like to use this box to remind myself why I&rsquo;m adding this show. Like,
+            I&rsquo;ll make a note of who recommended it to me, and include some links to articles
+            that piqued my interest.
           </em>
         </p>
       </Container>

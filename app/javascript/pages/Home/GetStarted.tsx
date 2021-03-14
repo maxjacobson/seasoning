@@ -39,8 +39,8 @@ const GetStarted: FunctionComponent<Record<string, never>> = () => {
     return (
       <div>
         <p>
-          To sign up or log in, just enter your email address and we&rsquo;ll
-          send you a link to get started:
+          To sign up or log in, just enter your email address and we&rsquo;ll send you a link to get
+          started:
         </p>
         <div>
           <form

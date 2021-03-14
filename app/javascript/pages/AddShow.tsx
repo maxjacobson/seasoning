@@ -42,10 +42,9 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
       <>
         <p>Not found!</p>
         <p>
-          Seasoning is very new. I&rsquo;m sorry to be the one to tell you, but
-          you&rsquo;re an early adopter. As such, I&rsquo;m relying on you to
-          help populate our database with interesting shows, which will benefit
-          everyone.
+          Seasoning is very new. I&rsquo;m sorry to be the one to tell you, but you&rsquo;re an
+          early adopter. As such, I&rsquo;m relying on you to help populate our database with
+          interesting shows, which will benefit everyone.
         </p>
         <ImportNewShow token={token} />
       </>
@@ -68,11 +67,7 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
   )
 }
 
-const searchForShows = (
-  title: string,
-  token: string,
-  callback: (shows: Show[]) => void
-) => {
+const searchForShows = (title: string, token: string, callback: (shows: Show[]) => void) => {
   fetch(`/api/shows.json?q=${encodeURIComponent(title)}`, {
     headers: {
       "X-SEASONING-TOKEN": token,

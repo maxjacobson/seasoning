@@ -55,9 +55,7 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
     })()
   }, [showSlug])
 
-  setHeadTitle(showData.loading ? undefined : showData.data.show.title, [
-    showData.loading,
-  ])
+  setHeadTitle(showData.loading ? undefined : showData.data.show.title, [showData.loading])
 
   if (showData.loading) {
     return <Loader />
