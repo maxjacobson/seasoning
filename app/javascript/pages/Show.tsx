@@ -3,6 +3,8 @@ import { RouteComponentProps } from "@reach/router"
 import { Guest, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import Loader from "../components/Loader"
+import AddShowButton from "../components/AddShowButton"
+import AddShow from "./AddShow"
 interface Props extends RouteComponentProps {
   showSlug?: string
   guest?: Guest
@@ -53,9 +55,19 @@ const Show = ({ showSlug, guest }: Props) => {
 
   return (
     <>
-      <h2>{show.title}</h2>
-      <p>There are {show.number_of_seasons} seasons</p>
-      <p>Show pages goes here!</p>
+      <h2>
+        {show.title}{" "}
+        {guest?.authenticated ? (
+          <AddShowButton token={guest.token} show={show} />
+        ) : (
+          <></>
+        )}
+      </h2>
+      {show.number_of_seasons === 1 ? (
+        <p>1 season</p>
+      ) : (
+        <p>{show.number_of_seasons} seasons</p>
+      )}
     </>
   )
 }
