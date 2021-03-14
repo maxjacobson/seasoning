@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :redirect_apex_domain
   after_action :verify_authorization_occurred
 
+  NotAuthorized = Class.new(StandardError)
+
   private
 
   def redirect_apex_domain
@@ -14,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize!
-    raise "Not authorized to do this" unless yield
+    raise NotAuthorized unless yield
 
     @did_authorize = true
   end
