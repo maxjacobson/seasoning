@@ -33,7 +33,11 @@ module Wikipedia
         next if table_header.blank?
         next unless table_header.text.in?(["No. of seasons", "No. of series"])
 
-        return Integer(table_detail.children.to_s)
+        begin
+          return Integer(table_detail.children.to_s)
+        rescue ArgumentError
+          raise UnexpectedPageStructure, "Could not identify number of seasons"
+        end
       end
 
       raise UnexpectedPageStructure, "Could not identify number of seasons"
