@@ -11,13 +11,7 @@ module API
         render json: {
           profile: {
             handle: human.handle,
-            shows: human.shows.map do |show|
-              {
-                id: show.id,
-                title: show.title,
-                slug: show.slug
-              }
-            end
+            created_at: human.created_at
           }
         }
       else

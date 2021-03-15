@@ -1,7 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
+import { DateTime } from "luxon"
+
 import Loader from "../components/Loader"
-import { Show } from "../types"
+import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
 
 interface StillLoading {
@@ -15,10 +17,7 @@ interface ProfileNotFound {
 
 interface LoadedProfileData {
   loading: false
-  profile: {
-    handle: string
-    shows: Show[]
-  }
+  profile: Profile
 }
 
 type ProfileData = StillLoading | LoadedProfileData | ProfileNotFound
@@ -43,7 +42,7 @@ const Profile: FunctionComponent<Props> = ({ handle }: Props) => {
           throw new Error("Could not fetch profile")
         }
       })
-      .then((data) => {
+      .then((data: { profile: Profile }) => {
         setProfile({
           loading: false,
           profile: data.profile,
@@ -69,7 +68,20 @@ const Profile: FunctionComponent<Props> = ({ handle }: Props) => {
     return <p>Not found: {handle}</p>
   }
 
-  return <p>Profile page for {handle}</p>
+  const { created_at } = profile.profile
+
+  return (
+    <>
+      <h1>{handle}</h1>
+      <p>
+        <em>Seasoner since {DateTime.fromISO(created_at).toLocaleString()}</em>
+      </p>
+      <p>
+        Welcome to {handle}&rsquo;s profile page. What should go here? Later on, when people can
+        write reviews, or share their favorite shows, that will probably go here.
+      </p>
+    </>
+  )
 }
 
 export default Profile

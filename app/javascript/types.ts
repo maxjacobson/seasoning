@@ -30,3 +30,8 @@ export interface YourShow {
   show: Show
   your_relationship?: YourRelationshipToShow
 }
+
+export interface Profile {
+  handle: string
+  created_at: string
+}
