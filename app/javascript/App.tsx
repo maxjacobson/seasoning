@@ -59,7 +59,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
         </span>
 
         <span>
-          {guest && guest.authenticated && (
+          {guest.authenticated && (
             <>
               <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>{" "}
               <a
