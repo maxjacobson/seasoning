@@ -1,4 +1,7 @@
 {
+  "repository": "github:maxjacobson/seasoning",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
     "@types/luxon": "^1.26.2",
