@@ -53,7 +53,11 @@ const ListResults = ({ searchResults, token }: ListResultsProps) => {
 
   return (
     <>
-      <p>Those are {searchResults.shows.length} shows</p>
+      {searchResults.shows.length === 1 ? (
+        <p>We have a match!</p>
+      ) : (
+        <p>There are {searchResults.shows.length} matching shows:</p>
+      )}
       <ul>
         {searchResults.shows.map((show) => {
           return (
