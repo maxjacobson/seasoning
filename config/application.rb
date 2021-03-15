@@ -41,5 +41,10 @@ module Seasoning
     config.action_dispatch.rescue_responses.merge!(
       "ApplicationController::NotAuthorized" => :unauthorized
     )
+
+    # Disabling CSRF protection. This is a single page app which uses a JSON API
+    # to access/manipulate data. As long as the request has a valid token,
+    # we're good
+    config.action_controller.allow_forgery_protection = false
   end
 end

@@ -1,7 +1,5 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
 
-import { csrfToken } from "../../networking/csrf"
-
 const GetStarted: FunctionComponent<Record<string, never>> = () => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
@@ -14,7 +12,6 @@ const GetStarted: FunctionComponent<Record<string, never>> = () => {
 
     fetch("/api/magic-links.json", {
       headers: {
-        "X-CSRF-Token": csrfToken(),
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ magic_link: { email: email } }),

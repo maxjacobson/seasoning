@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react"
 
 import { Show, YourRelationshipToShow, YourShow } from "../types"
-import { csrfToken } from "../networking/csrf"
 
 interface Props {
   show: Show
@@ -26,7 +25,6 @@ const AddShowButton: FunctionComponent<Props> = ({
 
           const response = await fetch(`/api/your-shows.json`, {
             headers: {
-              "X-CSRF-Token": csrfToken(),
               "Content-Type": "application/json",
               "X-SEASONING-TOKEN": token,
             },

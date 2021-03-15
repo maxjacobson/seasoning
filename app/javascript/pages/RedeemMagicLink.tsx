@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
-import { csrfToken } from "../networking/csrf"
 
 import { Guest } from "../types"
 
@@ -77,7 +76,6 @@ const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest }: Props) =
               }),
               method: "POST",
               headers: {
-                "X-CSRF-Token": csrfToken(),
                 "Content-Type": "application/json",
               },
             })

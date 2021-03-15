@@ -3,7 +3,6 @@ import { RouteComponentProps, navigate } from "@reach/router"
 import styled from "styled-components"
 
 import { Show } from "../../types"
-import { csrfToken } from "../../networking/csrf"
 
 const FullWidthSingleInputForm = styled.form`
   display: flex;
@@ -42,7 +41,6 @@ const ImportNewShow: FunctionComponent<Props> = ({ token }: Props) => {
             method: "POST",
             headers: {
               "X-SEASONING-TOKEN": token,
-              "X-CSRF-Token": csrfToken(),
               "Content-Type": "application/json",
             },
           })

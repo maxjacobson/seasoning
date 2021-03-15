@@ -4,7 +4,6 @@ import gfm from "remark-gfm"
 import styled from "styled-components"
 
 import { Show, YourRelationshipToShow } from "../types"
-import { csrfToken } from "../networking/csrf"
 
 const Container = styled.div`
   background-color: #fff9e8;
@@ -55,7 +54,6 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
             const response = await fetch(`/api/your-shows/${show.slug}.json`, {
               method: "PATCH",
               headers: {
-                "X-CSRF-Token": csrfToken(),
                 "X-SEASONING-TOKEN": token,
                 "Content-Type": "application/json",
               },
