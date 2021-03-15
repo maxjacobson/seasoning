@@ -1,8 +1,26 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
 import { Link } from "@reach/router"
+import styled from "styled-components"
 
 import { Human, YourShow } from "../../types"
 import Loader from "../../components/Loader"
+
+const Gallery = styled.div`
+  display: flex;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+`
+
+const GalleryItem = styled.div`
+  height: 100px;
+  border: 1px dotted black;
+  width: 200px;
+  margin: 5px;
+  background-color: #ffe8f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 
 interface YourShows {
   your_shows: YourShow[]
@@ -15,15 +33,15 @@ interface Props {
 const ListShows = ({ shows }: { shows: YourShow[] }) => {
   if (shows.length) {
     return (
-      <ul>
+      <Gallery>
         {shows.map((yourShow) => {
           return (
-            <li key={yourShow.show.id}>
-              <Link to={`/shows/${yourShow.show.slug}`}>{yourShow.show.title}</Link>
-            </li>
+            <Link to={`/shows/${yourShow.show.slug}`} key={yourShow.show.id}>
+              <GalleryItem>{yourShow.show.title}</GalleryItem>
+            </Link>
           )
         })}
-      </ul>
+      </Gallery>
     )
   } else {
     return <p>No shows yet!</p>
