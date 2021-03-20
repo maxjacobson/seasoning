@@ -11,6 +11,10 @@ import Show from "./pages/Show"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 
+import "@shopify/polaris/dist/styles.css"
+import enTranslations from "@shopify/polaris/locales/en.json"
+import { AppProvider, Page, Card, Button } from "@shopify/polaris"
+
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -50,46 +54,55 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [guest, setGuest] = useState<Guest>(initialGuest)
 
   return (
-    <Layout>
-      <GlobalStyle />
+    <>
+      <AppProvider i18n={enTranslations}>
+        <Page title="Example app">
+          <Card sectioned>
+            <Button onClick={() => alert("Button clicked!")}>Example button</Button>
+          </Card>
+        </Page>
+      </AppProvider>
+      <Layout>
+        <GlobalStyle />
 
-      <Nav>
-        <span>
-          <Link to="/">Seasoning</Link> <Link to="/about">About</Link>
-        </span>
+        <Nav>
+          <span>
+            <Link to="/">Seasoning</Link> <Link to="/about">About</Link>
+          </span>
 
-        <span>
-          {guest.authenticated && (
-            <>
-              <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>{" "}
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault()
-                  if (confirm("Log out?")) {
-                    localStorage.clear()
-                    setGuest({ authenticated: false })
-                    navigate("/")
-                  }
-                }}
-              >
-                Log out
-              </a>
-            </>
-          )}
-        </span>
-      </Nav>
+          <span>
+            {guest.authenticated && (
+              <>
+                <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>{" "}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    if (confirm("Log out?")) {
+                      localStorage.clear()
+                      setGuest({ authenticated: false })
+                      navigate("/")
+                    }
+                  }}
+                >
+                  Log out
+                </a>
+              </>
+            )}
+          </span>
+        </Nav>
 
-      <Router>
-        <NotFound default />
-        <Home path="/" guest={guest} />
-        <RedeemMagicLink path="/knock-knock/:token" setGuest={setGuest} />
-        <About path="/about" />
-        <AddShow path="/add-show" guest={guest} />
-        <Show path="/shows/:showSlug" guest={guest} />
-        <Profile path="/:handle" />
-      </Router>
-    </Layout>
+        <Router>
+          <NotFound default />
+          <Home path="/" guest={guest} />
+          <RedeemMagicLink path="/knock-knock/:token" setGuest={setGuest} />
+          <About path="/about" />
+          <AddShow path="/add-show" guest={guest} />
+          <Show path="/shows/:showSlug" guest={guest} />
+          <Profile path="/:handle" />
+        </Router>
+      </Layout>
+    </>
   )
 }
 
