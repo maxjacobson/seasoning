@@ -15,15 +15,15 @@ interface Props {
 const ListShows = ({ shows }: { shows: YourShow[] }) => {
   if (shows.length) {
     return (
-      <div>
+      <ul>
         {shows.map((yourShow) => {
           return (
-            <Link url={`/shows/${yourShow.show.slug}`} key={yourShow.show.id}>
-              <div>{yourShow.show.title}</div>
-            </Link>
+            <li key={yourShow.show.id}>
+              <Link url={`/shows/${yourShow.show.slug}`}>{yourShow.show.title}</Link>
+            </li>
           )
         })}
-      </div>
+      </ul>
     )
   } else {
     return <p>No shows yet!</p>
