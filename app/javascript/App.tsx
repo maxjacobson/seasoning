@@ -10,6 +10,10 @@ import {
   Icon,
   VisuallyHidden,
   ActionList,
+  Modal,
+  FormLayout,
+  TextField,
+  TextContainer,
 } from "@shopify/polaris"
 import { LogOutMinor, InfoMinor, QuestionMarkMajor } from "@shopify/polaris-icons"
 import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
@@ -26,6 +30,8 @@ import ShowPage from "./pages/Show"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 import Credits from "./pages/Credits"
+
+import ImportNewShowModal from "./components/ImportNewShowModal"
 
 // Wires @reach/router up to @shopify/polaris.
 // We'll just use the link component from polaris, and it will use this.
@@ -84,11 +90,13 @@ type SearchResults = NoSearchYet | SearchResultsLoaded
 interface ShowSearchResultsProps {
   shows: Show[]
   setSearchQuery: (newQuery: string) => void
+  initiateImport: () => void
 }
 
 const ShowSearchResults: FunctionComponent<ShowSearchResultsProps> = ({
   shows,
   setSearchQuery,
+  initiateImport,
 }: ShowSearchResultsProps) => {
   if (shows.length) {
     return (
@@ -111,7 +119,8 @@ const ShowSearchResults: FunctionComponent<ShowSearchResultsProps> = ({
           {
             content: "Add show?",
             onAction: () => {
-              alert("Importing new shows is temporarily disabled...")
+              setSearchQuery("")
+              initiateImport()
             },
           },
         ]}
@@ -133,6 +142,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [searchResults, setSearchResults] = useState<SearchResults>({
     shows: null,
   })
+  const [modalActive, setModalActive] = useState(false)
 
   useEffect(() => {
     if (!searchQuery || !guest.authenticated) {
@@ -236,7 +246,11 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               }
               searchResults={
                 searchResults.shows && (
-                  <ShowSearchResults shows={searchResults.shows} setSearchQuery={setSearchQuery} />
+                  <ShowSearchResults
+                    shows={searchResults.shows}
+                    setSearchQuery={setSearchQuery}
+                    initiateImport={() => setModalActive(true)}
+                  />
                 )
               }
               searchResultsVisible={true}
@@ -257,6 +271,15 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
             <Credits path="/credits" />
             <Profile path="/:handle" setLoading={setLoading} />
           </Router>
+
+          {guest.authenticated && (
+            <ImportNewShowModal
+              token={guest.token}
+              globalSetLoading={setLoading}
+              active={modalActive}
+              setActive={setModalActive}
+            />
+          )}
         </Frame>
       </AppProvider>
     </>
