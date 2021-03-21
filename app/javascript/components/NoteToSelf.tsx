@@ -1,25 +1,33 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import { Button, TextField } from "@shopify/polaris"
 import ReactMarkdown from "react-markdown"
 import gfm from "remark-gfm"
 import { Badge } from "@shopify/polaris"
 
-import { Show, YourRelationshipToShow } from "../types"
+import { YourShow } from "../types"
 
 interface Props {
-  show: Show
-  yourRelationship: YourRelationshipToShow
+  yourShow: YourShow
   token: string
+  globalSetLoading: (loadingState: boolean) => void
+  updateYourShow: (updatedYourShow: YourShow) => void
 }
 
-const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }: Props) => {
+const NoteToSelf: FunctionComponent<Props> = ({
+  token,
+  yourShow,
+  globalSetLoading,
+  updateYourShow,
+}: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const [persistedNoteToSelf, setPersistedNoteToSelf] = useState<string>(
-    yourRelationship.note_to_self || ""
-  )
-  const [newNoteToSelf, setNewNoteToSelf] = useState<string>(yourRelationship.note_to_self || "")
+  const [newNoteToSelf, setNewNoteToSelf] = useState("")
+
+  // I'll confess I am surprised that this is necessary...
+  useEffect(() => {
+    setNewNoteToSelf(yourShow.your_relationship?.note_to_self || "")
+  }, [yourShow.show.slug])
 
   if (isEditing) {
     return (
@@ -41,9 +49,10 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
         <Button
           disabled={loading}
           onClick={async () => {
+            globalSetLoading(true)
             setLoading(true)
 
-            const response = await fetch(`/api/your-shows/${show.slug}.json`, {
+            const response = await fetch(`/api/your-shows/${yourShow.show.slug}.json`, {
               method: "PATCH",
               headers: {
                 "X-SEASONING-TOKEN": token,
@@ -56,9 +65,12 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
               }),
             })
 
+            setLoading(false)
+            globalSetLoading(false)
+
             if (response.ok) {
-              setPersistedNoteToSelf(newNoteToSelf)
-              setLoading(false)
+              const updated: YourShow = await response.json()
+              updateYourShow(updated)
               setIsEditing(false)
             } else {
               throw new Error("Could not update note to self")
@@ -98,11 +110,11 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
 
   return (
     <>
-      {persistedNoteToSelf ? (
+      {yourShow.your_relationship?.note_to_self ? (
         <>
           <Badge status="critical">Private</Badge>
           {edit}
-          <ReactMarkdown plugins={[gfm]}>{persistedNoteToSelf}</ReactMarkdown>
+          <ReactMarkdown plugins={[gfm]}>{yourShow.your_relationship?.note_to_self}</ReactMarkdown>
         </>
       ) : (
         <p>

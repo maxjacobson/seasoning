@@ -31,7 +31,7 @@ module API
       my_show = MyShow.find_by!(human: current_human, show: show)
 
       if my_show.update(params.require(:show).permit(:note_to_self))
-        render json: {}
+        render json: MyShowSerializer.one(my_show)
       else
         render json: {}, status: 400
       end

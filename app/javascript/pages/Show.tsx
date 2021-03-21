@@ -82,9 +82,12 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
           {guest.authenticated && data.your_relationship && (
             <Card.Section>
               <NoteToSelf
-                show={data.show}
-                yourRelationship={data.your_relationship}
                 token={guest.token}
+                globalSetLoading={setLoading}
+                yourShow={data}
+                updateYourShow={(newData) => {
+                  setShowData({ loading: false, data: newData })
+                }}
               />
             </Card.Section>
           )}
