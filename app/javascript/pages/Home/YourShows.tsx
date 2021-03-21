@@ -66,7 +66,6 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
           ) : (
             <>
               <ListShows shows={shows} />
-              <Link url="/add-show">Add show</Link>
             </>
           )}
         </Card.Section>

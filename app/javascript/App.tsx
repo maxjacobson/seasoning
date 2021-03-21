@@ -1,20 +1,28 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import { Link as ReachLink, Router, navigate } from "@reach/router"
+import debounce from "lodash.debounce"
 
-import { AppProvider, Frame, Loading, TopBar, Icon, VisuallyHidden } from "@shopify/polaris"
+import {
+  AppProvider,
+  Frame,
+  Loading,
+  TopBar,
+  Icon,
+  VisuallyHidden,
+  ActionList,
+} from "@shopify/polaris"
 import { LogOutMinor, InfoMinor, QuestionMarkMajor } from "@shopify/polaris-icons"
 import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
 import enTranslations from "@shopify/polaris/locales/en.json"
 import "@shopify/polaris/dist/styles.css"
 
-import { Guest } from "./types"
+import { Guest, Show } from "./types"
 import Logo from "./images/logo.svg"
 
 // Pages
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
-import AddShow from "./pages/AddShow"
-import Show from "./pages/Show"
+import ShowPage from "./pages/Show"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 import Credits from "./pages/Credits"
@@ -36,6 +44,82 @@ const CustomLink = ({
   )
 }
 
+const searchForShows = (
+  title: string,
+  token: string,
+  setLoading: (loadingState: boolean) => void,
+  callback: (shows: Show[]) => void
+) => {
+  setLoading(true)
+
+  fetch(`/api/shows.json?q=${encodeURIComponent(title)}`, {
+    headers: {
+      "X-SEASONING-TOKEN": token,
+    },
+  })
+    .then((response) => {
+      setLoading(false)
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("Could not search shows")
+      }
+    })
+    .then((data) => {
+      callback(data.shows)
+    })
+}
+const debouncedSearch = debounce(searchForShows, 400, { trailing: true })
+
+interface NoSearchYet {
+  shows: null
+}
+
+interface SearchResultsLoaded {
+  shows: Show[]
+}
+
+type SearchResults = NoSearchYet | SearchResultsLoaded
+
+interface ShowSearchResultsProps {
+  shows: Show[]
+  setSearchQuery: (newQuery: string) => void
+}
+
+const ShowSearchResults: FunctionComponent<ShowSearchResultsProps> = ({
+  shows,
+  setSearchQuery,
+}: ShowSearchResultsProps) => {
+  if (shows.length) {
+    return (
+      <ActionList
+        items={shows.map((show) => {
+          return {
+            content: show.title,
+            onAction: () => {
+              setSearchQuery("")
+              navigate(`/shows/${show.slug}`)
+            },
+          }
+        })}
+      />
+    )
+  } else {
+    return (
+      <ActionList
+        items={[
+          {
+            content: "Add show?",
+            onAction: () => {
+              alert("Importing new shows is temporarily disabled...")
+            },
+          },
+        ]}
+      />
+    )
+  }
+}
+
 interface Props {
   initialGuest: Guest
 }
@@ -45,6 +129,22 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [loading, setLoading] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [searchResults, setSearchResults] = useState<SearchResults>({
+    shows: null,
+  })
+
+  useEffect(() => {
+    if (!searchQuery || !guest.authenticated) {
+      setSearchResults({ shows: null })
+    } else {
+      debouncedSearch(searchQuery, guest.token, setLoading, (shows) => {
+        setSearchResults({ shows: shows })
+      })
+    }
+
+    return debouncedSearch.cancel
+  }, [searchQuery, guest])
 
   return (
     <>
@@ -125,6 +225,21 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   ]}
                 />
               }
+              searchField={
+                guest.authenticated && (
+                  <TopBar.SearchField
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                    placeholder="Search shows"
+                  />
+                )
+              }
+              searchResults={
+                searchResults.shows && (
+                  <ShowSearchResults shows={searchResults.shows} setSearchQuery={setSearchQuery} />
+                )
+              }
+              searchResultsVisible={true}
             />
           }
         >
@@ -138,8 +253,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               setGuest={setGuest}
               setLoading={setLoading}
             />
-            <AddShow path="/add-show" guest={guest} setLoading={setLoading} />
-            <Show path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
+            <ShowPage path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
             <Credits path="/credits" />
             <Profile path="/:handle" setLoading={setLoading} />
           </Router>

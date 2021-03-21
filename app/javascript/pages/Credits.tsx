@@ -2,7 +2,11 @@ import React, { FunctionComponent } from "react"
 import { Page, Card } from "@shopify/polaris"
 import { RouteComponentProps } from "@reach/router"
 
+import { setHeadTitle } from "../hooks"
+
 const Credits: FunctionComponent<RouteComponentProps> = () => {
+  setHeadTitle("Credits")
+
   return (
     <Page title="Credits">
       <Card sectioned>
