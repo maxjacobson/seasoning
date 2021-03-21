@@ -10,4 +10,5 @@ RESERVED_WORDS = %w[
   knock-knock
   about
   add-show
+  credits
 ].freeze

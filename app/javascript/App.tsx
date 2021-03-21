@@ -1,50 +1,40 @@
 import React, { FunctionComponent, useState } from "react"
-import { Link, Router, navigate } from "@reach/router"
-import styled, { createGlobalStyle } from "styled-components"
+import { Link as ReachLink, Router, navigate } from "@reach/router"
+
+import { AppProvider, Frame, Loading, TopBar, Icon, VisuallyHidden } from "@shopify/polaris"
+import { LogOutMinor, InfoMinor, QuestionMarkMajor } from "@shopify/polaris-icons"
+import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
+import enTranslations from "@shopify/polaris/locales/en.json"
+import "@shopify/polaris/dist/styles.css"
 
 import { Guest } from "./types"
+import Logo from "./images/logo.svg"
+
+// Pages
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
-import About from "./pages/About"
 import AddShow from "./pages/AddShow"
 import Show from "./pages/Show"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
+import Credits from "./pages/Credits"
 
-import "@shopify/polaris/dist/styles.css"
-import enTranslations from "@shopify/polaris/locales/en.json"
-import { AppProvider, Page, Card, Button } from "@shopify/polaris"
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-color: #edfff2;
-  }
-
-
-  a {
-    color: #1d2b8a;
-    text-decoration: none;
-    font-weight: bold;
-    background-color: yellow;
-    &:hover {
-      color: green;
-    }
-  }
-`
-
-const Layout = styled.div`
-  max-width: 450px;
-  margin: 10px auto;
-  padding: 0 10px;
-`
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-`
+// Wires @reach/router up to @shopify/polaris.
+// We'll just use the link component from polaris, and it will use this.
+const CustomLink = ({
+  children,
+  url,
+  className,
+  id,
+  onClick,
+  ..._rest
+}: LinkLikeComponentProps) => {
+  return (
+    <ReachLink to={url} id={id} className={className} onClick={onClick}>
+      {children}
+    </ReachLink>
+  )
+}
 
 interface Props {
   initialGuest: Guest
@@ -52,56 +42,109 @@ interface Props {
 
 const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [guest, setGuest] = useState<Guest>(initialGuest)
+  const [loading, setLoading] = useState(false)
+  const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false)
 
   return (
     <>
-      <AppProvider i18n={enTranslations}>
-        <Page title="Example app">
-          <Card sectioned>
-            <Button onClick={() => alert("Button clicked!")}>Example button</Button>
-          </Card>
-        </Page>
+      <AppProvider
+        i18n={enTranslations}
+        linkComponent={CustomLink}
+        theme={{
+          logo: {
+            topBarSource: Logo,
+            url: "/",
+            accessibilityLabel: "Seasoning",
+            width: 160,
+          },
+        }}
+      >
+        <Frame
+          topBar={
+            <TopBar
+              userMenu={
+                guest.authenticated && (
+                  <TopBar.UserMenu
+                    name={guest.human.handle}
+                    initials={guest.human.handle.charAt(0)}
+                    avatar={guest.human.gravatar_url}
+                    open={userMenuOpen}
+                    onToggle={() => {
+                      setUserMenuOpen(!userMenuOpen)
+                    }}
+                    actions={[
+                      {
+                        items: [
+                          {
+                            content: "Your page",
+                            onAction: () => {
+                              navigate(`/${guest.human.handle}`)
+                            },
+                            icon: InfoMinor,
+                          },
+                          {
+                            content: "Log out",
+                            onAction: () => {
+                              if (confirm("Log out?")) {
+                                localStorage.clear()
+                                setGuest({ authenticated: false })
+                                navigate("/")
+                              }
+                            },
+                            icon: LogOutMinor,
+                          },
+                        ],
+                      },
+                    ]}
+                  />
+                )
+              }
+              secondaryMenu={
+                <TopBar.Menu
+                  activatorContent={
+                    <span>
+                      <Icon source={QuestionMarkMajor} />
+                      <VisuallyHidden>Secondary menu</VisuallyHidden>
+                    </span>
+                  }
+                  open={isSecondaryMenuOpen}
+                  onOpen={() => setIsSecondaryMenuOpen(!isSecondaryMenuOpen)}
+                  onClose={() => setIsSecondaryMenuOpen(!isSecondaryMenuOpen)}
+                  actions={[
+                    {
+                      items: [
+                        {
+                          content: "Credits",
+                          onAction: () => {
+                            navigate("/credits")
+                          },
+                        },
+                      ],
+                    },
+                  ]}
+                />
+              }
+            />
+          }
+        >
+          {loading && <Loading />}
+
+          <Router>
+            <NotFound default />
+            <Home path="/" guest={guest} setLoading={setLoading} />
+            <RedeemMagicLink
+              path="/knock-knock/:token"
+              setGuest={setGuest}
+              setLoading={setLoading}
+            />
+            <AddShow path="/add-show" guest={guest} setLoading={setLoading} />
+            <Show path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
+            <Credits path="/credits" />
+            <Profile path="/:handle" setLoading={setLoading} />
+          </Router>
+        </Frame>
       </AppProvider>
-      <Layout>
-        <GlobalStyle />
-
-        <Nav>
-          <span>
-            <Link to="/">Seasoning</Link> <Link to="/about">About</Link>
-          </span>
-
-          <span>
-            {guest.authenticated && (
-              <>
-                <Link to={`/${guest.human.handle}`}>{guest.human.handle}</Link>{" "}
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    if (confirm("Log out?")) {
-                      localStorage.clear()
-                      setGuest({ authenticated: false })
-                      navigate("/")
-                    }
-                  }}
-                >
-                  Log out
-                </a>
-              </>
-            )}
-          </span>
-        </Nav>
-
-        <Router>
-          <NotFound default />
-          <Home path="/" guest={guest} />
-          <RedeemMagicLink path="/knock-knock/:token" setGuest={setGuest} />
-          <About path="/about" />
-          <AddShow path="/add-show" guest={guest} />
-          <Show path="/shows/:showSlug" guest={guest} />
-          <Profile path="/:handle" />
-        </Router>
-      </Layout>
     </>
   )
 }

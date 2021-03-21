@@ -1,5 +1,6 @@
 export interface Human {
   handle: string
+  gravatar_url: string
 }
 
 export interface AuthenticatedGuest {

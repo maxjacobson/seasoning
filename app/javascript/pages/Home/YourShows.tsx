@@ -1,26 +1,7 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Link } from "@reach/router"
-import styled from "styled-components"
+import { Link, Page, Card } from "@shopify/polaris"
 
 import { Human, YourShow } from "../../types"
-import Loader from "../../components/Loader"
-
-const Gallery = styled.div`
-  display: flex;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
-`
-
-const GalleryItem = styled.div`
-  height: 100px;
-  border: 1px dotted black;
-  width: 200px;
-  margin: 5px;
-  background-color: #ffe8f5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
 
 interface YourShows {
   your_shows: YourShow[]
@@ -28,20 +9,21 @@ interface YourShows {
 interface Props {
   human: Human
   token: string
+  globalSetLoading: (loadingState: boolean) => void
 }
 
 const ListShows = ({ shows }: { shows: YourShow[] }) => {
   if (shows.length) {
     return (
-      <Gallery>
+      <div>
         {shows.map((yourShow) => {
           return (
-            <Link to={`/shows/${yourShow.show.slug}`} key={yourShow.show.id}>
-              <GalleryItem>{yourShow.show.title}</GalleryItem>
+            <Link url={`/shows/${yourShow.show.slug}`} key={yourShow.show.id}>
+              <div>{yourShow.show.title}</div>
             </Link>
           )
         })}
-      </Gallery>
+      </div>
     )
   } else {
     return <p>No shows yet!</p>
@@ -53,12 +35,17 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
   const [shows, setShows] = useState<YourShow[]>([])
 
   useEffect(() => {
+    props.globalSetLoading(true)
+
     fetch("/api/your-shows.json", {
       headers: {
         "X-SEASONING-TOKEN": props.token,
       },
     })
       .then((response) => {
+        props.globalSetLoading(false)
+        setLoading(false)
+
         if (response.ok) {
           return response.json()
         } else {
@@ -66,23 +53,25 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
         }
       })
       .then((data: YourShows) => {
-        setLoading(false)
         setShows(data.your_shows)
       })
   }, [])
 
   return (
-    <>
-      <h2>{props.human.handle}&rsquo;s shows</h2>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <ListShows shows={shows} />
-          <Link to="/add-show">Add show</Link>
-        </>
-      )}
-    </>
+    <Page>
+      <Card sectioned>
+        <Card.Section title={<>{props.human.handle}&rsquo;s shows</>}>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              <ListShows shows={shows} />
+              <Link url="/add-show">Add show</Link>
+            </>
+          )}
+        </Card.Section>
+      </Card>
+    </Page>
   )
 }
 
