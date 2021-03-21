@@ -1,15 +1,16 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
+import { Page, SkeletonPage, Card } from "@shopify/polaris"
 
 import { Guest, YourShow } from "../types"
 import { setHeadTitle } from "../hooks"
-import Loader from "../components/Loader"
 import AddShowButton from "../components/AddShowButton"
 import NoteToSelf from "../components/NoteToSelf"
 
 interface Props extends RouteComponentProps {
   showSlug?: string
   guest: Guest
+  setLoading: (loadingState: boolean) => void
 }
 
 type LoadingShowData = {
@@ -24,7 +25,7 @@ type LoadedShowData = {
 
 type ShowData = LoadingShowData | LoadedShowData
 
-const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
+const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) => {
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
     data: null,
@@ -35,6 +36,7 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
       return
     }
 
+    setLoading(true)
     ;(async () => {
       let headers
       if (guest.authenticated) {
@@ -45,6 +47,8 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
       const response = await fetch(`/api/shows/${showSlug}.json`, {
         headers: headers,
       })
+
+      setLoading(false)
 
       if (response.ok) {
         const data: YourShow = await response.json()
@@ -58,16 +62,13 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
   setHeadTitle(showData.loading ? undefined : showData.data.show.title, [showData.loading])
 
   if (showData.loading) {
-    return <Loader />
-  }
+    return <SkeletonPage title="Loading show..."></SkeletonPage>
+  } else {
+    const { data } = showData
 
-  const { data } = showData
-
-  return (
-    <>
-      <h2>
-        {data.show.title}{" "}
-        {guest.authenticated ? (
+    return (
+      <Page title={data.show.title}>
+        {guest.authenticated && (
           <AddShowButton
             token={guest.token}
             show={data.show}
@@ -76,25 +77,29 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest }: Props) => {
               setShowData({ loading: false, data: yourShow })
             }}
           />
-        ) : (
-          <></>
         )}
-      </h2>
-      {guest.authenticated && data.your_relationship && (
-        <NoteToSelf
-          show={data.show}
-          yourRelationship={data.your_relationship}
-          token={guest.token}
-        />
-      )}
+        <Card sectioned>
+          {guest.authenticated && data.your_relationship && (
+            <Card.Section>
+              <NoteToSelf
+                show={data.show}
+                yourRelationship={data.your_relationship}
+                token={guest.token}
+              />
+            </Card.Section>
+          )}
 
-      {data.show.number_of_seasons === 1 ? (
-        <p>1 season</p>
-      ) : (
-        <p>{data.show.number_of_seasons} seasons</p>
-      )}
-    </>
-  )
+          <Card.Section>
+            {data.show.number_of_seasons === 1 ? (
+              <p>1 season</p>
+            ) : (
+              <p>{data.show.number_of_seasons} seasons</p>
+            )}
+          </Card.Section>
+        </Card>
+      </Page>
+    )
+  }
 }
 
 export default Show

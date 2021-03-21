@@ -32,7 +32,8 @@ module API
           already_exists: true,
           session_token: browser_session.token,
           email: human.email,
-          handle: human.handle
+          handle: human.handle,
+          gravatar_url: human.gravatar_url
         }
       else
         render json: {

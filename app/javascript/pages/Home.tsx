@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
-import Loader from "../components/Loader"
+import { Page } from "@shopify/polaris"
 import GetStarted from "./Home/GetStarted"
 import YourShows from "./Home/YourShows"
 
@@ -8,27 +8,20 @@ import { Guest } from "../types"
 
 interface HomeProps extends RouteComponentProps {
   guest: Guest
+  setLoading: (loadingState: boolean) => void
 }
 
 const Home: FunctionComponent<HomeProps> = (props: HomeProps) => {
-  const { guest } = props
+  const { guest, setLoading } = props
 
-  if (!guest) {
-    return <Loader />
-  }
-
-  if (guest.authenticated) {
-    return (
-      <>
-        <YourShows human={guest.human} token={guest.token} />
-      </>
-    )
-  } else {
-    return (
-      <>
-        <GetStarted />
-      </>
-    )
-  }
+  return (
+    <Page title="Welcome">
+      {guest.authenticated ? (
+        <YourShows human={guest.human} token={guest.token} globalSetLoading={setLoading} />
+      ) : (
+        <GetStarted globalSetLoading={setLoading} />
+      )}
+    </Page>
+  )
 }
 export default Home

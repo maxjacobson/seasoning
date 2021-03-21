@@ -1,20 +1,10 @@
 import React, { FunctionComponent, useState } from "react"
+import { Button, TextField } from "@shopify/polaris"
 import ReactMarkdown from "react-markdown"
 import gfm from "remark-gfm"
-import styled from "styled-components"
+import { Badge } from "@shopify/polaris"
 
 import { Show, YourRelationshipToShow } from "../types"
-
-const Container = styled.div`
-  background-color: #fff9e8;
-  border: 1px dotted black;
-  padding 2px;
-`
-
-const Editor = styled.textarea`
-  width: 100%;
-  min-height: 200px;
-`
 
 interface Props {
   show: Show
@@ -33,22 +23,24 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
 
   if (isEditing) {
     return (
-      <Container>
-        <p>
-          Add a note to self about this show. Put whatever you want in here. It&rsquo;s just for
-          you. Feel free to use Markdown.
-        </p>
-        <Editor
+      <div>
+        <TextField
+          label={
+            <p>
+              Add a note to self about this show. Put whatever you want in here. It&rsquo;s just for
+              you. Feel free to use Markdown.
+            </p>
+          }
           value={newNoteToSelf}
-          onChange={(e) => {
-            setNewNoteToSelf(e.target.value)
-          }}
+          onChange={setNewNoteToSelf}
           disabled={loading}
+          multiline={4}
+          clearButton={true}
+          onClearButtonClick={() => setNewNoteToSelf("")}
         />
-        <button
+        <Button
           disabled={loading}
-          onClick={async (e) => {
-            e.preventDefault()
+          onClick={async () => {
             setLoading(true)
 
             const response = await fetch(`/api/your-shows/${show.slug}.json`, {
@@ -74,16 +66,15 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
           }}
         >
           Save
-        </button>{" "}
-        <button
-          onClick={(e) => {
-            e.preventDefault()
+        </Button>{" "}
+        <Button
+          onClick={() => {
             setIsEditing(false)
           }}
           disabled={loading}
         >
           Cancel
-        </button>
+        </Button>
         <p>
           <em>
             Tip: I like to use this box to remind myself why I&rsquo;m adding this show. Like,
@@ -91,27 +82,26 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
             that piqued my interest.
           </em>
         </p>
-      </Container>
+      </div>
     )
   }
 
   const edit = (
-    <a
-      href="#"
-      onClick={(e) => {
-        e.preventDefault()
+    <Button
+      onClick={() => {
         setIsEditing(true)
       }}
     >
       Edit
-    </a>
+    </Button>
   )
 
   return (
-    <Container>
+    <>
       {persistedNoteToSelf ? (
         <>
-          <div>Only you can see this note to self. {edit}</div>
+          <Badge status="critical">Private</Badge>
+          {edit}
           <ReactMarkdown plugins={[gfm]}>{persistedNoteToSelf}</ReactMarkdown>
         </>
       ) : (
@@ -119,7 +109,7 @@ const NoteToSelf: FunctionComponent<Props> = ({ yourRelationship, token, show }:
           <em>No note to self.</em> {edit}
         </p>
       )}
-    </Container>
+    </>
   )
 }
 

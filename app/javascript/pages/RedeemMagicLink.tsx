@@ -1,11 +1,13 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
+import { Page, Card } from "@shopify/polaris"
 
 import { Guest } from "../types"
 
 interface Props extends RouteComponentProps {
   token?: string
   setGuest: (guest: Guest) => void
+  setLoading: (loadingState: boolean) => void
 }
 
 interface AlreadyExists {
@@ -13,6 +15,7 @@ interface AlreadyExists {
   email: string
   handle: string
   session_token: string
+  gravatar_url: string
 }
 
 interface NewHuman {
@@ -22,93 +25,107 @@ interface NewHuman {
 
 type Redemption = AlreadyExists | NewHuman
 
-const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest }: Props) => {
+const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest, setLoading }: Props) => {
   const [email, setEmail] = useState<string | null>(null)
   const [handle, setHandle] = useState<string>("")
   const [creating, setCreating] = useState(false)
 
   useEffect(() => {
-    fetch(`/api/magic-links/${token}.json`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error("Could not redeem magic link")
-        }
+    setLoading(true)
+    ;(async () => {
+      const response = await fetch(`/api/magic-links/${token}.json`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .then((data: Redemption) => {
-        if (data.already_exists) {
-          localStorage.setItem("seasoning-guest-token", data.session_token)
-          setGuest({
-            authenticated: true,
-            human: { handle: data.handle },
-            token: data.session_token,
-          })
-          navigate("/")
-        } else {
-          setEmail(data.email)
-        }
-      })
+
+      setLoading(false)
+
+      if (!response.ok) {
+        throw new Error("Could not redeem magic link")
+      }
+
+      const data: Redemption = await response.json()
+
+      if (data.already_exists) {
+        localStorage.setItem("seasoning-guest-token", data.session_token)
+        setGuest({
+          authenticated: true,
+          human: { handle: data.handle, gravatar_url: data.gravatar_url },
+          token: data.session_token,
+        })
+        navigate("/")
+      } else {
+        setEmail(data.email)
+      }
+    })()
   }, [])
 
   if (email) {
     return (
-      <>
-        <p>Thanks for clicking the link.</p>
-        <p>Just one more question... What do you want to be called?</p>
+      <Page>
+        <Card sectioned>
+          <p>Thanks for clicking the link.</p>
+          <p>Just one more question... What do you want to be called?</p>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
 
-            setCreating(true)
+              setLoading(true)
 
-            fetch("/api/humans.json", {
-              body: JSON.stringify({
-                humans: {
-                  magic_link_token: token,
-                  handle: handle,
+              setCreating(true)
+
+              fetch("/api/humans.json", {
+                body: JSON.stringify({
+                  humans: {
+                    magic_link_token: token,
+                    handle: handle,
+                  },
+                }),
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
                 },
-              }),
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((response) => {
-                if (response.ok) {
-                  return response.json()
-                } else {
-                  throw new Error("Could not create human")
-                }
               })
-              .then((data: AlreadyExists) => {
-                localStorage.setItem("seasoning-guest-token", data.session_token)
-                setGuest({
-                  authenticated: true,
-                  human: { handle: data.handle },
-                  token: data.session_token,
+                .then((response) => {
+                  setLoading(false)
+                  if (response.ok) {
+                    return response.json()
+                  } else {
+                    throw new Error("Could not create human")
+                  }
                 })
-                navigate("/")
-              })
-          }}
-        >
-          <input
-            type="text"
-            value={handle}
-            placeholder="Your handle"
-            onChange={(e) => setHandle(e.target.value)}
-          />
-          <input type="submit" value="Go" disabled={creating} />
-        </form>
-      </>
+                .then((data: AlreadyExists) => {
+                  localStorage.setItem("seasoning-guest-token", data.session_token)
+                  setGuest({
+                    authenticated: true,
+                    human: { handle: data.handle, gravatar_url: data.gravatar_url },
+                    token: data.session_token,
+                  })
+                  navigate("/")
+                })
+            }}
+          >
+            <input
+              type="text"
+              value={handle}
+              placeholder="Your handle"
+              onChange={(e) => setHandle(e.target.value)}
+            />
+            <input type="submit" value="Go" disabled={creating} />
+          </form>
+        </Card>
+      </Page>
     )
   } else {
-    return <p>Checking your link...</p>
+    return (
+      <Page>
+        <Card sectioned>
+          <p>Checking your link...</p>
+        </Card>
+      </Page>
+    )
   }
 }
 

@@ -1,25 +1,14 @@
 import React, { useState, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
-import styled from "styled-components"
 
 import { Show } from "../../types"
 
-const FullWidthSingleInputForm = styled.form`
-  display: flex;
-  input[type="text"] {
-    flex-grow: 3;
-  }
-`
-
-const ErrorMessage = styled.p`
-  color: red;
-`
-
 interface Props extends RouteComponentProps {
   token: string
+  globalSetLoading: (loadingState: boolean) => void
 }
 
-const ImportNewShow: FunctionComponent<Props> = ({ token }: Props) => {
+const ImportNewShow: FunctionComponent<Props> = ({ token, globalSetLoading }: Props) => {
   const [url, setURL] = useState("")
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -27,10 +16,11 @@ const ImportNewShow: FunctionComponent<Props> = ({ token }: Props) => {
   return (
     <>
       <p>Enter the URL of the show&rsquo;s English Wikipedia page:</p>
-      <FullWidthSingleInputForm
+      <form
         onSubmit={async (e) => {
           e.preventDefault()
           setLoading(true)
+          globalSetLoading(true)
 
           const response = await fetch("/api/shows.json", {
             body: JSON.stringify({
@@ -45,12 +35,14 @@ const ImportNewShow: FunctionComponent<Props> = ({ token }: Props) => {
             },
           })
 
+          setLoading(false)
+          globalSetLoading(false)
+
           if (response.ok) {
             const data: { show: Show } = await response.json()
             navigate(`/shows/${data.show.slug}`)
           } else {
             const data: { error: { message: string } } = await response.json()
-            setLoading(false)
             setErrorMessage(data.error.message)
           }
         }}
@@ -63,8 +55,8 @@ const ImportNewShow: FunctionComponent<Props> = ({ token }: Props) => {
           disabled={loading}
         />
         <input type="submit" value="Go" disabled={loading} />
-      </FullWidthSingleInputForm>
-      {errorMessage && <ErrorMessage>Problems: {errorMessage}</ErrorMessage>}
+      </form>
+      {errorMessage && <p>Problems: {errorMessage}</p>}
     </>
   )
 }
