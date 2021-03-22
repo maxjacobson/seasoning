@@ -25,7 +25,7 @@
     "@shopify/polaris": "^6.2.0",
     "lodash.debounce": "^4.0.8",
     "luxon": "^1.26.0",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-dom": "^16.14.0",
     "react-markdown": "^5.0.3",
     "remark-gfm": "^1.0.0",
