@@ -81,7 +81,7 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    listen (3.4.1)
+    listen (3.5.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.9.0)
@@ -202,7 +202,7 @@ DEPENDENCIES
   byebug
   email_validator
   letter_opener
-  listen (~> 3.3)
+  listen (~> 3.5)
   nokogiri (~> 1.11, >= 1.11.2)
   oj_serializers
   pg (~> 1.1)
