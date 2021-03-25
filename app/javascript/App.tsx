@@ -10,10 +10,6 @@ import {
   Icon,
   VisuallyHidden,
   ActionList,
-  Modal,
-  FormLayout,
-  TextField,
-  TextContainer,
 } from "@shopify/polaris"
 import { LogOutMinor, InfoMinor, QuestionMarkMajor } from "@shopify/polaris-icons"
 import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
