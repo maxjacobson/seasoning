@@ -33,12 +33,10 @@ class ApplicationController < ActionController::Base
     return @current_human if defined?(@current_human)
 
     @current_human =
-      begin
-        if token.blank?
-          nil
-        else
-          BrowserSession.active.includes(:human).where(token: token).first&.human
-        end
+      if token.blank?
+        nil
+      else
+        BrowserSession.active.includes(:human).where(token: token).first&.human
       end
   end
 end
