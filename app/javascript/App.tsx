@@ -36,21 +36,33 @@ import Credits from "./pages/Credits"
 
 import ImportNewShowModal from "./components/ImportNewShowModal"
 
-// Wires @reach/router up to @shopify/polaris.
-// We'll just use the link component from polaris, and it will use this.
-const CustomLink = ({
-  children,
-  url,
-  className,
-  id,
-  onClick,
-  ..._rest
-}: LinkLikeComponentProps) => {
-  return (
-    <ReachLink to={url} id={id} className={className} onClick={onClick}>
-      {children}
-    </ReachLink>
-  )
+const createCustomLink = (closeMobileMenu: () => void) => {
+  // Wires @reach/router up to @shopify/polaris.
+  // We'll just use the link component from polaris, and it will use this.
+  const CustomLink = ({
+    children,
+    url,
+    className,
+    id,
+    onClick,
+    ..._rest
+  }: LinkLikeComponentProps) => {
+    return (
+      <ReachLink
+        to={url}
+        id={id}
+        className={className}
+        onClick={(e) => {
+          closeMobileMenu()
+          onClick && onClick(e)
+        }}
+      >
+        {children}
+      </ReachLink>
+    )
+  }
+
+  return CustomLink
 }
 
 const searchForShows = (
@@ -164,13 +176,13 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
     <>
       <AppProvider
         i18n={enTranslations}
-        linkComponent={CustomLink}
+        linkComponent={createCustomLink(() => setMobileNavigationActive(false))}
         theme={{
           logo: {
             topBarSource: Logo,
-            url: "/",
             accessibilityLabel: "Seasoning",
             width: 160,
+            url: "/",
           },
         }}
       >
