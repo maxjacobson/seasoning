@@ -1,9 +1,6 @@
 # Seasoning
 
-Playing around with an idea for a website.
-This is mostly an excuse to try out vite.
-
-So far I've just built a passwordless signup/signin via magic links.
+Your couch away from your couch.
 
 Deploying to: <http://seasoning.herokuapp.com/> aka <https://www.seasoning.tv>
 
@@ -13,3 +10,7 @@ Deploying to: <http://seasoning.herokuapp.com/> aka <https://www.seasoning.tv>
 - Use camel case for typescript variables
 - Use snake case in ruby variables
 - Use snake case in the serialized API data
+
+## Environment variables
+
+For some features to work in development, you'll need to create an `.env.development.local` file, filling in any of the blank values in `.env.development`.

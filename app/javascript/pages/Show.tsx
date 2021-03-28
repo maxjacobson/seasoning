@@ -93,11 +93,7 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
           )}
 
           <Card.Section>
-            {data.show.number_of_seasons === 1 ? (
-              <p>1 season</p>
-            ) : (
-              <p>{data.show.number_of_seasons} seasons</p>
-            )}
+            <p>Info about show to come</p>
           </Card.Section>
         </Card>
       </Page>

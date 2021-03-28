@@ -19,7 +19,6 @@ export interface Show {
   id: number
   title: string
   slug: string
-  number_of_seasons: number
 }
 
 export interface YourRelationshipToShow {

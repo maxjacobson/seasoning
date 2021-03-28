@@ -33,3 +33,5 @@ node_modules
 *.local
 .DS_Store
 
+# dotenv
+.env.development.local

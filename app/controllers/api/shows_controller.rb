@@ -3,6 +3,8 @@
 module API
   # Lets you search the shows so you can add some
   class ShowsController < ApplicationController
+    NoShowsFound = Class.new(StandardError)
+
     def index
       authorize! { current_human.present? }
 
@@ -16,18 +18,21 @@ module API
     def create
       authorize! { current_human.present? }
 
-      wikipedia_page = Wikipedia::TVShowPage.new(params.require(:shows).require(:wikipedia_url))
-      show = Show.find_by(title: wikipedia_page.title)
+      response = TMDB::Client.new.search_tv(params.require(:shows).require(:query))
+
+      raise NoShowsFound, "Not found" if response.results.none?
+
+      tmdb_show = response.results.first
+      show = Show.find_by(title: tmdb_show.name)
       show ||= Show.create!(
-        title: wikipedia_page.title,
-        wikipedia_page_id: wikipedia_page.page_id,
-        number_of_seasons: wikipedia_page.number_of_seasons
+        title: tmdb_show.name,
+        tmdb_tv_id: tmdb_show.id
       )
 
       render json: {
         show: ShowSerializer.one(show)
       }
-    rescue Wikipedia::WikipediaError => e
+    rescue NoShowsFound => e
       render json: {
         error: {
           message: e.message

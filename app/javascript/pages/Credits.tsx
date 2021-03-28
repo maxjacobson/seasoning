@@ -34,6 +34,15 @@ const Credits: FunctionComponent<RouteComponentProps> = () => {
             by Shannon E Thomas.
           </p>
         </Card.Section>
+        <Card.Section title="Data">
+          <p>
+            All data from{" "}
+            <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">
+              The Movie Database
+            </a>
+            .
+          </p>
+        </Card.Section>
       </Card>
     </Page>
   )

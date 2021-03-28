@@ -17,7 +17,7 @@ const ImportNewShowModal: FunctionComponent<Props> = ({
   active,
   setActive,
 }: Props) => {
-  const [url, setURL] = useState("")
+  const [showQuery, setShowQuery] = useState("")
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -37,7 +37,7 @@ const ImportNewShowModal: FunctionComponent<Props> = ({
             const response = await fetch("/api/shows.json", {
               body: JSON.stringify({
                 shows: {
-                  wikipedia_url: url,
+                  query: showQuery,
                 },
               }),
               method: "POST",
@@ -74,13 +74,13 @@ const ImportNewShowModal: FunctionComponent<Props> = ({
       <Modal.Section>
         <FormLayout>
           <TextField
-            label="Wikipedia URL"
-            value={url}
-            onChange={setURL}
-            id="url"
+            label="Name of show"
+            value={showQuery}
+            onChange={setShowQuery}
+            id="show-name"
             clearButton={true}
           />
-          {errorMessage && <InlineError message={errorMessage} fieldID="url" />}
+          {errorMessage && <InlineError message={errorMessage} fieldID="show-name" />}
         </FormLayout>
       </Modal.Section>
     </Modal>
