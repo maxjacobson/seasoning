@@ -10,8 +10,15 @@ import {
   Icon,
   VisuallyHidden,
   ActionList,
+  Navigation,
 } from "@shopify/polaris"
-import { LogOutMinor, InfoMinor, QuestionMarkMajor } from "@shopify/polaris-icons"
+import {
+  LogOutMinor,
+  InfoMinor,
+  QuestionMarkMajor,
+  ViewMinor,
+  StarFilledMinor,
+} from "@shopify/polaris-icons"
 import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
 import enTranslations from "@shopify/polaris/locales/en.json"
 import "@shopify/polaris/dist/styles.css"
@@ -139,6 +146,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
     shows: null,
   })
   const [modalActive, setModalActive] = useState(false)
+  const [mobileNavigationActive, setMobileNavigationActive] = useState(false)
 
   useEffect(() => {
     if (!searchQuery || !guest.authenticated) {
@@ -167,8 +175,12 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
         }}
       >
         <Frame
+          showMobileNavigation={mobileNavigationActive}
+          onNavigationDismiss={() => setMobileNavigationActive(!mobileNavigationActive)}
           topBar={
             <TopBar
+              showNavigationToggle
+              onNavigationToggle={() => setMobileNavigationActive(!mobileNavigationActive)}
               userMenu={
                 guest.authenticated && (
                   <TopBar.UserMenu
@@ -251,6 +263,28 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               }
               searchResultsVisible={true}
             />
+          }
+          navigation={
+            <Navigation location="/">
+              <Navigation.Section
+                items={[
+                  {
+                    label: "Currently watching",
+                    onClick: () => {
+                      alert("Not implemented yet")
+                    },
+                    icon: ViewMinor,
+                  },
+                  {
+                    label: "Your favorite shows",
+                    onClick: () => {
+                      alert("stand by...")
+                    },
+                    icon: StarFilledMinor,
+                  },
+                ]}
+              />
+            </Navigation>
           }
         >
           {loading && <Loading />}
