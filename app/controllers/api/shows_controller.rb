@@ -23,11 +23,7 @@ module API
       raise NoShowsFound, "Not found" if response.results.none?
 
       tmdb_show = response.results.first
-      show = Show.find_by(title: tmdb_show.name)
-      show ||= Show.create!(
-        title: tmdb_show.name,
-        tmdb_tv_id: tmdb_show.id
-      )
+      show = FindOrCreateShow.call(tmdb_show)
 
       render json: {
         show: ShowSerializer.one(show)

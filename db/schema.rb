@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_023636) do
+ActiveRecord::Schema.define(version: 2021_03_28_033937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,20 @@ ActiveRecord::Schema.define(version: 2021_03_28_023636) do
     t.index ["show_id"], name: "index_my_shows_on_show_id"
   end
 
+  create_table "seasons", force: :cascade do |t|
+    t.bigint "show_id", null: false, comment: "Which show this season is part of"
+    t.integer "tmdb_id", null: false
+    t.string "name", null: false
+    t.integer "season_number", null: false
+    t.integer "episode_count", null: false
+    t.string "slug", null: false, comment: "A URL-friendly slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["show_id", "slug"], name: "index_seasons_on_show_id_and_slug", unique: true
+    t.index ["show_id"], name: "index_seasons_on_show_id"
+    t.index ["tmdb_id"], name: "index_seasons_on_tmdb_id", unique: true
+  end
+
   create_table "shows", force: :cascade do |t|
     t.string "title", null: false, comment: "The show's official title"
     t.string "slug", null: false, comment: "The show's title, in slug form, to go in a URL"
@@ -61,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_023636) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tmdb_tv_id", null: false
     t.index ["slug"], name: "index_shows_on_slug", unique: true
+    t.index ["tmdb_tv_id"], name: "index_shows_on_tmdb_tv_id", unique: true
   end
 
   add_foreign_key "browser_sessions", "humans", on_delete: :cascade
