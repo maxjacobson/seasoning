@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_033937) do
+ActiveRecord::Schema.define(version: 2021_04_04_171659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 2021_03_28_033937) do
     t.integer "tmdb_tv_id", null: false
     t.index ["slug"], name: "index_shows_on_slug", unique: true
     t.index ["tmdb_tv_id"], name: "index_shows_on_tmdb_tv_id", unique: true
+  end
+
+  create_table "tmdb_api_configurations", force: :cascade do |t|
+    t.string "secure_base_url", null: false
+    t.datetime "fetched_at", null: false
+    t.string "poster_sizes", null: false, array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["poster_sizes"], name: "index_tmdb_api_configurations_on_poster_sizes", using: :gin
   end
 
   add_foreign_key "browser_sessions", "humans", on_delete: :cascade

@@ -16,6 +16,11 @@ module TMDB
       ::TMDB::TVDetails.new(data)
     end
 
+    def api_configuration
+      data = get("/configuration")
+      ::TMDB::APIConfiguration.new(data)
+    end
+
     private
 
     def get(path, params = {})
