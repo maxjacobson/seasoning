@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
-import { Page, Card } from "@shopify/polaris"
+import { Page, Card, Link } from "@shopify/polaris"
 
 import { Guest } from "../types"
 
@@ -25,8 +25,22 @@ interface NewHuman {
 
 type Redemption = AlreadyExists | NewHuman
 
+interface LoadingMagicLink {
+  loading: true
+}
+interface ValidMagicLink {
+  loading: false
+  email: string
+}
+interface MagicLinkNotFound {
+  loading: false
+  email: null
+}
+
+type MagicLinkInfo = LoadingMagicLink | ValidMagicLink | MagicLinkNotFound
+
 const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest, setLoading }: Props) => {
-  const [email, setEmail] = useState<string | null>(null)
+  const [magicLinkInfo, setMagicLinkInfo] = useState<MagicLinkInfo>({ loading: true })
   const [handle, setHandle] = useState<string>("")
   const [creating, setCreating] = useState(false)
 
@@ -41,27 +55,39 @@ const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest, setLoading
 
       setLoading(false)
 
-      if (!response.ok) {
+      if (response.status === 404) {
+        setMagicLinkInfo({ loading: false, email: null })
+      } else if (!response.ok) {
         throw new Error("Could not redeem magic link")
-      }
-
-      const data: Redemption = await response.json()
-
-      if (data.already_exists) {
-        localStorage.setItem("seasoning-guest-token", data.session_token)
-        setGuest({
-          authenticated: true,
-          human: { handle: data.handle, gravatar_url: data.gravatar_url },
-          token: data.session_token,
-        })
-        navigate("/")
       } else {
-        setEmail(data.email)
+        const data: Redemption = await response.json()
+
+        if (data.already_exists) {
+          localStorage.setItem("seasoning-guest-token", data.session_token)
+          setGuest({
+            authenticated: true,
+            human: { handle: data.handle, gravatar_url: data.gravatar_url },
+            token: data.session_token,
+          })
+          navigate("/")
+        } else {
+          setMagicLinkInfo({ loading: false, email: data.email })
+        }
       }
     })()
   }, [])
 
-  if (email) {
+  if (magicLinkInfo.loading) {
+    return (
+      <Page>
+        <Card sectioned>
+          <p>Checking your link...</p>
+        </Card>
+      </Page>
+    )
+  }
+
+  if (magicLinkInfo.email) {
     return (
       <Page>
         <Card sectioned>
@@ -122,7 +148,11 @@ const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest, setLoading
     return (
       <Page>
         <Card sectioned>
-          <p>Checking your link...</p>
+          <p>Hmmm, that magic does not seem to be valid.</p>
+          <p>Perhaps it has expired.</p>
+          <p>
+            <Link url="/">Try again?</Link>
+          </p>
         </Card>
       </Page>
     )
