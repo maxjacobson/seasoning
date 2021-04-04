@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "net/http"
+
 module TMDB
   # API client for the movie database's API
   # https://developers.themoviedb.org/3/getting-started
