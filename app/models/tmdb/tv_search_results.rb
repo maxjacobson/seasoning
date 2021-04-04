@@ -10,7 +10,7 @@ module TMDB
       attribute :id, Types::Integer
       attribute :name, Types::String
       attribute :first_air_date, Types::String
-      attribute :poster_path, Types::String
+      attribute :poster_path, Types::String.optional
     end
   end
 end
