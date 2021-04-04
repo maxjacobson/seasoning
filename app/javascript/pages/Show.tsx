@@ -60,7 +60,7 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
     })()
   }, [showSlug])
 
-  setHeadTitle(showData.loading ? undefined : showData.data.show.title, [showData.loading])
+  setHeadTitle(showData.loading ? undefined : showData.data.show.title, [showData])
 
   if (showData.loading) {
     return <SkeletonPage title="Loading show..."></SkeletonPage>
