@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
-import { Page, Card, Link } from "@shopify/polaris"
+import { Page, Card, Link, Spinner } from "@shopify/polaris"
 
 import { Guest } from "../types"
 
@@ -81,7 +81,7 @@ const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest, setLoading
     return (
       <Page>
         <Card sectioned>
-          <p>Checking your link...</p>
+          <Spinner accessibilityLabel="Checking your magic link" size="large" />
         </Card>
       </Page>
     )

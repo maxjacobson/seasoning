@@ -22,9 +22,17 @@ export interface Show {
   poster_url: string | null
 }
 
+export type MyShowStatus =
+  | "might_watch"
+  | "currently_watching"
+  | "stopped_watching"
+  | "waiting_for_more"
+  | "finished"
+
 export interface YourRelationshipToShow {
   added_at: string
   note_to_self: string | undefined
+  status: MyShowStatus
 }
 
 export interface YourShow {

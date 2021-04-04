@@ -1,9 +1,11 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Link, Page, Card, DataTable } from "@shopify/polaris"
+import { Link, Page, Card, DataTable, EmptyState, Spinner } from "@shopify/polaris"
 import { DateTime } from "luxon"
 
 import ShowPoster from "../../components/ShowPoster"
 import { Human, YourShow } from "../../types"
+import { displayMyShowStatus } from "../../helpers/my_shows"
+import Logo from "../../images/logo.svg"
 
 interface YourShows {
   your_shows: YourShow[]
@@ -14,12 +16,15 @@ interface Props {
   globalSetLoading: (loadingState: boolean) => void
 }
 
-const ListShows = ({ shows }: { shows: YourShow[] }) => {
+interface ListShowProps {
+  shows: YourShow[]
+}
+const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
       <DataTable
-        columnContentTypes={["text", "text"]}
-        headings={["Show", "Added"]}
+        columnContentTypes={["text", "text", "text"]}
+        headings={["Show", "Added", "Status"]}
         rows={shows.map((yourShow) => {
           return [
             <>
@@ -35,12 +40,17 @@ const ListShows = ({ shows }: { shows: YourShow[] }) => {
             ) : (
               <span>&mdash;</span>
             ),
+            yourShow.your_relationship?.status ? (
+              displayMyShowStatus(yourShow.your_relationship.status)
+            ) : (
+              <span>&mdash;</span>
+            ),
           ]
         })}
       />
     )
   } else {
-    return <p>No shows yet!</p>
+    return <EmptyState heading="No shows yet" image={Logo} />
   }
 }
 
@@ -76,7 +86,7 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
       <Card sectioned>
         <Card.Section title={<>{props.human.handle}&rsquo;s shows</>}>
           {loading ? (
-            <p>Loading...</p>
+            <Spinner accessibilityLabel="Loading your shows" size="large" />
           ) : (
             <>
               <ListShows shows={shows} />

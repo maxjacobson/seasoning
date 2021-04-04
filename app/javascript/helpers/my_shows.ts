@@ -1,0 +1,26 @@
+import { MyShowStatus, Show } from "../types"
+
+export const displayMyShowStatus = (status: MyShowStatus): string => {
+  return {
+    might_watch: "Might watch",
+    currently_watching: "Currently watching",
+    stopped_watching: "Stopped watching",
+    waiting_for_more: "Waiting for more",
+    finished: "Finished",
+  }[status]
+}
+
+export const updateMyShow = (
+  show: Show,
+  token: string,
+  body: Record<string, unknown>
+): Promise<Response> => {
+  return fetch(`/api/your-shows/${show.slug}.json`, {
+    method: "PATCH",
+    headers: {
+      "X-SEASONING-TOKEN": token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+}

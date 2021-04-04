@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_04_191424) do
+ActiveRecord::Schema.define(version: 2021_04_04_205926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_enum :my_show_status, [
+    "might_watch",
+    "currently_watching",
+    "stopped_watching",
+    "waiting_for_more",
+    "finished",
+  ], force: :cascade
 
   create_table "browser_sessions", force: :cascade do |t|
     t.string "token", null: false, comment: "The token that will be kept in localstorage and included with API requests"
@@ -49,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_04_04_191424) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "note_to_self", comment: "An optional blob of Markdown-formatted text that the human can write to remind themselves why they've added the show, or however they want to use it"
+    t.enum "status", default: "might_watch", null: false, enum_name: "my_show_status"
     t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true
     t.index ["human_id"], name: "index_my_shows_on_human_id"
     t.index ["show_id"], name: "index_my_shows_on_show_id"

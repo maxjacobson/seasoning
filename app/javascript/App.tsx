@@ -18,13 +18,14 @@ import {
   QuestionMarkMajor,
   ViewMinor,
   StarFilledMinor,
+  ChecklistAlternateMajor,
 } from "@shopify/polaris-icons"
 import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
 import enTranslations from "@shopify/polaris/locales/en.json"
 import "@shopify/polaris/dist/styles.css"
 
 import { Guest, Show } from "./types"
-import Logo from "./images/logo.svg"
+import LogoWithName from "./images/logo-with-name.svg"
 
 // Pages
 import NotFound from "./pages/NotFound"
@@ -179,7 +180,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
         linkComponent={createCustomLink(() => setMobileNavigationActive(false))}
         theme={{
           logo: {
-            topBarSource: Logo,
+            topBarSource: LogoWithName,
             accessibilityLabel: "Seasoning",
             width: 160,
             url: "/",
@@ -283,9 +284,17 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   {
                     label: "Currently watching",
                     onClick: () => {
-                      alert("Not implemented yet")
+                      navigate("/")
                     },
                     icon: ViewMinor,
+                  },
+
+                  {
+                    label: "Watch list",
+                    onClick: () => {
+                      alert("Not implemented yet")
+                    },
+                    icon: ChecklistAlternateMajor,
                   },
                   {
                     label: "Your favorite shows",

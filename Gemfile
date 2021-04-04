@@ -12,6 +12,7 @@ gem "pg", "~> 1.1"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
 
+gem "activerecord-postgres_enum"
 gem "email_validator"
 gem "nokogiri", "~> 1.11", ">= 1.11.2"
 gem "oj_serializers"

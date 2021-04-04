@@ -5,6 +5,7 @@ import gfm from "remark-gfm"
 import { Badge } from "@shopify/polaris"
 
 import { YourShow } from "../types"
+import { updateMyShow } from "../helpers/my_shows"
 
 interface Props {
   yourShow: YourShow
@@ -52,17 +53,10 @@ const NoteToSelf: FunctionComponent<Props> = ({
             globalSetLoading(true)
             setLoading(true)
 
-            const response = await fetch(`/api/your-shows/${yourShow.show.slug}.json`, {
-              method: "PATCH",
-              headers: {
-                "X-SEASONING-TOKEN": token,
-                "Content-Type": "application/json",
+            const response = await updateMyShow(yourShow.show, token, {
+              show: {
+                note_to_self: newNoteToSelf,
               },
-              body: JSON.stringify({
-                show: {
-                  note_to_self: newNoteToSelf,
-                },
-              }),
             })
 
             setLoading(false)
