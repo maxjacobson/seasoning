@@ -19,6 +19,7 @@ export interface Show {
   id: number
   title: string
   slug: string
+  poster_url: string | null
 }
 
 export interface YourRelationshipToShow {

@@ -4,7 +4,8 @@ FindOrCreateShow = lambda { |tmdb_show|
   show = Show.find_by(title: tmdb_show.name)
   show ||= Show.create!(
     title: tmdb_show.name,
-    tmdb_tv_id: tmdb_show.id
+    tmdb_tv_id: tmdb_show.id,
+    tmdb_poster_path: tmdb_show.poster_path
   )
 
   TMDB::Client.new.tv_details(show.tmdb_tv_id).seasons.each do |tmdb_season|

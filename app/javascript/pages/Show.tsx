@@ -6,6 +6,7 @@ import { Guest, YourShow } from "../types"
 import { setHeadTitle } from "../hooks"
 import AddShowButton from "../components/AddShowButton"
 import NoteToSelf from "../components/NoteToSelf"
+import ShowPoster from "../components/ShowPoster"
 
 interface Props extends RouteComponentProps {
   showSlug?: string
@@ -93,6 +94,7 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
           )}
 
           <Card.Section>
+            <ShowPoster show={data.show} />
             <p>Info about show to come</p>
           </Card.Section>
         </Card>

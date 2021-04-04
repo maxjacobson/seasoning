@@ -7,6 +7,10 @@
 #
 # There should always be exactly one record in this table
 class TMDBAPIConfiguration < ApplicationRecord
+  def self.only
+    @only ||= first
+  end
+
   def self.refresh!
     transaction do
       most_recent = order(fetched_at: :desc).first

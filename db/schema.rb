@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_04_171659) do
+ActiveRecord::Schema.define(version: 2021_04_04_182820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_04_04_171659) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tmdb_tv_id", null: false
+    t.string "tmdb_poster_path"
     t.index ["slug"], name: "index_shows_on_slug", unique: true
     t.index ["tmdb_tv_id"], name: "index_shows_on_tmdb_tv_id", unique: true
   end
