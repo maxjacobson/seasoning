@@ -94,7 +94,7 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
           )}
 
           <Card.Section>
-            <ShowPoster show={data.show} />
+            <ShowPoster show={data.show} size="large" />
             <p>Info about show to come</p>
           </Card.Section>
         </Card>

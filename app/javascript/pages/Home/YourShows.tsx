@@ -1,6 +1,8 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Link, Page, Card } from "@shopify/polaris"
+import { Link, Page, Card, DataTable } from "@shopify/polaris"
+import { DateTime } from "luxon"
 
+import ShowPoster from "../../components/ShowPoster"
 import { Human, YourShow } from "../../types"
 
 interface YourShows {
@@ -15,15 +17,27 @@ interface Props {
 const ListShows = ({ shows }: { shows: YourShow[] }) => {
   if (shows.length) {
     return (
-      <ul>
-        {shows.map((yourShow) => {
-          return (
-            <li key={yourShow.show.id}>
-              <Link url={`/shows/${yourShow.show.slug}`}>{yourShow.show.title}</Link>
-            </li>
-          )
+      <DataTable
+        columnContentTypes={["text", "text"]}
+        headings={["Show", "Added"]}
+        rows={shows.map((yourShow) => {
+          return [
+            <>
+              <Link key={yourShow.show.id} url={`/shows/${yourShow.show.slug}`}>
+                <div>
+                  <ShowPoster show={yourShow.show} size="small" />
+                </div>
+                {yourShow.show.title}
+              </Link>
+            </>,
+            yourShow.your_relationship ? (
+              DateTime.fromISO(yourShow.your_relationship.added_at).toLocaleString()
+            ) : (
+              <span>&mdash;</span>
+            ),
+          ]
         })}
-      </ul>
+      />
     )
   } else {
     return <p>No shows yet!</p>
