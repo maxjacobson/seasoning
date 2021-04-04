@@ -1,10 +1,9 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Link, Page, Card, DataTable, EmptyState, Spinner } from "@shopify/polaris"
-import { DateTime } from "luxon"
+import { Link, Page, Card, DataTable, EmptyState, Spinner, Badge } from "@shopify/polaris"
 
 import ShowPoster from "../../components/ShowPoster"
 import { Human, YourShow } from "../../types"
-import { displayMyShowStatus } from "../../helpers/my_shows"
+import { displayMyShowStatus, myShowBadgeProgress, myShowBadgeStatus } from "../../helpers/my_shows"
 import Logo from "../../images/logo.svg"
 
 interface YourShows {
@@ -23,8 +22,8 @@ const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
       <DataTable
-        columnContentTypes={["text", "text", "text"]}
-        headings={["Show", "Added", "Status"]}
+        columnContentTypes={["text", "text"]}
+        headings={["Show", "Status"]}
         rows={shows.map((yourShow) => {
           return [
             <>
@@ -35,13 +34,13 @@ const ListShows = ({ shows }: ListShowProps) => {
                 {yourShow.show.title}
               </Link>
             </>,
-            yourShow.your_relationship ? (
-              DateTime.fromISO(yourShow.your_relationship.added_at).toLocaleString()
-            ) : (
-              <span>&mdash;</span>
-            ),
             yourShow.your_relationship?.status ? (
-              displayMyShowStatus(yourShow.your_relationship.status)
+              <Badge
+                progress={myShowBadgeProgress(yourShow.your_relationship.status)}
+                status={myShowBadgeStatus(yourShow.your_relationship.status)}
+              >
+                {displayMyShowStatus(yourShow.your_relationship.status)}
+              </Badge>
             ) : (
               <span>&mdash;</span>
             ),

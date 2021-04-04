@@ -10,6 +10,40 @@ export const displayMyShowStatus = (status: MyShowStatus): string => {
   }[status]
 }
 
+export const myShowBadgeProgress = (
+  status: MyShowStatus
+): "incomplete" | "partiallyComplete" | "complete" => {
+  switch (status) {
+    case "might_watch":
+      return "incomplete"
+    case "currently_watching":
+      return "partiallyComplete"
+    case "stopped_watching":
+      return "partiallyComplete"
+    case "waiting_for_more":
+      return "partiallyComplete"
+    case "finished":
+      return "complete"
+  }
+}
+
+export const myShowBadgeStatus = (
+  status: MyShowStatus
+): "success" | "info" | "attention" | "critical" | "warning" | "new" => {
+  switch (status) {
+    case "might_watch":
+      return "new"
+    case "currently_watching":
+      return "attention"
+    case "stopped_watching":
+      return "warning"
+    case "waiting_for_more":
+      return "warning"
+    case "finished":
+      return "success"
+  }
+}
+
 export const updateMyShow = (
   show: Show,
   token: string,
