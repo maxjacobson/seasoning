@@ -2,7 +2,6 @@
 
 module TMDB
   class TVDetails < Dry::Struct
-    attribute :first_air_date, Types::String
     attribute :id, Types::Integer
     attribute :in_production, Types::Bool
     attribute :name, Types::String
