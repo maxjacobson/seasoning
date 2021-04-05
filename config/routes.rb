@@ -7,8 +7,11 @@ Rails.application.routes.draw do
       resources :magic_links, only: %i[create show], path: "/magic-links"
       resources :humans, only: [:create]
       resources :your_shows, only: %i[index create update], path: "/your-shows"
+      resources :your_seasons, only: %i[update], path: "/your-seasons"
       resources :profiles, only: [:show]
-      resources :shows, only: %i[create index show]
+      resources :shows, only: %i[create index show] do
+        resources :seasons, only: %i[show]
+      end
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_04_205926) do
+ActiveRecord::Schema.define(version: 2021_04_05_035006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 2021_04_04_205926) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["token"], name: "index_magic_links_on_token", unique: true
+  end
+
+  create_table "my_seasons", force: :cascade do |t|
+    t.bigint "human_id", null: false, comment: "Which human saved this season"
+    t.bigint "season_id", null: false, comment: "Which season did this human save"
+    t.boolean "watched", default: false, null: false, comment: "Did the human watch this season yet?"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["human_id", "season_id"], name: "index_my_seasons_on_human_id_and_season_id", unique: true
+    t.index ["human_id"], name: "index_my_seasons_on_human_id"
+    t.index ["season_id"], name: "index_my_seasons_on_season_id"
   end
 
   create_table "my_shows", force: :cascade do |t|
@@ -99,6 +110,8 @@ ActiveRecord::Schema.define(version: 2021_04_04_205926) do
   end
 
   add_foreign_key "browser_sessions", "humans", on_delete: :cascade
+  add_foreign_key "my_seasons", "humans", on_delete: :cascade
+  add_foreign_key "my_seasons", "seasons", on_delete: :cascade
   add_foreign_key "my_shows", "humans", on_delete: :cascade
   add_foreign_key "my_shows", "shows", on_delete: :cascade
 end

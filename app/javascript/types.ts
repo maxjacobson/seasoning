@@ -52,3 +52,13 @@ export interface Profile {
   handle: string
   created_at: string
 }
+
+export interface YourRelationshipToSeason {
+  watched: boolean
+}
+
+export interface YourSeason {
+  show: Show
+  season: Season
+  your_relationship?: YourRelationshipToSeason
+}
