@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { Button, TextField } from "@shopify/polaris"
+import { TextField, CalloutCard } from "@shopify/polaris"
 import ReactMarkdown from "react-markdown"
 import gfm from "remark-gfm"
-import { Badge } from "@shopify/polaris"
 
+import Say from "../images/say.svg"
 import { YourShow } from "../types"
 import { updateMyShow } from "../helpers/my_shows"
 
@@ -30,92 +30,88 @@ const NoteToSelf: FunctionComponent<Props> = ({
     setNewNoteToSelf(yourShow.your_relationship?.note_to_self || "")
   }, [yourShow.show.slug])
 
-  if (isEditing) {
-    return (
-      <div>
-        <TextField
-          label={
-            <p>
-              Add a note to self about this show. Put whatever you want in here. It&rsquo;s just for
-              you. Feel free to use Markdown.
-            </p>
-          }
-          value={newNoteToSelf}
-          onChange={setNewNoteToSelf}
-          disabled={loading}
-          multiline={4}
-          clearButton={true}
-          onClearButtonClick={() => setNewNoteToSelf("")}
-        />
-        <Button
-          disabled={loading}
-          onClick={async () => {
-            globalSetLoading(true)
-            setLoading(true)
-
-            const response = await updateMyShow(yourShow.show, token, {
-              show: {
-                note_to_self: newNoteToSelf,
-              },
-            })
-
-            setLoading(false)
-            globalSetLoading(false)
-
-            if (response.ok) {
-              const updated: YourShow = await response.json()
-              updateYourShow(updated)
-              setIsEditing(false)
-            } else {
-              throw new Error("Could not update note to self")
-            }
-          }}
-        >
-          Save
-        </Button>{" "}
-        <Button
-          onClick={() => {
-            setIsEditing(false)
-          }}
-          disabled={loading}
-        >
-          Cancel
-        </Button>
-        <p>
-          <em>
-            Tip: I like to use this box to remind myself why I&rsquo;m adding this show. Like,
-            I&rsquo;ll make a note of who recommended it to me, and include some links to articles
-            that piqued my interest.
-          </em>
-        </p>
-      </div>
-    )
-  }
-
-  const edit = (
-    <Button
-      onClick={() => {
-        setIsEditing(true)
-      }}
-    >
-      Edit
-    </Button>
-  )
-
   return (
-    <>
-      {yourShow.your_relationship?.note_to_self ? (
+    <CalloutCard
+      title="Write a note to self"
+      illustration={Say}
+      primaryAction={
+        isEditing
+          ? {
+              content: "Save",
+              onAction: async () => {
+                globalSetLoading(true)
+                setLoading(true)
+
+                const response = await updateMyShow(yourShow.show, token, {
+                  show: {
+                    note_to_self: newNoteToSelf,
+                  },
+                })
+
+                setLoading(false)
+                globalSetLoading(false)
+
+                if (response.ok) {
+                  const updated: YourShow = await response.json()
+                  updateYourShow(updated)
+                  setIsEditing(false)
+                } else {
+                  throw new Error("Could not update note to self")
+                }
+              },
+            }
+          : {
+              content: "Edit",
+              onAction: () => {
+                setIsEditing(true)
+              },
+            }
+      }
+      secondaryAction={
+        isEditing
+          ? {
+              content: "Cancel",
+              onAction: () => {
+                setIsEditing(false)
+              },
+            }
+          : undefined
+      }
+    >
+      {isEditing ? (
+        <div>
+          <TextField
+            label={
+              <p>
+                Add a note to self about this show. Put whatever you want in here. It&rsquo;s just
+                for you. Feel free to use Markdown.
+              </p>
+            }
+            value={newNoteToSelf}
+            onChange={setNewNoteToSelf}
+            disabled={loading}
+            multiline={4}
+            clearButton={true}
+            onClearButtonClick={() => setNewNoteToSelf("")}
+          />
+          <p>
+            <em>
+              Tip: I like to use this box to remind myself why I&rsquo;m adding this show. Like,
+              I&rsquo;ll make a note of who recommended it to me, and include some links to articles
+              that piqued my interest.
+            </em>
+          </p>
+        </div>
+      ) : yourShow.your_relationship?.note_to_self ? (
         <>
-          <Badge status="critical">Private</Badge>
-          {edit}
-          <ReactMarkdown plugins={[gfm]}>{yourShow.your_relationship?.note_to_self}</ReactMarkdown>
+          <ReactMarkdown plugins={[gfm]}>{yourShow.your_relationship.note_to_self}</ReactMarkdown>
         </>
       ) : (
         <p>
-          <em>No note to self.</em> {edit}
+          <em>No note to self.</em>
         </p>
       )}
-    </>
+    </CalloutCard>
   )
 }
 

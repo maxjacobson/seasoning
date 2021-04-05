@@ -15,7 +15,7 @@ const Home: FunctionComponent<HomeProps> = (props: HomeProps) => {
   const { guest, setLoading } = props
 
   return (
-    <Page title="Welcome">
+    <Page title="Welcome" subtitle="This is seasoning, a website about TV shows">
       {guest.authenticated ? (
         <YourShows human={guest.human} token={guest.token} globalSetLoading={setLoading} />
       ) : (

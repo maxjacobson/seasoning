@@ -7,6 +7,7 @@ import { setHeadTitle } from "../hooks"
 import AddShowButton from "../components/AddShowButton"
 import ChooseShowStatusButton from "../components/ChooseShowStatusButton"
 import NoteToSelf from "../components/NoteToSelf"
+import SeasonsList from "../components/SeasonsList"
 import ShowPoster from "../components/ShowPoster"
 
 interface Props extends RouteComponentProps {
@@ -27,12 +28,11 @@ type LoadedShowData = {
 
 type ShowData = LoadingShowData | LoadedShowData
 
-const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) => {
+const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) => {
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
     data: null,
   })
-
   useEffect(() => {
     if (!showSlug) {
       return
@@ -69,7 +69,18 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
     const { data } = showData
 
     return (
-      <Page>
+      <Page title={data.show.title} breadcrumbs={[{ url: "/" }]}>
+        {guest.authenticated && data.your_relationship && (
+          <NoteToSelf
+            token={guest.token}
+            globalSetLoading={setLoading}
+            yourShow={data}
+            updateYourShow={(newData) => {
+              setShowData({ loading: false, data: newData })
+            }}
+          />
+        )}
+
         <Card sectioned>
           <Card.Header title={data.show.title}>
             <Stack>
@@ -101,23 +112,11 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
             </Stack>
           </Card.Header>
 
-          <Card.Section>
+          <Card.Section title="Poster">
             <ShowPoster show={data.show} size="large" />
-
-            {guest.authenticated && data.your_relationship && (
-              <div>
-                <NoteToSelf
-                  token={guest.token}
-                  globalSetLoading={setLoading}
-                  yourShow={data}
-                  updateYourShow={(newData) => {
-                    setShowData({ loading: false, data: newData })
-                  }}
-                />
-              </div>
-            )}
-
-            <p>Info about show to come</p>
+          </Card.Section>
+          <Card.Section title="Seasons">
+            <SeasonsList show={data.show} />
           </Card.Section>
         </Card>
       </Page>
@@ -125,4 +124,4 @@ const Show: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) 
   }
 }
 
-export default Show
+export default ShowPage

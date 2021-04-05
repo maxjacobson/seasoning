@@ -30,7 +30,8 @@ import LogoWithName from "./images/logo-with-name.svg"
 // Pages
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
-import ShowPage from "./pages/Show"
+import ShowPage from "./pages/ShowPage"
+import SeasonPage from "./pages/SeasonPage"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 import Credits from "./pages/Credits"
@@ -319,6 +320,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               setLoading={setLoading}
             />
             <ShowPage path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
+            <SeasonPage path="/shows/:showSlug/:seasonSlug" guest={guest} setLoading={setLoading} />
             <Credits path="/credits" />
             <Profile path="/:handle" setLoading={setLoading} />
           </Router>

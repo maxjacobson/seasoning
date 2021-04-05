@@ -77,8 +77,8 @@ const Profile: FunctionComponent<Props> = ({ handle, setLoading }: Props) => {
     const { created_at } = profile.profile
 
     return (
-      <Page>
-        <Card title={handle} sectioned>
+      <Page title={handle}>
+        <Card title="Profile" sectioned>
           <Card.Section title="About">
             <p>
               <em>Seasoner since {DateTime.fromISO(created_at).toLocaleString()}</em>

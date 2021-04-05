@@ -15,11 +15,19 @@ export interface AnonymousGuest {
 
 export type Guest = AuthenticatedGuest | AnonymousGuest
 
+export interface Season {
+  id: number
+  name: string
+  season_number: number
+  episode_count: number
+  slug: string
+}
 export interface Show {
   id: number
   title: string
   slug: string
   poster_url: string | null
+  seasons: Season[]
 }
 
 export type MyShowStatus =

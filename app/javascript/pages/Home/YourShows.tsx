@@ -83,7 +83,7 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
   return (
     <Page>
       <Card sectioned>
-        <Card.Section title={<>{props.human.handle}&rsquo;s shows</>}>
+        <Card.Section title="Your shows">
           {loading ? (
             <Spinner accessibilityLabel="Loading your shows" size="large" />
           ) : (
