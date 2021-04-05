@@ -33,7 +33,7 @@ module API
         error: {
           message: e.message
         }
-      }, status: 400
+      }, status: :bad_request
     end
 
     def show

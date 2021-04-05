@@ -1,3 +1,8 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+
 AllCops:
   Exclude:
     - bin/**/* # I use this strictly for binstubs; custom scripts go in exe/

@@ -15,7 +15,7 @@ module API
           }
         }
       else
-        render json: {}, status: 404
+        render json: {}, status: :not_found
       end
     end
   end

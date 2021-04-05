@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def redirect_apex_domain
     return unless request.host == "seasoning.tv"
 
-    redirect_to("#{request.protocol}www.seasoning.tv#{request.fullpath}", status: 302)
+    redirect_to("#{request.protocol}www.seasoning.tv#{request.fullpath}", status: :found)
   end
 
   def authorize!

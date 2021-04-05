@@ -16,7 +16,7 @@ module API
         magic_link.deliver
         render json: MagicLinkSerializer.one(magic_link)
       else
-        render json: {}, status: 400
+        render json: {}, status: :bad_request
       end
     end
 

@@ -9,7 +9,7 @@ class Show < ApplicationRecord
   has_many :seasons
 
   scope :needs_refreshing, lambda {
-    where(tmdb_next_refresh_at: nil).or(where(tmdb_next_refresh_at: ..(Time.now)))
+    where(tmdb_next_refresh_at: nil).or(where(tmdb_next_refresh_at: ..(Time.zone.now)))
   }
 
   def poster
