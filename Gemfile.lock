@@ -125,12 +125,12 @@ GEM
     mini_portile2 (2.5.0)
     minitest (5.14.4)
     nio4r (2.5.7)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
-    nokogiri (1.11.2-x86_64-darwin)
+    nokogiri (1.11.3-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.11.2-x86_64-linux)
+    nokogiri (1.11.3-x86_64-linux)
       racc (~> 1.4)
     oj (3.11.2)
     oj_serializers (1.0.0)
@@ -234,7 +234,7 @@ DEPENDENCIES
   email_validator
   letter_opener
   listen (~> 3.5)
-  nokogiri (~> 1.11, >= 1.11.2)
+  nokogiri (~> 1.11)
   oj_serializers
   pg (~> 1.1)
   puma (~> 5.0)
