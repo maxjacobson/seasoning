@@ -6,8 +6,14 @@ module API
     def index
       authorize! { current_human.present? }
 
+      my_shows = current_human
+                 .my_shows
+                 .joins(:show)
+                 .yield_self { |relation| search(relation) }
+                 .order(status: :asc)
+
       render json: {
-        your_shows: MyShowSerializer.many(current_human.my_shows.order(status: :asc))
+        your_shows: MyShowSerializer.many(my_shows)
       }
     end
 
@@ -34,6 +40,23 @@ module API
         render json: MyShowSerializer.one(my_show)
       else
         render json: {}, status: :bad_request
+      end
+    end
+
+    private
+
+    def search(my_shows)
+      my_shows =
+        if params[:statuses].is_a?(Array)
+          my_shows.where(status: params[:statuses])
+        else
+          my_shows
+        end
+
+      if params[:q].present?
+        my_shows.where("shows.title ilike ?", "%#{params[:q]}%")
+      else
+        my_shows
       end
     end
   end
