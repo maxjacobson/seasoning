@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 2021_04_10_214926) do
   end
 
   add_foreign_key "browser_sessions", "humans", on_delete: :cascade
-  add_foreign_key "follows", "humans", column: "followee_id"
-  add_foreign_key "follows", "humans", column: "follower_id"
+  add_foreign_key "follows", "humans", column: "followee_id", on_delete: :cascade
+  add_foreign_key "follows", "humans", column: "follower_id", on_delete: :cascade
   add_foreign_key "my_seasons", "humans", on_delete: :cascade
   add_foreign_key "my_seasons", "seasons", on_delete: :cascade
   add_foreign_key "my_shows", "humans", on_delete: :cascade
