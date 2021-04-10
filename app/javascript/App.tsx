@@ -281,30 +281,34 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
           navigation={
             <Navigation location="/">
               <Navigation.Section
-                items={[
-                  {
-                    label: "Currently watching",
-                    onClick: () => {
-                      navigate("/")
-                    },
-                    icon: ViewMinor,
-                  },
+                items={
+                  guest.authenticated
+                    ? [
+                        {
+                          label: "Currently watching",
+                          onClick: () => {
+                            navigate("/")
+                          },
+                          icon: ViewMinor,
+                        },
 
-                  {
-                    label: "Watch list",
-                    onClick: () => {
-                      alert("Not implemented yet")
-                    },
-                    icon: ChecklistAlternateMajor,
-                  },
-                  {
-                    label: "Your favorite shows",
-                    onClick: () => {
-                      alert("stand by...")
-                    },
-                    icon: StarFilledMinor,
-                  },
-                ]}
+                        {
+                          label: "Watch list",
+                          onClick: () => {
+                            alert("Not implemented yet")
+                          },
+                          icon: ChecklistAlternateMajor,
+                        },
+                        {
+                          label: "Your favorite shows",
+                          onClick: () => {
+                            alert("stand by...")
+                          },
+                          icon: StarFilledMinor,
+                        },
+                      ]
+                    : []
+                }
               />
             </Navigation>
           }
