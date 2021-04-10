@@ -125,6 +125,7 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
           ) : (
             <>
               <Filters
+                queryPlaceholder="Filter your shows"
                 queryValue={queryValue}
                 filters={[
                   {
