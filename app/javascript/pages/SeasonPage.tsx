@@ -129,7 +129,6 @@ const Season: FunctionComponent<Props> = ({ guest, showSlug, seasonSlug, setLoad
                 } else {
                   throw new Error("Could not toggle watched status")
                 }
-                console.log("toggle watched")
               }}
               disabled={hasWatched === undefined || updating}
             />

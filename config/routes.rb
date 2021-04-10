@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :shows, only: %i[create index show] do
         resources :seasons, only: %i[show]
       end
+      resource :settings, only: %i[show update]
     end
   end
 

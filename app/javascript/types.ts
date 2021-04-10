@@ -51,6 +51,7 @@ export interface YourShow {
 export interface Profile {
   handle: string
   created_at: string
+  currently_watching?: Show[]
 }
 
 export interface YourRelationshipToSeason {
@@ -61,4 +62,8 @@ export interface YourSeason {
   show: Show
   season: Season
   your_relationship?: YourRelationshipToSeason
+}
+
+export interface HumanSettings {
+  share_currently_watching: boolean
 }

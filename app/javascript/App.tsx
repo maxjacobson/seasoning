@@ -17,8 +17,7 @@ import {
   InfoMinor,
   QuestionMarkMajor,
   ViewMinor,
-  StarFilledMinor,
-  ChecklistAlternateMajor,
+  SettingsMajor,
 } from "@shopify/polaris-icons"
 import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
 import enTranslations from "@shopify/polaris/locales/en.json"
@@ -35,6 +34,7 @@ import SeasonPage from "./pages/SeasonPage"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 import Credits from "./pages/Credits"
+import Settings from "./pages/Settings"
 
 import ImportNewShowModal from "./components/ImportNewShowModal"
 
@@ -216,6 +216,13 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                             icon: InfoMinor,
                           },
                           {
+                            content: "Settings",
+                            onAction: () => {
+                              navigate("/settings")
+                            },
+                            icon: SettingsMajor,
+                          },
+                          {
                             content: "Log out",
                             onAction: () => {
                               if (confirm("Log out?")) {
@@ -285,26 +292,11 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   guest.authenticated
                     ? [
                         {
-                          label: "Currently watching",
+                          label: "Your shows",
                           onClick: () => {
                             navigate("/")
                           },
                           icon: ViewMinor,
-                        },
-
-                        {
-                          label: "Watch list",
-                          onClick: () => {
-                            alert("Not implemented yet")
-                          },
-                          icon: ChecklistAlternateMajor,
-                        },
-                        {
-                          label: "Your favorite shows",
-                          onClick: () => {
-                            alert("stand by...")
-                          },
-                          icon: StarFilledMinor,
                         },
                       ]
                     : []
@@ -326,6 +318,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
             <ShowPage path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
             <SeasonPage path="/shows/:showSlug/:seasonSlug" guest={guest} setLoading={setLoading} />
             <Credits path="/credits" />
+            <Settings path="/settings" setLoading={setLoading} guest={guest} />
             <Profile path="/:handle" setLoading={setLoading} />
           </Router>
 

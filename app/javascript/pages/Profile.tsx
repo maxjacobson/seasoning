@@ -1,10 +1,11 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Card, Page, SkeletonPage } from "@shopify/polaris"
+import { Card, Page, SkeletonPage, DataTable, Link } from "@shopify/polaris"
 import { DateTime } from "luxon"
 
 import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
+import ShowPoster from "../components/ShowPoster"
 
 interface StillLoading {
   loading: true
@@ -74,7 +75,7 @@ const Profile: FunctionComponent<Props> = ({ handle, setLoading }: Props) => {
       </Page>
     )
   } else {
-    const { created_at } = profile.profile
+    const { created_at, currently_watching } = profile.profile
 
     return (
       <Page title={handle}>
@@ -85,13 +86,30 @@ const Profile: FunctionComponent<Props> = ({ handle, setLoading }: Props) => {
             </p>
           </Card.Section>
 
-          <Card.Section title="Hmm">
-            <p>
-              Welcome to <strong>{handle}</strong>&rsquo;s profile page. What should go here? Later
-              on, when people can write reviews, or share their favorite shows, that will probably
-              go here.
-            </p>
-          </Card.Section>
+          {currently_watching && (
+            <Card.Section title="Currently watching">
+              {currently_watching.length ? (
+                <DataTable
+                  columnContentTypes={["text"]}
+                  headings={["Show"]}
+                  rows={currently_watching.map((show) => {
+                    return [
+                      <>
+                        <Link key={show.id} url={`/shows/${show.slug}`}>
+                          <div>
+                            <ShowPoster show={show} size="small" />
+                          </div>
+                          {show.title}
+                        </Link>
+                      </>,
+                    ]
+                  })}
+                />
+              ) : (
+                <p>{handle} is not currently watching anything</p>
+              )}
+            </Card.Section>
+          )}
         </Card>
       </Page>
     )
