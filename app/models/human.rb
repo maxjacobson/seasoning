@@ -11,6 +11,16 @@ class Human < ApplicationRecord
 
   validates :handle, exclusion: { in: RESERVED_WORDS, message: "%<value>s is reserved" }
 
+  def followers
+    human_ids = Follow.where(followee_id: id).pluck(:follower_id)
+    Human.where(id: human_ids)
+  end
+
+  def followings
+    human_ids = Follow.where(follower_id: id).pluck(:followee_id)
+    Human.where(id: human_ids)
+  end
+
   def gravatar_url
     hash = Digest::MD5.hexdigest(email)
     "https://www.gravatar.com/avatar/#{hash}"

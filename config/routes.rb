@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :seasons, only: %i[show]
       end
       resource :settings, only: %i[show update]
+      resources :follows, only: %i[create]
     end
   end
 

@@ -319,7 +319,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
             <SeasonPage path="/shows/:showSlug/:seasonSlug" guest={guest} setLoading={setLoading} />
             <Credits path="/credits" />
             <Settings path="/settings" setLoading={setLoading} guest={guest} />
-            <Profile path="/:handle" setLoading={setLoading} />
+            <Profile path="/:handle" guest={guest} setLoading={setLoading} />
           </Router>
 
           {guest.authenticated && (

@@ -48,10 +48,17 @@ export interface YourShow {
   your_relationship?: YourRelationshipToShow
 }
 
+interface YourRelationshipToProfile {
+  self: boolean
+  you_follow_them: boolean
+  they_follow_you: boolean
+}
+
 export interface Profile {
   handle: string
   created_at: string
   currently_watching?: Show[]
+  your_relationship?: YourRelationshipToProfile
 }
 
 export interface YourRelationshipToSeason {

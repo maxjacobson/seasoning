@@ -8,7 +8,9 @@ module API
       human = Human.find_by(handle: params.require(:id))
 
       if human.present?
-        render json: { profile: ProfileSerializer.one(human) }
+        render json: {
+          profile: ProfileSerializer.one(Profile.new(human: human, viewer: current_human))
+        }
       else
         render json: {}, status: :not_found
       end

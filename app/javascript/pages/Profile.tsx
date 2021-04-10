@@ -3,7 +3,7 @@ import { RouteComponentProps } from "@reach/router"
 import { Card, Page, SkeletonPage, DataTable, Link } from "@shopify/polaris"
 import { DateTime } from "luxon"
 
-import { Profile } from "../types"
+import { Profile, Guest } from "../types"
 import { setHeadTitle } from "../hooks"
 import ShowPoster from "../components/ShowPoster"
 
@@ -25,17 +25,22 @@ type ProfileData = StillLoading | LoadedProfileData | ProfileNotFound
 
 interface Props extends RouteComponentProps {
   handle?: string
+  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-const Profile: FunctionComponent<Props> = ({ handle, setLoading }: Props) => {
+const Profile: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props) => {
   const [profile, setProfile] = useState<ProfileData>({ loading: true })
 
   setHeadTitle(handle)
 
   useEffect(() => {
+    const headers: Record<string, string> = {}
+    if (guest.authenticated) {
+      headers["X-Seasoning-Token"] = guest.token
+    }
     setLoading(true)
-    fetch(`/api/profiles/${handle}.json`)
+    fetch(`/api/profiles/${handle}.json`, { headers: headers })
       .then((response) => {
         setLoading(false)
         if (response.ok) {
@@ -75,10 +80,40 @@ const Profile: FunctionComponent<Props> = ({ handle, setLoading }: Props) => {
       </Page>
     )
   } else {
-    const { created_at, currently_watching } = profile.profile
+    const { created_at, currently_watching, your_relationship } = profile.profile
 
     return (
-      <Page title={handle}>
+      <Page
+        title={handle}
+        primaryAction={
+          guest.authenticated &&
+          your_relationship &&
+          !your_relationship.self && {
+            content: "Follow",
+            disabled: your_relationship.you_follow_them,
+            onAction: async () => {
+              const response = await fetch("/api/follows.json", {
+                method: "POST",
+                headers: {
+                  "X-Seasoning-Token": guest.token,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  followee: handle,
+                }),
+              })
+
+              if (!response.ok) {
+                throw new Error("Could not follow")
+              }
+
+              const data = await response.json()
+
+              setProfile({ loading: false, profile: data.profile })
+            },
+          }
+        }
+      >
         <Card title="Profile" sectioned>
           <Card.Section title="About">
             <p>
