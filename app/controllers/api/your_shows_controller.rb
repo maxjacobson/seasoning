@@ -7,7 +7,7 @@ module API
       authorize! { current_human.present? }
 
       render json: {
-        your_shows: MyShowSerializer.many(current_human.my_shows)
+        your_shows: MyShowSerializer.many(current_human.my_shows.order(status: :asc))
       }
     end
 
