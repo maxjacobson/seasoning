@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: actually reference this somewhere
 RESERVED_WORDS = %w[
   show
   shows
@@ -11,4 +10,5 @@ RESERVED_WORDS = %w[
   about
   add-show
   credits
+  settings
 ].freeze
