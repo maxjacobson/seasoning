@@ -25,8 +25,8 @@ const Heading = ({ children, level }: { children: React.ReactNode; level: Level 
   return <PolarisSubheading element={element}>{children}</PolarisSubheading>
 }
 
-const InlineCode = ({ text }: { text: string }) => {
-  return <TextStyle variation="code">{text}</TextStyle>
+const InlineCode = ({ children }: { children: string }) => {
+  return <TextStyle variation="code">{children}</TextStyle>
 }
 
 // Use the polaris components
