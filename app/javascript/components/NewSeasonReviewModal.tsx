@@ -128,7 +128,7 @@ const NewSeasonReviewModal: FunctionComponent<Props> = ({
               <span>
                 Your review (you can use{" "}
                 <Link url="https://commonmark.org/help/" external={true}>
-                  markdown
+                  Markdown
                 </Link>
                 )
               </span>
