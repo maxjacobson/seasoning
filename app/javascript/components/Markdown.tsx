@@ -1,7 +1,12 @@
 import React, { FunctionComponent } from "react"
 import ReactMarkdown from "react-markdown"
 import gfm from "remark-gfm"
-import { TextContainer, Heading as PolarisHeading, HeadingTagName } from "@shopify/polaris"
+import {
+  TextContainer,
+  HeadingTagName,
+  Subheading as PolarisSubheading,
+  TextStyle,
+} from "@shopify/polaris"
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6
 
@@ -16,7 +21,12 @@ const headingMappings: Record<Level, HeadingTagName> = {
 
 const Heading = ({ children, level }: { children: React.ReactNode; level: Level }) => {
   const element: HeadingTagName = headingMappings[level]
-  return <PolarisHeading element={element}>{children}</PolarisHeading>
+
+  return <PolarisSubheading element={element}>{children}</PolarisSubheading>
+}
+
+const InlineCode = ({ text }: { text: string }) => {
+  return <TextStyle variation="code">{text}</TextStyle>
 }
 
 // Use the polaris components
@@ -24,8 +34,8 @@ const Heading = ({ children, level }: { children: React.ReactNode; level: Level 
 // This is necessary because polaris resets things like h1 and p tags,
 // and it looks bad unless we use polaris's stuff
 const renderers = {
-  text: TextContainer,
   heading: Heading,
+  inlineCode: InlineCode,
 }
 
 interface Props {
@@ -34,9 +44,11 @@ interface Props {
 
 const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
   return (
-    <ReactMarkdown plugins={[gfm]} renderers={renderers}>
-      {markdown}
-    </ReactMarkdown>
+    <TextContainer>
+      <ReactMarkdown plugins={[gfm]} renderers={renderers} linkTarget="_blank">
+        {markdown}
+      </ReactMarkdown>
+    </TextContainer>
   )
 }
 
