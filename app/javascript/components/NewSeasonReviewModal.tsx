@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from "react"
-import { FormLayout, TextField, Modal, Checkbox, Select, InlineError } from "@shopify/polaris"
+import { Link, FormLayout, TextField, Modal, Checkbox, Select, InlineError } from "@shopify/polaris"
 
 import { Show, Season, SeasonReview, AuthenticatedGuest } from "../types"
 import { navigate } from "@reach/router"
@@ -124,7 +124,15 @@ const NewSeasonReviewModal: FunctionComponent<Props> = ({
           />
 
           <TextField
-            label="Your review (you can use markdown)"
+            label={
+              <span>
+                Your review (you can use{" "}
+                <Link url="https://commonmark.org/help/" external={true}>
+                  markdown
+                </Link>
+                )
+              </span>
+            }
             onChange={setBody}
             value={body}
             multiline={10}

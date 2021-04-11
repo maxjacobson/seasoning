@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Page, Card, DataTable } from "@shopify/polaris"
+import { Page, Card, DataTable, Link } from "@shopify/polaris"
 import { RouteComponentProps } from "@reach/router"
 
 import { setHeadTitle } from "../hooks"
@@ -13,12 +13,14 @@ interface IconLinkProps {
 }
 const IconLink: FunctionComponent<IconLinkProps> = ({ name, url, icon }: IconLinkProps) => {
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
+    <>
       <div>
         <img src={icon} width="60" />
       </div>
-      {name}
-    </a>
+      <Link url={url} external={true}>
+        {name}
+      </Link>
+    </>
   )
 }
 
@@ -31,18 +33,18 @@ const Credits: FunctionComponent<RouteComponentProps> = () => {
         <Card.Section title="Inspiration">
           <p>
             Obviously this is very much inspired by{" "}
-            <a href="https://letterboxd.com/" target="_blank" rel="noopener noreferrer">
+            <Link url="https://letterboxd.com/" external={true}>
               Letterboxd
-            </a>
+            </Link>
             .
           </p>
         </Card.Section>
         <Card.Section title="Icons">
           <p>
             Several icons are from{" "}
-            <a href="https://www.toicon.com/" target="_blank" rel="noopner noreferrer">
+            <Link url="https://www.toicon.com/" external={true}>
               to [icon]
-            </a>
+            </Link>
             :
           </p>
           <DataTable
@@ -73,9 +75,9 @@ const Credits: FunctionComponent<RouteComponentProps> = () => {
         <Card.Section title="Data">
           <p>
             All data from{" "}
-            <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">
+            <Link url="https://www.themoviedb.org/" external={true}>
               The Movie Database
-            </a>
+            </Link>
             .
           </p>
         </Card.Section>

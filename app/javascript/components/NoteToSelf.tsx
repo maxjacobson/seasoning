@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { TextField, CalloutCard } from "@shopify/polaris"
+import { TextField, CalloutCard, Link } from "@shopify/polaris"
 
 import Markdown from "../components/Markdown"
 import Say from "../images/say.svg"
@@ -83,7 +83,11 @@ const NoteToSelf: FunctionComponent<Props> = ({
             label={
               <p>
                 Add a note to self about this show. Put whatever you want in here. It&rsquo;s just
-                for you. Feel free to use Markdown.
+                for you. Feel free to use{" "}
+                <Link url="https://commonmark.org/help/" external={true}>
+                  Markdown
+                </Link>
+                .
               </p>
             }
             value={newNoteToSelf}

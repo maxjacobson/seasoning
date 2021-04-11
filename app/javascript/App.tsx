@@ -49,21 +49,30 @@ const createCustomLink = (closeMobileMenu: () => void) => {
     className,
     id,
     onClick,
+    external,
     ..._rest
   }: LinkLikeComponentProps) => {
-    return (
-      <ReachLink
-        to={url}
-        id={id}
-        className={className}
-        onClick={(e) => {
-          closeMobileMenu()
-          onClick && onClick(e)
-        }}
-      >
-        {children}
-      </ReachLink>
-    )
+    if (external) {
+      return (
+        <a id={id} className={className} href={url} target="_blank" rel="noreferrer">
+          {children}
+        </a>
+      )
+    } else {
+      return (
+        <ReachLink
+          to={url}
+          id={id}
+          className={className}
+          onClick={(e) => {
+            closeMobileMenu()
+            onClick && onClick(e)
+          }}
+        >
+          {children}
+        </ReachLink>
+      )
+    }
   }
 
   return CustomLink

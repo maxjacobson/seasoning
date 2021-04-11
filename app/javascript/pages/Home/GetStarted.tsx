@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Card } from "@shopify/polaris"
+import { Card, Link } from "@shopify/polaris"
 
 interface Props {
   globalSetLoading: (loadingState: boolean) => void
@@ -59,14 +59,9 @@ const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
           </p>
           <p>
             &mdash;{" "}
-            <a
-              href="https://twitter.com/maxjacobson"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="Polaris-Link"
-            >
+            <Link url="https://twitter.com/maxjacobson" external={true}>
               Max
-            </a>
+            </Link>
           </p>
         </Card.Section>
 
