@@ -30,6 +30,20 @@ export interface Show {
   seasons: Season[]
 }
 
+export interface ImportedShow {
+  title: string
+  slug: string
+  imported: true
+}
+
+export interface NotYetImportedShow {
+  title: string
+  imported: false
+  tmdb_id: number
+}
+
+export type ShallowShow = ImportedShow | NotYetImportedShow
+
 export type MyShowStatus =
   | "might_watch"
   | "currently_watching"

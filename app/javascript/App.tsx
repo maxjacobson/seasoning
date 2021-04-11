@@ -23,7 +23,7 @@ import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/u
 import enTranslations from "@shopify/polaris/locales/en.json"
 import "@shopify/polaris/dist/styles.css"
 
-import { Guest, Show } from "./types"
+import { Guest, Show, ShallowShow, AuthenticatedGuest } from "./types"
 import LogoWithName from "./images/logo-with-name.svg"
 
 // Pages
@@ -37,8 +37,6 @@ import RedeemMagicLink from "./pages/RedeemMagicLink"
 import Credits from "./pages/Credits"
 import Settings from "./pages/Settings"
 import SeasonReviewPage from "./pages/SeasonReviewPage"
-
-import ImportNewShowModal from "./components/ImportNewShowModal"
 
 const createCustomLink = (closeMobileMenu: () => void) => {
   // Wires @reach/router up to @shopify/polaris.
@@ -82,7 +80,7 @@ const searchForShows = (
   title: string,
   token: string,
   setLoading: (loadingState: boolean) => void,
-  callback: (shows: Show[]) => void
+  callback: (shows: ShallowShow[]) => void
 ) => {
   setLoading(true)
 
@@ -110,21 +108,23 @@ interface NoSearchYet {
 }
 
 interface SearchResultsLoaded {
-  shows: Show[]
+  shows: ShallowShow[]
 }
 
 type SearchResults = NoSearchYet | SearchResultsLoaded
 
 interface ShowSearchResultsProps {
-  shows: Show[]
+  shows: ShallowShow[]
   setSearchQuery: (newQuery: string) => void
-  initiateImport: () => void
+  guest: AuthenticatedGuest
+  globalSetLoading: (loadingState: boolean) => void
 }
 
 const ShowSearchResults: FunctionComponent<ShowSearchResultsProps> = ({
   shows,
   setSearchQuery,
-  initiateImport,
+  guest,
+  globalSetLoading,
 }: ShowSearchResultsProps) => {
   if (shows.length) {
     return (
@@ -132,9 +132,33 @@ const ShowSearchResults: FunctionComponent<ShowSearchResultsProps> = ({
         items={shows.map((show) => {
           return {
             content: show.title,
-            onAction: () => {
+            onAction: async () => {
               setSearchQuery("")
-              navigate(`/shows/${show.slug}`)
+              if (show.imported) {
+                navigate(`/shows/${show.slug}`)
+              } else {
+                globalSetLoading(true)
+                const response = await fetch("/api/shows.json", {
+                  body: JSON.stringify({
+                    shows: {
+                      tmdb_id: show.tmdb_id,
+                    },
+                  }),
+                  method: "POST",
+                  headers: {
+                    "X-SEASONING-TOKEN": guest.token,
+                    "Content-Type": "application/json",
+                  },
+                })
+                globalSetLoading(false)
+
+                if (response.ok) {
+                  const data: { show: Show } = await response.json()
+                  navigate(`/shows/${data.show.slug}`)
+                } else {
+                  throw new Error("Could not import show")
+                }
+              }
             },
           }
         })}
@@ -145,11 +169,7 @@ const ShowSearchResults: FunctionComponent<ShowSearchResultsProps> = ({
       <ActionList
         items={[
           {
-            content: "Add show?",
-            onAction: () => {
-              setSearchQuery("")
-              initiateImport()
-            },
+            content: "No matches",
           },
         ]}
       />
@@ -286,15 +306,8 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                       <ShowSearchResults
                         shows={searchResults.shows}
                         setSearchQuery={setSearchQuery}
-                        initiateImport={() => {
-                          setCurrentModal(
-                            <ImportNewShowModal
-                              token={guest.token}
-                              globalSetLoading={setLoading}
-                              onClose={() => setCurrentModal(null)}
-                            />
-                          )
-                        }}
+                        globalSetLoading={setLoading}
+                        guest={guest}
                       />
                     )
                   }

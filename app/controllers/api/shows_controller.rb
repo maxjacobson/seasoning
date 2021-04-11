@@ -9,20 +9,38 @@ module API
       authorize! { current_human.present? }
 
       query = params.require(:q)
-      shows = Show.where("title ilike ?", "%#{query}%")
+      persisted_shows = Show.where("title ilike ?", "%#{query}%").map do |show|
+        {
+          title: show.title,
+          slug: show.slug,
+          imported: true
+        }
+      end
+
+      searched_shows = TMDB::Client.new.search_tv(query).results.map do |show|
+        next if show.first_air_date.blank?
+        next if Show.exists?(tmdb_tv_id: show.id)
+
+        {
+          title: [
+            show.name,
+            "(#{Date.parse(show.first_air_date).year})"
+          ].join(" "),
+          imported: false,
+          tmdb_id: show.id
+        }
+      end.compact
+
       render json: {
-        shows: ShowSerializer.many(shows)
+        shows: persisted_shows + searched_shows
       }
     end
 
     def create
       authorize! { current_human.present? }
 
-      response = TMDB::Client.new.search_tv(params.require(:shows).require(:query))
+      tmdb_show = TMDB::Client.new.tv_details(params.require(:shows).require(:tmdb_id))
 
-      raise NoShowsFound, "Not found" if response.results.none?
-
-      tmdb_show = response.results.first
       show = FindOrCreateShow.call(tmdb_show)
 
       render json: {
