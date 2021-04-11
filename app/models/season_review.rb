@@ -18,10 +18,11 @@ class SeasonReview < ApplicationRecord
     if viewable_by_anybody?
       true
     elsif viewable_by_mutuals?
-      human.present? &&
-        human.followers.include?(author) &&
-        author.followers.include?(human)
-    elsif viewably_by_only_me?
+      human.present? && (
+        (author == human) ||
+        (human.followers.include?(author) && author.followers.include?(human))
+      )
+    elsif viewable_by_only_me?
       author == human
     else
       raise

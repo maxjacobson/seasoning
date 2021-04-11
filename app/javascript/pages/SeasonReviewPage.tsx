@@ -43,6 +43,7 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
   seasonSlug,
   viewing,
   setLoading,
+  guest,
 }: Props) => {
   const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true })
 
@@ -54,13 +55,22 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
       }
 
       setLoading(true)
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      }
+      if (guest.authenticated) {
+        headers["X-SEASONING-TOKEN"] = guest.token
+      }
       const response = await fetch(
         `/api/season-review.json?${querystring.stringify({
           handle: handle,
           show: showSlug,
           season: seasonSlug,
           viewing: viewing,
-        })}`
+        })}`,
+        {
+          headers: headers,
+        }
       )
       setLoading(false)
 
