@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_214926) do
+ActiveRecord::Schema.define(version: 2021_04_10_233420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 2021_04_10_214926) do
     "stopped_watching",
     "waiting_for_more",
     "finished",
+  ], force: :cascade
+
+  create_enum :visibility, [
+    "anybody",
+    "mutuals",
+    "myself",
   ], force: :cascade
 
   create_table "browser_sessions", force: :cascade do |t|
@@ -85,6 +91,21 @@ ActiveRecord::Schema.define(version: 2021_04_10_214926) do
     t.index ["show_id"], name: "index_my_shows_on_show_id"
   end
 
+  create_table "season_reviews", force: :cascade do |t|
+    t.bigint "author_id", null: false, comment: "Who wrote this review"
+    t.bigint "season_id", null: false, comment: "Which season are they reviewing"
+    t.text "body", null: false, comment: "The body of the review"
+    t.integer "rating", comment: "The rating between 0 and 10 (optional)"
+    t.boolean "spoilers", default: false, null: false, comment: "Whether this review contains spoilers"
+    t.integer "viewing", null: false, comment: "Is this the person's first, second, third etc viewing of the season?"
+    t.enum "visibility", default: "anybody", null: false, comment: "Who can see this review", enum_name: "visibility"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id", "season_id", "viewing"], name: "index_season_reviews_on_author_id_and_season_id_and_viewing", unique: true
+    t.index ["author_id"], name: "index_season_reviews_on_author_id"
+    t.index ["season_id"], name: "index_season_reviews_on_season_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.bigint "show_id", null: false, comment: "Which show this season is part of"
     t.integer "tmdb_id", null: false
@@ -127,4 +148,6 @@ ActiveRecord::Schema.define(version: 2021_04_10_214926) do
   add_foreign_key "my_seasons", "seasons", on_delete: :cascade
   add_foreign_key "my_shows", "humans", on_delete: :cascade
   add_foreign_key "my_shows", "shows", on_delete: :cascade
+  add_foreign_key "season_reviews", "humans", column: "author_id", on_delete: :cascade
+  add_foreign_key "season_reviews", "seasons", on_delete: :cascade
 end

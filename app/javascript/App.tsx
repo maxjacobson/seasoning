@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import { Link as ReachLink, Router, navigate } from "@reach/router"
+import { Link as ReachLink, Router, navigate, Location } from "@reach/router"
 import debounce from "lodash.debounce"
 
 import {
@@ -29,12 +29,14 @@ import LogoWithName from "./images/logo-with-name.svg"
 // Pages
 import NotFound from "./pages/NotFound"
 import Home from "./pages/Home"
+import YourShowsPage from "./pages/YourShowsPage"
 import ShowPage from "./pages/ShowPage"
 import SeasonPage from "./pages/SeasonPage"
 import Profile from "./pages/Profile"
 import RedeemMagicLink from "./pages/RedeemMagicLink"
 import Credits from "./pages/Credits"
 import Settings from "./pages/Settings"
+import SeasonReviewPage from "./pages/SeasonReviewPage"
 
 import ImportNewShowModal from "./components/ImportNewShowModal"
 
@@ -159,8 +161,8 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [searchResults, setSearchResults] = useState<SearchResults>({
     shows: null,
   })
-  const [modalActive, setModalActive] = useState(false)
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false)
+  const [currentModal, setCurrentModal] = useState<React.ReactNode | null>(null)
 
   useEffect(() => {
     if (!searchQuery || !guest.authenticated) {
@@ -176,162 +178,176 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
 
   return (
     <>
-      <AppProvider
-        i18n={enTranslations}
-        linkComponent={createCustomLink(() => setMobileNavigationActive(false))}
-        theme={{
-          logo: {
-            topBarSource: LogoWithName,
-            accessibilityLabel: "Seasoning",
-            width: 160,
-            url: "/",
-          },
-        }}
-      >
-        <Frame
-          showMobileNavigation={mobileNavigationActive}
-          onNavigationDismiss={() => setMobileNavigationActive(!mobileNavigationActive)}
-          topBar={
-            <TopBar
-              showNavigationToggle
-              onNavigationToggle={() => setMobileNavigationActive(!mobileNavigationActive)}
-              userMenu={
-                guest.authenticated && (
-                  <TopBar.UserMenu
-                    name={guest.human.handle}
-                    initials={guest.human.handle.charAt(0)}
-                    avatar={guest.human.gravatar_url}
-                    open={userMenuOpen}
-                    onToggle={() => {
-                      setUserMenuOpen(!userMenuOpen)
-                    }}
-                    actions={[
-                      {
-                        items: [
+      <Location>
+        {({ location }) => (
+          <AppProvider
+            i18n={enTranslations}
+            linkComponent={createCustomLink(() => setMobileNavigationActive(false))}
+            theme={{
+              logo: {
+                topBarSource: LogoWithName,
+                accessibilityLabel: "Seasoning",
+                width: 160,
+                url: guest.authenticated ? "/shows" : "/",
+              },
+            }}
+          >
+            <Frame
+              showMobileNavigation={mobileNavigationActive}
+              onNavigationDismiss={() => setMobileNavigationActive(!mobileNavigationActive)}
+              topBar={
+                <TopBar
+                  showNavigationToggle
+                  onNavigationToggle={() => setMobileNavigationActive(!mobileNavigationActive)}
+                  userMenu={
+                    guest.authenticated && (
+                      <TopBar.UserMenu
+                        name={guest.human.handle}
+                        initials={guest.human.handle.charAt(0)}
+                        avatar={guest.human.gravatar_url}
+                        open={userMenuOpen}
+                        onToggle={() => {
+                          setUserMenuOpen(!userMenuOpen)
+                        }}
+                        actions={[
                           {
-                            content: "Your page",
-                            onAction: () => {
-                              navigate(`/${guest.human.handle}`)
-                            },
-                            icon: InfoMinor,
+                            items: [
+                              {
+                                content: "Your page",
+                                url: `/${guest.human.handle}`,
+                                icon: InfoMinor,
+                              },
+                              {
+                                content: "Settings",
+                                url: "/settings",
+                                icon: SettingsMajor,
+                              },
+                              {
+                                content: "Log out",
+                                onAction: () => {
+                                  if (confirm("Log out?")) {
+                                    localStorage.clear()
+                                    setGuest({ authenticated: false })
+                                    navigate("/")
+                                  }
+                                },
+                                icon: LogOutMinor,
+                              },
+                            ],
                           },
-                          {
-                            content: "Settings",
-                            onAction: () => {
-                              navigate("/settings")
-                            },
-                            icon: SettingsMajor,
-                          },
-                          {
-                            content: "Log out",
-                            onAction: () => {
-                              if (confirm("Log out?")) {
-                                localStorage.clear()
-                                setGuest({ authenticated: false })
-                                navigate("/")
-                              }
-                            },
-                            icon: LogOutMinor,
-                          },
-                        ],
-                      },
-                    ]}
-                  />
-                )
-              }
-              secondaryMenu={
-                <TopBar.Menu
-                  activatorContent={
-                    <span>
-                      <Icon source={QuestionMarkMajor} />
-                      <VisuallyHidden>Secondary menu</VisuallyHidden>
-                    </span>
+                        ]}
+                      />
+                    )
                   }
-                  open={isSecondaryMenuOpen}
-                  onOpen={() => setIsSecondaryMenuOpen(!isSecondaryMenuOpen)}
-                  onClose={() => setIsSecondaryMenuOpen(!isSecondaryMenuOpen)}
-                  actions={[
-                    {
-                      items: [
+                  secondaryMenu={
+                    <TopBar.Menu
+                      activatorContent={
+                        <span>
+                          <Icon source={QuestionMarkMajor} />
+                          <VisuallyHidden>Secondary menu</VisuallyHidden>
+                        </span>
+                      }
+                      open={isSecondaryMenuOpen}
+                      onOpen={() => setIsSecondaryMenuOpen(!isSecondaryMenuOpen)}
+                      onClose={() => setIsSecondaryMenuOpen(!isSecondaryMenuOpen)}
+                      actions={[
                         {
-                          content: "Credits",
-                          onAction: () => {
-                            navigate("/credits")
-                          },
+                          items: [
+                            {
+                              content: "Credits",
+                              url: "/credits",
+                            },
+                          ],
                         },
-                      ],
-                    },
-                  ]}
+                      ]}
+                    />
+                  }
+                  searchField={
+                    guest.authenticated && (
+                      <TopBar.SearchField
+                        value={searchQuery}
+                        onChange={setSearchQuery}
+                        placeholder="Search shows"
+                      />
+                    )
+                  }
+                  searchResults={
+                    searchResults.shows &&
+                    guest.authenticated && (
+                      <ShowSearchResults
+                        shows={searchResults.shows}
+                        setSearchQuery={setSearchQuery}
+                        initiateImport={() => {
+                          setCurrentModal(
+                            <ImportNewShowModal
+                              token={guest.token}
+                              globalSetLoading={setLoading}
+                              onClose={() => setCurrentModal(null)}
+                            />
+                          )
+                        }}
+                      />
+                    )
+                  }
+                  searchResultsVisible={true}
                 />
               }
-              searchField={
-                guest.authenticated && (
-                  <TopBar.SearchField
-                    value={searchQuery}
-                    onChange={setSearchQuery}
-                    placeholder="Search shows"
+              navigation={
+                <Navigation location={location.pathname}>
+                  <Navigation.Section
+                    items={
+                      guest.authenticated
+                        ? [
+                            {
+                              label: "Shows",
+                              icon: ViewMinor,
+                              url: "/shows",
+                            },
+                          ]
+                        : []
+                    }
                   />
-                )
+                </Navigation>
               }
-              searchResults={
-                searchResults.shows && (
-                  <ShowSearchResults
-                    shows={searchResults.shows}
-                    setSearchQuery={setSearchQuery}
-                    initiateImport={() => setModalActive(true)}
-                  />
-                )
-              }
-              searchResultsVisible={true}
-            />
-          }
-          navigation={
-            <Navigation location="/">
-              <Navigation.Section
-                items={
-                  guest.authenticated
-                    ? [
-                        {
-                          label: "Your shows",
-                          onClick: () => {
-                            navigate("/")
-                          },
-                          icon: ViewMinor,
-                        },
-                      ]
-                    : []
-                }
-              />
-            </Navigation>
-          }
-        >
-          {loading && <Loading />}
+            >
+              {loading && <Loading />}
 
-          <Router>
-            <NotFound default />
-            <Home path="/" guest={guest} setLoading={setLoading} />
-            <RedeemMagicLink
-              path="/knock-knock/:token"
-              setGuest={setGuest}
-              setLoading={setLoading}
-            />
-            <ShowPage path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
-            <SeasonPage path="/shows/:showSlug/:seasonSlug" guest={guest} setLoading={setLoading} />
-            <Credits path="/credits" />
-            <Settings path="/settings" setLoading={setLoading} guest={guest} />
-            <Profile path="/:handle" guest={guest} setLoading={setLoading} />
-          </Router>
+              <Router>
+                <NotFound default />
+                <Home path="/" guest={guest} setLoading={setLoading} />
+                <YourShowsPage path="/shows" guest={guest} setLoading={setLoading} />
+                <RedeemMagicLink
+                  path="/knock-knock/:token"
+                  setGuest={setGuest}
+                  setLoading={setLoading}
+                />
+                <ShowPage path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
+                <SeasonPage
+                  path="/shows/:showSlug/:seasonSlug"
+                  guest={guest}
+                  setLoading={setLoading}
+                  setCurrentModal={setCurrentModal}
+                />
+                <SeasonReviewPage
+                  path="/:handle/shows/:showSlug/:seasonSlug"
+                  guest={guest}
+                  setLoading={setLoading}
+                />
+                <SeasonReviewPage
+                  path="/:handle/shows/:showSlug/:seasonSlug/:viewing"
+                  guest={guest}
+                  setLoading={setLoading}
+                />
+                <Credits path="/credits" />
+                <Settings path="/settings" setLoading={setLoading} guest={guest} />
+                <Profile path="/:handle" guest={guest} setLoading={setLoading} />
+              </Router>
 
-          {guest.authenticated && (
-            <ImportNewShowModal
-              token={guest.token}
-              globalSetLoading={setLoading}
-              active={modalActive}
-              setActive={setModalActive}
-            />
-          )}
-        </Frame>
-      </AppProvider>
+              {currentModal}
+            </Frame>
+          </AppProvider>
+        )}
+      </Location>
     </>
   )
 }

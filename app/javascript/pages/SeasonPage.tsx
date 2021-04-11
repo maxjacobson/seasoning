@@ -1,10 +1,20 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Checkbox } from "@shopify/polaris"
+import {
+  Page,
+  Card,
+  SkeletonPage,
+  Layout,
+  SkeletonBodyText,
+  Checkbox,
+  Link,
+} from "@shopify/polaris"
+import { DateTime } from "luxon"
 
 import { setHeadTitle } from "../hooks"
 import { Guest, YourSeason } from "../types"
 import { updateMySeason } from "../helpers/my_shows"
+import NewSeasonReviewModal from "../components/NewSeasonReviewModal"
 
 interface LoadingSeason {
   loading: true
@@ -27,9 +37,16 @@ interface Props extends RouteComponentProps {
   seasonSlug?: string
   guest: Guest
   setLoading: (loadingState: boolean) => void
+  setCurrentModal: (_: React.ReactNode) => void
 }
 
-const Season: FunctionComponent<Props> = ({ guest, showSlug, seasonSlug, setLoading }: Props) => {
+const Season: FunctionComponent<Props> = ({
+  guest,
+  showSlug,
+  seasonSlug,
+  setLoading,
+  setCurrentModal,
+}: Props) => {
   const [response, setResponse] = useState<SeasonData>({ loading: true })
   const [hasWatched, setHasWatched] = useState<undefined | boolean>(undefined)
   const [updating, setUpdating] = useState(false)
@@ -108,33 +125,83 @@ const Season: FunctionComponent<Props> = ({ guest, showSlug, seasonSlug, setLoad
     >
       <Card sectioned>
         <Card.Section title="Season info">
-          {guest.authenticated && (
-            <Checkbox
-              label={"I've watched this season"}
-              checked={hasWatched}
-              onChange={async (value) => {
-                setLoading(true)
-                setUpdating(true)
-                const response = await updateMySeason(yourSeason.season, guest.token, {
-                  season: {
-                    watched: value,
-                  },
-                })
-
-                setLoading(false)
-                setUpdating(false)
-
-                if (response.ok) {
-                  setHasWatched(value)
-                } else {
-                  throw new Error("Could not toggle watched status")
-                }
-              }}
-              disabled={hasWatched === undefined || updating}
-            />
-          )}
+          <span>Episode count: {yourSeason.season.episode_count}</span>
         </Card.Section>
+
+        {guest.authenticated && (
+          <>
+            <Card.Section title="Seen it?">
+              <Checkbox
+                label={"I've watched this season"}
+                checked={hasWatched}
+                onChange={async (value) => {
+                  setLoading(true)
+                  setUpdating(true)
+                  const response = await updateMySeason(yourSeason.season, guest.token, {
+                    season: {
+                      watched: value,
+                    },
+                  })
+
+                  setLoading(false)
+                  setUpdating(false)
+
+                  if (response.ok) {
+                    setHasWatched(value)
+                  } else {
+                    throw new Error("Could not toggle watched status")
+                  }
+                }}
+                disabled={hasWatched === undefined || updating}
+              />
+            </Card.Section>
+          </>
+        )}
       </Card>
+
+      {guest.authenticated && yourSeason.your_reviews && (
+        <Card
+          title="Your review"
+          actions={[
+            {
+              content: "Add review",
+              onAction: () => {
+                setCurrentModal(
+                  <NewSeasonReviewModal
+                    guest={guest}
+                    show={yourSeason.show}
+                    season={yourSeason.season}
+                    globalSetLoading={setLoading}
+                    onClose={() => setCurrentModal(null)}
+                  />
+                )
+              },
+            },
+          ]}
+        >
+          <Card.Section>
+            {yourSeason.your_reviews.length ? (
+              <ul>
+                {yourSeason.your_reviews.map((review, i) => {
+                  return (
+                    <li key={i}>
+                      <Link
+                        url={`/${guest.human.handle}/shows/${yourSeason.show.slug}/${
+                          yourSeason.season.slug
+                        }${review.viewing === 1 ? "" : `/${review.viewing}`}`}
+                      >
+                        {DateTime.fromISO(review.created_at).toLocaleString()}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            ) : (
+              <p>None yet</p>
+            )}
+          </Card.Section>
+        </Card>
+      )}
     </Page>
   )
 }

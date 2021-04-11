@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from "react"
-import { RouteComponentProps } from "@reach/router"
-import { Page } from "@shopify/polaris"
+import { navigate, RouteComponentProps } from "@reach/router"
+import { Page, Spinner } from "@shopify/polaris"
 import GetStarted from "./Home/GetStarted"
-import YourShows from "./Home/YourShows"
 
 import { Guest } from "../types"
 
@@ -14,14 +13,20 @@ interface HomeProps extends RouteComponentProps {
 const Home: FunctionComponent<HomeProps> = (props: HomeProps) => {
   const { guest, setLoading } = props
 
-  return (
-    <Page title="Welcome" subtitle="This is seasoning, a website about TV shows">
-      {guest.authenticated ? (
-        <YourShows human={guest.human} token={guest.token} globalSetLoading={setLoading} />
-      ) : (
+  if (guest.authenticated) {
+    navigate("/shows")
+
+    return (
+      <Page>
+        <Spinner />
+      </Page>
+    )
+  } else {
+    return (
+      <Page title="Welcome" subtitle="This is seasoning, a website about TV shows">
         <GetStarted globalSetLoading={setLoading} />
-      )}
-    </Page>
-  )
+      </Page>
+    )
+  }
 }
 export default Home

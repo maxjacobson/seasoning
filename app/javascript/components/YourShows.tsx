@@ -13,10 +13,10 @@ import {
 } from "@shopify/polaris"
 import querystring from "query-string"
 
-import ShowPoster from "../../components/ShowPoster"
-import { Human, YourShow, MyShowStatus } from "../../types"
-import { displayMyShowStatus, myShowBadgeProgress, myShowBadgeStatus } from "../../helpers/my_shows"
-import Logo from "../../images/logo.svg"
+import ShowPoster from "./ShowPoster"
+import { Human, YourShow, MyShowStatus } from "../types"
+import { displayMyShowStatus, myShowBadgeProgress, myShowBadgeStatus } from "../helpers/my_shows"
+import Logo from "../images/logo.svg"
 
 interface YourShows {
   your_shows: YourShow[]

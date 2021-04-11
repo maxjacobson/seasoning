@@ -7,25 +7,27 @@ import { Show } from "../types"
 interface Props extends RouteComponentProps {
   token: string
   globalSetLoading: (loadingState: boolean) => void
-  active: boolean
-  setActive: (newActiveState: boolean) => void
+  onClose: () => void
 }
 
 const ImportNewShowModal: FunctionComponent<Props> = ({
   token,
   globalSetLoading,
-  active,
-  setActive,
+  onClose,
 }: Props) => {
   const [showQuery, setShowQuery] = useState("")
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [active, setActive] = useState(true)
 
   return (
     <Modal
       loading={loading}
       open={active}
-      onClose={() => setActive(false)}
+      onClose={() => {
+        setActive(false)
+        onClose()
+      }}
       title="Import show"
       primaryAction={{
         content: "Add",
@@ -53,6 +55,7 @@ const ImportNewShowModal: FunctionComponent<Props> = ({
             if (response.ok) {
               const data: { show: Show } = await response.json()
               setActive(false)
+              onClose()
               navigate(`/shows/${data.show.slug}`)
             } else {
               const data: { error: { message: string } } = await response.json()

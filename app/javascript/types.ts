@@ -61,6 +61,19 @@ export interface Profile {
   your_relationship?: YourRelationshipToProfile
 }
 
+type Rating = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+export interface SeasonReview {
+  body: string
+  visibility: boolean
+  created_at: string
+  updated_at: string
+  spoilers: boolean
+  rating: Rating
+  author: Human
+  season: Season
+  viewing: number
+}
+
 export interface YourRelationshipToSeason {
   watched: boolean
 }
@@ -69,6 +82,7 @@ export interface YourSeason {
   show: Show
   season: Season
   your_relationship?: YourRelationshipToSeason
+  your_reviews?: SeasonReview[]
 }
 
 export interface HumanSettings {

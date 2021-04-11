@@ -11,4 +11,7 @@ RESERVED_WORDS = %w[
   add-show
   credits
   settings
+  review
+  reviews
+  undefined
 ].freeze
