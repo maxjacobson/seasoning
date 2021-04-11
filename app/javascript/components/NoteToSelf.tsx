@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { TextField, CalloutCard } from "@shopify/polaris"
-import ReactMarkdown from "react-markdown"
-import gfm from "remark-gfm"
 
+import Markdown from "../components/Markdown"
 import Say from "../images/say.svg"
 import { YourShow } from "../types"
 import { updateMyShow } from "../helpers/my_shows"
@@ -104,7 +103,7 @@ const NoteToSelf: FunctionComponent<Props> = ({
         </div>
       ) : yourShow.your_relationship?.note_to_self ? (
         <>
-          <ReactMarkdown plugins={[gfm]}>{yourShow.your_relationship.note_to_self}</ReactMarkdown>
+          <Markdown markdown={yourShow.your_relationship.note_to_self} />
         </>
       ) : (
         <p>

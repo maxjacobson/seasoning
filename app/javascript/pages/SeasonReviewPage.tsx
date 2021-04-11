@@ -2,11 +2,10 @@ import React, { FunctionComponent, useState, useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
 import { Page, Card, SkeletonPage, Layout, SkeletonBodyText } from "@shopify/polaris"
 import querystring from "query-string"
-import ReactMarkdown from "react-markdown"
-import gfm from "remark-gfm"
 import { DateTime } from "luxon"
 
 import Spoilers from "../components/Spoilers"
+import Markdown from "../components/Markdown"
 import { Guest, Season, SeasonReview, Show } from "../types"
 
 interface LoadingReviewData {
@@ -126,7 +125,7 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
         <Card.Section title="Rating">{review.rating}</Card.Section>
         <Card.Section>
           <Spoilers spoilers={review.spoilers}>
-            <ReactMarkdown plugins={[gfm]}>{review.body}</ReactMarkdown>
+            <Markdown markdown={review.body} />
           </Spoilers>
         </Card.Section>
       </Card>
