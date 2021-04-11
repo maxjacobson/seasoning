@@ -6,6 +6,7 @@ import {
   HeadingTagName,
   Subheading as PolarisSubheading,
   TextStyle,
+  Link,
 } from "@shopify/polaris"
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6
@@ -29,6 +30,14 @@ const InlineCode = ({ children }: { children: string }) => {
   return <TextStyle variation="code">{children}</TextStyle>
 }
 
+const MarkdownLink = ({ children, href }: { href: string; children: React.ReactNode }) => {
+  return (
+    <Link url={href} external={true}>
+      {children}
+    </Link>
+  )
+}
+
 // Use the polaris components
 //
 // This is necessary because polaris resets things like h1 and p tags,
@@ -36,6 +45,7 @@ const InlineCode = ({ children }: { children: string }) => {
 const renderers = {
   heading: Heading,
   inlineCode: InlineCode,
+  link: MarkdownLink,
 }
 
 interface Props {
@@ -45,7 +55,7 @@ interface Props {
 const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
   return (
     <TextContainer>
-      <ReactMarkdown plugins={[gfm]} renderers={renderers} linkTarget="_blank">
+      <ReactMarkdown plugins={[gfm]} renderers={renderers}>
         {markdown}
       </ReactMarkdown>
     </TextContainer>
