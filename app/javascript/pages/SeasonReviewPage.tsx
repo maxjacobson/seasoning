@@ -7,6 +7,7 @@ import { DateTime } from "luxon"
 import Spoilers from "../components/Spoilers"
 import Markdown from "../components/Markdown"
 import { Guest, Season, SeasonReview, Show } from "../types"
+import { setHeadTitle } from "../hooks"
 
 interface LoadingReviewData {
   loading: true
@@ -83,6 +84,12 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
       }
     })()
   }, [handle, showSlug, seasonSlug, viewing])
+
+  let headTitle
+  if (!reviewData.loading && reviewData.review) {
+    headTitle = `${reviewData.show.title} - ${reviewData.season.name} Review`
+  }
+  setHeadTitle(headTitle, [reviewData])
 
   if (reviewData.loading) {
     return (
