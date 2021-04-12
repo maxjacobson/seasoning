@@ -37,7 +37,7 @@ const Profile: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props)
   useEffect(() => {
     const headers: Record<string, string> = {}
     if (guest.authenticated) {
-      headers["X-Seasoning-Token"] = guest.token
+      headers["X-SEASONING-TOKEN"] = guest.token
     }
     setLoading(true)
     fetch(`/api/profiles/${handle}.json`, { headers: headers })
@@ -95,7 +95,7 @@ const Profile: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props)
               const response = await fetch("/api/follows.json", {
                 method: "POST",
                 headers: {
-                  "X-Seasoning-Token": guest.token,
+                  "X-SEASONING-TOKEN": guest.token,
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({

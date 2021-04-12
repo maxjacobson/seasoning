@@ -47,6 +47,23 @@ module API
       }
     end
 
+    def index
+      authorize! { true }
+
+      reviews = SeasonReview.order(created_at: :desc).lazy.select do |review|
+        review.viewable_by?(current_human)
+      end.take(10)
+
+      render json: {
+        data: reviews.map do |review|
+          {
+            show: ShowSerializer.one(review.season.show),
+            review: SeasonReviewSerializer.one(review)
+          }
+        end
+      }
+    end
+
     private
 
     def season_review_params

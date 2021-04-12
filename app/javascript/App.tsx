@@ -18,6 +18,7 @@ import {
   QuestionMarkMajor,
   ViewMinor,
   SettingsMajor,
+  StarFilledMinor,
 } from "@shopify/polaris-icons"
 import { LinkLikeComponentProps } from "@shopify/polaris/dist/types/latest/src/utilities/link"
 import enTranslations from "@shopify/polaris/locales/en.json"
@@ -37,6 +38,7 @@ import RedeemMagicLink from "./pages/RedeemMagicLink"
 import Credits from "./pages/Credits"
 import Settings from "./pages/Settings"
 import SeasonReviewPage from "./pages/SeasonReviewPage"
+import ReviewsFeed from "./pages/ReviewsFeed"
 
 import ImportNewShowModal from "./components/ImportNewShowModal"
 
@@ -312,6 +314,11 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                               icon: ViewMinor,
                               url: "/shows",
                             },
+                            {
+                              label: "Reviews",
+                              icon: StarFilledMinor,
+                              url: "/reviews",
+                            },
                           ]
                         : []
                     }
@@ -347,6 +354,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   guest={guest}
                   setLoading={setLoading}
                 />
+                <ReviewsFeed path="/reviews" guest={guest} setLoading={setLoading} />
                 <Credits path="/credits" />
                 <Settings path="/settings" setLoading={setLoading} guest={guest} />
                 <Profile path="/:handle" guest={guest} setLoading={setLoading} />

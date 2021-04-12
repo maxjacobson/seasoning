@@ -72,6 +72,7 @@ export interface SeasonReview {
   author: Human
   season: Season
   viewing: number
+  id: number
 }
 
 export interface YourRelationshipToSeason {

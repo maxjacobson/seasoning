@@ -8,7 +8,8 @@ class SeasonReviewSerializer < Oj::Serializer
     :updated_at,
     :spoilers,
     :rating,
-    :viewing
+    :viewing,
+    :id
   )
   has_one :author, serializer: HumanSerializer
   has_one :season, serializer: SeasonSerializer
