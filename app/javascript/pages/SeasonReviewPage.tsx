@@ -129,7 +129,7 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
         <Card.Section title="Date">
           {DateTime.fromISO(review.created_at).toLocaleString()}
         </Card.Section>
-        {review.rating && <Card.Section title="Rating">{review.rating}</Card.Section>}
+        {review.rating !== undefined && <Card.Section title="Rating">{review.rating}</Card.Section>}
         <Card.Section>
           <Spoilers spoilers={review.spoilers}>
             <Markdown markdown={review.body} />
