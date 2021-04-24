@@ -5,28 +5,25 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.1"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails", "~> 6.1.3"
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
-# Use Puma as the app server
-gem "puma", "~> 5.0"
+gem "pg"
+gem "puma"
+gem "rails"
 
 gem "activerecord-postgres_enum"
 gem "email_validator"
-gem "nokogiri", "~> 1.11"
+gem "nokogiri"
 gem "oj_serializers"
 gem "vite_rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
-  gem "dotenv-rails", "~> 2.7"
+  gem "dotenv-rails"
 end
 
 group :development do
   gem "letter_opener"
-  gem "listen", "~> 3.5"
+  gem "listen"
   gem "rubocop"
   gem "rubocop-rails"
 end
@@ -34,4 +31,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
-gem "dry-struct", "~> 1.4"
+gem "dry-struct"
