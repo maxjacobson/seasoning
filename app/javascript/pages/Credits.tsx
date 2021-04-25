@@ -28,7 +28,7 @@ const Credits: FunctionComponent<RouteComponentProps> = () => {
   setHeadTitle("Credits")
 
   return (
-    <Page title="Credits" breadcrumbs={[{ url: "/" }]}>
+    <Page title="Credits">
       <Card sectioned>
         <Card.Section title="Inspiration">
           <p>

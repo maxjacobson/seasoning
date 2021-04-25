@@ -118,11 +118,7 @@ const Season: FunctionComponent<Props> = ({
   }
 
   return (
-    <Page
-      title={yourSeason.show.title}
-      subtitle={yourSeason.season.name}
-      breadcrumbs={[{ url: `/shows/${showSlug}` }]}
-    >
+    <Page title={yourSeason.show.title} subtitle={yourSeason.season.name}>
       <Card sectioned>
         <Card.Section title="Season info">
           <span>Episode count: {yourSeason.season.episode_count}</span>

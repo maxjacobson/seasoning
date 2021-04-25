@@ -120,11 +120,7 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
   const { review, show, season } = reviewData
 
   return (
-    <Page
-      title={show.title}
-      subtitle={season.name}
-      breadcrumbs={[{ url: `/shows/${showSlug}/${seasonSlug}` }]}
-    >
+    <Page title={show.title} subtitle={season.name}>
       <Card sectioned title={`${handle}'s review`}>
         <Card.Section title="Date">
           {DateTime.fromISO(review.created_at).toLocaleString()}

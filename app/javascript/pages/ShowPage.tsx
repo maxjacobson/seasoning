@@ -69,7 +69,7 @@ const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Pro
     const { data } = showData
 
     return (
-      <Page title={data.show.title} breadcrumbs={[{ url: "/" }]}>
+      <Page title={data.show.title}>
         {guest.authenticated && data.your_relationship && (
           <NoteToSelf
             token={guest.token}

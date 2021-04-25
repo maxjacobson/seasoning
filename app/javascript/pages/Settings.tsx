@@ -14,7 +14,7 @@ const Settings: FunctionComponent<Props> = (props) => {
   setHeadTitle("Settings")
 
   return (
-    <Page title="Settings" breadcrumbs={[{ url: "/" }]}>
+    <Page title="Settings">
       <SettingsBody {...props} />
     </Page>
   )
