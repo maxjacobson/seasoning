@@ -121,48 +121,48 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
     <Page>
       <Card sectioned>
         <Card.Section title="Your shows">
-          {loading ? (
-            <Spinner accessibilityLabel="Loading your shows" size="large" />
-          ) : (
-            <>
-              <Filters
-                queryPlaceholder="Filter your shows"
-                queryValue={queryValue}
-                filters={[
-                  {
-                    key: "status",
-                    label: "Status",
-                    filter: (
-                      <ChoiceList
-                        title="Status"
-                        titleHidden
-                        choices={[
-                          { label: "Might watch", value: "might_watch" },
-                          { label: "Currently watching", value: "currently_watching" },
-                          { label: "Stopped watching", value: "stopped_watching" },
-                          { label: "Waiting for more", value: "waiting_for_more" },
-                          { label: "Finished", value: "finished" },
-                        ]}
-                        selected={selectedStatuses}
-                        onChange={setSelectedStatuses}
-                        allowMultiple
-                      />
-                    ),
-                    shortcut: true,
-                  },
-                ]}
-                appliedFilters={appliedFilters}
-                onQueryChange={setQueryValue}
-                onQueryClear={() => {
-                  setQueryValue("")
-                }}
-                onClearAll={() => {
-                  setQueryValue("")
-                }}
-              />
+          <>
+            <Filters
+              queryPlaceholder="Filter your shows"
+              queryValue={queryValue}
+              filters={[
+                {
+                  key: "status",
+                  label: "Status",
+                  filter: (
+                    <ChoiceList
+                      title="Status"
+                      titleHidden
+                      choices={[
+                        { label: "Might watch", value: "might_watch" },
+                        { label: "Currently watching", value: "currently_watching" },
+                        { label: "Stopped watching", value: "stopped_watching" },
+                        { label: "Waiting for more", value: "waiting_for_more" },
+                        { label: "Finished", value: "finished" },
+                      ]}
+                      selected={selectedStatuses}
+                      onChange={setSelectedStatuses}
+                      allowMultiple
+                    />
+                  ),
+                  shortcut: true,
+                },
+              ]}
+              appliedFilters={appliedFilters}
+              onQueryChange={setQueryValue}
+              onQueryClear={() => {
+                setQueryValue("")
+              }}
+              onClearAll={() => {
+                setQueryValue("")
+              }}
+            />
+            {loading ? (
+              <Spinner accessibilityLabel="Loading your shows" size="large" />
+            ) : (
               <ListShows shows={shows} />
-            </>
-          )}
+            )}
+          </>
         </Card.Section>
       </Card>
     </Page>

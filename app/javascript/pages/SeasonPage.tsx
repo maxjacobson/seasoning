@@ -1,20 +1,12 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { RouteComponentProps } from "@reach/router"
-import {
-  Page,
-  Card,
-  SkeletonPage,
-  Layout,
-  SkeletonBodyText,
-  Checkbox,
-  Link,
-} from "@shopify/polaris"
+import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Link } from "@shopify/polaris"
 import { DateTime } from "luxon"
 
 import { setHeadTitle } from "../hooks"
 import { Guest, YourSeason } from "../types"
-import { updateMySeason } from "../helpers/my_shows"
 import { NewSeasonReviewModal } from "../components/NewSeasonReviewModal"
+import { SeenSeasonCheckbox } from "../components/SeenSeasonCheckbox"
 
 interface LoadingSeason {
   loading: true
@@ -48,8 +40,6 @@ export const SeasonPage: FunctionComponent<Props> = ({
   setCurrentModal,
 }: Props) => {
   const [response, setResponse] = useState<SeasonData>({ loading: true })
-  const [hasWatched, setHasWatched] = useState<undefined | boolean>(undefined)
-  const [updating, setUpdating] = useState(false)
 
   useEffect(() => {
     if (!seasonSlug) {
@@ -74,7 +64,6 @@ export const SeasonPage: FunctionComponent<Props> = ({
       } else if (response.ok) {
         const yourSeason: YourSeason = await response.json()
         setResponse({ loading: false, yourSeason: yourSeason })
-        setHasWatched(yourSeason.your_relationship ? yourSeason.your_relationship.watched : false)
       } else {
         throw new Error("Could not load season")
       }
@@ -118,7 +107,11 @@ export const SeasonPage: FunctionComponent<Props> = ({
   }
 
   return (
-    <Page title={yourSeason.show.title} subtitle={yourSeason.season.name}>
+    <Page
+      title={yourSeason.show.title}
+      subtitle={yourSeason.season.name}
+      breadcrumbs={[{ url: `/shows/${showSlug}` }]}
+    >
       <Card sectioned>
         <Card.Section title="Season info">
           <span>Episode count: {yourSeason.season.episode_count}</span>
@@ -127,28 +120,11 @@ export const SeasonPage: FunctionComponent<Props> = ({
         {guest.authenticated && (
           <>
             <Card.Section title="Seen it?">
-              <Checkbox
-                label={"I've watched this season"}
-                checked={hasWatched}
-                onChange={async (value) => {
-                  setLoading(true)
-                  setUpdating(true)
-                  const response = await updateMySeason(yourSeason.season, guest.token, {
-                    season: {
-                      watched: value,
-                    },
-                  })
-
-                  setLoading(false)
-                  setUpdating(false)
-
-                  if (response.ok) {
-                    setHasWatched(value)
-                  } else {
-                    throw new Error("Could not toggle watched status")
-                  }
-                }}
-                disabled={hasWatched === undefined || updating}
+              <SeenSeasonCheckbox
+                setLoading={setLoading}
+                guest={guest}
+                show={yourSeason.show}
+                season={yourSeason.season}
               />
             </Card.Section>
           </>

@@ -116,7 +116,7 @@ export const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading
             <ShowPoster show={data.show} size="large" />
           </Card.Section>
           <Card.Section title="Seasons">
-            <SeasonsList show={data.show} />
+            <SeasonsList show={data.show} guest={guest} setLoading={setLoading} />
           </Card.Section>
         </Card>
       </Page>
