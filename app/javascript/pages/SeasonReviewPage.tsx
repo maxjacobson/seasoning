@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
 import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Link } from "@shopify/polaris"
-import querystring from "query-string"
+import { stringify } from "query-string"
 import { DateTime } from "luxon"
 
-import Spoilers from "../components/Spoilers"
-import Markdown from "../components/Markdown"
+import { Spoilers } from "../components/Spoilers"
+import { Markdown } from "../components/Markdown"
 import { Guest, Season, SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 
@@ -37,7 +37,7 @@ interface Props extends RouteComponentProps {
   setLoading: (loadingState: boolean) => void
 }
 
-const SeasonReviewPage: FunctionComponent<Props> = ({
+export const SeasonReviewPage: FunctionComponent<Props> = ({
   handle,
   showSlug,
   seasonSlug,
@@ -62,7 +62,7 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
         headers["X-SEASONING-TOKEN"] = guest.token
       }
       const response = await fetch(
-        `/api/season-review.json?${querystring.stringify({
+        `/api/season-review.json?${stringify({
           handle: handle,
           show: showSlug,
           season: seasonSlug,
@@ -142,5 +142,3 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
     </Page>
   )
 }
-
-export default SeasonReviewPage

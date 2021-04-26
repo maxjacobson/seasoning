@@ -11,9 +11,9 @@ import {
   ChoiceList,
   AppliedFilterInterface,
 } from "@shopify/polaris"
-import querystring from "query-string"
+import { stringify } from "query-string"
 
-import ShowPoster from "./ShowPoster"
+import { ShowPoster } from "./ShowPoster"
 import { Human, YourShow, MyShowStatus } from "../types"
 import { displayMyShowStatus, myShowBadgeProgress, myShowBadgeStatus } from "../helpers/my_shows"
 import Logo from "../images/logo.svg"
@@ -65,7 +65,7 @@ const ListShows = ({ shows }: ListShowProps) => {
   }
 }
 
-const YourShows: FunctionComponent<Props> = (props: Props) => {
+export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
   const [loading, setLoading] = useState(true)
   const [shows, setShows] = useState<YourShow[]>([])
   const [queryValue, setQueryValue] = useState("")
@@ -97,7 +97,7 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
     }
 
     // TODO: debounce me
-    fetch(`/api/your-shows.json?${querystring.stringify(params, { arrayFormat: "bracket" })}`, {
+    fetch(`/api/your-shows.json?${stringify(params, { arrayFormat: "bracket" })}`, {
       headers: {
         "X-SEASONING-TOKEN": props.token,
       },
@@ -168,5 +168,3 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
     </Page>
   )
 }
-
-export default YourShows

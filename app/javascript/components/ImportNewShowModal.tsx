@@ -10,7 +10,7 @@ interface Props extends RouteComponentProps {
   onClose: () => void
 }
 
-const ImportNewShowModal: FunctionComponent<Props> = ({
+export const ImportNewShowModal: FunctionComponent<Props> = ({
   token,
   globalSetLoading,
   onClose,
@@ -89,5 +89,3 @@ const ImportNewShowModal: FunctionComponent<Props> = ({
     </Modal>
   )
 }
-
-export default ImportNewShowModal

@@ -39,7 +39,11 @@ interface MagicLinkNotFound {
 
 type MagicLinkInfo = LoadingMagicLink | ValidMagicLink | MagicLinkNotFound
 
-const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest, setLoading }: Props) => {
+export const RedeemMagicLinkPage: FunctionComponent<Props> = ({
+  token,
+  setGuest,
+  setLoading,
+}: Props) => {
   const [magicLinkInfo, setMagicLinkInfo] = useState<MagicLinkInfo>({ loading: true })
   const [handle, setHandle] = useState<string>("")
   const [creating, setCreating] = useState(false)
@@ -158,5 +162,3 @@ const RedeemMagicLink: FunctionComponent<Props> = ({ token, setGuest, setLoading
     )
   }
 }
-
-export default RedeemMagicLink

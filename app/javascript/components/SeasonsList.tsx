@@ -7,7 +7,7 @@ interface Props {
   show: Show
 }
 
-const SeasonsList: FunctionComponent<Props> = ({ show }: Props) => {
+export const SeasonsList: FunctionComponent<Props> = ({ show }: Props) => {
   return (
     <DataTable
       columnContentTypes={["text", "numeric"]}
@@ -23,5 +23,3 @@ const SeasonsList: FunctionComponent<Props> = ({ show }: Props) => {
     />
   )
 }
-
-export default SeasonsList

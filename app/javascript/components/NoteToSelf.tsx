@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { TextField, CalloutCard, Link } from "@shopify/polaris"
 
-import Markdown from "../components/Markdown"
+import { Markdown } from "../components/Markdown"
 import Say from "../images/say.svg"
 import { YourShow } from "../types"
 import { updateMyShow } from "../helpers/my_shows"
@@ -13,7 +13,7 @@ interface Props {
   updateYourShow: (updatedYourShow: YourShow) => void
 }
 
-const NoteToSelf: FunctionComponent<Props> = ({
+export const NoteToSelf: FunctionComponent<Props> = ({
   token,
   yourShow,
   globalSetLoading,
@@ -117,5 +117,3 @@ const NoteToSelf: FunctionComponent<Props> = ({
     </CalloutCard>
   )
 }
-
-export default NoteToSelf

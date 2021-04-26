@@ -24,7 +24,7 @@ const IconLink: FunctionComponent<IconLinkProps> = ({ name, url, icon }: IconLin
   )
 }
 
-const Credits: FunctionComponent<RouteComponentProps> = () => {
+export const CreditsPage: FunctionComponent<RouteComponentProps> = () => {
   setHeadTitle("Credits")
 
   return (
@@ -85,5 +85,3 @@ const Credits: FunctionComponent<RouteComponentProps> = () => {
     </Page>
   )
 }
-
-export default Credits

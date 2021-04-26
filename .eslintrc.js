@@ -7,6 +7,9 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -27,6 +30,7 @@ module.exports = {
       },
     ],
     "no-console": ["error"],
+    "import/no-default-export": ["error"],
   },
   settings: {
     react: {

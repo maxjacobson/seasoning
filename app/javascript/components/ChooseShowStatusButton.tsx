@@ -21,7 +21,7 @@ interface Props {
   setYourShow: (yourShow: YourShow) => void
 }
 
-const ChooseShowStatusButton: FunctionComponent<Props> = ({
+export const ChooseShowStatusButton: FunctionComponent<Props> = ({
   show,
   token,
   yourRelationship,
@@ -66,5 +66,3 @@ const ChooseShowStatusButton: FunctionComponent<Props> = ({
     </Popover>
   )
 }
-
-export default ChooseShowStatusButton

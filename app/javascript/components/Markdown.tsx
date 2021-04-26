@@ -52,7 +52,7 @@ interface Props {
   markdown: string
 }
 
-const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
+export const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
   return (
     <TextContainer>
       <ReactMarkdown plugins={[gfm]} renderers={renderers}>
@@ -61,5 +61,3 @@ const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
     </TextContainer>
   )
 }
-
-export default Markdown

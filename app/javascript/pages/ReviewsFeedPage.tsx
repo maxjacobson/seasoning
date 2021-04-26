@@ -24,7 +24,7 @@ interface Props extends RouteComponentProps {
   setLoading: (loadingState: boolean) => void
 }
 
-const ReviewsFeed: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
+export const ReviewsFeedPage: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
   const [feedData, setFeedData] = useState<ReviewsFeedData>({ loading: true })
 
   useEffect(() => {
@@ -91,5 +91,3 @@ const ReviewsFeed: FunctionComponent<Props> = ({ setLoading, guest }: Props) => 
     </Page>
   )
 }
-
-export default ReviewsFeed

@@ -12,7 +12,7 @@ interface Props {
   season: Season
 }
 
-const NewSeasonReviewModal: FunctionComponent<Props> = ({
+export const NewSeasonReviewModal: FunctionComponent<Props> = ({
   guest,
   globalSetLoading,
   onClose,
@@ -153,5 +153,3 @@ const NewSeasonReviewModal: FunctionComponent<Props> = ({
     </Modal>
   )
 }
-
-export default NewSeasonReviewModal

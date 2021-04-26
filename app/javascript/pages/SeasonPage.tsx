@@ -14,7 +14,7 @@ import { DateTime } from "luxon"
 import { setHeadTitle } from "../hooks"
 import { Guest, YourSeason } from "../types"
 import { updateMySeason } from "../helpers/my_shows"
-import NewSeasonReviewModal from "../components/NewSeasonReviewModal"
+import { NewSeasonReviewModal } from "../components/NewSeasonReviewModal"
 
 interface LoadingSeason {
   loading: true
@@ -40,7 +40,7 @@ interface Props extends RouteComponentProps {
   setCurrentModal: (_: React.ReactNode) => void
 }
 
-const Season: FunctionComponent<Props> = ({
+export const SeasonPage: FunctionComponent<Props> = ({
   guest,
   showSlug,
   seasonSlug,
@@ -201,5 +201,3 @@ const Season: FunctionComponent<Props> = ({
     </Page>
   )
 }
-
-export default Season

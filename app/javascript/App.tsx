@@ -28,19 +28,19 @@ import { Guest, Show } from "./types"
 import LogoWithName from "./images/logo-with-name.svg"
 
 // Pages
-import NotFound from "./pages/NotFound"
-import Home from "./pages/Home"
-import YourShowsPage from "./pages/YourShowsPage"
-import ShowPage from "./pages/ShowPage"
-import SeasonPage from "./pages/SeasonPage"
-import Profile from "./pages/Profile"
-import RedeemMagicLink from "./pages/RedeemMagicLink"
-import Credits from "./pages/Credits"
-import Settings from "./pages/Settings"
-import SeasonReviewPage from "./pages/SeasonReviewPage"
-import ReviewsFeed from "./pages/ReviewsFeed"
+import { NotFoundPage } from "./pages/NotFoundPage"
+import { HomePage } from "./pages/HomePage"
+import { YourShowsPage } from "./pages/YourShowsPage"
+import { ShowPage } from "./pages/ShowPage"
+import { SeasonPage } from "./pages/SeasonPage"
+import { ProfilePage } from "./pages/ProfilePage"
+import { RedeemMagicLinkPage } from "./pages/RedeemMagicLinkPage"
+import { CreditsPage } from "./pages/CreditsPage"
+import { SettingsPage } from "./pages/SettingsPage"
+import { SeasonReviewPage } from "./pages/SeasonReviewPage"
+import { ReviewsFeedPage } from "./pages/ReviewsFeedPage"
 
-import ImportNewShowModal from "./components/ImportNewShowModal"
+import { ImportNewShowModal } from "./components/ImportNewShowModal"
 
 const createCustomLink = (closeMobileMenu: () => void) => {
   // Wires @reach/router up to @shopify/polaris.
@@ -163,7 +163,7 @@ interface Props {
   initialGuest: Guest
 }
 
-const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
+export const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [guest, setGuest] = useState<Guest>(initialGuest)
   const [loading, setLoading] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
@@ -329,10 +329,10 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               {loading && <Loading />}
 
               <Router>
-                <NotFound default />
-                <Home path="/" guest={guest} setLoading={setLoading} />
+                <NotFoundPage default />
+                <HomePage path="/" guest={guest} setLoading={setLoading} />
                 <YourShowsPage path="/shows" guest={guest} setLoading={setLoading} />
-                <RedeemMagicLink
+                <RedeemMagicLinkPage
                   path="/knock-knock/:token"
                   setGuest={setGuest}
                   setLoading={setLoading}
@@ -354,10 +354,10 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   guest={guest}
                   setLoading={setLoading}
                 />
-                <ReviewsFeed path="/reviews" guest={guest} setLoading={setLoading} />
-                <Credits path="/credits" />
-                <Settings path="/settings" setLoading={setLoading} guest={guest} />
-                <Profile path="/:handle" guest={guest} setLoading={setLoading} />
+                <ReviewsFeedPage path="/reviews" guest={guest} setLoading={setLoading} />
+                <CreditsPage path="/credits" />
+                <SettingsPage path="/settings" setLoading={setLoading} guest={guest} />
+                <ProfilePage path="/:handle" guest={guest} setLoading={setLoading} />
               </Router>
 
               {currentModal}
@@ -368,5 +368,3 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
     </>
   )
 }
-
-export default App

@@ -5,7 +5,7 @@ interface Props {
   globalSetLoading: (loadingState: boolean) => void
 }
 
-const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
+export const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [createdMagicLink, setCreatedMagicLink] = useState(false)
@@ -92,5 +92,3 @@ const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
     )
   }
 }
-
-export default GetStarted

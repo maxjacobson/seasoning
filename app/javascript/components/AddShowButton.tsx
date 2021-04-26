@@ -10,7 +10,7 @@ interface Props {
   setYourShow: (yourShow: YourShow) => void
 }
 
-const AddShowButton: FunctionComponent<Props> = ({
+export const AddShowButton: FunctionComponent<Props> = ({
   show,
   token,
   yourRelationship,
@@ -48,5 +48,3 @@ const AddShowButton: FunctionComponent<Props> = ({
     )
   }
 }
-
-export default AddShowButton

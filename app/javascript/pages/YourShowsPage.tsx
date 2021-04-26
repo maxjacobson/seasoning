@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
 import { Page, Card, Link } from "@shopify/polaris"
-import YourShows from "../components/YourShows"
+import { YourShowsList } from "../components/YourShowsList"
 
 import { Guest } from "../types"
 
@@ -10,13 +10,13 @@ interface Props extends RouteComponentProps {
   setLoading: (loadingState: boolean) => void
 }
 
-const Home: FunctionComponent<Props> = (props: Props) => {
+export const YourShowsPage: FunctionComponent<Props> = (props: Props) => {
   const { guest, setLoading } = props
 
   return (
     <Page title="Your shows">
       {guest.authenticated ? (
-        <YourShows human={guest.human} token={guest.token} globalSetLoading={setLoading} />
+        <YourShowsList human={guest.human} token={guest.token} globalSetLoading={setLoading} />
       ) : (
         <Card>
           <Card.Section>
@@ -27,4 +27,3 @@ const Home: FunctionComponent<Props> = (props: Props) => {
     </Page>
   )
 }
-export default Home

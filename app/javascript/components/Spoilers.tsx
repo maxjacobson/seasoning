@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode
 }
 
-const Spoilers: FunctionComponent<Props> = ({ spoilers, children }: Props) => {
+export const Spoilers: FunctionComponent<Props> = ({ spoilers, children }: Props) => {
   const [acknowledged, setAcknowledged] = useState(false)
 
   if (!spoilers || acknowledged) {
@@ -24,5 +24,3 @@ const Spoilers: FunctionComponent<Props> = ({ spoilers, children }: Props) => {
     )
   }
 }
-
-export default Spoilers

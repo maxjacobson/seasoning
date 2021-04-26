@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { navigate, RouteComponentProps } from "@reach/router"
 import { Page, Spinner } from "@shopify/polaris"
-import GetStarted from "./Home/GetStarted"
+import { GetStarted } from "../components/GetStarted"
 
 import { Guest } from "../types"
 
@@ -10,7 +10,7 @@ interface HomeProps extends RouteComponentProps {
   setLoading: (loadingState: boolean) => void
 }
 
-const Home: FunctionComponent<HomeProps> = (props: HomeProps) => {
+export const HomePage: FunctionComponent<HomeProps> = (props: HomeProps) => {
   const { guest, setLoading } = props
 
   if (guest.authenticated) {
@@ -29,4 +29,3 @@ const Home: FunctionComponent<HomeProps> = (props: HomeProps) => {
     )
   }
 }
-export default Home

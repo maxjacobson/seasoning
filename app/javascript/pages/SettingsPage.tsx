@@ -10,7 +10,7 @@ interface Props extends RouteComponentProps {
   setLoading: (loadingState: boolean) => void
 }
 
-const Settings: FunctionComponent<Props> = (props) => {
+export const SettingsPage: FunctionComponent<Props> = (props) => {
   setHeadTitle("Settings")
 
   return (
@@ -119,5 +119,3 @@ const updateMySettings = (token: string, body: Record<string, unknown>): Promise
     },
   })
 }
-
-export default Settings

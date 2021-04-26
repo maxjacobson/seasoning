@@ -4,11 +4,11 @@ import { Page, SkeletonPage, Card, Stack } from "@shopify/polaris"
 
 import { Guest, YourShow } from "../types"
 import { setHeadTitle } from "../hooks"
-import AddShowButton from "../components/AddShowButton"
-import ChooseShowStatusButton from "../components/ChooseShowStatusButton"
-import NoteToSelf from "../components/NoteToSelf"
-import SeasonsList from "../components/SeasonsList"
-import ShowPoster from "../components/ShowPoster"
+import { AddShowButton } from "../components/AddShowButton"
+import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
+import { NoteToSelf } from "../components/NoteToSelf"
+import { SeasonsList } from "../components/SeasonsList"
+import { ShowPoster } from "../components/ShowPoster"
 
 interface Props extends RouteComponentProps {
   showSlug?: string
@@ -28,7 +28,7 @@ type LoadedShowData = {
 
 type ShowData = LoadingShowData | LoadedShowData
 
-const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) => {
+export const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Props) => {
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
     data: null,
@@ -123,5 +123,3 @@ const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading }: Pro
     )
   }
 }
-
-export default ShowPage

@@ -5,7 +5,7 @@ import { DateTime } from "luxon"
 
 import { Profile, Guest } from "../types"
 import { setHeadTitle } from "../hooks"
-import ShowPoster from "../components/ShowPoster"
+import { ShowPoster } from "../components/ShowPoster"
 
 interface StillLoading {
   loading: true
@@ -29,7 +29,7 @@ interface Props extends RouteComponentProps {
   setLoading: (loadingState: boolean) => void
 }
 
-const Profile: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props) => {
+export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props) => {
   const [profile, setProfile] = useState<ProfileData>({ loading: true })
 
   setHeadTitle(handle)
@@ -150,5 +150,3 @@ const Profile: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props)
     )
   }
 }
-
-export default Profile

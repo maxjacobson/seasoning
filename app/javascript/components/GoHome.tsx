@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { Link } from "@shopify/polaris"
 
-const GoHome: FunctionComponent<Record<string, never>> = () => {
+export const GoHome: FunctionComponent<Record<string, never>> = () => {
   return (
     <>
       <p>
@@ -10,5 +10,3 @@ const GoHome: FunctionComponent<Record<string, never>> = () => {
     </>
   )
 }
-
-export default GoHome
