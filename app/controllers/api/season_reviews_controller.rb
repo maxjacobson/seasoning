@@ -52,7 +52,7 @@ module API
 
       reviews = SeasonReview.order(created_at: :desc).lazy.select do |review|
         review.viewable_by?(current_human)
-      end.take(10)
+      end
 
       render json: {
         data: reviews.map do |review|
