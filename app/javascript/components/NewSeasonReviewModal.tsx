@@ -1,7 +1,15 @@
 import React, { useState, FunctionComponent, useEffect } from "react"
 import { Link, FormLayout, TextField, Modal, Checkbox, Select, InlineError } from "@shopify/polaris"
-
-import { Show, Season, SeasonReview, AuthenticatedGuest, Visibility, HumanSettings } from "../types"
+import { StarFilledMinor, StarOutlineMinor, CircleDisableMinor } from "@shopify/polaris-icons"
+import {
+  Show,
+  Season,
+  SeasonReview,
+  AuthenticatedGuest,
+  Visibility,
+  HumanSettings,
+  Rating,
+} from "../types"
 import { navigate } from "@reach/router"
 
 interface Props {
@@ -10,6 +18,87 @@ interface Props {
   onClose: () => void
   show: Show
   season: Season
+}
+
+const RatingChoice = ({
+  position,
+  setTentativeRating,
+  setChoice,
+  tentativeRating,
+  choice,
+}: {
+  position: Rating
+  setTentativeRating: (_: Rating | undefined) => void
+  setChoice: (_: Rating | undefined) => void
+  tentativeRating: Rating | undefined
+  choice: Rating | undefined
+}) => {
+  if ((choice && choice >= position) || (tentativeRating && tentativeRating >= position)) {
+    return (
+      <StarFilledMinor
+        width="20"
+        onMouseEnter={() => setTentativeRating(position)}
+        onMouseLeave={() => setTentativeRating(undefined)}
+        cursor="pointer"
+        onClick={() => setChoice(position)}
+        fill="#FFD700"
+      />
+    )
+  } else {
+    return (
+      <StarOutlineMinor
+        width="20"
+        onMouseEnter={() => setTentativeRating(position)}
+        onMouseLeave={() => setTentativeRating(undefined)}
+        cursor="pointer"
+        onClick={() => setChoice(position)}
+      />
+    )
+  }
+}
+
+const RatingPicker = ({
+  rating,
+  setRating,
+}: {
+  rating: Rating | undefined
+  setRating: (_: Rating | undefined) => void
+}) => {
+  const [tentativeRating, setTentativeRating] = useState<Rating | undefined>(undefined)
+
+  const choiceProps = {
+    setTentativeRating: setTentativeRating,
+    tentativeRating: tentativeRating,
+    choice: rating,
+    setChoice: setRating,
+  }
+
+  return (
+    <>
+      <div>
+        <RatingChoice position={1} {...choiceProps} />
+        <RatingChoice position={2} {...choiceProps} />
+        <RatingChoice position={3} {...choiceProps} />
+        <RatingChoice position={4} {...choiceProps} />
+        <RatingChoice position={5} {...choiceProps} />
+        <RatingChoice position={6} {...choiceProps} />
+        <RatingChoice position={7} {...choiceProps} />
+        <RatingChoice position={8} {...choiceProps} />
+        <RatingChoice position={9} {...choiceProps} />
+        <RatingChoice position={10} {...choiceProps} />
+        <CircleDisableMinor
+          width="20"
+          cursor="pointer"
+          onClick={() => {
+            setRating(undefined)
+          }}
+          onMouseEnter={() => setTentativeRating(undefined)}
+          onMouseLeave={() => setTentativeRating(undefined)}
+        />
+      </div>
+      <div>{rating ? `Rating: ${rating}` : "No rating"}</div>
+    </>
+  )
 }
 
 export const NewSeasonReviewModal: FunctionComponent<Props> = ({
@@ -23,7 +112,7 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
   const [body, setBody] = useState("")
   const [visibility, setVisibility] = useState<Visibility | undefined>(undefined)
   const [containsSpoilers, setContainsSpoilers] = useState(false)
-  const [rating, setRating] = useState("")
+  const [rating, setRating] = useState<Rating | undefined>(undefined)
   const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null)
 
   useEffect(() => {
@@ -123,26 +212,7 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
             value={visibility}
             disabled={!visibility}
           />
-          <Select
-            label="Rating"
-            labelInline
-            options={[
-              { label: "(None)", value: "" },
-              { label: "0/10", value: "0" },
-              { label: "1/10", value: "1" },
-              { label: "2/10", value: "2" },
-              { label: "3/10", value: "3" },
-              { label: "4/10", value: "4" },
-              { label: "5/10", value: "5" },
-              { label: "6/10", value: "6" },
-              { label: "7/10", value: "7" },
-              { label: "8/10", value: "8" },
-              { label: "9/10", value: "9" },
-              { label: "10/10", value: "10" },
-            ]}
-            onChange={setRating}
-            value={rating}
-          />
+          <RatingPicker rating={rating} setRating={setRating} />
 
           <TextField
             label={
