@@ -126,7 +126,8 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({
         title={
           <>
             <Link url={`/${handle}`}>{handle}</Link>&rsquo;s review of{" "}
-            <Link url={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link>.
+            <Link url={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link> of{" "}
+            <Link url={`/shows/${show.slug}`}>{show.title}</Link>.
           </>
         }
       >
