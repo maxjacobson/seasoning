@@ -125,7 +125,8 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({
         sectioned
         title={
           <>
-            <Link url={`/${handle}`}>{handle}</Link>&rsquo;s review
+            <Link url={`/${handle}`}>{handle}</Link>&rsquo;s review of{" "}
+            <Link url={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link>.
           </>
         }
       >
