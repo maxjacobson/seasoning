@@ -84,6 +84,7 @@ const YourShows: FunctionComponent<Props> = (props: Props) => {
 
   useEffect(() => {
     props.globalSetLoading(true)
+    setLoading(true)
 
     const params: Record<string, unknown> = {}
 
