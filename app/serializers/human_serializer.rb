@@ -2,5 +2,10 @@
 
 # Serializes a human
 class HumanSerializer < Oj::Serializer
-  attributes :handle, :gravatar_url
+  object_as :human
+
+  attributes(
+    :handle,
+    :gravatar_url
+  )
 end

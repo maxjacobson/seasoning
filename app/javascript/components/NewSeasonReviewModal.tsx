@@ -1,7 +1,7 @@
-import React, { useState, FunctionComponent } from "react"
+import React, { useState, FunctionComponent, useEffect } from "react"
 import { Link, FormLayout, TextField, Modal, Checkbox, Select, InlineError } from "@shopify/polaris"
 
-import { Show, Season, SeasonReview, AuthenticatedGuest } from "../types"
+import { Show, Season, SeasonReview, AuthenticatedGuest, Visibility, HumanSettings } from "../types"
 import { navigate } from "@reach/router"
 
 interface Props {
@@ -21,10 +21,29 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
 }: Props) => {
   const [active, setActive] = useState(true)
   const [body, setBody] = useState("")
-  const [visibility, setVisibility] = useState("anybody")
+  const [visibility, setVisibility] = useState<Visibility | undefined>(undefined)
   const [containsSpoilers, setContainsSpoilers] = useState(false)
   const [rating, setRating] = useState("")
   const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null)
+
+  useEffect(() => {
+    ;(async () => {
+      globalSetLoading(true)
+      const response = await fetch("/api/settings.json", {
+        headers: {
+          "X-SEASONING-TOKEN": guest.token,
+        },
+      })
+      globalSetLoading(false)
+
+      if (response.ok) {
+        const data: HumanSettings = await response.json()
+        setVisibility(data.default_review_visibility)
+      } else {
+        throw new Error("Could not load settings")
+      }
+    })()
+  }, [])
 
   return (
     <Modal
@@ -35,6 +54,7 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
         onClose()
       }}
       primaryAction={{
+        disabled: !visibility,
         content: "Save",
         onAction: async () => {
           globalSetLoading(true)
@@ -99,8 +119,9 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
               { label: "Mutual follows", value: "mutuals" },
               { label: "Only myself", value: "myself" },
             ]}
-            onChange={setVisibility}
+            onChange={(value: Visibility) => setVisibility(value)}
             value={visibility}
+            disabled={!visibility}
           />
           <Select
             label="Rating"

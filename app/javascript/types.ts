@@ -1,3 +1,8 @@
+export interface HumanSettings {
+  share_currently_watching: boolean
+  default_review_visibility: Visibility
+}
+
 export interface Human {
   handle: string
   gravatar_url: string
@@ -36,6 +41,8 @@ export type MyShowStatus =
   | "stopped_watching"
   | "waiting_for_more"
   | "finished"
+
+export type Visibility = "anybody" | "mutuals" | "myself"
 
 export interface YourRelationshipToShow {
   added_at: string
@@ -84,8 +91,4 @@ export interface YourSeason {
   season: Season
   your_relationship?: YourRelationshipToSeason
   your_reviews?: SeasonReview[]
-}
-
-export interface HumanSettings {
-  share_currently_watching: boolean
 }

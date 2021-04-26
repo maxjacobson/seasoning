@@ -1,9 +1,20 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { Page, Card, Checkbox, Spinner } from "@shopify/polaris"
+import { Page, Card, Checkbox, Select, Spinner } from "@shopify/polaris"
 import { RouteComponentProps } from "@reach/router"
 
-import { AuthenticatedGuest, Guest, HumanSettings } from "../types"
+import { AuthenticatedGuest, Guest, HumanSettings, Visibility } from "../types"
 import { setHeadTitle } from "../hooks"
+
+interface LoadingSettingsData {
+  loading: true
+}
+
+interface LoadedSettingsData {
+  loading: false
+  settings: HumanSettings
+}
+
+type SettingsData = LoadingSettingsData | LoadedSettingsData
 
 interface Props extends RouteComponentProps {
   guest: Guest
@@ -36,17 +47,6 @@ const SettingsBody: FunctionComponent<Props> = (props: Props) => {
   )
 }
 
-interface LoadingSettingsData {
-  loading: true
-}
-
-interface LoadedSettingsData {
-  loading: false
-  settings: HumanSettings
-}
-
-type SettingsData = LoadingSettingsData | LoadedSettingsData
-
 interface EditSettingsProps {
   guest: AuthenticatedGuest
   setLoading: (loadingState: boolean) => void
@@ -56,8 +56,8 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({
   guest,
   setLoading,
 }: EditSettingsProps) => {
-  const [settingsData, setSettingsData] = useState<SettingsData>({ loading: true })
   const [currentlyUpdating, setCurrentlyUpdating] = useState(false)
+  const [settingsData, setSettingsData] = useState<SettingsData>({ loading: true })
 
   useEffect(() => {
     ;(async () => {
@@ -78,34 +78,50 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({
     })()
   }, [])
 
+  const update = async (patch: Record<string, unknown>) => {
+    setCurrentlyUpdating(true)
+    setLoading(true)
+    const response = await updateMySettings(guest.token, patch)
+    setCurrentlyUpdating(false)
+    setLoading(false)
+
+    if (response.ok) {
+      const data: HumanSettings = await response.json()
+      setSettingsData({ loading: false, settings: data })
+    } else {
+      throw new Error("Could not update settings")
+    }
+  }
+
   if (settingsData.loading) {
     return <Spinner accessibilityLabel="Loading settings" />
   }
 
   return (
-    <Card.Section title="Profile page">
-      <Checkbox
-        label={"Share the shows I'm currently watching"}
-        checked={settingsData.settings.share_currently_watching}
-        onChange={async (value) => {
-          setCurrentlyUpdating(true)
-          setLoading(true)
-          const response = await updateMySettings(guest.token, {
-            share_currently_watching: value,
-          })
-          setCurrentlyUpdating(false)
-          setLoading(false)
+    <>
+      <Card.Section title="Profile page">
+        <Checkbox
+          label={"Share the shows I'm currently watching"}
+          checked={settingsData.settings.share_currently_watching}
+          onChange={(value) => update({ share_currently_watching: value })}
+          disabled={currentlyUpdating}
+        />
+      </Card.Section>
 
-          if (response.ok) {
-            const data: HumanSettings = await response.json()
-            setSettingsData({ loading: false, settings: data })
-          } else {
-            throw new Error("Could not update settings")
-          }
-        }}
-        disabled={currentlyUpdating}
-      />
-    </Card.Section>
+      <Card.Section title="Reviews">
+        <Select
+          label="Who should new reviews be visible to?"
+          helpText="This is just a default for new reviews, you can pick another visibility on a review-by-review basis!"
+          options={[
+            { label: "Anybody", value: "anybody" },
+            { label: "Mutual follows", value: "mutuals" },
+            { label: "Only myself", value: "myself" },
+          ]}
+          onChange={(value: Visibility) => update({ default_review_visibility: value })}
+          value={settingsData.settings.default_review_visibility}
+        />
+      </Card.Section>
+    </>
   )
 }
 
