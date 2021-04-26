@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Page, Card, SkeletonPage, Layout, SkeletonBodyText } from "@shopify/polaris"
+import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Link } from "@shopify/polaris"
 import querystring from "query-string"
 import { DateTime } from "luxon"
 
@@ -121,11 +121,18 @@ const SeasonReviewPage: FunctionComponent<Props> = ({
 
   return (
     <Page title={show.title} subtitle={season.name}>
-      <Card sectioned title={`${handle}'s review`}>
+      <Card
+        sectioned
+        title={
+          <>
+            <Link url={`/${handle}`}>{handle}</Link>&rsquo;s review
+          </>
+        }
+      >
         <Card.Section title="Date">
           {DateTime.fromISO(review.created_at).toLocaleString()}
         </Card.Section>
-        {review.rating !== undefined && <Card.Section title="Rating">{review.rating}</Card.Section>}
+        {review.rating != null && <Card.Section title="Rating">{review.rating}</Card.Section>}
         <Card.Section>
           <Spoilers spoilers={review.spoilers}>
             <Markdown markdown={review.body} />

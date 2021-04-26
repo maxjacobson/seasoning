@@ -26,6 +26,7 @@ module.exports = {
         argsIgnorePattern: "^_",
       },
     ],
+    "no-console": ["error"],
   },
   settings: {
     react: {
