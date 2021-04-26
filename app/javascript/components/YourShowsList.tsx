@@ -155,6 +155,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
               }}
               onClearAll={() => {
                 setQueryValue("")
+                setSelectedStatuses([])
               }}
             />
             {loading ? (
