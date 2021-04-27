@@ -22,38 +22,23 @@ interface Props {
 
 const RatingChoice = ({
   position,
-  setTentativeRating,
   setChoice,
-  tentativeRating,
   choice,
 }: {
   position: Rating
-  setTentativeRating: (_: Rating | undefined) => void
   setChoice: (_: Rating | undefined) => void
-  tentativeRating: Rating | undefined
   choice: Rating | undefined
 }) => {
-  if ((choice && choice >= position) || (tentativeRating && tentativeRating >= position)) {
-    return (
-      <StarFilledMinor
-        width="20"
-        onMouseEnter={() => setTentativeRating(position)}
-        onMouseLeave={() => setTentativeRating(undefined)}
-        cursor="pointer"
-        onClick={() => setChoice(position)}
-        fill="#FFD700"
-      />
-    )
+  const starProps = {
+    width: "20",
+    cursor: "pointer",
+    onClick: () => setChoice(position),
+  }
+
+  if (choice && choice >= position) {
+    return <StarFilledMinor {...starProps} fill="#FFD700" />
   } else {
-    return (
-      <StarOutlineMinor
-        width="20"
-        onMouseEnter={() => setTentativeRating(position)}
-        onMouseLeave={() => setTentativeRating(undefined)}
-        cursor="pointer"
-        onClick={() => setChoice(position)}
-      />
-    )
+    return <StarOutlineMinor {...starProps} />
   }
 }
 
@@ -64,11 +49,7 @@ const RatingPicker = ({
   rating: Rating | undefined
   setRating: (_: Rating | undefined) => void
 }) => {
-  const [tentativeRating, setTentativeRating] = useState<Rating | undefined>(undefined)
-
   const choiceProps = {
-    setTentativeRating: setTentativeRating,
-    tentativeRating: tentativeRating,
     choice: rating,
     setChoice: setRating,
   }
@@ -92,8 +73,6 @@ const RatingPicker = ({
           onClick={() => {
             setRating(undefined)
           }}
-          onMouseEnter={() => setTentativeRating(undefined)}
-          onMouseLeave={() => setTentativeRating(undefined)}
         />
       </div>
       <div>{rating ? `Rating: ${rating}` : "No rating"}</div>
