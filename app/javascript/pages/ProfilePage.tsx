@@ -1,11 +1,12 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Card, Page, SkeletonPage, DataTable, Link } from "@shopify/polaris"
+import { Card, Page, SkeletonPage, DataTable, Link, Tabs, SkeletonBodyText } from "@shopify/polaris"
 import { DateTime } from "luxon"
 
-import { Profile, Guest } from "../types"
-import { setHeadTitle } from "../hooks"
+import { Profile, Guest, SeasonReview, Show } from "../types"
+import { setHeadTitle, loadData } from "../hooks"
 import { ShowPoster } from "../components/ShowPoster"
+import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 
 interface StillLoading {
   loading: true
@@ -30,7 +31,8 @@ interface Props extends RouteComponentProps {
 }
 
 export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props) => {
-  const [profile, setProfile] = useState<ProfileData>({ loading: true })
+  const [profileData, setProfile] = useState<ProfileData>({ loading: true })
+  const [selectedTab, setSelectedTab] = useState(0)
 
   setHeadTitle(handle)
 
@@ -69,9 +71,9 @@ export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoadin
       })
   }, [handle])
 
-  if (profile.loading) {
+  if (profileData.loading) {
     return <SkeletonPage></SkeletonPage>
-  } else if (!profile.profile) {
+  } else if (!profileData.profile) {
     return (
       <Page>
         <Card title="Not found" sectioned>
@@ -80,17 +82,17 @@ export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoadin
       </Page>
     )
   } else {
-    const { created_at, currently_watching, your_relationship } = profile.profile
+    const { profile } = profileData
 
     return (
       <Page
         title={handle}
         primaryAction={
           guest.authenticated &&
-          your_relationship &&
-          !your_relationship.self && {
+          profile.your_relationship &&
+          !profile.your_relationship.self && {
             content: "Follow",
-            disabled: your_relationship.you_follow_them,
+            disabled: profile.your_relationship.you_follow_them,
             onAction: async () => {
               const response = await fetch("/api/follows.json", {
                 method: "POST",
@@ -115,38 +117,124 @@ export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoadin
         }
       >
         <Card title="Profile" sectioned>
-          <Card.Section title="About">
-            <p>
-              <em>Seasoner since {DateTime.fromISO(created_at).toLocaleString()}</em>
-            </p>
-          </Card.Section>
-
-          {currently_watching && (
-            <Card.Section title="Currently watching">
-              {currently_watching.length ? (
-                <DataTable
-                  columnContentTypes={["text"]}
-                  headings={["Show"]}
-                  rows={currently_watching.map((show) => {
-                    return [
-                      <>
-                        <Link key={show.id} url={`/shows/${show.slug}`}>
-                          <div>
-                            <ShowPoster show={show} size="small" />
-                          </div>
-                          {show.title}
-                        </Link>
-                      </>,
-                    ]
-                  })}
-                />
-              ) : (
-                <p>{handle} is not currently watching anything</p>
-              )}
-            </Card.Section>
-          )}
+          <Tabs
+            tabs={[
+              {
+                id: "about",
+                content: "About",
+                accessibilityLabel: "About",
+                panelID: "about",
+              },
+              {
+                id: "reviews",
+                content: "Reviews",
+                panelID: "reviews",
+              },
+            ]}
+            selected={selectedTab}
+            onSelect={setSelectedTab}
+          >
+            {renderTab(selectedTab, profile, guest, setLoading)}
+          </Tabs>
         </Card>
       </Page>
     )
   }
+}
+
+const renderTab = (
+  selectedTab: number,
+  profile: Profile,
+  guest: Guest,
+  setLoading: (_: boolean) => void
+) => {
+  if (selectedTab === 0) {
+    return <AboutTab profile={profile} />
+  } else if (selectedTab === 1) {
+    return <ReviewsTab profile={profile} guest={guest} setLoading={setLoading} />
+  } else {
+    return <div>Unknown tab???</div>
+  }
+}
+
+interface AboutTabProps {
+  profile: Profile
+}
+
+const AboutTab = ({ profile }: AboutTabProps) => {
+  return (
+    <>
+      <Card.Section title="About">
+        <p>
+          <em>Seasoner since {DateTime.fromISO(profile.created_at).toLocaleString()}</em>
+        </p>
+      </Card.Section>
+
+      {profile.currently_watching && (
+        <Card.Section title="Currently watching">
+          {profile.currently_watching.length ? (
+            <DataTable
+              columnContentTypes={["text"]}
+              headings={["Show"]}
+              rows={profile.currently_watching.map((show) => {
+                return [
+                  <>
+                    <Link key={show.id} url={`/shows/${show.slug}`}>
+                      <div>
+                        <ShowPoster show={show} size="small" />
+                      </div>
+                      {show.title}
+                    </Link>
+                  </>,
+                ]
+              })}
+            />
+          ) : (
+            <p>{profile.handle} is not currently watching anything</p>
+          )}
+        </Card.Section>
+      )}
+    </>
+  )
+}
+
+interface ReviewsTabProps {
+  profile: Profile
+  guest: Guest
+  setLoading: (_: boolean) => void
+}
+
+const ReviewsTab = ({ profile, guest, setLoading }: ReviewsTabProps) => {
+  const reviewsData = loadData<{ reviews: { review: SeasonReview; show: Show }[] }>(
+    guest,
+    `/api/profiles/${profile.handle}/season-reviews.json`,
+    [],
+    setLoading
+  )
+
+  if (reviewsData.loading) {
+    return (
+      <Card.Section>
+        <SkeletonBodyText />
+      </Card.Section>
+    )
+  }
+
+  if (!reviewsData.data || reviewsData.data.reviews.length === 0) {
+    return (
+      <>
+        <Card.Section>
+          <p>No reviews yet!</p>
+        </Card.Section>
+      </>
+    )
+  }
+
+  return (
+    <Card.Section>
+      {reviewsData.data.reviews.map(({ review, show }) => {
+        return <SeasonReviewSummary review={review} show={show} key={review.id} />
+      })}
+    </Card.Section>
+  )
 }

@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Link } from "@shopify/polaris"
+import { Page, Card, SkeletonPage, Layout, SkeletonBodyText } from "@shopify/polaris"
 
+import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 import { Guest, SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 
@@ -71,21 +72,9 @@ export const ReviewsFeedPage: FunctionComponent<Props> = ({ setLoading, guest }:
     <Page title="Reviews">
       <Card sectioned>
         <Card.Section title="Recent">
-          <ul>
-            {feedData.data.map(({ review, show }) => {
-              return (
-                <li key={review.id}>
-                  <Link
-                    url={`/${review.author.handle}/shows/${show.slug}/${review.season.slug}${
-                      review.viewing === 1 ? "" : `/${review.viewing}`
-                    }`}
-                  >
-                    {show.title} &mdash; {review.season.name} reviewed by {review.author.handle}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+          {feedData.data.map(({ review, show }) => {
+            return <SeasonReviewSummary key={review.id} review={review} show={show} />
+          })}
         </Card.Section>
       </Card>
     </Page>

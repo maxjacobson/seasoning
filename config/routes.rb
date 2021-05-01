@@ -8,7 +8,9 @@ Rails.application.routes.draw do
       resources :humans, only: [:create]
       resources :your_shows, only: %i[index create update], path: "/your-shows"
       resources :your_seasons, only: %i[update], path: "/your-seasons"
-      resources :profiles, only: [:show]
+      resources :profiles, only: [:show] do
+        resources :season_reviews, only: [:index], controller: "profile_season_reviews", path: "season-reviews"
+      end
       resources :shows, only: %i[create index show] do
         resources :seasons, only: %i[show]
       end
