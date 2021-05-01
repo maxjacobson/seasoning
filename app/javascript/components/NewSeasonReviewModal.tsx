@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent, useEffect } from "react"
-import { Link, FormLayout, TextField, Modal, Checkbox, Select, InlineError } from "@shopify/polaris"
+import { Link, FormLayout, TextField, Modal, Select, InlineError } from "@shopify/polaris"
 import { StarFilledMinor, StarOutlineMinor, CircleDisableMinor } from "@shopify/polaris-icons"
 import {
   Show,
@@ -90,7 +90,6 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
   const [active, setActive] = useState(true)
   const [body, setBody] = useState("")
   const [visibility, setVisibility] = useState<Visibility | undefined>(undefined)
-  const [containsSpoilers, setContainsSpoilers] = useState(false)
   const [rating, setRating] = useState<Rating | undefined>(undefined)
   const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null)
 
@@ -136,7 +135,6 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
               review: {
                 body: body,
                 visibility: visibility,
-                spoilers: containsSpoilers,
                 rating: rating,
               },
               show_id: show.id,
@@ -174,11 +172,6 @@ export const NewSeasonReviewModal: FunctionComponent<Props> = ({
     >
       <Modal.Section>
         <FormLayout>
-          <Checkbox
-            label="Contains spoilers"
-            checked={containsSpoilers}
-            onChange={setContainsSpoilers}
-          />
           <Select
             label="Visible to"
             labelInline

@@ -4,7 +4,6 @@ import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Link } from "@shopi
 import { stringify } from "query-string"
 import { DateTime } from "luxon"
 
-import { Spoilers } from "../components/Spoilers"
 import { Markdown } from "../components/Markdown"
 import { Guest, Season, SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
@@ -136,9 +135,7 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({
         </Card.Section>
         {review.rating != null && <Card.Section title="Rating">{review.rating}</Card.Section>}
         <Card.Section>
-          <Spoilers spoilers={review.spoilers}>
-            <Markdown markdown={review.body} />
-          </Spoilers>
+          <Markdown markdown={review.body} />
         </Card.Section>
       </Card>
     </Page>

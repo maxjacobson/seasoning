@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_043706) do
+ActiveRecord::Schema.define(version: 2021_05_01_212545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 2021_04_26_043706) do
     t.bigint "season_id", null: false, comment: "Which season are they reviewing"
     t.text "body", null: false, comment: "The body of the review"
     t.integer "rating", comment: "The rating between 0 and 10 (optional)"
-    t.boolean "spoilers", default: false, null: false, comment: "Whether this review contains spoilers"
     t.integer "viewing", null: false, comment: "Is this the person's first, second, third etc viewing of the season?"
     t.enum "visibility", default: "anybody", null: false, comment: "Who can see this review", enum_name: "visibility"
     t.datetime "created_at", precision: 6, null: false

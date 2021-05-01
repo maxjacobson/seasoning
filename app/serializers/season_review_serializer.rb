@@ -6,7 +6,6 @@ class SeasonReviewSerializer < Oj::Serializer
     :visibility,
     :created_at,
     :updated_at,
-    :spoilers,
     :rating,
     :viewing,
     :id

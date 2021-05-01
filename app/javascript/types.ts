@@ -74,7 +74,6 @@ export interface SeasonReview {
   visibility: boolean
   created_at: string
   updated_at: string
-  spoilers: boolean
   rating: Rating | undefined
   author: Human
   season: Season

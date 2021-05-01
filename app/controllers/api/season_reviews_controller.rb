@@ -67,7 +67,7 @@ module API
     private
 
     def season_review_params
-      params.require(:review).permit(:body, :visibility, :spoilers, :rating)
+      params.require(:review).permit(:body, :visibility, :rating)
     end
   end
 end
