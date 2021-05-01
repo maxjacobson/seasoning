@@ -7,7 +7,7 @@ interface Props {
 
 export const StarRating: FunctionComponent<Props> = ({ rating }) => {
   return (
-    <>
+    <span title={`${rating}/10 rating`}>
       <Star position={1} rating={rating} />
       <Star position={2} rating={rating} />
       <Star position={3} rating={rating} />
@@ -18,7 +18,7 @@ export const StarRating: FunctionComponent<Props> = ({ rating }) => {
       <Star position={8} rating={rating} />
       <Star position={9} rating={rating} />
       <Star position={10} rating={rating} />
-    </>
+    </span>
   )
 }
 
