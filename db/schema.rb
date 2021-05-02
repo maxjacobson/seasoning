@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_01_212545) do
+ActiveRecord::Schema.define(version: 2021_05_02_011508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_212545) do
     t.string "slug", null: false, comment: "A URL-friendly slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "tmdb_poster_path"
     t.index ["show_id", "slug"], name: "index_seasons_on_show_id_and_slug", unique: true
     t.index ["show_id"], name: "index_seasons_on_show_id"
     t.index ["tmdb_id"], name: "index_seasons_on_tmdb_id", unique: true

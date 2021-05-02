@@ -5,7 +5,7 @@ import { DateTime } from "luxon"
 
 import { Profile, Guest, SeasonReview, Show } from "../types"
 import { setHeadTitle, loadData } from "../hooks"
-import { ShowPoster } from "../components/ShowPoster"
+import { Poster } from "../components/Poster"
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 
 interface StillLoading {
@@ -194,7 +194,7 @@ const AboutTab = ({ profile }: AboutTabProps) => {
                   <>
                     <Link key={show.id} url={`/shows/${show.slug}`}>
                       <div>
-                        <ShowPoster show={show} size="small" />
+                        <Poster show={show} size="small" url={show.poster_url} />
                       </div>
                       {show.title}
                     </Link>

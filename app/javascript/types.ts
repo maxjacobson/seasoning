@@ -26,6 +26,7 @@ export interface Season {
   season_number: number
   episode_count: number
   slug: string
+  poster_url: string | null
 }
 export interface Show {
   id: number

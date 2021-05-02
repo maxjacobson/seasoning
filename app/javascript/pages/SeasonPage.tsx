@@ -7,6 +7,7 @@ import { setHeadTitle } from "../hooks"
 import { Guest, YourSeason } from "../types"
 import { NewSeasonReviewModal } from "../components/NewSeasonReviewModal"
 import { SeenSeasonCheckbox } from "../components/SeenSeasonCheckbox"
+import { Poster } from "../components/Poster"
 
 interface LoadingSeason {
   loading: true
@@ -113,6 +114,9 @@ export const SeasonPage: FunctionComponent<Props> = ({
       breadcrumbs={[{ url: `/shows/${showSlug}` }]}
     >
       <Card sectioned>
+        <Card.Section>
+          <Poster url={yourSeason.season.poster_url} size="large" show={yourSeason.show} />
+        </Card.Section>
         <Card.Section title="Season info">
           <span>Episode count: {yourSeason.season.episode_count}</span>
         </Card.Section>

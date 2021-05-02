@@ -8,7 +8,7 @@ import { AddShowButton } from "../components/AddShowButton"
 import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
 import { NoteToSelf } from "../components/NoteToSelf"
 import { SeasonsList } from "../components/SeasonsList"
-import { ShowPoster } from "../components/ShowPoster"
+import { Poster } from "../components/Poster"
 
 interface Props extends RouteComponentProps {
   showSlug?: string
@@ -113,7 +113,7 @@ export const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading
           </Card.Header>
 
           <Card.Section title="Poster">
-            <ShowPoster show={data.show} size="large" />
+            <Poster show={data.show} size="large" url={data.show.poster_url} />
           </Card.Section>
           <Card.Section title="Seasons">
             <SeasonsList show={data.show} guest={guest} setLoading={setLoading} />

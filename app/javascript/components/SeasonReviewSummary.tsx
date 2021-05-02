@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { Card, Link } from "@shopify/polaris"
 
 import { SeasonReview, Show } from "../types"
-import { ShowPoster } from "../components/ShowPoster"
+import { Poster } from "./Poster"
 import { StarRating } from "../components/StarRating"
 
 interface Props {
@@ -30,7 +30,7 @@ export const SeasonReviewSummary: FunctionComponent<Props> = ({ review, show }) 
           },
         ]}
       >
-        <ShowPoster show={show} size="small" />
+        <Poster show={show} size="small" url={review.season.poster_url} />
         <div>{review.rating ? <StarRating rating={review.rating} /> : <>No rating</>}</div>
       </Card.Section>
     </Card>

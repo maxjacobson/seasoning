@@ -13,7 +13,7 @@ import {
 } from "@shopify/polaris"
 import { stringify } from "query-string"
 
-import { ShowPoster } from "./ShowPoster"
+import { Poster } from "./Poster"
 import { Human, YourShow, MyShowStatus } from "../types"
 import { displayMyShowStatus, myShowBadgeProgress, myShowBadgeStatus } from "../helpers/my_shows"
 import Logo from "../images/logo.svg"
@@ -41,7 +41,7 @@ const ListShows = ({ shows }: ListShowProps) => {
             <>
               <Link key={yourShow.show.id} url={`/shows/${yourShow.show.slug}`}>
                 <div>
-                  <ShowPoster show={yourShow.show} size="small" />
+                  <Poster show={yourShow.show} size="small" url={yourShow.show.poster_url} />
                 </div>
                 {yourShow.show.title}
               </Link>

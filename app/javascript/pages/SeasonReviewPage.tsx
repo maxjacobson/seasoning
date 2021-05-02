@@ -8,6 +8,7 @@ import { Markdown } from "../components/Markdown"
 import { Guest, Season, SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import { StarRating } from "../components/StarRating"
+import { Poster } from "../components/Poster"
 
 interface LoadingReviewData {
   loading: true
@@ -131,6 +132,9 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({
           </>
         }
       >
+        <Card.Section title="Poster">
+          <Poster show={show} url={season.poster_url} size="large" />
+        </Card.Section>
         <Card.Section title="Date">
           {DateTime.fromISO(review.created_at).toLocaleString()}
         </Card.Section>

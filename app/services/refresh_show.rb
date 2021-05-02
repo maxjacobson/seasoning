@@ -14,14 +14,16 @@ RefreshShow = lambda { |show|
 
       if (season = show.seasons.find_by(season_number: tmdb_season.season_number))
         season.update!(
-          episode_count: tmdb_season.episode_count
+          episode_count: tmdb_season.episode_count,
+          tmdb_poster_path: tmdb_season.poster_path
         )
       else
         show.seasons.create(
           tmdb_id: tmdb_season.id,
           name: tmdb_season.name,
           season_number: tmdb_season.season_number,
-          episode_count: tmdb_season.episode_count
+          episode_count: tmdb_season.episode_count,
+          tmdb_poster_path: tmdb_season.poster_path
         )
       end
     end

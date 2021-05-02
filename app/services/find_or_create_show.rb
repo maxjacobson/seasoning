@@ -17,7 +17,8 @@ FindOrCreateShow = lambda { |tmdb_show|
       tmdb_id: tmdb_season.id,
       name: tmdb_season.name,
       season_number: tmdb_season.season_number,
-      episode_count: tmdb_season.episode_count
+      episode_count: tmdb_season.episode_count,
+      tmdb_poster_path: tmdb_season.poster_path
     )
   end
 

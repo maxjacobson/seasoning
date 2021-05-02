@@ -13,7 +13,7 @@ class Show < ApplicationRecord
   }
 
   def poster
-    ShowPoster.new(self)
+    Poster.new(tmdb_poster_path)
   end
 
   def refresh!
