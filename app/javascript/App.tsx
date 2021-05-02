@@ -357,7 +357,13 @@ export const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <ReviewsFeedPage path="/reviews" guest={guest} setLoading={setLoading} />
                 <CreditsPage path="/credits" />
                 <SettingsPage path="/settings" setLoading={setLoading} guest={guest} />
-                <ProfilePage path="/:handle" guest={guest} setLoading={setLoading} />
+                <ProfilePage path="/:handle" guest={guest} setLoading={setLoading} tab={0} />
+                <ProfilePage
+                  path="/:handle/reviews"
+                  guest={guest}
+                  setLoading={setLoading}
+                  tab={1}
+                />
               </Router>
 
               {currentModal}

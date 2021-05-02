@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
-import { RouteComponentProps } from "@reach/router"
+import { RouteComponentProps, navigate } from "@reach/router"
 import { Card, Page, SkeletonPage, DataTable, Link, Tabs, SkeletonBodyText } from "@shopify/polaris"
 import { DateTime } from "luxon"
 
@@ -28,11 +28,16 @@ interface Props extends RouteComponentProps {
   handle?: string
   guest: Guest
   setLoading: (loadingState: boolean) => void
+  tab: 0 | 1
 }
 
-export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props) => {
+export const ProfilePage: FunctionComponent<Props> = ({
+  guest,
+  handle,
+  setLoading,
+  tab,
+}: Props) => {
   const [profileData, setProfile] = useState<ProfileData>({ loading: true })
-  const [selectedTab, setSelectedTab] = useState(0)
 
   setHeadTitle(handle)
 
@@ -131,10 +136,18 @@ export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoadin
                 panelID: "reviews",
               },
             ]}
-            selected={selectedTab}
-            onSelect={setSelectedTab}
+            selected={tab}
+            onSelect={(newTab) => {
+              let url = `/${handle}`
+
+              if (newTab === 1) {
+                url = `${url}/reviews`
+              }
+
+              navigate(url)
+            }}
           >
-            {renderTab(selectedTab, profile, guest, setLoading)}
+            {renderTab(tab, profile, guest, setLoading)}
           </Tabs>
         </Card>
       </Page>
