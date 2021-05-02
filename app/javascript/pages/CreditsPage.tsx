@@ -81,6 +81,29 @@ export const CreditsPage: FunctionComponent<RouteComponentProps> = () => {
             .
           </p>
         </Card.Section>
+        <Card.Section title="Development">
+          <p>
+            This site is developed by{" "}
+            <Link url="https://www.hardscrabble.net" external={true}>
+              Max Jacobson
+            </Link>
+            . The source code is on GitHub at{" "}
+            <Link url="https://github.com/maxjacobson/seasoning" external={true}>
+              maxjacobson/seasoning
+            </Link>
+            . Feel free to pitch in and/or roast me. There are no tests. Just going to get ahead of
+            that one. Otherwise it&rsquo;s perfect.
+          </p>
+        </Card.Section>
+        <Card.Section title="Design">
+          <p>
+            The design is 100% just Shopify&rsquo;s design system,{" "}
+            <Link url="https://polaris.shopify.com/components/get-started/" external={true}>
+              Polaris
+            </Link>{" "}
+            and I feel the need to acknowledge that.
+          </p>
+        </Card.Section>
       </Card>
     </Page>
   )
