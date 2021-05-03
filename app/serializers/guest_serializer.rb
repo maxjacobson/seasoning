@@ -3,8 +3,8 @@
 # Serializes the guest to JSON
 class GuestSerializer < Oj::Serializer
   attributes :authenticated, :token
-  serializer_attributes :human
 
+  attribute \
   def human
     HumanSerializer.one(guest.human) if guest.human
   end
