@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { Link } from "@shopify/polaris"
+import { Link } from "@reach/router"
 
 export const GoHome: FunctionComponent<Record<string, never>> = () => {
   return (
     <>
       <p>
-        <Link url="/">Go home</Link>
+        <Link to="/">Go home</Link>
       </p>
     </>
   )

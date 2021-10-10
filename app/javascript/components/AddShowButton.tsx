@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react"
-import { Button } from "@shopify/polaris"
 
 import { Show, YourRelationshipToShow, YourShow } from "../types"
 
@@ -17,10 +16,10 @@ export const AddShowButton: FunctionComponent<Props> = ({
   setYourShow,
 }: Props) => {
   if (yourRelationship) {
-    return <Button disabled={true}>Added</Button>
+    return <button disabled={true}>Added</button>
   } else {
     return (
-      <Button
+      <button
         onClick={async () => {
           const response = await fetch(`/api/your-shows.json`, {
             headers: {
@@ -44,7 +43,7 @@ export const AddShowButton: FunctionComponent<Props> = ({
         }}
       >
         Add
-      </Button>
+      </button>
     )
   }
 }

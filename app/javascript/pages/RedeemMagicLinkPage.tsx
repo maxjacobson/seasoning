@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
-import { RouteComponentProps, navigate } from "@reach/router"
-import { Page, Card, Link, Spinner } from "@shopify/polaris"
+import { RouteComponentProps, navigate, Link } from "@reach/router"
 
 import { Guest } from "../types"
 
@@ -82,19 +81,13 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({
   }, [])
 
   if (magicLinkInfo.loading) {
-    return (
-      <Page>
-        <Card sectioned>
-          <Spinner accessibilityLabel="Checking your magic link" size="large" />
-        </Card>
-      </Page>
-    )
+    return <div>Checking your magic link....</div>
   }
 
   if (magicLinkInfo.email) {
     return (
-      <Page>
-        <Card sectioned>
+      <div>
+        <div>
           <p>Thanks for clicking the link.</p>
           <p>Just one more question... What do you want to be called?</p>
 
@@ -145,20 +138,18 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({
             />
             <input type="submit" value="Go" disabled={creating} />
           </form>
-        </Card>
-      </Page>
+        </div>
+      </div>
     )
   } else {
     return (
-      <Page>
-        <Card sectioned>
-          <p>Hmmm, that magic does not seem to be valid.</p>
-          <p>Perhaps it has expired.</p>
-          <p>
-            <Link url="/">Try again?</Link>
-          </p>
-        </Card>
-      </Page>
+      <div>
+        <p>Hmmm, that magic does not seem to be valid.</p>
+        <p>Perhaps it has expired.</p>
+        <p>
+          <Link to="/">Try again?</Link>
+        </p>
+      </div>
     )
   }
 }

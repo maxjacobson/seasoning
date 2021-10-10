@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import { Checkbox } from "@shopify/polaris"
 
 import { updateMySeason } from "../helpers/my_shows"
 import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"
@@ -40,29 +39,33 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({
   }, [])
 
   return (
-    <Checkbox
-      label={"I've watched this season"}
-      labelHidden={labelHidden}
-      checked={hasWatched}
-      onChange={async (value) => {
-        setLoading(true)
-        setUpdating(true)
-        const response = await updateMySeason(season, guest.token, {
-          season: {
-            watched: value,
-          },
-        })
+    <>
+      <input
+        type="checkbox"
+        name={season.slug}
+        id={season.slug}
+        checked={!!hasWatched}
+        disabled={hasWatched === undefined || updating}
+        onChange={async () => {
+          setLoading(true)
+          setUpdating(true)
+          const response = await updateMySeason(season, guest.token, {
+            season: {
+              watched: !hasWatched,
+            },
+          })
 
-        setLoading(false)
-        setUpdating(false)
+          setLoading(false)
+          setUpdating(false)
 
-        if (response.ok) {
-          setHasWatched(value)
-        } else {
-          throw new Error("Could not toggle watched status")
-        }
-      }}
-      disabled={hasWatched === undefined || updating}
-    />
+          if (response.ok) {
+            setHasWatched(!hasWatched)
+          } else {
+            throw new Error("Could not toggle watched status")
+          }
+        }}
+      />
+      {!labelHidden && <label htmlFor={season.slug}>I&rsquo;ve watched this season</label>}
+    </>
   )
 }

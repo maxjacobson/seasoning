@@ -1,11 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { RouteComponentProps } from "@reach/router"
-import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Link } from "@shopify/polaris"
+import { RouteComponentProps, Link } from "@reach/router"
 import { DateTime } from "luxon"
 
 import { setHeadTitle } from "../hooks"
 import { Guest, YourSeason } from "../types"
-import { NewSeasonReviewModal } from "../components/NewSeasonReviewModal"
 import { SeenSeasonCheckbox } from "../components/SeenSeasonCheckbox"
 import { Poster } from "../components/Poster"
 
@@ -30,7 +28,6 @@ interface Props extends RouteComponentProps {
   seasonSlug?: string
   guest: Guest
   setLoading: (loadingState: boolean) => void
-  setCurrentModal: (_: React.ReactNode) => void
 }
 
 export const SeasonPage: FunctionComponent<Props> = ({
@@ -38,7 +35,6 @@ export const SeasonPage: FunctionComponent<Props> = ({
   showSlug,
   seasonSlug,
   setLoading,
-  setCurrentModal,
 }: Props) => {
   const [response, setResponse] = useState<SeasonData>({ loading: true })
 
@@ -80,89 +76,71 @@ export const SeasonPage: FunctionComponent<Props> = ({
   setHeadTitle(headTitle, [response])
 
   if (response.loading) {
-    return (
-      <SkeletonPage>
-        <Layout>
-          <Layout.Section>
-            <Card sectioned>
-              <SkeletonBodyText />
-            </Card>
-          </Layout.Section>
-        </Layout>
-      </SkeletonPage>
-    )
+    return <div>Loading...</div>
   }
 
   const { yourSeason } = response
 
   if (!yourSeason) {
     return (
-      <Page title="Not found" breadcrumbs={[{ url: `/shows/${showSlug}` }]}>
-        <Card sectioned>
-          <Card.Section>
-            <p>Season does not exist!</p>
-          </Card.Section>
-        </Card>
-      </Page>
+      <div>
+        <h1>Not found</h1>
+        <p>Season does not exist!</p>
+        <p>
+          <Link to={`/shows/${showSlug}`}>Back</Link>
+        </p>
+      </div>
     )
   }
 
   return (
-    <Page
-      title={yourSeason.show.title}
-      subtitle={yourSeason.season.name}
-      breadcrumbs={[{ url: `/shows/${showSlug}` }]}
-    >
-      <Card sectioned>
-        <Card.Section>
+    <div>
+      <h1>{yourSeason.show.title}</h1>
+      <h2>{yourSeason.season.name}</h2>
+      <p>
+        <Link to={`/shows/${showSlug}`}>Back</Link>
+      </p>
+
+      <div>
+        <div>
           <Poster url={yourSeason.season.poster_url} size="large" show={yourSeason.show} />
-        </Card.Section>
-        <Card.Section title="Season info">
+        </div>
+        <div>
+          <h2>Season info</h2>
           <span>Episode count: {yourSeason.season.episode_count}</span>
-        </Card.Section>
+        </div>
 
         {guest.authenticated && (
           <>
-            <Card.Section title="Seen it?">
+            <div>
+              <h2>Seen it?</h2>
               <SeenSeasonCheckbox
                 setLoading={setLoading}
                 guest={guest}
                 show={yourSeason.show}
                 season={yourSeason.season}
               />
-            </Card.Section>
+            </div>
           </>
         )}
-      </Card>
+      </div>
 
       {guest.authenticated && yourSeason.your_reviews && (
-        <Card
-          title="Your review"
-          actions={[
-            {
-              content: "Add review",
-              onAction: () => {
-                setCurrentModal(
-                  <NewSeasonReviewModal
-                    guest={guest}
-                    show={yourSeason.show}
-                    season={yourSeason.season}
-                    globalSetLoading={setLoading}
-                    onClose={() => setCurrentModal(null)}
-                  />
-                )
-              },
-            },
-          ]}
-        >
-          <Card.Section>
+        <div>
+          <h2>Your review</h2>
+          <div>
+            <Link to={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}>
+              Add review
+            </Link>
+          </div>
+          <div>
             {yourSeason.your_reviews.length ? (
               <ul>
                 {yourSeason.your_reviews.map((review, i) => {
                   return (
                     <li key={i}>
                       <Link
-                        url={`/${guest.human.handle}/shows/${yourSeason.show.slug}/${
+                        to={`/${guest.human.handle}/shows/${yourSeason.show.slug}/${
                           yourSeason.season.slug
                         }${review.viewing === 1 ? "" : `/${review.viewing}`}`}
                       >
@@ -175,9 +153,9 @@ export const SeasonPage: FunctionComponent<Props> = ({
             ) : (
               <p>None yet</p>
             )}
-          </Card.Section>
-        </Card>
+          </div>
+        </div>
       )}
-    </Page>
+    </div>
   )
 }

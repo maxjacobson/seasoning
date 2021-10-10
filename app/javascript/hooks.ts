@@ -45,7 +45,7 @@ export const loadData = <T>(
       } else if (response.status === 404) {
         setData({ loading: false, data: null })
       } else {
-        throw new Error("Could not fetch data")
+        throw new Error(`Could not fetch data from ${url}`)
       }
     })()
   }, deps)
