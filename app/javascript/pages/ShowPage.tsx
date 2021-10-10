@@ -1,6 +1,5 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Page, SkeletonPage, Card, Stack } from "@shopify/polaris"
 
 import { Guest, YourShow } from "../types"
 import { setHeadTitle } from "../hooks"
@@ -64,12 +63,18 @@ export const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading
   setHeadTitle(showData.loading ? undefined : showData.data.show.title, [showData])
 
   if (showData.loading) {
-    return <SkeletonPage title="Loading show..."></SkeletonPage>
+    return (
+      <div>
+        <h1>Loading show...</h1>
+      </div>
+    )
   } else {
     const { data } = showData
 
     return (
-      <Page title={data.show.title}>
+      <div>
+        <h1>{data.show.title}</h1>
+
         {guest.authenticated && data.your_relationship && (
           <NoteToSelf
             token={guest.token}
@@ -81,45 +86,46 @@ export const ShowPage: FunctionComponent<Props> = ({ showSlug, guest, setLoading
           />
         )}
 
-        <Card sectioned>
-          <Card.Header title={data.show.title}>
-            <Stack>
-              <>
-                {guest.authenticated && (
-                  <AddShowButton
-                    token={guest.token}
-                    show={data.show}
-                    yourRelationship={data.your_relationship}
-                    setYourShow={(yourShow) => {
-                      setShowData({ loading: false, data: yourShow })
-                    }}
-                  />
-                )}
-              </>
-              <>
-                {guest.authenticated && data.your_relationship && (
-                  <ChooseShowStatusButton
-                    token={guest.token}
-                    show={data.show}
-                    yourRelationship={data.your_relationship}
-                    globalSetLoading={setLoading}
-                    setYourShow={(yourShow) => {
-                      setShowData({ loading: false, data: yourShow })
-                    }}
-                  />
-                )}
-              </>
-            </Stack>
-          </Card.Header>
+        <div>
+          <h2>{data.show.title}</h2>
+          <div>
+            <>
+              {guest.authenticated && (
+                <AddShowButton
+                  token={guest.token}
+                  show={data.show}
+                  yourRelationship={data.your_relationship}
+                  setYourShow={(yourShow) => {
+                    setShowData({ loading: false, data: yourShow })
+                  }}
+                />
+              )}
+            </>
+            <>
+              {guest.authenticated && data.your_relationship && (
+                <ChooseShowStatusButton
+                  token={guest.token}
+                  show={data.show}
+                  yourRelationship={data.your_relationship}
+                  globalSetLoading={setLoading}
+                  setYourShow={(yourShow) => {
+                    setShowData({ loading: false, data: yourShow })
+                  }}
+                />
+              )}
+            </>
+          </div>
+        </div>
 
-          <Card.Section title="Poster">
-            <Poster show={data.show} size="large" url={data.show.poster_url} />
-          </Card.Section>
-          <Card.Section title="Seasons">
-            <SeasonsList show={data.show} guest={guest} setLoading={setLoading} />
-          </Card.Section>
-        </Card>
-      </Page>
+        <div>
+          <h2>Poster</h2>
+          <Poster show={data.show} size="large" url={data.show.poster_url} />
+        </div>
+        <div>
+          <h2>Seasons</h2>
+          <SeasonsList show={data.show} guest={guest} setLoading={setLoading} />
+        </div>
+      </div>
     )
   }
 }

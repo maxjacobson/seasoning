@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react"
-import { StarFilledMinor, StarOutlineMinor } from "@shopify/polaris-icons"
 
 interface Props {
   rating: number
@@ -24,8 +23,8 @@ export const StarRating: FunctionComponent<Props> = ({ rating }) => {
 
 const Star = ({ position, rating }: { position: number; rating: number }) => {
   if (rating >= position) {
-    return <StarFilledMinor width="20" fill="#FFD700" />
+    return <span style={{ color: "#FFD700" }}>★</span>
   } else {
-    return <StarOutlineMinor width="20" />
+    return <span>☆</span>
   }
 }

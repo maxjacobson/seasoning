@@ -1,5 +1,4 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Card, Link } from "@shopify/polaris"
 
 interface Props {
   globalSetLoading: (loadingState: boolean) => void
@@ -40,14 +39,15 @@ export const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
 
   if (createdMagicLink) {
     return (
-      <Card title="Nice!" sectioned>
+      <div>
+        <h2>Nice!</h2>
         <p>Check your email for a link to log in to Seasoning!</p>
-      </Card>
+      </div>
     )
   } else {
     return (
-      <Card sectioned>
-        <Card.Section>
+      <>
+        <div>
           <p>
             This is <strong>Seasoning</strong>. It&rsquo;s a simple website to help you survive the
             age of <em>Peak TV</em>.
@@ -59,13 +59,13 @@ export const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
           </p>
           <p>
             &mdash;{" "}
-            <Link url="https://twitter.com/maxjacobson" external={true}>
+            <a href="https://twitter.com/maxjacobson" target="_blank" rel="noreferrer">
               Max
-            </Link>
+            </a>
           </p>
-        </Card.Section>
+        </div>
 
-        <Card.Section>
+        <div>
           <p>
             To sign up or log in, just enter your email address and we&rsquo;ll send you a link to
             get started:
@@ -87,8 +87,8 @@ export const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
               <input type="submit" value="Go" disabled={loading} />
             </form>
           </div>
-        </Card.Section>
-      </Card>
+        </div>
+      </>
     )
   }
 }

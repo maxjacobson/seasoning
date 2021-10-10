@@ -14,4 +14,6 @@ RESERVED_WORDS = %w[
   review
   reviews
   undefined
+  import-show
+  search
 ].freeze

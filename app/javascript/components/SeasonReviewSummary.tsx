@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Card, Link } from "@shopify/polaris"
+import { Link } from "@reach/router"
 
 import { SeasonReview, Show } from "../types"
 import { Poster } from "./Poster"
@@ -16,23 +16,20 @@ export const SeasonReviewSummary: FunctionComponent<Props> = ({ review, show }) 
   }`
 
   return (
-    <Card title={<Link url={url}>Review by {review.author.handle}</Link>} sectioned>
-      <Card.Section
-        title={
-          <>
-            {show.title} &mdash; {review.season.name}
-          </>
-        }
-        actions={[
-          {
-            content: "Read",
-            url: url,
-          },
-        ]}
-      >
+    <div>
+      <h1>
+        <Link to={url}>Review by {review.author.handle}</Link>
+      </h1>
+      <div>
+        <h2>
+          {show.title} &mdash; {review.season.name}
+        </h2>
         <Poster show={show} size="small" url={review.season.poster_url} />
         <div>{review.rating ? <StarRating rating={review.rating} /> : <>No rating</>}</div>
-      </Card.Section>
-    </Card>
+        <div>
+          <Link to={url}>Read</Link>
+        </div>
+      </div>
+    </div>
   )
 }

@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
 import { RouteComponentProps } from "@reach/router"
-import { Page, Card, SkeletonPage, Layout, SkeletonBodyText } from "@shopify/polaris"
 
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 import { Guest, SeasonReview, Show } from "../types"
@@ -55,28 +54,16 @@ export const ReviewsFeedPage: FunctionComponent<Props> = ({ setLoading, guest }:
   setHeadTitle("Reviews", [feedData])
 
   if (feedData.loading) {
-    return (
-      <SkeletonPage>
-        <Layout>
-          <Layout.Section>
-            <Card sectioned>
-              <SkeletonBodyText />
-            </Card>
-          </Layout.Section>
-        </Layout>
-      </SkeletonPage>
-    )
+    return <div>Loading...</div>
   }
 
   return (
-    <Page title="Reviews">
-      <Card sectioned>
-        <Card.Section title="Recent">
-          {feedData.data.map(({ review, show }) => {
-            return <SeasonReviewSummary key={review.id} review={review} show={show} />
-          })}
-        </Card.Section>
-      </Card>
-    </Page>
+    <div>
+      <h1>Reviews</h1>
+      <h2>Recent</h2>
+      {feedData.data.map(({ review, show }) => {
+        return <SeasonReviewSummary key={review.id} review={review} show={show} />
+      })}
+    </div>
   )
 }

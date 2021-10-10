@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import { RouteComponentProps } from "@reach/router"
-import { Page, Card, SkeletonPage, Layout, SkeletonBodyText, Link } from "@shopify/polaris"
+import { RouteComponentProps, Link } from "@reach/router"
 import { stringify } from "query-string"
 import { DateTime } from "luxon"
 
@@ -93,60 +92,55 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({
   setHeadTitle(headTitle, [reviewData])
 
   if (reviewData.loading) {
-    return (
-      <SkeletonPage>
-        <Layout>
-          <Layout.Section>
-            <Card sectioned>
-              <SkeletonBodyText />
-            </Card>
-          </Layout.Section>
-        </Layout>
-      </SkeletonPage>
-    )
+    return <div>Loading...</div>
   }
 
   if (!reviewData.review) {
     return (
-      <Page title="Not found" breadcrumbs={[{ url: `/${handle}` }]}>
-        <Card sectioned>
-          <Card.Section>
-            <p>Review not found!</p>
-          </Card.Section>
-        </Card>
-      </Page>
+      <div>
+        <h1>Not found</h1>
+        <p>Review not found!</p>
+        <p>
+          <Link to={`/${handle}`}>Back</Link>
+        </p>
+      </div>
     )
   }
 
   const { review, show, season } = reviewData
 
   return (
-    <Page title={show.title} subtitle={season.name}>
-      <Card
-        sectioned
-        title={
-          <>
-            <Link url={`/${handle}`}>{handle}</Link>&rsquo;s review of{" "}
-            <Link url={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link> of{" "}
-            <Link url={`/shows/${show.slug}`}>{show.title}</Link>.
-          </>
-        }
-      >
-        <Card.Section title="Poster">
+    <div>
+      <h1>{show.title}</h1>
+      <h2>{season.name}</h2>
+
+      <div>
+        <h3>
+          <Link to={`/${handle}`}>{handle}</Link>&rsquo;s review of{" "}
+          <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link> of{" "}
+          <Link to={`/shows/${show.slug}`}>{show.title}</Link>.
+        </h3>
+
+        <div>
+          <h3>Poster</h3>
           <Poster show={show} url={season.poster_url} size="large" />
-        </Card.Section>
-        <Card.Section title="Date">
-          {DateTime.fromISO(review.created_at).toLocaleString()}
-        </Card.Section>
+        </div>
+
+        <div>
+          <h3>Date</h3>
+          <span>{DateTime.fromISO(review.created_at).toLocaleString()}</span>
+        </div>
+
         {review.rating != null && (
-          <Card.Section title="Rating">
+          <div>
+            <h3>Rating</h3>
             <StarRating rating={review.rating} />
-          </Card.Section>
+          </div>
         )}
-        <Card.Section>
+        <div>
           <Markdown markdown={review.body} />
-        </Card.Section>
-      </Card>
-    </Page>
+        </div>
+      </div>
+    </div>
   )
 }

@@ -1,22 +1,10 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import {
-  Link,
-  Page,
-  Card,
-  DataTable,
-  EmptyState,
-  Spinner,
-  Badge,
-  Filters,
-  ChoiceList,
-  AppliedFilterInterface,
-} from "@shopify/polaris"
+import { Link } from "@reach/router"
 import { stringify } from "query-string"
 
 import { Poster } from "./Poster"
-import { Human, YourShow, MyShowStatus } from "../types"
-import { displayMyShowStatus, myShowBadgeProgress, myShowBadgeStatus } from "../helpers/my_shows"
-import Logo from "../images/logo.svg"
+import { Human, YourShow } from "../types"
+import { displayMyShowStatus } from "../helpers/my_shows"
 
 interface YourShows {
   your_shows: YourShow[]
@@ -33,35 +21,41 @@ interface ListShowProps {
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
-      <DataTable
-        columnContentTypes={["text", "text"]}
-        headings={["Show", "Status"]}
-        rows={shows.map((yourShow) => {
-          return [
-            <>
-              <Link key={yourShow.show.id} url={`/shows/${yourShow.show.slug}`}>
-                <div>
-                  <Poster show={yourShow.show} size="small" url={yourShow.show.poster_url} />
-                </div>
-                {yourShow.show.title}
-              </Link>
-            </>,
-            yourShow.your_relationship?.status ? (
-              <Badge
-                progress={myShowBadgeProgress(yourShow.your_relationship.status)}
-                status={myShowBadgeStatus(yourShow.your_relationship.status)}
-              >
-                {displayMyShowStatus(yourShow.your_relationship.status)}
-              </Badge>
-            ) : (
-              <span>&mdash;</span>
-            ),
-          ]
-        })}
-      />
+      <table>
+        <thead>
+          <tr>
+            <th>Show</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {shows.map((yourShow) => {
+            return (
+              <tr key={yourShow.show.id}>
+                <td>
+                  <Link key={yourShow.show.id} to={`/shows/${yourShow.show.slug}`}>
+                    <div>
+                      <Poster show={yourShow.show} size="small" url={yourShow.show.poster_url} />
+                    </div>
+                    {yourShow.show.title}
+                  </Link>
+                </td>
+
+                <td>
+                  {yourShow.your_relationship?.status ? (
+                    <span>{displayMyShowStatus(yourShow.your_relationship.status)}</span>
+                  ) : (
+                    <span>&mdash;</span>
+                  )}
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     )
   } else {
-    return <EmptyState heading="No shows yet" image={Logo} />
+    return <div>No shows yet. Maybe add some via the search at the top of the page?</div>
   }
 }
 
@@ -70,17 +64,6 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
   const [shows, setShows] = useState<YourShow[]>([])
   const [queryValue, setQueryValue] = useState("")
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>(["currently_watching"])
-  const appliedFilters: AppliedFilterInterface[] = []
-
-  if (selectedStatuses.length) {
-    appliedFilters.push({
-      key: "status",
-      onRemove: () => setSelectedStatuses([]),
-      label: `Status: ${selectedStatuses
-        .map((status) => displayMyShowStatus(status as MyShowStatus))
-        .join(", ")}`,
-    })
-  }
 
   useEffect(() => {
     props.globalSetLoading(true)
@@ -118,54 +101,33 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
   }, [queryValue, selectedStatuses])
 
   return (
-    <Page>
-      <Card sectioned>
-        <Card.Section title="Your shows">
-          <>
-            <Filters
-              queryPlaceholder="Filter your shows"
-              queryValue={queryValue}
-              filters={[
-                {
-                  key: "status",
-                  label: "Status",
-                  filter: (
-                    <ChoiceList
-                      title="Status"
-                      titleHidden
-                      choices={[
-                        { label: "Might watch", value: "might_watch" },
-                        { label: "Currently watching", value: "currently_watching" },
-                        { label: "Stopped watching", value: "stopped_watching" },
-                        { label: "Waiting for more", value: "waiting_for_more" },
-                        { label: "Finished", value: "finished" },
-                      ]}
-                      selected={selectedStatuses}
-                      onChange={setSelectedStatuses}
-                      allowMultiple
-                    />
-                  ),
-                  shortcut: true,
-                },
-              ]}
-              appliedFilters={appliedFilters}
-              onQueryChange={setQueryValue}
-              onQueryClear={() => {
-                setQueryValue("")
-              }}
-              onClearAll={() => {
-                setQueryValue("")
-                setSelectedStatuses([])
-              }}
-            />
-            {loading ? (
-              <Spinner accessibilityLabel="Loading your shows" size="large" />
-            ) : (
-              <ListShows shows={shows} />
-            )}
-          </>
-        </Card.Section>
-      </Card>
-    </Page>
+    <div>
+      <>
+        <div>
+          <input
+            type="text"
+            placeholder="Filter your shows"
+            value={queryValue}
+            onChange={(event) => setQueryValue(event.target.value)}
+          />
+        </div>
+        <select
+          multiple={true}
+          value={selectedStatuses}
+          onChange={(event) => {
+            const statuses = Array.from(event.target.selectedOptions, (option) => option.value)
+
+            setSelectedStatuses(statuses)
+          }}
+        >
+          <option value="might_watch">Might watch</option>
+          <option value="currently_watching">Currently watching</option>
+          <option value="stopped_watching">Stopped watching</option>
+          <option value="waiting_for_more">Waiting for more</option>
+          <option value="finished">Finished</option>
+        </select>
+        {loading ? <div>Loading your shows...</div> : <ListShows shows={shows} />}
+      </>
+    </div>
   )
 }

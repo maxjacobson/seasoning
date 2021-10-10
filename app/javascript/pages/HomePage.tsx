@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react"
 import { navigate, RouteComponentProps } from "@reach/router"
-import { Page, Spinner } from "@shopify/polaris"
 import { GetStarted } from "../components/GetStarted"
 
 import { Guest } from "../types"
@@ -16,16 +15,14 @@ export const HomePage: FunctionComponent<HomeProps> = (props: HomeProps) => {
   if (guest.authenticated) {
     navigate("/shows")
 
-    return (
-      <Page>
-        <Spinner />
-      </Page>
-    )
+    return <div>Loading...</div>
   } else {
     return (
-      <Page title="Welcome" subtitle="This is seasoning, a website about TV shows">
+      <div>
+        <h1>Welcome</h1>
+        <h2>This is seasoning, a website about TV shows</h2>
         <GetStarted globalSetLoading={setLoading} />
-      </Page>
+      </div>
     )
   }
 }

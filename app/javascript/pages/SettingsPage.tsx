@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { Page, Card, Checkbox, Select, Spinner } from "@shopify/polaris"
 import { RouteComponentProps } from "@reach/router"
 
-import { AuthenticatedGuest, Guest, HumanSettings, Visibility } from "../types"
+import { AuthenticatedGuest, Guest, HumanSettings } from "../types"
 import { setHeadTitle } from "../hooks"
 
 interface LoadingSettingsData {
@@ -25,25 +24,24 @@ export const SettingsPage: FunctionComponent<Props> = (props) => {
   setHeadTitle("Settings")
 
   return (
-    <Page title="Settings">
+    <div>
+      <h1>Settings</h1>
       <SettingsBody {...props} />
-    </Page>
+    </div>
   )
 }
 
 const SettingsBody: FunctionComponent<Props> = (props: Props) => {
   return (
-    <Card sectioned>
+    <div>
       {props.guest.authenticated ? (
         <EditSettings guest={props.guest} setLoading={props.setLoading} />
       ) : (
-        <Card sectioned>
-          <Card.Section>
-            <p>You need to log in to edit your settings!</p>
-          </Card.Section>
-        </Card>
+        <div>
+          <p>You need to log in to edit your settings!</p>
+        </div>
       )}
-    </Card>
+    </div>
   )
 }
 
@@ -94,33 +92,51 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({
   }
 
   if (settingsData.loading) {
-    return <Spinner accessibilityLabel="Loading settings" />
+    return <div>Loading settings...</div>
   }
 
   return (
     <>
-      <Card.Section title="Profile page">
-        <Checkbox
-          label={"Share the shows I'm currently watching"}
+      <div>
+        <h2>Profile page</h2>
+        <input
+          type="checkbox"
+          name="share-currently-watching"
+          id="share-currently-watching"
           checked={settingsData.settings.share_currently_watching}
-          onChange={(value) => update({ share_currently_watching: value })}
           disabled={currentlyUpdating}
+          onChange={() =>
+            update({ share_currently_watching: !settingsData.settings.share_currently_watching })
+          }
         />
-      </Card.Section>
 
-      <Card.Section title="Reviews">
-        <Select
-          label="Who should new reviews be visible to?"
-          helpText="This is just a default for new reviews, you can pick another visibility on a review-by-review basis!"
-          options={[
-            { label: "Anybody", value: "anybody" },
-            { label: "Mutual follows", value: "mutuals" },
-            { label: "Only myself", value: "myself" },
-          ]}
-          onChange={(value: Visibility) => update({ default_review_visibility: value })}
+        <label htmlFor="share-currently-watching">
+          Share the shows I&rsquo;m currently watching
+        </label>
+      </div>
+
+      <div>
+        <h2>Reviews</h2>
+
+        <div>
+          <label>Who should new reviews be visible to?</label>
+        </div>
+        <select
           value={settingsData.settings.default_review_visibility}
-        />
-      </Card.Section>
+          onChange={(event) => {
+            update({ default_review_visibility: event.target.value })
+          }}
+          disabled={currentlyUpdating}
+        >
+          <option value="anybody">Anybody</option>
+          <option value="mutuals">Mutual follows</option>
+          <option value="myself">Only myself</option>
+        </select>
+        <p>
+          This is just a default for new reviews, you can pick another visibility on a
+          review-by-review basis!
+        </p>
+      </div>
     </>
   )
 }

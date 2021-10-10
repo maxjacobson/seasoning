@@ -1,6 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
-import { Popover, Button, ActionList, Icon } from "@shopify/polaris"
-import { TickSmallMinor } from "@shopify/polaris-icons"
+import React, { FunctionComponent } from "react"
 
 import { MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
 import { displayMyShowStatus, updateMyShow } from "../helpers/my_shows"
@@ -28,41 +26,29 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
   globalSetLoading,
   setYourShow,
 }: Props) => {
-  const [active, setActive] = useState(false)
-
   return (
-    <Popover
-      active={active}
-      activator={
-        <Button disclosure onClick={() => setActive(true)}>
-          {displayMyShowStatus(yourRelationship.status)}
-        </Button>
-      }
-      onClose={() => {
-        setActive(false)
+    <select
+      value={yourRelationship.status}
+      onChange={async (event) => {
+        globalSetLoading(true)
+        const response = await updateMyShow(show, token, { show: { status: event.target.value } })
+        globalSetLoading(false)
+
+        if (response.ok) {
+          const data: YourShow = await response.json()
+          setYourShow(data)
+        } else {
+          throw new Error("Could not update status of show")
+        }
       }}
     >
-      <ActionList
-        items={allStatuses.map((status) => {
-          return {
-            content: displayMyShowStatus(status),
-            onAction: async () => {
-              globalSetLoading(true)
-              const response = await updateMyShow(show, token, { show: { status: status } })
-              globalSetLoading(false)
-
-              if (response.ok) {
-                const data: YourShow = await response.json()
-                setYourShow(data)
-                setActive(false)
-              } else {
-                throw new Error("Could not update status of show")
-              }
-            },
-            suffix: status == yourRelationship.status && <Icon source={TickSmallMinor} />,
-          }
-        })}
-      />
-    </Popover>
+      {allStatuses.map((status) => {
+        return (
+          <option key={status} value={status}>
+            {displayMyShowStatus(status)}
+          </option>
+        )
+      })}
+    </select>
   )
 }
