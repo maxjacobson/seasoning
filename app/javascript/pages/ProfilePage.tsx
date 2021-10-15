@@ -108,7 +108,7 @@ export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoadin
               setProfile({ loading: false, profile: data.profile })
             }}
           >
-            Follow
+            {profile.your_relationship.you_follow_them ? "Following" : "Follow"}
           </button>
         )}
         <div>
