@@ -20,7 +20,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-react": "^7.26.1",
     "prettier": "^2.4.1",
-    "vite": "^2.6.5",
+    "vite": "^2.6.7",
     "vite-plugin-ruby": "^3.0.1"
   },
   "dependencies": {
