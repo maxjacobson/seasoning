@@ -12,6 +12,7 @@ FindOrCreateShow = lambda { |tmdb_show|
   TMDB::Client.new.tv_details(show.tmdb_tv_id).seasons.each do |tmdb_season|
     next if show.seasons.exists?(season_number: tmdb_season.season_number)
     next if tmdb_season.season_number.zero?
+    next if tmdb_season.episode_count.zero?
 
     show.seasons.create(
       tmdb_id: tmdb_season.id,

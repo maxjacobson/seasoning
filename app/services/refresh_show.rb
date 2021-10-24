@@ -11,6 +11,7 @@ RefreshShow = lambda { |show|
 
     details.seasons.each do |tmdb_season|
       next if tmdb_season.season_number.zero?
+      next if tmdb_season.episode_count.zero?
 
       if (season = show.seasons.find_by(season_number: tmdb_season.season_number))
         season.update!(

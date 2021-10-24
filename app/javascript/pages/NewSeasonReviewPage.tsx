@@ -1,8 +1,13 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
+import styled from "@emotion/styled"
 
 import { setHeadTitle, loadData } from "../hooks"
 import { Guest, HumanSettings, Visibility, Rating, YourSeason, SeasonReview } from "../types"
+
+const Container = styled.span`
+  font-size: 2rem;
+`
 
 interface Props extends RouteComponentProps {
   showSlug?: string
@@ -76,7 +81,12 @@ export const NewSeasonReviewPage: FunctionComponent<Props> = ({
         </span>
       </label>
       <div>
-        <textarea value={body} onChange={(event) => setBody(event.target.value)} />
+        <textarea
+          rows={15}
+          cols={20}
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
+        />
       </div>
       <div>
         <button
@@ -153,19 +163,21 @@ const RatingPicker = ({
   return (
     <>
       <div>
-        <RatingChoice position={1} {...choiceProps} />
-        <RatingChoice position={2} {...choiceProps} />
-        <RatingChoice position={3} {...choiceProps} />
-        <RatingChoice position={4} {...choiceProps} />
-        <RatingChoice position={5} {...choiceProps} />
-        <RatingChoice position={6} {...choiceProps} />
-        <RatingChoice position={7} {...choiceProps} />
-        <RatingChoice position={8} {...choiceProps} />
-        <RatingChoice position={9} {...choiceProps} />
-        <RatingChoice position={10} {...choiceProps} />
-        <span style={{ cursor: "pointer" }} onClick={() => setRating(undefined)}>
-          🚫
-        </span>
+        <Container>
+          <RatingChoice position={1} {...choiceProps} />
+          <RatingChoice position={2} {...choiceProps} />
+          <RatingChoice position={3} {...choiceProps} />
+          <RatingChoice position={4} {...choiceProps} />
+          <RatingChoice position={5} {...choiceProps} />
+          <RatingChoice position={6} {...choiceProps} />
+          <RatingChoice position={7} {...choiceProps} />
+          <RatingChoice position={8} {...choiceProps} />
+          <RatingChoice position={9} {...choiceProps} />
+          <RatingChoice position={10} {...choiceProps} />
+          <span style={{ cursor: "pointer" }} onClick={() => setRating(undefined)}>
+            🚫
+          </span>
+        </Container>
       </div>
       <div>{rating ? `Rating: ${rating}` : "No rating"}</div>
     </>

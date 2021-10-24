@@ -121,6 +121,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           }}
         >
           <option value="might_watch">Might watch</option>
+          <option value="next_up">Next up</option>
           <option value="currently_watching">Currently watching</option>
           <option value="stopped_watching">Stopped watching</option>
           <option value="waiting_for_more">Waiting for more</option>
