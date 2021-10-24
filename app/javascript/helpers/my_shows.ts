@@ -3,6 +3,7 @@ import { MyShowStatus, Show, Season } from "../types"
 export const displayMyShowStatus = (status: MyShowStatus): string => {
   return {
     might_watch: "Might watch",
+    next_up: "Next up",
     currently_watching: "Currently watching",
     stopped_watching: "Stopped watching",
     waiting_for_more: "Waiting for more",

@@ -38,6 +38,7 @@ export interface Show {
 
 export type MyShowStatus =
   | "might_watch"
+  | "next_up"
   | "currently_watching"
   | "stopped_watching"
   | "waiting_for_more"
