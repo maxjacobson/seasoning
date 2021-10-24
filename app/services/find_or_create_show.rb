@@ -13,6 +13,7 @@ FindOrCreateShow = lambda { |tmdb_show|
     next if show.seasons.exists?(season_number: tmdb_season.season_number)
     next if tmdb_season.season_number.zero?
     next if tmdb_season.episode_count.zero?
+    next if tmdb_season.air_date.nil? # skip not-yet-aired seasons
 
     show.seasons.create(
       tmdb_id: tmdb_season.id,
