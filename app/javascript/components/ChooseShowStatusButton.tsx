@@ -5,6 +5,7 @@ import { displayMyShowStatus, updateMyShow } from "../helpers/my_shows"
 
 const allStatuses: MyShowStatus[] = [
   "might_watch",
+  "next_up",
   "currently_watching",
   "stopped_watching",
   "waiting_for_more",
