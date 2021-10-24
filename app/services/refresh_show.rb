@@ -13,11 +13,20 @@ RefreshShow = lambda { |show|
       next if tmdb_season.season_number.zero?
       next if tmdb_season.episode_count.zero?
 
+      # next if tmdb_season.air_date.nil? # skip not-yet-aired seasons
+
       if (season = show.seasons.find_by(season_number: tmdb_season.season_number))
         season.update!(
           episode_count: tmdb_season.episode_count,
           tmdb_poster_path: tmdb_season.poster_path
         )
+
+        if tmdb_season.air_date.nil?
+          # auto-clean-up unaired seasons
+          # can remove this after a bit...
+          Rails.logger.info "Deleting unaired season #{season.show.slug} - #{season.slug}"
+          season.destroy!
+        end
       else
         show.seasons.create(
           tmdb_id: tmdb_season.id,
