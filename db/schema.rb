@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_011508) do
+ActiveRecord::Schema.define(version: 2021_10_24_190928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_05_02_011508) do
     "stopped_watching",
     "waiting_for_more",
     "finished",
+    "next_up",
   ], force: :cascade
 
   create_enum :visibility, [
