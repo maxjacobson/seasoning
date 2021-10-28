@@ -21,7 +21,7 @@
     "eslint-plugin-react": "^7.26.1",
     "prettier": "^2.4.1",
     "vite": "^2.6.10",
-    "vite-plugin-ruby": "^3.0.1"
+    "vite-plugin-ruby": "^3.0.2"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
