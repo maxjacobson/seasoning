@@ -11,9 +11,10 @@ Rails.application.routes.draw do
       resources :profiles, only: [:show] do
         resources :season_reviews, only: [:index], controller: "profile_season_reviews", path: "season-reviews"
       end
-      resources :shows, only: %i[create index show] do
+      resources :shows, only: %i[index show] do
         resources :seasons, only: %i[show]
       end
+      resources :imports, only: %i[index create]
       resource :settings, only: %i[show update]
       resources :follows, only: %i[create]
       resources :season_reviews, only: %i[create index], path: "/season-reviews"

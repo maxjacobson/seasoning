@@ -1,7 +1,16 @@
 import React, { FunctionComponent, useState } from "react"
 import { RouteComponentProps, navigate } from "@reach/router"
+import { stringify } from "query-string"
+import styled from "@emotion/styled"
 
-import { Guest, Show } from "../types"
+import { Guest, Show, Import } from "../types"
+
+const ImportContainer = styled.div`
+  margin: 10px 0;
+  border: 1px dotted blue;
+  padding: 5px;
+  border-radius: 5px;
+`
 
 interface Props extends RouteComponentProps {
   guest: Guest
@@ -10,8 +19,9 @@ interface Props extends RouteComponentProps {
 
 export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
   const [showQuery, setShowQuery] = useState("")
+  const [searching, setSearching] = useState(false)
   const [importing, setImporting] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [results, setResults] = useState<Import[] | null>(null)
 
   if (!guest.authenticated) {
     return <div>Not found...</div>
@@ -32,15 +42,9 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
           event.preventDefault()
 
           setLoading(true)
-          setImporting(true)
+          setSearching(true)
 
-          const response = await fetch("/api/shows.json", {
-            body: JSON.stringify({
-              shows: {
-                query: showQuery,
-              },
-            }),
-            method: "POST",
+          const response = await fetch(`/api/imports.json?${stringify({ query: showQuery })}`, {
             headers: {
               "X-SEASONING-TOKEN": guest.token,
               "Content-Type": "application/json",
@@ -48,14 +52,13 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
           })
 
           setLoading(false)
-          setImporting(false)
+          setSearching(false)
 
           if (response.ok) {
-            const data: { show: Show } = await response.json()
-            navigate(`/shows/${data.show.slug}`)
+            const data: { shows: Import[] } = await response.json()
+            setResults(data.shows)
           } else {
-            const data: { error: { message: string } } = await response.json()
-            setErrorMessage(data.error.message)
+            throw new Error("failed to search")
           }
         }}
       >
@@ -69,11 +72,55 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
             onChange={(event) => setShowQuery(event.target.value)}
           />
         </div>
-        <button type="submit" disabled={importing}>
-          Import
+        <button type="submit" disabled={searching}>
+          Search
         </button>
       </form>
-      {errorMessage && <div>{errorMessage}</div>}
+
+      {results && (
+        <div>
+          {results.map((result) => (
+            <ImportContainer key={result.id}>
+              {result.poster_url && <img src={result.poster_url} />}
+              <div>{result.name}</div>
+              <div>
+                <button
+                  disabled={importing}
+                  onClick={async () => {
+                    setLoading(true)
+                    setImporting(true)
+
+                    const response = await fetch(`/api/imports.json`, {
+                      headers: {
+                        "X-SEASONING-TOKEN": guest.token,
+                        "Content-Type": "application/json",
+                      },
+                      method: "POST",
+                      body: JSON.stringify({
+                        imports: {
+                          id: result.id,
+                        },
+                      }),
+                    })
+
+                    setLoading(false)
+                    setImporting(false)
+
+                    if (response.ok) {
+                      const data: { show: Show } = await response.json()
+                      navigate(`/shows/${data.show.slug}`)
+                    } else {
+                      throw new Error("could not import show")
+                    }
+                  }}
+                >
+                  Import
+                </button>
+              </div>
+            </ImportContainer>
+          ))}
+        </div>
+      )}
     </>
   )
 }
