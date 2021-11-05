@@ -93,3 +93,9 @@ export interface YourSeason {
   your_relationship?: YourRelationshipToSeason
   your_reviews?: SeasonReview[]
 }
+
+export interface Import {
+  id: number
+  name: string
+  poster_url: string | null
+}
