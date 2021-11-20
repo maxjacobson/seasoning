@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react"
-import { RouteComponentProps, Link } from "@reach/router"
+import { Link } from "react-router-dom"
 
 import { setHeadTitle } from "../hooks"
 import { Show } from "../types"
-interface Props extends RouteComponentProps {
+interface Props {
   searchResults: Show[] | null
 }
 

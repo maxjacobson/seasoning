@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { RouteComponentProps } from "@reach/router"
 
 import { AuthenticatedGuest, Guest, HumanSettings } from "../types"
 import { setHeadTitle } from "../hooks"
@@ -15,7 +14,7 @@ interface LoadedSettingsData {
 
 type SettingsData = LoadingSettingsData | LoadedSettingsData
 
-interface Props extends RouteComponentProps {
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }

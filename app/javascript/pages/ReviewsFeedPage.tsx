@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import { RouteComponentProps } from "@reach/router"
 
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 import { Guest, SeasonReview, Show } from "../types"
@@ -19,7 +18,7 @@ interface LoadedReviewsFeedData {
 
 type ReviewsFeedData = LoadingReviewsFeedData | LoadedReviewsFeedData
 
-interface Props extends RouteComponentProps {
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }

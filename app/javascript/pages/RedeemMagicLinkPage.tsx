@@ -1,10 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
-import { RouteComponentProps, navigate, Link } from "@reach/router"
+import { useNavigate, Link, useParams } from "react-router-dom"
 
 import { Guest } from "../types"
 
-interface Props extends RouteComponentProps {
-  token?: string
+interface Props {
   setGuest: (guest: Guest) => void
   setLoading: (loadingState: boolean) => void
 }
@@ -38,14 +37,12 @@ interface MagicLinkNotFound {
 
 type MagicLinkInfo = LoadingMagicLink | ValidMagicLink | MagicLinkNotFound
 
-export const RedeemMagicLinkPage: FunctionComponent<Props> = ({
-  token,
-  setGuest,
-  setLoading,
-}: Props) => {
+export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest, setLoading }: Props) => {
   const [magicLinkInfo, setMagicLinkInfo] = useState<MagicLinkInfo>({ loading: true })
   const [handle, setHandle] = useState<string>("")
   const [creating, setCreating] = useState(false)
+  const navigate = useNavigate()
+  const { token } = useParams()
 
   useEffect(() => {
     setLoading(true)

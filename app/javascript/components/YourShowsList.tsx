@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Link } from "@reach/router"
+import { Link } from "react-router-dom"
 import { stringify } from "query-string"
 
 import { Poster } from "./Poster"

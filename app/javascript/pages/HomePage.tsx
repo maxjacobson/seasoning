@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react"
-import { navigate, RouteComponentProps } from "@reach/router"
+import React, { FunctionComponent, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { GetStarted } from "../components/GetStarted"
 
 import { Guest } from "../types"
 
-interface HomeProps extends RouteComponentProps {
+interface HomeProps {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }
@@ -12,9 +12,14 @@ interface HomeProps extends RouteComponentProps {
 export const HomePage: FunctionComponent<HomeProps> = (props: HomeProps) => {
   const { guest, setLoading } = props
 
-  if (guest.authenticated) {
-    navigate("/shows")
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (guest.authenticated) {
+      navigate("/shows")
+    }
+  }, [])
 
+  if (guest.authenticated) {
     return <div>Loading...</div>
   } else {
     return (

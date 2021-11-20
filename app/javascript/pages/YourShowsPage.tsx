@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react"
-import { RouteComponentProps, Link } from "@reach/router"
+import { Link } from "react-router-dom"
 import { YourShowsList } from "../components/YourShowsList"
 
 import { Guest } from "../types"
 
-interface Props extends RouteComponentProps {
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }

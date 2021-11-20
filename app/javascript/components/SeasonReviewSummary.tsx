@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Link } from "@reach/router"
+import { Link } from "react-router-dom"
 
 import { SeasonReview, Show } from "../types"
 import { Poster } from "./Poster"

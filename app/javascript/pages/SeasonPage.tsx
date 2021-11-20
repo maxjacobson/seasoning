@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { RouteComponentProps, Link } from "@reach/router"
+import { Link, useParams } from "react-router-dom"
 import { DateTime } from "luxon"
 
 import { setHeadTitle } from "../hooks"
@@ -23,20 +23,14 @@ interface SeasonFound {
 
 type SeasonData = LoadingSeason | SeasonNotFound | SeasonFound
 
-interface Props extends RouteComponentProps {
-  showSlug?: string
-  seasonSlug?: string
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const SeasonPage: FunctionComponent<Props> = ({
-  guest,
-  showSlug,
-  seasonSlug,
-  setLoading,
-}: Props) => {
+export const SeasonPage: FunctionComponent<Props> = ({ guest, setLoading }: Props) => {
   const [response, setResponse] = useState<SeasonData>({ loading: true })
+  const { showSlug, seasonSlug } = useParams()
 
   useEffect(() => {
     if (!seasonSlug) {
