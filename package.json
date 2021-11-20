@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
-    "@types/luxon": "^1.27.1",
     "@types/react": "^17.0.35",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -27,7 +26,6 @@
     "@emotion/styled": "^11.6.0",
     "@vitejs/plugin-react-refresh": "^1.3.6",
     "lodash.debounce": "^4.0.8",
-    "luxon": "^2.1.1",
     "query-string": "^7.0.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
