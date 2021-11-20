@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
-import { Router, Link, navigate } from "@reach/router"
+import { Routes, Route, Link, useNavigate, BrowserRouter } from "react-router-dom"
 import { Global, css } from "@emotion/react"
 import styled from "@emotion/styled"
 
@@ -49,11 +49,12 @@ interface Props {
   initialGuest: Guest
 }
 
-export const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
+const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [guest, setGuest] = useState<Guest>(initialGuest)
   const [loading, setLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState<Show[] | null>(null)
+  const navigate = useNavigate()
 
   return (
     <>
@@ -106,42 +107,72 @@ export const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
         </SiteHeader>
 
         <SiteBody>
-          <Router>
-            <NotFoundPage default />
-            <HomePage path="/" guest={guest} setLoading={setLoading} />
-            <YourShowsPage path="/shows" guest={guest} setLoading={setLoading} />
-            <RedeemMagicLinkPage
+          <Routes>
+            <Route path="/" element={<HomePage guest={guest} setLoading={setLoading} />} />
+
+            <Route
+              path="/shows"
+              element={<YourShowsPage guest={guest} setLoading={setLoading} />}
+            />
+            <Route
               path="/knock-knock/:token"
-              setGuest={setGuest}
-              setLoading={setLoading}
+              element={<RedeemMagicLinkPage setGuest={setGuest} setLoading={setLoading} />}
             />
-            <ShowPage path="/shows/:showSlug" guest={guest} setLoading={setLoading} />
-            <SeasonPage path="/shows/:showSlug/:seasonSlug" guest={guest} setLoading={setLoading} />
-            <SeasonReviewPage
+            <Route
+              path="/shows/:showSlug"
+              element={<ShowPage guest={guest} setLoading={setLoading} />}
+            />
+            <Route
+              path="/shows/:showSlug/:seasonSlug"
+              element={<SeasonPage guest={guest} setLoading={setLoading} />}
+            />
+            <Route
               path="/:handle/shows/:showSlug/:seasonSlug"
-              guest={guest}
-              setLoading={setLoading}
+              element={<SeasonReviewPage guest={guest} setLoading={setLoading} />}
             />
-            <SeasonReviewPage
+            <Route
               path="/:handle/shows/:showSlug/:seasonSlug/:viewing"
-              guest={guest}
-              setLoading={setLoading}
+              element={<SeasonReviewPage guest={guest} setLoading={setLoading} />}
             />
-            <ReviewsFeedPage path="/reviews" guest={guest} setLoading={setLoading} />
-            <CreditsPage path="/credits" />
-            <SettingsPage path="/settings" setLoading={setLoading} guest={guest} />
-            <ImportShowPage path="/import-show" guest={guest} setLoading={setLoading} />
-            <ProfilePage path="/:handle" guest={guest} setLoading={setLoading} />
-            <ProfileReviewsPage path="/:handle/reviews" guest={guest} setLoading={setLoading} />
-            <NewSeasonReviewPage
+
+            <Route
+              path="/reviews"
+              element={<ReviewsFeedPage guest={guest} setLoading={setLoading} />}
+            />
+            <Route path="/credits" element={<CreditsPage />} />
+            <Route
+              path="/settings"
+              element={<SettingsPage setLoading={setLoading} guest={guest} />}
+            />
+            <Route
+              path="/import-show"
+              element={<ImportShowPage guest={guest} setLoading={setLoading} />}
+            />
+            <Route
+              path="/:handle"
+              element={<ProfilePage guest={guest} setLoading={setLoading} />}
+            />
+            <Route
+              path="/:handle/reviews"
+              element={<ProfileReviewsPage guest={guest} setLoading={setLoading} />}
+            />
+            <Route
               path="/shows/:showSlug/:seasonSlug/reviews/new"
-              guest={guest}
-              setLoading={setLoading}
+              element={<NewSeasonReviewPage guest={guest} setLoading={setLoading} />}
             />
-            <SearchResultsPage path="/search" searchResults={searchResults} />
-          </Router>
+            <Route path="/search" element={<SearchResultsPage searchResults={searchResults} />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </SiteBody>
       </>
     </>
+  )
+}
+
+export const AppWithRouter: FunctionComponent<Props> = (props) => {
+  return (
+    <BrowserRouter>
+      <App {...props} />
+    </BrowserRouter>
   )
 }

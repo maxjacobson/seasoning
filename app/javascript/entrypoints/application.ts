@@ -1,6 +1,6 @@
 import React from "react"
 import { render } from "react-dom"
-import { App } from "../App"
+import { AppWithRouter } from "../App"
 import { Guest } from "../types"
 ;(async () => {
   const guestToken = localStorage.getItem("seasoning-guest-token")
@@ -17,7 +17,7 @@ import { Guest } from "../types"
 
   render(
     React.createElement(
-      App,
+      AppWithRouter,
       {
         initialGuest: guest as Guest,
       },

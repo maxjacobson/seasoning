@@ -1,21 +1,17 @@
 import React, { FunctionComponent } from "react"
-import { RouteComponentProps } from "@reach/router"
+import { useParams } from "react-router-dom"
 
 import { Guest, SeasonReview, Show } from "../types"
 import { setHeadTitle, loadData } from "../hooks"
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 
-interface Props extends RouteComponentProps {
-  handle?: string
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const ProfileReviewsPage: FunctionComponent<Props> = ({
-  guest,
-  handle,
-  setLoading,
-}: Props) => {
+export const ProfileReviewsPage: FunctionComponent<Props> = ({ guest, setLoading }: Props) => {
+  const { handle } = useParams()
   setHeadTitle(`${handle}'s reviews`)
 
   const reviewsData = loadData<{ reviews: { review: SeasonReview; show: Show }[] }>(

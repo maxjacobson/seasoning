@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { RouteComponentProps, navigate } from "@reach/router"
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "@emotion/styled"
 
 import { setHeadTitle, loadData } from "../hooks"
@@ -9,25 +9,21 @@ const Container = styled.span`
   font-size: 2rem;
 `
 
-interface Props extends RouteComponentProps {
-  showSlug?: string
-  seasonSlug?: string
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const NewSeasonReviewPage: FunctionComponent<Props> = ({
-  showSlug,
-  seasonSlug,
-  guest,
-  setLoading,
-}) => {
+export const NewSeasonReviewPage: FunctionComponent<Props> = ({ guest, setLoading }) => {
   const [body, setBody] = useState("")
   const [visibility, setVisibility] = useState<Visibility | undefined>(undefined)
   const [rating, setRating] = useState<Rating | undefined>(undefined)
   const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null)
+  const { showSlug, seasonSlug } = useParams()
 
   const settings = loadData<HumanSettings>(guest, "/api/settings.json", [], setLoading)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!settings.loading) {

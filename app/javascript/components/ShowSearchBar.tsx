@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect } from "react"
 import debounce from "lodash.debounce"
 
 import { AuthenticatedGuest, Show } from "../types"
-import { navigate } from "@reach/router"
+import { useNavigate } from "react-router-dom"
 
 const searchForShows = (
   title: string,
@@ -52,6 +52,7 @@ export const ShowSearchBar: FunctionComponent<Props> = ({
   query,
   setQuery,
 }) => {
+  const navigate = useNavigate()
   useEffect(() => {
     debouncedSearch(query, guest.token, setLoading, callback)
   }, [query])

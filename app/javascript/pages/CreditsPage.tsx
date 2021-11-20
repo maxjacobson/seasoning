@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react"
-import { RouteComponentProps } from "@reach/router"
 
 import { setHeadTitle } from "../hooks"
 import Logo from "../images/logo.svg"
@@ -22,7 +21,7 @@ const IconLink: FunctionComponent<IconLinkProps> = ({ name, url, icon }: IconLin
   )
 }
 
-export const CreditsPage: FunctionComponent<RouteComponentProps> = () => {
+export const CreditsPage: FunctionComponent = () => {
   setHeadTitle("Credits")
 
   return (

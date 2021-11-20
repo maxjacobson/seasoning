@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import { RouteComponentProps, Link } from "@reach/router"
+import { Link, useParams } from "react-router-dom"
 import { stringify } from "query-string"
 import { DateTime } from "luxon"
 
@@ -28,24 +28,14 @@ interface ReviewDataNotFound {
 }
 type SeasonReviewData = LoadingReviewData | LoadedReviewData | ReviewDataNotFound
 
-interface Props extends RouteComponentProps {
-  handle?: string
-  showSlug?: string
-  seasonSlug?: string
-  viewing?: string
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const SeasonReviewPage: FunctionComponent<Props> = ({
-  handle,
-  showSlug,
-  seasonSlug,
-  viewing,
-  setLoading,
-  guest,
-}: Props) => {
+export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
   const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true })
+  const { handle, showSlug, seasonSlug, viewing } = useParams()
 
   useEffect(() => {
     ;(async () => {

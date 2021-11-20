@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
-import { RouteComponentProps, navigate } from "@reach/router"
+import { useNavigate } from "react-router-dom"
 import { stringify } from "query-string"
 import styled from "@emotion/styled"
 
@@ -12,7 +12,7 @@ const ImportContainer = styled.div`
   border-radius: 5px;
 `
 
-interface Props extends RouteComponentProps {
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }
@@ -22,6 +22,7 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
   const [searching, setSearching] = useState(false)
   const [importing, setImporting] = useState(false)
   const [results, setResults] = useState<Import[] | null>(null)
+  const navigate = useNavigate()
 
   if (!guest.authenticated) {
     return <div>Not found...</div>

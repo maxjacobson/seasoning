@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
-import { RouteComponentProps, Link } from "@reach/router"
+import { Link, useParams } from "react-router-dom"
 import { DateTime } from "luxon"
 
 import { Profile, Guest } from "../types"
@@ -22,14 +22,14 @@ interface LoadedProfileData {
 
 type ProfileData = StillLoading | LoadedProfileData | ProfileNotFound
 
-interface Props extends RouteComponentProps {
-  handle?: string
+interface Props {
   guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const ProfilePage: FunctionComponent<Props> = ({ guest, handle, setLoading }: Props) => {
+export const ProfilePage: FunctionComponent<Props> = ({ guest, setLoading }: Props) => {
   const [profileData, setProfile] = useState<ProfileData>({ loading: true })
+  const { handle } = useParams()
 
   setHeadTitle(handle)
 
