@@ -83,7 +83,7 @@ export const NewSeasonReviewPage: FunctionComponent<Props> = ({
       <div>
         <textarea
           rows={15}
-          cols={20}
+          cols={60}
           value={body}
           onChange={(event) => setBody(event.target.value)}
         />
