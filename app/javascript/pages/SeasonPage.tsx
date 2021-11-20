@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { DateTime } from "luxon"
 
 import { setHeadTitle } from "../hooks"
 import { Guest, YourSeason } from "../types"
@@ -138,7 +137,7 @@ export const SeasonPage: FunctionComponent<Props> = ({ guest, setLoading }: Prop
                           yourSeason.season.slug
                         }${review.viewing === 1 ? "" : `/${review.viewing}`}`}
                       >
-                        {DateTime.fromISO(review.created_at).toLocaleString()}
+                        {new Date(review.created_at).toLocaleDateString()}
                       </Link>
                     </li>
                   )

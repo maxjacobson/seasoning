@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import { stringify } from "query-string"
-import { DateTime } from "luxon"
 
 import { Markdown } from "../components/Markdown"
 import { Guest, Season, SeasonReview, Show } from "../types"
@@ -118,7 +117,7 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading, guest }
 
         <div>
           <h3>Date</h3>
-          <span>{DateTime.fromISO(review.created_at).toLocaleString()}</span>
+          <span>{new Date(review.created_at).toLocaleDateString()}</span>
         </div>
 
         {review.rating != null && (

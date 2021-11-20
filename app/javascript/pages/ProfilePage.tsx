@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { Link, useParams } from "react-router-dom"
-import { DateTime } from "luxon"
 
 import { Profile, Guest } from "../types"
 import { setHeadTitle } from "../hooks"
@@ -118,7 +117,7 @@ export const ProfilePage: FunctionComponent<Props> = ({ guest, setLoading }: Pro
             <div>
               <h2>About</h2>
               <p>
-                <em>Seasoner since {DateTime.fromISO(profile.created_at).toLocaleString()}</em>
+                <em>Seasoner since {new Date(profile.created_at).toLocaleDateString()}</em>
               </p>
             </div>
 
