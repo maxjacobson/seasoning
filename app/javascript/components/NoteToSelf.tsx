@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 
+import { TextArea } from "./TextArea"
 import { Markdown } from "../components/Markdown"
 import { YourShow } from "../types"
 import { updateMyShow } from "../helpers/my_shows"
@@ -49,7 +50,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
             </p>
           </label>
 
-          <textarea
+          <TextArea
             disabled={loading}
             value={newNoteToSelf}
             onChange={(event) => setNewNoteToSelf(event.target.value)}
