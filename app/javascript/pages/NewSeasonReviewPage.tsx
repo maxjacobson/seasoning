@@ -4,6 +4,7 @@ import styled from "@emotion/styled"
 
 import { setHeadTitle, loadData } from "../hooks"
 import { Guest, HumanSettings, Visibility, Rating, YourSeason, SeasonReview } from "../types"
+import { TextArea } from "../components/TextArea"
 
 const Container = styled.span`
   font-size: 2rem;
@@ -77,12 +78,7 @@ export const NewSeasonReviewPage: FunctionComponent<Props> = ({ guest, setLoadin
         </span>
       </label>
       <div>
-        <textarea
-          rows={15}
-          cols={60}
-          value={body}
-          onChange={(event) => setBody(event.target.value)}
-        />
+        <TextArea value={body} onChange={(event) => setBody(event.target.value)} />
       </div>
       <div>
         <button
