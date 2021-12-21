@@ -48,8 +48,8 @@ GEM
     activerecord (7.0.0)
       activemodel (= 7.0.0)
       activesupport (= 7.0.0)
-    activerecord-postgres_enum (1.7.0)
-      activerecord (>= 5)
+    activerecord-postgres_enum (2.0.0)
+      activerecord (>= 5.2)
       pg
     activestorage (7.0.0)
       actionpack (= 7.0.0)
