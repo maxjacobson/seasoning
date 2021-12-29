@@ -26,7 +26,7 @@ class AddSeasonReviews < ActiveRecord::Migration[6.1]
                 null: false,
                 comment: "Is this the person's first, second, third etc viewing of the season?"
 
-      t.enum :visibility, enum_name: :visibility, default: "anybody", null: false, comment: "Who can see this review"
+      t.enum :visibility, enum_type: :visibility, default: "anybody", null: false, comment: "Who can see this review"
 
       t.timestamps
     end
