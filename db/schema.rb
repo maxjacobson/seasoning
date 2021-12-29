@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2021_10_24_190928) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "share_currently_watching", default: false, null: false, comment: "Whether or not to publicly display your currently watching list on the profile page"
-    t.enum "default_review_visibility", default: "anybody", null: false, comment: "Lets people specify who they generally want to share their reviews with, to save them some clicking", enum_name: "visibility"
+    t.enum "default_review_visibility", default: "anybody", null: false, comment: "Lets people specify who they generally want to share their reviews with, to save them some clicking", enum_type: "visibility"
     t.index ["email"], name: "humans_email_unique", unique: true
     t.index ["handle"], name: "humans_handle_unique", unique: true
   end
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2021_10_24_190928) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "note_to_self", comment: "An optional blob of Markdown-formatted text that the human can write to remind themselves why they've added the show, or however they want to use it"
-    t.enum "status", default: "might_watch", null: false, enum_name: "my_show_status"
+    t.enum "status", default: "might_watch", null: false, enum_type: "my_show_status"
     t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true
     t.index ["human_id"], name: "index_my_shows_on_human_id"
     t.index ["show_id"], name: "index_my_shows_on_show_id"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_10_24_190928) do
     t.text "body", null: false, comment: "The body of the review"
     t.integer "rating", comment: "The rating between 0 and 10 (optional)"
     t.integer "viewing", null: false, comment: "Is this the person's first, second, third etc viewing of the season?"
-    t.enum "visibility", default: "anybody", null: false, comment: "Who can see this review", enum_name: "visibility"
+    t.enum "visibility", default: "anybody", null: false, comment: "Who can see this review", enum_type: "visibility"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id", "season_id", "viewing"], name: "index_season_reviews_on_author_id_and_season_id_and_viewing", unique: true

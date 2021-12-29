@@ -5,7 +5,7 @@ class AddDefaultReviewVisibility < ActiveRecord::Migration[6.1]
   def change
     change_table :humans do |t|
       t.enum :default_review_visibility,
-             enum_name: :visibility,
+             enum_type: :visibility,
              default: "anybody",
              null: false,
              comment: <<~COMMENT.squish
