@@ -61,7 +61,7 @@ export const ShowSearchBar: FunctionComponent<Props> = ({
     <form
       onSubmit={(event) => {
         event.preventDefault()
-        navigate("/search")
+        navigate(`/search?q=${encodeURIComponent(query)}`)
       }}
     >
       <input
