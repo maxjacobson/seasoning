@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
-import { Routes, Route, Link, useNavigate, BrowserRouter } from "react-router-dom"
+import { Routes, Route, Link, useNavigate, BrowserRouter, useSearchParams } from "react-router-dom"
 import { Global, css } from "@emotion/react"
 import styled from "@emotion/styled"
 
@@ -52,9 +52,10 @@ interface Props {
 const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
   const [guest, setGuest] = useState<Guest>(initialGuest)
   const [loading, setLoading] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState<Show[] | null>(null)
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchQuery = searchParams.get("q") || ""
 
   return (
     <>
@@ -73,7 +74,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 setLoading={setLoading}
                 callback={setSearchResults}
                 query={searchQuery}
-                setQuery={setSearchQuery}
+                setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
               />
             )}
           </div>
