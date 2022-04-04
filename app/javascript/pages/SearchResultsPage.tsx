@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 
 import { setHeadTitle } from "../hooks"
 import { Show } from "../types"
@@ -9,6 +9,15 @@ interface Props {
 
 export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) => {
   setHeadTitle("Search results")
+
+  const [searchParams] = useSearchParams()
+  const searchQuery = searchParams.get("q")
+
+  const importParams = new URLSearchParams()
+
+  if (searchQuery) {
+    importParams.set("q", searchQuery)
+  }
 
   return (
     <>
@@ -26,7 +35,11 @@ export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) =
       )}
       <p>
         Not seeing what you&rsquo;re looking for? You might be the first person to want to add it.
-        Feel free to <Link to="/import-show">import it here</Link>.
+        Feel free to{" "}
+        <Link to={searchQuery ? `/import-show?${importParams}` : "/import-show"}>
+          import it here
+        </Link>
+        .
       </p>
     </>
   )

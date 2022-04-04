@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { stringify } from "query-string"
 import styled from "@emotion/styled"
 
@@ -18,7 +18,9 @@ interface Props {
 }
 
 export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
-  const [showQuery, setShowQuery] = useState("")
+  const [searchParams] = useSearchParams()
+  const searchQuery = searchParams.get("q")
+  const [showQuery, setShowQuery] = useState(searchQuery || "")
   const [searching, setSearching] = useState(false)
   const [importing, setImporting] = useState(false)
   const [results, setResults] = useState<Import[] | null>(null)
