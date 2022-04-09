@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { stringify } from "query-string"
 import styled from "@emotion/styled"
@@ -26,6 +26,36 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
   const [results, setResults] = useState<Import[] | null>(null)
   const navigate = useNavigate()
 
+  const search = async () => {
+    if (!guest.authenticated) {
+      return
+    }
+
+    setLoading(true)
+    setSearching(true)
+
+    const response = await fetch(`/api/imports.json?${stringify({ query: showQuery })}`, {
+      headers: {
+        "X-SEASONING-TOKEN": guest.token,
+        "Content-Type": "application/json",
+      },
+    })
+
+    setLoading(false)
+    setSearching(false)
+
+    if (response.ok) {
+      const data: { shows: Import[] } = await response.json()
+      setResults(data.shows)
+    } else {
+      throw new Error("failed to search")
+    }
+  }
+
+  useEffect(() => {
+    search()
+  }, [searchQuery])
+
   if (!guest.authenticated) {
     return <div>Not found...</div>
   }
@@ -44,25 +74,7 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
         onSubmit={async (event) => {
           event.preventDefault()
 
-          setLoading(true)
-          setSearching(true)
-
-          const response = await fetch(`/api/imports.json?${stringify({ query: showQuery })}`, {
-            headers: {
-              "X-SEASONING-TOKEN": guest.token,
-              "Content-Type": "application/json",
-            },
-          })
-
-          setLoading(false)
-          setSearching(false)
-
-          if (response.ok) {
-            const data: { shows: Import[] } = await response.json()
-            setResults(data.shows)
-          } else {
-            throw new Error("failed to search")
-          }
+          await search()
         }}
       >
         <div>
