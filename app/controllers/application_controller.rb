@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
       if token.blank?
         nil
       else
-        BrowserSession.active.includes(:human).where(token: token).first&.human
+        BrowserSession.active.includes(:human).where(token:).first&.human
       end
   end
 end

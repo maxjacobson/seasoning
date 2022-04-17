@@ -8,7 +8,7 @@ module TMDB
   #
   class Client
     def search_tv(query)
-      data = get("/search/tv", query: query)
+      data = get("/search/tv", query:)
       ::TMDB::TVSearchResults.new(data)
     end
 

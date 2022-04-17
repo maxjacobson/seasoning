@@ -5,7 +5,7 @@ class Guest
   def self.from(token)
     session = BrowserSession
               .includes(:human)
-              .where(token: token)
+              .where(token:)
               .active
               .first
 

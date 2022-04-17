@@ -20,7 +20,7 @@ module API
 
       show = FindOrCreateShow.call(tmdb_show)
 
-      MyShow.create_or_find_by(human: current_human, show: show)
+      MyShow.create_or_find_by(human: current_human, show:)
 
       render json: {
         show: ShowSerializer.one(show)

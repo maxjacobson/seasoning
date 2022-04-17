@@ -6,6 +6,6 @@ class MySeason < ApplicationRecord
   belongs_to :season
 
   def reviews
-    SeasonReview.where(season: season, author: human)
+    SeasonReview.where(season:, author: human)
   end
 end
