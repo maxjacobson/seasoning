@@ -11,13 +11,13 @@ module API
 
       existing_review_count = SeasonReview.where(
         author: current_human,
-        season: season
+        season:
       ).count
 
       review = SeasonReview.new(
         season_review_params.merge(
           author: current_human,
-          season: season,
+          season:,
           viewing: existing_review_count + 1
         )
       )

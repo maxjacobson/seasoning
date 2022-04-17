@@ -9,7 +9,7 @@ module API
 
       if human.present?
         render json: {
-          profile: ProfileSerializer.one(Profile.new(human: human, viewer: current_human))
+          profile: ProfileSerializer.one(Profile.new(human:, viewer: current_human))
         }
       else
         render json: {}, status: :not_found

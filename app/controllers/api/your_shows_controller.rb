@@ -22,7 +22,7 @@ module API
 
       show = Show.find(params.require(:show).require(:id))
 
-      my_show = MyShow.create_or_find_by(human: current_human, show: show)
+      my_show = MyShow.create_or_find_by(human: current_human, show:)
 
       render json: {
         your_show: MyShowSerializer.one(my_show)
@@ -34,7 +34,7 @@ module API
 
       show = Show.find_by(slug: params.require(:id))
 
-      my_show = MyShow.find_by!(human: current_human, show: show)
+      my_show = MyShow.find_by!(human: current_human, show:)
 
       if my_show.update(params.require(:show).permit(:note_to_self, :status))
         render json: MyShowSerializer.one(my_show)

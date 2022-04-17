@@ -9,7 +9,7 @@ module API
       show = Show.find_by!(slug: params.require(:show_id))
       season = show.seasons.find_by!(slug: params.require(:id))
 
-      my_season = MySeason.find_or_initialize_by(human: current_human, season: season)
+      my_season = MySeason.find_or_initialize_by(human: current_human, season:)
 
       render json: MySeasonSerializer.one(my_season)
     end

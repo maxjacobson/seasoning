@@ -12,7 +12,7 @@ module API
       # I won't actually create a human until someone follows the magic link, which proves that it
       # was a real email address.
       if EmailValidator.valid?(email)
-        magic_link = MagicLink.create!(email: email)
+        magic_link = MagicLink.create!(email:)
         magic_link.deliver
         render json: MagicLinkSerializer.one(magic_link)
       else

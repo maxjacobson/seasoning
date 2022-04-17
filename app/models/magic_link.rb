@@ -10,7 +10,7 @@ class MagicLink < ApplicationRecord
   scope :inactive, -> { where("expires_at < now()") }
 
   def deliver
-    human = Human.find_by(email: email)
+    human = Human.find_by(email:)
 
     if human.present?
       MagicLinkMailer.log_in_email(email, token).deliver_now
