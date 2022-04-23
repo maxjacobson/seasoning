@@ -9,7 +9,7 @@ module API
       my_shows = current_human
                  .my_shows
                  .joins(:show)
-                 .yield_self { |relation| search(relation) }
+                 .then { |relation| search(relation) }
                  .order(status: :asc)
 
       render json: {
