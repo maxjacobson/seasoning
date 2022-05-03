@@ -12,7 +12,7 @@
     "@types/lodash.debounce": "^4.0.7",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.3",
-    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "eslint": "^8.14.0",
     "eslint-plugin-import": "^2.26.0",
