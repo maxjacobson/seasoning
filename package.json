@@ -16,7 +16,7 @@
     "@typescript-eslint/parser": "^5.23.0",
     "eslint": "^8.15.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react": "^7.30.0",
     "prettier": "^2.6.2",
     "vite": "^2.9.9",
     "vite-plugin-ruby": "^3.0.12"
