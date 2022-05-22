@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FindOrCreateShow = lambda { |tmdb_show|
-  show = Show.find_by(title: tmdb_show.name)
+  show = Show.find_by(tmdb_tv_id: tmdb_show.id)
   show ||= Show.create!(
     title: tmdb_show.name,
     tmdb_tv_id: tmdb_show.id,

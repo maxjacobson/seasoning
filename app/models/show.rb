@@ -5,7 +5,21 @@
 class Show < ApplicationRecord
   REFRESH_INTERVAL = 2.weeks
 
-  before_create -> { self.slug = title&.gsub(/[^a-z0-9\s]/i, "")&.parameterize }
+  before_create lambda {
+    slug = nil
+    n = nil
+    loop do
+      slug = title&.gsub(/[^a-z0-9\s]/i, "")&.parameterize
+      slug = "#{slug}-#{n}" if n && slug
+
+      break unless Show.exists?(slug:)
+
+      n ||= 0
+      n += 1
+    end
+
+    self.slug = slug
+  }
   has_many :seasons
 
   scope :needs_refreshing, lambda {
