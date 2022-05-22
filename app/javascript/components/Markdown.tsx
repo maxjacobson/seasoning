@@ -9,7 +9,7 @@ interface Props {
 export const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
   return (
     <>
-      <ReactMarkdown plugins={[gfm]}>{markdown}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[gfm]}>{markdown}</ReactMarkdown>
     </>
   )
 }
