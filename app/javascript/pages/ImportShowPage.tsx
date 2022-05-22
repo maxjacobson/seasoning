@@ -97,7 +97,9 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
           {results.map((result) => (
             <ImportContainer key={result.id}>
               {result.poster_url && <img src={result.poster_url} />}
-              <div>{result.name}</div>
+              <div>
+                {result.name} {result.year && `(${result.year})`}
+              </div>
               <div>
                 <button
                   disabled={importing}
