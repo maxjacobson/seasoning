@@ -98,4 +98,5 @@ export interface Import {
   id: number
   name: string
   poster_url: string | null
+  year: number | null
 }
