@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resource :settings, only: %i[show update]
       resources :follows, only: %i[create]
       resources :season_reviews, only: %i[create index], path: "/season-reviews"
-      resource :season_review, only: %i[show], path: "/season-review"
+      resource :season_review, only: %i[show destroy], path: "/season-review"
     end
   end
 

@@ -9,16 +9,11 @@ module API
       show = Show.find(params.require(:show_id))
       season = show.seasons.find(params.require(:season_id))
 
-      existing_review_count = SeasonReview.where(
-        author: current_human,
-        season:
-      ).count
-
       review = SeasonReview.new(
         season_review_params.merge(
           author: current_human,
           season:,
-          viewing: existing_review_count + 1
+          viewing: (SeasonReview.where(author: current_human, season:).maximum(:viewing) || 0) + 1
         )
       )
 
@@ -43,7 +38,8 @@ module API
       render json: {
         show: ShowSerializer.one(review.season.show),
         season: SeasonSerializer.one(review.season),
-        review: SeasonReviewSerializer.one(review)
+        review: SeasonReviewSerializer.one(review),
+        author: HumanSerializer.one(review.author)
       }
     end
 
@@ -62,6 +58,20 @@ module API
           }
         end
       }
+    end
+
+    def destroy
+      review_to_destroy = SeasonReview.joins(:author).joins(season: :show).where(
+        author: { handle: params.require(:handle) },
+        season: { slug: params.require(:season) },
+        show: { slug: params.require(:show) }
+      ).find_by!(viewing: params[:viewing] || 1)
+
+      authorize! { review_to_destroy.author == current_human }
+
+      review_to_destroy.destroy!
+
+      render json: {}
     end
 
     private

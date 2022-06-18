@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { stringify } from "query-string"
 
 import { Markdown } from "../components/Markdown"
-import { Guest, Season, SeasonReview, Show } from "../types"
+import { Guest, Human, Season, SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import { StarRating } from "../components/StarRating"
 import { Poster } from "../components/Poster"
@@ -17,6 +17,7 @@ interface LoadedReviewData {
   review: SeasonReview
   show: Show
   season: Season
+  author: Human
 }
 
 interface ReviewDataNotFound {
@@ -35,6 +36,7 @@ interface Props {
 export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
   const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true })
   const { handle, showSlug, seasonSlug, viewing } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     ;(async () => {
@@ -64,8 +66,15 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading, guest }
       setLoading(false)
 
       if (response.ok) {
-        const data: { review: SeasonReview; show: Show; season: Season } = await response.json()
-        setReviewData({ loading: false, review: data.review, show: data.show, season: data.season })
+        const data: { review: SeasonReview; show: Show; season: Season; author: Human } =
+          await response.json()
+        setReviewData({
+          loading: false,
+          review: data.review,
+          show: data.show,
+          season: data.season,
+          author: data.author,
+        })
       } else if (response.status === 404) {
         setReviewData({ loading: false, review: null, season: null, show: null })
       } else {
@@ -129,6 +138,46 @@ export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading, guest }
         <div>
           <Markdown markdown={review.body} />
         </div>
+
+        {guest.authenticated && review.author.handle === guest.human.handle && (
+          <div>
+            <button
+              onClick={async (event) => {
+                event.preventDefault()
+
+                if (confirm("Are you sure?")) {
+                  const headers: Record<string, string> = {
+                    "Content-Type": "application/json",
+                  }
+                  if (guest.authenticated) {
+                    headers["X-SEASONING-TOKEN"] = guest.token
+                  }
+                  const response = await fetch(
+                    `/api/season-review.json?${stringify({
+                      handle: handle,
+                      show: showSlug,
+                      season: seasonSlug,
+                      viewing: viewing,
+                    })}`,
+                    {
+                      headers: headers,
+                      method: "DELETE",
+                    }
+                  )
+                  setLoading(false)
+
+                  if (response.ok) {
+                    navigate(`/${handle}`)
+                  } else {
+                    throw new Error("Could not delete")
+                  }
+                }
+              }}
+            >
+              Delete review
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
