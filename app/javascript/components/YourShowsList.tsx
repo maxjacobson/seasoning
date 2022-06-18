@@ -1,10 +1,18 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
 import { Link } from "react-router-dom"
 import { stringify } from "query-string"
+import styled from "@emotion/styled"
 
 import { Poster } from "./Poster"
 import { Human, YourShow } from "../types"
 import { displayMyShowStatus } from "../helpers/my_shows"
+import { Markdown } from "./Markdown"
+
+const NoteToSelf = styled.div`
+  border: 1px solid black;
+  padding: 2px;
+  margin: 10px 0;
+`
 
 interface YourShows {
   your_shows: YourShow[]
@@ -21,38 +29,43 @@ interface ListShowProps {
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Show</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {shows.map((yourShow) => {
-            return (
-              <tr key={yourShow.show.id}>
-                <td>
-                  <Link key={yourShow.show.id} to={`/shows/${yourShow.show.slug}`}>
-                    <div>
-                      <Poster show={yourShow.show} size="small" url={yourShow.show.poster_url} />
-                    </div>
-                    {yourShow.show.title}
-                  </Link>
-                </td>
+      <div
+        style={{
+          margin: "10px 0",
+        }}
+      >
+        {shows.map((yourShow) => {
+          return (
+            <div key={yourShow.show.id}>
+              <div>
+                <Link key={yourShow.show.id} to={`/shows/${yourShow.show.slug}`}>
+                  <div>
+                    <Poster show={yourShow.show} size="small" url={yourShow.show.poster_url} />
+                  </div>
+                  {yourShow.show.title}
+                </Link>
+              </div>
 
-                <td>
-                  {yourShow.your_relationship?.status ? (
-                    <span>{displayMyShowStatus(yourShow.your_relationship.status)}</span>
-                  ) : (
-                    <span>&mdash;</span>
-                  )}
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+              <div>
+                {yourShow.your_relationship?.status ? (
+                  <span>{displayMyShowStatus(yourShow.your_relationship.status)}</span>
+                ) : (
+                  <span>&mdash;</span>
+                )}
+              </div>
+
+              {yourShow.your_relationship?.note_to_self ? (
+                <NoteToSelf>
+                  <h2>Note to self</h2>
+                  <Markdown markdown={yourShow.your_relationship.note_to_self} />
+                </NoteToSelf>
+              ) : (
+                <></>
+              )}
+            </div>
+          )
+        })}
+      </div>
     )
   } else {
     return <div>No shows yet. Maybe add some via the search at the top of the page?</div>
