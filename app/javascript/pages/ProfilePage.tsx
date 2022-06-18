@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
-import { Guest, Profile } from "../types"
+import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
 import { Poster } from "../components/Poster"
+import { GuestContext } from "../contexts"
 
 interface StillLoading {
   loading: true
@@ -22,13 +23,13 @@ interface LoadedProfileData {
 type ProfileData = StillLoading | LoadedProfileData | ProfileNotFound
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const ProfilePage: FunctionComponent<Props> = ({ guest, setLoading }: Props) => {
+export const ProfilePage: FunctionComponent<Props> = ({ setLoading }: Props) => {
   const [profileData, setProfile] = useState<ProfileData>({ loading: true })
   const { handle } = useParams()
+  const guest = useContext(GuestContext)
 
   setHeadTitle(handle)
 

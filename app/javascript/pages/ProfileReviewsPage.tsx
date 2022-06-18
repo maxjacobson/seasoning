@@ -1,16 +1,17 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useContext } from "react"
 import { useParams } from "react-router-dom"
 
-import { Guest, SeasonReview, Show } from "../types"
+import { SeasonReview, Show } from "../types"
 import { loadData, setHeadTitle } from "../hooks"
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
+import { GuestContext } from "../contexts"
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const ProfileReviewsPage: FunctionComponent<Props> = ({ guest, setLoading }: Props) => {
+export const ProfileReviewsPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
+  const guest = useContext(GuestContext)
   const { handle } = useParams()
   setHeadTitle(`${handle}'s reviews`)
 

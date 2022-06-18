@@ -4,6 +4,7 @@ import { Global, css } from "@emotion/react"
 import styled from "@emotion/styled"
 
 import { Guest, Show } from "./types"
+import { GuestContext } from "./contexts"
 
 // Pages
 import { NotFoundPage } from "./pages/NotFoundPage"
@@ -59,113 +60,97 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
 
   return (
     <>
-      <Global styles={globalStyles} />
-      <>
-        <LoadingRibbon loading={loading} />
+      <GuestContext.Provider value={guest}>
+        <Global styles={globalStyles} />
+        <>
+          <LoadingRibbon loading={loading} />
 
-        <SiteHeader>
-          <div style={{ display: "flex" }}>
-            <Link to="/">
-              <img src={LogoWithName} />
-            </Link>
-            {guest.authenticated && (
-              <ShowSearchBar
-                guest={guest}
-                setLoading={setLoading}
-                callback={setSearchResults}
-                query={searchQuery}
-                setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
+          <SiteHeader>
+            <div style={{ display: "flex" }}>
+              <Link to="/">
+                <img src={LogoWithName} />
+              </Link>
+              {guest.authenticated && (
+                <ShowSearchBar
+                  guest={guest}
+                  setLoading={setLoading}
+                  callback={setSearchResults}
+                  query={searchQuery}
+                  setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
+                />
+              )}
+            </div>
+            <div>
+              <Link to="/reviews">Reviews</Link>
+              <span> * </span>
+              <Link to="/credits">Credits</Link>
+
+              {guest.authenticated && (
+                <>
+                  <span> * </span>
+                  <Link to={`/${guest.human.handle}`}>Your page</Link>
+                  <span> * </span>
+                  <Link to="/settings">Settings</Link>
+                  <span> * </span>
+                  <a
+                    href="#"
+                    onClick={() => {
+                      if (confirm("Log out?")) {
+                        localStorage.clear()
+                        setGuest({ authenticated: false })
+                        navigate("/")
+                      }
+                    }}
+                  >
+                    Log out
+                  </a>
+                </>
+              )}
+            </div>
+          </SiteHeader>
+
+          <SiteBody>
+            <Routes>
+              <Route path="/" element={<HomePage setLoading={setLoading} />} />
+
+              <Route path="/shows" element={<YourShowsPage setLoading={setLoading} />} />
+              <Route
+                path="/knock-knock/:token"
+                element={<RedeemMagicLinkPage setGuest={setGuest} setLoading={setLoading} />}
               />
-            )}
-          </div>
-          <div>
-            <Link to="/reviews">Reviews</Link>
-            <span> * </span>
-            <Link to="/credits">Credits</Link>
+              <Route path="/shows/:showSlug" element={<ShowPage setLoading={setLoading} />} />
+              <Route
+                path="/shows/:showSlug/:seasonSlug"
+                element={<SeasonPage setLoading={setLoading} />}
+              />
+              <Route
+                path="/:handle/shows/:showSlug/:seasonSlug"
+                element={<SeasonReviewPage setLoading={setLoading} />}
+              />
+              <Route
+                path="/:handle/shows/:showSlug/:seasonSlug/:viewing"
+                element={<SeasonReviewPage setLoading={setLoading} />}
+              />
 
-            {guest.authenticated && (
-              <>
-                <span> * </span>
-                <Link to={`/${guest.human.handle}`}>Your page</Link>
-                <span> * </span>
-                <Link to="/settings">Settings</Link>
-                <span> * </span>
-                <a
-                  href="#"
-                  onClick={() => {
-                    if (confirm("Log out?")) {
-                      localStorage.clear()
-                      setGuest({ authenticated: false })
-                      navigate("/")
-                    }
-                  }}
-                >
-                  Log out
-                </a>
-              </>
-            )}
-          </div>
-        </SiteHeader>
-
-        <SiteBody>
-          <Routes>
-            <Route path="/" element={<HomePage guest={guest} setLoading={setLoading} />} />
-
-            <Route
-              path="/shows"
-              element={<YourShowsPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/knock-knock/:token"
-              element={<RedeemMagicLinkPage setGuest={setGuest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/shows/:showSlug"
-              element={<ShowPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/shows/:showSlug/:seasonSlug"
-              element={<SeasonPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/:handle/shows/:showSlug/:seasonSlug"
-              element={<SeasonReviewPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/:handle/shows/:showSlug/:seasonSlug/:viewing"
-              element={<SeasonReviewPage guest={guest} setLoading={setLoading} />}
-            />
-
-            <Route
-              path="/reviews"
-              element={<ReviewsFeedPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route path="/credits" element={<CreditsPage />} />
-            <Route
-              path="/settings"
-              element={<SettingsPage setLoading={setLoading} guest={guest} />}
-            />
-            <Route
-              path="/import-show"
-              element={<ImportShowPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/:handle"
-              element={<ProfilePage guest={guest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/:handle/reviews"
-              element={<ProfileReviewsPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route
-              path="/shows/:showSlug/:seasonSlug/reviews/new"
-              element={<NewSeasonReviewPage guest={guest} setLoading={setLoading} />}
-            />
-            <Route path="/search" element={<SearchResultsPage searchResults={searchResults} />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </SiteBody>
-      </>
+              <Route path="/reviews" element={<ReviewsFeedPage setLoading={setLoading} />} />
+              <Route path="/credits" element={<CreditsPage />} />
+              <Route path="/settings" element={<SettingsPage setLoading={setLoading} />} />
+              <Route path="/import-show" element={<ImportShowPage setLoading={setLoading} />} />
+              <Route path="/:handle" element={<ProfilePage setLoading={setLoading} />} />
+              <Route
+                path="/:handle/reviews"
+                element={<ProfileReviewsPage setLoading={setLoading} />}
+              />
+              <Route
+                path="/shows/:showSlug/:seasonSlug/reviews/new"
+                element={<NewSeasonReviewPage setLoading={setLoading} />}
+              />
+              <Route path="/search" element={<SearchResultsPage searchResults={searchResults} />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </SiteBody>
+        </>
+      </GuestContext.Provider>
     </>
   )
 }

@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useContext } from "react"
 import { Link } from "react-router-dom"
 import { YourShowsList } from "../components/YourShowsList"
 
-import { Guest } from "../types"
+import { GuestContext } from "../contexts"
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
 export const YourShowsPage: FunctionComponent<Props> = (props: Props) => {
-  const { guest, setLoading } = props
+  const { setLoading } = props
+  const guest = useContext(GuestContext)
 
   return (
     <div>
