@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { stringify } from "query-string"
 
 import { Markdown } from "../components/Markdown"
-import { Guest, Human, Season, SeasonReview, Show } from "../types"
+import { Human, Season, SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import { StarRating } from "../components/StarRating"
 import { Poster } from "../components/Poster"
+import { GuestContext } from "../contexts"
 
 interface LoadingReviewData {
   loading: true
@@ -29,14 +30,14 @@ interface ReviewDataNotFound {
 type SeasonReviewData = LoadingReviewData | LoadedReviewData | ReviewDataNotFound
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
+export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
   const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true })
   const { handle, showSlug, seasonSlug, viewing } = useParams()
   const navigate = useNavigate()
+  const guest = useContext(GuestContext)
 
   useEffect(() => {
     ;(async () => {

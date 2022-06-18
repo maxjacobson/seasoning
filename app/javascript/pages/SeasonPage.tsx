@@ -1,10 +1,11 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
 import { setHeadTitle } from "../hooks"
-import { Guest, YourSeason } from "../types"
+import { YourSeason } from "../types"
 import { SeenSeasonCheckbox } from "../components/SeenSeasonCheckbox"
 import { Poster } from "../components/Poster"
+import { GuestContext } from "../contexts"
 
 interface LoadingSeason {
   loading: true
@@ -23,13 +24,13 @@ interface SeasonFound {
 type SeasonData = LoadingSeason | SeasonNotFound | SeasonFound
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const SeasonPage: FunctionComponent<Props> = ({ guest, setLoading }: Props) => {
+export const SeasonPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
   const [response, setResponse] = useState<SeasonData>({ loading: true })
   const { showSlug, seasonSlug } = useParams()
+  const guest = useContext(GuestContext)
 
   useEffect(() => {
     if (!seasonSlug) {

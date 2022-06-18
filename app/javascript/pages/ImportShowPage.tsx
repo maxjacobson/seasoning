@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { stringify } from "query-string"
 import styled from "@emotion/styled"
 
-import { Guest, Import, Show } from "../types"
+import { Import, Show } from "../types"
+import { GuestContext } from "../contexts"
 
 const ImportContainer = styled.div`
   margin: 10px 0;
@@ -13,11 +14,10 @@ const ImportContainer = styled.div`
 `
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: Props) => {
+export const ImportShowPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
   const [searchParams] = useSearchParams()
   const searchQuery = searchParams.get("q")
   const [showQuery, setShowQuery] = useState(searchQuery || "")
@@ -25,6 +25,7 @@ export const ImportShowPage: FunctionComponent<Props> = ({ setLoading, guest }: 
   const [importing, setImporting] = useState(false)
   const [results, setResults] = useState<Import[] | null>(null)
   const navigate = useNavigate()
+  const guest = useContext(GuestContext)
 
   const search = async () => {
     if (!guest.authenticated) {

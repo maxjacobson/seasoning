@@ -1,26 +1,27 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import styled from "@emotion/styled"
 
 import { loadData, setHeadTitle } from "../hooks"
-import { Guest, HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types"
+import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types"
 import { TextArea } from "../components/TextArea"
+import { GuestContext } from "../contexts"
 
 const Container = styled.span`
   font-size: 2rem;
 `
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
-export const NewSeasonReviewPage: FunctionComponent<Props> = ({ guest, setLoading }) => {
+export const NewSeasonReviewPage: FunctionComponent<Props> = ({ setLoading }) => {
   const [body, setBody] = useState("")
   const [visibility, setVisibility] = useState<Visibility | undefined>(undefined)
   const [rating, setRating] = useState<Rating | undefined>(undefined)
   const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null)
   const { showSlug, seasonSlug } = useParams()
+  const guest = useContext(GuestContext)
 
   const settings = loadData<HumanSettings>(guest, "/api/settings.json", [], setLoading)
 

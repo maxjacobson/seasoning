@@ -1,16 +1,16 @@
-import React, { FunctionComponent, useEffect } from "react"
+import React, { FunctionComponent, useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { GetStarted } from "../components/GetStarted"
 
-import { Guest } from "../types"
+import { GuestContext } from "../contexts"
 
 interface HomeProps {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
 export const HomePage: FunctionComponent<HomeProps> = (props: HomeProps) => {
-  const { guest, setLoading } = props
+  const { setLoading } = props
+  const guest = useContext(GuestContext)
 
   const navigate = useNavigate()
   useEffect(() => {

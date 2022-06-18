@@ -1,16 +1,16 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
-import { Guest, YourShow } from "../types"
+import { YourShow } from "../types"
 import { setHeadTitle } from "../hooks"
 import { AddShowButton } from "../components/AddShowButton"
 import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
 import { NoteToSelf } from "../components/NoteToSelf"
 import { SeasonsList } from "../components/SeasonsList"
 import { Poster } from "../components/Poster"
+import { GuestContext } from "../contexts"
 
 interface Props {
-  guest: Guest
   setLoading: (loadingState: boolean) => void
 }
 
@@ -26,7 +26,8 @@ type LoadedShowData = {
 
 type ShowData = LoadingShowData | LoadedShowData
 
-export const ShowPage: FunctionComponent<Props> = ({ guest, setLoading }: Props) => {
+export const ShowPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
+  const guest = useContext(GuestContext)
   const { showSlug } = useParams()
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
