@@ -32,6 +32,12 @@ module.exports = {
     "no-console": ["error"],
     "import/no-default-export": ["error"],
     "react/prop-types": ["off"],
+    "sort-imports": [
+      "error",
+      {
+        ignoreDeclarationSort: true,
+      },
+    ],
   },
   settings: {
     react: {

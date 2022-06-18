@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 import { Guest, YourShow } from "../types"

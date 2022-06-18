@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { useParams } from "react-router-dom"
 
 import { Guest, SeasonReview, Show } from "../types"
-import { setHeadTitle, loadData } from "../hooks"
+import { loadData, setHeadTitle } from "../hooks"
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 
 interface Props {

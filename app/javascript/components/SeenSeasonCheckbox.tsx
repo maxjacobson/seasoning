@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 
 import { updateMySeason } from "../helpers/my_shows"
 import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"

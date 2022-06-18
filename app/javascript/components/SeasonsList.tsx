@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { Link } from "react-router-dom"
-import { Show, Guest } from "../types"
+import { Guest, Show } from "../types"
 import { SeenSeasonCheckbox } from "./SeenSeasonCheckbox"
 
 interface Props {

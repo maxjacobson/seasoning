@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 
 interface Props {
   globalSetLoading: (loadingState: boolean) => void
