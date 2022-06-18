@@ -40,6 +40,17 @@ const SiteHeader = styled.div`
   margin: 10px 5px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+`
+
+const MobileFlex = styled.div`
+  display: flex;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 
 const SiteBody = styled.div`
@@ -67,7 +78,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
             <LoadingRibbon loading={loading} />
 
             <SiteHeader>
-              <div style={{ display: "flex" }}>
+              <MobileFlex>
                 <Link to="/">
                   <img src={LogoWithName} />
                 </Link>
@@ -79,15 +90,10 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                     setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
                   />
                 )}
-              </div>
+              </MobileFlex>
               <div>
-                <Link to="/reviews">Reviews</Link>
-                <span> * </span>
-                <Link to="/credits">Credits</Link>
-
                 {guest.authenticated && (
                   <>
-                    <span> * </span>
                     <Link to={`/${guest.human.handle}`}>Your page</Link>
                     <span> * </span>
                     <Link to="/settings">Settings</Link>
@@ -142,6 +148,10 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
+
+              <div style={{ marginTop: "25px", borderTop: "1px dashed black" }}>
+                <Link to="/reviews">Reviews</Link> * <Link to="/credits">Credits</Link>
+              </div>
             </SiteBody>
           </>
         </SetLoadingContext.Provider>
