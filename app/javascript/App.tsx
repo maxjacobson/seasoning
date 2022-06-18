@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
-import { Routes, Route, Link, useNavigate, BrowserRouter, useSearchParams } from "react-router-dom"
+import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router-dom"
 import { Global, css } from "@emotion/react"
 import styled from "@emotion/styled"
 

@@ -2,8 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import styled from "@emotion/styled"
 
-import { setHeadTitle, loadData } from "../hooks"
-import { Guest, HumanSettings, Visibility, Rating, YourSeason, SeasonReview } from "../types"
+import { loadData, setHeadTitle } from "../hooks"
+import { Guest, HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types"
 import { TextArea } from "../components/TextArea"
 
 const Container = styled.span`

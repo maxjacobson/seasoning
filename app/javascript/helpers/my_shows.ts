@@ -1,4 +1,4 @@
-import { MyShowStatus, Show, Season } from "../types"
+import { MyShowStatus, Season, Show } from "../types"
 
 export const displayMyShowStatus = (status: MyShowStatus): string => {
   return {

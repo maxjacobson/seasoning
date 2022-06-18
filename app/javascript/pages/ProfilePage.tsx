@@ -1,7 +1,7 @@
-import React, { useState, useEffect, FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
-import { Profile, Guest } from "../types"
+import { Guest, Profile } from "../types"
 import { setHeadTitle } from "../hooks"
 import { Poster } from "../components/Poster"
 
