@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
 import { setHeadTitle } from "../hooks"
 import { YourSeason } from "../types"
 import { SeenSeasonCheckbox } from "../components/SeenSeasonCheckbox"
 import { Poster } from "../components/Poster"
-import { GuestContext } from "../contexts"
+import { GuestContext, SetLoadingContext } from "../contexts"
 
 interface LoadingSeason {
   loading: true
@@ -23,12 +23,9 @@ interface SeasonFound {
 
 type SeasonData = LoadingSeason | SeasonNotFound | SeasonFound
 
-interface Props {
-  setLoading: (loadingState: boolean) => void
-}
-
-export const SeasonPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
+export const SeasonPage = () => {
   const [response, setResponse] = useState<SeasonData>({ loading: true })
+  const setLoading = useContext(SetLoadingContext)
   const { showSlug, seasonSlug } = useParams()
   const guest = useContext(GuestContext)
 
@@ -108,12 +105,7 @@ export const SeasonPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
           <>
             <div>
               <h2>Seen it?</h2>
-              <SeenSeasonCheckbox
-                setLoading={setLoading}
-                guest={guest}
-                show={yourSeason.show}
-                season={yourSeason.season}
-              />
+              <SeenSeasonCheckbox guest={guest} show={yourSeason.show} season={yourSeason.season} />
             </div>
           </>
         )}

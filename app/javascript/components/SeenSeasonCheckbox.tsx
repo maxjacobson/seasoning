@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import { SetLoadingContext } from "../contexts"
 
 import { updateMySeason } from "../helpers/my_shows"
 import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"
 
 interface Props {
-  setLoading: (loadingState: boolean) => void
   guest: AuthenticatedGuest
   show: Show
   season: Season
@@ -12,7 +12,6 @@ interface Props {
 }
 
 export const SeenSeasonCheckbox: FunctionComponent<Props> = ({
-  setLoading,
   guest,
   season,
   labelHidden,
@@ -20,6 +19,7 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({
 }) => {
   const [updating, setUpdating] = useState(false)
   const [hasWatched, setHasWatched] = useState<boolean | undefined>(undefined)
+  const setLoading = useContext(SetLoadingContext)
 
   useEffect(() => {
     ;(async () => {

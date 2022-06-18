@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 import { SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
-import { GuestContext } from "../contexts"
+import { GuestContext, SetLoadingContext } from "../contexts"
 
 interface LoadingReviewsFeedData {
   loading: true
@@ -19,13 +19,10 @@ interface LoadedReviewsFeedData {
 
 type ReviewsFeedData = LoadingReviewsFeedData | LoadedReviewsFeedData
 
-interface Props {
-  setLoading: (loadingState: boolean) => void
-}
-
-export const ReviewsFeedPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
+export const ReviewsFeedPage = () => {
   const [feedData, setFeedData] = useState<ReviewsFeedData>({ loading: true })
   const guest = useContext(GuestContext)
+  const setLoading = useContext(SetLoadingContext)
 
   useEffect(() => {
     ;(async () => {

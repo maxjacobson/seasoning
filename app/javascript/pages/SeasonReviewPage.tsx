@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { stringify } from "query-string"
 
@@ -7,7 +7,7 @@ import { Human, Season, SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import { StarRating } from "../components/StarRating"
 import { Poster } from "../components/Poster"
-import { GuestContext } from "../contexts"
+import { GuestContext, SetLoadingContext } from "../contexts"
 
 interface LoadingReviewData {
   loading: true
@@ -29,15 +29,12 @@ interface ReviewDataNotFound {
 }
 type SeasonReviewData = LoadingReviewData | LoadedReviewData | ReviewDataNotFound
 
-interface Props {
-  setLoading: (loadingState: boolean) => void
-}
-
-export const SeasonReviewPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
+export const SeasonReviewPage = () => {
   const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true })
   const { handle, showSlug, seasonSlug, viewing } = useParams()
   const navigate = useNavigate()
   const guest = useContext(GuestContext)
+  const setLoading = useContext(SetLoadingContext)
 
   useEffect(() => {
     ;(async () => {

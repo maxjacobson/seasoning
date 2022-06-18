@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useContext } from "react"
 
 import { MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
 import { displayMyShowStatus, updateMyShow } from "../helpers/my_shows"
+import { SetLoadingContext } from "../contexts"
 
 const allStatuses: MyShowStatus[] = [
   "might_watch",
@@ -16,7 +17,6 @@ interface Props {
   show: Show
   yourRelationship: YourRelationshipToShow
   token: string
-  globalSetLoading: (loadingState: boolean) => void
   setYourShow: (yourShow: YourShow) => void
 }
 
@@ -24,9 +24,10 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
   show,
   token,
   yourRelationship,
-  globalSetLoading,
   setYourShow,
 }: Props) => {
+  const globalSetLoading = useContext(SetLoadingContext)
+
   return (
     <select
       value={yourRelationship.status}
