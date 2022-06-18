@@ -1,13 +1,11 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import { SetLoadingContext } from "../contexts"
 
-interface Props {
-  globalSetLoading: (loadingState: boolean) => void
-}
-
-export const GetStarted: FunctionComponent<Props> = ({ globalSetLoading }) => {
+export const GetStarted = () => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [createdMagicLink, setCreatedMagicLink] = useState(false)
+  const globalSetLoading = useContext(SetLoadingContext)
 
   useEffect(() => {
     if (!loading) {

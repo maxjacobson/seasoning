@@ -6,10 +6,9 @@ import { SeenSeasonCheckbox } from "./SeenSeasonCheckbox"
 interface Props {
   show: Show
   guest: Guest
-  setLoading: (_: boolean) => void
 }
 
-export const SeasonsList: FunctionComponent<Props> = ({ show, guest, setLoading }: Props) => {
+export const SeasonsList: FunctionComponent<Props> = ({ show, guest }: Props) => {
   return (
     <table style={{ width: "100%" }}>
       <thead>
@@ -33,7 +32,6 @@ export const SeasonsList: FunctionComponent<Props> = ({ show, guest, setLoading 
               {guest.authenticated && (
                 <td>
                   <SeenSeasonCheckbox
-                    setLoading={setLoading}
                     guest={guest}
                     show={show}
                     season={season}

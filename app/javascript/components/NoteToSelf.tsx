@@ -1,27 +1,26 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 
 import { TextArea } from "./TextArea"
 import { Markdown } from "../components/Markdown"
 import { YourShow } from "../types"
 import { updateMyShow } from "../helpers/my_shows"
+import { SetLoadingContext } from "../contexts"
 
 interface Props {
   yourShow: YourShow
   token: string
-  globalSetLoading: (loadingState: boolean) => void
   updateYourShow: (updatedYourShow: YourShow) => void
 }
 
 export const NoteToSelf: FunctionComponent<Props> = ({
   token,
   yourShow,
-  globalSetLoading,
   updateYourShow,
 }: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(false)
-
   const [newNoteToSelf, setNewNoteToSelf] = useState("")
+  const globalSetLoading = useContext(SetLoadingContext)
 
   // I'll confess I am surprised that this is necessary...
   useEffect(() => {

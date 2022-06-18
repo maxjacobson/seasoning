@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useEffect } from "react"
+import React, { FunctionComponent, useContext, useEffect } from "react"
 import debounce from "lodash.debounce"
 
 import { AuthenticatedGuest, Show } from "../types"
 import { useNavigate } from "react-router-dom"
+import { SetLoadingContext } from "../contexts"
 
 const searchForShows = (
   title: string,
@@ -39,20 +40,14 @@ const debouncedSearch = debounce(searchForShows, 400, { trailing: true })
 
 interface Props {
   guest: AuthenticatedGuest
-  setLoading: (loading: boolean) => void
   callback: (results: Show[] | null) => void
   query: string
   setQuery: (query: string) => void
 }
 
-export const ShowSearchBar: FunctionComponent<Props> = ({
-  guest,
-  setLoading,
-  callback,
-  query,
-  setQuery,
-}) => {
+export const ShowSearchBar: FunctionComponent<Props> = ({ guest, callback, query, setQuery }) => {
   const navigate = useNavigate()
+  const setLoading = useContext(SetLoadingContext)
   useEffect(() => {
     debouncedSearch(query, guest.token, setLoading, callback)
   }, [query])

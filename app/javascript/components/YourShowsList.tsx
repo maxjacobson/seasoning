@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { stringify } from "query-string"
 import styled from "@emotion/styled"
@@ -7,6 +7,7 @@ import { Poster } from "./Poster"
 import { Human, YourShow } from "../types"
 import { displayMyShowStatus } from "../helpers/my_shows"
 import { Markdown } from "./Markdown"
+import { SetLoadingContext } from "../contexts"
 
 const NoteToSelf = styled.div`
   border: 1px solid black;
@@ -20,7 +21,6 @@ interface YourShows {
 interface Props {
   human: Human
   token: string
-  globalSetLoading: (loadingState: boolean) => void
 }
 
 interface ListShowProps {
@@ -73,6 +73,7 @@ const ListShows = ({ shows }: ListShowProps) => {
 }
 
 export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
+  const globalSetLoading = useContext(SetLoadingContext)
   const [loading, setLoading] = useState(true)
   const [shows, setShows] = useState<YourShow[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
@@ -83,7 +84,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
     : ["currently_watching"]
 
   useEffect(() => {
-    props.globalSetLoading(true)
+    globalSetLoading(true)
     setLoading(true)
 
     const params: Record<string, unknown> = {}
@@ -103,7 +104,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
       },
     })
       .then((response) => {
-        props.globalSetLoading(false)
+        globalSetLoading(false)
         setLoading(false)
 
         if (response.ok) {

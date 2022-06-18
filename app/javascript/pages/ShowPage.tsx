@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 import { YourShow } from "../types"
@@ -8,11 +8,7 @@ import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
 import { NoteToSelf } from "../components/NoteToSelf"
 import { SeasonsList } from "../components/SeasonsList"
 import { Poster } from "../components/Poster"
-import { GuestContext } from "../contexts"
-
-interface Props {
-  setLoading: (loadingState: boolean) => void
-}
+import { GuestContext, SetLoadingContext } from "../contexts"
 
 type LoadingShowData = {
   loading: true
@@ -26,8 +22,9 @@ type LoadedShowData = {
 
 type ShowData = LoadingShowData | LoadedShowData
 
-export const ShowPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
+export const ShowPage = () => {
   const guest = useContext(GuestContext)
+  const setLoading = useContext(SetLoadingContext)
   const { showSlug } = useParams()
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
@@ -79,7 +76,6 @@ export const ShowPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
         {guest.authenticated && data.your_relationship && (
           <NoteToSelf
             token={guest.token}
-            globalSetLoading={setLoading}
             yourShow={data}
             updateYourShow={(newData) => {
               setShowData({ loading: false, data: newData })
@@ -108,7 +104,6 @@ export const ShowPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
                   token={guest.token}
                   show={data.show}
                   yourRelationship={data.your_relationship}
-                  globalSetLoading={setLoading}
                   setYourShow={(yourShow) => {
                     setShowData({ loading: false, data: yourShow })
                   }}
@@ -124,7 +119,7 @@ export const ShowPage: FunctionComponent<Props> = ({ setLoading }: Props) => {
         </div>
         <div>
           <h2>Seasons</h2>
-          <SeasonsList show={data.show} guest={guest} setLoading={setLoading} />
+          <SeasonsList show={data.show} guest={guest} />
         </div>
       </div>
     )

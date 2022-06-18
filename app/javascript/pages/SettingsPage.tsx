@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext, useEffect, useState } from "react
 
 import { AuthenticatedGuest, HumanSettings } from "../types"
 import { setHeadTitle } from "../hooks"
-import { GuestContext } from "../contexts"
+import { GuestContext, SetLoadingContext } from "../contexts"
 
 interface LoadingSettingsData {
   loading: true
@@ -15,28 +15,24 @@ interface LoadedSettingsData {
 
 type SettingsData = LoadingSettingsData | LoadedSettingsData
 
-interface Props {
-  setLoading: (loadingState: boolean) => void
-}
-
-export const SettingsPage: FunctionComponent<Props> = (props) => {
+export const SettingsPage = () => {
   setHeadTitle("Settings")
 
   return (
     <div>
       <h1>Settings</h1>
-      <SettingsBody {...props} />
+      <SettingsBody />
     </div>
   )
 }
 
-const SettingsBody: FunctionComponent<Props> = (props: Props) => {
+const SettingsBody = () => {
   const guest = useContext(GuestContext)
 
   return (
     <div>
       {guest.authenticated ? (
-        <EditSettings guest={guest} setLoading={props.setLoading} />
+        <EditSettings guest={guest} />
       ) : (
         <div>
           <p>You need to log in to edit your settings!</p>
@@ -48,15 +44,12 @@ const SettingsBody: FunctionComponent<Props> = (props: Props) => {
 
 interface EditSettingsProps {
   guest: AuthenticatedGuest
-  setLoading: (loadingState: boolean) => void
 }
 
-const EditSettings: FunctionComponent<EditSettingsProps> = ({
-  guest,
-  setLoading,
-}: EditSettingsProps) => {
+const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSettingsProps) => {
   const [currentlyUpdating, setCurrentlyUpdating] = useState(false)
   const [settingsData, setSettingsData] = useState<SettingsData>({ loading: true })
+  const setLoading = useContext(SetLoadingContext)
 
   useEffect(() => {
     ;(async () => {
