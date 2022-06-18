@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { stringify } from "query-string"
 import styled from "@emotion/styled"
 
@@ -75,8 +75,12 @@ const ListShows = ({ shows }: ListShowProps) => {
 export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
   const [loading, setLoading] = useState(true)
   const [shows, setShows] = useState<YourShow[]>([])
-  const [queryValue, setQueryValue] = useState("")
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>(["currently_watching"])
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const titleQueryValue = searchParams.get("title") || ""
+  const statusesFilterValue = searchParams.getAll("statuses").length
+    ? searchParams.getAll("statuses")
+    : ["currently_watching"]
 
   useEffect(() => {
     props.globalSetLoading(true)
@@ -84,12 +88,12 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
 
     const params: Record<string, unknown> = {}
 
-    if (queryValue) {
-      params.q = queryValue
+    if (titleQueryValue) {
+      params.q = titleQueryValue
     }
 
-    if (selectedStatuses.length) {
-      params.statuses = selectedStatuses
+    if (statusesFilterValue.length) {
+      params.statuses = statusesFilterValue
     }
 
     // TODO: debounce me
@@ -111,7 +115,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
       .then((data: YourShows) => {
         setShows(data.your_shows)
       })
-  }, [queryValue, selectedStatuses])
+  }, [titleQueryValue, statusesFilterValue.join("-")])
 
   return (
     <div>
@@ -120,17 +124,27 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           <input
             type="text"
             placeholder="Filter your shows"
-            value={queryValue}
-            onChange={(event) => setQueryValue(event.target.value)}
+            value={titleQueryValue}
+            onChange={(event) => {
+              if (event.target.value) {
+                searchParams.set("title", event.target.value)
+              } else {
+                searchParams.delete("title")
+              }
+              setSearchParams(searchParams)
+            }}
           />
         </div>
         <select
           multiple={true}
-          value={selectedStatuses}
+          value={statusesFilterValue}
           onChange={(event) => {
             const statuses = Array.from(event.target.selectedOptions, (option) => option.value)
 
-            setSelectedStatuses(statuses)
+            setSearchParams({
+              title: titleQueryValue,
+              statuses: statuses,
+            })
           }}
         >
           <option value="might_watch">Might watch</option>
