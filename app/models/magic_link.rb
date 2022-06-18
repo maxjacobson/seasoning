@@ -2,7 +2,6 @@
 
 # A link we email you so you can log in or sign up
 class MagicLink < ApplicationRecord
-  before_save ->(magic_link) { magic_link.email = magic_link.email.to_s.strip.downcase.presence }
   before_create -> { self.token = SecureRandom.uuid }
   before_create -> { self.expires_at = 30.minutes.from_now }
 

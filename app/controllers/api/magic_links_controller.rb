@@ -6,7 +6,7 @@ module API
   class MagicLinksController < ApplicationController
     def create
       authorize! { true }
-      email = params.require(:magic_link).require(:email)
+      email = params.require(:magic_link).require(:email).to_s.strip.downcase.presence
 
       # This is a "loose" validation which I think is fine.
       # I won't actually create a human until someone follows the magic link, which proves that it
