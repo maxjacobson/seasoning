@@ -3,3 +3,4 @@ public/vite/**/*
 public/vite-dev/**/*
 tmp/**/*
 .rubocop_todo.yml
+vendor/**/*
