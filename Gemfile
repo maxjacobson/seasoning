@@ -19,6 +19,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "dotenv-rails"
+  gem "rspec-rails"
 end
 
 group :development do
@@ -26,6 +27,7 @@ group :development do
   gem "listen"
   gem "rubocop"
   gem "rubocop-rails"
+  gem "rubocop-rspec"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

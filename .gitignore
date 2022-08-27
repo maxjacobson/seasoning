@@ -35,3 +35,6 @@ node_modules
 
 # dotenv
 .env.development.local
+
+# RSpec
+spec/examples.txt
