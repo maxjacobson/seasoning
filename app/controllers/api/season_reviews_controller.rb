@@ -3,6 +3,40 @@
 module API
   # People can review seasons of shows
   class SeasonReviewsController < ApplicationController
+    def index
+      authorize! { true }
+
+      reviews = SeasonReview.order(created_at: :desc).lazy.select do |review|
+        review.viewable_by?(current_human)
+      end
+
+      render json: {
+        data: reviews.map do |review|
+          {
+            show: ShowSerializer.one(review.season.show),
+            review: SeasonReviewSerializer.one(review)
+          }
+        end
+      }
+    end
+
+    def show
+      review = SeasonReview.joins(:author).joins(season: :show).where(
+        author: { handle: params.require(:handle) },
+        season: { slug: params.require(:season) },
+        show: { slug: params.require(:show) }
+      ).find_by!(viewing: params[:viewing] || 1)
+
+      authorize! { review.viewable_by?(current_human) }
+
+      render json: {
+        show: ShowSerializer.one(review.season.show),
+        season: SeasonSerializer.one(review.season),
+        review: SeasonReviewSerializer.one(review),
+        author: HumanSerializer.one(review.author)
+      }
+    end
+
     def create
       authorize! { current_human.present? }
 
@@ -24,40 +58,6 @@ module API
       else
         render json: review.errors, status: :bad_request
       end
-    end
-
-    def show
-      review = SeasonReview.joins(:author).joins(season: :show).where(
-        author: { handle: params.require(:handle) },
-        season: { slug: params.require(:season) },
-        show: { slug: params.require(:show) }
-      ).find_by!(viewing: params[:viewing] || 1)
-
-      authorize! { review.viewable_by?(current_human) }
-
-      render json: {
-        show: ShowSerializer.one(review.season.show),
-        season: SeasonSerializer.one(review.season),
-        review: SeasonReviewSerializer.one(review),
-        author: HumanSerializer.one(review.author)
-      }
-    end
-
-    def index
-      authorize! { true }
-
-      reviews = SeasonReview.order(created_at: :desc).lazy.select do |review|
-        review.viewable_by?(current_human)
-      end
-
-      render json: {
-        data: reviews.map do |review|
-          {
-            show: ShowSerializer.one(review.season.show),
-            review: SeasonReviewSerializer.one(review)
-          }
-        end
-      }
     end
 
     def destroy

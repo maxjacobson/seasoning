@@ -4,22 +4,6 @@ module API
   # This is how people sign up and sign in. There's no passwords. Only magic links.
   # If you have access to your email account, you're you.
   class MagicLinksController < ApplicationController
-    def create
-      authorize! { true }
-      email = params.require(:magic_link).require(:email).to_s.strip.downcase.presence
-
-      # This is a "loose" validation which I think is fine.
-      # I won't actually create a human until someone follows the magic link, which proves that it
-      # was a real email address.
-      if EmailValidator.valid?(email)
-        magic_link = MagicLink.create!(email:)
-        magic_link.deliver
-        render json: MagicLinkSerializer.one(magic_link)
-      else
-        render json: {}, status: :bad_request
-      end
-    end
-
     def show
       authorize! { true }
 
@@ -40,6 +24,22 @@ module API
           already_exists: false,
           email: magic_link.email
         }
+      end
+    end
+
+    def create
+      authorize! { true }
+      email = params.require(:magic_link).require(:email).to_s.strip.downcase.presence
+
+      # This is a "loose" validation which I think is fine.
+      # I won't actually create a human until someone follows the magic link, which proves that it
+      # was a real email address.
+      if EmailValidator.valid?(email)
+        magic_link = MagicLink.create!(email:)
+        magic_link.deliver
+        render json: MagicLinkSerializer.one(magic_link)
+      else
+        render json: {}, status: :bad_request
       end
     end
   end
