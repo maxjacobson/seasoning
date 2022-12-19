@@ -10,7 +10,7 @@ module API
                  .my_shows
                  .joins(:show)
                  .then { |relation| search(relation) }
-                 .order(status: :asc)
+                 .order(status: :asc, title: :asc)
 
       render json: {
         your_shows: MyShowSerializer.many(my_shows)
