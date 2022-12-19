@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { stringify } from "query-string"
+import queryString from "query-string"
 
 import { Markdown } from "../components/Markdown"
 import { Human, Season, SeasonReview, Show } from "../types"
@@ -51,7 +51,7 @@ export const SeasonReviewPage = () => {
         headers["X-SEASONING-TOKEN"] = guest.token
       }
       const response = await fetch(
-        `/api/season-review.json?${stringify({
+        `/api/season-review.json?${queryString.stringify({
           handle: handle,
           show: showSlug,
           season: seasonSlug,
@@ -151,7 +151,7 @@ export const SeasonReviewPage = () => {
                     headers["X-SEASONING-TOKEN"] = guest.token
                   }
                   const response = await fetch(
-                    `/api/season-review.json?${stringify({
+                    `/api/season-review.json?${queryString.stringify({
                       handle: handle,
                       show: showSlug,
                       season: seasonSlug,

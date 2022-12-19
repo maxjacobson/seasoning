@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { stringify } from "query-string"
+import queryString from "query-string"
 import styled from "@emotion/styled"
 
 import { Import, Show } from "../types"
@@ -32,12 +32,15 @@ export const ImportShowPage = () => {
     setLoading(true)
     setSearching(true)
 
-    const response = await fetch(`/api/imports.json?${stringify({ query: showQuery })}`, {
-      headers: {
-        "X-SEASONING-TOKEN": guest.token,
-        "Content-Type": "application/json",
-      },
-    })
+    const response = await fetch(
+      `/api/imports.json?${queryString.stringify({ query: showQuery })}`,
+      {
+        headers: {
+          "X-SEASONING-TOKEN": guest.token,
+          "Content-Type": "application/json",
+        },
+      }
+    )
 
     setLoading(false)
     setSearching(false)
