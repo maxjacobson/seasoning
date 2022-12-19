@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
-import { stringify } from "query-string"
+import queryString from "query-string"
 import styled from "@emotion/styled"
 
 import { Poster } from "./Poster"
@@ -98,7 +98,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
     }
 
     // TODO: debounce me
-    fetch(`/api/your-shows.json?${stringify(params, { arrayFormat: "bracket" })}`, {
+    fetch(`/api/your-shows.json?${queryString.stringify(params, { arrayFormat: "bracket" })}`, {
       headers: {
         "X-SEASONING-TOKEN": props.token,
       },
