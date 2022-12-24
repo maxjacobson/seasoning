@@ -31,5 +31,6 @@ class SeasonReview < ApplicationRecord
           and author_follows.follower_id = author_followers.followee_id
         )
       SQL
+      .distinct
   }
 end
