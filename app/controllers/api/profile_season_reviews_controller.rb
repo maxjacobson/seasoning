@@ -8,10 +8,10 @@ module API
 
       profile = Human.find_by!(handle: params.require(:profile_id))
 
-      # FIXME: this should be paginated
       reviews = SeasonReview
                 .where(author: profile)
                 .viewable_by(current_human)
+                .limit(10)
                 .order(created_at: :desc)
 
       render json: {

@@ -42,6 +42,9 @@ export const ProfileReviewsPage = () => {
       {reviewsData.data.reviews.map(({ review, show }) => {
         return <SeasonReviewSummary review={review} show={show} key={review.id} />
       })}
+      <p>
+        <strong>Note:</strong> this is just the 10 most recent reviews!
+      </p>
     </div>
   )
 }
