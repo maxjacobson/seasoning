@@ -150,7 +150,12 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               </Routes>
 
               <div style={{ marginTop: "25px", borderTop: "1px dashed black" }}>
-                <Link to="/reviews">Reviews</Link> * <Link to="/credits">Credits</Link>
+                {guest.authenticated && (
+                  <>
+                    <Link to="/reviews">Reviews</Link> *{" "}
+                  </>
+                )}
+                <Link to="/credits">Credits</Link>
               </div>
             </SiteBody>
           </>

@@ -4,7 +4,7 @@ module API
   # People can review seasons of shows
   class SeasonReviewsController < ApplicationController
     def index
-      authorize! { true }
+      authorize! { current_human.present? }
 
       reviews = SeasonReview.order(created_at: :desc).lazy.select do |review|
         review.viewable_by?(current_human)
