@@ -12,7 +12,7 @@ module API
         seasonsCount: Season.count,
         reviewsCount: SeasonReview.count,
         lastRefreshedTmdbConfigAt: TMDBAPIConfiguration.only.fetched_at,
-        recentHumans: HumanSerializer.many(Human.order(created_at: :desc).limit(10))
+        recentHumans: HumanSerializer.many(Human.order(created_at: :desc).limit(50))
       }
     end
   end
