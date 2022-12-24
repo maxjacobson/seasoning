@@ -8,13 +8,12 @@ const roadmap = `
 
   1. Pagination on [the reviews page](/reviews)
   1. Pagination on a person's reviews page, for example [mine](/maxjacobson/reviews)
-  1. Showing who someone follows on their page
-  1. Showing who follows someone on their page
   1. Possible to remove a show from your shows
   1. Like button on reviews
   1. Comments on reviews
   1. Possible to edit reviews after publishing them -- body, star rating, visibility
   1. Option to unfollow someone after following them
+  1. Sort following and followers pages by when it happened
 `
 
 export const RoadmapPage: FunctionComponent = () => {

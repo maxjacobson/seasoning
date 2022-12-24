@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       resources :your_seasons, only: %i[update], path: "/your-seasons"
       resources :profiles, only: [:show] do
         resources :season_reviews, only: [:index], controller: "profile_season_reviews", path: "season-reviews"
+        resources :followers, only: [:index], controller: "profile_followers", path: "followers"
+        resources :follows, only: [:index], controller: "profile_follows", path: "following"
       end
       resources :shows, only: %i[index show] do
         resources :seasons, only: %i[show]

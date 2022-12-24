@@ -17,6 +17,8 @@ import { ShowPage } from "./pages/ShowPage"
 import { SeasonPage } from "./pages/SeasonPage"
 import { ProfilePage } from "./pages/ProfilePage"
 import { ProfileReviewsPage } from "./pages/ProfileReviewsPage"
+import { ProfileFollowingPage } from "./pages/ProfileFollowingPage"
+import { ProfileFollowersPage } from "./pages/ProfileFollowersPage"
 import { RedeemMagicLinkPage } from "./pages/RedeemMagicLinkPage"
 import { CreditsPage } from "./pages/CreditsPage"
 import { SettingsPage } from "./pages/SettingsPage"
@@ -144,6 +146,8 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
+                <Route path="/:handle/following" element={<ProfileFollowingPage />} />
+                <Route path="/:handle/followers" element={<ProfileFollowersPage />} />
                 <Route
                   path="/shows/:showSlug/:seasonSlug/reviews/new"
                   element={<NewSeasonReviewPage />}
