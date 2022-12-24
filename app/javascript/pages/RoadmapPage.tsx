@@ -13,6 +13,7 @@ const roadmap = `
   1. Possible to remove a show from your shows
   1. Like button on reviews
   1. Comments on reviews
+  1. Possible to edit reviews after publishing them -- body, star rating, visibility
 `
 
 export const RoadmapPage: FunctionComponent = () => {
