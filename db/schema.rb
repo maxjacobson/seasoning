@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_10_24_190928) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_24_193651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_10_24_190928) do
     t.datetime "updated_at", null: false
     t.boolean "share_currently_watching", default: false, null: false, comment: "Whether or not to publicly display your currently watching list on the profile page"
     t.enum "default_review_visibility", default: "anybody", null: false, comment: "Lets people specify who they generally want to share their reviews with, to save them some clicking", enum_type: "visibility"
+    t.boolean "admin", default: false, null: false, comment: "Gives humans some extra abilities to see things like the admin stats page"
     t.index ["email"], name: "humans_email_unique", unique: true
     t.index ["handle"], name: "humans_handle_unique", unique: true
   end

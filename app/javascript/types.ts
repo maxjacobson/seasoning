@@ -6,6 +6,7 @@ export interface HumanSettings {
 export interface Human {
   handle: string
   gravatar_url: string
+  admin: boolean
 }
 
 export interface AuthenticatedGuest {

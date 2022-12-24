@@ -8,6 +8,7 @@ import { GuestContext, SetLoadingContext } from "./contexts"
 
 // Pages
 import { NotFoundPage } from "./pages/NotFoundPage"
+import { AdminPage } from "./pages/AdminPage"
 import { ChangelogPage } from "./pages/ChangelogPage"
 import { RoadmapPage } from "./pages/RoadmapPage"
 import { HomePage } from "./pages/HomePage"
@@ -140,6 +141,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <Route path="/import-show" element={<ImportShowPage />} />
                 <Route path="/changelog" element={<ChangelogPage />} />
                 <Route path="/roadmap" element={<RoadmapPage />} />
+                <Route path="/admin" element={<AdminPage />} />
                 <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
                 <Route
@@ -154,6 +156,12 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               </Routes>
 
               <div style={{ marginTop: "25px", borderTop: "1px dashed black" }}>
+                {guest.authenticated && guest.human.admin && (
+                  <>
+                    {" "}
+                    <Link to="/admin">Admin</Link> *{" "}
+                  </>
+                )}
                 {guest.authenticated && (
                   <>
                     <Link to="/reviews">Reviews</Link> *{" "}
