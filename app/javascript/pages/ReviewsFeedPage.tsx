@@ -4,6 +4,7 @@ import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 import { SeasonReview, Show } from "../types"
 import { setHeadTitle } from "../hooks"
 import { GuestContext, SetLoadingContext } from "../contexts"
+import { Navigate } from "react-router-dom"
 
 interface LoadingReviewsFeedData {
   loading: true
@@ -49,6 +50,10 @@ export const ReviewsFeedPage = () => {
   }, [])
 
   setHeadTitle("Reviews", [feedData])
+
+  if (!guest.authenticated) {
+    return <Navigate to="/" />
+  }
 
   if (feedData.loading) {
     return <div>Loading...</div>
