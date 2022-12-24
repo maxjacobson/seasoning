@@ -8,6 +8,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **December 24, 2022** -- add simple admin page with some basic stats
   1. **December 24, 2022** -- add [changelog page](/changelog) and [roadmap page](/roadmap)
   1. **December 24, 2022** -- limit [the reviews page](/reviews) to your own reviews, and reviews from people you follow
   1. **December 24, 2022** -- limit [an individual's reviews page](/maxjacobson/reviews) to 10 recent reviews

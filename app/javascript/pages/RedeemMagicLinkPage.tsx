@@ -14,6 +14,7 @@ interface AlreadyExists {
   handle: string
   session_token: string
   gravatar_url: string
+  admin: boolean
 }
 
 interface NewHuman {
@@ -67,7 +68,7 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
           localStorage.setItem("seasoning-guest-token", data.session_token)
           setGuest({
             authenticated: true,
-            human: { handle: data.handle, gravatar_url: data.gravatar_url },
+            human: { handle: data.handle, gravatar_url: data.gravatar_url, admin: data.admin },
             token: data.session_token,
           })
           navigate("/")
@@ -121,7 +122,11 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                   localStorage.setItem("seasoning-guest-token", data.session_token)
                   setGuest({
                     authenticated: true,
-                    human: { handle: data.handle, gravatar_url: data.gravatar_url },
+                    human: {
+                      handle: data.handle,
+                      gravatar_url: data.gravatar_url,
+                      admin: data.admin,
+                    },
                     token: data.session_token,
                   })
                   navigate("/")
