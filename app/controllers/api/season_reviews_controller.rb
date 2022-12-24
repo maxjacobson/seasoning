@@ -6,9 +6,7 @@ module API
     def index
       authorize! { current_human.present? }
 
-      reviews = SeasonReview.order(created_at: :desc).lazy.select do |review|
-        review.viewable_by?(current_human)
-      end
+      reviews = SeasonReview.order(created_at: :desc).viewable_by(current_human).limit(10)
 
       render json: {
         data: reviews.map do |review|
@@ -27,7 +25,7 @@ module API
         show: { slug: params.require(:show) }
       ).find_by!(viewing: params[:viewing] || 1)
 
-      authorize! { review.viewable_by?(current_human) }
+      authorize! { SeasonReview.viewable_by(current_human).exists?(id: review.id) }
 
       render json: {
         show: ShowSerializer.one(review.season.show),

@@ -27,7 +27,6 @@ group :development do
   gem "listen"
   gem "rubocop"
   gem "rubocop-rails"
-  gem "rubocop-rspec"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

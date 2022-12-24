@@ -233,8 +233,6 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.16.0)
-      rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
     strscan (3.0.4)
     thor (1.2.1)
@@ -276,7 +274,6 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-rails
-  rubocop-rspec
   tzinfo-data
   vite_rails
 
