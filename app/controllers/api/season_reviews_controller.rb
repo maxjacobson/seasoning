@@ -6,7 +6,11 @@ module API
     def index
       authorize! { current_human.present? }
 
-      reviews = SeasonReview.order(created_at: :desc).viewable_by(current_human).limit(10)
+      reviews = SeasonReview
+                .order(created_at: :desc)
+                .viewable_by(current_human)
+                .of_interest_to(current_human)
+                .limit(10)
 
       render json: {
         data: reviews.map do |review|
