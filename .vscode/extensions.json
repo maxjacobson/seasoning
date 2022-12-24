@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "misogi.ruby-rubocop",
+    "rebornix.ruby",
+    "kaiwood.endwise"
+  ]
+}
