@@ -14,18 +14,22 @@ class SeasonReview < ApplicationRecord
   validates :rating, inclusion: { in: (0..10).to_a }, allow_blank: true
   validates :body, presence: true
 
-  def viewable_by?(human)
-    if viewable_by_anybody?
-      true
-    elsif viewable_by_mutuals?
-      human.present? && (
-        (author == human) ||
-        (human.followers.include?(author) && author.followers.include?(human))
-      )
-    elsif viewable_by_only_me?
-      author == human
-    else
-      raise
-    end
-  end
+  scope :viewable_by, lambda { |viewer|
+    joins(<<~SQL.squish)
+      join humans authors on authors.id = season_reviews.author_id
+      left outer join follows author_followers on author_followers.follower_id = authors.id
+      left outer join follows author_follows on author_follows.followee_id = authors.id
+    SQL
+      .where(<<~SQL.squish, viewer_id: viewer&.id)
+        (visibility = 'anybody')
+        or (
+          visibility = 'myself'
+          and author_id = :viewer_id
+        ) or (
+          visibility = 'mutuals'
+          and author_followers.follower_id = author_follows.followee_id
+          and author_follows.follower_id = author_followers.followee_id
+        )
+      SQL
+  }
 end
