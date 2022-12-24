@@ -16,4 +16,6 @@ RESERVED_WORDS = %w[
   undefined
   import-show
   search
+  changelog
+  roadmap
 ].freeze
