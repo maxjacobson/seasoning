@@ -31,6 +31,7 @@ export const ProfileReviewsPage = () => {
     return (
       <>
         <div>
+          <h1>{handle}&rsquo;s reviews</h1>
           <p>No reviews yet!</p>
         </div>
       </>
@@ -39,6 +40,7 @@ export const ProfileReviewsPage = () => {
 
   return (
     <div>
+      <h1>{handle}&rsquo;s reviews</h1>
       {reviewsData.data.reviews.map(({ review, show }) => {
         return <SeasonReviewSummary review={review} show={show} key={review.id} />
       })}

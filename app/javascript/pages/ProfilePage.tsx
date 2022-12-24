@@ -157,6 +157,12 @@ export const ProfilePage = () => {
               <li>
                 <Link to={`/${handle}/reviews`}>{handle}&rsquo;s reviews</Link>
               </li>
+              <li>
+                <Link to={`/${handle}/followers`}>{handle}&rsquo;s followers</Link>
+              </li>
+              <li>
+                <Link to={`/${handle}/following`}>{handle}&rsquo;s follows</Link>
+              </li>
             </ul>
           </>
         </div>
