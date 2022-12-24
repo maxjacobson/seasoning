@@ -57,7 +57,7 @@ export const GetStarted = () => {
           </p>
           <p>
             &mdash;{" "}
-            <a href="https://twitter.com/maxjacobson" target="_blank" rel="noreferrer">
+            <a href="https://www.hardscrabble.net/" target="_blank" rel="noreferrer">
               Max
             </a>
           </p>
