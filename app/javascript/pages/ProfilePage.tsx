@@ -1,10 +1,18 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
+import styled from "@emotion/styled"
+
 import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
 import { Poster } from "../components/Poster"
 import { GuestContext, SetLoadingContext } from "../contexts"
+
+const CurrentlyWatchingContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+`
 
 interface StillLoading {
   loading: true
@@ -123,29 +131,20 @@ export const ProfilePage = () => {
               <div>
                 <h2>Currently watching</h2>
                 {profile.currently_watching.length ? (
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Show</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {profile.currently_watching.map((show) => {
-                        return (
-                          <tr key={show.id}>
-                            <th>
-                              <Link to={`/shows/${show.slug}`}>
-                                <div>
-                                  <Poster show={show} size="small" url={show.poster_url} />
-                                </div>
-                                {show.title}
-                              </Link>
-                            </th>{" "}
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                  </table>
+                  <CurrentlyWatchingContainer>
+                    {profile.currently_watching.map((show) => {
+                      return (
+                        <div key={show.id}>
+                          <Link to={`/shows/${show.slug}`}>
+                            <div>
+                              <Poster show={show} size="small" url={show.poster_url} />
+                            </div>
+                            {show.title}
+                          </Link>
+                        </div>
+                      )
+                    })}
+                  </CurrentlyWatchingContainer>
                 ) : (
                   <p>{profile.handle} is not currently watching anything</p>
                 )}
