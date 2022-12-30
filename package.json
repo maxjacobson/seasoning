@@ -5,8 +5,8 @@
   "license": "UNLICENSED",
   "private": true,
   "engines": {
-    "node": "19.1.0",
-    "npm": "9.1.2"
+    "node": "19.3.0",
+    "npm": "9.2.0"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.7",
