@@ -17,7 +17,7 @@
     "eslint": "^8.31.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.31.11",
-    "husky": "^8.0.2",
+    "husky": "^8.0.3",
     "prettier": "^2.8.1",
     "vite": "^4.0.4",
     "vite-plugin-ruby": "^3.1.3"
