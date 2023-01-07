@@ -15,6 +15,7 @@ const roadmap = `
   1. Option to unfollow someone after following them
   1. Sort following and followers pages by when it happened
   1. Ability to mark individual episodes as seen
+  1. Display air dates for shows and seasons
 `
 
 export const RoadmapPage: FunctionComponent = () => {
