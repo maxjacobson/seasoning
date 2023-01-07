@@ -19,10 +19,11 @@ class MyShow < ApplicationRecord
                           .joins(:season)
                           .where(
                             human:,
-                            season: { show: },
-                            watched: true
-                          ).joins(:season)
-                          .maximum(:season_number)
+                            season: { show: }
+                          )
+                          .select(&:watched?)
+                          .map(&:season_number)
+                          .max
 
     most_recent_released = show.seasons.maximum(:season_number)
 

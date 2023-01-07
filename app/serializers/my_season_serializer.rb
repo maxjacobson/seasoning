@@ -18,7 +18,7 @@ class MySeasonSerializer < Oj::Serializer
 
   def your_relationship
     {
-      watched: my_season.watched
+      watched: my_season.watched?
     }
   end
 
