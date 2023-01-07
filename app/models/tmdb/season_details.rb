@@ -10,7 +10,6 @@ module TMDB
       attribute :name, Types::String
       attribute :overview, Types::String
       attribute :runtime, Types::Integer.optional
-      attribute :show_id, Types::Integer
       attribute :still_path, Types::String.optional
     end
     attribute :id, Types::Integer
