@@ -4,23 +4,15 @@ Your couch away from your couch.
 
 Deploying to: <http://seasoning.herokuapp.com/> aka <https://www.seasoning.tv>
 
-## Kebabs, snakes, and camels
-
-- Use kebab case in routes
-- Use camel case for typescript variables
-- Use snake case in ruby variables
-- Use snake case in the serialized API data
-
 ## Setup
 
-Pretty typical Rails stuff.
+1. Install ruby, node, and postgres
+1. Run `cp .env.development .env.development.local` and fill out `.env.development.local`
+1. Run `rails db:setup`
 
-Some specific call outs:
+Then to start things up, run these two commands in two separate terminal tabs:
 
-- Make sure to `cp .env.development .env.development.local` and fill it out
-- Make sure to run `rails db:seed`
-- To build the front-end assets you'll need to run this in a separate terminal tab: `bin/vite dev`
+1. `rails server`
+1. `bin/vite dev` -- this is technically optional, but it will enable hot module reloading which is nice
 
-## Environment variables
-
-For some features to work in development, you'll need to create an `.env.development.local` file, filling in any of the blank values in `.env.development`.
+And visit <http://localhost:3000>
