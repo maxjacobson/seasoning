@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_24_193651) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_07_181846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_193651) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["human_id"], name: "index_browser_sessions_on_human_id"
+  end
+
+  create_table "episodes", force: :cascade do |t|
+    t.string "name", null: false, comment: "The episode's official name"
+    t.string "still_path", comment: "TMDB path to a photo related to the episode"
+    t.integer "tmdb_id", null: false, comment: "The episode's id on TMDB"
+    t.integer "episode_number", null: false, comment: "The position of the episode in the season"
+    t.bigint "season_id", null: false, comment: "Which season this episode is part of"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id", "episode_number"], name: "index_episodes_on_season_id_and_episode_number", unique: true
+    t.index ["season_id"], name: "index_episodes_on_season_id"
+    t.index ["tmdb_id"], name: "index_episodes_on_tmdb_id", unique: true
   end
 
   create_table "follows", force: :cascade do |t|

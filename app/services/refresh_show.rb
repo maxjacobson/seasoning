@@ -14,13 +14,14 @@ RefreshShow = lambda { |show|
       next if tmdb_season.episode_count.zero?
       next if tmdb_season.air_date.nil? # skip not-yet-aired seasons
 
-      if (season = show.seasons.find_by(season_number: tmdb_season.season_number))
+      season = show.seasons.find_by(season_number: tmdb_season.season_number)
+      if season.present?
         season.update!(
           episode_count: tmdb_season.episode_count,
           tmdb_poster_path: tmdb_season.poster_path
         )
       else
-        show.seasons.create(
+        season = show.seasons.create(
           tmdb_id: tmdb_season.id,
           name: tmdb_season.name,
           season_number: tmdb_season.season_number,
@@ -28,6 +29,7 @@ RefreshShow = lambda { |show|
           tmdb_poster_path: tmdb_season.poster_path
         )
       end
+      RefreshEpisodes.call(show, season)
     end
   end
 }

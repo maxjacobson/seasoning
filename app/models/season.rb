@@ -4,6 +4,7 @@
 # Data is mostly from the movie database
 class Season < ApplicationRecord
   belongs_to :show
+  has_many :episodes, dependent: :destroy
   before_create -> { self.slug = name&.gsub(/[^a-z0-9\s]/i, "")&.parameterize }
 
   def poster
