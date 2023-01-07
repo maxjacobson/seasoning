@@ -10,13 +10,11 @@ module API
       my_season = MySeason.create_or_find_by(human: current_human, season:)
       if params.require(:season).require(:watched)
         my_season.update!(
-          watched_episode_numbers: season.episodes.order(episode_number: :asc).pluck(:episode_number),
-          watched: true # TODO: remove me
+          watched_episode_numbers: season.episodes.order(episode_number: :asc).pluck(:episode_number)
         )
       else
         my_season.update!(
-          watched_episode_numbers: [],
-          watched: false # TODO: remove me
+          watched_episode_numbers: []
         )
       end
 

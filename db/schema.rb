@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_07_201736) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_07_211737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,7 +86,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_201736) do
   create_table "my_seasons", force: :cascade do |t|
     t.bigint "human_id", null: false, comment: "Which human saved this season"
     t.bigint "season_id", null: false, comment: "Which season did this human save"
-    t.boolean "watched", default: false, null: false, comment: "Did the human watch this season yet?"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "watched_episode_numbers", default: [], null: false, comment: "Which episodes has this person watched?", array: true
