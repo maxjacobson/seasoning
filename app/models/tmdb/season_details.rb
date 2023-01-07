@@ -16,7 +16,7 @@ module TMDB
     attribute :id, Types::Integer
     attribute :name, Types::String
     attribute :overview, Types::String
-    attribute :poster_path, Types::String
+    attribute :poster_path, Types::String.optional
     attribute :season_number, Types::Integer
   end
 end
