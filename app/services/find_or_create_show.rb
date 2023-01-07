@@ -15,13 +15,15 @@ FindOrCreateShow = lambda { |tmdb_show|
     next if tmdb_season.episode_count.zero?
     next if tmdb_season.air_date.nil? # skip not-yet-aired seasons
 
-    show.seasons.create(
+    season = show.seasons.create(
       tmdb_id: tmdb_season.id,
       name: tmdb_season.name,
       season_number: tmdb_season.season_number,
       episode_count: tmdb_season.episode_count,
       tmdb_poster_path: tmdb_season.poster_path
     )
+
+    RefreshEpisodes.call(show, season)
   end
 
   show

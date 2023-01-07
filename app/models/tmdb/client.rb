@@ -18,6 +18,12 @@ module TMDB
       ::TMDB::TVDetails.new(data)
     end
 
+    def season_details(tv_id, season_number)
+      path = "/tv/#{tv_id}/season/#{season_number}"
+      data = get(path)
+      ::TMDB::SeasonDetails.new(data)
+    end
+
     def api_configuration
       data = get("/configuration")
       ::TMDB::APIConfiguration.new(data)
