@@ -2,9 +2,9 @@
 
 module TMDB
   class SeasonDetails < Dry::Struct
-    attribute :air_date, Types::String
+    attribute :air_date, Types::String.optional
     attribute :episodes, Types::Array do
-      attribute :air_date, Types::String
+      attribute :air_date, Types::String.optional
       attribute :episode_number, Types::Integer
       attribute :id, Types::Integer
       attribute :name, Types::String
