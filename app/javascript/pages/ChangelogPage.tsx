@@ -8,7 +8,6 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
-  1. **January 7, 2023** -- stop recording episode details in database
   1. **January 7, 2023** -- start recording episode details in database
   1. **December 24, 2022** -- add following and followers page to profiles
   1. **December 24, 2022** -- add simple admin page with some basic stats
