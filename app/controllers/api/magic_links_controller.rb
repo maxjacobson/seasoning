@@ -17,7 +17,6 @@ module API
           session_token: browser_session.token,
           email: human.email,
           handle: human.handle,
-          gravatar_url: human.gravatar_url,
           admin: human.admin
         }
       else

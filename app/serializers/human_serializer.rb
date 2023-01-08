@@ -6,7 +6,6 @@ class HumanSerializer < Oj::Serializer
 
   attributes(
     :handle,
-    :gravatar_url,
     :admin
   )
 end
