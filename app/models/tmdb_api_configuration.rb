@@ -28,7 +28,8 @@ class TMDBAPIConfiguration < ApplicationRecord
       create!(
         fetched_at: Time.zone.now,
         secure_base_url: api_configuration.images.secure_base_url,
-        poster_sizes: api_configuration.images.poster_sizes
+        poster_sizes: api_configuration.images.poster_sizes,
+        still_sizes: api_configuration.images.still_sizes
       )
     end
   end
