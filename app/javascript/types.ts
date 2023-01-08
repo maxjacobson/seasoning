@@ -28,7 +28,15 @@ export interface Season {
   episode_count: number
   slug: string
   poster_url: string | null
+  episodes: Episode[]
 }
+
+export interface Episode {
+  name: string
+  episode_number: number
+  still_path: string | null
+}
+
 export interface Show {
   id: number
   title: string
@@ -86,6 +94,7 @@ export interface SeasonReview {
 
 export interface YourRelationshipToSeason {
   watched: boolean
+  watched_episode_numbers: number[]
 }
 
 export interface YourSeason {

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
       resources :magic_links, only: %i[create show], path: "/magic-links"
       resources :humans, only: [:create]
       resources :your_shows, only: %i[index create update], path: "/your-shows"
-      resources :your_seasons, only: %i[update], path: "/your-seasons"
+      resources :your_seasons, only: %i[update], path: "/your-seasons" do
+        resources :episodes, only: %i[update], controller: "your_episodes"
+      end
       resources :profiles, only: [:show] do
         resources :season_reviews, only: [:index], controller: "profile_season_reviews", path: "season-reviews"
         resources :followers, only: [:index], controller: "profile_followers", path: "followers"

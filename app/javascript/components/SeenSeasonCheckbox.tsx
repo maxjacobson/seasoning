@@ -4,21 +4,17 @@ import { SetLoadingContext } from "../contexts"
 import { updateMySeason } from "../helpers/my_shows"
 import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"
 
+type HasWatched = "unknown" | "partial" | boolean
+
 interface Props {
   guest: AuthenticatedGuest
   show: Show
   season: Season
-  labelHidden?: boolean
 }
 
-export const SeenSeasonCheckbox: FunctionComponent<Props> = ({
-  guest,
-  season,
-  labelHidden,
-  show,
-}) => {
+export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, show }) => {
   const [updating, setUpdating] = useState(false)
-  const [hasWatched, setHasWatched] = useState<boolean | undefined>(undefined)
+  const [hasWatched, setHasWatched] = useState<HasWatched>("unknown")
   const setLoading = useContext(SetLoadingContext)
 
   useEffect(() => {
@@ -31,7 +27,20 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({
 
       if (response.ok) {
         const yourSeason: YourSeason = await response.json()
-        setHasWatched(!!yourSeason.your_relationship?.watched)
+
+        const yourRelationship = yourSeason.your_relationship
+
+        if (yourRelationship) {
+          if (yourRelationship.watched_episode_numbers.length === yourSeason.season.episode_count) {
+            setHasWatched(true)
+          } else if (yourRelationship.watched_episode_numbers.length === 0) {
+            setHasWatched(false)
+          } else {
+            setHasWatched("partial")
+          }
+        } else {
+          setHasWatched(false)
+        }
       } else {
         throw new Error("Could not load season")
       }
@@ -41,17 +50,24 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({
   return (
     <>
       <input
+        ref={(input) => {
+          if (input && hasWatched === "partial") {
+            input.indeterminate = true
+          } else if (input) {
+            input.indeterminate = false
+          }
+        }}
         type="checkbox"
-        name={season.slug}
-        id={season.slug}
-        checked={!!hasWatched}
-        disabled={hasWatched === undefined || updating}
+        checked={hasWatched === true}
+        disabled={hasWatched === "unknown" || updating}
         onChange={async () => {
+          const newHasWatched: boolean = hasWatched === true ? false : true
+
           setLoading(true)
           setUpdating(true)
           const response = await updateMySeason(season, guest.token, {
             season: {
-              watched: !hasWatched,
+              watched: newHasWatched,
             },
           })
 
@@ -59,13 +75,12 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({
           setUpdating(false)
 
           if (response.ok) {
-            setHasWatched(!hasWatched)
+            setHasWatched(newHasWatched)
           } else {
             throw new Error("Could not toggle watched status")
           }
         }}
       />
-      {!labelHidden && <label htmlFor={season.slug}>I&rsquo;ve watched this season</label>}
     </>
   )
 }

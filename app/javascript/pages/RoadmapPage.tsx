@@ -14,7 +14,6 @@ const roadmap = `
   1. Possible to edit reviews after publishing them -- body, star rating, visibility
   1. Option to unfollow someone after following them
   1. Sort following and followers pages by when it happened
-  1. Ability to mark individual episodes as seen
   1. Display air dates for shows and seasons
 `
 

@@ -1,4 +1,4 @@
-import { MyShowStatus, Season, Show } from "../types"
+import { Episode, MyShowStatus, Season, Show } from "../types"
 
 export const displayMyShowStatus = (status: MyShowStatus): string => {
   return {
@@ -32,6 +32,22 @@ export const updateMySeason = (
   body: Record<string, unknown>
 ): Promise<Response> => {
   return fetch(`/api/your-seasons/${season.id}.json`, {
+    method: "PATCH",
+    headers: {
+      "X-SEASONING-TOKEN": token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+}
+
+export const updateMyEpisode = (
+  season: Season,
+  episode: Episode,
+  token: string,
+  body: Record<string, unknown>
+): Promise<Response> => {
+  return fetch(`/api/your-seasons/${season.id}/episodes/${episode.episode_number}.json`, {
     method: "PATCH",
     headers: {
       "X-SEASONING-TOKEN": token,
