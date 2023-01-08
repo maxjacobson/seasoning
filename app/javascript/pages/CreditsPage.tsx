@@ -1,25 +1,6 @@
 import React, { FunctionComponent } from "react"
 
 import { setHeadTitle } from "../hooks"
-import Logo from "../images/logo.svg"
-
-interface IconLinkProps {
-  name: string
-  url: string
-  icon: string
-}
-const IconLink: FunctionComponent<IconLinkProps> = ({ name, url, icon }: IconLinkProps) => {
-  return (
-    <>
-      <div>
-        <img src={icon} width="60" />
-      </div>
-      <a href={url} target="_blank" rel="noreferrer">
-        {name}
-      </a>
-    </>
-  )
-}
 
 export const CreditsPage: FunctionComponent = () => {
   setHeadTitle("Credits")
@@ -38,42 +19,6 @@ export const CreditsPage: FunctionComponent = () => {
           </a>
           .
         </p>
-      </div>
-
-      <div>
-        <h2>Icons</h2>
-
-        <div>
-          <p>
-            Several icons are from{" "}
-            <a href="https://www.toicon.com/" target="_blank" rel="noreferrer">
-              to [icon]
-            </a>
-            :
-          </p>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Icon</th>
-                <th>Artist</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <IconLink
-                    key="to-watch"
-                    name="to watch"
-                    url="https://www.toicon.com/icons/avocado_watch"
-                    icon={Logo}
-                  />
-                </td>
-                <td>Shannon E Thomas</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
 
       <div>
@@ -99,6 +44,12 @@ export const CreditsPage: FunctionComponent = () => {
           </a>
           . Feel free to pitch in and/or roast me. There are no tests. Just going to get ahead of
           that one. Otherwise it&rsquo;s perfect.
+        </p>
+
+        <h3>Icon</h3>
+        <p>
+          The television icon you see up top is{" "}
+          <a href="https://www.toicon.com/icons/avocado_watch">by Shannon E Thomas</a>.
         </p>
       </div>
     </div>
