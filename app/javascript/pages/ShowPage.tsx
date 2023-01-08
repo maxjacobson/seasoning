@@ -113,14 +113,22 @@ export const ShowPage = () => {
           </div>
         </div>
 
-        <div>
-          <h2>Poster</h2>
-          <Poster show={data.show} size="large" url={data.show.poster_url} />
-        </div>
-        <div>
-          <h2>Seasons</h2>
-          <SeasonsList show={data.show} guest={guest} />
-        </div>
+        {data.show.poster_url ? (
+          <div>
+            <h2>Poster</h2>
+            <Poster show={data.show} size="large" url={data.show.poster_url} />
+          </div>
+        ) : (
+          <div>No poster...</div>
+        )}
+        {data.show.seasons.length > 0 ? (
+          <div>
+            <h2>Seasons</h2>
+            <SeasonsList show={data.show} guest={guest} />
+          </div>
+        ) : (
+          <div>No seasons...</div>
+        )}
       </div>
     )
   }
