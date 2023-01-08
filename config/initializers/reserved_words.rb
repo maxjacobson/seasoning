@@ -10,6 +10,7 @@ RESERVED_WORDS = %w[
   about
   add-show
   credits
+  feeds
   settings
   review
   reviews
