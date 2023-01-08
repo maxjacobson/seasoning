@@ -10,6 +10,6 @@ class SeasonSerializer < Oj::Serializer
   end
 
   def episodes
-    EpisodeSerializer.many(season.episodes)
+    EpisodeSerializer.many(season.episodes.order(episode_number: :asc))
   end
 end
