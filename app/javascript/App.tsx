@@ -40,6 +40,15 @@ const globalStyles = css`
     margin: 0;
     font-family: monospace;
   }
+
+  a {
+    color: #d67411;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
 
 const SiteHeader = styled.div`
