@@ -20,9 +20,4 @@ class Human < ApplicationRecord
     human_ids = Follow.where(follower_id: id).pluck(:followee_id)
     Human.where(id: human_ids)
   end
-
-  def gravatar_url
-    hash = Digest::MD5.hexdigest(email)
-    "https://www.gravatar.com/avatar/#{hash}"
-  end
 end
