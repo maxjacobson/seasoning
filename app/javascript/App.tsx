@@ -15,6 +15,7 @@ import { HomePage } from "./pages/HomePage"
 import { YourShowsPage } from "./pages/YourShowsPage"
 import { ShowPage } from "./pages/ShowPage"
 import { SeasonPage } from "./pages/SeasonPage"
+import { EpisodePage } from "./pages/EpisodePage"
 import { ProfilePage } from "./pages/ProfilePage"
 import { ProfileReviewsPage } from "./pages/ProfileReviewsPage"
 import { ProfileFollowingPage } from "./pages/ProfileFollowingPage"
@@ -131,6 +132,10 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 />
                 <Route path="/shows/:showSlug" element={<ShowPage />} />
                 <Route path="/shows/:showSlug/:seasonSlug" element={<SeasonPage />} />
+                <Route
+                  path="/shows/:showSlug/:seasonSlug/:episodeNumber"
+                  element={<EpisodePage />}
+                />
                 <Route path="/:handle/shows/:showSlug/:seasonSlug" element={<SeasonReviewPage />} />
                 <Route
                   path="/:handle/shows/:showSlug/:seasonSlug/:viewing"

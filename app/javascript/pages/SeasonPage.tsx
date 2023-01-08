@@ -56,7 +56,7 @@ export const SeasonPage = () => {
         throw new Error("Could not load season")
       }
     })()
-  }, [seasonSlug])
+  }, [showSlug, seasonSlug])
 
   let headTitle
 
@@ -113,7 +113,11 @@ export const SeasonPage = () => {
                   return (
                     <tr key={episode.episode_number}>
                       <td>{episode.episode_number}</td>
-                      <td>{episode.name}</td>
+                      <td>
+                        <Link to={`/shows/${showSlug}/${seasonSlug}/${episode.episode_number}`}>
+                          {episode.name}
+                        </Link>
+                      </td>
                       {guest.authenticated && yourSeason.your_relationship && (
                         <td>
                           <SeenEpisodeCheckbox
