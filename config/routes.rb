@@ -16,7 +16,9 @@ Rails.application.routes.draw do
         resources :follows, only: [:index], controller: "profile_follows", path: "following"
       end
       resources :shows, only: %i[index show] do
-        resources :seasons, only: %i[show]
+        resources :seasons, only: %i[show] do
+          resources :episodes, only: %i[show]
+        end
       end
       resources :imports, only: %i[index create]
       resource :settings, only: %i[show update]
