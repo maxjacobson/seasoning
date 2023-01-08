@@ -22,6 +22,7 @@ const roadmap = `
   1. Page that shows you what episodes are available from your currently watching shows
   1. RSS feed for public reviews
   1. An activity feed for the people you follow
+  1. A way to indicate that you're rewatching a show/season, not watching it for the first time
 `
 
 export const RoadmapPage: FunctionComponent = () => {
