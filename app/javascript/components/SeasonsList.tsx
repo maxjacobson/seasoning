@@ -31,12 +31,7 @@ export const SeasonsList: FunctionComponent<Props> = ({ show, guest }: Props) =>
               <td>{season.episode_count}</td>
               {guest.authenticated && (
                 <td>
-                  <SeenSeasonCheckbox
-                    guest={guest}
-                    show={show}
-                    season={season}
-                    labelHidden={true}
-                  />
+                  <SeenSeasonCheckbox guest={guest} show={show} season={season} />
                 </td>
               )}
             </tr>

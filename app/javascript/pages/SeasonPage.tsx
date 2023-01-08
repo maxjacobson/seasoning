@@ -3,9 +3,9 @@ import { Link, useParams } from "react-router-dom"
 
 import { setHeadTitle } from "../hooks"
 import { YourSeason } from "../types"
-import { SeenSeasonCheckbox } from "../components/SeenSeasonCheckbox"
 import { Poster } from "../components/Poster"
 import { GuestContext, SetLoadingContext } from "../contexts"
+import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
 
 interface LoadingSeason {
   loading: true
@@ -98,17 +98,39 @@ export const SeasonPage = () => {
         </div>
         <div>
           <h2>Season info</h2>
-          <span>Episode count: {yourSeason.season.episode_count}</span>
-        </div>
 
-        {guest.authenticated && (
-          <>
-            <div>
-              <h2>Seen it?</h2>
-              <SeenSeasonCheckbox guest={guest} show={yourSeason.show} season={yourSeason.season} />
-            </div>
-          </>
-        )}
+          <div>
+            <table style={{ width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={{ textAlign: "left" }}>Number</th>
+                  <th style={{ textAlign: "left" }}>Name</th>
+                  {guest.authenticated && <th style={{ textAlign: "left" }}>Seen?</th>}
+                </tr>
+              </thead>
+              <tbody>
+                {yourSeason.season.episodes.map((episode) => {
+                  return (
+                    <tr key={episode.episode_number}>
+                      <td>{episode.episode_number}</td>
+                      <td>{episode.name}</td>
+                      {guest.authenticated && yourSeason.your_relationship && (
+                        <td>
+                          <SeenEpisodeCheckbox
+                            episode={episode}
+                            season={yourSeason.season}
+                            guest={guest}
+                            yourRelationshipToSeason={yourSeason.your_relationship}
+                          />
+                        </td>
+                      )}
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       {guest.authenticated && yourSeason.your_reviews && (
