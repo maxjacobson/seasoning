@@ -11,6 +11,7 @@ module API
         showsCount: Show.count,
         seasonsCount: Season.count,
         reviewsCount: SeasonReview.count,
+        episodesCount: Episode.count,
         lastRefreshedTmdbConfigAt: TMDBAPIConfiguration.only.fetched_at,
         recentHumans: HumanSerializer.many(Human.order(created_at: :desc).limit(50))
       }

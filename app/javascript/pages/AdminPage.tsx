@@ -10,6 +10,7 @@ type AdminData = {
   showsCount: number
   seasonsCount: number
   reviewsCount: number
+  episodesCount: number
   lastRefreshedTmdbConfigAt: string
   recentHumans: Human[]
 }
@@ -48,6 +49,9 @@ export const AdminPage = () => {
         </li>
         <li>
           <strong>Reviews count: </strong> {adminData.data.reviewsCount}
+        </li>
+        <li>
+          <strong>Episodes count: </strong> {adminData.data.episodesCount}
         </li>
         <li>
           <strong>Last refreshed TMDB config: </strong> {adminData.data.lastRefreshedTmdbConfigAt}
