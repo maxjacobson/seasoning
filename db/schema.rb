@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_08_011418) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_08_022213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_08_011418) do
     t.string "email", null: false, comment: "Their email. This is how they'll log in. No passwords. Just click a link in your email."
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "share_currently_watching", default: false, null: false, comment: "Whether or not to publicly display your currently watching list on the profile page"
+    t.boolean "share_currently_watching", default: true, null: false, comment: "Whether or not to publicly display your currently watching list on the profile page"
     t.enum "default_review_visibility", default: "anybody", null: false, comment: "Lets people specify who they generally want to share their reviews with, to save them some clicking", enum_type: "visibility"
     t.boolean "admin", default: false, null: false, comment: "Gives humans some extra abilities to see things like the admin stats page"
     t.index ["email"], name: "humans_email_unique", unique: true
