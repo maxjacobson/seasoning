@@ -10,13 +10,22 @@ namespace :tmdb do
 
   # Refresh the shows and seasons records over time.
   #
-  # Helps make sure that as new seasons spring to life, Seasoning is aware.
+  # Helps make sure that as new seasons and episodes spring to life, Seasoning is aware.
   #
   # Plus other various changes, like the default poster changing...
   #
   # Run daily via https://dashboard.heroku.com/apps/seasoning/scheduler
   task refresh_shows: :environment do
     Show.needs_refreshing.find_each do |show|
+      puts "Refreshing #{show.slug}"
+      show.refresh!
+    end
+  end
+
+  # Available to run manually if I make changes to the import/refresh flow and want
+  # to kick off a full refresh to confirm it's still working
+  task refresh_all_shows: :environment do
+    Show.all.find_each do |show|
       puts "Refreshing #{show.slug}"
       show.refresh!
     end
