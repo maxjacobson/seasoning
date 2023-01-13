@@ -8,6 +8,7 @@ RefreshEpisodes = lambda do |show, season|
     episode.name = tmdb_episode.name
     episode.still_path = tmdb_episode.still_path
     episode.tmdb_id = tmdb_episode.id
+    episode.air_date = tmdb_episode.air_date
     episode.save!
   end
 end
