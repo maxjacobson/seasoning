@@ -8,6 +8,8 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **January 13, 2023** -- Made background refreshing of episodes more resilient, so if one show cannot refresh it doesn't prevent other shows from refreshing
+  1. **January 13, 2023** -- Set up bugsnag for exception tracking for backend ruby errors
   1. **January 7, 2023** -- Change the default setting for new people who sign up so that their currently viewing shows will be publicly viewable.
   1. **January 7, 2023** -- New page for individual episodes
   1. **January 7, 2023** -- People can mark individual episodes as seen
