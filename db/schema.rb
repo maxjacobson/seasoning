@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_08_022213) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_170232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_08_022213) do
     t.bigint "season_id", null: false, comment: "Which season this episode is part of"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "air_date", comment: "What date did this episode first air?"
     t.index ["season_id", "episode_number"], name: "index_episodes_on_season_id_and_episode_number", unique: true
     t.index ["season_id"], name: "index_episodes_on_season_id"
     t.index ["tmdb_id"], name: "index_episodes_on_tmdb_id", unique: true
