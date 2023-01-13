@@ -35,3 +35,5 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "dry-struct"
 
 gem "bugsnag"
+
+gem "sucker_punch"

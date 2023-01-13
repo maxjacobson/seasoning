@@ -237,6 +237,8 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
     ruby-progressbar (1.11.0)
     strscan (3.0.4)
+    sucker_punch (3.1.0)
+      concurrent-ruby (~> 1.0)
     thor (1.2.1)
     timeout (0.3.0)
     tzinfo (2.0.5)
@@ -277,6 +279,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-rails
+  sucker_punch
   tzinfo-data
   vite_rails
 
