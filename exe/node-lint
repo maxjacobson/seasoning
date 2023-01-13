@@ -4,4 +4,4 @@ set -ex
 
 npx tsc --build tsconfig.json
 npx prettier --check .
-npx eslint --max-warnings 0 app
+npx eslint --max-warnings 0 .
