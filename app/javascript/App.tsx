@@ -36,7 +36,7 @@ import LogoWithName from "./images/logo-with-name.svg"
 
 const globalStyles = css`
   body {
-    padding: 0;
+    padding: 0 0 20px 0;
     margin: 0;
     font-family: monospace;
   }
