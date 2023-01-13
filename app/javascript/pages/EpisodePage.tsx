@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { setHeadTitle } from "../hooks"
 import { Episode, Season, Show } from "../types"
+import { AirDate } from "../components/AirDate"
 
 interface LoadingEpisode {
   loading: true
@@ -85,6 +86,10 @@ export const EpisodePage = () => {
       </p>
 
       <div>{episode.still_url && <img src={episode.still_url} />}</div>
+
+      <div>
+        Air date: <AirDate date={episode.air_date} />
+      </div>
     </>
   )
 }
