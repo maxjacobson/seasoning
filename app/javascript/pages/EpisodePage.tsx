@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { setHeadTitle } from "../hooks"
 import { Episode, Season, Show } from "../types"
+import { GuestContext, SetLoadingContext } from "../contexts"
+import { Link, useParams } from "react-router-dom"
+import React, { useContext, useEffect, useState } from "react"
 import { AirDate } from "../components/AirDate"
+import { setHeadTitle } from "../hooks"
 
 interface LoadingEpisode {
   loading: true

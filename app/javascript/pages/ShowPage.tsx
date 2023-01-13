@@ -1,14 +1,13 @@
+import { GuestContext, SetLoadingContext } from "../contexts"
 import React, { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-
-import { YourShow } from "../types"
-import { setHeadTitle } from "../hooks"
 import { AddShowButton } from "../components/AddShowButton"
 import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
 import { NoteToSelf } from "../components/NoteToSelf"
-import { SeasonsList } from "../components/SeasonsList"
 import { Poster } from "../components/Poster"
-import { GuestContext, SetLoadingContext } from "../contexts"
+import { SeasonsList } from "../components/SeasonsList"
+import { setHeadTitle } from "../hooks"
+import { useParams } from "react-router-dom"
+import { YourShow } from "../types"
 
 type LoadingShowData = {
   loading: true

@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from "react"
+import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
-
+import React, { useContext, useEffect, useState } from "react"
+import { AirDate } from "../components/AirDate"
+import { Poster } from "../components/Poster"
+import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
 import { setHeadTitle } from "../hooks"
 import { YourSeason } from "../types"
-import { Poster } from "../components/Poster"
-import { AirDate } from "../components/AirDate"
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
 
 interface LoadingSeason {
   loading: true

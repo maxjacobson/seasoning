@@ -1,8 +1,7 @@
 import React, { useContext } from "react"
+import { GuestContext } from "../contexts"
 import { Link } from "react-router-dom"
 import { YourShowsList } from "../components/YourShowsList"
-
-import { GuestContext } from "../contexts"
 
 export const YourShowsPage = () => {
   const guest = useContext(GuestContext)

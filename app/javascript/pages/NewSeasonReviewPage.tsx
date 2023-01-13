@@ -1,11 +1,10 @@
+import { GuestContext, SetLoadingContext } from "../contexts"
+import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types"
+import { loadData, setHeadTitle } from "../hooks"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import styled from "@emotion/styled"
-
-import { loadData, setHeadTitle } from "../hooks"
-import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types"
 import { TextArea } from "../components/TextArea"
-import { GuestContext, SetLoadingContext } from "../contexts"
 
 const Container = styled.span`
   font-size: 2rem;

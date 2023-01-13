@@ -1,8 +1,7 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
-
 import { AuthenticatedGuest, HumanSettings } from "../types"
-import { setHeadTitle } from "../hooks"
 import { GuestContext, SetLoadingContext } from "../contexts"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import { setHeadTitle } from "../hooks"
 
 interface LoadingSettingsData {
   loading: true

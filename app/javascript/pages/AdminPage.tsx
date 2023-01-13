@@ -1,8 +1,7 @@
-import React, { useContext } from "react"
-import { Link, Navigate } from "react-router-dom"
 import { GuestContext, SetLoadingContext } from "../contexts"
-
+import { Link, Navigate } from "react-router-dom"
 import { loadData, setHeadTitle } from "../hooks"
+import React, { useContext } from "react"
 import { Human } from "../types"
 
 type AdminData = {
