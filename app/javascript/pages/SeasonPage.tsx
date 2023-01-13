@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom"
 import { setHeadTitle } from "../hooks"
 import { YourSeason } from "../types"
 import { Poster } from "../components/Poster"
+import { AirDate } from "../components/AirDate"
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
 
@@ -105,6 +106,7 @@ export const SeasonPage = () => {
                 <tr>
                   <th style={{ textAlign: "left" }}>Number</th>
                   <th style={{ textAlign: "left" }}>Name</th>
+                  <th style={{ textAlign: "left" }}>Air date</th>
                   {guest.authenticated && <th style={{ textAlign: "left" }}>Seen?</th>}
                 </tr>
               </thead>
@@ -117,6 +119,9 @@ export const SeasonPage = () => {
                         <Link to={`/shows/${showSlug}/${seasonSlug}/${episode.episode_number}`}>
                           {episode.name}
                         </Link>
+                      </td>
+                      <td>
+                        <AirDate date={episode.air_date} />
                       </td>
                       {guest.authenticated && yourSeason.your_relationship && (
                         <td>

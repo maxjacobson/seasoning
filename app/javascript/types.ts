@@ -34,6 +34,7 @@ export interface Episode {
   name: string
   episode_number: number
   still_url: string | null
+  air_date: string | null
 }
 
 export interface Show {
