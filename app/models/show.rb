@@ -33,4 +33,8 @@ class Show < ApplicationRecord
   def refresh!
     RefreshShow.call(self)
   end
+
+  def refresh_async
+    RefreshShowJob.perform_async(id)
+  end
 end
