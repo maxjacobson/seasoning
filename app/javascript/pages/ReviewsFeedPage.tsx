@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from "react"
-
-import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
-import { SeasonReview, Show } from "../types"
-import { setHeadTitle } from "../hooks"
 import { GuestContext, SetLoadingContext } from "../contexts"
+import React, { useContext, useEffect, useState } from "react"
+import { SeasonReview, Show } from "../types"
 import { Navigate } from "react-router-dom"
+import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
+import { setHeadTitle } from "../hooks"
 
 interface LoadingReviewsFeedData {
   loading: true

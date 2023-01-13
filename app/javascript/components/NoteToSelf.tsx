@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 
-import { TextArea } from "./TextArea"
 import { Markdown } from "../components/Markdown"
-import { YourShow } from "../types"
-import { updateMyShow } from "../helpers/my_shows"
 import { SetLoadingContext } from "../contexts"
+import { TextArea } from "./TextArea"
+import { updateMyShow } from "../helpers/my_shows"
+import { YourShow } from "../types"
 
 interface Props {
   yourShow: YourShow

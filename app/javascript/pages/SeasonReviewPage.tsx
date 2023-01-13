@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import queryString from "query-string"
-
-import { Markdown } from "../components/Markdown"
+import { GuestContext, SetLoadingContext } from "../contexts"
 import { Human, Season, SeasonReview, Show } from "../types"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import React, { useContext, useEffect, useState } from "react"
+import { Markdown } from "../components/Markdown"
+import { Poster } from "../components/Poster"
+import queryString from "query-string"
 import { setHeadTitle } from "../hooks"
 import { StarRating } from "../components/StarRating"
-import { Poster } from "../components/Poster"
-import { GuestContext, SetLoadingContext } from "../contexts"
 
 interface LoadingReviewData {
   loading: true

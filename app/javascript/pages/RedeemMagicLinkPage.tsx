@@ -1,8 +1,7 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { SetLoadingContext } from "../contexts"
-
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Guest } from "../types"
+import { SetLoadingContext } from "../contexts"
 
 interface Props {
   setGuest: (guest: Guest) => void

@@ -1,13 +1,12 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
-import { Link, useSearchParams } from "react-router-dom"
-import queryString from "query-string"
-import styled from "@emotion/styled"
-
-import { Poster } from "./Poster"
 import { Human, YourShow } from "../types"
+import { Link, useSearchParams } from "react-router-dom"
+import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { displayMyShowStatus } from "../helpers/my_shows"
 import { Markdown } from "./Markdown"
+import { Poster } from "./Poster"
+import queryString from "query-string"
 import { SetLoadingContext } from "../contexts"
+import styled from "@emotion/styled"
 
 const NoteToSelf = styled.div`
   border: 1px solid black;

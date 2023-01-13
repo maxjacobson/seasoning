@@ -1,8 +1,7 @@
+import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { SetLoadingContext } from "../contexts"
-
 import { updateMySeason } from "../helpers/my_shows"
-import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"
 
 type HasWatched = "unknown" | "partial" | boolean
 

@@ -1,9 +1,8 @@
+import { AuthenticatedGuest, Show } from "../types"
 import React, { FunctionComponent, useContext, useEffect } from "react"
 import debounce from "lodash.debounce"
-
-import { AuthenticatedGuest, Show } from "../types"
-import { useNavigate } from "react-router-dom"
 import { SetLoadingContext } from "../contexts"
+import { useNavigate } from "react-router-dom"
 
 const searchForShows = (
   title: string,

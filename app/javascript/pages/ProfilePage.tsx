@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react"
+import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
-
-import styled from "@emotion/styled"
-
+import React, { useContext, useEffect, useState } from "react"
+import { Poster } from "../components/Poster"
 import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
-import { Poster } from "../components/Poster"
-import { GuestContext, SetLoadingContext } from "../contexts"
+import styled from "@emotion/styled"
 
 const CurrentlyWatchingContainer = styled.div`
   display: flex;

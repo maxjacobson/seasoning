@@ -1,9 +1,8 @@
-import React, { useContext } from "react"
-import { Link, useParams } from "react-router-dom"
-
-import { Human } from "../types"
-import { loadData, setHeadTitle } from "../hooks"
 import { GuestContext, SetLoadingContext } from "../contexts"
+import { Link, useParams } from "react-router-dom"
+import { loadData, setHeadTitle } from "../hooks"
+import React, { useContext } from "react"
+import { Human } from "../types"
 
 export const ProfileFollowingPage = () => {
   const guest = useContext(GuestContext)

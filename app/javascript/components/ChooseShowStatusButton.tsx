@@ -1,7 +1,6 @@
-import React, { FunctionComponent, useContext } from "react"
-
-import { MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
 import { displayMyShowStatus, updateMyShow } from "../helpers/my_shows"
+import { MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
+import React, { FunctionComponent, useContext } from "react"
 import { SetLoadingContext } from "../contexts"
 
 const allStatuses: MyShowStatus[] = [
