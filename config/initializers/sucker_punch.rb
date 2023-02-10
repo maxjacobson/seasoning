@@ -10,5 +10,13 @@ SuckerPunch.exception_handler = lambda { |ex, klass, args|
     #{ex.backtrace&.join("\n")}
   MSG
 
-  Bugsnag.notify(ex)
+  Bugsnag.notify(ex) do |event|
+    event.add_metadata(
+      :sucker_punch,
+      {
+        klass:,
+        args:
+      }
+    )
+  end
 }
