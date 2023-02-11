@@ -18,8 +18,8 @@ export const HomePage = () => {
   } else {
     return (
       <div>
-        <h1>Welcome</h1>
-        <h2>This is seasoning, a website about TV shows</h2>
+        <h1 className="text-2xl">Welcome</h1>
+        <h2 className="text-lg">This is seasoning, a website about TV shows</h2>
         <GetStarted />
       </div>
     )

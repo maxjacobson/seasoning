@@ -28,7 +28,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
 
   return (
     <div className="border border-solid border-black p-2">
-      <h1>Write a note to self</h1>
+      <h1 className="text-2xl">Write a note to self</h1>
 
       {isEditing ? (
         <div>
@@ -44,7 +44,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
           </label>
 
           <textarea
-            className="h-48 w-5/6"
+            className="h-48 w-5/6 font-mono"
             disabled={loading}
             value={newNoteToSelf}
             onChange={(event) => setNewNoteToSelf(event.target.value)}

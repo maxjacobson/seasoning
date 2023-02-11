@@ -58,7 +58,7 @@ export const ChangelogPage: FunctionComponent = () => {
 
   return (
     <div>
-      <h1>Changelog</h1>
+      <h1 className="text-xl">Changelog</h1>
 
       <Markdown markdown={changelog} />
     </div>

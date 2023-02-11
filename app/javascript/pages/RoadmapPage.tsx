@@ -30,7 +30,7 @@ export const RoadmapPage: FunctionComponent = () => {
 
   return (
     <div>
-      <h1>Roadmap</h1>
+      <h1 className="text-xl">Roadmap</h1>
 
       <Markdown markdown={roadmap} />
     </div>

@@ -69,7 +69,7 @@ export const ProfilePage = () => {
   } else if (!profileData.profile) {
     return (
       <div>
-        <h1>Not found</h1>
+        <h1 className="text-xl">Not found</h1>
         <p>No one goes by that name around these parts</p>
       </div>
     )
@@ -78,7 +78,7 @@ export const ProfilePage = () => {
 
     return (
       <div>
-        <h1>{handle}</h1>
+        <h1 className="text-2xl">{handle}</h1>
 
         {guest.authenticated && profile.your_relationship && !profile.your_relationship.self && (
           <button
@@ -108,11 +108,11 @@ export const ProfilePage = () => {
           </button>
         )}
         <div>
-          <h2>Profile</h2>
+          <h2 className="text-xl">Profile</h2>
 
           <>
             <div>
-              <h2>About</h2>
+              <h2 className="text-xl">About</h2>
               <p>
                 <em>Seasoner since {new Date(profile.created_at).toLocaleDateString()}</em>
               </p>
@@ -120,7 +120,7 @@ export const ProfilePage = () => {
 
             {profile.currently_watching && (
               <div>
-                <h2>Currently watching</h2>
+                <h2 className="text-xl">Currently watching</h2>
                 {profile.currently_watching.length ? (
                   <div className="flex flex-wrap gap-1">
                     {profile.currently_watching.map((show) => {
@@ -143,7 +143,7 @@ export const ProfilePage = () => {
             )}
 
             <h2>See also</h2>
-            <ul>
+            <ul className="list-inside list-disc">
               <li>
                 <Link to={`/${handle}/reviews`}>{handle}&rsquo;s reviews</Link>
               </li>
