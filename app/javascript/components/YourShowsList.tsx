@@ -21,11 +21,7 @@ interface ListShowProps {
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
-      <div
-        style={{
-          margin: "10px 0",
-        }}
-      >
+      <div className="my-2 mx-0">
         {shows.map((yourShow) => {
           return (
             <div key={yourShow.show.id}>

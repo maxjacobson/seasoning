@@ -10,12 +10,12 @@ interface Props {
 
 export const SeasonsList: FunctionComponent<Props> = ({ show, guest }: Props) => {
   return (
-    <table style={{ width: "100%" }}>
+    <table className="w-full">
       <thead>
         <tr>
-          <th style={{ textAlign: "left" }}>Name</th>
-          <th style={{ textAlign: "left" }}>Episode count</th>
-          {guest.authenticated && <th style={{ textAlign: "left" }}>Seen?</th>}
+          <th className="text-left">Name</th>
+          <th className="text-left">Episode count</th>
+          {guest.authenticated && <th className="text-left">Seen?</th>}
         </tr>
       </thead>
 

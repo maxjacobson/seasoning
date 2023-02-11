@@ -7,7 +7,7 @@ Following this guide: <https://tailwindcss.com/docs/guides/vite>
 - [x] Set up Tailwind
   - [x] Tailwind editor integration to get rid of warnings in css files
 - [x] Convert emotion styles to Tailwind styles
-- [ ] Convert inline styles to Tailwind styles
+- [x] Convert inline styles to Tailwind styles
 - [x] Remove emotion
 - [ ] Make it look nicer using Tailwind
   - [ ] Stars on new review page are too small

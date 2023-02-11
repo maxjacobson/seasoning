@@ -27,12 +27,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
   }, [yourShow.show.slug])
 
   return (
-    <div
-      style={{
-        border: "1px solid black",
-        padding: "5px",
-      }}
-    >
+    <div className="border border-solid border-black p-2">
       <h1>Write a note to self</h1>
 
       {isEditing ? (

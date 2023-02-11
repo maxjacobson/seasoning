@@ -129,7 +129,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
 
-              <div style={{ marginTop: "25px", borderTop: "1px dashed black" }}>
+              <div className="mt-5 border-t border-dashed border-t-black">
                 {guest.authenticated && guest.human.admin && (
                   <>
                     {" "}

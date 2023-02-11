@@ -100,13 +100,13 @@ export const SeasonPage = () => {
           <h2>Season info</h2>
 
           <div>
-            <table style={{ width: "100%" }}>
+            <table className="w-full">
               <thead>
                 <tr>
-                  <th style={{ textAlign: "left" }}>Number</th>
-                  <th style={{ textAlign: "left" }}>Name</th>
-                  <th style={{ textAlign: "left" }}>Air date</th>
-                  {guest.authenticated && <th style={{ textAlign: "left" }}>Seen?</th>}
+                  <th className="text-left">Number</th>
+                  <th className="text-left">Name</th>
+                  <th className="text-left">Air date</th>
+                  {guest.authenticated && <th className="text-left">Seen?</th>}
                 </tr>
               </thead>
               <tbody>

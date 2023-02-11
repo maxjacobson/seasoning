@@ -149,7 +149,7 @@ const RatingPicker = ({
 
   return (
     <>
-      <div>
+      <div className="text-xl">
         <RatingChoice position={1} {...choiceProps} />
         <RatingChoice position={2} {...choiceProps} />
         <RatingChoice position={3} {...choiceProps} />
@@ -160,7 +160,7 @@ const RatingPicker = ({
         <RatingChoice position={8} {...choiceProps} />
         <RatingChoice position={9} {...choiceProps} />
         <RatingChoice position={10} {...choiceProps} />
-        <span style={{ cursor: "pointer" }} onClick={() => setRating(undefined)}>
+        <span className="cursor-pointer" onClick={() => setRating(undefined)}>
           🚫
         </span>
       </div>
@@ -184,13 +184,13 @@ const RatingChoice = ({
 
   if (choice && choice >= position) {
     return (
-      <span {...starProps} style={{ color: "#FFD700", cursor: "pointer" }}>
+      <span {...starProps} className="cursor-pointer text-yellow-400">
         ★
       </span>
     )
   } else {
     return (
-      <span {...starProps} style={{ cursor: "pointer" }}>
+      <span {...starProps} className="cursor-pointer">
         ☆
       </span>
     )

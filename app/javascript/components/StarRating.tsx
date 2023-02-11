@@ -23,7 +23,7 @@ export const StarRating: FunctionComponent<Props> = ({ rating }) => {
 
 const Star = ({ position, rating }: { position: number; rating: number }) => {
   if (rating >= position) {
-    return <span style={{ color: "#FFD700" }}>★</span>
+    return <span className="text-yellow-400">★</span>
   } else {
     return <span>☆</span>
   }
