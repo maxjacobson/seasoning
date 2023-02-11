@@ -2,7 +2,6 @@ import React, { FunctionComponent, useContext, useEffect, useState } from "react
 
 import { Markdown } from "../components/Markdown"
 import { SetLoadingContext } from "../contexts"
-import { TextArea } from "./TextArea"
 import { updateMyShow } from "../helpers/my_shows"
 import { YourShow } from "../types"
 
@@ -49,7 +48,8 @@ export const NoteToSelf: FunctionComponent<Props> = ({
             </p>
           </label>
 
-          <TextArea
+          <textarea
+            className="h-48 w-5/6"
             disabled={loading}
             value={newNoteToSelf}
             onChange={(event) => setNewNoteToSelf(event.target.value)}

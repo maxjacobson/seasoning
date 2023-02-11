@@ -4,13 +4,6 @@ import React, { useContext, useEffect, useState } from "react"
 import { Poster } from "../components/Poster"
 import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
-import styled from "@emotion/styled"
-
-const CurrentlyWatchingContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-`
 
 interface StillLoading {
   loading: true
@@ -129,7 +122,7 @@ export const ProfilePage = () => {
               <div>
                 <h2>Currently watching</h2>
                 {profile.currently_watching.length ? (
-                  <CurrentlyWatchingContainer>
+                  <div className="flex flex-wrap gap-1">
                     {profile.currently_watching.map((show) => {
                       return (
                         <div key={show.id}>
@@ -142,7 +135,7 @@ export const ProfilePage = () => {
                         </div>
                       )
                     })}
-                  </CurrentlyWatchingContainer>
+                  </div>
                 ) : (
                   <p>{profile.handle} is not currently watching anything</p>
                 )}

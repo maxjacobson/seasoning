@@ -3,14 +3,6 @@ import { Import, Show } from "../types"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import queryString from "query-string"
-import styled from "@emotion/styled"
-
-const ImportContainer = styled.div`
-  margin: 10px 0;
-  border: 1px dotted blue;
-  padding: 5px;
-  border-radius: 5px;
-`
 
 export const ImportShowPage = () => {
   const [searchParams] = useSearchParams()
@@ -95,7 +87,10 @@ export const ImportShowPage = () => {
       {results && (
         <div>
           {results.map((result) => (
-            <ImportContainer key={result.id}>
+            <div
+              className="mx-0 my-2 rounded-md border border-dotted border-blue-500 p-1"
+              key={result.id}
+            >
               {result.poster_url && <img src={result.poster_url} />}
               <div>
                 {result.name} {result.year && `(${result.year})`}
@@ -134,7 +129,7 @@ export const ImportShowPage = () => {
                   Import
                 </button>
               </div>
-            </ImportContainer>
+            </div>
           ))}
         </div>
       )}

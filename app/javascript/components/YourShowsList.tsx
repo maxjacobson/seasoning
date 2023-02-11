@@ -6,13 +6,6 @@ import { Markdown } from "./Markdown"
 import { Poster } from "./Poster"
 import queryString from "query-string"
 import { SetLoadingContext } from "../contexts"
-import styled from "@emotion/styled"
-
-const NoteToSelf = styled.div`
-  border: 1px solid black;
-  padding: 2px;
-  margin: 10px 0;
-`
 
 interface YourShows {
   your_shows: YourShow[]
@@ -54,10 +47,10 @@ const ListShows = ({ shows }: ListShowProps) => {
               </div>
 
               {yourShow.your_relationship?.note_to_self ? (
-                <NoteToSelf>
+                <div className="mx-0 my-2.5 border border-solid border-black p-0.5">
                   <h2>Note to self</h2>
                   <Markdown markdown={yourShow.your_relationship.note_to_self} />
-                </NoteToSelf>
+                </div>
               ) : (
                 <></>
               )}

@@ -3,12 +3,6 @@ import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../
 import { loadData, setHeadTitle } from "../hooks"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import styled from "@emotion/styled"
-import { TextArea } from "../components/TextArea"
-
-const Container = styled.span`
-  font-size: 2rem;
-`
 
 export const NewSeasonReviewPage = () => {
   const [body, setBody] = useState("")
@@ -75,7 +69,11 @@ export const NewSeasonReviewPage = () => {
         </span>
       </label>
       <div>
-        <TextArea value={body} onChange={(event) => setBody(event.target.value)} />
+        <textarea
+          className="h-48 w-5/6"
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
+        />
       </div>
       <div>
         <button
@@ -152,21 +150,19 @@ const RatingPicker = ({
   return (
     <>
       <div>
-        <Container>
-          <RatingChoice position={1} {...choiceProps} />
-          <RatingChoice position={2} {...choiceProps} />
-          <RatingChoice position={3} {...choiceProps} />
-          <RatingChoice position={4} {...choiceProps} />
-          <RatingChoice position={5} {...choiceProps} />
-          <RatingChoice position={6} {...choiceProps} />
-          <RatingChoice position={7} {...choiceProps} />
-          <RatingChoice position={8} {...choiceProps} />
-          <RatingChoice position={9} {...choiceProps} />
-          <RatingChoice position={10} {...choiceProps} />
-          <span style={{ cursor: "pointer" }} onClick={() => setRating(undefined)}>
-            🚫
-          </span>
-        </Container>
+        <RatingChoice position={1} {...choiceProps} />
+        <RatingChoice position={2} {...choiceProps} />
+        <RatingChoice position={3} {...choiceProps} />
+        <RatingChoice position={4} {...choiceProps} />
+        <RatingChoice position={5} {...choiceProps} />
+        <RatingChoice position={6} {...choiceProps} />
+        <RatingChoice position={7} {...choiceProps} />
+        <RatingChoice position={8} {...choiceProps} />
+        <RatingChoice position={9} {...choiceProps} />
+        <RatingChoice position={10} {...choiceProps} />
+        <span style={{ cursor: "pointer" }} onClick={() => setRating(undefined)}>
+          🚫
+        </span>
       </div>
       <div>{rating ? `Rating: ${rating}` : "No rating"}</div>
     </>

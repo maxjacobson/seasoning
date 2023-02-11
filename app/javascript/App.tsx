@@ -27,30 +27,8 @@ import { SeasonReviewPage } from "./pages/SeasonReviewPage"
 import { SettingsPage } from "./pages/SettingsPage"
 import { ShowPage } from "./pages/ShowPage"
 import { ShowSearchBar } from "./components/ShowSearchBar"
-import styled from "@emotion/styled"
 import { YourShowsPage } from "./pages/YourShowsPage"
 
-const SiteHeader = styled.div`
-  margin: 10px 5px;
-  display: flex;
-  justify-content: space-between;
-
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
-`
-
-const MobileFlex = styled.div`
-  display: flex;
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
-`
-
-const SiteBody = styled.div`
-  max-width: 750px;
-  margin: 0 auto;
-`
 interface Props {
   initialGuest: Guest
 }
@@ -70,8 +48,8 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
           <>
             <LoadingRibbon loading={loading} />
 
-            <SiteHeader>
-              <MobileFlex>
+            <div className="my-2 mx-1 flex flex-col justify-between md:flex-row">
+              <div className="flex flex-col md:flex-row">
                 <Link to="/">
                   <img src={LogoWithName} />
                 </Link>
@@ -83,7 +61,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                     setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
                   />
                 )}
-              </MobileFlex>
+              </div>
               <div>
                 {guest.authenticated && (
                   <>
@@ -106,9 +84,9 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   </>
                 )}
               </div>
-            </SiteHeader>
+            </div>
 
-            <SiteBody>
+            <div className="my-0 mx-auto max-w-2xl">
               <Routes>
                 <Route path="/" element={<HomePage />} />
 
@@ -166,7 +144,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <Link to="/roadmap">Roadmap</Link> * <Link to="/changelog">Changelog</Link> *{" "}
                 <Link to="/credits">Credits</Link>
               </div>
-            </SiteBody>
+            </div>
           </>
         </SetLoadingContext.Provider>
       </GuestContext.Provider>
