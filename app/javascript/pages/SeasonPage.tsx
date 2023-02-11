@@ -146,7 +146,7 @@ export const SeasonPage = () => {
           <h2>Your review</h2>
           <div>
             <Link to={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}>
-              Add review
+              <span className="underlined">Add review</span>
             </Link>
           </div>
           <div>

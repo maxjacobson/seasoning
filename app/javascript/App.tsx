@@ -1,5 +1,6 @@
+import "./App.css"
+
 import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router-dom"
-import { css, Global } from "@emotion/react"
 import { Guest, Show } from "./types"
 import { GuestContext, SetLoadingContext } from "./contexts"
 import React, { FunctionComponent, useState } from "react"
@@ -28,23 +29,6 @@ import { ShowPage } from "./pages/ShowPage"
 import { ShowSearchBar } from "./components/ShowSearchBar"
 import styled from "@emotion/styled"
 import { YourShowsPage } from "./pages/YourShowsPage"
-
-const globalStyles = css`
-  body {
-    padding: 0 0 20px 0;
-    margin: 0;
-    font-family: monospace;
-  }
-
-  a {
-    color: #d67411;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`
 
 const SiteHeader = styled.div`
   margin: 10px 5px;
@@ -83,7 +67,6 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
     <>
       <GuestContext.Provider value={guest}>
         <SetLoadingContext.Provider value={setLoading}>
-          <Global styles={globalStyles} />
           <>
             <LoadingRibbon loading={loading} />
 
