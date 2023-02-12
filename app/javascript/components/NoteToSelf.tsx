@@ -60,9 +60,9 @@ export const NoteToSelf: FunctionComponent<Props> = ({
           </p>
         </div>
       ) : yourShow.your_relationship?.note_to_self ? (
-        <>
+        <div className="break-words">
           <Markdown markdown={yourShow.your_relationship.note_to_self} />
-        </>
+        </div>
       ) : (
         <p>
           <em>No note to self.</em>
