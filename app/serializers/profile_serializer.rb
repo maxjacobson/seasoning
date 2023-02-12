@@ -4,7 +4,7 @@
 class ProfileSerializer < Oj::Serializer
   object_as :profile
 
-  serializer_attributes :handle, :created_at
+  serializer_attributes :handle, :created_at, :reviews_count, :followers_count, :following_count
   serializer_attributes :currently_watching, if: -> { profile.human.share_currently_watching? }
   serializer_attributes :your_relationship, if: -> { profile.viewer.present? }
 
@@ -20,6 +20,18 @@ class ProfileSerializer < Oj::Serializer
     shows = profile.human.shows.where(my_shows: { status: "currently_watching" }).order(title: :asc)
 
     ShowSerializer.many(shows)
+  end
+
+  def reviews_count
+    profile.human.season_reviews.count
+  end
+
+  def followers_count
+    profile.human.followers.count
+  end
+
+  def following_count
+    profile.human.followings.count
   end
 
   def your_relationship

@@ -79,6 +79,9 @@ export interface Profile {
   created_at: string
   currently_watching?: Show[]
   your_relationship?: YourRelationshipToProfile
+  reviews_count: number
+  followers_count: number
+  following_count: number
 }
 
 export type Rating = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
