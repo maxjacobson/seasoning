@@ -7,6 +7,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **February 11, 2023** — Display show first aired year on search page
   1. **February 11, 2023** — Add more info links to TMDB
   1. **February 11, 2023** — Some restyling with Tailwind
   1. **January 13, 2023** — Display episode air date on episode page and season page

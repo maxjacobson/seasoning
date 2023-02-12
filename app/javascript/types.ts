@@ -44,6 +44,7 @@ export interface Show {
   poster_url: string | null
   seasons: Season[]
   tmdb_tv_id: string
+  first_air_date: string | null
 }
 
 export type MyShowStatus =

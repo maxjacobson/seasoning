@@ -6,6 +6,12 @@ interface Props {
   searchResults: Show[] | null
 }
 
+const Year = ({ date: str }: { date: string }) => {
+  const date = new Date(str)
+
+  return <>({date.getFullYear()})</>
+}
+
 export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) => {
   setHeadTitle("Search results")
 
@@ -27,7 +33,9 @@ export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) =
         <ul className="list-inside list-disc">
           {searchResults.map((show) => (
             <li key={show.id}>
-              <Link to={`/shows/${show.slug}`}>{show.title}</Link>
+              <Link to={`/shows/${show.slug}`}>
+                {show.title} {show.first_air_date && <Year date={show.first_air_date} />}
+              </Link>
             </li>
           ))}
         </ul>
