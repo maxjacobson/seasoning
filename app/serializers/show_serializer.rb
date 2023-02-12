@@ -2,7 +2,7 @@
 
 # Serializes the show to JSON
 class ShowSerializer < Oj::Serializer
-  attributes :id, :title, :slug
+  attributes :id, :title, :slug, :tmdb_tv_id
   serializer_attributes :poster_url, :seasons
 
   def poster_url

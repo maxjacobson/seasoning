@@ -2,6 +2,7 @@ import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import { AirDate } from "../components/AirDate"
+import { MoreInfo } from "../components/MoreInfo"
 import { Poster } from "../components/Poster"
 import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
 import { setHeadTitle } from "../hooks"
@@ -88,6 +89,9 @@ export const SeasonPage = () => {
     <div>
       <h1 className="text-xl">{yourSeason.show.title}</h1>
       <h2 className="text-lg">{yourSeason.season.name}</h2>
+      <MoreInfo
+        url={`https://www.themoviedb.org/tv/${yourSeason.show.tmdb_tv_id}/season/${yourSeason.season.season_number}`}
+      />
       <p>
         <Link to={`/shows/${showSlug}`}>Back</Link>
       </p>

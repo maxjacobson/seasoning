@@ -43,6 +43,7 @@ export interface Show {
   slug: string
   poster_url: string | null
   seasons: Season[]
+  tmdb_tv_id: string
 }
 
 export type MyShowStatus =

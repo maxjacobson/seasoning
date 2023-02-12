@@ -3,6 +3,7 @@ import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import { AirDate } from "../components/AirDate"
+import { MoreInfo } from "../components/MoreInfo"
 import { setHeadTitle } from "../hooks"
 
 interface LoadingEpisode {
@@ -79,7 +80,10 @@ export const EpisodePage = () => {
 
   return (
     <>
-      <h1>{episode.name}</h1>
+      <h1 className="text-xl">{episode.name}</h1>
+      <MoreInfo
+        url={`https://www.themoviedb.org/tv/${show.tmdb_tv_id}/season/${season.season_number}/episode/${episode.episode_number}`}
+      />
       <p>
         An episode of <Link to={`/shows/${show.slug}`}>{show.title}</Link>,{" "}
         <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link>.
