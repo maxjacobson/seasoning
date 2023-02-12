@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_13_170232) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_040244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -144,6 +144,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_170232) do
     t.integer "tmdb_tv_id", null: false
     t.string "tmdb_poster_path"
     t.datetime "tmdb_next_refresh_at", precision: nil
+    t.date "first_air_date", comment: "What date did this show first air?"
     t.index ["slug"], name: "index_shows_on_slug", unique: true
     t.index ["tmdb_tv_id"], name: "index_shows_on_tmdb_tv_id", unique: true
   end
