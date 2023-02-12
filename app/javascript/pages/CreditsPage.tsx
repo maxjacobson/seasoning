@@ -20,7 +20,8 @@ export const CreditsPage: FunctionComponent = () => {
           All of the data is sourced from{" "}
           <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
             The Movie Database
-          </a>
+          </a>{" "}
+          who have an excellent free API.
         </li>
         <li>
           This site is developed by{" "}
@@ -31,12 +32,12 @@ export const CreditsPage: FunctionComponent = () => {
           <a href="https://github.com/maxjacobson/seasoning" target="_blank" rel="noreferrer">
             maxjacobson/seasoning
           </a>
-          . Feel free to pitch in and/or roast me. There are no tests. Just going to get ahead of
-          that one. Otherwise it&rsquo;s perfect.
+          . Feel free to pitch in and/or roast me.
         </li>
         <li>
           The television icon you see up top is{" "}
-          <a href="https://www.toicon.com/icons/avocado_watch">by Shannon E Thomas</a>.
+          <a href="https://shannonethomas.com">by Shannon E Thomas</a>, which I got from the defunct{" "}
+          <a href="https://www.toicon.com/icons/avocado_watch">to icon</a> project.
         </li>
       </ul>
     </div>
