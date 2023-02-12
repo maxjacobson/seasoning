@@ -62,7 +62,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   />
                 )}
               </div>
-              <div>
+              <div className="pr-2">
                 {guest.authenticated && (
                   <>
                     <Link to={`/${guest.human.handle}`} className="mr-2">
@@ -88,7 +88,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               </div>
             </div>
 
-            <div className="my-0 mx-auto max-w-2xl">
+            <div className="my-0 mx-auto max-w-2xl p-2">
               <Routes>
                 <Route path="/" element={<HomePage />} />
 
