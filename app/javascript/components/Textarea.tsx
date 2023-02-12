@@ -1,5 +1,3 @@
-import React from "react"
-
 type Props = Omit<
   React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>,
   "className"

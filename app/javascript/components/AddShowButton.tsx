@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from "react"
-
 import { Show, YourRelationshipToShow, YourShow } from "../types"
 import { Button } from "./Button"
+import { FunctionComponent } from "react"
 
 interface Props {
   show: Show

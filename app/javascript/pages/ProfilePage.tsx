@@ -1,6 +1,6 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button } from "../components/Button"
 import { Poster } from "../components/Poster"
 import { Profile } from "../types"

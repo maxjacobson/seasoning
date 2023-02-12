@@ -1,9 +1,9 @@
 import "./App.css"
 
 import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router-dom"
+import { FunctionComponent, useState } from "react"
 import { Guest, Show } from "./types"
 import { GuestContext, SetLoadingContext } from "./contexts"
-import React, { FunctionComponent, useState } from "react"
 import { AdminPage } from "./pages/AdminPage"
 import { ChangelogPage } from "./pages/ChangelogPage"
 import { CreditsPage } from "./pages/CreditsPage"

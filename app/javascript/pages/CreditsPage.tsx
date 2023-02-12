@@ -1,5 +1,4 @@
-import React, { FunctionComponent } from "react"
-
+import { FunctionComponent } from "react"
 import { setHeadTitle } from "../hooks"
 
 export const CreditsPage: FunctionComponent = () => {

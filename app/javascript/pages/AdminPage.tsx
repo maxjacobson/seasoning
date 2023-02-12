@@ -1,8 +1,8 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, Navigate } from "react-router-dom"
 import { loadData, setHeadTitle } from "../hooks"
-import React, { useContext } from "react"
 import { Human } from "../types"
+import { useContext } from "react"
 
 type AdminData = {
   humansCount: number

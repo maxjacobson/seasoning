@@ -1,6 +1,6 @@
 import { displayMyShowStatus, updateMyShow } from "../helpers/my_shows"
+import { FunctionComponent, useContext } from "react"
 import { MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
-import React, { FunctionComponent, useContext } from "react"
 import { Select } from "./Select"
 import { SetLoadingContext } from "../contexts"
 

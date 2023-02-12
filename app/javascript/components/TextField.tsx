@@ -1,5 +1,3 @@
-import React from "react"
-
 type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, "className" | "type">
 
 export const TextField = (props: Props) => {

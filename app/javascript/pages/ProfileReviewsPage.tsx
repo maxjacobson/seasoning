@@ -1,8 +1,8 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { loadData, setHeadTitle } from "../hooks"
-import React, { useContext } from "react"
 import { SeasonReview, Show } from "../types"
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
+import { useContext } from "react"
 import { useParams } from "react-router-dom"
 
 export const ProfileReviewsPage = () => {

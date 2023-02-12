@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import { FunctionComponent } from "react"
 import gfm from "remark-gfm"
 import ReactMarkdown from "react-markdown"
 

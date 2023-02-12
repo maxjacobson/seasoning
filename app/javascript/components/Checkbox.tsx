@@ -1,7 +1,3 @@
-import React from "react"
-
-// type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, "className" | "type">
-
 type Props = Omit<
   React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
   "type"
