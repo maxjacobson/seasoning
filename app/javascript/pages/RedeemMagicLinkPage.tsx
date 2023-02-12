@@ -1,7 +1,9 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import { Button } from "../components/Button"
 import { Guest } from "../types"
 import { SetLoadingContext } from "../contexts"
+import { TextField } from "../components/TextField"
 
 interface Props {
   setGuest: (guest: Guest) => void
@@ -130,13 +132,12 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                 })
             }}
           >
-            <input
-              type="text"
+            <TextField
               value={handle}
               placeholder="Your handle"
               onChange={(e) => setHandle(e.target.value)}
             />
-            <input type="submit" value="Go" disabled={creating} />
+            <Button type="submit" value="Go" disabled={creating} />
           </form>
         </div>
       </div>

@@ -70,7 +70,7 @@ export const ShowPage = () => {
 
     return (
       <div>
-        <h1>{data.show.title}</h1>
+        <h1 className="text-2xl">{data.show.title}</h1>
 
         {guest.authenticated && data.your_relationship && (
           <NoteToSelf
@@ -83,18 +83,20 @@ export const ShowPage = () => {
         )}
 
         <div>
-          <h2>{data.show.title}</h2>
+          <h2 className="text-xl">{data.show.title}</h2>
           <div>
             <>
               {guest.authenticated && (
-                <AddShowButton
-                  token={guest.token}
-                  show={data.show}
-                  yourRelationship={data.your_relationship}
-                  setYourShow={(yourShow) => {
-                    setShowData({ loading: false, data: yourShow })
-                  }}
-                />
+                <span className="mr-2">
+                  <AddShowButton
+                    token={guest.token}
+                    show={data.show}
+                    yourRelationship={data.your_relationship}
+                    setYourShow={(yourShow) => {
+                      setShowData({ loading: false, data: yourShow })
+                    }}
+                  />
+                </span>
               )}
             </>
             <>
@@ -114,7 +116,7 @@ export const ShowPage = () => {
 
         {data.show.poster_url ? (
           <div>
-            <h2>Poster</h2>
+            <h2 className="text-xl">Poster</h2>
             <Poster show={data.show} size="large" url={data.show.poster_url} />
           </div>
         ) : (
@@ -122,7 +124,7 @@ export const ShowPage = () => {
         )}
         {data.show.seasons.length > 0 ? (
           <div>
-            <h2>Seasons</h2>
+            <h2 className="text-xl">Seasons</h2>
             <SeasonsList show={data.show} guest={guest} />
           </div>
         ) : (

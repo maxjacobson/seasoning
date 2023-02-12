@@ -5,7 +5,9 @@ import { displayMyShowStatus } from "../helpers/my_shows"
 import { Markdown } from "./Markdown"
 import { Poster } from "./Poster"
 import queryString from "query-string"
+import { Select } from "./Select"
 import { SetLoadingContext } from "../contexts"
+import { TextField } from "./TextField"
 
 interface YourShows {
   your_shows: YourShow[]
@@ -109,9 +111,8 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
   return (
     <div>
       <>
-        <div>
-          <input
-            type="text"
+        <div className="mb-2">
+          <TextField
             placeholder="Filter your shows"
             value={titleQueryValue}
             onChange={(event) => {
@@ -124,7 +125,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
             }}
           />
         </div>
-        <select
+        <Select
           multiple={true}
           value={statusesFilterValue}
           onChange={(event) => {
@@ -142,7 +143,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           <option value="stopped_watching">Stopped watching</option>
           <option value="waiting_for_more">Waiting for more</option>
           <option value="finished">Finished</option>
-        </select>
+        </Select>
         {loading ? <div>Loading your shows...</div> : <ListShows shows={shows} />}
       </>
     </div>

@@ -1,5 +1,6 @@
 import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import { Checkbox } from "./Checkbox"
 import { SetLoadingContext } from "../contexts"
 import { updateMySeason } from "../helpers/my_shows"
 
@@ -48,7 +49,8 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
 
   return (
     <>
-      <input
+      <Checkbox
+        className="text-yellow-500"
         ref={(input) => {
           if (input && hasWatched === "partial") {
             input.indeterminate = true
@@ -56,7 +58,6 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
             input.indeterminate = false
           }
         }}
-        type="checkbox"
         checked={hasWatched === true}
         disabled={hasWatched === "unknown" || updating}
         onChange={async () => {

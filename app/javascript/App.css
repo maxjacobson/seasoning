@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 a {
-  color: #d67411;
+  color: theme(colors.yellow.600);
 }
 
 a:hover {

@@ -3,6 +3,9 @@ import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../
 import { loadData, setHeadTitle } from "../hooks"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { Button } from "../components/Button"
+import { Select } from "../components/Select"
+import { Textarea } from "../components/Textarea"
 
 export const NewSeasonReviewPage = () => {
   const [body, setBody] = useState("")
@@ -42,12 +45,12 @@ export const NewSeasonReviewPage = () => {
 
   return (
     <div>
-      <h1>
+      <h1 className="mb-2 text-2xl">
         New review of {yourSeason.data.show.title} &mdash; {yourSeason.data.season.name}
       </h1>
 
-      <label>Visible to</label>
-      <select
+      <label className="mr-2">Visible to</label>
+      <Select
         value={visibility}
         onChange={(event) => setVisibility(event.target.value as Visibility)}
         disabled={!visibility}
@@ -55,7 +58,7 @@ export const NewSeasonReviewPage = () => {
         <option value="anybody">Anybody</option>
         <option value="mutuals">Mutual follows</option>
         <option value="myself">Only myself</option>
-      </select>
+      </Select>
 
       <RatingPicker rating={rating} setRating={setRating} />
 
@@ -69,14 +72,10 @@ export const NewSeasonReviewPage = () => {
         </span>
       </label>
       <div>
-        <textarea
-          className="h-48 w-5/6"
-          value={body}
-          onChange={(event) => setBody(event.target.value)}
-        />
+        <Textarea value={body} onChange={(event) => setBody(event.target.value)} />
       </div>
       <div>
-        <button
+        <Button
           disabled={!visibility}
           onClick={async () => {
             setLoading(true)
@@ -114,7 +113,7 @@ export const NewSeasonReviewPage = () => {
           }}
         >
           Save
-        </button>
+        </Button>
       </div>
 
       {validationError &&

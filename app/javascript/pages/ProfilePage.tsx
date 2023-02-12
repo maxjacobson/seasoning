@@ -1,6 +1,7 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
 import React, { useContext, useEffect, useState } from "react"
+import { Button } from "../components/Button"
 import { Poster } from "../components/Poster"
 import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
@@ -81,7 +82,7 @@ export const ProfilePage = () => {
         <h1 className="text-2xl">{handle}</h1>
 
         {guest.authenticated && profile.your_relationship && !profile.your_relationship.self && (
-          <button
+          <Button
             disabled={profile.your_relationship.you_follow_them}
             onClick={async () => {
               const response = await fetch("/api/follows.json", {
@@ -105,7 +106,7 @@ export const ProfilePage = () => {
             }}
           >
             {profile.your_relationship.you_follow_them ? "Following" : "Follow"}
-          </button>
+          </Button>
         )}
         <div>
           <h2 className="text-xl">Profile</h2>

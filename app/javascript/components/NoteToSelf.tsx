@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 
+import { Button } from "./Button"
 import { Markdown } from "../components/Markdown"
 import { SetLoadingContext } from "../contexts"
+import { Textarea } from "./Textarea"
 import { updateMyShow } from "../helpers/my_shows"
 import { YourShow } from "../types"
 
@@ -43,8 +45,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
             </p>
           </label>
 
-          <textarea
-            className="h-48 w-5/6 font-mono"
+          <Textarea
             disabled={loading}
             value={newNoteToSelf}
             onChange={(event) => setNewNoteToSelf(event.target.value)}
@@ -70,7 +71,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
 
       {isEditing ? (
         <>
-          <button
+          <Button
             onClick={async () => {
               globalSetLoading(true)
               setLoading(true)
@@ -94,12 +95,14 @@ export const NoteToSelf: FunctionComponent<Props> = ({
             }}
           >
             Save
-          </button>
+          </Button>
 
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
+          <span className="ml-1">
+            <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+          </span>
         </>
       ) : (
-        <button onClick={() => setIsEditing(true)}>Edit</button>
+        <Button onClick={() => setIsEditing(true)}>Edit</Button>
       )}
     </div>
   )

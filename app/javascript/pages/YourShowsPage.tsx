@@ -8,7 +8,7 @@ export const YourShowsPage = () => {
 
   return (
     <div>
-      <h1>Your shows</h1>
+      <h1 className="text-xl">Your shows</h1>
       {guest.authenticated ? (
         <YourShowsList human={guest.human} token={guest.token} />
       ) : (

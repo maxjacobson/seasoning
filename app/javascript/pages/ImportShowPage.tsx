@@ -2,7 +2,9 @@ import { GuestContext, SetLoadingContext } from "../contexts"
 import { Import, Show } from "../types"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { Button } from "../components/Button"
 import queryString from "query-string"
+import { TextField } from "../components/TextField"
 
 export const ImportShowPage = () => {
   const [searchParams] = useSearchParams()
@@ -54,7 +56,7 @@ export const ImportShowPage = () => {
 
   return (
     <>
-      <h1>Import show</h1>
+      <h1 className="text-2xl">Import show</h1>
 
       <p>
         Seasoning is very new. I&rsquo;m sorry to be the one to tell you, but you&rsquo;re an early
@@ -70,18 +72,14 @@ export const ImportShowPage = () => {
         }}
       >
         <div>
-          <label>Name of show</label>
+          <label className="text-lg">Name of show</label>
         </div>
-        <div>
-          <input
-            type="text"
-            value={showQuery}
-            onChange={(event) => setShowQuery(event.target.value)}
-          />
+        <div className="mb-2">
+          <TextField value={showQuery} onChange={(event) => setShowQuery(event.target.value)} />
         </div>
-        <button type="submit" disabled={searching}>
+        <Button type="submit" disabled={searching}>
           Search
-        </button>
+        </Button>
       </form>
 
       {results && (
@@ -96,7 +94,7 @@ export const ImportShowPage = () => {
                 {result.name} {result.year && `(${result.year})`}
               </div>
               <div>
-                <button
+                <Button
                   disabled={importing}
                   onClick={async () => {
                     setLoading(true)
@@ -127,7 +125,7 @@ export const ImportShowPage = () => {
                   }}
                 >
                   Import
-                </button>
+                </Button>
               </div>
             </div>
           ))}

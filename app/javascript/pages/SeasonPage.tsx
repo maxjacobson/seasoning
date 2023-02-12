@@ -75,7 +75,7 @@ export const SeasonPage = () => {
   if (!yourSeason) {
     return (
       <div>
-        <h1>Not found</h1>
+        <h1 className="text-xl">Not found</h1>
         <p>Season does not exist!</p>
         <p>
           <Link to={`/shows/${showSlug}`}>Back</Link>
@@ -86,8 +86,8 @@ export const SeasonPage = () => {
 
   return (
     <div>
-      <h1>{yourSeason.show.title}</h1>
-      <h2>{yourSeason.season.name}</h2>
+      <h1 className="text-xl">{yourSeason.show.title}</h1>
+      <h2 className="text-lg">{yourSeason.season.name}</h2>
       <p>
         <Link to={`/shows/${showSlug}`}>Back</Link>
       </p>
@@ -97,7 +97,7 @@ export const SeasonPage = () => {
           <Poster url={yourSeason.season.poster_url} size="large" show={yourSeason.show} />
         </div>
         <div>
-          <h2>Season info</h2>
+          <h2 className="text-lg">Season info</h2>
 
           <div>
             <table className="w-full">
@@ -143,7 +143,7 @@ export const SeasonPage = () => {
 
       {guest.authenticated && yourSeason.your_reviews && (
         <div>
-          <h2>Your review</h2>
+          <h2 className="text-lg">Your review</h2>
           <div>
             <Link to={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}>
               <span className="underlined">Add review</span>
