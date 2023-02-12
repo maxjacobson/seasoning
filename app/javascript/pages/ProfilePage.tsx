@@ -126,7 +126,7 @@ export const ProfilePage = () => {
                   <div className="flex flex-wrap gap-1">
                     {profile.currently_watching.map((show) => {
                       return (
-                        <div key={show.id}>
+                        <div key={show.id} className="w-32">
                           <Link to={`/shows/${show.slug}`}>
                             <div>
                               <Poster show={show} size="small" url={show.poster_url} />
