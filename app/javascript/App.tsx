@@ -51,7 +51,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
             <div className="my-2 mx-1 flex flex-col justify-between md:flex-row">
               <div className="flex flex-col md:flex-row">
                 <Link to="/">
-                  <img src={LogoWithName} />
+                  <img src={LogoWithName} className="h-full" />
                 </Link>
                 {guest.authenticated && (
                   <ShowSearchBar
@@ -65,10 +65,12 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               <div>
                 {guest.authenticated && (
                   <>
-                    <Link to={`/${guest.human.handle}`}>Your page</Link>
-                    <span> * </span>
-                    <Link to="/settings">Settings</Link>
-                    <span> * </span>
+                    <Link to={`/${guest.human.handle}`} className="mr-2">
+                      Your page
+                    </Link>
+                    <Link to="/settings" className="mr-2">
+                      Settings
+                    </Link>
                     <a
                       href="#"
                       onClick={() => {
@@ -129,19 +131,19 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
 
-              <div className="mt-5 border-t border-dashed border-t-black">
+              <div className="mt-5 flex justify-evenly border-t border-dashed border-t-black">
                 {guest.authenticated && guest.human.admin && (
                   <>
                     {" "}
-                    <Link to="/admin">Admin</Link> *{" "}
+                    <Link to="/admin">Admin</Link>
                   </>
                 )}
                 {guest.authenticated && (
                   <>
-                    <Link to="/reviews">Reviews</Link> *{" "}
+                    <Link to="/reviews">Reviews</Link>{" "}
                   </>
                 )}
-                <Link to="/roadmap">Roadmap</Link> * <Link to="/changelog">Changelog</Link> *{" "}
+                <Link to="/roadmap">Roadmap</Link> <Link to="/changelog">Changelog</Link>{" "}
                 <Link to="/credits">Credits</Link>
               </div>
             </div>

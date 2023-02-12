@@ -20,11 +20,11 @@ export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) =
 
   return (
     <>
-      <h1>Search results</h1>
+      <h1 className="text-2xl">Search results</h1>
       {searchResults === null ? (
         <p>No results. Try searching something else.</p>
       ) : (
-        <ul>
+        <ul className="list-inside list-disc">
           {searchResults.map((show) => (
             <li key={show.id}>
               <Link to={`/shows/${show.slug}`}>{show.title}</Link>
