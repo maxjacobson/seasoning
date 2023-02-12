@@ -23,32 +23,34 @@ interface ListShowProps {
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
-      <div className="my-2 mx-0">
+      <div className="my-2 mx-0 flex flex-wrap gap-4">
         {shows.map((yourShow) => {
           return (
             <div
               key={yourShow.show.id}
-              className="my-4 rounded-lg border-2 border-dashed border-yellow-500 p-2"
+              className="w-60 rounded-lg border-2 border-dashed border-yellow-500 p-2"
             >
-              <div>
-                <Link key={yourShow.show.id} to={`/shows/${yourShow.show.slug}`}>
-                  <div>
-                    <Poster show={yourShow.show} size="small" url={yourShow.show.poster_url} />
-                  </div>
-                  {yourShow.show.title}
-                </Link>
-              </div>
+              <div className="flex flex-col">
+                <div className="self-center">
+                  <Link key={yourShow.show.id} to={`/shows/${yourShow.show.slug}`}>
+                    <div>
+                      <Poster show={yourShow.show} size="large" url={yourShow.show.poster_url} />
+                    </div>
+                    {yourShow.show.title}
+                  </Link>
+                </div>
 
-              <div>
-                {yourShow.your_relationship?.status ? (
-                  <span>{displayMyShowStatus(yourShow.your_relationship.status)}</span>
-                ) : (
-                  <span>&mdash;</span>
-                )}
+                <div className="self-center">
+                  {yourShow.your_relationship?.status ? (
+                    <span>{displayMyShowStatus(yourShow.your_relationship.status)}</span>
+                  ) : (
+                    <span>&mdash;</span>
+                  )}
+                </div>
               </div>
 
               {yourShow.your_relationship?.note_to_self ? (
-                <div className=" mx-0 my-2.5  border-t border-dotted border-slate-300 p-0.5	">
+                <div className=" mx-0 my-2.5  break-words border-t border-dotted border-slate-300	p-0.5">
                   <h2 className="text-lg font-bold">Note to self</h2>
                   <Markdown markdown={yourShow.your_relationship.note_to_self} />
                 </div>
