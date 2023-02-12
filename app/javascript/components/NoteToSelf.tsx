@@ -28,82 +28,79 @@ export const NoteToSelf: FunctionComponent<Props> = ({
     setNewNoteToSelf(yourShow.your_relationship?.note_to_self || "")
   }, [yourShow.show.slug])
 
-  return (
-    <div className="border border-solid border-black p-2">
-      <h1 className="text-2xl">Write a note to self</h1>
+  if (yourShow.your_relationship?.note_to_self || isEditing) {
+    return (
+      <div className="my-4 border-t border-b border-solid border-orange-200 py-4">
+        <h1 className="text-2xl">Note to self</h1>
 
-      {isEditing ? (
-        <div>
-          <label>
-            <p>
-              Add a note to self about this show. Put whatever you want in here. It&rsquo;s just for
-              you. Feel free to use{" "}
-              <a href="https://commonmark.org/help/" target="_blank" rel="noreferrer">
-                Markdown
-              </a>
-              .
-            </p>
-          </label>
+        {isEditing ? (
+          <div>
+            <label>
+              <p>
+                Put whatever you want in here. It&rsquo;s just for you. Feel free to use{" "}
+                <a href="https://commonmark.org/help/" target="_blank" rel="noreferrer">
+                  Markdown
+                </a>
+                .
+              </p>
+            </label>
 
-          <Textarea
-            disabled={loading}
-            value={newNoteToSelf}
-            onChange={(event) => setNewNoteToSelf(event.target.value)}
-          />
-
+            <Textarea
+              disabled={loading}
+              value={newNoteToSelf}
+              onChange={(event) => setNewNoteToSelf(event.target.value)}
+            />
+          </div>
+        ) : yourShow.your_relationship?.note_to_self ? (
+          <div className="break-words">
+            <Markdown markdown={yourShow.your_relationship.note_to_self} />
+          </div>
+        ) : (
           <p>
-            <em>
-              Tip: I like to use this box to remind myself why I&rsquo;m adding this show. Like,
-              I&rsquo;ll make a note of who recommended it to me, and include some links to articles
-              that piqued my interest.
-            </em>
+            <em>No note to self.</em>
           </p>
-        </div>
-      ) : yourShow.your_relationship?.note_to_self ? (
-        <div className="break-words">
-          <Markdown markdown={yourShow.your_relationship.note_to_self} />
-        </div>
-      ) : (
-        <p>
-          <em>No note to self.</em>
-        </p>
-      )}
+        )}
 
-      {isEditing ? (
-        <>
-          <Button
-            onClick={async () => {
-              globalSetLoading(true)
-              setLoading(true)
+        {isEditing ? (
+          <div className="mt-4">
+            <Button
+              onClick={async () => {
+                globalSetLoading(true)
+                setLoading(true)
 
-              const response = await updateMyShow(yourShow.show, token, {
-                show: {
-                  note_to_self: newNoteToSelf,
-                },
-              })
+                const response = await updateMyShow(yourShow.show, token, {
+                  show: {
+                    note_to_self: newNoteToSelf,
+                  },
+                })
 
-              setLoading(false)
-              globalSetLoading(false)
+                setLoading(false)
+                globalSetLoading(false)
 
-              if (response.ok) {
-                const updated: YourShow = await response.json()
-                updateYourShow(updated)
-                setIsEditing(false)
-              } else {
-                throw new Error("Could not update note to self")
-              }
-            }}
-          >
-            Save
-          </Button>
+                if (response.ok) {
+                  const updated: YourShow = await response.json()
+                  updateYourShow(updated)
+                  setIsEditing(false)
+                } else {
+                  throw new Error("Could not update note to self")
+                }
+              }}
+            >
+              Save
+            </Button>
 
-          <span className="ml-1">
-            <Button onClick={() => setIsEditing(false)}>Cancel</Button>
-          </span>
-        </>
-      ) : (
-        <Button onClick={() => setIsEditing(true)}>Edit</Button>
-      )}
-    </div>
-  )
+            <span className="ml-1">
+              <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+            </span>
+          </div>
+        ) : (
+          <div className="mt-4">
+            <Button onClick={() => setIsEditing(true)}>Edit</Button>
+          </div>
+        )}
+      </div>
+    )
+  } else {
+    return <Button onClick={() => setIsEditing(true)}>Write note to self</Button>
+  }
 }
