@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import { FunctionComponent } from "react"
 import { Markdown } from "../components/Markdown"
 
 import { setHeadTitle } from "../hooks"

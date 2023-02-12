@@ -1,5 +1,3 @@
-import React from "react"
-
 type Props = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">
 
 export const Button = (props: Props) => {

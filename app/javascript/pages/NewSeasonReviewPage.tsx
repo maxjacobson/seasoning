@@ -1,7 +1,7 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types"
 import { loadData, setHeadTitle } from "../hooks"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "../components/Button"
 import { Select } from "../components/Select"

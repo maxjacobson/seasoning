@@ -1,5 +1,5 @@
 import { AuthenticatedGuest, Episode, Season, YourRelationshipToSeason } from "../types"
-import React, { FunctionComponent, useContext, useState } from "react"
+import { FunctionComponent, useContext, useState } from "react"
 import { Checkbox } from "./Checkbox"
 import { SetLoadingContext } from "../contexts"
 import { updateMyEpisode } from "../helpers/my_shows"

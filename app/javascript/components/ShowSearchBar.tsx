@@ -1,5 +1,5 @@
 import { AuthenticatedGuest, Show } from "../types"
-import React, { FunctionComponent, useContext, useEffect } from "react"
+import { FunctionComponent, useContext, useEffect } from "react"
 import { Button } from "./Button"
 import debounce from "lodash.debounce"
 import { SetLoadingContext } from "../contexts"

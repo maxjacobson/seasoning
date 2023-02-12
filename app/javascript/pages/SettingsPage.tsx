@@ -1,6 +1,6 @@
 import { AuthenticatedGuest, HumanSettings } from "../types"
+import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { GuestContext, SetLoadingContext } from "../contexts"
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Checkbox } from "../components/Checkbox"
 import { Select } from "../components/Select"
 import { setHeadTitle } from "../hooks"

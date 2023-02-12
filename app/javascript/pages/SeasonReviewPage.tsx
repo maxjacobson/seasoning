@@ -1,7 +1,7 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Human, Season, SeasonReview, Show } from "../types"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button } from "../components/Button"
 import { Markdown } from "../components/Markdown"
 import { Poster } from "../components/Poster"

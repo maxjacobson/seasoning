@@ -1,6 +1,6 @@
+import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Human, YourShow } from "../types"
 import { Link, useSearchParams } from "react-router-dom"
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { displayMyShowStatus } from "../helpers/my_shows"
 import { Markdown } from "./Markdown"
 import { Poster } from "./Poster"
@@ -46,7 +46,7 @@ const ListShows = ({ shows }: ListShowProps) => {
 
               {yourShow.your_relationship?.note_to_self ? (
                 <div className="mx-0 my-2.5 border border-solid border-black p-0.5">
-                  <h2>Note to self</h2>
+                  <h2 className="text-lg">Note to self</h2>
                   <Markdown markdown={yourShow.your_relationship.note_to_self} />
                 </div>
               ) : (

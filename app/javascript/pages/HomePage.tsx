@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { GetStarted } from "../components/GetStarted"
 import { GuestContext } from "../contexts"
 import { useNavigate } from "react-router-dom"

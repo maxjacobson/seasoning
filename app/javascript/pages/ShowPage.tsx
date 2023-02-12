@@ -1,5 +1,5 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AddShowButton } from "../components/AddShowButton"
 import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
 import { NoteToSelf } from "../components/NoteToSelf"

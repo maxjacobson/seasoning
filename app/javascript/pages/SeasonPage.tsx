@@ -1,6 +1,6 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AirDate } from "../components/AirDate"
 import { Poster } from "../components/Poster"
 import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"

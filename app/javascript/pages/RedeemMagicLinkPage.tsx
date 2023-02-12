@@ -1,5 +1,5 @@
+import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Button } from "../components/Button"
 import { Guest } from "../types"
 import { SetLoadingContext } from "../contexts"
