@@ -51,7 +51,7 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
     <>
       <Checkbox
         className="text-yellow-500"
-        ref={(input) => {
+        inputRef={(input) => {
           if (input && hasWatched === "partial") {
             input.indeterminate = true
           } else if (input) {
