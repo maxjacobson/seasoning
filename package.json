@@ -6,7 +6,7 @@
   "private": true,
   "engines": {
     "node": "19.4.0",
-    "npm": "9.2.0"
+    "npm": "9.4.2"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.7",
