@@ -5,14 +5,9 @@ import { displayMyShowStatus } from "../helpers/my_shows"
 import { Markdown } from "./Markdown"
 import { Poster } from "./Poster"
 import queryString from "query-string"
+import { Select } from "./Select"
 import { SetLoadingContext } from "../contexts"
-import styled from "@emotion/styled"
-
-const NoteToSelf = styled.div`
-  border: 1px solid black;
-  padding: 2px;
-  margin: 10px 0;
-`
+import { TextField } from "./TextField"
 
 interface YourShows {
   your_shows: YourShow[]
@@ -28,11 +23,7 @@ interface ListShowProps {
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
-      <div
-        style={{
-          margin: "10px 0",
-        }}
-      >
+      <div className="my-2 mx-0">
         {shows.map((yourShow) => {
           return (
             <div key={yourShow.show.id}>
@@ -54,10 +45,10 @@ const ListShows = ({ shows }: ListShowProps) => {
               </div>
 
               {yourShow.your_relationship?.note_to_self ? (
-                <NoteToSelf>
+                <div className="mx-0 my-2.5 border border-solid border-black p-0.5">
                   <h2>Note to self</h2>
                   <Markdown markdown={yourShow.your_relationship.note_to_self} />
-                </NoteToSelf>
+                </div>
               ) : (
                 <></>
               )}
@@ -120,9 +111,8 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
   return (
     <div>
       <>
-        <div>
-          <input
-            type="text"
+        <div className="mb-2">
+          <TextField
             placeholder="Filter your shows"
             value={titleQueryValue}
             onChange={(event) => {
@@ -135,7 +125,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
             }}
           />
         </div>
-        <select
+        <Select
           multiple={true}
           value={statusesFilterValue}
           onChange={(event) => {
@@ -153,7 +143,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           <option value="stopped_watching">Stopped watching</option>
           <option value="waiting_for_more">Waiting for more</option>
           <option value="finished">Finished</option>
-        </select>
+        </Select>
         {loading ? <div>Loading your shows...</div> : <ListShows shows={shows} />}
       </>
     </div>

@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
+import { Button } from "./Button"
 import { SetLoadingContext } from "../contexts"
+import { TextField } from "./TextField"
 
 export const GetStarted = () => {
   const [email, setEmail] = useState("")
@@ -75,14 +77,15 @@ export const GetStarted = () => {
                 setLoading(true)
               }}
             >
-              <input
-                type="text"
+              <TextField
                 placeholder="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
               />
-              <input type="submit" value="Go" disabled={loading} />
+              <span className="ml-2">
+                <Button type="submit" value="Go" disabled={loading} />
+              </span>
             </form>
           </div>
         </div>

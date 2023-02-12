@@ -1,6 +1,7 @@
 import { displayMyShowStatus, updateMyShow } from "../helpers/my_shows"
 import { MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
 import React, { FunctionComponent, useContext } from "react"
+import { Select } from "./Select"
 import { SetLoadingContext } from "../contexts"
 
 const allStatuses: MyShowStatus[] = [
@@ -28,7 +29,7 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
   const globalSetLoading = useContext(SetLoadingContext)
 
   return (
-    <select
+    <Select
       value={yourRelationship.status}
       onChange={async (event) => {
         globalSetLoading(true)
@@ -50,6 +51,6 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
           </option>
         )
       })}
-    </select>
+    </Select>
   )
 }

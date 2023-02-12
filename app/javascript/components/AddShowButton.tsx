@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 
 import { Show, YourRelationshipToShow, YourShow } from "../types"
+import { Button } from "./Button"
 
 interface Props {
   show: Show
@@ -16,10 +17,10 @@ export const AddShowButton: FunctionComponent<Props> = ({
   setYourShow,
 }: Props) => {
   if (yourRelationship) {
-    return <button disabled={true}>Added</button>
+    return <Button disabled={true}>Added</Button>
   } else {
     return (
-      <button
+      <Button
         onClick={async () => {
           const response = await fetch(`/api/your-shows.json`, {
             headers: {
@@ -43,7 +44,7 @@ export const AddShowButton: FunctionComponent<Props> = ({
         }}
       >
         Add
-      </button>
+      </Button>
     )
   }
 }

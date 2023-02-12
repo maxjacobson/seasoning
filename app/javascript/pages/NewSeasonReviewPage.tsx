@@ -3,12 +3,9 @@ import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../
 import { loadData, setHeadTitle } from "../hooks"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import styled from "@emotion/styled"
-import { TextArea } from "../components/TextArea"
-
-const Container = styled.span`
-  font-size: 2rem;
-`
+import { Button } from "../components/Button"
+import { Select } from "../components/Select"
+import { Textarea } from "../components/Textarea"
 
 export const NewSeasonReviewPage = () => {
   const [body, setBody] = useState("")
@@ -48,12 +45,12 @@ export const NewSeasonReviewPage = () => {
 
   return (
     <div>
-      <h1>
+      <h1 className="mb-2 text-2xl">
         New review of {yourSeason.data.show.title} &mdash; {yourSeason.data.season.name}
       </h1>
 
-      <label>Visible to</label>
-      <select
+      <label className="mr-2">Visible to</label>
+      <Select
         value={visibility}
         onChange={(event) => setVisibility(event.target.value as Visibility)}
         disabled={!visibility}
@@ -61,7 +58,7 @@ export const NewSeasonReviewPage = () => {
         <option value="anybody">Anybody</option>
         <option value="mutuals">Mutual follows</option>
         <option value="myself">Only myself</option>
-      </select>
+      </Select>
 
       <RatingPicker rating={rating} setRating={setRating} />
 
@@ -75,10 +72,10 @@ export const NewSeasonReviewPage = () => {
         </span>
       </label>
       <div>
-        <TextArea value={body} onChange={(event) => setBody(event.target.value)} />
+        <Textarea value={body} onChange={(event) => setBody(event.target.value)} />
       </div>
       <div>
-        <button
+        <Button
           disabled={!visibility}
           onClick={async () => {
             setLoading(true)
@@ -116,7 +113,7 @@ export const NewSeasonReviewPage = () => {
           }}
         >
           Save
-        </button>
+        </Button>
       </div>
 
       {validationError &&
@@ -151,22 +148,20 @@ const RatingPicker = ({
 
   return (
     <>
-      <div>
-        <Container>
-          <RatingChoice position={1} {...choiceProps} />
-          <RatingChoice position={2} {...choiceProps} />
-          <RatingChoice position={3} {...choiceProps} />
-          <RatingChoice position={4} {...choiceProps} />
-          <RatingChoice position={5} {...choiceProps} />
-          <RatingChoice position={6} {...choiceProps} />
-          <RatingChoice position={7} {...choiceProps} />
-          <RatingChoice position={8} {...choiceProps} />
-          <RatingChoice position={9} {...choiceProps} />
-          <RatingChoice position={10} {...choiceProps} />
-          <span style={{ cursor: "pointer" }} onClick={() => setRating(undefined)}>
-            🚫
-          </span>
-        </Container>
+      <div className="text-xl">
+        <RatingChoice position={1} {...choiceProps} />
+        <RatingChoice position={2} {...choiceProps} />
+        <RatingChoice position={3} {...choiceProps} />
+        <RatingChoice position={4} {...choiceProps} />
+        <RatingChoice position={5} {...choiceProps} />
+        <RatingChoice position={6} {...choiceProps} />
+        <RatingChoice position={7} {...choiceProps} />
+        <RatingChoice position={8} {...choiceProps} />
+        <RatingChoice position={9} {...choiceProps} />
+        <RatingChoice position={10} {...choiceProps} />
+        <span className="cursor-pointer" onClick={() => setRating(undefined)}>
+          🚫
+        </span>
       </div>
       <div>{rating ? `Rating: ${rating}` : "No rating"}</div>
     </>
@@ -188,13 +183,13 @@ const RatingChoice = ({
 
   if (choice && choice >= position) {
     return (
-      <span {...starProps} style={{ color: "#FFD700", cursor: "pointer" }}>
+      <span {...starProps} className="cursor-pointer text-yellow-400">
         ★
       </span>
     )
   } else {
     return (
-      <span {...starProps} style={{ cursor: "pointer" }}>
+      <span {...starProps} className="cursor-pointer">
         ☆
       </span>
     )

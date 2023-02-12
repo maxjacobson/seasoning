@@ -8,6 +8,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **February 11, 2023** -- Some restyling with Tailwind
   1. **January 13, 2023** -- Display episode air date on episode page and season page
   1. **January 13, 2023** -- Made background refreshing of episodes more resilient, so if one show cannot refresh it doesn't prevent other shows from refreshing
   1. **January 13, 2023** -- Set up bugsnag for exception tracking for backend ruby errors
@@ -58,7 +59,7 @@ export const ChangelogPage: FunctionComponent = () => {
 
   return (
     <div>
-      <h1>Changelog</h1>
+      <h1 className="text-xl">Changelog</h1>
 
       <Markdown markdown={changelog} />
     </div>

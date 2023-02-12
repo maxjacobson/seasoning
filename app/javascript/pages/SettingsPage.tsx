@@ -1,6 +1,8 @@
 import { AuthenticatedGuest, HumanSettings } from "../types"
 import { GuestContext, SetLoadingContext } from "../contexts"
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import { Checkbox } from "../components/Checkbox"
+import { Select } from "../components/Select"
 import { setHeadTitle } from "../hooks"
 
 interface LoadingSettingsData {
@@ -19,7 +21,7 @@ export const SettingsPage = () => {
 
   return (
     <div>
-      <h1>Settings</h1>
+      <h1 className="text-2xl">Settings</h1>
       <SettingsBody />
     </div>
   )
@@ -90,10 +92,9 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
 
   return (
     <>
-      <div>
-        <h2>Profile page</h2>
-        <input
-          type="checkbox"
+      <div className="my-2">
+        <h2 className="text-xl">Profile page</h2>
+        <Checkbox
           name="share-currently-watching"
           id="share-currently-watching"
           checked={settingsData.settings.share_currently_watching}
@@ -103,18 +104,18 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
           }
         />
 
-        <label htmlFor="share-currently-watching">
+        <label htmlFor="share-currently-watching" className="ml-2">
           Share the shows I&rsquo;m currently watching
         </label>
       </div>
 
-      <div>
-        <h2>Reviews</h2>
+      <div className="my-2">
+        <h2 className="text-xl">Reviews</h2>
 
         <div>
           <label>Who should new reviews be visible to?</label>
         </div>
-        <select
+        <Select
           value={settingsData.settings.default_review_visibility}
           onChange={(event) => {
             update({ default_review_visibility: event.target.value })
@@ -124,7 +125,7 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
           <option value="anybody">Anybody</option>
           <option value="mutuals">Mutual follows</option>
           <option value="myself">Only myself</option>
-        </select>
+        </Select>
         <p>
           This is just a default for new reviews, you can pick another visibility on a
           review-by-review basis!

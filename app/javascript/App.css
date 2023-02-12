@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  color: theme(colors.yellow.600);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.rendered-markdown h1 {
+  @apply text-2xl;
+}
+
+.rendered-markdown h2 {
+  @apply text-xl;
+}
+
+.rendered-markdown h3,
+.rendered-markdown h4,
+.rendered-markdown h5,
+.rendered-markdown h6 {
+  @apply text-lg;
+}
+
+.rendered-markdown ol {
+  @apply list-decimal;
+  @apply list-inside;
+}
+
+.rendered-markdown ul {
+  @apply list-disc;
+  @apply list-inside;
+}

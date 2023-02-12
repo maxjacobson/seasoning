@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 
+import { Button } from "./Button"
 import { Markdown } from "../components/Markdown"
 import { SetLoadingContext } from "../contexts"
-import { TextArea } from "./TextArea"
+import { Textarea } from "./Textarea"
 import { updateMyShow } from "../helpers/my_shows"
 import { YourShow } from "../types"
 
@@ -28,13 +29,8 @@ export const NoteToSelf: FunctionComponent<Props> = ({
   }, [yourShow.show.slug])
 
   return (
-    <div
-      style={{
-        border: "1px solid black",
-        padding: "5px",
-      }}
-    >
-      <h1>Write a note to self</h1>
+    <div className="border border-solid border-black p-2">
+      <h1 className="text-2xl">Write a note to self</h1>
 
       {isEditing ? (
         <div>
@@ -49,7 +45,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
             </p>
           </label>
 
-          <TextArea
+          <Textarea
             disabled={loading}
             value={newNoteToSelf}
             onChange={(event) => setNewNoteToSelf(event.target.value)}
@@ -75,7 +71,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
 
       {isEditing ? (
         <>
-          <button
+          <Button
             onClick={async () => {
               globalSetLoading(true)
               setLoading(true)
@@ -99,12 +95,14 @@ export const NoteToSelf: FunctionComponent<Props> = ({
             }}
           >
             Save
-          </button>
+          </Button>
 
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
+          <span className="ml-1">
+            <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+          </span>
         </>
       ) : (
-        <button onClick={() => setIsEditing(true)}>Edit</button>
+        <Button onClick={() => setIsEditing(true)}>Edit</Button>
       )}
     </div>
   )

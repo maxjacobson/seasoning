@@ -60,8 +60,8 @@ export const ReviewsFeedPage = () => {
 
   return (
     <div>
-      <h1>Reviews</h1>
-      <h2>Recent 10 reviews</h2>
+      <h1 className="text-xl">Reviews</h1>
+      <h2 className="text-lg">Recent 10 reviews</h2>
       {feedData.data.map(({ review, show }) => {
         return <SeasonReviewSummary key={review.id} review={review} show={show} />
       })}

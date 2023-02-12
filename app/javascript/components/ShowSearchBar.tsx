@@ -1,7 +1,9 @@
 import { AuthenticatedGuest, Show } from "../types"
 import React, { FunctionComponent, useContext, useEffect } from "react"
+import { Button } from "./Button"
 import debounce from "lodash.debounce"
 import { SetLoadingContext } from "../contexts"
+import { TextField } from "./TextField"
 import { useNavigate } from "react-router-dom"
 
 const searchForShows = (
@@ -58,13 +60,14 @@ export const ShowSearchBar: FunctionComponent<Props> = ({ guest, callback, query
         navigate(`/search?q=${encodeURIComponent(query)}`)
       }}
     >
-      <input
-        type="text"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Search"
-      />
-      <input type="submit" value="Search" />
+      <span className="mr-2">
+        <TextField
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search"
+        />
+      </span>
+      <Button type="submit" value="Search" />
     </form>
   )
 }
