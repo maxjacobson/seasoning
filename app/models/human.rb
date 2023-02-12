@@ -5,6 +5,7 @@ class Human < ApplicationRecord
   has_many :browser_sessions
   has_many :my_shows
   has_many :shows, through: :my_shows
+  has_many :season_reviews, foreign_key: :author_id, inverse_of: :author
 
   before_validation ->(human) { human.handle = human.handle.to_s.parameterize.underscore.presence }
   before_save ->(human) { human.email = human.email.to_s.strip.downcase.presence }

@@ -109,14 +109,23 @@ export const ProfilePage = () => {
           </Button>
         )}
         <div>
-          <h2 className="text-xl">Profile</h2>
-
           <>
             <div>
-              <h2 className="text-xl">About</h2>
               <p>
-                <em>Seasoner since {new Date(profile.created_at).toLocaleDateString()}</em>
+                <em>Joined Seasoning on {new Date(profile.created_at).toLocaleDateString()}</em>
               </p>
+
+              <ul className="list-inside list-disc">
+                <li className="inline">
+                  <Link to={`/${handle}/reviews`}>reviews ({profile.reviews_count})</Link>
+                </li>
+                <li className="ml-2 inline">
+                  <Link to={`/${handle}/followers`}>followers ({profile.followers_count})</Link>
+                </li>
+                <li className="ml-2 inline">
+                  <Link to={`/${handle}/following`}>following ({profile.following_count})</Link>
+                </li>
+              </ul>
             </div>
 
             {profile.currently_watching && (
@@ -142,19 +151,6 @@ export const ProfilePage = () => {
                 )}
               </div>
             )}
-
-            <h2>See also</h2>
-            <ul className="list-inside list-disc">
-              <li>
-                <Link to={`/${handle}/reviews`}>{handle}&rsquo;s reviews</Link>
-              </li>
-              <li>
-                <Link to={`/${handle}/followers`}>{handle}&rsquo;s followers</Link>
-              </li>
-              <li>
-                <Link to={`/${handle}/following`}>{handle}&rsquo;s follows</Link>
-              </li>
-            </ul>
           </>
         </div>
       </div>
