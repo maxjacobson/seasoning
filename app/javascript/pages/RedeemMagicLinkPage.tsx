@@ -87,8 +87,8 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
     return (
       <div>
         <div>
-          <p>Thanks for clicking the link.</p>
-          <p>Just one more question... What do you want to be called?</p>
+          <h1 className="mb-2 text-xl">Complete your sign up</h1>
+          <p className="mb-2">Just one more question... what would you like to be called?</p>
 
           <form
             onSubmit={(e) => {
@@ -132,11 +132,13 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                 })
             }}
           >
-            <TextField
-              value={handle}
-              placeholder="Your handle"
-              onChange={(e) => setHandle(e.target.value)}
-            />
+            <span className="mr-2">
+              <TextField
+                value={handle}
+                placeholder="Your handle"
+                onChange={(e) => setHandle(e.target.value)}
+              />
+            </span>
             <Button type="submit" value="Go" disabled={creating} />
           </form>
         </div>
