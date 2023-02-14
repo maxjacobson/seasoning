@@ -4,6 +4,8 @@ Your couch away from your couch.
 
 Deploying to: <http://seasoning.herokuapp.com/> aka <https://www.seasoning.tv>
 
+Demo: <https://www.youtube.com/watch?v=4aB6LbN2ff8>
+
 ## Setup
 
 1. Install ruby, node, and postgres

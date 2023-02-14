@@ -66,7 +66,7 @@ export const GetStarted = () => {
         </div>
 
         <div>
-          <p>
+          <p className="mt-2 mb-2">
             To sign up or log in, just enter your email address and we&rsquo;ll send you a link to
             get started:
           </p>
@@ -87,6 +87,18 @@ export const GetStarted = () => {
                 <Button type="submit" value="Go" disabled={loading} />
               </span>
             </form>
+          </div>
+
+          <div className="mt-2">
+            <h1 className="mb-2 text-2xl">Demo (February 14, 2023)</h1>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube-nocookie.com/embed/4aB6LbN2ff8"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </>
