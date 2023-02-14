@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { Button } from "./Button"
 import { SetLoadingContext } from "../contexts"
 import { TextField } from "./TextField"
+import { YouTubeVideo } from "./YouTubeVideo"
 
 export const GetStarted = () => {
   const [email, setEmail] = useState("")
@@ -91,14 +92,7 @@ export const GetStarted = () => {
 
           <div className="mt-2">
             <h1 className="mb-2 text-2xl">Demo (February 14, 2023)</h1>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube-nocookie.com/embed/4aB6LbN2ff8"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
+            <YouTubeVideo id="4aB6LbN2ff8" />
           </div>
         </div>
       </>
