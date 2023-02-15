@@ -26,6 +26,16 @@ class Show < ApplicationRecord
     where(tmdb_next_refresh_at: nil).or(where(tmdb_next_refresh_at: ..(Time.zone.now)))
   }
 
+  scope :alphabetical, lambda {
+    order(
+      Arel.sql(
+        <<~SQL.squish
+          regexp_replace(title, '^(The|A)\s', '', 'i')
+        SQL
+      )
+    )
+  }
+
   def poster
     Poster.new(tmdb_poster_path)
   end

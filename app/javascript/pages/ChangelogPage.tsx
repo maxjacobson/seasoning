@@ -7,6 +7,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **February 15, 2023** — Ignore "The" and "A" at start of titles when sorting shows
   1. **February 11, 2023** — Display show first aired year on search page
   1. **February 11, 2023** — Add more info links to TMDB
   1. **February 11, 2023** — Some restyling with Tailwind
