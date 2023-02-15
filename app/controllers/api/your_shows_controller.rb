@@ -10,7 +10,14 @@ module API
                  .my_shows
                  .joins(:show)
                  .then { |relation| search(relation) }
-                 .order(status: :asc, title: :asc)
+                 .order(
+                   Arel.sql(
+                     <<~SQL.squish
+                       status asc,
+                       regexp_replace(title, '^(The|A)\s', '', 'i')
+                     SQL
+                   )
+                 )
 
       render json: {
         your_shows: MyShowSerializer.many(my_shows)

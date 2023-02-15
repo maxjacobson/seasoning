@@ -17,7 +17,7 @@ class ProfileSerializer < Oj::Serializer
   end
 
   def currently_watching
-    shows = profile.human.shows.where(my_shows: { status: "currently_watching" }).order(title: :asc)
+    shows = profile.human.shows.where(my_shows: { status: "currently_watching" }).alphabetical
 
     ShowSerializer.many(shows)
   end
