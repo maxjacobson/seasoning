@@ -146,9 +146,9 @@ export const ShowPage = () => {
             )}
             {data.show.tmdb_next_refresh_at && (
               <li>
-                <span className="font-bold">Data will next be refreshed at</span>:{" "}
+                <span className="font-bold">Data will next be refreshed within 24 hours of</span>{" "}
                 <span title={data.show.tmdb_next_refresh_at}>
-                  {new Date(data.show.tmdb_next_refresh_at).toLocaleString()}
+                  {new Date(data.show.tmdb_next_refresh_at).toLocaleDateString()}
                 </span>
               </li>
             )}
