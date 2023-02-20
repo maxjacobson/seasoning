@@ -45,6 +45,8 @@ export interface Show {
   seasons: Season[]
   tmdb_tv_id: string
   first_air_date: string | null
+  tmdb_last_refreshed_at: string | null
+  tmdb_next_refresh_at: string | null
 }
 
 export type MyShowStatus =

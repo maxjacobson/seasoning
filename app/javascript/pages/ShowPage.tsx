@@ -132,6 +132,28 @@ export const ShowPage = () => {
         ) : (
           <div>No seasons...</div>
         )}
+
+        <div className="my-4 border-t border-b border-solid border-orange-200 py-4">
+          <h2 className="text-lg">FYI</h2>
+          <ul className="list-inside list-disc">
+            {data.show.tmdb_last_refreshed_at && (
+              <li>
+                <span className="font-bold">Data last refreshed at:</span>{" "}
+                <span title={data.show.tmdb_last_refreshed_at}>
+                  {new Date(data.show.tmdb_last_refreshed_at).toLocaleString()}
+                </span>
+              </li>
+            )}
+            {data.show.tmdb_next_refresh_at && (
+              <li>
+                <span className="font-bold">Data will next be refreshed within 24 hours of</span>{" "}
+                <span title={data.show.tmdb_next_refresh_at}>
+                  {new Date(data.show.tmdb_next_refresh_at).toLocaleDateString()}
+                </span>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
     )
   }
