@@ -8,7 +8,7 @@ export const AirDate: FunctionComponent<Props> = ({ date: dateStr }: Props) => {
   if (dateStr) {
     const date: Date = new Date(dateStr)
 
-    return <>{date.toLocaleDateString()}</>
+    return <>{date.toLocaleDateString(undefined, { timeZone: "UTC" })}</>
   } else {
     return <>&mdash;</>
   }
