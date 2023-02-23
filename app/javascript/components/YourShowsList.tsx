@@ -99,9 +99,6 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
       },
     })
       .then((response) => {
-        globalSetLoading(false)
-        setLoading(false)
-
         if (response.ok) {
           return response.json()
         } else {
@@ -110,6 +107,8 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
       })
       .then((data: YourShows) => {
         setShows(data.your_shows)
+        setLoading(false)
+        globalSetLoading(false)
       })
   }, [titleQueryValue, statusesFilterValue.join("-")])
 
