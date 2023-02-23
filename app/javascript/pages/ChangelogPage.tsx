@@ -7,6 +7,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **February 23, 2023** — Show future episode air dates in a fainter gray text color in episodes list on season page
   1. **February 21, 2023** — Fix bug where episode air dates could be off by a day
   1. **February 19, 2023** — Display when show data was last refreshed from TMDB
   1. **February 15, 2023** — Ignore "The" and "A" at start of titles when sorting shows
