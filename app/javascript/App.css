@@ -53,3 +53,21 @@ a:hover {
   width: 100%;
   height: 100%;
 }
+
+@keyframes grow-to-fill-screen {
+  from {
+    width: 10%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.loading-ribbon {
+  background-color: theme(colors.orange.500);
+  animation-name: grow-to-fill-screen;
+  animation-timing-function: ease-out;
+  animation-duration: 4s;
+  width: 100%;
+}
