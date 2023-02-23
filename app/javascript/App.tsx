@@ -53,6 +53,8 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <Link to="/">
                   <img src={LogoWithName} className="h-full" />
                 </Link>
+              </div>
+              <div className="pr-2">
                 {guest.authenticated && (
                   <ShowSearchBar
                     guest={guest}
@@ -61,8 +63,6 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                     setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
                   />
                 )}
-              </div>
-              <div className="pr-2">
                 {guest.authenticated && (
                   <>
                     <Link to={`/${guest.human.handle}`} className="mr-2">
