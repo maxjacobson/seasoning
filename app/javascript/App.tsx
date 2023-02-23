@@ -46,7 +46,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
       <GuestContext.Provider value={guest}>
         <SetLoadingContext.Provider value={setLoading}>
           <>
-            <LoadingRibbon loading={loading} />
+            {loading && <LoadingRibbon />}
 
             <div className="my-2 mx-1 flex flex-col justify-between md:flex-row">
               <div className="flex flex-col md:flex-row">
