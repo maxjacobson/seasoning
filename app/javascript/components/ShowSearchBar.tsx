@@ -55,6 +55,7 @@ export const ShowSearchBar: FunctionComponent<Props> = ({ guest, callback, query
 
   return (
     <form
+      className="md:mr-2 md:inline "
       onSubmit={(event) => {
         event.preventDefault()
         navigate(`/search?q=${encodeURIComponent(query)}`)
