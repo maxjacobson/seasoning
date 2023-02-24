@@ -284,7 +284,6 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   sucker_punch
-  tzinfo-data
   vite_rails
   webmock
 
