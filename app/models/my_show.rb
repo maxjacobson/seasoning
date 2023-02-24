@@ -25,7 +25,11 @@ class MyShow < ApplicationRecord
                           .map { |my_season| my_season.season.season_number }
                           .max
 
-    most_recent_released = show.seasons.maximum(:season_number)
+    most_recent_released = show
+                           .seasons
+                           .select { |season| season.episodes.any?(&:available?) }
+                           .map(&:season_number)
+                           .max
 
     most_recent_watched.present? && most_recent_watched < most_recent_released
   end
