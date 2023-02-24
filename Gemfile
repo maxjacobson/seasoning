@@ -17,7 +17,6 @@ gem "sucker_punch"
 gem "vite_rails"
 
 group :development, :test do
-  gem "byebug"
   gem "dotenv-rails"
   gem "rspec-rails"
 end
