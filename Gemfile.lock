@@ -275,7 +275,7 @@ DEPENDENCIES
   email_validator
   letter_opener
   listen
-  nokogiri (>= 1.12.5)
+  nokogiri
   oj_serializers
   pg
   puma

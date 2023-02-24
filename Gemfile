@@ -11,7 +11,7 @@ gem "rails"
 
 gem "activerecord-postgres_enum"
 gem "email_validator"
-gem "nokogiri", ">= 1.12.5"
+gem "nokogiri"
 gem "oj_serializers"
 gem "vite_rails"
 
