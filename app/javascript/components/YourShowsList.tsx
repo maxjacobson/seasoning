@@ -23,7 +23,7 @@ interface ListShowProps {
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
-      <div className="my-2 mx-0 flex flex-wrap gap-4">
+      <div className="mx-0 my-2 flex flex-wrap gap-4">
         {shows.map((yourShow) => {
           return (
             <div
