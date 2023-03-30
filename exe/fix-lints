@@ -3,4 +3,4 @@
 set -ex
 
 npx prettier --write .
-bin/rubocop --auto-correct-all
+bin/rubocop --autocorrect-all
