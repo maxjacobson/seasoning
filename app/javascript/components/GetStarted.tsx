@@ -67,7 +67,7 @@ export const GetStarted = () => {
         </div>
 
         <div>
-          <p className="mt-2 mb-2">
+          <p className="mb-2 mt-2">
             To sign up or log in, just enter your email address and we&rsquo;ll send you a link to
             get started:
           </p>

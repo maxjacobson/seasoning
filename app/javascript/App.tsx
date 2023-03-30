@@ -48,7 +48,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
           <>
             {loading && <LoadingRibbon />}
 
-            <div className="my-2 mx-1 flex flex-col justify-between md:flex-row">
+            <div className="mx-1 my-2 flex flex-col justify-between md:flex-row">
               <div className="flex flex-col md:flex-row">
                 <Link to="/">
                   <img src={LogoWithName} className="h-full" />
@@ -88,7 +88,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
               </div>
             </div>
 
-            <div className="my-0 mx-auto max-w-2xl p-2">
+            <div className="mx-auto my-0 max-w-2xl p-2">
               <Routes>
                 <Route path="/" element={<HomePage />} />
 

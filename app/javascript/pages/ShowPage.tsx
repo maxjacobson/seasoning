@@ -133,7 +133,7 @@ export const ShowPage = () => {
           <div>No seasons...</div>
         )}
 
-        <div className="my-4 border-t border-b border-solid border-orange-200 py-4">
+        <div className="my-4 border-b border-t border-solid border-orange-200 py-4">
           <h2 className="text-lg">FYI</h2>
           <ul className="list-inside list-disc">
             {data.show.tmdb_last_refreshed_at && (

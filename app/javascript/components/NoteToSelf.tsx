@@ -30,7 +30,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
 
   if (yourShow.your_relationship?.note_to_self || isEditing) {
     return (
-      <div className="my-4 border-t border-b border-solid border-orange-200 py-4">
+      <div className="my-4 border-b border-t border-solid border-orange-200 py-4">
         <h1 className="text-2xl">Note to self</h1>
 
         {isEditing ? (
