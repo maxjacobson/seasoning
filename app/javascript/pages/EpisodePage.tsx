@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { AirDate } from "../components/AirDate"
 import { MoreInfo } from "../components/MoreInfo"
 import { setHeadTitle } from "../hooks"
+import { ShowMetadata } from "../components/ShowMetadata"
 
 interface LoadingEpisode {
   loading: true
@@ -94,6 +95,8 @@ export const EpisodePage = () => {
       <div>
         Air date: <AirDate date={episode.air_date} available={episode.available} />
       </div>
+
+      <ShowMetadata show={show} />
     </>
   )
 }
