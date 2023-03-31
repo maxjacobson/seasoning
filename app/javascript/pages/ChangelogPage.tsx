@@ -7,6 +7,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **March 31, 2023** — Show "last refreshed at" show data on season page and episode page
   1. **February 23, 2023** — Automatically toggle shows from "waiting for more" to "next up" _only when there is a new episode available to watch_, not just when the season is announced.
   1. **February 23, 2023** — Add some animation to the global loading ribbon
   1. **February 23, 2023** — Show future episode air dates in a fainter gray text color in episodes list on season page
