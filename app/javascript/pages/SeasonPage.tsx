@@ -6,6 +6,7 @@ import { MoreInfo } from "../components/MoreInfo"
 import { Poster } from "../components/Poster"
 import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
 import { setHeadTitle } from "../hooks"
+import { ShowMetadata } from "../components/ShowMetadata"
 import { YourSeason } from "../types"
 
 interface LoadingSeason {
@@ -176,6 +177,8 @@ export const SeasonPage = () => {
           </div>
         </div>
       )}
+
+      <ShowMetadata show={yourSeason.show} />
     </div>
   )
 }
