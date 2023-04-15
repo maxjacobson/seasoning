@@ -3,7 +3,7 @@
 # A TV show!
 # Data is mostly from the movie database
 class Show < ApplicationRecord
-  REFRESH_INTERVAL = 3.days
+  REFRESH_INTERVAL = 2.days
 
   before_create lambda {
     slug = nil
