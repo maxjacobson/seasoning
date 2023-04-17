@@ -1,4 +1,4 @@
-import { Episode, MyShowStatus, Season, Show } from "../types"
+import { Episode, HumanLimits, MyShowStatus, Season, Show } from "../types"
 
 export const displayMyShowStatus = (status: MyShowStatus): string => {
   return {
@@ -9,6 +9,25 @@ export const displayMyShowStatus = (status: MyShowStatus): string => {
     waiting_for_more: "Waiting for more",
     finished: "Finished",
   }[status]
+}
+
+export const displayMyShowStatusLimit = (status: MyShowStatus, limits: HumanLimits): string => {
+  if (atLimit(status, limits)) {
+    return "(At limit!)"
+  } else {
+    return ""
+  }
+}
+
+export const atLimit = (status: MyShowStatus, limits: HumanLimits): boolean => {
+  if (status === "currently_watching") {
+    return !!(
+      limits.currently_watching_limit.max &&
+      limits.currently_watching_limit.current >= limits.currently_watching_limit.max
+    )
+  } else {
+    return false
+  }
 }
 
 export const updateMyShow = (

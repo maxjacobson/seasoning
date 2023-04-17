@@ -11,6 +11,7 @@ class Human < ApplicationRecord
   before_save ->(human) { human.email = human.email.to_s.strip.downcase.presence }
 
   validates :handle, exclusion: { in: RESERVED_WORDS, message: "%<value>s is reserved" }
+  validates :currently_watching_limit, numericality: { in: 1..10, allow_nil: true }
 
   def followers
     human_ids = Follow.where(followee_id: id).pluck(:follower_id)

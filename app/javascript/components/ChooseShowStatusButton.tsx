@@ -1,8 +1,14 @@
-import { displayMyShowStatus, updateMyShow } from "../helpers/my_shows"
+import {
+  atLimit,
+  displayMyShowStatus,
+  displayMyShowStatusLimit,
+  updateMyShow,
+} from "../helpers/my_shows"
 import { FunctionComponent, useContext } from "react"
-import { MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
+import { GuestContext, SetLoadingContext } from "../contexts"
+import { HumanLimits, MyShowStatus, Show, YourRelationshipToShow, YourShow } from "../types"
+import { loadData } from "../hooks"
 import { Select } from "./Select"
-import { SetLoadingContext } from "../contexts"
 
 const allStatuses: MyShowStatus[] = [
   "might_watch",
@@ -27,6 +33,22 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
   setYourShow,
 }: Props) => {
   const globalSetLoading = useContext(SetLoadingContext)
+  const guest = useContext(GuestContext)
+
+  const limits = loadData<HumanLimits>(
+    guest,
+    "/api/human-limits.json",
+    [yourRelationship.status],
+    globalSetLoading
+  )
+
+  if (limits.loading) {
+    return <p>Loading...</p>
+  }
+
+  if (!limits.data) {
+    throw new Error("Missing limits data")
+  }
 
   return (
     <Select
@@ -46,8 +68,8 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
     >
       {allStatuses.map((status) => {
         return (
-          <option key={status} value={status}>
-            {displayMyShowStatus(status)}
+          <option key={status} value={status} disabled={atLimit(status, limits.data)}>
+            {displayMyShowStatus(status)} {displayMyShowStatusLimit(status, limits.data)}
           </option>
         )
       })}
