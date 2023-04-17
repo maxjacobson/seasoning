@@ -13,7 +13,7 @@ export const displayMyShowStatus = (status: MyShowStatus): string => {
 
 export const displayMyShowStatusLimit = (status: MyShowStatus, limits: HumanLimits): string => {
   if (atLimit(status, limits)) {
-    return "(At limit!)"
+    return "(at limit!)"
   } else {
     return ""
   }
