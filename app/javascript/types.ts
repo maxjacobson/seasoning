@@ -1,11 +1,21 @@
 export interface HumanSettings {
   share_currently_watching: boolean
   default_review_visibility: Visibility
+  currently_watching_limit: number | null
 }
 
 export interface Human {
   handle: string
   admin: boolean
+}
+
+interface Limit {
+  current: number
+  max: number | null
+}
+
+export interface HumanLimits {
+  currently_watching_limit: Limit
 }
 
 export interface AuthenticatedGuest {

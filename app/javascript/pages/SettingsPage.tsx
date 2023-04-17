@@ -92,7 +92,7 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
 
   return (
     <>
-      <div className="my-2">
+      <div className="my-6">
         <h2 className="text-xl">Profile page</h2>
         <Checkbox
           name="share-currently-watching"
@@ -109,7 +109,7 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
         </label>
       </div>
 
-      <div className="my-2">
+      <div className="my-6">
         <h2 className="text-xl">Reviews</h2>
 
         <div>
@@ -130,6 +130,39 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
           This is just a default for new reviews, you can pick another visibility on a
           review-by-review basis!
         </p>
+      </div>
+
+      <div className="my-6">
+        <h2 className="text-xl">Limits</h2>
+
+        <div>
+          <label>Currently watching limit</label>
+        </div>
+
+        <Select
+          value={settingsData.settings.currently_watching_limit || -1}
+          onChange={(event) => {
+            const value = event.target.value
+            if (parseInt(value) > 0) {
+              update({ currently_watching_limit: value })
+            } else {
+              update({ currently_watching_limit: null })
+            }
+          }}
+          disabled={currentlyUpdating}
+        >
+          <option value={-1}>None</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={6}>6</option>
+          <option value={7}>7</option>
+          <option value={8}>8</option>
+          <option value={9}>9</option>
+          <option value={10}>10</option>
+        </Select>
       </div>
     </>
   )
