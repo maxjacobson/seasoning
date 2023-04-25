@@ -7,6 +7,7 @@
     "eslint:recommended",
     "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript"
@@ -24,11 +25,27 @@
   "rules": {
     "@typescript-eslint/no-extra-semi": "off", // handled by prettier, which I run separately
     "@typescript-eslint/no-unused-vars": [
-      "warn",
+      "error",
       {
         "argsIgnorePattern": "^_"
       }
     ],
+    "@typescript-eslint/no-floating-promises": [
+      "warn", // FIXME: bump up to error
+      {
+        "ignoreIIFE": true
+      }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "warn", // FIXME: bump up to error
+      {
+        "checksVoidReturn": false
+      }
+    ],
+    "@typescript-eslint/restrict-template-expressions": ["warn"], // FIXME: bump up to error
+    "@typescript-eslint/no-unsafe-assignment": ["warn"], // FIXME: bump up to error
+    "@typescript-eslint/no-unsafe-argument": ["warn"], // FIXME: bump up to error
+    "@typescript-eslint/no-unsafe-member-access": ["warn"], // FIXME: bump up to error
     "no-console": ["error"],
     "import/no-default-export": ["error"],
     "react/prop-types": ["off"],
