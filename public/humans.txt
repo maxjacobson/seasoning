@@ -1,0 +1,5 @@
+Hi!
+
+Seasoning is a website for TV lovers. You can use it to keep track of what shows you're watching or are thinking about watching.
+
+It's developed by Max Jacobson. Feel free to check out the source code here: https://github.com/maxjacobson/seasoning/

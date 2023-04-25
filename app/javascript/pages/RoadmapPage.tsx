@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import { FunctionComponent } from "react"
 import { Markdown } from "../components/Markdown"
 
 import { setHeadTitle } from "../hooks"
@@ -23,6 +23,9 @@ const roadmap = `
   1. RSS feed for public reviews
   1. An activity feed for the people you follow
   1. A way to indicate that you're rewatching a show/season, not watching it for the first time
+  1. Some kind of notification when new episodes are available to watch
+  1. Some way to mark seasons as "skipped" -- for example if you add the bachelor because you want to watch the latest episode of the bachelor but you don't want to watch all 27 seasons, just the new one
+  1. Some way to mark episodes as "skipped" -- for example if you start watching saturday night live mid-season and don't feel compelled to go back and watch the old episodes
 `
 
 export const RoadmapPage: FunctionComponent = () => {
@@ -30,7 +33,7 @@ export const RoadmapPage: FunctionComponent = () => {
 
   return (
     <div>
-      <h1>Roadmap</h1>
+      <h1 className="text-xl">Roadmap</h1>
 
       <Markdown markdown={roadmap} />
     </div>

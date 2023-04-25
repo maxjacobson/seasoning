@@ -1,16 +1,10 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { Button } from "../components/Button"
 import { Poster } from "../components/Poster"
 import { Profile } from "../types"
 import { setHeadTitle } from "../hooks"
-import styled from "@emotion/styled"
-
-const CurrentlyWatchingContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-`
 
 interface StillLoading {
   loading: true
@@ -76,7 +70,7 @@ export const ProfilePage = () => {
   } else if (!profileData.profile) {
     return (
       <div>
-        <h1>Not found</h1>
+        <h1 className="text-xl">Not found</h1>
         <p>No one goes by that name around these parts</p>
       </div>
     )
@@ -85,10 +79,10 @@ export const ProfilePage = () => {
 
     return (
       <div>
-        <h1>{handle}</h1>
+        <h1 className="text-2xl">{handle}</h1>
 
         {guest.authenticated && profile.your_relationship && !profile.your_relationship.self && (
-          <button
+          <Button
             disabled={profile.your_relationship.you_follow_them}
             onClick={async () => {
               const response = await fetch("/api/follows.json", {
@@ -112,27 +106,36 @@ export const ProfilePage = () => {
             }}
           >
             {profile.your_relationship.you_follow_them ? "Following" : "Follow"}
-          </button>
+          </Button>
         )}
         <div>
-          <h2>Profile</h2>
-
           <>
             <div>
-              <h2>About</h2>
               <p>
-                <em>Seasoner since {new Date(profile.created_at).toLocaleDateString()}</em>
+                <em>Joined Seasoning on {new Date(profile.created_at).toLocaleDateString()}</em>
               </p>
+
+              <ul className="list-inside list-disc">
+                <li className="inline">
+                  <Link to={`/${handle}/reviews`}>reviews ({profile.reviews_count})</Link>
+                </li>
+                <li className="ml-2 inline">
+                  <Link to={`/${handle}/followers`}>followers ({profile.followers_count})</Link>
+                </li>
+                <li className="ml-2 inline">
+                  <Link to={`/${handle}/following`}>following ({profile.following_count})</Link>
+                </li>
+              </ul>
             </div>
 
             {profile.currently_watching && (
               <div>
-                <h2>Currently watching</h2>
+                <h2 className="text-xl">Currently watching</h2>
                 {profile.currently_watching.length ? (
-                  <CurrentlyWatchingContainer>
+                  <div className="flex flex-wrap gap-1">
                     {profile.currently_watching.map((show) => {
                       return (
-                        <div key={show.id}>
+                        <div key={show.id} className="w-32">
                           <Link to={`/shows/${show.slug}`}>
                             <div>
                               <Poster show={show} size="small" url={show.poster_url} />
@@ -142,25 +145,12 @@ export const ProfilePage = () => {
                         </div>
                       )
                     })}
-                  </CurrentlyWatchingContainer>
+                  </div>
                 ) : (
                   <p>{profile.handle} is not currently watching anything</p>
                 )}
               </div>
             )}
-
-            <h2>See also</h2>
-            <ul>
-              <li>
-                <Link to={`/${handle}/reviews`}>{handle}&rsquo;s reviews</Link>
-              </li>
-              <li>
-                <Link to={`/${handle}/followers`}>{handle}&rsquo;s followers</Link>
-              </li>
-              <li>
-                <Link to={`/${handle}/following`}>{handle}&rsquo;s follows</Link>
-              </li>
-            </ul>
           </>
         </div>
       </div>

@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  color: theme(colors.yellow.600);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.rendered-markdown h1 {
+  @apply text-2xl;
+}
+
+.rendered-markdown h2 {
+  @apply text-xl;
+}
+
+.rendered-markdown h3,
+.rendered-markdown h4,
+.rendered-markdown h5,
+.rendered-markdown h6 {
+  @apply text-lg;
+}
+
+.rendered-markdown ol {
+  @apply list-decimal;
+  @apply list-inside;
+}
+
+.rendered-markdown ul {
+  @apply list-disc;
+  @apply list-inside;
+}
+
+/* Copied from https://github.com/nathancy/jekyll-embed-video#responsive-videos */
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes grow-to-fill-screen {
+  from {
+    width: 10%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.loading-ribbon {
+  background-color: theme(colors.orange.500);
+  animation-name: grow-to-fill-screen;
+  animation-timing-function: ease-out;
+  animation-duration: 4s;
+  width: 100%;
+}

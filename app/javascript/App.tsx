@@ -1,8 +1,9 @@
+import "./App.css"
+
 import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router-dom"
-import { css, Global } from "@emotion/react"
+import { FunctionComponent, useState } from "react"
 import { Guest, Show } from "./types"
 import { GuestContext, SetLoadingContext } from "./contexts"
-import React, { FunctionComponent, useState } from "react"
 import { AdminPage } from "./pages/AdminPage"
 import { ChangelogPage } from "./pages/ChangelogPage"
 import { CreditsPage } from "./pages/CreditsPage"
@@ -26,47 +27,8 @@ import { SeasonReviewPage } from "./pages/SeasonReviewPage"
 import { SettingsPage } from "./pages/SettingsPage"
 import { ShowPage } from "./pages/ShowPage"
 import { ShowSearchBar } from "./components/ShowSearchBar"
-import styled from "@emotion/styled"
 import { YourShowsPage } from "./pages/YourShowsPage"
 
-const globalStyles = css`
-  body {
-    padding: 0 0 20px 0;
-    margin: 0;
-    font-family: monospace;
-  }
-
-  a {
-    color: #d67411;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`
-
-const SiteHeader = styled.div`
-  margin: 10px 5px;
-  display: flex;
-  justify-content: space-between;
-
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
-`
-
-const MobileFlex = styled.div`
-  display: flex;
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
-`
-
-const SiteBody = styled.div`
-  max-width: 750px;
-  margin: 0 auto;
-`
 interface Props {
   initialGuest: Guest
 }
@@ -83,15 +45,16 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
     <>
       <GuestContext.Provider value={guest}>
         <SetLoadingContext.Provider value={setLoading}>
-          <Global styles={globalStyles} />
           <>
-            <LoadingRibbon loading={loading} />
+            {loading && <LoadingRibbon />}
 
-            <SiteHeader>
-              <MobileFlex>
+            <div className="mx-1 my-2 flex flex-col justify-between md:flex-row">
+              <div className="flex flex-col md:flex-row">
                 <Link to="/">
-                  <img src={LogoWithName} />
+                  <img src={LogoWithName} className="h-full" />
                 </Link>
+              </div>
+              <div className="pr-2">
                 {guest.authenticated && (
                   <ShowSearchBar
                     guest={guest}
@@ -100,14 +63,14 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                     setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
                   />
                 )}
-              </MobileFlex>
-              <div>
                 {guest.authenticated && (
                   <>
-                    <Link to={`/${guest.human.handle}`}>Your page</Link>
-                    <span> * </span>
-                    <Link to="/settings">Settings</Link>
-                    <span> * </span>
+                    <Link to={`/${guest.human.handle}`} className="mr-2">
+                      Your page
+                    </Link>
+                    <Link to="/settings" className="mr-2">
+                      Settings
+                    </Link>
                     <a
                       href="#"
                       onClick={() => {
@@ -123,9 +86,9 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                   </>
                 )}
               </div>
-            </SiteHeader>
+            </div>
 
-            <SiteBody>
+            <div className="mx-auto my-0 max-w-2xl p-2">
               <Routes>
                 <Route path="/" element={<HomePage />} />
 
@@ -168,22 +131,22 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
 
-              <div style={{ marginTop: "25px", borderTop: "1px dashed black" }}>
+              <div className="mt-5 flex justify-evenly border-t border-dashed border-t-black">
                 {guest.authenticated && guest.human.admin && (
                   <>
                     {" "}
-                    <Link to="/admin">Admin</Link> *{" "}
+                    <Link to="/admin">Admin</Link>
                   </>
                 )}
                 {guest.authenticated && (
                   <>
-                    <Link to="/reviews">Reviews</Link> *{" "}
+                    <Link to="/reviews">Reviews</Link>{" "}
                   </>
                 )}
-                <Link to="/roadmap">Roadmap</Link> * <Link to="/changelog">Changelog</Link> *{" "}
+                <Link to="/roadmap">Roadmap</Link> <Link to="/changelog">Changelog</Link>{" "}
                 <Link to="/credits">Credits</Link>
               </div>
-            </SiteBody>
+            </div>
           </>
         </SetLoadingContext.Provider>
       </GuestContext.Provider>

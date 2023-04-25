@@ -1,18 +1,13 @@
+import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Human, YourShow } from "../types"
 import { Link, useSearchParams } from "react-router-dom"
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
 import { displayMyShowStatus } from "../helpers/my_shows"
 import { Markdown } from "./Markdown"
 import { Poster } from "./Poster"
 import queryString from "query-string"
+import { Select } from "./Select"
 import { SetLoadingContext } from "../contexts"
-import styled from "@emotion/styled"
-
-const NoteToSelf = styled.div`
-  border: 1px solid black;
-  padding: 2px;
-  margin: 10px 0;
-`
+import { TextField } from "./TextField"
 
 interface YourShows {
   your_shows: YourShow[]
@@ -28,36 +23,37 @@ interface ListShowProps {
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
     return (
-      <div
-        style={{
-          margin: "10px 0",
-        }}
-      >
+      <div className="mx-0 my-2 flex flex-wrap gap-4">
         {shows.map((yourShow) => {
           return (
-            <div key={yourShow.show.id}>
-              <div>
-                <Link key={yourShow.show.id} to={`/shows/${yourShow.show.slug}`}>
-                  <div>
-                    <Poster show={yourShow.show} size="small" url={yourShow.show.poster_url} />
-                  </div>
-                  {yourShow.show.title}
-                </Link>
-              </div>
+            <div
+              key={yourShow.show.id}
+              className="w-60 rounded-lg border-2 border-dashed border-yellow-500 p-2"
+            >
+              <div className="flex flex-col">
+                <div className="self-center">
+                  <Link key={yourShow.show.id} to={`/shows/${yourShow.show.slug}`}>
+                    <div>
+                      <Poster show={yourShow.show} size="large" url={yourShow.show.poster_url} />
+                    </div>
+                    {yourShow.show.title}
+                  </Link>
+                </div>
 
-              <div>
-                {yourShow.your_relationship?.status ? (
-                  <span>{displayMyShowStatus(yourShow.your_relationship.status)}</span>
-                ) : (
-                  <span>&mdash;</span>
-                )}
+                <div className="self-center">
+                  {yourShow.your_relationship?.status ? (
+                    <span>{displayMyShowStatus(yourShow.your_relationship.status)}</span>
+                  ) : (
+                    <span>&mdash;</span>
+                  )}
+                </div>
               </div>
 
               {yourShow.your_relationship?.note_to_self ? (
-                <NoteToSelf>
-                  <h2>Note to self</h2>
+                <div className=" mx-0 my-2.5  break-words border-t border-dotted border-slate-300	p-0.5">
+                  <h2 className="text-lg font-bold">Note to self</h2>
                   <Markdown markdown={yourShow.your_relationship.note_to_self} />
-                </NoteToSelf>
+                </div>
               ) : (
                 <></>
               )}
@@ -103,9 +99,6 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
       },
     })
       .then((response) => {
-        globalSetLoading(false)
-        setLoading(false)
-
         if (response.ok) {
           return response.json()
         } else {
@@ -114,15 +107,16 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
       })
       .then((data: YourShows) => {
         setShows(data.your_shows)
+        setLoading(false)
+        globalSetLoading(false)
       })
   }, [titleQueryValue, statusesFilterValue.join("-")])
 
   return (
     <div>
       <>
-        <div>
-          <input
-            type="text"
+        <div className="mb-2">
+          <TextField
             placeholder="Filter your shows"
             value={titleQueryValue}
             onChange={(event) => {
@@ -135,7 +129,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
             }}
           />
         </div>
-        <select
+        <Select
           multiple={true}
           value={statusesFilterValue}
           onChange={(event) => {
@@ -153,7 +147,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           <option value="stopped_watching">Stopped watching</option>
           <option value="waiting_for_more">Waiting for more</option>
           <option value="finished">Finished</option>
-        </select>
+        </Select>
         {loading ? <div>Loading your shows...</div> : <ListShows shows={shows} />}
       </>
     </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { GetStarted } from "../components/GetStarted"
 import { GuestContext } from "../contexts"
 import { useNavigate } from "react-router-dom"
@@ -18,8 +18,8 @@ export const HomePage = () => {
   } else {
     return (
       <div>
-        <h1>Welcome</h1>
-        <h2>This is seasoning, a website about TV shows</h2>
+        <h1 className="text-2xl">Welcome</h1>
+        <h2 className="text-lg">This is seasoning, a website about TV shows</h2>
         <GetStarted />
       </div>
     )

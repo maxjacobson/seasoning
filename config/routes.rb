@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :season_reviews, only: %i[create index], path: "/season-reviews"
       resource :season_review, only: %i[show destroy], path: "/season-review"
       resource :admin, only: %i[show]
+      resource :human_limits, only: %i[show], path: "/human-limits", controller: "human_limits"
     end
   end
 

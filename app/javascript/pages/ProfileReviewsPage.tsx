@@ -1,8 +1,8 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { loadData, setHeadTitle } from "../hooks"
-import React, { useContext } from "react"
 import { SeasonReview, Show } from "../types"
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
+import { useContext } from "react"
 import { useParams } from "react-router-dom"
 
 export const ProfileReviewsPage = () => {
@@ -30,7 +30,7 @@ export const ProfileReviewsPage = () => {
     return (
       <>
         <div>
-          <h1>{handle}&rsquo;s reviews</h1>
+          <h1 className="text-2xl">{handle}&rsquo;s reviews</h1>
           <p>No reviews yet!</p>
         </div>
       </>
@@ -39,7 +39,7 @@ export const ProfileReviewsPage = () => {
 
   return (
     <div>
-      <h1>{handle}&rsquo;s reviews</h1>
+      <h1 className="text-2xl">{handle}&rsquo;s reviews</h1>
       {reviewsData.data.reviews.map(({ review, show }) => {
         return <SeasonReviewSummary review={review} show={show} key={review.id} />
       })}

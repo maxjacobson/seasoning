@@ -4,5 +4,9 @@
 class FrontendController < ApplicationController
   def show
     authorize! { true }
+
+    respond_to do |format|
+      format.html
+    end
   end
 end

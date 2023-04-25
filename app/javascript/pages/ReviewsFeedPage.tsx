@@ -1,6 +1,6 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
-import React, { useContext, useEffect, useState } from "react"
 import { SeasonReview, Show } from "../types"
+import { useContext, useEffect, useState } from "react"
 import { Navigate } from "react-router-dom"
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
 import { setHeadTitle } from "../hooks"
@@ -60,8 +60,8 @@ export const ReviewsFeedPage = () => {
 
   return (
     <div>
-      <h1>Reviews</h1>
-      <h2>Recent 10 reviews</h2>
+      <h1 className="text-xl">Reviews</h1>
+      <h2 className="text-lg">Recent 10 reviews</h2>
       {feedData.data.map(({ review, show }) => {
         return <SeasonReviewSummary key={review.id} review={review} show={show} />
       })}

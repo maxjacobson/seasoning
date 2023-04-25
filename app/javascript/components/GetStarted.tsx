@@ -1,5 +1,8 @@
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { Button } from "./Button"
 import { SetLoadingContext } from "../contexts"
+import { TextField } from "./TextField"
+import { YouTubeVideo } from "./YouTubeVideo"
 
 export const GetStarted = () => {
   const [email, setEmail] = useState("")
@@ -64,7 +67,7 @@ export const GetStarted = () => {
         </div>
 
         <div>
-          <p>
+          <p className="mb-2 mt-2">
             To sign up or log in, just enter your email address and we&rsquo;ll send you a link to
             get started:
           </p>
@@ -75,15 +78,21 @@ export const GetStarted = () => {
                 setLoading(true)
               }}
             >
-              <input
-                type="text"
+              <TextField
                 placeholder="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
               />
-              <input type="submit" value="Go" disabled={loading} />
+              <span className="ml-2">
+                <Button type="submit" value="Go" disabled={loading} />
+              </span>
             </form>
+          </div>
+
+          <div className="mt-2">
+            <h1 className="mb-2 text-2xl">Demo (February 14, 2023)</h1>
+            <YouTubeVideo id="4aB6LbN2ff8" />
           </div>
         </div>
       </>

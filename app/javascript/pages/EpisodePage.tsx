@@ -1,9 +1,11 @@
 import { Episode, Season, Show } from "../types"
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AirDate } from "../components/AirDate"
+import { MoreInfo } from "../components/MoreInfo"
 import { setHeadTitle } from "../hooks"
+import { ShowMetadata } from "../components/ShowMetadata"
 
 interface LoadingEpisode {
   loading: true
@@ -79,7 +81,10 @@ export const EpisodePage = () => {
 
   return (
     <>
-      <h1>{episode.name}</h1>
+      <h1 className="text-xl">{episode.name}</h1>
+      <MoreInfo
+        url={`https://www.themoviedb.org/tv/${show.tmdb_tv_id}/season/${season.season_number}/episode/${episode.episode_number}`}
+      />
       <p>
         An episode of <Link to={`/shows/${show.slug}`}>{show.title}</Link>,{" "}
         <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link>.
@@ -88,8 +93,10 @@ export const EpisodePage = () => {
       <div>{episode.still_url && <img src={episode.still_url} />}</div>
 
       <div>
-        Air date: <AirDate date={episode.air_date} />
+        Air date: <AirDate date={episode.air_date} available={episode.available} />
       </div>
+
+      <ShowMetadata show={show} />
     </>
   )
 }

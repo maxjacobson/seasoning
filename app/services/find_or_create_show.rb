@@ -3,10 +3,12 @@
 FindOrCreateShow = lambda { |tmdb_show|
   show = Show.find_by(tmdb_tv_id: tmdb_show.id)
   show ||= Show.create!(
+    first_air_date: tmdb_show.first_air_date,
     title: tmdb_show.name,
     tmdb_tv_id: tmdb_show.id,
     tmdb_poster_path: tmdb_show.poster_path,
-    tmdb_next_refresh_at: Show::REFRESH_INTERVAL.from_now
+    tmdb_next_refresh_at: Show::REFRESH_INTERVAL.from_now,
+    tmdb_last_refreshed_at: Time.zone.now
   )
 
   TMDB::Client.new.tv_details(show.tmdb_tv_id).seasons.each do |tmdb_season|

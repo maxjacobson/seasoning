@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react"
 import { SeasonReview, Show } from "../types"
+import { FunctionComponent } from "react"
 import { Link } from "react-router-dom"
 import { Poster } from "./Poster"
 import { StarRating } from "../components/StarRating"
@@ -16,11 +16,11 @@ export const SeasonReviewSummary: FunctionComponent<Props> = ({ review, show }) 
 
   return (
     <div>
-      <h1>
+      <h1 className="text-xl">
         <Link to={url}>Review by {review.author.handle}</Link>
       </h1>
       <div>
-        <h2>
+        <h2 className="text-lg">
           {show.title} &mdash; {review.season.name}
         </h2>
         <Poster show={show} size="small" url={review.season.poster_url} />

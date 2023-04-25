@@ -20,7 +20,11 @@ module API
     private
 
     def settings_params
-      params.permit(:share_currently_watching, :default_review_visibility)
+      params.permit(
+        :currently_watching_limit,
+        :default_review_visibility,
+        :share_currently_watching
+      )
     end
   end
 end

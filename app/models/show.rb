@@ -3,7 +3,7 @@
 # A TV show!
 # Data is mostly from the movie database
 class Show < ApplicationRecord
-  REFRESH_INTERVAL = 2.weeks
+  REFRESH_INTERVAL = 2.days
 
   before_create lambda {
     slug = nil
@@ -24,6 +24,16 @@ class Show < ApplicationRecord
 
   scope :needs_refreshing, lambda {
     where(tmdb_next_refresh_at: nil).or(where(tmdb_next_refresh_at: ..(Time.zone.now)))
+  }
+
+  scope :alphabetical, lambda {
+    order(
+      Arel.sql(
+        <<~SQL.squish
+          regexp_replace(title, '^(The|A)\s', '', 'i')
+        SQL
+      )
+    )
   }
 
   def poster

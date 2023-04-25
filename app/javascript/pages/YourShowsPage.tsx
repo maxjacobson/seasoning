@@ -1,6 +1,6 @@
-import React, { useContext } from "react"
 import { GuestContext } from "../contexts"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
 import { YourShowsList } from "../components/YourShowsList"
 
 export const YourShowsPage = () => {
@@ -8,7 +8,7 @@ export const YourShowsPage = () => {
 
   return (
     <div>
-      <h1>Your shows</h1>
+      <h1 className="text-xl">Your shows</h1>
       {guest.authenticated ? (
         <YourShowsList human={guest.human} token={guest.token} />
       ) : (

@@ -1,7 +1,8 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Human, Season, SeasonReview, Show } from "../types"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { Button } from "../components/Button"
 import { Markdown } from "../components/Markdown"
 import { Poster } from "../components/Poster"
 import queryString from "query-string"
@@ -93,7 +94,7 @@ export const SeasonReviewPage = () => {
   if (!reviewData.review) {
     return (
       <div>
-        <h1>Not found</h1>
+        <h1 className="text-2xl">Not found</h1>
         <p>Review not found!</p>
         <p>
           <Link to={`/${handle}`}>Back</Link>
@@ -106,8 +107,8 @@ export const SeasonReviewPage = () => {
 
   return (
     <div>
-      <h1>{show.title}</h1>
-      <h2>{season.name}</h2>
+      <h1 className="text-2xl">{show.title}</h1>
+      <h2 className="text-xl">{season.name}</h2>
 
       <div>
         <h3>
@@ -117,28 +118,28 @@ export const SeasonReviewPage = () => {
         </h3>
 
         <div>
-          <h3>Poster</h3>
+          <h3 className="text-lg">Poster</h3>
           <Poster show={show} url={season.poster_url} size="large" />
         </div>
 
         <div>
-          <h3>Date</h3>
+          <h3 className="text-lg">Date</h3>
           <span>{new Date(review.created_at).toLocaleDateString()}</span>
         </div>
 
         {review.rating != null && (
           <div>
-            <h3>Rating</h3>
+            <h3 className="text-lg">Rating</h3>
             <StarRating rating={review.rating} />
           </div>
         )}
-        <div>
+        <div className="my-2 rounded-md border border-solid border-yellow-600 p-4">
           <Markdown markdown={review.body} />
         </div>
 
         {guest.authenticated && review.author.handle === guest.human.handle && (
           <div>
-            <button
+            <Button
               onClick={async (event) => {
                 event.preventDefault()
 
@@ -172,7 +173,7 @@ export const SeasonReviewPage = () => {
               }}
             >
               Delete review
-            </button>
+            </Button>
           </div>
         )}
       </div>

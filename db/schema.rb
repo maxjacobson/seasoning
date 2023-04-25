@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_13_170232) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_145901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_170232) do
   create_table "browser_sessions", force: :cascade do |t|
     t.string "token", null: false, comment: "The token that will be kept in localstorage and included with API requests"
     t.bigint "human_id", null: false
-    t.datetime "last_seen_at", precision: nil, null: false, comment: "When the human last visited during this session"
     t.datetime "expires_at", precision: nil, null: false, comment: "The time at which we should stop honoring the token and force them to log in again"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_170232) do
     t.boolean "share_currently_watching", default: true, null: false, comment: "Whether or not to publicly display your currently watching list on the profile page"
     t.enum "default_review_visibility", default: "anybody", null: false, comment: "Lets people specify who they generally want to share their reviews with, to save them some clicking", enum_type: "visibility"
     t.boolean "admin", default: false, null: false, comment: "Gives humans some extra abilities to see things like the admin stats page"
+    t.integer "currently_watching_limit", comment: "How many shows, at most, does this human want to watch at once?"
     t.index ["email"], name: "humans_email_unique", unique: true
     t.index ["handle"], name: "humans_handle_unique", unique: true
   end
@@ -144,6 +144,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_170232) do
     t.integer "tmdb_tv_id", null: false
     t.string "tmdb_poster_path"
     t.datetime "tmdb_next_refresh_at", precision: nil
+    t.date "first_air_date", comment: "What date did this show first air?"
+    t.datetime "tmdb_last_refreshed_at", precision: nil, comment: "When did we last refresh this show's info from TMDB?"
     t.index ["slug"], name: "index_shows_on_slug", unique: true
     t.index ["tmdb_tv_id"], name: "index_shows_on_tmdb_tv_id", unique: true
   end

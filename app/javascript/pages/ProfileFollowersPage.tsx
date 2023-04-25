@@ -1,8 +1,8 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
 import { loadData, setHeadTitle } from "../hooks"
-import React, { useContext } from "react"
 import { Human } from "../types"
+import { useContext } from "react"
 
 export const ProfileFollowersPage = () => {
   const guest = useContext(GuestContext)
@@ -29,7 +29,7 @@ export const ProfileFollowersPage = () => {
     return (
       <>
         <div>
-          <h1>{handle}&rsquo;s followers</h1>
+          <h1 className="text-2xl">{handle}&rsquo;s followers</h1>
           <p>None yet!</p>
         </div>
       </>
@@ -38,8 +38,8 @@ export const ProfileFollowersPage = () => {
 
   return (
     <div>
-      <h1>{handle}&rsquo;s followers</h1>
-      <ol>
+      <h1 className="text-2xl">{handle}&rsquo;s followers</h1>
+      <ol className="list-inside list-decimal">
         {followersData.data.humans.map((human) => {
           return (
             <li key={human.handle}>

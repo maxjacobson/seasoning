@@ -1,7 +1,9 @@
+import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import React, { FunctionComponent, useContext, useEffect, useState } from "react"
+import { Button } from "../components/Button"
 import { Guest } from "../types"
 import { SetLoadingContext } from "../contexts"
+import { TextField } from "../components/TextField"
 
 interface Props {
   setGuest: (guest: Guest) => void
@@ -85,8 +87,8 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
     return (
       <div>
         <div>
-          <p>Thanks for clicking the link.</p>
-          <p>Just one more question... What do you want to be called?</p>
+          <h1 className="mb-2 text-xl">Complete your sign up</h1>
+          <p className="mb-2">Just one more question... what would you like to be called?</p>
 
           <form
             onSubmit={(e) => {
@@ -130,13 +132,14 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                 })
             }}
           >
-            <input
-              type="text"
-              value={handle}
-              placeholder="Your handle"
-              onChange={(e) => setHandle(e.target.value)}
-            />
-            <input type="submit" value="Go" disabled={creating} />
+            <span className="mr-2">
+              <TextField
+                value={handle}
+                placeholder="Your handle"
+                onChange={(e) => setHandle(e.target.value)}
+              />
+            </span>
+            <Button type="submit" value="Go" disabled={creating} />
           </form>
         </div>
       </div>

@@ -1,11 +1,13 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AddShowButton } from "../components/AddShowButton"
 import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
+import { MoreInfo } from "../components/MoreInfo"
 import { NoteToSelf } from "../components/NoteToSelf"
 import { Poster } from "../components/Poster"
 import { SeasonsList } from "../components/SeasonsList"
 import { setHeadTitle } from "../hooks"
+import { ShowMetadata } from "../components/ShowMetadata"
 import { useParams } from "react-router-dom"
 import { YourShow } from "../types"
 
@@ -70,23 +72,14 @@ export const ShowPage = () => {
 
     return (
       <div>
-        <h1>{data.show.title}</h1>
+        <h1 className="text-2xl">{data.show.title}</h1>
 
-        {guest.authenticated && data.your_relationship && (
-          <NoteToSelf
-            token={guest.token}
-            yourShow={data}
-            updateYourShow={(newData) => {
-              setShowData({ loading: false, data: newData })
-            }}
-          />
-        )}
+        <MoreInfo url={`https://www.themoviedb.org/tv/${data.show.tmdb_tv_id}`} />
 
         <div>
-          <h2>{data.show.title}</h2>
-          <div>
-            <>
-              {guest.authenticated && (
+          <>
+            {guest.authenticated && (
+              <span className="mr-2">
                 <AddShowButton
                   token={guest.token}
                   show={data.show}
@@ -95,26 +88,38 @@ export const ShowPage = () => {
                     setShowData({ loading: false, data: yourShow })
                   }}
                 />
-              )}
-            </>
-            <>
-              {guest.authenticated && data.your_relationship && (
-                <ChooseShowStatusButton
-                  token={guest.token}
-                  show={data.show}
-                  yourRelationship={data.your_relationship}
-                  setYourShow={(yourShow) => {
-                    setShowData({ loading: false, data: yourShow })
-                  }}
-                />
-              )}
-            </>
-          </div>
+              </span>
+            )}
+          </>
+          <>
+            {guest.authenticated && data.your_relationship && (
+              <ChooseShowStatusButton
+                token={guest.token}
+                show={data.show}
+                yourRelationship={data.your_relationship}
+                setYourShow={(yourShow) => {
+                  setShowData({ loading: false, data: yourShow })
+                }}
+              />
+            )}
+          </>
+
+          {guest.authenticated && data.your_relationship && (
+            <div className="my-2">
+              <NoteToSelf
+                token={guest.token}
+                yourShow={data}
+                updateYourShow={(newData) => {
+                  setShowData({ loading: false, data: newData })
+                }}
+              />
+            </div>
+          )}
         </div>
 
         {data.show.poster_url ? (
           <div>
-            <h2>Poster</h2>
+            <h2 className="text-xl">Poster</h2>
             <Poster show={data.show} size="large" url={data.show.poster_url} />
           </div>
         ) : (
@@ -122,12 +127,14 @@ export const ShowPage = () => {
         )}
         {data.show.seasons.length > 0 ? (
           <div>
-            <h2>Seasons</h2>
+            <h2 className="text-xl">Seasons</h2>
             <SeasonsList show={data.show} guest={guest} />
           </div>
         ) : (
           <div>No seasons...</div>
         )}
+
+        <ShowMetadata show={data.show} />
       </div>
     )
   }

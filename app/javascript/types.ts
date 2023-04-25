@@ -1,11 +1,21 @@
 export interface HumanSettings {
   share_currently_watching: boolean
   default_review_visibility: Visibility
+  currently_watching_limit: number | null
 }
 
 export interface Human {
   handle: string
   admin: boolean
+}
+
+interface Limit {
+  current: number
+  max: number | null
+}
+
+export interface HumanLimits {
+  currently_watching_limit: Limit
 }
 
 export interface AuthenticatedGuest {
@@ -35,6 +45,7 @@ export interface Episode {
   episode_number: number
   still_url: string | null
   air_date: string | null
+  available: boolean
 }
 
 export interface Show {
@@ -43,6 +54,10 @@ export interface Show {
   slug: string
   poster_url: string | null
   seasons: Season[]
+  tmdb_tv_id: string
+  first_air_date: string | null
+  tmdb_last_refreshed_at: string | null
+  tmdb_next_refresh_at: string | null
 }
 
 export type MyShowStatus =
@@ -77,6 +92,9 @@ export interface Profile {
   created_at: string
   currently_watching?: Show[]
   your_relationship?: YourRelationshipToProfile
+  reviews_count: number
+  followers_count: number
+  following_count: number
 }
 
 export type Rating = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10

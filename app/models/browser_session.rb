@@ -6,7 +6,6 @@
 # If it's old we can consider it expired and log them out.
 class BrowserSession < ApplicationRecord
   belongs_to :human
-  before_create -> { self.last_seen_at = Time.zone.now }
   before_create -> { self.token = SecureRandom.uuid }
   before_create -> { self.expires_at = 3.months.from_now }
 

@@ -1,16 +1,10 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Import, Show } from "../types"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { Button } from "../components/Button"
 import queryString from "query-string"
-import styled from "@emotion/styled"
-
-const ImportContainer = styled.div`
-  margin: 10px 0;
-  border: 1px dotted blue;
-  padding: 5px;
-  border-radius: 5px;
-`
+import { TextField } from "../components/TextField"
 
 export const ImportShowPage = () => {
   const [searchParams] = useSearchParams()
@@ -62,7 +56,7 @@ export const ImportShowPage = () => {
 
   return (
     <>
-      <h1>Import show</h1>
+      <h1 className="text-2xl">Import show</h1>
 
       <p>
         Seasoning is very new. I&rsquo;m sorry to be the one to tell you, but you&rsquo;re an early
@@ -78,30 +72,34 @@ export const ImportShowPage = () => {
         }}
       >
         <div>
-          <label>Name of show</label>
+          <label className="text-lg">Name of show</label>
         </div>
-        <div>
-          <input
-            type="text"
-            value={showQuery}
-            onChange={(event) => setShowQuery(event.target.value)}
-          />
+        <div className="mb-2">
+          <TextField value={showQuery} onChange={(event) => setShowQuery(event.target.value)} />
         </div>
-        <button type="submit" disabled={searching}>
+        <Button type="submit" disabled={searching}>
           Search
-        </button>
+        </Button>
       </form>
 
       {results && (
         <div>
           {results.map((result) => (
-            <ImportContainer key={result.id}>
-              {result.poster_url && <img src={result.poster_url} />}
+            <div
+              className="mx-0 my-2 rounded-md border border-dotted border-blue-500 p-1"
+              key={result.id}
+            >
+              {result.poster_url && (
+                <img
+                  className="border-2 border-solid border-yellow-700 p-1"
+                  src={result.poster_url}
+                />
+              )}
               <div>
                 {result.name} {result.year && `(${result.year})`}
               </div>
               <div>
-                <button
+                <Button
                   disabled={importing}
                   onClick={async () => {
                     setLoading(true)
@@ -132,9 +130,9 @@ export const ImportShowPage = () => {
                   }}
                 >
                   Import
-                </button>
+                </Button>
               </div>
-            </ImportContainer>
+            </div>
           ))}
         </div>
       )}

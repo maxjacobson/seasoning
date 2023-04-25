@@ -1,10 +1,12 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, useParams } from "react-router-dom"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AirDate } from "../components/AirDate"
+import { MoreInfo } from "../components/MoreInfo"
 import { Poster } from "../components/Poster"
 import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
 import { setHeadTitle } from "../hooks"
+import { ShowMetadata } from "../components/ShowMetadata"
 import { YourSeason } from "../types"
 
 interface LoadingSeason {
@@ -75,7 +77,7 @@ export const SeasonPage = () => {
   if (!yourSeason) {
     return (
       <div>
-        <h1>Not found</h1>
+        <h1 className="text-xl">Not found</h1>
         <p>Season does not exist!</p>
         <p>
           <Link to={`/shows/${showSlug}`}>Back</Link>
@@ -86,8 +88,11 @@ export const SeasonPage = () => {
 
   return (
     <div>
-      <h1>{yourSeason.show.title}</h1>
-      <h2>{yourSeason.season.name}</h2>
+      <h1 className="text-xl">{yourSeason.show.title}</h1>
+      <h2 className="text-lg">{yourSeason.season.name}</h2>
+      <MoreInfo
+        url={`https://www.themoviedb.org/tv/${yourSeason.show.tmdb_tv_id}/season/${yourSeason.season.season_number}`}
+      />
       <p>
         <Link to={`/shows/${showSlug}`}>Back</Link>
       </p>
@@ -97,16 +102,16 @@ export const SeasonPage = () => {
           <Poster url={yourSeason.season.poster_url} size="large" show={yourSeason.show} />
         </div>
         <div>
-          <h2>Season info</h2>
+          <h2 className="text-lg">Season info</h2>
 
           <div>
-            <table style={{ width: "100%" }}>
+            <table className="w-full">
               <thead>
                 <tr>
-                  <th style={{ textAlign: "left" }}>Number</th>
-                  <th style={{ textAlign: "left" }}>Name</th>
-                  <th style={{ textAlign: "left" }}>Air date</th>
-                  {guest.authenticated && <th style={{ textAlign: "left" }}>Seen?</th>}
+                  <th className="text-left">Number</th>
+                  <th className="text-left">Name</th>
+                  <th className="text-left">Air date</th>
+                  {guest.authenticated && <th className="text-left">Seen?</th>}
                 </tr>
               </thead>
               <tbody>
@@ -120,7 +125,7 @@ export const SeasonPage = () => {
                         </Link>
                       </td>
                       <td>
-                        <AirDate date={episode.air_date} />
+                        <AirDate date={episode.air_date} available={episode.available} />
                       </td>
                       {guest.authenticated && yourSeason.your_relationship && (
                         <td>
@@ -143,10 +148,10 @@ export const SeasonPage = () => {
 
       {guest.authenticated && yourSeason.your_reviews && (
         <div>
-          <h2>Your review</h2>
+          <h2 className="text-lg">Your review</h2>
           <div>
             <Link to={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}>
-              Add review
+              <span className="underlined">Add review</span>
             </Link>
           </div>
           <div>
@@ -172,6 +177,8 @@ export const SeasonPage = () => {
           </div>
         </div>
       )}
+
+      <ShowMetadata show={yourSeason.show} />
     </div>
   )
 }

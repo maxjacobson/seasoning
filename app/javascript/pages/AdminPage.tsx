@@ -1,8 +1,8 @@
 import { GuestContext, SetLoadingContext } from "../contexts"
 import { Link, Navigate } from "react-router-dom"
 import { loadData, setHeadTitle } from "../hooks"
-import React, { useContext } from "react"
 import { Human } from "../types"
+import { useContext } from "react"
 
 type AdminData = {
   humansCount: number
@@ -32,41 +32,45 @@ export const AdminPage = () => {
 
   return (
     <div>
-      <h1>Admin</h1>
+      <h1 className="text-xl">Admin</h1>
 
-      <h2>Stats</h2>
+      <div className="mb-3 border-2 border-dashed border-yellow-600 p-3">
+        <h2 className="text-lg">Stats</h2>
 
-      <ul>
-        <li>
-          <strong>Humans count: </strong> {adminData.data.humansCount}
-        </li>
-        <li>
-          <strong>Shows count: </strong> {adminData.data.showsCount}
-        </li>
-        <li>
-          <strong>Seasons count: </strong> {adminData.data.seasonsCount}
-        </li>
-        <li>
-          <strong>Reviews count: </strong> {adminData.data.reviewsCount}
-        </li>
-        <li>
-          <strong>Episodes count: </strong> {adminData.data.episodesCount}
-        </li>
-        <li>
-          <strong>Last refreshed TMDB config: </strong> {adminData.data.lastRefreshedTmdbConfigAt}
-        </li>
-      </ul>
+        <ul className="list-inside list-disc">
+          <li>
+            <strong>Humans count: </strong> {adminData.data.humansCount}
+          </li>
+          <li>
+            <strong>Shows count: </strong> {adminData.data.showsCount}
+          </li>
+          <li>
+            <strong>Seasons count: </strong> {adminData.data.seasonsCount}
+          </li>
+          <li>
+            <strong>Reviews count: </strong> {adminData.data.reviewsCount}
+          </li>
+          <li>
+            <strong>Episodes count: </strong> {adminData.data.episodesCount}
+          </li>
+          <li>
+            <strong>Last refreshed TMDB config: </strong> {adminData.data.lastRefreshedTmdbConfigAt}
+          </li>
+        </ul>
+      </div>
 
-      <h2>Recent humans</h2>
-      <ol>
-        {adminData.data.recentHumans.map((human) => {
-          return (
-            <li key={human.handle}>
-              <Link to={`/${human.handle}`}>{human.handle}</Link>
-            </li>
-          )
-        })}
-      </ol>
+      <div className="border-2 border-dashed border-yellow-600 p-3">
+        <h2 className="text-lg">Recent humans</h2>
+        <ol className="list-inside list-decimal">
+          {adminData.data.recentHumans.map((human) => {
+            return (
+              <li key={human.handle}>
+                <Link to={`/${human.handle}`}>{human.handle}</Link>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
     </div>
   )
 }

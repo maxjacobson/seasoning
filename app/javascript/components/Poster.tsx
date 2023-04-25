@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import { FunctionComponent } from "react"
 import { Show } from "../types"
 
 interface Props {
@@ -9,6 +9,13 @@ interface Props {
 
 export const Poster: FunctionComponent<Props> = ({ url, show, size }: Props) => (
   <>
-    {url && <img src={url} alt={`${show.title} poster`} width={size === "small" ? "100" : "185"} />}
+    {url && (
+      <img
+        className="border-2 border-solid border-yellow-700 p-1"
+        src={url}
+        alt={`${show.title} poster`}
+        width={size === "small" ? "100" : "185"}
+      />
+    )}
   </>
 )
