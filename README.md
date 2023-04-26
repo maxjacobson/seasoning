@@ -1,3 +1,5 @@
+![tv set logo](logo.png)
+
 # Seasoning
 
 Your couch away from your couch.
