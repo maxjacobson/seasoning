@@ -5,6 +5,7 @@ import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
 import { MoreInfo } from "../components/MoreInfo"
 import { NoteToSelf } from "../components/NoteToSelf"
 import { Poster } from "../components/Poster"
+import { RemoveShowButton } from "../components/RemoveShowButton"
 import { SeasonsList } from "../components/SeasonsList"
 import { setHeadTitle } from "../hooks"
 import { ShowMetadata } from "../components/ShowMetadata"
@@ -80,14 +81,23 @@ export const ShowPage = () => {
           <>
             {guest.authenticated && (
               <span className="mr-2">
-                <AddShowButton
-                  token={guest.token}
-                  show={data.show}
-                  yourRelationship={data.your_relationship}
-                  setYourShow={(yourShow) => {
-                    setShowData({ loading: false, data: yourShow })
-                  }}
-                />
+                {data.your_relationship ? (
+                  <RemoveShowButton
+                    show={data.show}
+                    token={guest.token}
+                    onRemove={() => {
+                      setShowData({ loading: false, data: { show: data.show } })
+                    }}
+                  />
+                ) : (
+                  <AddShowButton
+                    token={guest.token}
+                    show={data.show}
+                    setYourShow={(yourShow) => {
+                      setShowData({ loading: false, data: yourShow })
+                    }}
+                  />
+                )}
               </span>
             )}
           </>

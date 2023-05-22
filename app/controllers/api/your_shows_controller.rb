@@ -50,6 +50,15 @@ module API
       end
     end
 
+    def destroy
+      authorize! { current_human.present? }
+
+      show = Show.find_by(slug: params.require(:id))
+      RemoveMyShow.call(show, current_human)
+
+      render json: {}
+    end
+
     private
 
     def search(my_shows)

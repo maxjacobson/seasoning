@@ -36,8 +36,8 @@ export const CreditsPage: FunctionComponent = () => {
         </li>
         <li>
           The television icon you see up top is{" "}
-          <a href="https://shannonethomas.com">by Shannon E Thomas</a>, which I got from the defunct{" "}
-          <a href="https://www.toicon.com/icons/avocado_watch">to icon</a> project.
+          <a href="https://shannonethomas.com">by Shannon E Thomas</a>, which I got from the now
+          defunct <a href="https://www.toicon.com/icons/avocado_watch">to icon</a> project.
         </li>
       </ul>
     </div>
