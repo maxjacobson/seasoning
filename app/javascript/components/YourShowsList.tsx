@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { Human, YourShow } from "../types"
 import { Link, useSearchParams } from "react-router-dom"
+import { Button } from "./Button"
 import { displayMyShowStatus } from "../helpers/my_shows"
 import { Markdown } from "./Markdown"
 import { Poster } from "./Poster"
@@ -78,6 +79,8 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
     ? searchParams.getAll("statuses")
     : ["currently_watching"]
 
+  const page: number = parseInt(searchParams.get("page") || "") || 1
+
   useEffect(() => {
     globalSetLoading(true)
     setLoading(true)
@@ -91,6 +94,8 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
     if (statusesFilterValue.length) {
       params.statuses = statusesFilterValue
     }
+
+    params.page = page
 
     // TODO: debounce me
     fetch(`/api/your-shows.json?${queryString.stringify(params, { arrayFormat: "bracket" })}`, {
@@ -110,7 +115,7 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
         setLoading(false)
         globalSetLoading(false)
       })
-  }, [titleQueryValue, statusesFilterValue.join("-")])
+  }, [titleQueryValue, statusesFilterValue.join("-"), page])
 
   return (
     <div>
@@ -149,6 +154,31 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           <option value="finished">Finished</option>
         </Select>
         {loading ? <div>Loading your shows...</div> : <ListShows shows={shows} />}
+        <div className="flex justify-between">
+          <div>
+            {page > 1 && (
+              <Button
+                onClick={() => {
+                  searchParams.set("page", (page - 1).toString())
+                  setSearchParams(searchParams)
+                }}
+              >
+                Previous
+              </Button>
+            )}
+          </div>
+          <div className="font-bold">Page {page} </div>
+          <div>
+            <Button
+              onClick={() => {
+                searchParams.set("page", (page + 1).toString())
+                setSearchParams(searchParams)
+              }}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
       </>
     </div>
   )
