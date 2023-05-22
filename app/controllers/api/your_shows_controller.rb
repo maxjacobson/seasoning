@@ -3,6 +3,8 @@
 module API
   # Exposes all of the current human's shows -- ones that they have saved
   class YourShowsController < ApplicationController
+    PAGE_SIZE = 10
+
     def index
       authorize! { current_human.present? }
 
@@ -18,9 +20,12 @@ module API
                      SQL
                    )
                  )
+                 .limit(PAGE_SIZE)
+                 .offset((current_page - 1) * PAGE_SIZE)
 
       render json: {
-        your_shows: MyShowSerializer.many(my_shows)
+        your_shows: MyShowSerializer.many(my_shows),
+        page: current_page
       }
     end
 
@@ -74,6 +79,14 @@ module API
       else
         my_shows
       end
+    end
+
+    def current_page
+      Integer(params[:page]).tap do |val|
+        raise ArgumentError unless val >= 1
+      end
+    rescue TypeError, ArgumentError
+      1
     end
   end
 end

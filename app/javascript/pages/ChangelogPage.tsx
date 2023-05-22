@@ -7,6 +7,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **May 22, 2023** — Basic pagination on the "Your shows" page to only show 10 shows at a time
   1. **May 22, 2023** — Humans can now remove a show from their "Your shows" list entirely. Seasoning will forget your "note to self" and the assigned status. It will still remember which episodes you've checked off that you've seen, and your season reviews.
   1. **April 17, 2023** — Humans can optionally set a limit on how many shows they are currently watching
   1. **March 31, 2023** — Show "last refreshed at" show data on season page and episode page
