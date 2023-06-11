@@ -16,5 +16,4 @@ jobs:
     steps:
       - uses: freckle/mergeabot-action@v1
         with:
-          quarantine-days: 1
           strategy: squash
