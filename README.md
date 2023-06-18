@@ -1,5 +1,7 @@
 ![tv set logo](logo.png)
 
+[![CI](https://github.com/maxjacobson/seasoning/actions/workflows/ci.yml/badge.svg)](https://github.com/maxjacobson/seasoning/actions/workflows/ci.yml)
+
 # Seasoning
 
 Your couch away from your couch.
