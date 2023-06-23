@@ -67,12 +67,7 @@ module API
     private
 
     def search(my_shows)
-      my_shows =
-        if params[:statuses].is_a?(Array)
-          my_shows.where(status: params[:statuses])
-        else
-          my_shows
-        end
+      my_shows = my_shows.where(status: params[:statuses]) if params[:statuses].is_a?(Array)
 
       if params[:q].present?
         my_shows.where("shows.title ilike ?", "%#{params[:q]}%")
