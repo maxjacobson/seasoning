@@ -25,7 +25,6 @@ const roadmap = `
   1. Some kind of notification when new episodes are available to watch
   1. Some way to mark seasons as "skipped" -- for example if you add the bachelor because you want to watch the latest episode of the bachelor but you don't want to watch all 27 seasons, just the new one
   1. Some way to mark episodes as "skipped" -- for example if you start watching saturday night live mid-season and don't feel compelled to go back and watch the old episodes
-  1. Improve styling of HTML rendered from markdown (for example, blockquotes don't show up as blockquotes)
 `
 
 export const RoadmapPage: FunctionComponent = () => {
