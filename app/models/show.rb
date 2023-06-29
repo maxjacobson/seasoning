@@ -3,8 +3,6 @@
 # A TV show!
 # Data is mostly from the movie database
 class Show < ApplicationRecord
-  REFRESH_INTERVAL = 2.days
-
   before_create lambda {
     slug = nil
     n = nil
@@ -35,6 +33,15 @@ class Show < ApplicationRecord
       )
     )
   }
+
+  def self.refresh_interval(tmdb_show)
+    if tmdb_show.in_production
+      # N.B. the refresh happens once per day, so this just means it'll get refreshed on the next day too
+      1.hour.from_now
+    else
+      1.week.from_now
+    end
+  end
 
   def poster
     Poster.new(tmdb_poster_path)
