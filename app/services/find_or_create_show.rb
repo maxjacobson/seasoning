@@ -7,7 +7,7 @@ FindOrCreateShow = lambda { |tmdb_show|
     title: tmdb_show.name,
     tmdb_tv_id: tmdb_show.id,
     tmdb_poster_path: tmdb_show.poster_path,
-    tmdb_next_refresh_at: Show::REFRESH_INTERVAL.from_now,
+    tmdb_next_refresh_at: Show.refresh_interval(tmdb_show),
     tmdb_last_refreshed_at: Time.zone.now
   )
 

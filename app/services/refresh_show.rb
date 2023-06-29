@@ -6,7 +6,7 @@ RefreshShow = lambda { |show|
 
     show.update!(
       tmdb_poster_path: details.poster_path,
-      tmdb_next_refresh_at: Show::REFRESH_INTERVAL.from_now,
+      tmdb_next_refresh_at: Show.refresh_interval(details),
       first_air_date: details.first_air_date,
       tmdb_last_refreshed_at: Time.zone.now
     )
