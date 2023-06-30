@@ -39,7 +39,10 @@ class Show < ApplicationRecord
       # N.B. the refresh happens once per day, so this just means it'll get refreshed on the next day too
       1.hour.from_now
     else
-      1.week.from_now
+      # N.B. don't need to refresh as often
+      #
+      # adding a little randomness to spread out the work over multiple days
+      (5..12).to_a.sample.days.from_now
     end
   end
 

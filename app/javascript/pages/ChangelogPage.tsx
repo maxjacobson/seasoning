@@ -7,7 +7,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
-  1. **June 29, 2023** — Update data refresh so that shows which are complete will refresh once per week, and ongoing shows will refresh daily
+  1. **June 29, 2023** — Update data refresh so that shows which are ongoing will refresh daily, and shows that are complete will refresh every 1-2 weeks, ish
   1. **June 25, 2023** — Blockquotes in rendered markdown are now styled as blockquotes, with a left border
   1. **June 25, 2023** — Some more spacing between paragraphs in rendered markdown
   1. **May 22, 2023** — Basic pagination on the "Your shows" page to only show 10 shows at a time
