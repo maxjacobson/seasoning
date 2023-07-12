@@ -1,78 +1,78 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Link, useParams } from "react-router-dom"
-import { useContext, useEffect, useState } from "react"
-import { AirDate } from "../components/AirDate"
-import { MoreInfo } from "../components/MoreInfo"
-import { Poster } from "../components/Poster"
-import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox"
-import { setHeadTitle } from "../hooks"
-import { ShowMetadata } from "../components/ShowMetadata"
-import { YourSeason } from "../types"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AirDate } from "../components/AirDate";
+import { MoreInfo } from "../components/MoreInfo";
+import { Poster } from "../components/Poster";
+import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox";
+import { setHeadTitle } from "../hooks";
+import { ShowMetadata } from "../components/ShowMetadata";
+import { YourSeason } from "../types";
 
 interface LoadingSeason {
-  loading: true
+  loading: true;
 }
 
 interface SeasonNotFound {
-  loading: false
-  yourSeason: null
+  loading: false;
+  yourSeason: null;
 }
 
 interface SeasonFound {
-  loading: false
-  yourSeason: YourSeason
+  loading: false;
+  yourSeason: YourSeason;
 }
 
-type SeasonData = LoadingSeason | SeasonNotFound | SeasonFound
+type SeasonData = LoadingSeason | SeasonNotFound | SeasonFound;
 
 export const SeasonPage = () => {
-  const [response, setResponse] = useState<SeasonData>({ loading: true })
-  const setLoading = useContext(SetLoadingContext)
-  const { showSlug, seasonSlug } = useParams()
-  const guest = useContext(GuestContext)
+  const [response, setResponse] = useState<SeasonData>({ loading: true });
+  const setLoading = useContext(SetLoadingContext);
+  const { showSlug, seasonSlug } = useParams();
+  const guest = useContext(GuestContext);
 
   useEffect(() => {
     if (!seasonSlug) {
-      return
+      return;
     }
 
-    ;(async () => {
-      let headers
+    (async () => {
+      let headers;
       if (guest.authenticated) {
-        headers = { "X-SEASONING_TOKEN": guest.token }
+        headers = { "X-SEASONING_TOKEN": guest.token };
       } else {
-        headers = {}
+        headers = {};
       }
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`/api/shows/${showSlug}/seasons/${seasonSlug}.json`, {
         headers: headers,
-      })
-      setLoading(false)
+      });
+      setLoading(false);
 
       if (response.status === 404) {
-        setResponse({ loading: false, yourSeason: null })
+        setResponse({ loading: false, yourSeason: null });
       } else if (response.ok) {
-        const yourSeason: YourSeason = await response.json()
-        setResponse({ loading: false, yourSeason: yourSeason })
+        const yourSeason: YourSeason = await response.json();
+        setResponse({ loading: false, yourSeason: yourSeason });
       } else {
-        throw new Error("Could not load season")
+        throw new Error("Could not load season");
       }
-    })()
-  }, [showSlug, seasonSlug])
+    })();
+  }, [showSlug, seasonSlug]);
 
-  let headTitle
+  let headTitle;
 
   if (!response.loading && response.yourSeason) {
-    headTitle = `${response.yourSeason.show.title} - ${response.yourSeason.season.name}`
+    headTitle = `${response.yourSeason.show.title} - ${response.yourSeason.season.name}`;
   }
 
-  setHeadTitle(headTitle, [response])
+  setHeadTitle(headTitle, [response]);
 
   if (response.loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
-  const { yourSeason } = response
+  const { yourSeason } = response;
 
   if (!yourSeason) {
     return (
@@ -83,7 +83,7 @@ export const SeasonPage = () => {
           <Link to={`/shows/${showSlug}`}>Back</Link>
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -138,7 +138,7 @@ export const SeasonPage = () => {
                         </td>
                       )}
                     </tr>
-                  )
+                  );
                 })}
               </tbody>
             </table>
@@ -168,7 +168,7 @@ export const SeasonPage = () => {
                         {new Date(review.created_at).toLocaleDateString()}
                       </Link>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             ) : (
@@ -180,5 +180,5 @@ export const SeasonPage = () => {
 
       <ShowMetadata show={yourSeason.show} />
     </div>
-  )
-}
+  );
+};

@@ -1,29 +1,29 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Import, Show } from "../types"
-import { useContext, useEffect, useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
-import { Button } from "../components/Button"
-import queryString from "query-string"
-import { TextField } from "../components/TextField"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Import, Show } from "../types";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button } from "../components/Button";
+import queryString from "query-string";
+import { TextField } from "../components/TextField";
 
 export const ImportShowPage = () => {
-  const [searchParams] = useSearchParams()
-  const searchQuery = searchParams.get("q")
-  const [showQuery, setShowQuery] = useState(searchQuery || "")
-  const [searching, setSearching] = useState(false)
-  const [importing, setImporting] = useState(false)
-  const [results, setResults] = useState<Import[] | null>(null)
-  const navigate = useNavigate()
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q");
+  const [showQuery, setShowQuery] = useState(searchQuery || "");
+  const [searching, setSearching] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const [results, setResults] = useState<Import[] | null>(null);
+  const navigate = useNavigate();
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
 
   const search = async () => {
     if (!guest.authenticated) {
-      return
+      return;
     }
 
-    setLoading(true)
-    setSearching(true)
+    setLoading(true);
+    setSearching(true);
 
     const response = await fetch(
       `/api/imports.json?${queryString.stringify({ query: showQuery })}`,
@@ -33,25 +33,25 @@ export const ImportShowPage = () => {
           "Content-Type": "application/json",
         },
       },
-    )
+    );
 
-    setLoading(false)
-    setSearching(false)
+    setLoading(false);
+    setSearching(false);
 
     if (response.ok) {
-      const data: { shows: Import[] } = await response.json()
-      setResults(data.shows)
+      const data: { shows: Import[] } = await response.json();
+      setResults(data.shows);
     } else {
-      throw new Error("failed to search")
+      throw new Error("failed to search");
     }
-  }
+  };
 
   useEffect(() => {
-    search()
-  }, [searchQuery])
+    search();
+  }, [searchQuery]);
 
   if (!guest.authenticated) {
-    return <div>Not found...</div>
+    return <div>Not found...</div>;
   }
 
   return (
@@ -66,9 +66,9 @@ export const ImportShowPage = () => {
 
       <form
         onSubmit={async (event) => {
-          event.preventDefault()
+          event.preventDefault();
 
-          await search()
+          await search();
         }}
       >
         <div>
@@ -102,8 +102,8 @@ export const ImportShowPage = () => {
                 <Button
                   disabled={importing}
                   onClick={async () => {
-                    setLoading(true)
-                    setImporting(true)
+                    setLoading(true);
+                    setImporting(true);
 
                     const response = await fetch(`/api/imports.json`, {
                       headers: {
@@ -116,16 +116,16 @@ export const ImportShowPage = () => {
                           id: result.id,
                         },
                       }),
-                    })
+                    });
 
-                    setLoading(false)
-                    setImporting(false)
+                    setLoading(false);
+                    setImporting(false);
 
                     if (response.ok) {
-                      const data: { show: Show } = await response.json()
-                      navigate(`/shows/${data.show.slug}`)
+                      const data: { show: Show } = await response.json();
+                      navigate(`/shows/${data.show.slug}`);
                     } else {
-                      throw new Error("could not import show")
+                      throw new Error("could not import show");
                     }
                   }}
                 >
@@ -137,5 +137,5 @@ export const ImportShowPage = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};

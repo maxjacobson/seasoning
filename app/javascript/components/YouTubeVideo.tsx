@@ -1,6 +1,6 @@
 type Props = {
-  id: string
-}
+  id: string;
+};
 
 export const YouTubeVideo = ({ id }: Props) => {
   return (
@@ -14,5 +14,5 @@ export const YouTubeVideo = ({ id }: Props) => {
         allowFullScreen
       ></iframe>
     </div>
-  )
-}
+  );
+};

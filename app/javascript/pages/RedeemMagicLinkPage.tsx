@@ -1,86 +1,86 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { Button } from "../components/Button"
-import { Guest } from "../types"
-import { SetLoadingContext } from "../contexts"
-import { TextField } from "../components/TextField"
+import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Button } from "../components/Button";
+import { Guest } from "../types";
+import { SetLoadingContext } from "../contexts";
+import { TextField } from "../components/TextField";
 
 interface Props {
-  setGuest: (guest: Guest) => void
+  setGuest: (guest: Guest) => void;
 }
 
 interface AlreadyExists {
-  already_exists: true
-  email: string
-  handle: string
-  session_token: string
-  admin: boolean
+  already_exists: true;
+  email: string;
+  handle: string;
+  session_token: string;
+  admin: boolean;
 }
 
 interface NewHuman {
-  already_exists: false
-  email: string
+  already_exists: false;
+  email: string;
 }
 
-type Redemption = AlreadyExists | NewHuman
+type Redemption = AlreadyExists | NewHuman;
 
 interface LoadingMagicLink {
-  loading: true
+  loading: true;
 }
 interface ValidMagicLink {
-  loading: false
-  email: string
+  loading: false;
+  email: string;
 }
 interface MagicLinkNotFound {
-  loading: false
-  email: null
+  loading: false;
+  email: null;
 }
 
-type MagicLinkInfo = LoadingMagicLink | ValidMagicLink | MagicLinkNotFound
+type MagicLinkInfo = LoadingMagicLink | ValidMagicLink | MagicLinkNotFound;
 
 export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Props) => {
-  const [magicLinkInfo, setMagicLinkInfo] = useState<MagicLinkInfo>({ loading: true })
-  const [handle, setHandle] = useState<string>("")
-  const [creating, setCreating] = useState(false)
-  const navigate = useNavigate()
-  const { token } = useParams()
-  const setLoading = useContext(SetLoadingContext)
+  const [magicLinkInfo, setMagicLinkInfo] = useState<MagicLinkInfo>({ loading: true });
+  const [handle, setHandle] = useState<string>("");
+  const [creating, setCreating] = useState(false);
+  const navigate = useNavigate();
+  const { token } = useParams();
+  const setLoading = useContext(SetLoadingContext);
 
   useEffect(() => {
-    setLoading(true)
-    ;(async () => {
+    setLoading(true);
+    (async () => {
       const response = await fetch(`/api/magic-links/${token}.json`, {
         headers: {
           "Content-Type": "application/json",
         },
-      })
+      });
 
-      setLoading(false)
+      setLoading(false);
 
       if (response.status === 404) {
-        setMagicLinkInfo({ loading: false, email: null })
+        setMagicLinkInfo({ loading: false, email: null });
       } else if (!response.ok) {
-        throw new Error("Could not redeem magic link")
+        throw new Error("Could not redeem magic link");
       } else {
-        const data: Redemption = await response.json()
+        const data: Redemption = await response.json();
 
         if (data.already_exists) {
-          localStorage.setItem("seasoning-guest-token", data.session_token)
+          localStorage.setItem("seasoning-guest-token", data.session_token);
           setGuest({
             authenticated: true,
             human: { handle: data.handle, admin: data.admin },
             token: data.session_token,
-          })
-          navigate("/")
+          });
+          navigate("/");
         } else {
-          setMagicLinkInfo({ loading: false, email: data.email })
+          setMagicLinkInfo({ loading: false, email: data.email });
         }
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
   if (magicLinkInfo.loading) {
-    return <div>Checking your magic link....</div>
+    return <div>Checking your magic link....</div>;
   }
 
   if (magicLinkInfo.email) {
@@ -92,11 +92,11 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
 
           <form
             onSubmit={(e) => {
-              e.preventDefault()
+              e.preventDefault();
 
-              setLoading(true)
+              setLoading(true);
 
-              setCreating(true)
+              setCreating(true);
 
               fetch("/api/humans.json", {
                 body: JSON.stringify({
@@ -111,15 +111,15 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                 },
               })
                 .then((response) => {
-                  setLoading(false)
+                  setLoading(false);
                   if (response.ok) {
-                    return response.json()
+                    return response.json();
                   } else {
-                    throw new Error("Could not create human")
+                    throw new Error("Could not create human");
                   }
                 })
                 .then((data: AlreadyExists) => {
-                  localStorage.setItem("seasoning-guest-token", data.session_token)
+                  localStorage.setItem("seasoning-guest-token", data.session_token);
                   setGuest({
                     authenticated: true,
                     human: {
@@ -127,9 +127,9 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                       admin: data.admin,
                     },
                     token: data.session_token,
-                  })
-                  navigate("/")
-                })
+                  });
+                  navigate("/");
+                });
             }}
           >
             <span className="mr-2">
@@ -143,7 +143,7 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
           </form>
         </div>
       </div>
-    )
+    );
   } else {
     return (
       <div>
@@ -153,6 +153,6 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
           <Link to="/">Try again?</Link>
         </p>
       </div>
-    )
+    );
   }
-}
+};

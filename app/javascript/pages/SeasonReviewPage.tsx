@@ -1,54 +1,54 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Human, Season, SeasonReview, Show } from "../types"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { useContext, useEffect, useState } from "react"
-import { Button } from "../components/Button"
-import { Markdown } from "../components/Markdown"
-import { Poster } from "../components/Poster"
-import queryString from "query-string"
-import { setHeadTitle } from "../hooks"
-import { StarRating } from "../components/StarRating"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Human, Season, SeasonReview, Show } from "../types";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Button } from "../components/Button";
+import { Markdown } from "../components/Markdown";
+import { Poster } from "../components/Poster";
+import queryString from "query-string";
+import { setHeadTitle } from "../hooks";
+import { StarRating } from "../components/StarRating";
 
 interface LoadingReviewData {
-  loading: true
+  loading: true;
 }
 
 interface LoadedReviewData {
-  loading: false
-  review: SeasonReview
-  show: Show
-  season: Season
-  author: Human
+  loading: false;
+  review: SeasonReview;
+  show: Show;
+  season: Season;
+  author: Human;
 }
 
 interface ReviewDataNotFound {
-  loading: false
-  review: null
-  season: null
-  show: null
+  loading: false;
+  review: null;
+  season: null;
+  show: null;
 }
-type SeasonReviewData = LoadingReviewData | LoadedReviewData | ReviewDataNotFound
+type SeasonReviewData = LoadingReviewData | LoadedReviewData | ReviewDataNotFound;
 
 export const SeasonReviewPage = () => {
-  const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true })
-  const { handle, showSlug, seasonSlug, viewing } = useParams()
-  const navigate = useNavigate()
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
+  const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true });
+  const { handle, showSlug, seasonSlug, viewing } = useParams();
+  const navigate = useNavigate();
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       if (!handle || !showSlug || !seasonSlug) {
-        setReviewData({ loading: false, review: null, season: null, show: null })
-        return
+        setReviewData({ loading: false, review: null, season: null, show: null });
+        return;
       }
 
-      setLoading(true)
+      setLoading(true);
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
-      }
+      };
       if (guest.authenticated) {
-        headers["X-SEASONING-TOKEN"] = guest.token
+        headers["X-SEASONING-TOKEN"] = guest.token;
       }
       const response = await fetch(
         `/api/season-review.json?${queryString.stringify({
@@ -60,35 +60,35 @@ export const SeasonReviewPage = () => {
         {
           headers: headers,
         },
-      )
-      setLoading(false)
+      );
+      setLoading(false);
 
       if (response.ok) {
         const data: { review: SeasonReview; show: Show; season: Season; author: Human } =
-          await response.json()
+          await response.json();
         setReviewData({
           loading: false,
           review: data.review,
           show: data.show,
           season: data.season,
           author: data.author,
-        })
+        });
       } else if (response.status === 404) {
-        setReviewData({ loading: false, review: null, season: null, show: null })
+        setReviewData({ loading: false, review: null, season: null, show: null });
       } else {
-        throw new Error("Could not load review")
+        throw new Error("Could not load review");
       }
-    })()
-  }, [handle, showSlug, seasonSlug, viewing])
+    })();
+  }, [handle, showSlug, seasonSlug, viewing]);
 
-  let headTitle
+  let headTitle;
   if (!reviewData.loading && reviewData.review) {
-    headTitle = `${reviewData.show.title} - ${reviewData.season.name} Review`
+    headTitle = `${reviewData.show.title} - ${reviewData.season.name} Review`;
   }
-  setHeadTitle(headTitle, [reviewData])
+  setHeadTitle(headTitle, [reviewData]);
 
   if (reviewData.loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!reviewData.review) {
@@ -100,10 +100,10 @@ export const SeasonReviewPage = () => {
           <Link to={`/${handle}`}>Back</Link>
         </p>
       </div>
-    )
+    );
   }
 
-  const { review, show, season } = reviewData
+  const { review, show, season } = reviewData;
 
   return (
     <div>
@@ -141,14 +141,14 @@ export const SeasonReviewPage = () => {
           <div>
             <Button
               onClick={async (event) => {
-                event.preventDefault()
+                event.preventDefault();
 
                 if (confirm("Are you sure?")) {
                   const headers: Record<string, string> = {
                     "Content-Type": "application/json",
-                  }
+                  };
                   if (guest.authenticated) {
-                    headers["X-SEASONING-TOKEN"] = guest.token
+                    headers["X-SEASONING-TOKEN"] = guest.token;
                   }
                   const response = await fetch(
                     `/api/season-review.json?${queryString.stringify({
@@ -161,13 +161,13 @@ export const SeasonReviewPage = () => {
                       headers: headers,
                       method: "DELETE",
                     },
-                  )
-                  setLoading(false)
+                  );
+                  setLoading(false);
 
                   if (response.ok) {
-                    navigate(`/${handle}`)
+                    navigate(`/${handle}`);
                   } else {
-                    throw new Error("Could not delete")
+                    throw new Error("Could not delete");
                   }
                 }
               }}
@@ -178,5 +178,5 @@ export const SeasonReviewPage = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};

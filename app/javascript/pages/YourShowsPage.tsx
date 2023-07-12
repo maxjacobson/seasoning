@@ -1,10 +1,10 @@
-import { GuestContext } from "../contexts"
-import { Link } from "react-router-dom"
-import { useContext } from "react"
-import { YourShowsList } from "../components/YourShowsList"
+import { GuestContext } from "../contexts";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { YourShowsList } from "../components/YourShowsList";
 
 export const YourShowsPage = () => {
-  const guest = useContext(GuestContext)
+  const guest = useContext(GuestContext);
 
   return (
     <div>
@@ -17,5 +17,5 @@ export const YourShowsPage = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};

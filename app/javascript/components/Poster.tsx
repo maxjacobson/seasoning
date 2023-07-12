@@ -1,10 +1,10 @@
-import { FunctionComponent } from "react"
-import { Show } from "../types"
+import { FunctionComponent } from "react";
+import { Show } from "../types";
 
 interface Props {
-  url: string | null
-  show: Show
-  size: "small" | "large"
+  url: string | null;
+  show: Show;
+  size: "small" | "large";
 }
 
 export const Poster: FunctionComponent<Props> = ({ url, show, size }: Props) => (
@@ -18,4 +18,4 @@ export const Poster: FunctionComponent<Props> = ({ url, show, size }: Props) => 
       />
     )}
   </>
-)
+);

@@ -1,75 +1,75 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { useContext, useEffect, useState } from "react"
-import { AddShowButton } from "../components/AddShowButton"
-import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton"
-import { MoreInfo } from "../components/MoreInfo"
-import { NoteToSelf } from "../components/NoteToSelf"
-import { Poster } from "../components/Poster"
-import { RemoveShowButton } from "../components/RemoveShowButton"
-import { SeasonsList } from "../components/SeasonsList"
-import { setHeadTitle } from "../hooks"
-import { ShowMetadata } from "../components/ShowMetadata"
-import { useParams } from "react-router-dom"
-import { YourShow } from "../types"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { useContext, useEffect, useState } from "react";
+import { AddShowButton } from "../components/AddShowButton";
+import { ChooseShowStatusButton } from "../components/ChooseShowStatusButton";
+import { MoreInfo } from "../components/MoreInfo";
+import { NoteToSelf } from "../components/NoteToSelf";
+import { Poster } from "../components/Poster";
+import { RemoveShowButton } from "../components/RemoveShowButton";
+import { SeasonsList } from "../components/SeasonsList";
+import { setHeadTitle } from "../hooks";
+import { ShowMetadata } from "../components/ShowMetadata";
+import { useParams } from "react-router-dom";
+import { YourShow } from "../types";
 
 type LoadingShowData = {
-  loading: true
-  data: null
-}
+  loading: true;
+  data: null;
+};
 
 type LoadedShowData = {
-  loading: false
-  data: YourShow
-}
+  loading: false;
+  data: YourShow;
+};
 
-type ShowData = LoadingShowData | LoadedShowData
+type ShowData = LoadingShowData | LoadedShowData;
 
 export const ShowPage = () => {
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
-  const { showSlug } = useParams()
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
+  const { showSlug } = useParams();
   const [showData, setShowData] = useState<ShowData>({
     loading: true,
     data: null,
-  })
+  });
   useEffect(() => {
     if (!showSlug) {
-      return
+      return;
     }
 
-    setLoading(true)
-    ;(async () => {
-      let headers
+    setLoading(true);
+    (async () => {
+      let headers;
       if (guest.authenticated) {
-        headers = { "X-SEASONING_TOKEN": guest.token }
+        headers = { "X-SEASONING_TOKEN": guest.token };
       } else {
-        headers = {}
+        headers = {};
       }
       const response = await fetch(`/api/shows/${showSlug}.json`, {
         headers: headers,
-      })
+      });
 
-      setLoading(false)
+      setLoading(false);
 
       if (response.ok) {
-        const data: YourShow = await response.json()
-        setShowData({ loading: false, data: data })
+        const data: YourShow = await response.json();
+        setShowData({ loading: false, data: data });
       } else {
-        throw new Error("Could not load show")
+        throw new Error("Could not load show");
       }
-    })()
-  }, [showSlug])
+    })();
+  }, [showSlug]);
 
-  setHeadTitle(showData.loading ? undefined : showData.data.show.title, [showData])
+  setHeadTitle(showData.loading ? undefined : showData.data.show.title, [showData]);
 
   if (showData.loading) {
     return (
       <div>
         <h1>Loading show...</h1>
       </div>
-    )
+    );
   } else {
-    const { data } = showData
+    const { data } = showData;
 
     return (
       <div>
@@ -86,7 +86,7 @@ export const ShowPage = () => {
                     show={data.show}
                     token={guest.token}
                     onRemove={() => {
-                      setShowData({ loading: false, data: { show: data.show } })
+                      setShowData({ loading: false, data: { show: data.show } });
                     }}
                   />
                 ) : (
@@ -94,7 +94,7 @@ export const ShowPage = () => {
                     token={guest.token}
                     show={data.show}
                     setYourShow={(yourShow) => {
-                      setShowData({ loading: false, data: yourShow })
+                      setShowData({ loading: false, data: yourShow });
                     }}
                   />
                 )}
@@ -108,7 +108,7 @@ export const ShowPage = () => {
                 show={data.show}
                 yourRelationship={data.your_relationship}
                 setYourShow={(yourShow) => {
-                  setShowData({ loading: false, data: yourShow })
+                  setShowData({ loading: false, data: yourShow });
                 }}
               />
             )}
@@ -120,7 +120,7 @@ export const ShowPage = () => {
                 token={guest.token}
                 yourShow={data}
                 updateYourShow={(newData) => {
-                  setShowData({ loading: false, data: newData })
+                  setShowData({ loading: false, data: newData });
                 }}
               />
             </div>
@@ -146,6 +146,6 @@ export const ShowPage = () => {
 
         <ShowMetadata show={data.show} />
       </div>
-    )
+    );
   }
-}
+};

@@ -1,28 +1,28 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Link, useParams } from "react-router-dom"
-import { loadData, setHeadTitle } from "../hooks"
-import { Human } from "../types"
-import { useContext } from "react"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Link, useParams } from "react-router-dom";
+import { loadData, setHeadTitle } from "../hooks";
+import { Human } from "../types";
+import { useContext } from "react";
 
 export const ProfileFollowersPage = () => {
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
-  const { handle } = useParams()
-  setHeadTitle(`${handle}'s followers`)
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
+  const { handle } = useParams();
+  setHeadTitle(`${handle}'s followers`);
 
   const followersData = loadData<{ humans: Human[] }>(
     guest,
     `/api/profiles/${handle}/followers.json`,
     [],
     setLoading,
-  )
+  );
 
   if (followersData.loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!followersData.data) {
-    return <div>Not found</div>
+    return <div>Not found</div>;
   }
 
   if (followersData.data.humans.length === 0) {
@@ -33,7 +33,7 @@ export const ProfileFollowersPage = () => {
           <p>None yet!</p>
         </div>
       </>
-    )
+    );
   }
 
   return (
@@ -45,9 +45,9 @@ export const ProfileFollowersPage = () => {
             <li key={human.handle}>
               <Link to={`/${human.handle}`}>{human.handle}</Link>
             </li>
-          )
+          );
         })}
       </ol>
     </div>
-  )
-}
+  );
+};

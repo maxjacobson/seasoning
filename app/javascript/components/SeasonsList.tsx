@@ -1,11 +1,11 @@
-import { Guest, Show } from "../types"
-import { FunctionComponent } from "react"
-import { Link } from "react-router-dom"
-import { SeenSeasonCheckbox } from "./SeenSeasonCheckbox"
+import { Guest, Show } from "../types";
+import { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
+import { SeenSeasonCheckbox } from "./SeenSeasonCheckbox";
 
 interface Props {
-  show: Show
-  guest: Guest
+  show: Show;
+  guest: Guest;
 }
 
 export const SeasonsList: FunctionComponent<Props> = ({ show, guest }: Props) => {
@@ -35,9 +35,9 @@ export const SeasonsList: FunctionComponent<Props> = ({ show, guest }: Props) =>
                 </td>
               )}
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
-  )
-}
+  );
+};

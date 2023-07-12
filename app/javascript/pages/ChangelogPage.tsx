@@ -1,6 +1,6 @@
-import { FunctionComponent } from "react"
-import { Markdown } from "../components/Markdown"
-import { setHeadTitle } from "../hooks"
+import { FunctionComponent } from "react";
+import { Markdown } from "../components/Markdown";
+import { setHeadTitle } from "../hooks";
 
 const changelog = `
   As mentioned on [the credits page](/credits), this whole thing is open source, so feel free to check out [the repo](https://github.com/maxjacobson/seasoning) on GitHub.
@@ -66,10 +66,10 @@ const changelog = `
   1. **March 14, 2021** — People can add "note to self" about a show
   1. **March 13, 2021** — People can add shows they're interested in
   1. **March 9, 2021** — Development starts
-`
+`;
 
 export const ChangelogPage: FunctionComponent = () => {
-  setHeadTitle("Changelog")
+  setHeadTitle("Changelog");
 
   return (
     <div>
@@ -77,5 +77,5 @@ export const ChangelogPage: FunctionComponent = () => {
 
       <Markdown markdown={changelog} />
     </div>
-  )
-}
+  );
+};

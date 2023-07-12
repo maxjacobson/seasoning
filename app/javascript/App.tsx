@@ -1,45 +1,45 @@
-import "./App.css"
+import "./App.css";
 
-import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router-dom"
-import { FunctionComponent, useState } from "react"
-import { Guest, Show } from "./types"
-import { GuestContext, SetLoadingContext } from "./contexts"
-import { AdminPage } from "./pages/AdminPage"
-import { ChangelogPage } from "./pages/ChangelogPage"
-import { CreditsPage } from "./pages/CreditsPage"
-import { EpisodePage } from "./pages/EpisodePage"
-import { HomePage } from "./pages/HomePage"
-import { ImportShowPage } from "./pages/ImportShowPage"
-import { LoadingRibbon } from "./components/LoadingRibbon"
-import LogoWithName from "./images/logo-with-name.svg"
-import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage"
-import { NotFoundPage } from "./pages/NotFoundPage"
-import { ProfileFollowersPage } from "./pages/ProfileFollowersPage"
-import { ProfileFollowingPage } from "./pages/ProfileFollowingPage"
-import { ProfilePage } from "./pages/ProfilePage"
-import { ProfileReviewsPage } from "./pages/ProfileReviewsPage"
-import { RedeemMagicLinkPage } from "./pages/RedeemMagicLinkPage"
-import { ReviewsFeedPage } from "./pages/ReviewsFeedPage"
-import { RoadmapPage } from "./pages/RoadmapPage"
-import { SearchResultsPage } from "./pages/SearchResultsPage"
-import { SeasonPage } from "./pages/SeasonPage"
-import { SeasonReviewPage } from "./pages/SeasonReviewPage"
-import { SettingsPage } from "./pages/SettingsPage"
-import { ShowPage } from "./pages/ShowPage"
-import { ShowSearchBar } from "./components/ShowSearchBar"
-import { YourShowsPage } from "./pages/YourShowsPage"
+import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router-dom";
+import { FunctionComponent, useState } from "react";
+import { Guest, Show } from "./types";
+import { GuestContext, SetLoadingContext } from "./contexts";
+import { AdminPage } from "./pages/AdminPage";
+import { ChangelogPage } from "./pages/ChangelogPage";
+import { CreditsPage } from "./pages/CreditsPage";
+import { EpisodePage } from "./pages/EpisodePage";
+import { HomePage } from "./pages/HomePage";
+import { ImportShowPage } from "./pages/ImportShowPage";
+import { LoadingRibbon } from "./components/LoadingRibbon";
+import LogoWithName from "./images/logo-with-name.svg";
+import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { ProfileFollowersPage } from "./pages/ProfileFollowersPage";
+import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { ProfileReviewsPage } from "./pages/ProfileReviewsPage";
+import { RedeemMagicLinkPage } from "./pages/RedeemMagicLinkPage";
+import { ReviewsFeedPage } from "./pages/ReviewsFeedPage";
+import { RoadmapPage } from "./pages/RoadmapPage";
+import { SearchResultsPage } from "./pages/SearchResultsPage";
+import { SeasonPage } from "./pages/SeasonPage";
+import { SeasonReviewPage } from "./pages/SeasonReviewPage";
+import { SettingsPage } from "./pages/SettingsPage";
+import { ShowPage } from "./pages/ShowPage";
+import { ShowSearchBar } from "./components/ShowSearchBar";
+import { YourShowsPage } from "./pages/YourShowsPage";
 
 interface Props {
-  initialGuest: Guest
+  initialGuest: Guest;
 }
 
 const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
-  const [guest, setGuest] = useState<Guest>(initialGuest)
-  const [loading, setLoading] = useState(false)
-  const [searchResults, setSearchResults] = useState<Show[] | null>(null)
-  const navigate = useNavigate()
-  const [searchParams, setSearchParams] = useSearchParams()
-  const searchQuery = searchParams.get("q") || ""
+  const [guest, setGuest] = useState<Guest>(initialGuest);
+  const [loading, setLoading] = useState(false);
+  const [searchResults, setSearchResults] = useState<Show[] | null>(null);
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
 
   return (
     <>
@@ -75,9 +75,9 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                       href="#"
                       onClick={() => {
                         if (confirm("Log out?")) {
-                          localStorage.clear()
-                          setGuest({ authenticated: false })
-                          navigate("/")
+                          localStorage.clear();
+                          setGuest({ authenticated: false });
+                          navigate("/");
                         }
                       }}
                     >
@@ -151,13 +151,13 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
         </SetLoadingContext.Provider>
       </GuestContext.Provider>
     </>
-  )
-}
+  );
+};
 
 export const AppWithRouter: FunctionComponent<Props> = (props) => {
   return (
     <BrowserRouter>
       <App {...props} />
     </BrowserRouter>
-  )
-}
+  );
+};

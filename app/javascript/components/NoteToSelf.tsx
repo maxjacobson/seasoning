@@ -1,16 +1,16 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react"
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 
-import { Button } from "./Button"
-import { Markdown } from "../components/Markdown"
-import { SetLoadingContext } from "../contexts"
-import { Textarea } from "./Textarea"
-import { updateMyShow } from "../helpers/my_shows"
-import { YourShow } from "../types"
+import { Button } from "./Button";
+import { Markdown } from "../components/Markdown";
+import { SetLoadingContext } from "../contexts";
+import { Textarea } from "./Textarea";
+import { updateMyShow } from "../helpers/my_shows";
+import { YourShow } from "../types";
 
 interface Props {
-  yourShow: YourShow
-  token: string
-  updateYourShow: (updatedYourShow: YourShow) => void
+  yourShow: YourShow;
+  token: string;
+  updateYourShow: (updatedYourShow: YourShow) => void;
 }
 
 export const NoteToSelf: FunctionComponent<Props> = ({
@@ -18,15 +18,15 @@ export const NoteToSelf: FunctionComponent<Props> = ({
   yourShow,
   updateYourShow,
 }: Props) => {
-  const [isEditing, setIsEditing] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [newNoteToSelf, setNewNoteToSelf] = useState("")
-  const globalSetLoading = useContext(SetLoadingContext)
+  const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [newNoteToSelf, setNewNoteToSelf] = useState("");
+  const globalSetLoading = useContext(SetLoadingContext);
 
   // I'll confess I am surprised that this is necessary...
   useEffect(() => {
-    setNewNoteToSelf(yourShow.your_relationship?.note_to_self || "")
-  }, [yourShow.show.slug])
+    setNewNoteToSelf(yourShow.your_relationship?.note_to_self || "");
+  }, [yourShow.show.slug]);
 
   if (yourShow.your_relationship?.note_to_self || isEditing) {
     return (
@@ -65,24 +65,24 @@ export const NoteToSelf: FunctionComponent<Props> = ({
           <div className="mt-4">
             <Button
               onClick={async () => {
-                globalSetLoading(true)
-                setLoading(true)
+                globalSetLoading(true);
+                setLoading(true);
 
                 const response = await updateMyShow(yourShow.show, token, {
                   show: {
                     note_to_self: newNoteToSelf,
                   },
-                })
+                });
 
-                setLoading(false)
-                globalSetLoading(false)
+                setLoading(false);
+                globalSetLoading(false);
 
                 if (response.ok) {
-                  const updated: YourShow = await response.json()
-                  updateYourShow(updated)
-                  setIsEditing(false)
+                  const updated: YourShow = await response.json();
+                  updateYourShow(updated);
+                  setIsEditing(false);
                 } else {
-                  throw new Error("Could not update note to self")
+                  throw new Error("Could not update note to self");
                 }
               }}
             >
@@ -99,8 +99,8 @@ export const NoteToSelf: FunctionComponent<Props> = ({
           </div>
         )}
       </div>
-    )
+    );
   } else {
-    return <Button onClick={() => setIsEditing(true)}>Write note to self</Button>
+    return <Button onClick={() => setIsEditing(true)}>Write note to self</Button>;
   }
-}
+};

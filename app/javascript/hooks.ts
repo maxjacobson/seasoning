@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-import { Guest } from "./types"
+import { Guest } from "./types";
 
-const DEFAULT_TITLE = "Seasoning"
+const DEFAULT_TITLE = "Seasoning";
 
 export const setHeadTitle = (title: string | undefined, deps?: React.DependencyList): void => {
   useEffect(() => {
-    document.title = title || DEFAULT_TITLE
+    document.title = title || DEFAULT_TITLE;
 
     return () => {
-      document.title = DEFAULT_TITLE
-    }
-  }, deps)
-}
+      document.title = DEFAULT_TITLE;
+    };
+  }, deps);
+};
 
 type LoadableData<T> =
   | { loading: true }
   | { loading: false; data: T }
-  | { loading: false; data: null }
+  | { loading: false; data: null };
 
 export const loadData = <T>(
   guest: Guest,
@@ -25,30 +25,30 @@ export const loadData = <T>(
   deps: React.DependencyList,
   setCurrentlyLoading: (_: boolean) => void,
 ): LoadableData<T> => {
-  const [data, setData] = useState<LoadableData<T>>({ loading: true })
+  const [data, setData] = useState<LoadableData<T>>({ loading: true });
 
   useEffect(() => {
-    ;(async () => {
-      const headers: Record<string, string> = {}
+    (async () => {
+      const headers: Record<string, string> = {};
       if (guest.authenticated) {
-        headers["X-SEASONING-TOKEN"] = guest.token
+        headers["X-SEASONING-TOKEN"] = guest.token;
       }
-      setCurrentlyLoading(true)
+      setCurrentlyLoading(true);
       const response = await fetch(url, {
         headers: headers,
-      })
-      setCurrentlyLoading(false)
+      });
+      setCurrentlyLoading(false);
 
       if (response.ok) {
-        const responseData: T = await response.json()
-        setData({ loading: false, data: responseData })
+        const responseData: T = await response.json();
+        setData({ loading: false, data: responseData });
       } else if (response.status === 404) {
-        setData({ loading: false, data: null })
+        setData({ loading: false, data: null });
       } else {
-        throw new Error(`Could not fetch data from ${url}`)
+        throw new Error(`Could not fetch data from ${url}`);
       }
-    })()
-  }, deps)
+    })();
+  }, deps);
 
-  return data
-}
+  return data;
+};

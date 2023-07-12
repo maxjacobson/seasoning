@@ -1,9 +1,9 @@
-import { FunctionComponent } from "react"
-import gfm from "remark-gfm"
-import ReactMarkdown from "react-markdown"
+import { FunctionComponent } from "react";
+import gfm from "remark-gfm";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
-  markdown: string
+  markdown: string;
 }
 
 export const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
@@ -13,5 +13,5 @@ export const Markdown: FunctionComponent<Props> = ({ markdown }: Props) => {
         {markdown}
       </ReactMarkdown>
     </>
-  )
-}
+  );
+};

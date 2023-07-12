@@ -1,61 +1,61 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { SeasonReview, Show } from "../types"
-import { useContext, useEffect, useState } from "react"
-import { Navigate } from "react-router-dom"
-import { SeasonReviewSummary } from "../components/SeasonReviewSummary"
-import { setHeadTitle } from "../hooks"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { SeasonReview, Show } from "../types";
+import { useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { SeasonReviewSummary } from "../components/SeasonReviewSummary";
+import { setHeadTitle } from "../hooks";
 
 interface LoadingReviewsFeedData {
-  loading: true
+  loading: true;
 }
 
 interface LoadedReviewsFeedData {
-  loading: false
+  loading: false;
   data: {
-    show: Show
-    review: SeasonReview
-  }[]
+    show: Show;
+    review: SeasonReview;
+  }[];
 }
 
-type ReviewsFeedData = LoadingReviewsFeedData | LoadedReviewsFeedData
+type ReviewsFeedData = LoadingReviewsFeedData | LoadedReviewsFeedData;
 
 export const ReviewsFeedPage = () => {
-  const [feedData, setFeedData] = useState<ReviewsFeedData>({ loading: true })
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
+  const [feedData, setFeedData] = useState<ReviewsFeedData>({ loading: true });
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
-      }
+      };
       if (guest.authenticated) {
-        headers["X-SEASONING-TOKEN"] = guest.token
+        headers["X-SEASONING-TOKEN"] = guest.token;
       }
 
-      setLoading(true)
+      setLoading(true);
       const response = await fetch("/api/season-reviews.json", {
         headers: headers,
-      })
-      setLoading(false)
+      });
+      setLoading(false);
 
       if (response.ok) {
-        const data = await response.json()
-        setFeedData({ loading: false, data: data.data })
+        const data = await response.json();
+        setFeedData({ loading: false, data: data.data });
       } else {
-        throw new Error("Could not load reviews")
+        throw new Error("Could not load reviews");
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
-  setHeadTitle("Reviews", [feedData])
+  setHeadTitle("Reviews", [feedData]);
 
   if (!guest.authenticated) {
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
 
   if (feedData.loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
@@ -63,8 +63,8 @@ export const ReviewsFeedPage = () => {
       <h1 className="text-xl">Reviews</h1>
       <h2 className="text-lg">Recent 10 reviews</h2>
       {feedData.data.map(({ review, show }) => {
-        return <SeasonReviewSummary key={review.id} review={review} show={show} />
+        return <SeasonReviewSummary key={review.id} review={review} show={show} />;
       })}
     </div>
-  )
-}
+  );
+};

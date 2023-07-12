@@ -1,7 +1,7 @@
-import { FunctionComponent } from "react"
+import { FunctionComponent } from "react";
 
 interface Props {
-  rating: number
+  rating: number;
 }
 
 export const StarRating: FunctionComponent<Props> = ({ rating }) => {
@@ -18,13 +18,13 @@ export const StarRating: FunctionComponent<Props> = ({ rating }) => {
       <Star position={9} rating={rating} />
       <Star position={10} rating={rating} />
     </span>
-  )
-}
+  );
+};
 
 const Star = ({ position, rating }: { position: number; rating: number }) => {
   if (rating >= position) {
-    return <span className="text-yellow-400">★</span>
+    return <span className="text-yellow-400">★</span>;
   } else {
-    return <span>☆</span>
+    return <span>☆</span>;
   }
-}
+};

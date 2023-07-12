@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react"
-import { Link } from "react-router-dom"
+import { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 
 export const GoHome: FunctionComponent<Record<string, never>> = () => {
   return (
@@ -8,5 +8,5 @@ export const GoHome: FunctionComponent<Record<string, never>> = () => {
         <Link to="/">Go home</Link>
       </p>
     </>
-  )
-}
+  );
+};

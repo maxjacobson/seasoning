@@ -1,33 +1,33 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Link, Navigate } from "react-router-dom"
-import { loadData, setHeadTitle } from "../hooks"
-import { Human } from "../types"
-import { useContext } from "react"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Link, Navigate } from "react-router-dom";
+import { loadData, setHeadTitle } from "../hooks";
+import { Human } from "../types";
+import { useContext } from "react";
 
 type AdminData = {
-  humansCount: number
-  showsCount: number
-  seasonsCount: number
-  reviewsCount: number
-  episodesCount: number
-  lastRefreshedTmdbConfigAt: string
-  recentHumans: Human[]
-}
+  humansCount: number;
+  showsCount: number;
+  seasonsCount: number;
+  reviewsCount: number;
+  episodesCount: number;
+  lastRefreshedTmdbConfigAt: string;
+  recentHumans: Human[];
+};
 
 export const AdminPage = () => {
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
 
-  setHeadTitle("Admin")
+  setHeadTitle("Admin");
 
-  const adminData = loadData<AdminData>(guest, `/api/admin.json`, [], setLoading)
+  const adminData = loadData<AdminData>(guest, `/api/admin.json`, [], setLoading);
 
   if (adminData.loading) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   if (!adminData.data) {
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
 
   return (
@@ -67,10 +67,10 @@ export const AdminPage = () => {
               <li key={human.handle}>
                 <Link to={`/${human.handle}`}>{human.handle}</Link>
               </li>
-            )
+            );
           })}
         </ol>
       </div>
     </div>
-  )
-}
+  );
+};

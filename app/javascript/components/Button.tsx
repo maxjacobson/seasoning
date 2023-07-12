@@ -1,4 +1,4 @@
-type Props = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">
+type Props = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
 
 export const Button = (props: Props) => {
   return (
@@ -8,5 +8,5 @@ export const Button = (props: Props) => {
     >
       {props.value || props.children}
     </button>
-  )
-}
+  );
+};
