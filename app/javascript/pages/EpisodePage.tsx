@@ -43,7 +43,7 @@ export const EpisodePage = () => {
         `/api/shows/${showSlug}/seasons/${seasonSlug}/episodes/${episodeNumber}.json`,
         {
           headers: headers,
-        }
+        },
       )
       setLoading(false)
 

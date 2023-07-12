@@ -23,7 +23,7 @@ export const loadData = <T>(
   guest: Guest,
   url: string,
   deps: React.DependencyList,
-  setCurrentlyLoading: (_: boolean) => void
+  setCurrentlyLoading: (_: boolean) => void,
 ): LoadableData<T> => {
   const [data, setData] = useState<LoadableData<T>>({ loading: true })
 

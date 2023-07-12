@@ -14,7 +14,7 @@ export const ProfileFollowersPage = () => {
     guest,
     `/api/profiles/${handle}/followers.json`,
     [],
-    setLoading
+    setLoading,
   )
 
   if (followersData.loading) {

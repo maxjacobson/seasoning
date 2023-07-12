@@ -39,7 +39,7 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
     guest,
     "/api/human-limits.json",
     [yourRelationship.status],
-    globalSetLoading
+    globalSetLoading,
   )
 
   if (limits.loading) {

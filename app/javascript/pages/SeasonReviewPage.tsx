@@ -59,7 +59,7 @@ export const SeasonReviewPage = () => {
         })}`,
         {
           headers: headers,
-        }
+        },
       )
       setLoading(false)
 
@@ -160,7 +160,7 @@ export const SeasonReviewPage = () => {
                     {
                       headers: headers,
                       method: "DELETE",
-                    }
+                    },
                   )
                   setLoading(false)
 
