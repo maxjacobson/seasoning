@@ -1,7 +1,7 @@
-import { FunctionComponent } from "react"
-import { Markdown } from "../components/Markdown"
+import { FunctionComponent } from "react";
+import { Markdown } from "../components/Markdown";
 
-import { setHeadTitle } from "../hooks"
+import { setHeadTitle } from "../hooks";
 
 const roadmap = `
   Some things I'm planning to work on:
@@ -25,10 +25,10 @@ const roadmap = `
   1. Some kind of notification when new episodes are available to watch
   1. Some way to mark seasons as "skipped" -- for example if you add the bachelor because you want to watch the latest episode of the bachelor but you don't want to watch all 27 seasons, just the new one
   1. Some way to mark episodes as "skipped" -- for example if you start watching saturday night live mid-season and don't feel compelled to go back and watch the old episodes
-`
+`;
 
 export const RoadmapPage: FunctionComponent = () => {
-  setHeadTitle("Roadmap")
+  setHeadTitle("Roadmap");
 
   return (
     <div>
@@ -36,5 +36,5 @@ export const RoadmapPage: FunctionComponent = () => {
 
       <Markdown markdown={roadmap} />
     </div>
-  )
-}
+  );
+};

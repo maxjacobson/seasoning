@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react"
-import { setHeadTitle } from "../hooks"
+import { FunctionComponent } from "react";
+import { setHeadTitle } from "../hooks";
 
 export const CreditsPage: FunctionComponent = () => {
-  setHeadTitle("Credits")
+  setHeadTitle("Credits");
 
   return (
     <div>
@@ -41,5 +41,5 @@ export const CreditsPage: FunctionComponent = () => {
         </li>
       </ul>
     </div>
-  )
-}
+  );
+};

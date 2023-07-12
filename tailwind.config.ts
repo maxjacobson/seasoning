@@ -1,6 +1,6 @@
 /* eslint-disable import/no-default-export */
-import { Config } from "tailwindcss"
-import forms from "@tailwindcss/forms"
+import { Config } from "tailwindcss";
+import forms from "@tailwindcss/forms";
 
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}"],
@@ -9,6 +9,6 @@ const config: Config = {
     extend: {},
   },
   plugins: [forms],
-}
+};
 
-export default config
+export default config;

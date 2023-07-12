@@ -1,21 +1,21 @@
-import { useContext, useEffect, useState } from "react"
-import { Button } from "./Button"
-import { SetLoadingContext } from "../contexts"
-import { TextField } from "./TextField"
-import { YouTubeVideo } from "./YouTubeVideo"
+import { useContext, useEffect, useState } from "react";
+import { Button } from "./Button";
+import { SetLoadingContext } from "../contexts";
+import { TextField } from "./TextField";
+import { YouTubeVideo } from "./YouTubeVideo";
 
 export const GetStarted = () => {
-  const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [createdMagicLink, setCreatedMagicLink] = useState(false)
-  const globalSetLoading = useContext(SetLoadingContext)
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [createdMagicLink, setCreatedMagicLink] = useState(false);
+  const globalSetLoading = useContext(SetLoadingContext);
 
   useEffect(() => {
     if (!loading) {
-      return
+      return;
     }
 
-    globalSetLoading(true)
+    globalSetLoading(true);
     fetch("/api/magic-links.json", {
       headers: {
         "Content-Type": "application/json",
@@ -24,19 +24,19 @@ export const GetStarted = () => {
       method: "POST",
     })
       .then((response) => {
-        globalSetLoading(false)
-        setLoading(false)
+        globalSetLoading(false);
+        setLoading(false);
 
         if (response.ok) {
-          return response.json()
+          return response.json();
         } else {
-          throw new Error("Could not create magic link")
+          throw new Error("Could not create magic link");
         }
       })
       .then(() => {
-        setCreatedMagicLink(true)
-      })
-  }, [loading])
+        setCreatedMagicLink(true);
+      });
+  }, [loading]);
 
   if (createdMagicLink) {
     return (
@@ -44,7 +44,7 @@ export const GetStarted = () => {
         <h2>Nice!</h2>
         <p>Check your email for a link to log in to Seasoning!</p>
       </div>
-    )
+    );
   } else {
     return (
       <>
@@ -74,8 +74,8 @@ export const GetStarted = () => {
           <div>
             <form
               onSubmit={(e) => {
-                e.preventDefault()
-                setLoading(true)
+                e.preventDefault();
+                setLoading(true);
               }}
             >
               <TextField
@@ -96,6 +96,6 @@ export const GetStarted = () => {
           </div>
         </div>
       </>
-    )
+    );
   }
-}
+};

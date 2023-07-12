@@ -1,81 +1,81 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Link, useParams } from "react-router-dom"
-import { useContext, useEffect, useState } from "react"
-import { Button } from "../components/Button"
-import { Poster } from "../components/Poster"
-import { Profile } from "../types"
-import { setHeadTitle } from "../hooks"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Button } from "../components/Button";
+import { Poster } from "../components/Poster";
+import { Profile } from "../types";
+import { setHeadTitle } from "../hooks";
 
 interface StillLoading {
-  loading: true
+  loading: true;
 }
 
 interface ProfileNotFound {
-  loading: false
-  profile: null
+  loading: false;
+  profile: null;
 }
 
 interface LoadedProfileData {
-  loading: false
-  profile: Profile
+  loading: false;
+  profile: Profile;
 }
 
-type ProfileData = StillLoading | LoadedProfileData | ProfileNotFound
+type ProfileData = StillLoading | LoadedProfileData | ProfileNotFound;
 
 export const ProfilePage = () => {
-  const [profileData, setProfile] = useState<ProfileData>({ loading: true })
-  const { handle } = useParams()
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
+  const [profileData, setProfile] = useState<ProfileData>({ loading: true });
+  const { handle } = useParams();
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
 
-  setHeadTitle(handle)
+  setHeadTitle(handle);
 
   useEffect(() => {
-    const headers: Record<string, string> = {}
+    const headers: Record<string, string> = {};
     if (guest.authenticated) {
-      headers["X-SEASONING-TOKEN"] = guest.token
+      headers["X-SEASONING-TOKEN"] = guest.token;
     }
-    setLoading(true)
+    setLoading(true);
     fetch(`/api/profiles/${handle}.json`, { headers: headers })
       .then((response) => {
-        setLoading(false)
+        setLoading(false);
         if (response.ok) {
-          return response.json()
+          return response.json();
         } else if (response.status === 404) {
-          throw new Error("Not found")
+          throw new Error("Not found");
         } else {
-          throw new Error("Could not fetch profile")
+          throw new Error("Could not fetch profile");
         }
       })
       .then((data: { profile: Profile }) => {
         setProfile({
           loading: false,
           profile: data.profile,
-        })
+        });
       })
       .catch((err) => {
         if (err.message === "Not found") {
           setProfile({
             loading: false,
             profile: null,
-          })
+          });
         } else {
-          throw err
+          throw err;
         }
-      })
-  }, [handle])
+      });
+  }, [handle]);
 
   if (profileData.loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   } else if (!profileData.profile) {
     return (
       <div>
         <h1 className="text-xl">Not found</h1>
         <p>No one goes by that name around these parts</p>
       </div>
-    )
+    );
   } else {
-    const { profile } = profileData
+    const { profile } = profileData;
 
     return (
       <div>
@@ -94,15 +94,15 @@ export const ProfilePage = () => {
                 body: JSON.stringify({
                   followee: handle,
                 }),
-              })
+              });
 
               if (!response.ok) {
-                throw new Error("Could not follow")
+                throw new Error("Could not follow");
               }
 
-              const data = await response.json()
+              const data = await response.json();
 
-              setProfile({ loading: false, profile: data.profile })
+              setProfile({ loading: false, profile: data.profile });
             }}
           >
             {profile.your_relationship.you_follow_them ? "Following" : "Follow"}
@@ -143,7 +143,7 @@ export const ProfilePage = () => {
                             {show.title}
                           </Link>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 ) : (
@@ -154,6 +154,6 @@ export const ProfilePage = () => {
           </>
         </div>
       </div>
-    )
+    );
   }
-}
+};

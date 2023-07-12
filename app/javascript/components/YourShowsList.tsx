@@ -1,25 +1,25 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react"
-import { Human, YourShow } from "../types"
-import { Link, useSearchParams } from "react-router-dom"
-import { Button } from "./Button"
-import { displayMyShowStatus } from "../helpers/my_shows"
-import { Markdown } from "./Markdown"
-import { Poster } from "./Poster"
-import queryString from "query-string"
-import { Select } from "./Select"
-import { SetLoadingContext } from "../contexts"
-import { TextField } from "./TextField"
+import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { Human, YourShow } from "../types";
+import { Link, useSearchParams } from "react-router-dom";
+import { Button } from "./Button";
+import { displayMyShowStatus } from "../helpers/my_shows";
+import { Markdown } from "./Markdown";
+import { Poster } from "./Poster";
+import queryString from "query-string";
+import { Select } from "./Select";
+import { SetLoadingContext } from "../contexts";
+import { TextField } from "./TextField";
 
 interface YourShows {
-  your_shows: YourShow[]
+  your_shows: YourShow[];
 }
 interface Props {
-  human: Human
-  token: string
+  human: Human;
+  token: string;
 }
 
 interface ListShowProps {
-  shows: YourShow[]
+  shows: YourShow[];
 }
 const ListShows = ({ shows }: ListShowProps) => {
   if (shows.length) {
@@ -59,43 +59,43 @@ const ListShows = ({ shows }: ListShowProps) => {
                 <></>
               )}
             </div>
-          )
+          );
         })}
       </div>
-    )
+    );
   } else {
-    return <div>No shows yet. Maybe add some via the search at the top of the page?</div>
+    return <div>No shows yet. Maybe add some via the search at the top of the page?</div>;
   }
-}
+};
 
 export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
-  const globalSetLoading = useContext(SetLoadingContext)
-  const [loading, setLoading] = useState(true)
-  const [shows, setShows] = useState<YourShow[]>([])
-  const [searchParams, setSearchParams] = useSearchParams()
+  const globalSetLoading = useContext(SetLoadingContext);
+  const [loading, setLoading] = useState(true);
+  const [shows, setShows] = useState<YourShow[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const titleQueryValue = searchParams.get("title") || ""
+  const titleQueryValue = searchParams.get("title") || "";
   const statusesFilterValue = searchParams.getAll("statuses").length
     ? searchParams.getAll("statuses")
-    : ["currently_watching"]
+    : ["currently_watching"];
 
-  const page: number = parseInt(searchParams.get("page") || "") || 1
+  const page: number = parseInt(searchParams.get("page") || "") || 1;
 
   useEffect(() => {
-    globalSetLoading(true)
-    setLoading(true)
+    globalSetLoading(true);
+    setLoading(true);
 
-    const params: Record<string, unknown> = {}
+    const params: Record<string, unknown> = {};
 
     if (titleQueryValue) {
-      params.q = titleQueryValue
+      params.q = titleQueryValue;
     }
 
     if (statusesFilterValue.length) {
-      params.statuses = statusesFilterValue
+      params.statuses = statusesFilterValue;
     }
 
-    params.page = page
+    params.page = page;
 
     // TODO: debounce me
     fetch(`/api/your-shows.json?${queryString.stringify(params, { arrayFormat: "bracket" })}`, {
@@ -105,17 +105,17 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
     })
       .then((response) => {
         if (response.ok) {
-          return response.json()
+          return response.json();
         } else {
-          throw new Error("Could not fetch your shows")
+          throw new Error("Could not fetch your shows");
         }
       })
       .then((data: YourShows) => {
-        setShows(data.your_shows)
-        setLoading(false)
-        globalSetLoading(false)
-      })
-  }, [titleQueryValue, statusesFilterValue.join("-"), page])
+        setShows(data.your_shows);
+        setLoading(false);
+        globalSetLoading(false);
+      });
+  }, [titleQueryValue, statusesFilterValue.join("-"), page]);
 
   return (
     <div>
@@ -126,11 +126,11 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
             value={titleQueryValue}
             onChange={(event) => {
               if (event.target.value) {
-                searchParams.set("title", event.target.value)
+                searchParams.set("title", event.target.value);
               } else {
-                searchParams.delete("title")
+                searchParams.delete("title");
               }
-              setSearchParams(searchParams)
+              setSearchParams(searchParams);
             }}
           />
         </div>
@@ -138,12 +138,12 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           multiple={true}
           value={statusesFilterValue}
           onChange={(event) => {
-            const statuses = Array.from(event.target.selectedOptions, (option) => option.value)
+            const statuses = Array.from(event.target.selectedOptions, (option) => option.value);
 
             setSearchParams({
               title: titleQueryValue,
               statuses: statuses,
-            })
+            });
           }}
         >
           <option value="might_watch">Might watch</option>
@@ -159,8 +159,8 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
             {page > 1 && (
               <Button
                 onClick={() => {
-                  searchParams.set("page", (page - 1).toString())
-                  setSearchParams(searchParams)
+                  searchParams.set("page", (page - 1).toString());
+                  setSearchParams(searchParams);
                 }}
               >
                 Previous
@@ -171,8 +171,8 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
           <div>
             <Button
               onClick={() => {
-                searchParams.set("page", (page + 1).toString())
-                setSearchParams(searchParams)
+                searchParams.set("page", (page + 1).toString());
+                setSearchParams(searchParams);
               }}
             >
               Next
@@ -181,5 +181,5 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
         </div>
       </>
     </div>
-  )
-}
+  );
+};

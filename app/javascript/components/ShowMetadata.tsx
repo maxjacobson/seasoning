@@ -1,4 +1,4 @@
-import { Show } from "../types"
+import { Show } from "../types";
 
 export const ShowMetadata = ({ show }: { show: Show }) => {
   return (
@@ -23,5 +23,5 @@ export const ShowMetadata = ({ show }: { show: Show }) => {
         )}
       </ul>
     </div>
-  )
-}
+  );
+};

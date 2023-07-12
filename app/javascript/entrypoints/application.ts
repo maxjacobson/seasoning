@@ -1,18 +1,18 @@
-import { AppWithRouter } from "../App"
-import { createElement } from "react"
-import { Guest } from "../types"
-import { render } from "react-dom"
-;(async () => {
-  const guestToken = localStorage.getItem("seasoning-guest-token")
-  let guest
+import { AppWithRouter } from "../App";
+import { createElement } from "react";
+import { Guest } from "../types";
+import { render } from "react-dom";
+(async () => {
+  const guestToken = localStorage.getItem("seasoning-guest-token");
+  let guest;
 
   if (guestToken) {
     const response = await fetch("/api/guest.json", {
       headers: { "X-SEASONING-TOKEN": guestToken },
-    })
-    guest = await response.json()
+    });
+    guest = await response.json();
   } else {
-    guest = { authenticated: false }
+    guest = { authenticated: false };
   }
 
   render(
@@ -24,5 +24,5 @@ import { render } from "react-dom"
       null,
     ),
     document.getElementById("app"),
-  )
-})()
+  );
+})();

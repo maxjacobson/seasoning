@@ -1,83 +1,83 @@
-import { Episode, Season, Show } from "../types"
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Link, useParams } from "react-router-dom"
-import { useContext, useEffect, useState } from "react"
-import { AirDate } from "../components/AirDate"
-import { MoreInfo } from "../components/MoreInfo"
-import { setHeadTitle } from "../hooks"
-import { ShowMetadata } from "../components/ShowMetadata"
+import { Episode, Season, Show } from "../types";
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AirDate } from "../components/AirDate";
+import { MoreInfo } from "../components/MoreInfo";
+import { setHeadTitle } from "../hooks";
+import { ShowMetadata } from "../components/ShowMetadata";
 
 interface LoadingEpisode {
-  loading: true
+  loading: true;
 }
 
 interface EpisodeFound {
-  loading: false
-  episode: Episode
-  show: Show
-  season: Season
+  loading: false;
+  episode: Episode;
+  show: Show;
+  season: Season;
 }
 
-type EpisodeData = LoadingEpisode | EpisodeFound
+type EpisodeData = LoadingEpisode | EpisodeFound;
 
 export const EpisodePage = () => {
-  const [response, setResponse] = useState<EpisodeData>({ loading: true })
-  const setLoading = useContext(SetLoadingContext)
-  const { showSlug, seasonSlug, episodeNumber } = useParams()
-  const guest = useContext(GuestContext)
+  const [response, setResponse] = useState<EpisodeData>({ loading: true });
+  const setLoading = useContext(SetLoadingContext);
+  const { showSlug, seasonSlug, episodeNumber } = useParams();
+  const guest = useContext(GuestContext);
 
   useEffect(() => {
     if (showSlug === undefined || seasonSlug === undefined || episodeNumber === undefined) {
-      return
+      return;
     }
 
-    ;(async () => {
-      let headers
+    (async () => {
+      let headers;
       if (guest.authenticated) {
-        headers = { "X-SEASONING_TOKEN": guest.token }
+        headers = { "X-SEASONING_TOKEN": guest.token };
       } else {
-        headers = {}
+        headers = {};
       }
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(
         `/api/shows/${showSlug}/seasons/${seasonSlug}/episodes/${episodeNumber}.json`,
         {
           headers: headers,
         },
-      )
-      setLoading(false)
+      );
+      setLoading(false);
 
       if (response.ok) {
-        const { episode, show, season } = await response.json()
+        const { episode, show, season } = await response.json();
 
         setResponse({
           loading: false,
           episode: episode,
           show: show,
           season: season,
-        })
+        });
       } else {
-        throw new Error("Could not load episode")
+        throw new Error("Could not load episode");
       }
-    })()
-  }, [showSlug, seasonSlug, episodeNumber])
+    })();
+  }, [showSlug, seasonSlug, episodeNumber]);
 
   // TODO: this should be different
-  setHeadTitle("episode title", [])
+  setHeadTitle("episode title", []);
 
-  let headTitle
+  let headTitle;
 
   if (!response.loading) {
-    headTitle = `${response.show.title}  - ${response.episode.name}`
+    headTitle = `${response.show.title}  - ${response.episode.name}`;
   }
 
-  setHeadTitle(headTitle, [response])
+  setHeadTitle(headTitle, [response]);
 
   if (response.loading) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
-  const { show, episode, season } = response
+  const { show, episode, season } = response;
 
   return (
     <>
@@ -98,5 +98,5 @@ export const EpisodePage = () => {
 
       <ShowMetadata show={show} />
     </>
-  )
-}
+  );
+};

@@ -1,27 +1,27 @@
-import { Link, useSearchParams } from "react-router-dom"
-import { FunctionComponent } from "react"
-import { setHeadTitle } from "../hooks"
-import { Show } from "../types"
+import { Link, useSearchParams } from "react-router-dom";
+import { FunctionComponent } from "react";
+import { setHeadTitle } from "../hooks";
+import { Show } from "../types";
 interface Props {
-  searchResults: Show[] | null
+  searchResults: Show[] | null;
 }
 
 const Year = ({ date: str }: { date: string }) => {
-  const date = new Date(str)
+  const date = new Date(str);
 
-  return <>({date.getFullYear()})</>
-}
+  return <>({date.getFullYear()})</>;
+};
 
 export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) => {
-  setHeadTitle("Search results")
+  setHeadTitle("Search results");
 
-  const [searchParams] = useSearchParams()
-  const searchQuery = searchParams.get("q")
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q");
 
-  const importParams = new URLSearchParams()
+  const importParams = new URLSearchParams();
 
   if (searchQuery) {
-    importParams.set("q", searchQuery)
+    importParams.set("q", searchQuery);
   }
 
   return (
@@ -49,5 +49,5 @@ export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) =
         .
       </p>
     </>
-  )
-}
+  );
+};

@@ -1,51 +1,51 @@
-import { AuthenticatedGuest, Season, Show, YourSeason } from "../types"
-import { FunctionComponent, useContext, useEffect, useState } from "react"
-import { Checkbox } from "./Checkbox"
-import { SetLoadingContext } from "../contexts"
-import { updateMySeason } from "../helpers/my_shows"
+import { AuthenticatedGuest, Season, Show, YourSeason } from "../types";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { Checkbox } from "./Checkbox";
+import { SetLoadingContext } from "../contexts";
+import { updateMySeason } from "../helpers/my_shows";
 
-type HasWatched = "unknown" | "partial" | boolean
+type HasWatched = "unknown" | "partial" | boolean;
 
 interface Props {
-  guest: AuthenticatedGuest
-  show: Show
-  season: Season
+  guest: AuthenticatedGuest;
+  show: Show;
+  season: Season;
 }
 
 export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, show }) => {
-  const [updating, setUpdating] = useState(false)
-  const [hasWatched, setHasWatched] = useState<HasWatched>("unknown")
-  const setLoading = useContext(SetLoadingContext)
+  const [updating, setUpdating] = useState(false);
+  const [hasWatched, setHasWatched] = useState<HasWatched>("unknown");
+  const setLoading = useContext(SetLoadingContext);
 
   useEffect(() => {
-    ;(async () => {
-      setLoading(true)
+    (async () => {
+      setLoading(true);
       const response = await fetch(`/api/shows/${show.slug}/seasons/${season.slug}.json`, {
         headers: { "X-SEASONING_TOKEN": guest.token },
-      })
-      setLoading(false)
+      });
+      setLoading(false);
 
       if (response.ok) {
-        const yourSeason: YourSeason = await response.json()
+        const yourSeason: YourSeason = await response.json();
 
-        const yourRelationship = yourSeason.your_relationship
+        const yourRelationship = yourSeason.your_relationship;
 
         if (yourRelationship) {
           if (yourRelationship.watched_episode_numbers.length === yourSeason.season.episode_count) {
-            setHasWatched(true)
+            setHasWatched(true);
           } else if (yourRelationship.watched_episode_numbers.length === 0) {
-            setHasWatched(false)
+            setHasWatched(false);
           } else {
-            setHasWatched("partial")
+            setHasWatched("partial");
           }
         } else {
-          setHasWatched(false)
+          setHasWatched(false);
         }
       } else {
-        throw new Error("Could not load season")
+        throw new Error("Could not load season");
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
   return (
     <>
@@ -53,34 +53,34 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
         className="text-yellow-500"
         inputRef={(input) => {
           if (input && hasWatched === "partial") {
-            input.indeterminate = true
+            input.indeterminate = true;
           } else if (input) {
-            input.indeterminate = false
+            input.indeterminate = false;
           }
         }}
         checked={hasWatched === true}
         disabled={hasWatched === "unknown" || updating}
         onChange={async () => {
-          const newHasWatched: boolean = hasWatched === true ? false : true
+          const newHasWatched: boolean = hasWatched === true ? false : true;
 
-          setLoading(true)
-          setUpdating(true)
+          setLoading(true);
+          setUpdating(true);
           const response = await updateMySeason(season, guest.token, {
             season: {
               watched: newHasWatched,
             },
-          })
+          });
 
-          setLoading(false)
-          setUpdating(false)
+          setLoading(false);
+          setUpdating(false);
 
           if (response.ok) {
-            setHasWatched(newHasWatched)
+            setHasWatched(newHasWatched);
           } else {
-            throw new Error("Could not toggle watched status")
+            throw new Error("Could not toggle watched status");
           }
         }}
       />
     </>
-  )
-}
+  );
+};

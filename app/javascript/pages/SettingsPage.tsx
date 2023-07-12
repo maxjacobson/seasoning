@@ -1,34 +1,34 @@
-import { AuthenticatedGuest, HumanSettings } from "../types"
-import { FunctionComponent, useContext, useEffect, useState } from "react"
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { Checkbox } from "../components/Checkbox"
-import { Select } from "../components/Select"
-import { setHeadTitle } from "../hooks"
+import { AuthenticatedGuest, HumanSettings } from "../types";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { Checkbox } from "../components/Checkbox";
+import { Select } from "../components/Select";
+import { setHeadTitle } from "../hooks";
 
 interface LoadingSettingsData {
-  loading: true
+  loading: true;
 }
 
 interface LoadedSettingsData {
-  loading: false
-  settings: HumanSettings
+  loading: false;
+  settings: HumanSettings;
 }
 
-type SettingsData = LoadingSettingsData | LoadedSettingsData
+type SettingsData = LoadingSettingsData | LoadedSettingsData;
 
 export const SettingsPage = () => {
-  setHeadTitle("Settings")
+  setHeadTitle("Settings");
 
   return (
     <div>
       <h1 className="text-2xl">Settings</h1>
       <SettingsBody />
     </div>
-  )
-}
+  );
+};
 
 const SettingsBody = () => {
-  const guest = useContext(GuestContext)
+  const guest = useContext(GuestContext);
 
   return (
     <div>
@@ -40,54 +40,54 @@ const SettingsBody = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 interface EditSettingsProps {
-  guest: AuthenticatedGuest
+  guest: AuthenticatedGuest;
 }
 
 const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSettingsProps) => {
-  const [currentlyUpdating, setCurrentlyUpdating] = useState(false)
-  const [settingsData, setSettingsData] = useState<SettingsData>({ loading: true })
-  const setLoading = useContext(SetLoadingContext)
+  const [currentlyUpdating, setCurrentlyUpdating] = useState(false);
+  const [settingsData, setSettingsData] = useState<SettingsData>({ loading: true });
+  const setLoading = useContext(SetLoadingContext);
 
   useEffect(() => {
-    ;(async () => {
-      setLoading(true)
+    (async () => {
+      setLoading(true);
       const response = await fetch("/api/settings.json", {
         headers: {
           "X-SEASONING-TOKEN": guest.token,
         },
-      })
-      setLoading(false)
+      });
+      setLoading(false);
 
       if (response.ok) {
-        const data: HumanSettings = await response.json()
-        setSettingsData({ loading: false, settings: data })
+        const data: HumanSettings = await response.json();
+        setSettingsData({ loading: false, settings: data });
       } else {
-        throw new Error("Could not load settings")
+        throw new Error("Could not load settings");
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
   const update = async (patch: Record<string, unknown>) => {
-    setCurrentlyUpdating(true)
-    setLoading(true)
-    const response = await updateMySettings(guest.token, patch)
-    setCurrentlyUpdating(false)
-    setLoading(false)
+    setCurrentlyUpdating(true);
+    setLoading(true);
+    const response = await updateMySettings(guest.token, patch);
+    setCurrentlyUpdating(false);
+    setLoading(false);
 
     if (response.ok) {
-      const data: HumanSettings = await response.json()
-      setSettingsData({ loading: false, settings: data })
+      const data: HumanSettings = await response.json();
+      setSettingsData({ loading: false, settings: data });
     } else {
-      throw new Error("Could not update settings")
+      throw new Error("Could not update settings");
     }
-  }
+  };
 
   if (settingsData.loading) {
-    return <div>Loading settings...</div>
+    return <div>Loading settings...</div>;
   }
 
   return (
@@ -118,7 +118,7 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
         <Select
           value={settingsData.settings.default_review_visibility}
           onChange={(event) => {
-            update({ default_review_visibility: event.target.value })
+            update({ default_review_visibility: event.target.value });
           }}
           disabled={currentlyUpdating}
         >
@@ -142,11 +142,11 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
         <Select
           value={settingsData.settings.currently_watching_limit || -1}
           onChange={(event) => {
-            const value = event.target.value
+            const value = event.target.value;
             if (parseInt(value) > 0) {
-              update({ currently_watching_limit: value })
+              update({ currently_watching_limit: value });
             } else {
-              update({ currently_watching_limit: null })
+              update({ currently_watching_limit: null });
             }
           }}
           disabled={currentlyUpdating}
@@ -165,8 +165,8 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
         </Select>
       </div>
     </>
-  )
-}
+  );
+};
 
 const updateMySettings = (token: string, body: Record<string, unknown>): Promise<Response> => {
   return fetch("/api/settings.json", {
@@ -176,5 +176,5 @@ const updateMySettings = (token: string, body: Record<string, unknown>): Promise
       "X-SEASONING-TOKEN": token,
       "Content-Type": "application/json",
     },
-  })
-}
+  });
+};

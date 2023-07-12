@@ -1,46 +1,46 @@
-import { GuestContext, SetLoadingContext } from "../contexts"
-import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types"
-import { loadData, setHeadTitle } from "../hooks"
-import { useContext, useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { Button } from "../components/Button"
-import { Select } from "../components/Select"
-import { Textarea } from "../components/Textarea"
+import { GuestContext, SetLoadingContext } from "../contexts";
+import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types";
+import { loadData, setHeadTitle } from "../hooks";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "../components/Button";
+import { Select } from "../components/Select";
+import { Textarea } from "../components/Textarea";
 
 export const NewSeasonReviewPage = () => {
-  const [body, setBody] = useState("")
-  const [visibility, setVisibility] = useState<Visibility | undefined>(undefined)
-  const [rating, setRating] = useState<Rating | undefined>(undefined)
-  const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null)
-  const { showSlug, seasonSlug } = useParams()
-  const guest = useContext(GuestContext)
-  const setLoading = useContext(SetLoadingContext)
+  const [body, setBody] = useState("");
+  const [visibility, setVisibility] = useState<Visibility | undefined>(undefined);
+  const [rating, setRating] = useState<Rating | undefined>(undefined);
+  const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null);
+  const { showSlug, seasonSlug } = useParams();
+  const guest = useContext(GuestContext);
+  const setLoading = useContext(SetLoadingContext);
 
-  const settings = loadData<HumanSettings>(guest, "/api/settings.json", [], setLoading)
+  const settings = loadData<HumanSettings>(guest, "/api/settings.json", [], setLoading);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!settings.loading) {
-      setVisibility(settings.data?.default_review_visibility)
+      setVisibility(settings.data?.default_review_visibility);
     }
-  }, [settings])
+  }, [settings]);
 
   const yourSeason = loadData<YourSeason>(
     guest,
     `/api/shows/${showSlug}/seasons/${seasonSlug}.json`,
     [showSlug, seasonSlug],
     setLoading,
-  )
+  );
 
-  setHeadTitle("New review")
+  setHeadTitle("New review");
 
   if (settings.loading || yourSeason.loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!settings.data || !yourSeason.data || !guest.authenticated) {
-    return <div>Not found</div>
+    return <div>Not found</div>;
   }
 
   return (
@@ -78,7 +78,7 @@ export const NewSeasonReviewPage = () => {
         <Button
           disabled={!visibility}
           onClick={async () => {
-            setLoading(true)
+            setLoading(true);
             const response = await fetch("/api/season-reviews.json", {
               method: "POST",
               headers: {
@@ -94,21 +94,21 @@ export const NewSeasonReviewPage = () => {
                 show_id: yourSeason.data.show.id,
                 season_id: yourSeason.data.season.id,
               }),
-            })
-            setLoading(false)
+            });
+            setLoading(false);
 
             if (response.ok) {
-              const data = await response.json()
-              const review: SeasonReview = data.review
+              const data = await response.json();
+              const review: SeasonReview = data.review;
               const url = `/${guest.human.handle}/shows/${showSlug}/${seasonSlug}${
                 review.viewing === 1 ? "" : `/${review.viewing}`
-              }`
-              navigate(url)
+              }`;
+              navigate(url);
             } else if (response.status === 400) {
-              const data = await response.json()
-              setValidationError(data)
+              const data = await response.json();
+              setValidationError(data);
             } else {
-              throw new Error("Could not create review")
+              throw new Error("Could not create review");
             }
           }}
         >
@@ -125,26 +125,26 @@ export const NewSeasonReviewPage = () => {
                   <div key={i}>
                     {key} {errorMessage}
                   </div>
-                )
+                );
               })}
             </>
-          )
+          );
         })}
     </div>
-  )
-}
+  );
+};
 
 const RatingPicker = ({
   rating,
   setRating,
 }: {
-  rating: Rating | undefined
-  setRating: (_: Rating | undefined) => void
+  rating: Rating | undefined;
+  setRating: (_: Rating | undefined) => void;
 }) => {
   const choiceProps = {
     choice: rating,
     setChoice: setRating,
-  }
+  };
 
   return (
     <>
@@ -165,33 +165,33 @@ const RatingPicker = ({
       </div>
       <div>{rating ? `Rating: ${rating}` : "No rating"}</div>
     </>
-  )
-}
+  );
+};
 
 const RatingChoice = ({
   position,
   setChoice,
   choice,
 }: {
-  position: Rating
-  setChoice: (_: Rating | undefined) => void
-  choice: Rating | undefined
+  position: Rating;
+  setChoice: (_: Rating | undefined) => void;
+  choice: Rating | undefined;
 }) => {
   const starProps = {
     onClick: () => setChoice(position),
-  }
+  };
 
   if (choice && choice >= position) {
     return (
       <span {...starProps} className="cursor-pointer text-yellow-400">
         ★
       </span>
-    )
+    );
   } else {
     return (
       <span {...starProps} className="cursor-pointer">
         ☆
       </span>
-    )
+    );
   }
-}
+};

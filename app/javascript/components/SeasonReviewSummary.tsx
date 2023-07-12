@@ -1,18 +1,18 @@
-import { SeasonReview, Show } from "../types"
-import { FunctionComponent } from "react"
-import { Link } from "react-router-dom"
-import { Poster } from "./Poster"
-import { StarRating } from "../components/StarRating"
+import { SeasonReview, Show } from "../types";
+import { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
+import { Poster } from "./Poster";
+import { StarRating } from "../components/StarRating";
 
 interface Props {
-  review: SeasonReview
-  show: Show
+  review: SeasonReview;
+  show: Show;
 }
 
 export const SeasonReviewSummary: FunctionComponent<Props> = ({ review, show }) => {
   const url = `/${review.author.handle}/shows/${show.slug}/${review.season.slug}${
     review.viewing === 1 ? "" : `/${review.viewing}`
-  }`
+  }`;
 
   return (
     <div>
@@ -30,5 +30,5 @@ export const SeasonReviewSummary: FunctionComponent<Props> = ({ review, show }) 
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

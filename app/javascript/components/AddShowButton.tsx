@@ -1,11 +1,11 @@
-import { Show, YourShow } from "../types"
-import { Button } from "./Button"
-import { FunctionComponent } from "react"
+import { Show, YourShow } from "../types";
+import { Button } from "./Button";
+import { FunctionComponent } from "react";
 
 interface Props {
-  show: Show
-  token: string
-  setYourShow: (yourShow: YourShow) => void
+  show: Show;
+  token: string;
+  setYourShow: (yourShow: YourShow) => void;
 }
 
 export const AddShowButton: FunctionComponent<Props> = ({ show, token, setYourShow }: Props) => {
@@ -23,17 +23,17 @@ export const AddShowButton: FunctionComponent<Props> = ({ show, token, setYourSh
             },
           }),
           method: "POST",
-        })
+        });
 
         if (response.ok) {
-          const data: { your_show: YourShow } = await response.json()
-          setYourShow(data.your_show)
+          const data: { your_show: YourShow } = await response.json();
+          setYourShow(data.your_show);
         } else {
-          throw new Error("Could not add show")
+          throw new Error("Could not add show");
         }
       }}
     >
       Add
     </Button>
-  )
-}
+  );
+};
