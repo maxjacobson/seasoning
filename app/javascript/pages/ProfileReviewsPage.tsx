@@ -15,7 +15,7 @@ export const ProfileReviewsPage = () => {
     guest,
     `/api/profiles/${handle}/season-reviews.json`,
     [],
-    setLoading
+    setLoading,
   )
 
   if (reviewsData.loading) {

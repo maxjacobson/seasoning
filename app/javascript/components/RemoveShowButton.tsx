@@ -13,7 +13,7 @@ export const RemoveShowButton = ({ show, token, onRemove }: Props) => {
       onClick={async () => {
         if (
           !confirm(
-            "Are you sure? This will lose track of your note to self and show status (but not reviews or which episodes you've seen)"
+            "Are you sure? This will lose track of your note to self and show status (but not reviews or which episodes you've seen)",
           )
         ) {
           return

@@ -32,7 +32,7 @@ export const ImportShowPage = () => {
           "X-SEASONING-TOKEN": guest.token,
           "Content-Type": "application/json",
         },
-      }
+      },
     )
 
     setLoading(false)

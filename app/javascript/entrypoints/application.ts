@@ -21,8 +21,8 @@ import { render } from "react-dom"
       {
         initialGuest: guest as Guest,
       },
-      null
+      null,
     ),
-    document.getElementById("app")
+    document.getElementById("app"),
   )
 })()

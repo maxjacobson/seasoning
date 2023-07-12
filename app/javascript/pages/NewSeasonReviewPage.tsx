@@ -30,7 +30,7 @@ export const NewSeasonReviewPage = () => {
     guest,
     `/api/shows/${showSlug}/seasons/${seasonSlug}.json`,
     [showSlug, seasonSlug],
-    setLoading
+    setLoading,
   )
 
   setHeadTitle("New review")

@@ -10,7 +10,7 @@ const searchForShows = (
   title: string,
   token: string,
   setLoading: (loadingState: boolean) => void,
-  callback: (shows: Show[] | null) => void
+  callback: (shows: Show[] | null) => void,
 ) => {
   setLoading(true)
 
