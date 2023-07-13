@@ -20,22 +20,21 @@ const searchForShows = (
     return;
   }
 
-  fetch(`/api/shows.json?q=${encodeURIComponent(title)}`, {
-    headers: {
-      "X-SEASONING-TOKEN": token,
-    },
-  })
-    .then((response) => {
-      setLoading(false);
-      if (response.ok) {
-        return response.json() as Promise<{ shows: Show[] }>;
-      } else {
-        throw new Error("Could not search shows");
-      }
-    })
-    .then((data) => {
-      callback(data.shows);
+  (async () => {
+    const response = await fetch(`/api/shows.json?q=${encodeURIComponent(title)}`, {
+      headers: {
+        "X-SEASONING-TOKEN": token,
+      },
     });
+
+    setLoading(false);
+    if (response.ok) {
+      const data = (await response.json()) as { shows: Show[] };
+      callback(data.shows);
+    } else {
+      throw new Error("Could not search shows");
+    }
+  })();
 };
 const debouncedSearch = debounce(searchForShows, 400, { trailing: true });
 

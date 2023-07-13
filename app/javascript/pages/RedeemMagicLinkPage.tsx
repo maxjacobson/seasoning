@@ -91,14 +91,14 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
           <p className="mb-2">Just one more question... what would you like to be called?</p>
 
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
 
               setLoading(true);
 
               setCreating(true);
 
-              fetch("/api/humans.json", {
+              const response = await fetch("/api/humans.json", {
                 body: JSON.stringify({
                   humans: {
                     magic_link_token: token,
@@ -109,27 +109,25 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                 headers: {
                   "Content-Type": "application/json",
                 },
-              })
-                .then((response) => {
-                  setLoading(false);
-                  if (response.ok) {
-                    return response.json();
-                  } else {
-                    throw new Error("Could not create human");
-                  }
-                })
-                .then((data: AlreadyExists) => {
-                  localStorage.setItem("seasoning-guest-token", data.session_token);
-                  setGuest({
-                    authenticated: true,
-                    human: {
-                      handle: data.handle,
-                      admin: data.admin,
-                    },
-                    token: data.session_token,
-                  });
-                  navigate("/");
+              });
+
+              setLoading(false);
+              if (response.ok) {
+                const data = (await response.json()) as AlreadyExists;
+
+                localStorage.setItem("seasoning-guest-token", data.session_token);
+                setGuest({
+                  authenticated: true,
+                  human: {
+                    handle: data.handle,
+                    admin: data.admin,
+                  },
+                  token: data.session_token,
                 });
+                navigate("/");
+              } else {
+                throw new Error("Could not create human");
+              }
             }}
           >
             <span className="mr-2">

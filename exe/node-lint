@@ -4,5 +4,4 @@ set -ex
 
 npx tsc --build tsconfig.json
 npx prettier --check .
-# FIXME: bump down to 0
-npx eslint --max-warnings 8 .
+npx eslint .

@@ -117,8 +117,8 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
         </div>
         <Select
           value={settingsData.settings.default_review_visibility}
-          onChange={(event) => {
-            update({ default_review_visibility: event.target.value });
+          onChange={async (event) => {
+            await update({ default_review_visibility: event.target.value });
           }}
           disabled={currentlyUpdating}
         >
@@ -141,12 +141,12 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
 
         <Select
           value={settingsData.settings.currently_watching_limit || -1}
-          onChange={(event) => {
+          onChange={async (event) => {
             const value = event.target.value;
             if (parseInt(value) > 0) {
-              update({ currently_watching_limit: value });
+              await update({ currently_watching_limit: value });
             } else {
-              update({ currently_watching_limit: null });
+              await update({ currently_watching_limit: null });
             }
           }}
           disabled={currentlyUpdating}

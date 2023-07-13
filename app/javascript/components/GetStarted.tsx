@@ -15,27 +15,26 @@ export const GetStarted = () => {
       return;
     }
 
-    globalSetLoading(true);
-    fetch("/api/magic-links.json", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ magic_link: { email: email } }),
-      method: "POST",
-    })
-      .then((response) => {
-        globalSetLoading(false);
-        setLoading(false);
+    (async () => {
+      globalSetLoading(true);
 
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Could not create magic link");
-        }
-      })
-      .then(() => {
-        setCreatedMagicLink(true);
+      const response = await fetch("/api/magic-links.json", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ magic_link: { email: email } }),
+        method: "POST",
       });
+
+      globalSetLoading(false);
+      setLoading(false);
+
+      if (response.ok) {
+        setCreatedMagicLink(true);
+      } else {
+        throw new Error("Could not create magic link");
+      }
+    })();
   }, [loading]);
 
   if (createdMagicLink) {
