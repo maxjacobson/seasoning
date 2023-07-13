@@ -26,7 +26,7 @@ export const AddShowButton: FunctionComponent<Props> = ({ show, token, setYourSh
         });
 
         if (response.ok) {
-          const data: { your_show: YourShow } = await response.json();
+          const data = (await response.json()) as { your_show: YourShow };
           setYourShow(data.your_show);
         } else {
           throw new Error("Could not add show");

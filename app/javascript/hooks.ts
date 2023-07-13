@@ -40,7 +40,7 @@ export const loadData = <T>(
       setCurrentlyLoading(false);
 
       if (response.ok) {
-        const responseData: T = await response.json();
+        const responseData = (await response.json()) as T;
         setData({ loading: false, data: responseData });
       } else if (response.status === 404) {
         setData({ loading: false, data: null });

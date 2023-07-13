@@ -40,7 +40,7 @@ export const ReviewsFeedPage = () => {
       setLoading(false);
 
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json()) as { data: LoadedReviewsFeedData["data"] };
         setFeedData({ loading: false, data: data.data });
       } else {
         throw new Error("Could not load reviews");

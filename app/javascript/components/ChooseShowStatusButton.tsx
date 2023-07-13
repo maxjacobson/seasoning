@@ -59,7 +59,7 @@ export const ChooseShowStatusButton: FunctionComponent<Props> = ({
         globalSetLoading(false);
 
         if (response.ok) {
-          const data: YourShow = await response.json();
+          const data = (await response.json()) as YourShow;
           setYourShow(data);
         } else {
           throw new Error("Could not update status of show");

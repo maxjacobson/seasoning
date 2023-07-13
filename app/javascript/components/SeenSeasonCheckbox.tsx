@@ -26,7 +26,7 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
       setLoading(false);
 
       if (response.ok) {
-        const yourSeason: YourSeason = await response.json();
+        const yourSeason = (await response.json()) as YourSeason;
 
         const yourRelationship = yourSeason.your_relationship;
 

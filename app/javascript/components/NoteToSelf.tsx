@@ -78,7 +78,7 @@ export const NoteToSelf: FunctionComponent<Props> = ({
                 globalSetLoading(false);
 
                 if (response.ok) {
-                  const updated: YourShow = await response.json();
+                  const updated = (await response.json()) as YourShow;
                   updateYourShow(updated);
                   setIsEditing(false);
                 } else {

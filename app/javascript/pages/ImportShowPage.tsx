@@ -39,7 +39,7 @@ export const ImportShowPage = () => {
     setSearching(false);
 
     if (response.ok) {
-      const data: { shows: Import[] } = await response.json();
+      const data = (await response.json()) as { shows: Import[] };
       setResults(data.shows);
     } else {
       throw new Error("failed to search");
@@ -122,7 +122,7 @@ export const ImportShowPage = () => {
                     setImporting(false);
 
                     if (response.ok) {
-                      const data: { show: Show } = await response.json();
+                      const data = (await response.json()) as { show: Show };
                       navigate(`/shows/${data.show.slug}`);
                     } else {
                       throw new Error("could not import show");

@@ -52,7 +52,7 @@ export const ShowPage = () => {
       setLoading(false);
 
       if (response.ok) {
-        const data: YourShow = await response.json();
+        const data = (await response.json()) as YourShow;
         setShowData({ loading: false, data: data });
       } else {
         throw new Error("Could not load show");

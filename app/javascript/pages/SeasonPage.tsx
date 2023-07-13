@@ -52,7 +52,7 @@ export const SeasonPage = () => {
       if (response.status === 404) {
         setResponse({ loading: false, yourSeason: null });
       } else if (response.ok) {
-        const yourSeason: YourSeason = await response.json();
+        const yourSeason = (await response.json()) as YourSeason;
         setResponse({ loading: false, yourSeason: yourSeason });
       } else {
         throw new Error("Could not load season");
