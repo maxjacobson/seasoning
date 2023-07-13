@@ -45,7 +45,7 @@
     "@typescript-eslint/restrict-template-expressions": ["warn"], // FIXME: bump up to error
     "@typescript-eslint/no-unsafe-assignment": ["error"],
     "@typescript-eslint/no-unsafe-argument": ["warn"], // FIXME: bump up to error
-    "@typescript-eslint/no-unsafe-member-access": ["warn"], // FIXME: bump up to error
+    "@typescript-eslint/no-unsafe-member-access": ["error"],
     "no-console": ["error"],
     "import/no-default-export": ["error"],
     "react/prop-types": ["off"],

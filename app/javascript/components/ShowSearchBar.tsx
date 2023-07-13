@@ -28,7 +28,7 @@ const searchForShows = (
     .then((response) => {
       setLoading(false);
       if (response.ok) {
-        return response.json();
+        return response.json() as Promise<{ shows: Show[] }>;
       } else {
         throw new Error("Could not search shows");
       }
