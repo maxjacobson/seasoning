@@ -47,7 +47,9 @@ export const ImportShowPage = () => {
   };
 
   useEffect(() => {
-    search();
+    (async () => {
+      await search();
+    })();
   }, [searchQuery]);
 
   if (!guest.authenticated) {

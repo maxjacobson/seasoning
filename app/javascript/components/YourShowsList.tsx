@@ -82,39 +82,41 @@ export const YourShowsList: FunctionComponent<Props> = (props: Props) => {
   const page: number = parseInt(searchParams.get("page") || "") || 1;
 
   useEffect(() => {
-    globalSetLoading(true);
-    setLoading(true);
+    (async () => {
+      globalSetLoading(true);
+      setLoading(true);
 
-    const params: Record<string, unknown> = {};
+      const params: Record<string, unknown> = {};
 
-    if (titleQueryValue) {
-      params.q = titleQueryValue;
-    }
+      if (titleQueryValue) {
+        params.q = titleQueryValue;
+      }
 
-    if (statusesFilterValue.length) {
-      params.statuses = statusesFilterValue;
-    }
+      if (statusesFilterValue.length) {
+        params.statuses = statusesFilterValue;
+      }
 
-    params.page = page;
+      params.page = page;
 
-    // TODO: debounce me
-    fetch(`/api/your-shows.json?${queryString.stringify(params, { arrayFormat: "bracket" })}`, {
-      headers: {
-        "X-SEASONING-TOKEN": props.token,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Could not fetch your shows");
-        }
-      })
-      .then((data: YourShows) => {
+      // TODO: debounce me
+      const response = await fetch(
+        `/api/your-shows.json?${queryString.stringify(params, { arrayFormat: "bracket" })}`,
+        {
+          headers: {
+            "X-SEASONING-TOKEN": props.token,
+          },
+        },
+      );
+
+      if (response.ok) {
+        const data = (await response.json()) as YourShows;
         setShows(data.your_shows);
         setLoading(false);
         globalSetLoading(false);
-      });
+      } else {
+        throw new Error("Could not fetch your shows");
+      }
+    })();
   }, [titleQueryValue, statusesFilterValue.join("-"), page]);
 
   return (
