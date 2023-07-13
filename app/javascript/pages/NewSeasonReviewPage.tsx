@@ -98,14 +98,14 @@ export const NewSeasonReviewPage = () => {
             setLoading(false);
 
             if (response.ok) {
-              const data = await response.json();
-              const review: SeasonReview = data.review;
+              const data = (await response.json()) as { review: SeasonReview };
+              const review = data.review;
               const url = `/${guest.human.handle}/shows/${showSlug}/${seasonSlug}${
                 review.viewing === 1 ? "" : `/${review.viewing}`
               }`;
               navigate(url);
             } else if (response.status === 400) {
-              const data = await response.json();
+              const data = (await response.json()) as Record<string, string[]>;
               setValidationError(data);
             } else {
               throw new Error("Could not create review");

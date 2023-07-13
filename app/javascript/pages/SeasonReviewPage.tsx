@@ -64,8 +64,12 @@ export const SeasonReviewPage = () => {
       setLoading(false);
 
       if (response.ok) {
-        const data: { review: SeasonReview; show: Show; season: Season; author: Human } =
-          await response.json();
+        const data = (await response.json()) as {
+          review: SeasonReview;
+          show: Show;
+          season: Season;
+          author: Human;
+        };
         setReviewData({
           loading: false,
           review: data.review,

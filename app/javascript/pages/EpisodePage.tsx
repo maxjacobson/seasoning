@@ -48,7 +48,11 @@ export const EpisodePage = () => {
       setLoading(false);
 
       if (response.ok) {
-        const { episode, show, season } = await response.json();
+        const { episode, show, season } = (await response.json()) as {
+          episode: Episode;
+          show: Show;
+          season: Season;
+        };
 
         setResponse({
           loading: false,

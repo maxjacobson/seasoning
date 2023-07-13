@@ -63,7 +63,7 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
       setLoading(false);
 
       if (response.ok) {
-        const data: HumanSettings = await response.json();
+        const data = (await response.json()) as HumanSettings;
         setSettingsData({ loading: false, settings: data });
       } else {
         throw new Error("Could not load settings");
@@ -79,7 +79,7 @@ const EditSettings: FunctionComponent<EditSettingsProps> = ({ guest }: EditSetti
     setLoading(false);
 
     if (response.ok) {
-      const data: HumanSettings = await response.json();
+      const data = (await response.json()) as HumanSettings;
       setSettingsData({ loading: false, settings: data });
     } else {
       throw new Error("Could not update settings");

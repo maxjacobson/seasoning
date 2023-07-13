@@ -62,7 +62,7 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
       } else if (!response.ok) {
         throw new Error("Could not redeem magic link");
       } else {
-        const data: Redemption = await response.json();
+        const data = (await response.json()) as Redemption;
 
         if (data.already_exists) {
           localStorage.setItem("seasoning-guest-token", data.session_token);

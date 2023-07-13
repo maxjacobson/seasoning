@@ -100,7 +100,7 @@ export const ProfilePage = () => {
                 throw new Error("Could not follow");
               }
 
-              const data = await response.json();
+              const data = (await response.json()) as { profile: LoadedProfileData["profile"] };
 
               setProfile({ loading: false, profile: data.profile });
             }}
