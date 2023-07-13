@@ -43,7 +43,7 @@ export const SearchResultsPage: FunctionComponent<Props> = ({ searchResults }) =
       <p>
         Not seeing what you&rsquo;re looking for? You might be the first person to want to add it.
         Feel free to{" "}
-        <Link to={searchQuery ? `/import-show?${importParams}` : "/import-show"}>
+        <Link to={searchQuery ? `/import-show?${importParams.toString()}` : "/import-show"}>
           import it here
         </Link>
         .
