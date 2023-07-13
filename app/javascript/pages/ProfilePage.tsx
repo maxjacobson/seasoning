@@ -31,38 +31,33 @@ export const ProfilePage = () => {
   setHeadTitle(handle);
 
   useEffect(() => {
-    const headers: Record<string, string> = {};
-    if (guest.authenticated) {
-      headers["X-SEASONING-TOKEN"] = guest.token;
-    }
-    setLoading(true);
-    fetch(`/api/profiles/${handle}.json`, { headers: headers })
-      .then((response) => {
-        setLoading(false);
-        if (response.ok) {
-          return response.json();
-        } else if (response.status === 404) {
-          throw new Error("Not found");
-        } else {
-          throw new Error("Could not fetch profile");
-        }
-      })
-      .then((data: { profile: Profile }) => {
+    (async () => {
+      const headers: Record<string, string> = {};
+      if (guest.authenticated) {
+        headers["X-SEASONING-TOKEN"] = guest.token;
+      }
+
+      setLoading(true);
+
+      const response = await fetch(`/api/profiles/${handle}.json`, { headers: headers });
+
+      setLoading(false);
+
+      if (response.ok) {
+        const data = (await response.json()) as { profile: Profile };
         setProfile({
           loading: false,
           profile: data.profile,
         });
-      })
-      .catch((err) => {
-        if (err.message === "Not found") {
-          setProfile({
-            loading: false,
-            profile: null,
-          });
-        } else {
-          throw err;
-        }
-      });
+      } else if (response.status === 404) {
+        setProfile({
+          loading: false,
+          profile: null,
+        });
+      } else {
+        throw new Error("Could not fetch profile");
+      }
+    })();
   }, [handle]);
 
   if (profileData.loading) {
