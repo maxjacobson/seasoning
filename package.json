@@ -9,7 +9,7 @@
     "npm": "9.6.2"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/forms": "^0.5.4",
     "@types/lodash.debounce": "^4.0.7",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.7",
