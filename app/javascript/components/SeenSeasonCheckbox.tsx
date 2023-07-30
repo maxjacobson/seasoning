@@ -16,6 +16,7 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
   const [updating, setUpdating] = useState(false);
   const [hasWatched, setHasWatched] = useState<HasWatched>("unknown");
   const setLoading = useContext(SetLoadingContext);
+  const [title, setTitle] = useState<undefined | string>(undefined);
 
   useEffect(() => {
     (async () => {
@@ -33,10 +34,15 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
         if (yourRelationship) {
           if (yourRelationship.watched_episode_numbers.length === yourSeason.season.episode_count) {
             setHasWatched(true);
+            setTitle(`Seen all ${yourSeason.season.episode_count} episodes`);
           } else if (yourRelationship.watched_episode_numbers.length === 0) {
             setHasWatched(false);
+            setTitle(`Seen 0 of ${yourSeason.season.episode_count} episodes`);
           } else {
             setHasWatched("partial");
+            setTitle(
+              `Seen ${yourRelationship.watched_episode_numbers.length} of ${yourSeason.season.episode_count} episodes`,
+            );
           }
         } else {
           setHasWatched(false);
@@ -60,6 +66,7 @@ export const SeenSeasonCheckbox: FunctionComponent<Props> = ({ guest, season, sh
         }}
         checked={hasWatched === true}
         disabled={hasWatched === "unknown" || updating}
+        title={title}
         onChange={async () => {
           const newHasWatched: boolean = hasWatched === true ? false : true;
 
