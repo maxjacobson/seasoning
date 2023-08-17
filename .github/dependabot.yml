@@ -5,18 +5,6 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 1000
-    groups:
-      rubocop:
-        patterns:
-          - "rubocop"
-          - "rubocop-*"
-      rspec:
-        patterns:
-          - "rspec"
-          - "rspec-*"
-      vite:
-        patterns:
-          - "vite_*"
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
