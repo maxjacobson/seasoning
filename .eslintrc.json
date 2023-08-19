@@ -42,13 +42,13 @@
         "checksVoidReturn": false
       }
     ],
-    "@typescript-eslint/restrict-template-expressions": ["error"],
-    "@typescript-eslint/no-unsafe-assignment": ["error"],
-    "@typescript-eslint/no-unsafe-argument": ["error"],
-    "@typescript-eslint/no-unsafe-member-access": ["error"],
-    "no-console": ["error"],
-    "import/no-default-export": ["error"],
-    "react/prop-types": ["off"],
+    "@typescript-eslint/restrict-template-expressions": "error",
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-unsafe-argument": "error",
+    "@typescript-eslint/no-unsafe-member-access": "error",
+    "no-console": "error",
+    "import/no-default-export": "error",
+    "react/prop-types": "off",
     "sort-imports": ["error", { "ignoreCase": true }]
   },
   "settings": {
