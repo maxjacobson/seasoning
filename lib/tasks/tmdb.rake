@@ -28,7 +28,7 @@ namespace :tmdb do
   # Available to run manually if I make changes to the import/refresh flow and want
   # to kick off a full refresh to confirm it's still working
   task refresh_all_shows: :environment do
-    Show.all.find_each do |show|
+    Show.find_each do |show|
       puts "Refreshing #{show.slug} asynchronously"
       show.refresh_async
     end
