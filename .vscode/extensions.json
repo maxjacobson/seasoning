@@ -3,8 +3,7 @@
     "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
-    "rebornix.ruby",
     "kaiwood.endwise",
-    "rubocop.vscode-rubocop"
+    "shopify.ruby-lsp"
   ]
 }
