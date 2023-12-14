@@ -24,4 +24,4 @@ jobs:
       - run: npm install
       - run: exe/ruby-lint
       - run: exe/node-lint
-      - run: rake assets:precompile
+      - run: bundle exec rake assets:precompile
