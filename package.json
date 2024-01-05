@@ -5,8 +5,8 @@
   "license": "UNLICENSED",
   "private": true,
   "engines": {
-    "node": "20.9.0",
-    "npm": "10.2.3"
+    "node": "21.5.0",
+    "npm": "10.2.5"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
