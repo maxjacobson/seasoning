@@ -27,6 +27,9 @@ module Seasoning
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#new-activesupport-cache-serialization-format
+    config.active_support.cache_format_version = 6.1
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
