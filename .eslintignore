@@ -1,4 +1,4 @@
 public
 postcss.config.js
-vite.config.ts
+vite.config.mts
 vendor
