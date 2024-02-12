@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
-    "query-string": "^8.1.0",
+    "query-string": "^8.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
