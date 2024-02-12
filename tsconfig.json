@@ -12,6 +12,6 @@
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "types": ["vite/client"],
-    "skipLibCheck": true,
-  },
+    "skipLibCheck": true
+  }
 }
