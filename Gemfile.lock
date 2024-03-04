@@ -123,7 +123,7 @@ GEM
     email_validator (2.2.4)
       activemodel
     erubi (1.12.0)
-    ffi (1.15.5)
+    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.0)
@@ -140,7 +140,7 @@ GEM
       addressable (~> 2.8)
     letter_opener (1.9.0)
       launchy (>= 2.2, < 3)
-    listen (3.8.0)
+    listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.22.0)
