@@ -26,7 +26,7 @@ RSpec.describe RefreshEpisodes do
           tmdb_poster_path: "/ctTaOOAg9iZtvVBOyH2UE5ifBHg.jpg"
         )
 
-        RefreshEpisodes.call(show, season)
+        described_class.call(show, season)
 
         expect(request).to have_been_requested
         expect(season.episodes.count).to be 3
@@ -76,7 +76,7 @@ RSpec.describe RefreshEpisodes do
           episode_number: 3
         )
 
-        RefreshEpisodes.call(show, season)
+        described_class.call(show, season)
 
         expect(request).to have_been_requested
         expect(season.episodes.count).to be 3
@@ -120,7 +120,7 @@ RSpec.describe RefreshEpisodes do
           episode_number: 2
         )
 
-        RefreshEpisodes.call(show, season)
+        described_class.call(show, season)
 
         expect(request).to have_been_requested
         expect(season.episodes.count).to be 3
@@ -170,7 +170,7 @@ RSpec.describe RefreshEpisodes do
           episode_number: 3
         )
 
-        RefreshEpisodes.call(show, season)
+        described_class.call(show, season)
 
         expect(request).to have_been_requested
         expect(season.episodes.count).to be 3
