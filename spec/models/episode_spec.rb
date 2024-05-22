@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Episode do
   let(:show) { Show.create!(title: "Not Dead Yet", tmdb_tv_id: 42) }
   let(:season) { Season.create!(show:, tmdb_id: 42, name: "Season 1", season_number: 1, episode_count: 1) }
-  let(:episode) { Episode.create!(season:, air_date:, name: "Pilot", tmdb_id: 42, episode_number: 1) }
+  let(:episode) { described_class.create!(season:, air_date:, name: "Pilot", tmdb_id: 42, episode_number: 1) }
 
   describe "#available?" do
     context "when there is an air_date" do
@@ -29,7 +29,7 @@ RSpec.describe Episode do
         let(:air_date) { 3.days.from_now.to_date }
 
         it "returns false" do
-          expect(episode).to_not be_available
+          expect(episode).not_to be_available
         end
       end
     end
@@ -38,7 +38,7 @@ RSpec.describe Episode do
       let(:air_date) { nil }
 
       it "returns false" do
-        expect(episode).to_not be_available
+        expect(episode).not_to be_available
       end
     end
   end

@@ -10,11 +10,11 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "anybody")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "anybody")
 
           other_human = Human.create!(handle: "Ashley", email: "ashley@example.com")
 
-          expect(SeasonReview.viewable_by(other_human)).to include(review)
+          expect(described_class.viewable_by(other_human)).to include(review)
         end
       end
 
@@ -23,9 +23,9 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "anybody")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "anybody")
 
-          expect(SeasonReview.viewable_by(nil)).to include(review)
+          expect(described_class.viewable_by(nil)).to include(review)
         end
       end
     end
@@ -36,9 +36,9 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "myself")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "myself")
 
-          expect(SeasonReview.viewable_by(human)).to include(review)
+          expect(described_class.viewable_by(human)).to include(review)
         end
       end
 
@@ -47,10 +47,10 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "myself")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "myself")
           other_human = Human.create!(handle: "Ashley", email: "ashley@example.com")
 
-          expect(SeasonReview.viewable_by(other_human)).not_to include(review)
+          expect(described_class.viewable_by(other_human)).not_to include(review)
         end
       end
 
@@ -59,9 +59,9 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "myself")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "myself")
 
-          expect(SeasonReview.viewable_by(nil)).not_to include(review)
+          expect(described_class.viewable_by(nil)).not_to include(review)
         end
       end
     end
@@ -72,13 +72,13 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
           other_human = Human.create!(handle: "ashley", email: "ashley@example.com")
 
           Follow.create!(follower_id: human.id, followee_id: other_human.id)
           Follow.create!(follower_id: other_human.id, followee_id: human.id)
 
-          expect(SeasonReview.viewable_by(other_human)).to include(review)
+          expect(described_class.viewable_by(other_human)).to include(review)
         end
       end
 
@@ -87,12 +87,12 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
           other_human = Human.create!(handle: "ashley", email: "ashley@example.com")
 
           Follow.create!(follower_id: other_human.id, followee_id: human.id)
 
-          expect(SeasonReview.viewable_by(other_human)).not_to include(review)
+          expect(described_class.viewable_by(other_human)).not_to include(review)
         end
       end
 
@@ -101,12 +101,12 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
           other_human = Human.create!(handle: "ashley", email: "ashley@example.com")
 
           Follow.create!(follower_id: human.id, followee_id: other_human.id)
 
-          expect(SeasonReview.viewable_by(other_human)).not_to include(review)
+          expect(described_class.viewable_by(other_human)).not_to include(review)
         end
       end
 
@@ -115,9 +115,9 @@ RSpec.describe SeasonReview do
           human = Human.create!(handle: "marc", email: "marc@example.com")
           show = Show.create!(title: "Home Economics", tmdb_tv_id: 1)
           season = Season.create!(show:, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 1)
-          review = SeasonReview.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
+          review = described_class.create!(author: human, season:, viewing: 1, body: "Not bad", visibility: "mutuals")
 
-          expect(SeasonReview.viewable_by(nil)).not_to include(review)
+          expect(described_class.viewable_by(nil)).not_to include(review)
         end
       end
     end

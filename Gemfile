@@ -26,6 +26,8 @@ group :development do
   gem "listen"
   gem "rubocop"
   gem "rubocop-rails"
+  gem "rubocop-rspec"
+  gem "rubocop-rspec_rails"
 end
 
 group :test do
