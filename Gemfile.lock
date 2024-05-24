@@ -83,7 +83,7 @@ GEM
     ast (2.4.2)
     base64 (0.2.0)
     bigdecimal (3.1.8)
-    bugsnag (6.26.4)
+    bugsnag (6.27.0)
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
     childprocess (5.0.0)
