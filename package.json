@@ -23,7 +23,7 @@
     "husky": "^9.0.11",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.6.0",
+    "prettier-plugin-tailwindcss": "^0.6.1",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.11",
     "vite-plugin-ruby": "^5.0.0"
