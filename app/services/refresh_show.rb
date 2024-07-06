@@ -20,6 +20,7 @@ RefreshShow = lambda { |show|
       if season.present?
         season.update!(
           episode_count: tmdb_season.episode_count,
+          tmdb_id: tmdb_season.id,
           tmdb_poster_path: tmdb_season.poster_path
         )
       else
