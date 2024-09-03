@@ -2,7 +2,7 @@
 
 # A person's review of a season of a show
 class SeasonReview < ApplicationRecord
-  enum visibility: {
+  enum :visibility, {
     viewable_by_anybody: "anybody",
     viewable_by_mutuals: "mutuals",
     viewable_by_only_me: "myself"

@@ -4,7 +4,7 @@
 class MyShow < ApplicationRecord
   belongs_to :human
   belongs_to :show
-  enum status: {
+  enum :status, {
     might_watch: "might_watch",
     next_up: "next_up",
     currently_watching: "currently_watching",
