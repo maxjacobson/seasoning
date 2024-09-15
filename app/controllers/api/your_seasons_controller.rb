@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Your relationship to a particular season
   class YourSeasonsController < ApplicationController

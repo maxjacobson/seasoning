@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # I'm building out a simple admin page, so I want to have the ability to mark my
 # human record as an admin so I can gate that page to just me
 class AddAdminToHuman < ActiveRecord::Migration[7.0]

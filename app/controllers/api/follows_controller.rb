@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Lets people follow each other
   class FollowsController < ApplicationController

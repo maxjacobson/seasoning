@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # A person's relationship to a particular season
 class MySeason < ApplicationRecord
   belongs_to :human

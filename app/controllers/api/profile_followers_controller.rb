@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Lists who follows someone
   class ProfileFollowersController < ApplicationController

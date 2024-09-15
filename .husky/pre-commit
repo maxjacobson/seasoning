@@ -1,2 +1,2 @@
 exe/lint
-bin/rspec
+RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal" bin/rspec

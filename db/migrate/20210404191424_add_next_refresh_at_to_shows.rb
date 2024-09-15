@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Supports the feature to keep our data up-to-date over time
 class AddNextRefreshAtToShows < ActiveRecord::Migration[6.1]
   def change

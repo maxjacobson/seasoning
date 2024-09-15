@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Let's track show first air date!
 class AddFirstAirDateToShows < ActiveRecord::Migration[7.0]
   def change

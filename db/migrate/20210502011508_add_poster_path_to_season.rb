@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Different seasons can have different posters so why not?
 class AddPosterPathToSeason < ActiveRecord::Migration[6.1]
   def change

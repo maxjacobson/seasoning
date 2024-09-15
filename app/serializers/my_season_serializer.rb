@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Render info about a human's relationship to a season, if any
 class MySeasonSerializer < Oj::Serializer
   object_as :my_season

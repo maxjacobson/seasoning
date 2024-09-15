@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # People can review seasons of shows
   class SeasonReviewsController < ApplicationController

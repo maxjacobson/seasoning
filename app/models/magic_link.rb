@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # A link we email you so you can log in or sign up
 class MagicLink < ApplicationRecord
   before_create -> { self.token = SecureRandom.uuid }

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # We can do this now because it's such early days...
 # later on we would need to do this more carefully
 class MakeNumberOfSeasonsNotNull < ActiveRecord::Migration[6.1]

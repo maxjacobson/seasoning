@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # A person's review of a season of a show
 class SeasonReview < ApplicationRecord
   enum :visibility, {

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Exposes some data for the admin page
   class AdminsController < ApplicationController

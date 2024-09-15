@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FindOrCreateShow = lambda { |tmdb_show|
   show = Show.find_by(tmdb_tv_id: tmdb_show.id)
   show ||= Show.create!(

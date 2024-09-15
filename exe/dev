@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+# run-pty is a modern foreman alternative for local development
+# See https://github.com/lydell/run-pty for docs
+# See ./run-pty.json for our configuration
+
+RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal" npx run-pty run-pty.json

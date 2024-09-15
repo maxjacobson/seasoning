@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RefreshShow = lambda { |show|
   Show.transaction do
     details = TMDB::Client.new.tv_details(show.tmdb_tv_id)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # rubocop:disable Rails/BulkChangeTable
 # We're making the switch, baby
 class ReplaceWikipediaWithTMDB < ActiveRecord::Migration[6.1]

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Look up info about a season of a show
   class SeasonsController < ApplicationController

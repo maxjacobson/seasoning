@@ -12,6 +12,7 @@ AllCops:
     - vendor/**/*
   NewCops: enable
   TargetRubyVersion: 3.3.5
+  StringLiteralsFrozenByDefault: true
 
 Metrics:
   Enabled: false
@@ -29,6 +30,9 @@ RSpec/MultipleExpectations:
 
 RSpec/NestedGroups:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Interactions with the human (aka user) resource
   class HumansController < ApplicationController

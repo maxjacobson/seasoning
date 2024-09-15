@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # This is how people sign up and sign in. There's no passwords. Only magic links.
   # If you have access to your email account, you're you.

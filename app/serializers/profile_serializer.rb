@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Renders the data for the profile page
 class ProfileSerializer < Oj::Serializer
   object_as :profile

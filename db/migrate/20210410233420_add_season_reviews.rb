@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # People should be able to review seasons of shows
 class AddSeasonReviews < ActiveRecord::Migration[6.1]
   def change

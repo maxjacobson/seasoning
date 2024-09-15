@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module TMDB
   class TVDetails < Dry::Struct
     attribute :first_air_date, Types::String.optional

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Let's go! So far we just let people add a show, but not specify why they added it
 class AddMyShowStatus < ActiveRecord::Migration[6.1]
   def change

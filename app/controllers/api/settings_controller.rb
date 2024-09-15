@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # The current human can look up and manipulate their settings
   class SettingsController < ApplicationController

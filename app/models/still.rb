@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Generates an absolute URL for an episode still, based on the instructions here:
 # https://developers.themoviedb.org/3/getting-started/images
 class Still

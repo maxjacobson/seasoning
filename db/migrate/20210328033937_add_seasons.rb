@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Let's start tracking seasons in seasoning. That's what we came here to do, no?
 class AddSeasons < ActiveRecord::Migration[6.1]
   def change

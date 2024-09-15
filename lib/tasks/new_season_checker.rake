@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :new_season_checker do
   # Run daily via https://dashboard.heroku.com/apps/seasoning/scheduler
   task toggle: :environment do

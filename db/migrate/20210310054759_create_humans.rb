@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Introduce the humans table -- users, basically
 class CreateHumans < ActiveRecord::Migration[6.1]
   def change
