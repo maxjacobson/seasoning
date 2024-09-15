@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Let's track episode air date!
 class AddAirDateToEpisodes < ActiveRecord::Migration[7.0]
   def change

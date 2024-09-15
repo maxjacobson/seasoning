@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :tmdb do
   # Refresh the configuration record
   #

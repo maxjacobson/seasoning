@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # let's have a table for magic links, which people can use to log in and sign up
 class CreateMagicLinks < ActiveRecord::Migration[6.1]
   def change

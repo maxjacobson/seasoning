@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # What are the state of this person's limits
 # For example, if they want to watch no more than 4 shows at a time... how many are they currently watching?
 class HumanLimitsSerializer < Oj::Serializer

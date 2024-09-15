@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # represents a show that someone is trying to add to the site
 class ImportSerializer < Oj::Serializer
   attributes :id, :name

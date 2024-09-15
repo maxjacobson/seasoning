@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Exposes up-to-the-second info on this human's show limits
   class HumanLimitsController < ApplicationController

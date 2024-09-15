@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # If we're going to display episode stills, we need to store this configuration
 class AddStillSizesToTMDBAPIConfigurations < ActiveRecord::Migration[7.0]
   def change

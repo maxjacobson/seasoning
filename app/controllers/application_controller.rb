@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Base class for all controllers
 class ApplicationController < ActionController::Base
   before_action :redirect_apex_domain

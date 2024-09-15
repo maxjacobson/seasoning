@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Exposes all of the current human's shows -- ones that they have saved
   class YourShowsController < ApplicationController

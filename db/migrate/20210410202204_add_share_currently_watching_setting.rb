@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Starting to introduce some settings so people can configure their experience
 class AddShareCurrentlyWatchingSetting < ActiveRecord::Migration[6.1]
   def change

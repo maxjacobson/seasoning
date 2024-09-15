@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # I forget why I had this, so I think I'll just drop it...
 class RemoveSessionLastSeenAt < ActiveRecord::Migration[7.0]
   def change

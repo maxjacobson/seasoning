@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Lets you search the shows so you can add some
   class ShowsController < ApplicationController

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Persist the configuration for the movie database API, as recommended here:
 # https://developers.themoviedb.org/3/configuration/get-api-configuration
 #

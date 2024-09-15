@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module TMDB
   class SeasonDetails < Dry::Struct
     attribute :air_date, Types::String.optional

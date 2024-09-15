@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # I like the idea of tracking this so I can display it
 #
 class AddLastRefreshedAtToShows < ActiveRecord::Migration[7.0]

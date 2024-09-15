@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # A season of a TV show!
 # Data is mostly from the movie database
 class Season < ApplicationRecord

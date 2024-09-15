@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :prune do
   # This just prunes some records which don't strictly need to exist anymore.
   # We're nowhere near hitting it, but there is a 10k rows limit in our database

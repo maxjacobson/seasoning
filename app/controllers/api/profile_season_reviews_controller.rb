@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Access the set of reviews for a particular person on the site
   class ProfileSeasonReviewsController < ApplicationController

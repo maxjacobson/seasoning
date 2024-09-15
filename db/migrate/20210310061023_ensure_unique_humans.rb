@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Just making sure that there can only be one of me
 class EnsureUniqueHumans < ActiveRecord::Migration[6.1]
   def up

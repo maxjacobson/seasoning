@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This new setting will support a new feature where humans can set their
 # cap on how many shows they want to be watching at once
 #

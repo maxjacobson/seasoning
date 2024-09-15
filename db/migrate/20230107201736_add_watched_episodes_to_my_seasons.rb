@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Start tracking which episodes a person has watched
 #
 # I'm not super confident about this modeling. I might regret not introducing a

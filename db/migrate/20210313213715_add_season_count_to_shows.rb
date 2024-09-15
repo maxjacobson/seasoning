@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # The first step toward importing rich data about shows.
 # Lays the groundwork for letting people keep track of what
 # season they're up to and write reviews about them.

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Serializes the show, in the context of a particular guest, to JSON
 class MyShowSerializer < Oj::Serializer
   object_as :my_show

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Data about a particular human's relationship to a show
 class MyShow < ApplicationRecord
   belongs_to :human

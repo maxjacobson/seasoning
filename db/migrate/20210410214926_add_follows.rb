@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Start keeping track of who follows whom
 class AddFollows < ActiveRecord::Migration[6.1]
   def change

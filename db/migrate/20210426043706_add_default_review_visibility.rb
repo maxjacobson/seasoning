@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # A new setting for the settings page
 class AddDefaultReviewVisibility < ActiveRecord::Migration[6.1]
   def change

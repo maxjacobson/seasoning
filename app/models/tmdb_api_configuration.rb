@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Persists the TMDB API configuration as recommended here:
 # https://developers.themoviedb.org/3/configuration/get-api-configuration
 #

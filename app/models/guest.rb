@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Someone who is visiting the site, who may or may not be an authenticated human
 class Guest
   def self.from(token)

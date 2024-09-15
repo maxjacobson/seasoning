@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Provides the data for the public profile page of a human
   class ProfilesController < ApplicationController

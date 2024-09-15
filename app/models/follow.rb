@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Records the relationship between people
 class Follow < ApplicationRecord
   validate :no_self_follow

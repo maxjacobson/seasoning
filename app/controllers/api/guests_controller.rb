@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # Exposes some information about the current Guest of the site
   class GuestsController < ApplicationController

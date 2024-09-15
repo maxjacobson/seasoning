@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module API
   # lets people add new shows to the site that the site isn't yet aware of
   class ImportsController < ApplicationController

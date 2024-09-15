@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # The table that stores the token that we keep in localstorage in the client side
 class CreateBrowserSessions < ActiveRecord::Migration[6.1]
   def change

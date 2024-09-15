@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Experimenting with the idea of letting people track which episodes they've seen
 # which will require tracking what episodes a show has... let's start setting that up!
 class CreateEpisodes < ActiveRecord::Migration[7.0]

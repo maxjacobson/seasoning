@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module TMDB
   class TVSearchResults < Dry::Struct
     attribute :page, Types::Integer

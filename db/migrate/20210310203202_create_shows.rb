@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This app is about TV shows, so let's make sure we can record them
 class CreateShows < ActiveRecord::Migration[6.1]
   def change

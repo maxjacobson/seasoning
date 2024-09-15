@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Now that we've set this value, we can mark it as not nullable going forward
 class MarkStillSizesAsNotNullable < ActiveRecord::Migration[7.0]
   def change

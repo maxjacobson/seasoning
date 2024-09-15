@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Making this default to true for new humans because I'm nosy,
 # and people can always change it if they are privacy conscious
 class ChangeDefaultShareCurrentlyWatching < ActiveRecord::Migration[7.0]

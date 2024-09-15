@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This lets people pick which, of the shows they might watch
 # next, they actually plan to watch next.
 #

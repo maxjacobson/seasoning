@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RefreshEpisodes = lambda do |show, season|
   Rails.logger.info "Refreshing show slug=#{show.slug} season slug=#{season.slug}"
 

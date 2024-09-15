@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Add a table for tracking info about a human's relationship to a season
 class AddMySeason < ActiveRecord::Migration[6.1]
   def change
