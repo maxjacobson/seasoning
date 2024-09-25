@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import { Config } from "tailwindcss";
 import forms from "@tailwindcss/forms";
 
