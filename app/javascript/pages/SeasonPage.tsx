@@ -125,7 +125,7 @@ export const SeasonPage = () => {
                         </Link>
                       </td>
                       <td>
-                        <AirDate date={episode.air_date} available={episode.available} />
+                        <AirDate date={episode.air_date} />
                       </td>
                       {guest.authenticated && yourSeason.your_relationship && (
                         <td>

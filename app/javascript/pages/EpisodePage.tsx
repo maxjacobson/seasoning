@@ -97,7 +97,7 @@ export const EpisodePage = () => {
       <div>{episode.still_url && <img src={episode.still_url} />}</div>
 
       <div>
-        Air date: <AirDate date={episode.air_date} available={episode.available} />
+        Air date: <AirDate date={episode.air_date} />
       </div>
 
       <ShowMetadata show={show} />
