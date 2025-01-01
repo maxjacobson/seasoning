@@ -1,7 +1,8 @@
 import { AppWithRouter } from "../App";
 import { createElement } from "react";
+import { createRoot } from "react-dom/client";
 import { Guest } from "../types";
-import { render } from "react-dom";
+
 (async () => {
   const guestToken = localStorage.getItem("seasoning-guest-token");
   let guest: Guest = { authenticated: false };
@@ -13,14 +14,18 @@ import { render } from "react-dom";
     guest = (await response.json()) as Guest;
   }
 
-  render(
-    createElement(
-      AppWithRouter,
-      {
-        initialGuest: guest,
-      },
-      null,
-    ),
-    document.getElementById("app"),
-  );
+  const container = document.getElementById("app");
+
+  if (container) {
+    const root = createRoot(container);
+    root.render(
+      createElement(
+        AppWithRouter,
+        {
+          initialGuest: guest,
+        },
+        null,
+      ),
+    );
+  }
 })();
