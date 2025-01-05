@@ -1,6 +1,10 @@
 #!/bin/sh
 
-set -ex
+set -e
 
-npx prettier --write .
+PATH="node_modules/.bin:$PATH"
+
+set -x
+
+prettier --write .
 bin/rubocop --autocorrect-all
