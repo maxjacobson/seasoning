@@ -13,8 +13,9 @@ Demo: <https://www.youtube.com/watch?v=4aB6LbN2ff8>
 ## Setup
 
 1. Install ruby, node, and postgres
+1. Install pnpm by running `corepack enable`
 1. Run `cp .env.development .env.development.local` and fill out `.env.development.local`
-1. Run `npm install`
+1. Run `pnpm install`
 1. Run `rails db:setup`
 
 Then to start things up, run these two commands in two separate terminal tabs:
