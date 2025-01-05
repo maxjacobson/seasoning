@@ -1,7 +1,7 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
 import { SeasonReview, Show } from "../types";
 import { useContext, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary";
 import { setHeadTitle } from "../hooks";
 

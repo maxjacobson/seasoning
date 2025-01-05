@@ -1,5 +1,5 @@
 import { GuestContext } from "../contexts";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useContext } from "react";
 import { YourShowsList } from "../components/YourShowsList";
 

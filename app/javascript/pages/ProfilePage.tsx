@@ -1,5 +1,5 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Poster } from "../components/Poster";

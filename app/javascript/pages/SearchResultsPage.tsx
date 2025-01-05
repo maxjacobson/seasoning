@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router";
 import { FunctionComponent } from "react";
 import { setHeadTitle } from "../hooks";
 import { Show } from "../types";

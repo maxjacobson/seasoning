@@ -1,7 +1,7 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
 import { Import, Show } from "../types";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router";
 import { Button } from "../components/Button";
 import queryString from "query-string";
 import { TextField } from "../components/TextField";
@@ -125,7 +125,7 @@ export const ImportShowPage = () => {
 
                     if (response.ok) {
                       const data = (await response.json()) as { show: Show };
-                      navigate(`/shows/${data.show.slug}`);
+                      await navigate(`/shows/${data.show.slug}`);
                     } else {
                       throw new Error("could not import show");
                     }

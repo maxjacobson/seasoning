@@ -1,5 +1,5 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 import { loadData, setHeadTitle } from "../hooks";
 import { Human } from "../types";
 import { useContext } from "react";

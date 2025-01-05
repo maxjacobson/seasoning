@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export const GoHome: FunctionComponent<Record<string, never>> = () => {
   return (
