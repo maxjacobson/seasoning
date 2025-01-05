@@ -3,7 +3,7 @@ import { loadData, setHeadTitle } from "../hooks";
 import { SeasonReview, Show } from "../types";
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary";
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 export const ProfileReviewsPage = () => {
   const guest = useContext(GuestContext);

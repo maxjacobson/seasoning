@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { Human, YourShow } from "../types";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router";
 import { Button } from "./Button";
 import { displayMyShowStatus } from "../helpers/my_shows";
 import { Markdown } from "./Markdown";

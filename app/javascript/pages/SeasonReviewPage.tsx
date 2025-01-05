@@ -1,6 +1,6 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
 import { Human, Season, SeasonReview, Show } from "../types";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Markdown } from "../components/Markdown";
@@ -169,7 +169,7 @@ export const SeasonReviewPage = () => {
                   setLoading(false);
 
                   if (response.ok) {
-                    navigate(`/${handle}`);
+                    await navigate(`/${handle}`);
                   } else {
                     throw new Error("Could not delete");
                   }

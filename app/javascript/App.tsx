@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router";
 import { FunctionComponent, useState } from "react";
 import { Guest, Show } from "./types";
 import { GuestContext, SetLoadingContext } from "./contexts";
@@ -73,11 +73,11 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                     </Link>
                     <a
                       href="#"
-                      onClick={() => {
+                      onClick={async () => {
                         if (confirm("Log out?")) {
                           localStorage.clear();
                           setGuest({ authenticated: false });
-                          navigate("/");
+                          await navigate("/");
                         }
                       }}
                     >

@@ -1,6 +1,6 @@
 import { Guest, Show } from "../types";
 import { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { SeenSeasonCheckbox } from "./SeenSeasonCheckbox";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { Button } from "../components/Button";
 import { Guest } from "../types";
 import { SetLoadingContext } from "../contexts";
@@ -71,7 +71,7 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
             human: { handle: data.handle, admin: data.admin },
             token: data.session_token,
           });
-          navigate("/");
+          await navigate("/");
         } else {
           setMagicLinkInfo({ loading: false, email: data.email });
         }
@@ -124,7 +124,7 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
                   },
                   token: data.session_token,
                 });
-                navigate("/");
+                await navigate("/");
               } else {
                 throw new Error("Could not create human");
               }

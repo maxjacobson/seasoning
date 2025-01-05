@@ -2,7 +2,7 @@ import { GuestContext, SetLoadingContext } from "../contexts";
 import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types";
 import { loadData, setHeadTitle } from "../hooks";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { Button } from "../components/Button";
 import { Select } from "../components/Select";
 import { Textarea } from "../components/Textarea";
@@ -103,7 +103,7 @@ export const NewSeasonReviewPage = () => {
               const url = `/${guest.human.handle}/shows/${showSlug}/${seasonSlug}${
                 review.viewing === 1 ? "" : `/${review.viewing}`
               }`;
-              navigate(url);
+              await navigate(url);
             } else if (response.status === 400) {
               const data = (await response.json()) as Record<string, string[]>;
               setValidationError(data);

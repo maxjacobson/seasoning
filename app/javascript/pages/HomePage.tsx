@@ -1,16 +1,19 @@
 import { useContext, useEffect } from "react";
 import { GetStarted } from "../components/GetStarted";
 import { GuestContext } from "../contexts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export const HomePage = () => {
   const guest = useContext(GuestContext);
 
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (guest.authenticated) {
-      navigate("/shows");
-    }
+    (async () => {
+      if (guest.authenticated) {
+        await navigate("/shows");
+      }
+    })();
   }, []);
 
   if (guest.authenticated) {

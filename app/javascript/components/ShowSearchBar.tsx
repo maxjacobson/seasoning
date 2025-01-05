@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import debounce from "lodash.debounce";
 import { SetLoadingContext } from "../contexts";
 import { TextField } from "./TextField";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const searchForShows = (
   title: string,
@@ -55,9 +55,9 @@ export const ShowSearchBar: FunctionComponent<Props> = ({ guest, callback, query
   return (
     <form
       className="md:mr-2 md:inline"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
-        navigate(`/search?q=${encodeURIComponent(query)}`);
+        await navigate(`/search?q=${encodeURIComponent(query)}`);
       }}
     >
       <span className="mr-2">

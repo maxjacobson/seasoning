@@ -9,7 +9,7 @@ import { RemoveShowButton } from "../components/RemoveShowButton";
 import { SeasonsList } from "../components/SeasonsList";
 import { setHeadTitle } from "../hooks";
 import { ShowMetadata } from "../components/ShowMetadata";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { YourShow } from "../types";
 
 type LoadingShowData = {
