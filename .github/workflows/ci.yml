@@ -17,6 +17,9 @@ jobs:
         with:
           ruby-version: 3.4.1
           bundler-cache: true
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
