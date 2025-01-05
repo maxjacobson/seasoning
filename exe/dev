@@ -2,7 +2,6 @@
 
 set -e
 
-
 PATH="node_modules/.bin:$PATH"
 
 # run-pty is a modern foreman alternative for local development

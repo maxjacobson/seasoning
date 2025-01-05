@@ -4,3 +4,4 @@ public/vite-dev/**/*
 tmp/**/*
 .rubocop_todo.yml
 vendor/**/*
+pnpm-lock.yaml
