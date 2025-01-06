@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.4.1"
+ruby file: ".ruby-version"
 
 gem "activerecord-postgres_enum"
 gem "bugsnag"
