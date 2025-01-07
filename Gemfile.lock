@@ -99,20 +99,23 @@ GEM
       railties (>= 6.1)
     drb (2.2.1)
     dry-cli (1.2.0)
-    dry-core (1.0.0)
+    dry-core (1.1.0)
       concurrent-ruby (~> 1.0)
+      logger
       zeitwerk (~> 2.6)
-    dry-inflector (1.0.0)
-    dry-logic (1.5.0)
+    dry-inflector (1.2.0)
+    dry-logic (1.6.0)
+      bigdecimal
       concurrent-ruby (~> 1.0)
-      dry-core (~> 1.0, < 2)
+      dry-core (~> 1.1)
       zeitwerk (~> 2.6)
-    dry-struct (1.6.0)
-      dry-core (~> 1.0, < 2)
-      dry-types (>= 1.7, < 2)
+    dry-struct (1.7.0)
+      dry-core (~> 1.1)
+      dry-types (~> 1.8)
       ice_nine (~> 0.11)
       zeitwerk (~> 2.6)
-    dry-types (1.7.1)
+    dry-types (1.8.0)
+      bigdecimal (~> 3.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0)
       dry-inflector (~> 1.0)
@@ -374,11 +377,11 @@ CHECKSUMS
   dotenv-rails (3.1.7) sha256=02c07b9601ad64046e196f48f6280c2cc660b073e08b30ad5c2f78b4872e9189
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
   dry-cli (1.2.0) sha256=8c97df3b290ee6354ee2025a5f0a67226b381627de32741d06f35ea0887cd95b
-  dry-core (1.0.0) sha256=7a92099870967f0d2c9997950608cb8bb622dafeea20b2fe1dd49e9ba1d0f305
-  dry-inflector (1.0.0) sha256=6ad22361ca2d6f3f001ae3037ffcfea01163f644280d13a9195d3c3a94dd1626
-  dry-logic (1.5.0) sha256=99ed2180f1970c3d8247004f277a01dffbe8e82cf6680de9c7209312d86cd416
-  dry-struct (1.6.0) sha256=3737025b3a6cd50fd4e6f42883cbb8d5e0d07680bc8310f7dc0db8c8897dd4e6
-  dry-types (1.7.1) sha256=12165841145a18dd22151f143707b90c8093f71e5ae06ee0f2301f5321f8cdb8
+  dry-core (1.1.0) sha256=0903821a9707649a7da545a2cd88e20f3a663ab1c5288abd7f914fa7751ab195
+  dry-inflector (1.2.0) sha256=22f5d0b50fd57074ae57e2ca17e3b300e57564c218269dcf82ff3e42d3f38f2e
+  dry-logic (1.6.0) sha256=da6fedbc0f90fc41f9b0cc7e6f05f5d529d1efaef6c8dcc8e0733f685745cea2
+  dry-struct (1.7.0) sha256=8c8b6eb8da570e8b7fde9fb080591f3ca79b4d97f03d2ffd87a0336138152ba5
+  dry-types (1.8.0) sha256=bdf444e0d2ff83f500271c7d38cb29690c2654fa78e588f68349a7b1e7341131
   email_validator (2.2.4) sha256=5ab238095bec7aef9389f230e9e0c64c5081cdf91f19d6c5cecee0a93af20604
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   ffi (1.16.3) sha256=6d3242ff10c87271b0675c58d68d3f10148fabc2ad6da52a18123f06078871fb
