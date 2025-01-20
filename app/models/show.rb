@@ -55,4 +55,8 @@ class Show < ApplicationRecord
   def refresh_async
     RefreshShowJob.perform_async(id)
   end
+
+  def to_param
+    slug
+  end
 end

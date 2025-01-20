@@ -1,1 +1,0 @@
-[{ "command": ["bin/rails", "server"] }, { "command": ["bin/vite", "dev"] }]

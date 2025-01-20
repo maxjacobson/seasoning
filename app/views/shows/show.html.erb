@@ -1,0 +1,41 @@
+<div>
+  <h1 class="text-2xl">
+    <%= @show.title %>
+  </h1>
+
+  <%= render "more_info", url: "https://www.themoviedb.org/tv/#{@show.tmdb_tv_id}" %>
+
+  <div>
+    <span class="mr-2">
+      <% if @my_show %>
+        <% render "remove_show_button", my_show: @my_show %>
+        <% render "choose_show_status_button", my_show: @my_show %>
+        <div class="my-2">
+          <% render "note_to_self", my_show: @my_show %>
+        </div>
+      <% else %>
+        <% render "add_show_button", my_show: @my_show %>
+      <% end %>
+    </span>
+  </div>
+
+  <% if @show.poster.url.present? %>
+    <div>
+      <h2 class="text-xl">Poster</h2>
+      <%= render "poster", show: @show, size: "large" %>
+    </div>
+  <% else %>
+    <div>No poster...</div>
+  <% end %>
+
+  <% if @show.seasons.any? %>
+    <div>
+      <h2 class="text-xl">Seasons</h2>
+      <%= render "seasons_list", show: @show %>
+    </div>
+  <% else %>
+    <div>No seasons...</div>
+  <% end %>
+
+  <%= render "show_metadata", show: @show %>
+</div>

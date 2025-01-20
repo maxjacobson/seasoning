@@ -7,6 +7,7 @@ const changelog = `
 
   But here's some highlights of when things happened.
 
+  1. **Jan 5, 2025** -- Rewrite the frontend without react
   1. **July 30, 2023** — On show page, you can hover on the checkbox to see how many episodes have been watched for each season
   1. **June 29, 2023** — Update data refresh so that shows which are ongoing will refresh daily, and shows that are complete will refresh every 1-2 weeks, ish
   1. **June 25, 2023** — Blockquotes in rendered markdown are now styled as blockquotes, with a left border

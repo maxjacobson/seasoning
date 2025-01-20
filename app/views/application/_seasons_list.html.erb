@@ -1,0 +1,29 @@
+<%# locals: (show:) %>
+
+<table className="w-full">
+  <thead>
+    <tr>
+      <th className="text-left">Name</th>
+      <th className="text-left">Episode count</th>
+      <th className="text-left">Seen?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% show.seasons.each do |season| %>
+      <tr>
+        <td>
+          <%= link_to show_season_path(show, season) do %>
+            <%= season.name %>
+          <% end %>
+        </td>
+
+        <td><%= season.episodes.count %></td>
+
+        <td>
+          <%= render "seen_season_checkbox", show: show, season: season %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

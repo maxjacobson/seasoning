@@ -1,0 +1,8 @@
+<%# locals: (show:, size:) %>
+
+<%= image_tag(
+  show.poster.url,
+  alt: "#{show.title} poster",
+  class: "border-2 border-solid border-yellow-700 p-1",
+  width: size == "small" ? "100" : "185"
+) %>

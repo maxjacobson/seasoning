@@ -24,20 +24,12 @@ class ApplicationController < ActionController::Base
     raise "Did not check authorization" unless @did_authorize
   end
 
-  def token
-    request.headers["X-SEASONING-TOKEN"]
-  end
-
   def current_human
     return @current_human if defined?(@current_human)
 
-    @current_human =
-      if token.blank?
-        nil
-      else
-        BrowserSession.active.includes(:human).where(token:).first&.human
-      end
+    @current_human = Human.find_by(id: session[:human_id])
   end
+  helper_method :current_human
 
   def add_human_info_to_bugsnag(event)
     return if current_human.blank?

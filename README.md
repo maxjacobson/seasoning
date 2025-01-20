@@ -21,6 +21,5 @@ Demo: <https://www.youtube.com/watch?v=4aB6LbN2ff8>
 Then to start things up, run these two commands in two separate terminal tabs:
 
 1. `rails server`
-1. `bin/vite dev` -- this is technically optional, but it will enable hot module reloading which is nice
 
 And visit <http://localhost:3000>

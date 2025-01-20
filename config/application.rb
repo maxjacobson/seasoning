@@ -48,8 +48,6 @@ module Seasoning
     # we're good
     config.action_controller.allow_forgery_protection = false
 
-    # Disable cookies, we don't use them here
-    config.middleware.delete ActionDispatch::Cookies
-    config.middleware.delete ActionDispatch::Session::CookieStore
+    config.session_store :cookie_store, key: "_your_app_session"
   end
 end

@@ -28,6 +28,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/", to: "frontend#show", as: :root
-  get "/*anything", to: "frontend#show"
+  root to: "home#show"
+  resources :shows, only: %i[index show], param: :slug do
+    resources :seasons, only: [:show], param: :slug
+  end
+  resources :magic_links, only: %i[create show], path: "/magic-links", param: :token do
+    resources :humans, only: [:create]
+  end
+
+  resource :session, only: [:destroy]
 end

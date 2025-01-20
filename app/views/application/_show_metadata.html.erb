@@ -1,0 +1,28 @@
+<%# locals: (show:) %>
+
+<div class="my-4 border-b border-t border-solid border-orange-200 py-4">
+  <h2 class="text-lg">FYI</h2>
+  <ul class="list-inside list-disc">
+    <% if show.tmdb_last_refreshed_at %>
+
+      <li>
+        <span class="font-bold">Data last refreshed at:</span>
+        <span>
+          <%# FIXME format better %>
+          <%= show.tmdb_last_refreshed_at %>
+        </span>
+      </li>
+    <% end %>
+
+    <% if show.tmdb_next_refresh_at %>
+      <li>
+        <span class="font-bold">Data will next be refreshed within 24 hours of</span>
+        <span>
+          <%# FIXME format better %>
+
+          <%= show.tmdb_next_refresh_at %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</div>

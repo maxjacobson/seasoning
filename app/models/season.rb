@@ -8,4 +8,8 @@ class Season < ApplicationRecord
   def poster
     Poster.new(tmdb_poster_path.presence || show.tmdb_poster_path)
   end
+
+  def to_param
+    slug
+  end
 end

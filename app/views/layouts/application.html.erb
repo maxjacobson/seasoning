@@ -4,26 +4,49 @@
     <title>Seasoning</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csp_meta_tag %>
-
-    <%= vite_client_tag %>
-    <%= vite_react_refresh_tag %>
-    <%= vite_typescript_tag 'application' %>
-    <style type="text/css">
-      body {
-        background-color: rgb(246, 246, 247);
-      }
-
-      #app-is-booting-up {
-        font-family: sans-serif;
-        width: 500px;
-        margin: 0 auto;
-        padding: 100px 0;
-        color: #443d47;
-      }
-    </style>
+    <%# FIXME - do not use this "play cdn" approach  %> 
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="mx-1 my-2 flex flex-col justify-between md:flex-row">
+      <div class="flex flex-col md:flex-row">
+        <%= link_to root_path do %>
+          <%# FIXME - iamge is not loading %>
+          <%= image_tag "logo-with-name.svg", class: "h-full" %>
+        <% end %>
+      </div>
+
+      <div class="pr-2">
+        <% if current_human.present? %>
+          <%# # FIXME add search %>
+          SEARCH BAR
+
+          <%= current_human.handle %>
+
+          <%# FIXME add links %>
+          Settings
+          <%= button_to "Logout", session_path, method: :delete, class: "inline" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mx-auto my-0 max-w-2xl p-2">
+      <%= yield %>
+
+      <div class="mt-5 flex justify-evenly border-t border-dashed border-t-black">
+        <% if current_human.present? %>
+          <% if current_human.admin? %>
+            <%# # FIXME add links %>
+            Admin
+          <% end %>
+
+          <%# FIXME add links %>
+          Reviews
+          Roadmap
+          Credits
+        <% end %>
+      </div>
+    </div>
   </body>
 </html>

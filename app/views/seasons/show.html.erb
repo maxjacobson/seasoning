@@ -1,0 +1,80 @@
+<div>
+  <h1 class="text-xl"><%= show.title %></h1>
+  <h2 class="text-lg"><%= season.name %></h2>
+
+  <%= render "more_info", url: "https://www.themoviedb.org/tv/#{@show.tmdb_tv_id}/season/#{@season.season_number}" %>
+
+  <p>
+    <%= link_to "Back", show_path(@show) %>
+  </p>
+
+  <div>
+    <div>
+      <%= render "poster", show: @show, size: "large" %>
+    </div>
+    <div>
+      <h2 class="text-lg">Season info</h2>
+
+      <div>
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th class="text-left">Number</th>
+              <th class="text-left">Name</th>
+              <th class="text-left">Air date</th>
+              <th class="text-left">Seen?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @season.episodes.each do |episode| %>
+              <tr>
+                <td><%= episode.episode_number %></td>
+                <td>
+                  <%= link-to episode.name, show_season_episode_path(@show, @season, episode) %>
+                </td>
+                <td>
+                  <%= render "air_date", episode: episode %>
+                </td>
+
+                <% if @my_season %>
+                  <td>
+                    <%= render "seen_episode_checkbox", season: @season, episode: episode, my_season: @my_season %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <% if @my_season %>
+    <div>
+      <h2 class="text-lg">Your review</h2>
+      <div>
+        <%= link_to new_review_season_show_path(@show, @season) do %>
+          <span class="underlined">Add review</span>
+        <% end %>
+      </div>
+      <div>
+        <% if @my_season.reviews.any? %>
+          <ul>
+            <% @my_season.reviews.each do |review| %>
+              <li>
+                <%= link_to path_for_review(review) do %>
+                  <%# FIXME format better %>
+                  <%= review.created_at %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>None yet</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render "show_metadata", show: @show %>
+</div>

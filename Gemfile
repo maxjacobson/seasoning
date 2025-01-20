@@ -7,12 +7,11 @@ gem "bugsnag"
 gem "dry-struct"
 gem "email_validator"
 gem "nokogiri"
-gem "oj_serializers"
+gem "oj_serializers" # FIXME: remove oj serializers
 gem "pg"
 gem "puma"
 gem "rails"
 gem "sucker_punch"
-gem "vite_rails"
 
 group :development, :test do
   gem "dotenv-rails"
@@ -21,7 +20,7 @@ end
 
 group :development do
   gem "letter_opener"
-  gem "listen"
+  gem "listen" # FIXME: remove this gem?
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-rspec"
