@@ -136,7 +136,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.9.1)
-    language_server-protocol (3.17.0.3)
+    language_server-protocol (3.17.0.4)
     launchy (3.0.0)
       addressable (~> 2.8)
       childprocess (~> 5.0)
@@ -262,7 +262,7 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
-    rubocop (1.70.0)
+    rubocop (1.71.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -392,7 +392,7 @@ CHECKSUMS
   io-console (0.8.0) sha256=cd6a9facbc69871d69b2cb8b926fc6ea7ef06f06e505e81a64f14a470fddefa2
   irb (1.14.3) sha256=c457f1f2f1438ae9ce5c5be3981ae2138dec7fb894c7d73777eeeb0a6c0d0752
   json (2.9.1) sha256=d2bdef4644052fad91c1785d48263756fe32fcac08b96a20bb15840e96550d11
-  language_server-protocol (3.17.0.3) sha256=3d5c58c02f44a20d972957a9febe386d7e7468ab3900ce6bd2b563dd910c6b3f
+  language_server-protocol (3.17.0.4) sha256=c484626478664fd13482d8180947c50a8590484b1258b99b7aedb3b69df89669
   launchy (3.0.0) sha256=4abcdab659689550ceca6ec0630cd9efd9940b51dc14cb4ebceee8f7aedc791b
   letter_opener (1.10.0) sha256=2ff33f2e3b5c3c26d1959be54b395c086ca6d44826e8bf41a14ff96fdf1bdbb2
   listen (3.9.0) sha256=db9e4424e0e5834480385197c139cb6b0ae0ef28cc13310cfd1ca78377d59c67
@@ -445,7 +445,7 @@ CHECKSUMS
   rspec-mocks (3.13.2) sha256=2327335def0e1665325a9b617e3af9ae20272741d80ac550336309a7c59abdef
   rspec-rails (7.1.0) sha256=94585b69c4086ca79afae5cc8d2c5e314f6ad32a88c927f9c065b99596e3ee47
   rspec-support (3.13.1) sha256=48877d4f15b772b7538f3693c22225f2eda490ba65a0515c4e7cf6f2f17de70f
-  rubocop (1.70.0) sha256=96751f8440b36a0ac6e9a8ab596900803118d83d6b83f2037bf8b3d7a5bc440e
+  rubocop (1.71.0) sha256=e19679efd447346ac476122313d3788ae23c38214790bcf660e984c747608bf0
   rubocop-ast (1.37.0) sha256=9513ac88aaf113d04b52912533ffe46475de1362d4aa41141b51b2455827c080
   rubocop-rails (2.28.0) sha256=4967bed9ea13e6dcab566fea4265a6dd0381db739b305e48930aba1282da2715
   rubocop-rspec (3.4.0) sha256=8721c13b6a8c9530a7ac481cea9423022f946fcf72428bda8289f8b57e4d4885
