@@ -29,6 +29,6 @@ class AddSeasonReviews < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_index :season_reviews, %i[author_id season_id viewing], unique: true
+    add_index :season_reviews, [:author_id, :season_id, :viewing], unique: true
   end
 end

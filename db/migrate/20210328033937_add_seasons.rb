@@ -13,7 +13,7 @@ class AddSeasons < ActiveRecord::Migration[6.1]
     end
 
     add_index :shows, [:tmdb_tv_id], unique: true
-    add_index :seasons, %i[show_id slug], unique: true
+    add_index :seasons, [:show_id, :slug], unique: true
     add_index :seasons, [:tmdb_id], unique: true
   end
 end

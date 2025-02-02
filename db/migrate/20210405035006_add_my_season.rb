@@ -9,7 +9,7 @@ class AddMySeason < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_index :my_seasons, %i[human_id season_id], unique: true
+    add_index :my_seasons, [:human_id, :season_id], unique: true
     add_foreign_key :my_seasons, :seasons, on_delete: :cascade
     add_foreign_key :my_seasons, :humans, on_delete: :cascade
   end

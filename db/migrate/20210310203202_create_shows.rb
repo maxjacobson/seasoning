@@ -23,6 +23,6 @@ class CreateShows < ActiveRecord::Migration[6.1]
 
     add_foreign_key :my_shows, :humans, on_delete: :cascade
     add_foreign_key :my_shows, :shows, on_delete: :cascade
-    add_index :my_shows, %i[human_id show_id], unique: true
+    add_index :my_shows, [:human_id, :show_id], unique: true
   end
 end
