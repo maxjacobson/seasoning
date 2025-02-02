@@ -1,19 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 p {
   margin: 15px 0;
 }
 
 blockquote {
-  border-left: theme(colors.yellow.600) solid 1px;
+  border-left: var(--color-yellow-600) solid 1px;
   margin-left: 1em;
   padding-left: 5px;
 }
 
 a {
-  color: theme(colors.yellow.600);
+  color: var(--color-yellow-600);
 }
 
 a:hover {
@@ -75,7 +93,7 @@ a:hover {
 }
 
 .loading-ribbon {
-  background-color: theme(colors.orange.500);
+  background-color: var(--color-orange-500);
   animation-name: grow-to-fill-screen;
   animation-timing-function: ease-out;
   animation-duration: 4s;

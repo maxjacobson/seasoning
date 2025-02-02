@@ -51,7 +51,7 @@ const ListShows = ({ shows }: ListShowProps) => {
               </div>
 
               {yourShow.your_relationship?.note_to_self ? (
-                <div className="mx-0 my-2.5 break-words border-t border-dotted border-slate-300 p-0.5">
+                <div className="mx-0 my-2.5 border-t border-dotted border-slate-300 p-0.5 break-words">
                   <h2 className="text-lg font-bold">Note to self</h2>
                   <Markdown markdown={yourShow.your_relationship.note_to_self} />
                 </div>
