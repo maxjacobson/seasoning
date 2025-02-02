@@ -77,7 +77,7 @@ module API
     private
 
     def season_review_params
-      params.require(:review).permit(:body, :visibility, :rating)
+      params.expect(review: %i[body visibility rating])
     end
   end
 end
