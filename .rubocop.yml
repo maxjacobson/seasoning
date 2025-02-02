@@ -36,3 +36,6 @@ Style/FrozenStringLiteralComment:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
