@@ -23,7 +23,7 @@ class SigningInTest < ApplicationSystemTestCase
 
     assert_match %r{http://127.0.0.1:57081/knock-knock/(#{token})}, email.to_s
 
-    visit "/knock-knock/#{token}"
+    visit redeem_magic_link_path(token)
 
     assert page.has_content?("No shows yet")
     assert_equal "/shows", page.current_path

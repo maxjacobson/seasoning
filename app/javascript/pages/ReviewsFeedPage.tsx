@@ -1,7 +1,6 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
 import { SeasonReview, Show } from "../types";
 import { useContext, useEffect, useState } from "react";
-import { Navigate } from "react-router";
 import { SeasonReviewSummary } from "../components/SeasonReviewSummary";
 import { setHeadTitle } from "../hooks";
 
@@ -51,7 +50,9 @@ export const ReviewsFeedPage = () => {
   setHeadTitle("Reviews", [feedData]);
 
   if (!guest.authenticated) {
-    return <Navigate to="/" />;
+    // hard navigation
+    window.location.pathname = "/";
+    return;
   }
 
   if (feedData.loading) {

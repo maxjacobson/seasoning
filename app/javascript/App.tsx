@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { BrowserRouter, Link, Route, Routes, useNavigate, useSearchParams } from "react-router";
+import { BrowserRouter, Link, Route, Routes, useSearchParams } from "react-router";
 import { FunctionComponent, useState } from "react";
 import { Guest, Show } from "./types";
 import { GuestContext, SetLoadingContext } from "./contexts";
@@ -8,7 +8,6 @@ import { AdminPage } from "./pages/AdminPage";
 import { ChangelogPage } from "./pages/ChangelogPage";
 import { CreditsPage } from "./pages/CreditsPage";
 import { EpisodePage } from "./pages/EpisodePage";
-import { HomePage } from "./pages/HomePage";
 import { ImportShowPage } from "./pages/ImportShowPage";
 import { LoadingRibbon } from "./components/LoadingRibbon";
 import LogoWithName from "./images/logo-with-name.svg";
@@ -18,7 +17,6 @@ import { ProfileFollowersPage } from "./pages/ProfileFollowersPage";
 import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { ProfileReviewsPage } from "./pages/ProfileReviewsPage";
-import { RedeemMagicLinkPage } from "./pages/RedeemMagicLinkPage";
 import { ReviewsFeedPage } from "./pages/ReviewsFeedPage";
 import { RoadmapPage } from "./pages/RoadmapPage";
 import { SearchResultsPage } from "./pages/SearchResultsPage";
@@ -30,14 +28,12 @@ import { ShowSearchBar } from "./components/ShowSearchBar";
 import { YourShowsPage } from "./pages/YourShowsPage";
 
 interface Props {
-  initialGuest: Guest;
+  guest: Guest;
 }
 
-const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
-  const [guest, setGuest] = useState<Guest>(initialGuest);
+const App: FunctionComponent<Props> = ({ guest }: Props) => {
   const [loading, setLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<Show[] | null>(null);
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
 
@@ -50,9 +46,9 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
 
             <div className="mx-1 my-2 flex flex-col justify-between md:flex-row">
               <div className="flex flex-col md:flex-row">
-                <Link to="/">
+                <a href="/">
                   <img src={LogoWithName} className="h-full" />
-                </Link>
+                </a>
               </div>
               <div className="pr-2">
                 {guest.authenticated && (
@@ -73,11 +69,10 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
                     </Link>
                     <a
                       href="#"
-                      onClick={async () => {
+                      onClick={() => {
                         if (confirm("Log out?")) {
-                          localStorage.clear();
-                          setGuest({ authenticated: false });
-                          await navigate("/");
+                          // hard navigate
+                          window.location.pathname = "/logout";
                         }
                       }}
                     >
@@ -90,13 +85,7 @@ const App: FunctionComponent<Props> = ({ initialGuest }: Props) => {
 
             <div className="mx-auto my-0 max-w-2xl p-2">
               <Routes>
-                <Route path="/" element={<HomePage />} />
-
                 <Route path="/shows" element={<YourShowsPage />} />
-                <Route
-                  path="/knock-knock/:token"
-                  element={<RedeemMagicLinkPage setGuest={setGuest} />}
-                />
                 <Route path="/shows/:showSlug" element={<ShowPage />} />
                 <Route path="/shows/:showSlug/:seasonSlug" element={<SeasonPage />} />
                 <Route

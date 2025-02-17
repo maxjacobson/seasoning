@@ -49,9 +49,5 @@ module Seasoning
     # to access/manipulate data. As long as the request has a valid token,
     # we're good
     config.action_controller.allow_forgery_protection = false
-
-    # Disable cookies, we don't use them here
-    config.middleware.delete ActionDispatch::Cookies
-    config.middleware.delete ActionDispatch::Session::CookieStore
   end
 end

@@ -14,12 +14,6 @@ Rails/HasManyOrHasOneDependent:
     - 'app/models/human.rb'
     - 'app/models/show.rb'
 
-# Offense count: 3
-Rails/I18nLocaleTexts:
-  Exclude:
-    - 'app/mailers/magic_link_mailer.rb'
-    - 'app/models/human.rb'
-
 # Offense count: 6
 # Configuration parameters: AllowedConstants.
 Style/Documentation:

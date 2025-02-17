@@ -1,7 +1,7 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
-import { Link, Navigate } from "react-router";
 import { loadData, setHeadTitle } from "../hooks";
 import { Human } from "../types";
+import { Link } from "react-router";
 import { useContext } from "react";
 
 type AdminData = {
@@ -27,7 +27,9 @@ export const AdminPage = () => {
   }
 
   if (!adminData.data) {
-    return <Navigate to="/" />;
+    // hard navigate
+    window.location.pathname = "/";
+    return;
   }
 
   return (

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2023_04_17_145901) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_18_013019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -45,7 +45,7 @@ ActiveRecord::Schema[8.0].define(version: 2023_04_17_145901) do
   ], force: :cascade
 
   create_table "browser_sessions", force: :cascade do |t|
-    t.string "token", null: false, comment: "The token that will be kept in localstorage and included with API requests"
+    t.string "token", null: false, comment: "A token that is kept in the session"
     t.bigint "human_id", null: false
     t.datetime "expires_at", precision: nil, null: false, comment: "The time at which we should stop honoring the token and force them to log in again"
     t.datetime "created_at", null: false

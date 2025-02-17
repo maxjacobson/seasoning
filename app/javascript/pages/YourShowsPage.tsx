@@ -1,5 +1,4 @@
 import { GuestContext } from "../contexts";
-import { Link } from "react-router";
 import { useContext } from "react";
 import { YourShowsList } from "../components/YourShowsList";
 
@@ -13,7 +12,7 @@ export const YourShowsPage = () => {
         <YourShowsList human={guest.human} token={guest.token} />
       ) : (
         <div>
-          <Link to="/">Go home</Link>
+          <a href="/">Go home</a>
         </div>
       )}
     </div>
