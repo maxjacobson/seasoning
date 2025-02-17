@@ -4,6 +4,9 @@ plugins:
   - rubocop-rails
   - rubocop-minitest
 
+require:
+  - rubocop-capybara
+
 AllCops:
   Exclude:
     - bin/**/* # I use this strictly for binstubs; custom scripts go in exe/

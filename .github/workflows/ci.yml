@@ -43,11 +43,13 @@ jobs:
       - run: bundle exec rake assets:precompile
       - run: bin/rails db:create db:schema:load
         env:
+          CI: 1
           OIVA_DATABASE_USERNAME: postgres
           OIVA_DATABASE_PASSWORD: postgres
           RAILS_ENV: test
       - run: bin/rails test:all
         env:
+          CI: 1
           OIVA_DATABASE_USERNAME: postgres
           OIVA_DATABASE_PASSWORD: postgres
           RAILS_ENV: test

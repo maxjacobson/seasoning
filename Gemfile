@@ -23,10 +23,13 @@ group :development do
   gem "letter_opener"
   gem "listen"
   gem "rubocop"
+  gem "rubocop-capybara"
   gem "rubocop-minitest"
   gem "rubocop-rails"
 end
 
 group :test do
+  gem "capybara"
+  gem "selenium-webdriver"
   gem "webmock"
 end
