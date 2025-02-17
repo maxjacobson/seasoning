@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2023_04_17_145901) do
+ActiveRecord::Schema[8.0].define(version: 2023_04_17_145901) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
+
+  create_enum :my_show_status, [
+    "might_watch",
+    "currently_watching",
+    "stopped_watching",
+    "waiting_for_more",
+    "finished",
+    "next_up",
+  ], force: :cascade
+
+  create_enum :visibility, [
+    "anybody",
+    "mutuals",
+    "myself",
+  ], force: :cascade
 
   create_enum :my_show_status, [
     "might_watch",
