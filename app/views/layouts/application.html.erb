@@ -5,25 +5,62 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csp_meta_tag %>
 
-    <%= vite_client_tag %>
-    <%= vite_react_refresh_tag %>
-    <%= vite_typescript_tag 'application' %>
     <style type="text/css">
       body {
         background-color: rgb(246, 246, 247);
       }
-
-      #app-is-booting-up {
-        font-family: sans-serif;
-        width: 500px;
-        margin: 0 auto;
-        padding: 100px 0;
-        color: #443d47;
-      }
     </style>
+    <%= stylesheet_link_tag "app" %>
   </head>
 
   <body>
-    <%= yield %>
+
+    <div>
+      <div class="mx-1 my-2 flex flex-col justify-between md:flex-row">
+        <div class="flex flex-col md:flex-row">
+          <%= link_to root_path do %>
+            <%= image_tag "logo_with_name.svg", class: "h-full" %>
+          <% end %>
+        </div>
+
+        <div class="pr-2">
+          <% if current_human.present? %>
+            <%= render "show_search_bar" %>
+            <%# FIXME - use route helper %>
+            <%= link_to "Your page", "/#{current_human.handle}", class: "mr-2" %>
+            <%# FIXME - use route helper %>
+            <%= link_to "Settings", "/settings", class: "mr-2" %>
+
+            <%# FIXME - make this a DELETE request %>
+            <%= link_to "Log out", logout_path %>
+          <% end %>
+        </div>
+      </div>
+      <div class="mx-auto my-0 max-w-2xl p-2">
+        <% flash.each do |key, message| %>
+          <div><%= message %></div>
+        <% end %>
+
+        <%= yield %>
+
+        <div class="mt-5 flex justify-evenly border-t border-dashed border-t-black">
+          <% if current_human&.admin? %>
+            <%# FIXME - use route helper %>
+            <%= link_to "/admin", "Admin" %>
+          <% end %>
+
+          <% if current_human %>
+            <%# FIXME - use route helper %>
+            <%= link_to "Reviews", "/reviews" %>
+          <% end %>
+
+          <%# FIXME - use route helper %>
+          <%= link_to "Roadmap", "/roadmap" %>
+
+          <%# FIXME - use route helper %>
+          <%= link_to "Credits", "/credits" %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

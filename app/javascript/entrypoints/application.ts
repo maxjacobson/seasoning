@@ -4,7 +4,9 @@ import { createRoot } from "react-dom/client";
 import { Guest } from "../types";
 
 (async () => {
-  const guestToken = localStorage.getItem("seasoning-guest-token");
+  const container = document.getElementById("app");
+
+  const guestToken = container?.dataset?.token;
   let guest: Guest = { authenticated: false };
 
   if (guestToken) {
@@ -14,15 +16,13 @@ import { Guest } from "../types";
     guest = (await response.json()) as Guest;
   }
 
-  const container = document.getElementById("app");
-
   if (container) {
     const root = createRoot(container);
     root.render(
       createElement(
         AppWithRouter,
         {
-          initialGuest: guest,
+          guest: guest,
         },
         null,
       ),

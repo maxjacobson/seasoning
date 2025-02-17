@@ -2,9 +2,7 @@
 class AddWikipediaPageIdToShows < ActiveRecord::Migration[6.1]
   def change
     change_table :shows do |t|
-      # rubocop:disable Rails/NotNullColumn
       t.integer :wikipedia_page_id, null: false
-      # rubocop:enable Rails/NotNullColumn
     end
   end
 end

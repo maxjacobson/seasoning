@@ -4,12 +4,14 @@ ruby file: ".ruby-version"
 
 gem "activerecord-postgres_enum"
 gem "bugsnag"
+gem "cssbundling-rails"
 gem "dry-struct"
 gem "email_validator"
 gem "nokogiri"
 gem "oj_serializers"
 gem "ostruct"
 gem "pg"
+gem "propshaft"
 gem "puma"
 gem "rails"
 gem "sucker_punch"
@@ -20,6 +22,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "erb_lint"
   gem "letter_opener"
   gem "listen"
   gem "rubocop"

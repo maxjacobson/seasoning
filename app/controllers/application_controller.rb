@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def token
-    request.headers["X-SEASONING-TOKEN"]
+    session[:token] || request.headers["X-SEASONING-TOKEN"]
   end
 
   def current_human
@@ -38,6 +38,8 @@ class ApplicationController < ActionController::Base
         BrowserSession.active.includes(:human).where(token:).first&.human
       end
   end
+
+  helper_method :current_human
 
   def add_human_info_to_bugsnag(event)
     return if current_human.blank?

@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   namespace :api do
     defaults format: :json do
       resource :guest, only: [:show]
-      resources :magic_links, only: [:create, :show], path: "/magic-links"
-      resources :humans, only: [:create]
       resources :your_shows, only: [:index, :create, :update, :destroy], path: "/your-shows"
       resources :your_seasons, only: [:update], path: "/your-seasons" do
         resources :episodes, only: [:update], controller: "your_episodes"
@@ -28,6 +26,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/", to: "frontend#show", as: :root
+  root to: "magic_links#new"
+  resources :magic_links, only: [:create], path: "magic-links"
+  resources :humans, only: [:create]
+  get "/logout", to: "sessions#destroy", as: :logout
+  get "/check-your-email", to: "check_your_email#show", as: :check_your_email
+  get "/knock-knock/:token", to: "magic_links#show", as: :redeem_magic_link
   get "/*anything", to: "frontend#show"
 end
