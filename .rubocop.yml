@@ -2,10 +2,7 @@ inherit_from: .rubocop_todo.yml
 
 plugins:
   - rubocop-rails
-  - rubocop-rspec
-
-require:
-  - rubocop-rspec_rails
+  - rubocop-minitest
 
 AllCops:
   Exclude:
@@ -19,18 +16,7 @@ AllCops:
 Metrics:
   Enabled: false
 
-RSpec/ContextWording:
-  Prefixes:
-    - and
-    - when
-
-RSpec/ExampleLength:
-  Enabled: false
-
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/NestedGroups:
+Minitest/MultipleAssertions:
   Enabled: false
 
 Style/FrozenStringLiteralComment:

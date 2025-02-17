@@ -17,16 +17,14 @@ gem "vite_rails"
 
 group :development, :test do
   gem "dotenv-rails"
-  gem "rspec-rails"
 end
 
 group :development do
   gem "letter_opener"
   gem "listen"
   gem "rubocop"
+  gem "rubocop-minitest"
   gem "rubocop-rails"
-  gem "rubocop-rspec"
-  gem "rubocop-rspec_rails"
 end
 
 group :test do

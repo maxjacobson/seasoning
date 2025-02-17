@@ -1,2 +1,2 @@
 exe/lint
-RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal" bin/rspec
+RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal" bin/rails test:all

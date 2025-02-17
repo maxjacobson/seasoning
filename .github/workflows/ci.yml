@@ -49,8 +49,9 @@ jobs:
           OIVA_DATABASE_USERNAME: postgres
           OIVA_DATABASE_PASSWORD: postgres
           RAILS_ENV: test
-      - run: bin/rspec
+      - run: bin/rails test:all
         env:
           OIVA_DATABASE_USERNAME: postgres
           OIVA_DATABASE_PASSWORD: postgres
           RAILS_ENV: test
+          RUBYOPT: "--enable=frozen-string-literal --debug=frozen-string-literal"
