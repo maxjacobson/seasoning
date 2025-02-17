@@ -263,7 +263,7 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
-    rubocop (1.72.1)
+    rubocop (1.72.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -450,7 +450,7 @@ CHECKSUMS
   rspec-mocks (3.13.2) sha256=2327335def0e1665325a9b617e3af9ae20272741d80ac550336309a7c59abdef
   rspec-rails (7.1.0) sha256=94585b69c4086ca79afae5cc8d2c5e314f6ad32a88c927f9c065b99596e3ee47
   rspec-support (3.13.1) sha256=48877d4f15b772b7538f3693c22225f2eda490ba65a0515c4e7cf6f2f17de70f
-  rubocop (1.72.1) sha256=4306ae64c6e7e1026d2a90ed755a113c7b9bf0ac21037b8046fbc826a87daaa5
+  rubocop (1.72.2) sha256=0259a32d89fee60882bf4c4d8847e696357719c9db4971839da742bf053ae96b
   rubocop-ast (1.38.0) sha256=4fdf6792fe443a9a18acb12dbc8225d0d64cd1654e41fedb30e79c18edbb26ae
   rubocop-rails (2.30.1) sha256=5eb39fbfce4e63fb0d79d48ba9a3fbc23d33dd9fa4585b8f9c811056fe156c10
   rubocop-rspec (3.5.0) sha256=710c942fe1af884ba8eea75cbb8bdbb051929a2208880a6fc2e2dce1eed5304c
