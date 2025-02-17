@@ -133,6 +133,7 @@ export const RedeemMagicLinkPage: FunctionComponent<Props> = ({ setGuest }: Prop
             <span className="mr-2">
               <TextField
                 value={handle}
+                name="handle"
                 placeholder="Your handle"
                 onChange={(e) => setHandle(e.target.value)}
               />
