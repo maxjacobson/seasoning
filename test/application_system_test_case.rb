@@ -13,4 +13,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     Capybara.server = :puma, { Silent: true }
     super
   end
+
+  def teardown
+    ActionMailer::Base.deliveries.clear
+
+    super
+  end
 end
