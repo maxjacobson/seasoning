@@ -17,7 +17,7 @@ class FilteringShowsTest < ApplicationSystemTestCase
       - ok
       - cool
     MARKDOWN
-    MyShow.create!(human:, show:, status: "might_watch", note_to_self:)
+    MyShow.create!(human:, show:, status: "currently_watching", note_to_self:)
   end
 
   test "seeing unfiltered list" do
@@ -43,9 +43,15 @@ class FilteringShowsTest < ApplicationSystemTestCase
   test "filtering by status" do
     visit shows_path
 
-    select "Currently watching", from: "statuses"
+    unselect "Currently watching", from: "statuses"
+    select "Might watch", from: "statuses"
     click_on "Apply filters"
 
     assert page.has_content?("No shows yet")
+
+    select "Currently watching", from: "statuses"
+    click_on "Apply filters"
+
+    assert page.has_content?("Halt and Catch Fire")
   end
 end
