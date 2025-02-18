@@ -1,3 +1,7 @@
+<%= content_for :title do %>
+  Your shows
+<% end %>
+
 <div>
   <div class="mb-2">
     <%= form_with(url: shows_path, method: :get) do |f| %>
