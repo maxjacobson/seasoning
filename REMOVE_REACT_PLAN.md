@@ -3,7 +3,7 @@
 - [x] Make it possible to build some pages with vanilla ERB, still with access to tailwind
 - [x] Port the sign up / sign-in flow
 - [x] Confirm that this can deploy to heroku without issue
-- [ ] Port /shows (YourShowsPage)
+- [x] Port /shows (YourShowsPage)
 - [ ] Port /shows/:showSlug (ShowPage)
 - [ ] Port /shows/:showSlug/:seasonSlug (SeasonPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)

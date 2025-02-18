@@ -107,3 +107,7 @@ a:hover {
 .text-field {
   @apply focus:border-yellow-400 focus:ring-yellow-400;
 }
+
+.select-field {
+  @apply focus:border-yellow-400 focus:ring-yellow-400;
+}

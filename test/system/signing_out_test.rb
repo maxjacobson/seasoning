@@ -12,7 +12,6 @@ class SigningOutTest < ApplicationSystemTestCase
 
     assert page.has_content?("No shows yet")
     click_on "Log out"
-    accept_alert
 
     assert page.has_content?("This is seasoning, a website about TV shows")
   end

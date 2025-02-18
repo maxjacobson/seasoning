@@ -10,6 +10,10 @@ class MagicLinksController < ApplicationController
       session[:token] = browser_session.token
       redirect_to root_path, notice: "Success!"
     end
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def new

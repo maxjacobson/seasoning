@@ -4,5 +4,5 @@ type Props = React.DetailedHTMLProps<
 >;
 
 export const Select = (props: Props) => {
-  return <select {...props} className="focus:border-yellow-400 focus:ring-yellow-400" />;
+  return <select {...props} className="select-field" />;
 };
