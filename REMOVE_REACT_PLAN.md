@@ -2,9 +2,28 @@
 
 - [x] Make it possible to build some pages with vanilla ERB, still with access to tailwind
 - [x] Port the sign up / sign-in flow
-- [ ] Confirm that this can deploy to heroku without issue
-- [ ] Port remaining pages
-- [ ] Remove react
-- [ ] Remove vite
-- [ ] remove oj
-- [ ] Add turbolinks/stimulus?
+- [x] Confirm that this can deploy to heroku without issue
+- [ ] Port /shows (YourShowsPage)
+- [ ] Port /shows/:showSlug (ShowPage)
+- [ ] Port /shows/:showSlug/:seasonSlug (SeasonPage)
+- [ ] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)
+- [ ] Port /:handle/shows/:showSlug/:seasonSlug (SeasonReviewPage)
+- [ ] Port /:handle/shows/:showSlug/:seasonSlug/:viewing (SeasonReviewPage)
+- [ ] Port /reviews (ReviewsFeedPage)
+- [ ] Port /credits (CreditsPage)
+- [ ] Port /settings (SettingsPage)
+- [ ] Port /import-show (ImportShowPage)
+- [ ] Port /changelog (ChangelogPage)
+- [ ] Port /roadmap (RoadmapPage)
+- [ ] Port /admin (AdminPage)
+- [ ] Port /:handle (ProfilePage)
+- [ ] Port /:handle/reviews (ProfileReviewsPage)
+- [ ] Port /:handle/following (ProfileFollowingPage)
+- [ ] Port /:handle/followers (ProfileFollowersPage)
+- [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
+- [ ] Port /search (SearchResultsPage)
+- [ ] Remove unused JavaScript dependencies (react, vite, etc)
+- [ ] Remove API endpoints
+- [ ] Remove JSON serializer classes
+- [ ] remove unused Ruby dependencies (`vite_rails`, `oj_serializers`)
+- [ ] Add turbolinks to make it fast again?
