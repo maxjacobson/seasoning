@@ -1,0 +1,67 @@
+<div>
+  <div class="mb-2">
+    <%= form_with(url: shows_path, method: :get) do |f| %>
+      <%= f.text_field :q, placeholder: "Filter your shows", class: "text-field block", value: @filters.q %>
+      <%=
+        f.select(
+          :statuses,
+          MyShow.statuses.keys.map { [it.humanize, it] },
+          class: "select-field block mt-2",
+          multiple: true,
+          selected: @filters.statuses
+        )
+      %>
+
+      <%= f.submit "Apply filters", class: "rounded-button mt-2 block" %>
+    <% end %>
+
+    <% if @my_shows.any? %>
+      <div class="mx-0 my-2 flex flex-wrap gap-4">
+        <% @my_shows.each do |my_show| %>
+          <div class="w-60 rounded-lg border-2 border-dashed border-yellow-500 p-2">
+            <div class="flex flex-col">
+              <div class="self-center">
+                <%# FIXME - use route helper %>
+                <%= link_to "/shows/#{my_show.show.slug}" do %>
+                  <div>
+                    <%= render "poster", size: "large", url: my_show.show.poster.url, show: my_show.show %>
+                  </div>
+
+                  <%= my_show.show.title %>
+                <% end %>
+              </div>
+              <div class="self-center">
+                <% if my_show.status %>
+                  <span>
+                    <%= my_show.status.humanize %>
+                  </span>
+                <% else %>
+                  <span>&mdash;</span>
+                <% end %>
+              </div>
+            </div>
+
+            <% if my_show.note_to_self.present? %>
+              <div class="mx-0 my-2.5 border-t border-dotted border-slate-300 p-0.5 break-words">
+                <h2 class="text-lg font-bold">Note to self</h2>
+                <%= markdown_to_html my_show.note_to_self %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div>No shows yet. Maybe add some via the search at the top of the page?</div>
+    <% end %>
+
+    <div class="flex justify-between">
+      <div>
+        <% if current_page > 1 %>
+          <%= link_to "Previous", @filters.previous_page_path, class: "rounded-button" %>
+        <% end %>
+      </div>
+      <div class="font-bold">Page <%= current_page %></div>
+      <%= link_to "Next", @filters.next_page_path, class: "rounded-button" %>
+    </div>
+  </div>
+</div>

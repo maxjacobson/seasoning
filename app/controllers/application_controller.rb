@@ -46,4 +46,13 @@ class ApplicationController < ActionController::Base
 
     event.set_user(current_human.id.to_s, current_human.email, current_human.handle)
   end
+
+  def current_page
+    Integer(params[:page]).tap do |val|
+      raise ArgumentError unless val >= 1
+    end
+  rescue TypeError, ArgumentError
+    1
+  end
+  helper_method :current_page
 end
