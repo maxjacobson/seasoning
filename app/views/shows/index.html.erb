@@ -48,7 +48,9 @@
             <% if my_show.note_to_self.present? %>
               <div class="mx-0 my-2.5 border-t border-dotted border-slate-300 p-0.5 break-words">
                 <h2 class="text-lg font-bold">Note to self</h2>
-                <%= markdown_to_html my_show.note_to_self %>
+                <div class="rendered-markdown">
+                  <%= markdown_to_html(my_show.note_to_self).html_safe %>
+                </div>
               </div>
             <% end %>
           </div>
