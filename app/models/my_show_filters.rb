@@ -7,9 +7,7 @@ class MyShowFilters
   attr_accessor :q, :page
 
   def statuses
-    return unless @statuses
-
-    @statuses.compact_blank
+    Array(@statuses).compact_blank.presence || ["currently_watching"]
   end
 
   def next_page_path
