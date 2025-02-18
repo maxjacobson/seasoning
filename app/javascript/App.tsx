@@ -6,7 +6,6 @@ import { Guest, Show } from "./types";
 import { GuestContext, SetLoadingContext } from "./contexts";
 import { AdminPage } from "./pages/AdminPage";
 import { ChangelogPage } from "./pages/ChangelogPage";
-import { CreditsPage } from "./pages/CreditsPage";
 import { EpisodePage } from "./pages/EpisodePage";
 import { ImportShowPage } from "./pages/ImportShowPage";
 import { LoadingRibbon } from "./components/LoadingRibbon";
@@ -97,7 +96,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 />
 
                 <Route path="/reviews" element={<ReviewsFeedPage />} />
-                <Route path="/credits" element={<CreditsPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/import-show" element={<ImportShowPage />} />
                 <Route path="/changelog" element={<ChangelogPage />} />
@@ -131,7 +129,7 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                   </>
                 )}
                 <Link to="/roadmap">Roadmap</Link> <Link to="/changelog">Changelog</Link>{" "}
-                <Link to="/credits">Credits</Link>
+                <a href="/credits">Credits</a>
               </div>
             </div>
           </>

@@ -10,7 +10,7 @@
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug (SeasonReviewPage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug/:viewing (SeasonReviewPage)
 - [ ] Port /reviews (ReviewsFeedPage)
-- [ ] Port /credits (CreditsPage)
+- [x] Port /credits (CreditsPage)
 - [ ] Port /settings (SettingsPage)
 - [ ] Port /import-show (ImportShowPage)
 - [ ] Port /changelog (ChangelogPage)

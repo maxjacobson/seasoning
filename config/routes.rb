@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   root to: "magic_links#new"
+  resource :credits, only: [:show]
   resources :magic_links, only: [:create], path: "magic-links"
   resources :humans, only: [:create]
   resources :shows, only: [:index]
