@@ -4,9 +4,6 @@
   "repository": "github:maxjacobson/seasoning",
   "license": "UNLICENSED",
   "private": true,
-  "engines": {
-    "node": "22.14.0"
-  },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
     "@tailwindcss/cli": "^4.0.6",
