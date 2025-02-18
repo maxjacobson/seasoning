@@ -8,7 +8,16 @@ class FilteringShowsTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
 
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 1234)
-    MyShow.create!(human:, show:, status: "might_watch")
+    note_to_self = <<~MARKDOWN
+      # hello
+
+      yes
+
+      - wow
+      - ok
+      - cool
+    MARKDOWN
+    MyShow.create!(human:, show:, status: "might_watch", note_to_self:)
   end
 
   test "seeing unfiltered list" do
