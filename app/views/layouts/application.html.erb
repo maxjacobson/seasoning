@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Seasoning</title>
+    <% if content_for?(:title) %>
+      <title><%= yield(:title) %> &mdash; Seasoning</title>
+    <% else %>
+      <title>Seasoning</title>
+    <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csp_meta_tag %>
 
