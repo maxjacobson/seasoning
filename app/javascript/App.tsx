@@ -4,7 +4,6 @@ import { BrowserRouter, Link, Route, Routes, useSearchParams } from "react-route
 import { FunctionComponent, useState } from "react";
 import { Guest, Show } from "./types";
 import { GuestContext, SetLoadingContext } from "./contexts";
-import { AdminPage } from "./pages/AdminPage";
 import { EpisodePage } from "./pages/EpisodePage";
 import { ImportShowPage } from "./pages/ImportShowPage";
 import { LoadingRibbon } from "./components/LoadingRibbon";
@@ -96,7 +95,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 <Route path="/reviews" element={<ReviewsFeedPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/import-show" element={<ImportShowPage />} />
-                <Route path="/admin" element={<AdminPage />} />
                 <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
                 <Route path="/:handle/following" element={<ProfileFollowingPage />} />
@@ -116,7 +114,7 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 {guest.authenticated && guest.human.admin && (
                   <>
                     {" "}
-                    <Link to="/admin">Admin</Link>
+                    <a href="/admin">Admin</a>
                   </>
                 )}
                 {guest.authenticated && (

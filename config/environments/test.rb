@@ -48,4 +48,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "127.0.0.1:57081" }
 
   config.active_support.test_parallelization_threshold = 10
+
+  config.consider_all_requests_local = false
 end

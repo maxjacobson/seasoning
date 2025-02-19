@@ -21,12 +21,12 @@ Rails.application.routes.draw do
       resources :follows, only: [:create]
       resources :season_reviews, only: [:create, :index], path: "/season-reviews"
       resource :season_review, only: [:show, :destroy], path: "/season-review"
-      resource :admin, only: [:show]
       resource :human_limits, only: [:show], path: "/human-limits", controller: "human_limits"
     end
   end
 
   root to: "magic_links#new"
+  resource :admin, only: [:show]
   resource :credits, only: [:show]
   resource :roadmap, only: [:show]
   resource :changelog, only: [:show]

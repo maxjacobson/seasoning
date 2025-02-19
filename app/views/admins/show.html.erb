@@ -1,0 +1,44 @@
+<% content_for :title do %>
+  Admin
+<% end %>
+
+<div>
+  <h1 class="text-xl">Admin</h1>
+
+  <div class="mb-3 border-2 border-dashed border-yellow-600 p-3">
+    <h2 class="text-lg">Stats</h2>
+
+    <ul class="list-inside list-disc">
+      <li>
+        <strong>Humans count: </strong> <%= Human.count %>
+      </li>
+      <li>
+        <strong>Shows count: </strong> <%= Show.count %>
+      </li>
+      <li>
+        <strong>Seasons count: </strong> <%= Season.count %>
+      </li>
+      <li>
+        <strong>Reviews count: </strong>  <%= SeasonReview.count %>
+      </li>
+      <li>
+        <strong>Episodes count: </strong> <%= Episode.count %>
+      </li>
+      <li>
+        <strong>Last refreshed TMDB config: </strong> <%= TMDBAPIConfiguration.only.fetched_at %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="border-2 border-dashed border-yellow-600 p-3">
+    <h2 class="text-lg">Recent humans</h2>
+    <ol class="list-inside list-decimal">
+      <% Human.order(created_at: :desc).limit(50).each do |human| %>
+        <li>
+          <%# FIXME - use the route helper method %>
+          <%= link_to human.handle, "/#{human.handle}" %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>
