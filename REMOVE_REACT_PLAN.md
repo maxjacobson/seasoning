@@ -13,7 +13,7 @@
 - [x] Port /credits (CreditsPage)
 - [ ] Port /settings (SettingsPage)
 - [ ] Port /import-show (ImportShowPage)
-- [ ] Port /changelog (ChangelogPage)
+- [x] Port /changelog (ChangelogPage)
 - [x] Port /roadmap (RoadmapPage)
 - [ ] Port /admin (AdminPage)
 - [ ] Port /:handle (ProfilePage)

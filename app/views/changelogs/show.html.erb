@@ -1,0 +1,7 @@
+<%= content_for :title do %>
+  Changelog
+<% end %>
+
+<div class="rendered-markdown">
+  <%= markdown_to_html(Rails.root.join("CHANGELOG.md").read).html_safe %>
+</div>
