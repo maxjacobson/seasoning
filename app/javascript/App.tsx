@@ -17,7 +17,6 @@ import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { ProfileReviewsPage } from "./pages/ProfileReviewsPage";
 import { ReviewsFeedPage } from "./pages/ReviewsFeedPage";
-import { RoadmapPage } from "./pages/RoadmapPage";
 import { SearchResultsPage } from "./pages/SearchResultsPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
@@ -99,7 +98,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/import-show" element={<ImportShowPage />} />
                 <Route path="/changelog" element={<ChangelogPage />} />
-                <Route path="/roadmap" element={<RoadmapPage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
@@ -128,7 +126,7 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                     <Link to="/reviews">Reviews</Link>{" "}
                   </>
                 )}
-                <Link to="/roadmap">Roadmap</Link> <Link to="/changelog">Changelog</Link>{" "}
+                <a href="/roadmap">Roadmap</a> <Link to="/changelog">Changelog</Link>{" "}
                 <a href="/credits">Credits</a>
               </div>
             </div>

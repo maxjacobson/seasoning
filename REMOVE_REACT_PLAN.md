@@ -14,7 +14,7 @@
 - [ ] Port /settings (SettingsPage)
 - [ ] Port /import-show (ImportShowPage)
 - [ ] Port /changelog (ChangelogPage)
-- [ ] Port /roadmap (RoadmapPage)
+- [x] Port /roadmap (RoadmapPage)
 - [ ] Port /admin (AdminPage)
 - [ ] Port /:handle (ProfilePage)
 - [ ] Port /:handle/reviews (ProfileReviewsPage)

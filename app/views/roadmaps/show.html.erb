@@ -1,0 +1,7 @@
+<%= content_for :title do %>
+  Roadmap
+<% end %>
+
+<div class="rendered-markdown">
+  <%= markdown_to_html(Rails.root.join("ROADMAP.md").read).html_safe %>
+</div>
