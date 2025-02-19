@@ -49,8 +49,7 @@
 
         <div class="mt-5 flex justify-evenly border-t border-dashed border-t-black">
           <% if current_human&.admin? %>
-            <%# FIXME - use route helper %>
-            <%= link_to "/admin", "Admin" %>
+            <%= link_to "Admin", admin_path %>
           <% end %>
 
           <% if current_human %>
