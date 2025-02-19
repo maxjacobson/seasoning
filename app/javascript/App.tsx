@@ -5,7 +5,6 @@ import { FunctionComponent, useState } from "react";
 import { Guest, Show } from "./types";
 import { GuestContext, SetLoadingContext } from "./contexts";
 import { AdminPage } from "./pages/AdminPage";
-import { ChangelogPage } from "./pages/ChangelogPage";
 import { EpisodePage } from "./pages/EpisodePage";
 import { ImportShowPage } from "./pages/ImportShowPage";
 import { LoadingRibbon } from "./components/LoadingRibbon";
@@ -97,7 +96,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 <Route path="/reviews" element={<ReviewsFeedPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/import-show" element={<ImportShowPage />} />
-                <Route path="/changelog" element={<ChangelogPage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
@@ -126,7 +124,7 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                     <Link to="/reviews">Reviews</Link>{" "}
                   </>
                 )}
-                <a href="/roadmap">Roadmap</a> <Link to="/changelog">Changelog</Link>{" "}
+                <a href="/roadmap">Roadmap</a> <a href="/changelog">Changelog</a>{" "}
                 <a href="/credits">Credits</a>
               </div>
             </div>
