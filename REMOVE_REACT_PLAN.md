@@ -15,7 +15,7 @@
 - [ ] Port /import-show (ImportShowPage)
 - [x] Port /changelog (ChangelogPage)
 - [x] Port /roadmap (RoadmapPage)
-- [ ] Port /admin (AdminPage)
+- [x] Port /admin (AdminPage)
 - [ ] Port /:handle (ProfilePage)
 - [ ] Port /:handle/reviews (ProfileReviewsPage)
 - [ ] Port /:handle/following (ProfileFollowingPage)

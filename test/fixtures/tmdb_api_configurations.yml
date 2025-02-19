@@ -1,0 +1,16 @@
+only:
+  secure_base_url: "https://image.tmdb.org/t/p/"
+  fetched_at: "1988-08-29"
+  poster_sizes:
+    - w92
+    - w154
+    - w185
+    - w342
+    - w500
+    - w780
+    - original
+  still_sizes:
+    - w92
+    - w185
+    - w300
+    - original
