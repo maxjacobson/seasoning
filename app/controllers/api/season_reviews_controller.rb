@@ -1,25 +1,6 @@
 module API
   # People can review seasons of shows
   class SeasonReviewsController < ApplicationController
-    def index
-      authorize! { current_human.present? }
-
-      reviews = SeasonReview
-                .order(created_at: :desc)
-                .viewable_by(current_human)
-                .of_interest_to(current_human)
-                .limit(10)
-
-      render json: {
-        data: reviews.map do |review|
-          {
-            show: ShowSerializer.one(review.season.show),
-            review: SeasonReviewSerializer.one(review)
-          }
-        end
-      }
-    end
-
     def show
       review = SeasonReview.joins(:author).joins(season: :show).where(
         author: { handle: params.require(:handle) },

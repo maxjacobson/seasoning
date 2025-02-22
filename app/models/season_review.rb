@@ -31,10 +31,4 @@ class SeasonReview < ApplicationRecord
       SQL
       .distinct
   }
-
-  scope :of_interest_to, lambda { |viewer|
-    where(author: viewer).or(
-      where(author: viewer.followings)
-    )
-  }
 end
