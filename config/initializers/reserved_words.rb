@@ -14,6 +14,7 @@ RESERVED_WORDS = %w[
   reviews
   undefined
   import-show
+  import-shows
   search
   changelog
   roadmap

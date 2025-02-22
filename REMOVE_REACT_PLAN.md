@@ -12,7 +12,7 @@
 - [ ] Port /reviews (ReviewsFeedPage)
 - [x] Port /credits (CreditsPage)
 - [x] Port /settings (SettingsPage)
-- [ ] Port /import-show (ImportShowPage)
+- [x] Port /import-show (ImportShowPage)
 - [x] Port /changelog (ChangelogPage)
 - [x] Port /roadmap (RoadmapPage)
 - [x] Port /admin (AdminPage)
