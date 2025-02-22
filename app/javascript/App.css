@@ -113,7 +113,7 @@ a:hover {
 }
 
 .flash {
-  @apply rounded-sm p-2;
+  @apply mb-2 rounded-sm p-2;
 }
 
 .flash.flash-notice {
