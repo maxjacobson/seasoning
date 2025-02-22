@@ -1,0 +1,160 @@
+{
+  "adult": false,
+  "backdrop_path": "/o35U5p9J3eDsqrgfCpYUOO2lsuG.jpg",
+  "created_by": [
+    {
+      "id": 1318793,
+      "credit_id": "537081c2c3a368122600f2d5",
+      "name": "Christopher Cantwell",
+      "original_name": "Christopher Cantwell",
+      "gender": 2,
+      "profile_path": null
+    },
+    {
+      "id": 1318794,
+      "credit_id": "537081cbc3a368122000f77b",
+      "name": "Christopher C. Rogers",
+      "original_name": "Christopher C. Rogers",
+      "gender": 2,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [43],
+  "first_air_date": "2014-06-01",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.amcplus.com/shows/halt-and-catch-fire--1002226",
+  "id": 59659,
+  "in_production": false,
+  "languages": ["en"],
+  "last_air_date": "2017-10-14",
+  "last_episode_to_air": {
+    "id": 1366654,
+    "name": "Ten of Swords",
+    "overview": "In the series finale, Donna celebrates a milestone with her closest allies. Cameron contemplates saying goodbye as Joe confronts an uncertain future.",
+    "vote_average": 9.1,
+    "vote_count": 7,
+    "air_date": "2017-10-14",
+    "episode_number": 10,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 52,
+    "season_number": 4,
+    "show_id": 59659,
+    "still_path": "/o5lGn18VmVFfHZ9jNrfoif8xBx3.jpg"
+  },
+  "name": "Halt and Catch Fire",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 174,
+      "logo_path": "/pmvRmATOCaDykE6JrVoeYxlFHw3.png",
+      "name": "AMC",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 40,
+  "number_of_seasons": 4,
+  "origin_country": ["US"],
+  "original_language": "en",
+  "original_name": "Halt and Catch Fire",
+  "overview": "During the rise of the PC era in the early 1980s, an unlikely trio - a visionary, an engineer and a prodigy - take personal and professional risks in the race to build a computer that will change the world as they know it.",
+  "popularity": 27.232,
+  "poster_path": "/8P2hs6Ok5DvieM9N2VjDZfJ6v59.jpg",
+  "production_companies": [
+    {
+      "id": 23242,
+      "logo_path": "/ucE6dN6pUPfZHH5JlXkq44TDUMS.png",
+      "name": "AMC Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 176992,
+      "logo_path": null,
+      "name": "Lockjaw",
+      "origin_country": ""
+    },
+    {
+      "id": 2605,
+      "logo_path": null,
+      "name": "Gran Via Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 176993,
+      "logo_path": null,
+      "name": "320 Sycamore",
+      "origin_country": ""
+    },
+    {
+      "id": 176994,
+      "logo_path": null,
+      "name": "Sic Semper Tyrannis",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2014-06-01",
+      "episode_count": 10,
+      "id": 60448,
+      "name": "Season 1",
+      "overview": "In 1983, personal computing was anyone's game. Navigating the thin line between visionary and fraud, genius and delusion, an unlikely trio - a visionary, an engineer, and a prodigy - take personal and professional risks in the race to build a computer that will change the world as they know it. The battle for CTRL begins.",
+      "poster_path": "/xZ0VPug3RGmxF58n3XDYVHzKLzC.jpg",
+      "season_number": 1,
+      "vote_average": 7.9
+    },
+    {
+      "air_date": "2015-05-31",
+      "episode_count": 10,
+      "id": 65354,
+      "name": "Season 2",
+      "overview": "Joe, Gordon, and Bosworth are caught up in their own \"online\" wave while attempting to heal old wounds. This season explores the thin line that separates genius from self-delusion and the desire to leave a meaningful mark on the world.",
+      "poster_path": "/v25YEgW84NyUb4kHk4PUtYHV3Kh.jpg",
+      "season_number": 2,
+      "vote_average": 7.9
+    },
+    {
+      "air_date": "2016-08-21",
+      "episode_count": 10,
+      "id": 78510,
+      "name": "Season 3",
+      "overview": "Season 3 returns six months after the move from Texas as each character faces new challenges trying to find their place in this new environment. Cameron and Donna hunt for an idea that will launch Mutiny as a key player. Gordon struggles to find a place within his wife's company. Joe continues to build upon his empire, reinventing himself which ultimately sends him back into the lives of his old partners.",
+      "poster_path": "/nuvOKRP1e4VrXNUm9oHrHbpvNc9.jpg",
+      "season_number": 3,
+      "vote_average": 8.4
+    },
+    {
+      "air_date": "2017-08-19",
+      "episode_count": 10,
+      "id": 81252,
+      "name": "Season 4",
+      "overview": "The final season chronicles the tech industry and the birth of the Internet in the 1980s and early 1990s and sees each character navigate the early days of the Internet as they search for answers, both personally and professionally, while the competitive nature of the tech world continues to grow and affect their relationships.",
+      "poster_path": "/8P2hs6Ok5DvieM9N2VjDZfJ6v59.jpg",
+      "season_number": 4,
+      "vote_average": 8.2
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "What are you searching for?",
+  "type": "Scripted",
+  "vote_average": 7.931,
+  "vote_count": 487
+}
