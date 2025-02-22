@@ -1,6 +1,0 @@
-#!/bin/sh
-
-set -ex
-
-exe/node-lint
-exe/ruby-lint
