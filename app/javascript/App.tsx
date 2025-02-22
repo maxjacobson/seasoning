@@ -13,7 +13,6 @@ import { ProfileFollowersPage } from "./pages/ProfileFollowersPage";
 import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { ProfileReviewsPage } from "./pages/ProfileReviewsPage";
-import { ReviewsFeedPage } from "./pages/ReviewsFeedPage";
 import { SearchResultsPage } from "./pages/SearchResultsPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
@@ -90,7 +89,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                   element={<SeasonReviewPage />}
                 />
 
-                <Route path="/reviews" element={<ReviewsFeedPage />} />
                 <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
                 <Route path="/:handle/following" element={<ProfileFollowingPage />} />

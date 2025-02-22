@@ -17,7 +17,7 @@ Rails.application.routes.draw do
         end
       end
       resources :follows, only: [:create]
-      resources :season_reviews, only: [:create, :index], path: "/season-reviews"
+      resources :season_reviews, only: [:create], path: "/season-reviews"
       resource :season_review, only: [:show, :destroy], path: "/season-review"
       resource :human_limits, only: [:show], path: "/human-limits", controller: "human_limits"
     end

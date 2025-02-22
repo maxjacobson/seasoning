@@ -9,7 +9,7 @@
 - [ ] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug (SeasonReviewPage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug/:viewing (SeasonReviewPage)
-- [ ] Port /reviews (ReviewsFeedPage)
+- [x] Remove /reviews (ReviewsFeedPage)
 - [x] Port /credits (CreditsPage)
 - [x] Port /settings (SettingsPage)
 - [x] Port /import-show (ImportShowPage)
