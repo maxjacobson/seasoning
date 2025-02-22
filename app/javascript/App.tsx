@@ -18,7 +18,6 @@ import { ReviewsFeedPage } from "./pages/ReviewsFeedPage";
 import { SearchResultsPage } from "./pages/SearchResultsPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
-import { SettingsPage } from "./pages/SettingsPage";
 import { ShowPage } from "./pages/ShowPage";
 import { ShowSearchBar } from "./components/ShowSearchBar";
 
@@ -59,9 +58,9 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                     <Link to={`/${guest.human.handle}`} className="mr-2">
                       Your page
                     </Link>
-                    <Link to="/settings" className="mr-2">
+                    <a href="/settings" className="mr-2">
                       Settings
-                    </Link>
+                    </a>
                     <a
                       href="#"
                       onClick={() => {
@@ -93,7 +92,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 />
 
                 <Route path="/reviews" element={<ReviewsFeedPage />} />
-                <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/import-show" element={<ImportShowPage />} />
                 <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />

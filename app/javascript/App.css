@@ -111,3 +111,15 @@ a:hover {
 .select-field {
   @apply focus:border-yellow-400 focus:ring-yellow-400;
 }
+
+.flash {
+  @apply rounded-sm p-2;
+}
+
+.flash.flash-notice {
+  @apply bg-green-200;
+}
+
+.flash.flash-alert {
+  @apply bg-orange-300;
+}

@@ -10,9 +10,11 @@
         f.select(
           :statuses,
           MyShow.statuses.keys.map { [it.humanize, it] },
-          class: "select-field block mt-2",
-          multiple: true,
-          selected: @filters.statuses
+          {
+            multiple: true,
+            selected: @filters.statuses
+          },
+          class: "select-field block mt-2"
         )
       %>
 

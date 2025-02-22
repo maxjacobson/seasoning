@@ -17,7 +17,6 @@ Rails.application.routes.draw do
         end
       end
       resources :imports, only: [:index, :create]
-      resource :settings, only: [:show, :update]
       resources :follows, only: [:create]
       resources :season_reviews, only: [:create, :index], path: "/season-reviews"
       resource :season_review, only: [:show, :destroy], path: "/season-review"
@@ -33,6 +32,7 @@ Rails.application.routes.draw do
   resources :magic_links, only: [:create], path: "magic-links"
   resources :humans, only: [:create]
   resources :shows, only: [:index]
+  resource :settings, only: [:show, :update]
   get "/logout", to: "sessions#destroy", as: :logout
   get "/check-your-email", to: "check_your_email#show", as: :check_your_email
   get "/knock-knock/:token", to: "magic_links#show", as: :redeem_magic_link

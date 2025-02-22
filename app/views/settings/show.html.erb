@@ -1,0 +1,57 @@
+<%= content_for :title do %>
+  Settings
+<% end %>
+
+<div>
+  <h1 class="text-2xl">Settings</h1>
+
+  <%= form_with model: current_human, url: settings_path, method: :patch do |f| %>
+
+    <div class="my-6">
+      <h2 class="text-xl">Profile page</h2>
+
+      <%= f.checkbox :share_currently_watching, class: "text-yellow-500" %>
+      <%= f.label :share_currently_watching %>
+    </div>
+
+    <div class="my-6">
+      <h2 class="text-xl">Reviews</h2>
+        <%=
+          f.select(
+            :default_review_visibility,
+            [
+              ["Anybody", "anybody"],
+              ["Mutual follows", "mutuals"],
+              ["Myself", "myself"]
+            ],
+            {},
+            class: "select-field"
+          )
+        %>
+        <%= f.label :default_review_visibility %>
+
+        <p>
+          This is just a default for new reviews, you can pick another visibility on a
+          review-by-review basis!
+        </p>
+      </div>
+      <div class="my-6">
+        <h2 class="text-xl">Limits</h2>
+
+        <%=
+          f.select(
+            :currently_watching_limit,
+            [
+              [["None", nil]],
+              (1..10).map { [it.to_s, it] }
+            ].flatten(1),
+            {},
+            class: "select-field"
+          )
+        %>
+        <%= f.label :currently_watching_limit %>
+      </div>
+
+    <%= f.submit "Update settings", class: "rounded-button" %>
+  <% end %>
+</div>
