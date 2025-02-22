@@ -2,7 +2,7 @@ require "test_helper"
 
 # Setup for system tests
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driver = if ENV["CI"] || ENV["HEADLESS"]
+  driver = if ENV["CI"] || ENV["HEADLESS"] == "1"
              :headless_chrome
            else
              :chrome

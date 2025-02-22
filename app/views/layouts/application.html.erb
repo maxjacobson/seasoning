@@ -32,8 +32,7 @@
             <%= render "show_search_bar" %>
             <%# FIXME - use route helper %>
             <%= link_to "Your page", "/#{current_human.handle}", class: "mr-2" %>
-            <%# FIXME - use route helper %>
-            <%= link_to "Settings", "/settings", class: "mr-2" %>
+            <%= link_to "Settings", settings_path, class: "mr-2" %>
 
             <%# FIXME - make this a DELETE request %>
             <%= link_to "Log out", logout_path %>
@@ -42,7 +41,7 @@
       </div>
       <div class="mx-auto my-0 max-w-2xl p-2">
         <% flash.each do |key, message| %>
-          <div><%= message %></div>
+          <div class="flash flash-<%= key %>"><%= message %></div>
         <% end %>
 
         <%= yield %>
