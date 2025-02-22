@@ -14,7 +14,7 @@ Demo: <https://www.youtube.com/watch?v=4aB6LbN2ff8>
 
 1. Install ruby, node, and postgres
 1. Run `cp .env.development .env.development.local` and fill out `.env.development.local`
-1. Run `exe/setup`
+1. Run `bin/setup`
 
 Then to start things up, run these two commands in two separate terminal tabs:
 

@@ -38,8 +38,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm install
-      - run: exe/ruby-lint
-      - run: exe/node-lint
+      - run: bin/ruby-lint
+      - run: bin/node-lint
       - run: bundle exec rake assets:precompile
       - run: bin/rails db:create db:schema:load
         env:
