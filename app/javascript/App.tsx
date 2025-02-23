@@ -114,11 +114,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                     <a href="/admin">Admin</a>
                   </>
                 )}
-                {guest.authenticated && (
-                  <>
-                    <Link to="/reviews">Reviews</Link>{" "}
-                  </>
-                )}
                 <a href="/roadmap">Roadmap</a> <a href="/changelog">Changelog</a>{" "}
                 <a href="/credits">Credits</a>
               </div>
