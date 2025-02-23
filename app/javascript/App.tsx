@@ -9,8 +9,6 @@ import { LoadingRibbon } from "./components/LoadingRibbon";
 import LogoWithName from "./images/logo-with-name.svg";
 import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import { ProfileFollowersPage } from "./pages/ProfileFollowersPage";
-import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
 import { ShowPage } from "./pages/ShowPage";
@@ -94,8 +92,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                   element={<SeasonReviewPage />}
                 />
 
-                <Route path="/:handle/following" element={<ProfileFollowingPage />} />
-                <Route path="/:handle/followers" element={<ProfileFollowersPage />} />
                 <Route
                   path="/shows/:showSlug/:seasonSlug/reviews/new"
                   element={<NewSeasonReviewPage />}

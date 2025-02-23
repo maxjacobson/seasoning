@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   get "/:handle", to: "human_profiles#show", as: :human_profile
   scope "/:handle", as: "profile" do
     resources :reviews, only: [:index]
+    resources :followers, only: [:index]
+    resources :followings, only: [:index], path: "following"
   end
   get "/*anything", to: "frontend#show"
 end
