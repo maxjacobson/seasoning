@@ -21,7 +21,7 @@
 - [ ] Port /:handle/following (ProfileFollowingPage)
 - [ ] Port /:handle/followers (ProfileFollowersPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
-- [ ] Port /search (SearchResultsPage)
+- [x] Port /search (SearchResultsPage)
 - [ ] Remove unused JavaScript dependencies (react, vite, etc)
 - [ ] Remove API endpoints
 - [ ] Remove JSON serializer classes

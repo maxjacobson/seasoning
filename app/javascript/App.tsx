@@ -2,9 +2,9 @@ import "./App.css";
 
 import { BrowserRouter, Link, Route, Routes, useSearchParams } from "react-router";
 import { FunctionComponent, useState } from "react";
-import { Guest, Show } from "./types";
 import { GuestContext, SetLoadingContext } from "./contexts";
 import { EpisodePage } from "./pages/EpisodePage";
+import { Guest } from "./types";
 import { LoadingRibbon } from "./components/LoadingRibbon";
 import LogoWithName from "./images/logo-with-name.svg";
 import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage";
@@ -13,11 +13,9 @@ import { ProfileFollowersPage } from "./pages/ProfileFollowersPage";
 import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { ProfileReviewsPage } from "./pages/ProfileReviewsPage";
-import { SearchResultsPage } from "./pages/SearchResultsPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
 import { ShowPage } from "./pages/ShowPage";
-import { ShowSearchBar } from "./components/ShowSearchBar";
 
 interface Props {
   guest: Guest;
@@ -25,9 +23,8 @@ interface Props {
 
 const App: FunctionComponent<Props> = ({ guest }: Props) => {
   const [loading, setLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<Show[] | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("q") || "";
+  const [searchParams] = useSearchParams();
+  const [searchQuery, setSearchquery] = useState(searchParams.get("q") || "");
 
   return (
     <>
@@ -44,12 +41,22 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
               </div>
               <div className="pr-2">
                 {guest.authenticated && (
-                  <ShowSearchBar
-                    guest={guest}
-                    callback={setSearchResults}
-                    query={searchQuery}
-                    setQuery={(newSearchQuery) => setSearchParams({ q: newSearchQuery })}
-                  />
+                  <form
+                    className="md:mr-2 md:inline"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      window.location.replace(`/search?q=${encodeURIComponent(searchQuery)}`);
+                    }}
+                  >
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      value={searchQuery}
+                      onChange={(event) => setSearchquery(event.target.value)}
+                      className="text-field mr-2"
+                    />
+                    <input type="submit" className="rounded-button" value="Search" />
+                  </form>
                 )}
                 {guest.authenticated && (
                   <>
@@ -96,10 +103,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 <Route
                   path="/shows/:showSlug/:seasonSlug/reviews/new"
                   element={<NewSeasonReviewPage />}
-                />
-                <Route
-                  path="/search"
-                  element={<SearchResultsPage searchResults={searchResults} />}
                 />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

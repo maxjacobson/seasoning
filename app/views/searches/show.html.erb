@@ -1,0 +1,28 @@
+<%= content_for :title do %>
+  Search
+<% end %>
+
+<h1 class="text-2xl">Search results</h1>
+
+<% if @shows.any? %>
+  <ul class="list-inside list-disc">
+    <% @shows.each do |show| %>
+      <li>
+        <%# FIXME - use the nice helper %>
+        <%= link_to "/shows/#{show.slug}" do %>
+          <%= show.title %>
+          <% if show.first_air_date %>
+            (<%= show.first_air_date.year %>)
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No results. Try searching something else.</p>
+<% end %>
+
+<p>
+  Not seeing what you&rsquo;re looking for? You might be the first person to want to add it.
+  Feel free to <%= link_to "import it here", importable_shows_path(params.permit(:q)) %>.
+</p>
