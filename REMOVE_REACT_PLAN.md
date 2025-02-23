@@ -16,12 +16,13 @@
 - [x] Port /changelog (ChangelogPage)
 - [x] Port /roadmap (RoadmapPage)
 - [x] Port /admin (AdminPage)
-- [ ] Port /:handle (ProfilePage)
+- [x] Port /:handle (ProfilePage)
 - [ ] Port /:handle/reviews (ProfileReviewsPage)
 - [ ] Port /:handle/following (ProfileFollowingPage)
 - [ ] Port /:handle/followers (ProfileFollowersPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
 - [x] Port /search (SearchResultsPage)
+- [ ] Review all of the FIXMEs
 - [ ] Remove unused JavaScript dependencies (react, vite, etc)
 - [ ] Remove API endpoints
 - [ ] Remove JSON serializer classes

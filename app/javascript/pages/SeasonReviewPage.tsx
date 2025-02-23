@@ -1,6 +1,6 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
 import { Human, Season, SeasonReview, Show } from "../types";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Markdown } from "../components/Markdown";
@@ -32,7 +32,6 @@ type SeasonReviewData = LoadingReviewData | LoadedReviewData | ReviewDataNotFoun
 export const SeasonReviewPage = () => {
   const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true });
   const { handle, showSlug, seasonSlug, viewing } = useParams();
-  const navigate = useNavigate();
   const guest = useContext(GuestContext);
   const setLoading = useContext(SetLoadingContext);
 
@@ -101,7 +100,7 @@ export const SeasonReviewPage = () => {
         <h1 className="text-2xl">Not found</h1>
         <p>Review not found!</p>
         <p>
-          <Link to={`/${handle}`}>Back</Link>
+          <a href={`/${handle}`}>Back</a>
         </p>
       </div>
     );
@@ -116,7 +115,7 @@ export const SeasonReviewPage = () => {
 
       <div>
         <h3>
-          <Link to={`/${handle}`}>{handle}</Link>&rsquo;s review of{" "}
+          <a href={`/${handle}`}>{handle}</a>&rsquo;s review of{" "}
           <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link> of{" "}
           <Link to={`/shows/${show.slug}`}>{show.title}</Link>.
         </h3>
@@ -169,7 +168,8 @@ export const SeasonReviewPage = () => {
                   setLoading(false);
 
                   if (response.ok) {
-                    await navigate(`/${handle}`);
+                    // hard refresh
+                    window.location.pathname = `/${handle}`;
                   } else {
                     throw new Error("Could not delete");
                   }

@@ -11,6 +11,10 @@ class Human < ApplicationRecord
   validates :handle, exclusion: { in: RESERVED_WORDS, message: "%<value>s is reserved" }
   validates :currently_watching_limit, numericality: { in: 1..10, allow_nil: true }
 
+  def currently_watching
+    shows.where(my_shows: { status: "currently_watching" }).alphabetical
+  end
+
   def followers
     human_ids = Follow.where(followee_id: id).pluck(:follower_id)
     Human.where(id: human_ids)
@@ -19,5 +23,9 @@ class Human < ApplicationRecord
   def followings
     human_ids = Follow.where(follower_id: id).pluck(:followee_id)
     Human.where(id: human_ids)
+  end
+
+  def follows?(other)
+    Follow.find_by(follower_id: id, followee_id: other.id)
   end
 end

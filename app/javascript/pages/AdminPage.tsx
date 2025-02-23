@@ -1,7 +1,6 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
 import { loadData, setHeadTitle } from "../hooks";
 import { Human } from "../types";
-import { Link } from "react-router";
 import { useContext } from "react";
 
 type AdminData = {
@@ -67,7 +66,7 @@ export const AdminPage = () => {
           {adminData.data.recentHumans.map((human) => {
             return (
               <li key={human.handle}>
-                <Link to={`/${human.handle}`}>{human.handle}</Link>
+                <a href={`/${human.handle}`}>{human.handle}</a>
               </li>
             );
           })}

@@ -16,7 +16,6 @@ Rails.application.routes.draw do
           resources :episodes, only: [:show]
         end
       end
-      resources :follows, only: [:create]
       resources :season_reviews, only: [:create], path: "/season-reviews"
       resource :season_review, only: [:show, :destroy], path: "/season-review"
       resource :human_limits, only: [:show], path: "/human-limits", controller: "human_limits"
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
 
   root to: "magic_links#new"
   resource :admin, only: [:show]
+  resources :follows, only: [:create, :destroy]
   resource :credits, only: [:show]
   resource :roadmap, only: [:show]
   resource :changelog, only: [:show]
@@ -37,5 +37,6 @@ Rails.application.routes.draw do
   get "/logout", to: "sessions#destroy", as: :logout
   get "/check-your-email", to: "check_your_email#show", as: :check_your_email
   get "/knock-knock/:token", to: "magic_links#show", as: :redeem_magic_link
+  get "/:handle", to: "human_profiles#show", as: :human_profile
   get "/*anything", to: "frontend#show"
 end

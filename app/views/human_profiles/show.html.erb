@@ -1,0 +1,75 @@
+<%= content_for :title do %>
+  <%= @human.handle %>
+<% end %>
+
+<div>
+  <h1 class="text-2xl"><%= @human.handle %></h1>
+
+  <% if current_human && current_human != @human %>
+    <% if (follow = current_human.follows?(@human)) %>
+      <%=
+        button_to(
+          "Unfollow",
+          follow_path(follow),
+          class: "rounded-button",
+          params: { followee_id: @human.id },
+          method: :delete
+        )
+      %>
+    <% else %>
+      <%=
+        button_to(
+          "Follow",
+          follows_path,
+          class: "rounded-button",
+          params: { followee_id: @human.id },
+          method: :post
+        )
+      %>
+    <% end %>
+  <% end %>
+
+  <div>
+    <div>
+      <p><em>Joined Seasoning on <%= @human.created_at %></em></p>
+      <ul class="list-inside list-disc">
+        <li class="inline">
+          <%# FIXME - use route helper %>
+          <%= link_to "reviews (#{@human.season_reviews.count})", "/#{@human.handle}/reviews" %>
+        </li>
+        <li class="ml-2 inline">
+          <%# FIXME - use route helper %>
+          <%= link_to "followers (#{@human.followers.count})", "/#{@human.handle}/followers" %>
+        </li>
+        <li class="ml-2 inline">
+          <%# FIXME - use route helper %>
+          <%= link_to "following (#{@human.followings.count})", "/#{@human.handle}/following" %>
+        </li>
+      </ul>
+    </div>
+
+    <% if @human.share_currently_watching? %>
+      <div>
+        <h2 class="text-xl">Currently watching</h2>
+
+        <% if @human.currently_watching.any? %>
+          <div class="flex flex-wrap gap-1">
+            <% @human.currently_watching.each do |show| %>
+              <div class="w-32">
+                <%# FIXME - use route helper %>
+                <%= link_to "/shows/#{show.slug}" do %>
+                  <div>
+                    <%= render "poster", size: "small", url: show.poster.url, show: show %>
+                  </div>
+                  <%= show.title %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p><%= @human.handle %> is not currently watching anything</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -30,8 +30,7 @@
         <div class="pr-2">
           <% if current_human.present? %>
             <%= render "show_search_bar" %>
-            <%# FIXME - use route helper %>
-            <%= link_to "Your page", "/#{current_human.handle}", class: "mr-2" %>
+            <%= link_to "Your page", human_profile_path(current_human.handle), class: "mr-2" %>
             <%= link_to "Settings", settings_path, class: "mr-2" %>
 
             <%# FIXME - make this a DELETE request %>
