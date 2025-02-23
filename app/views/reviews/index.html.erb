@@ -1,0 +1,32 @@
+<%= content_for :title do %>
+  <%= @profile.handle %>&rsquo;s reviews
+<% end %>
+
+<h1 class="text-2xl"><%= @profile.handle %>&rsquo;s reviews</h1>
+<% if @reviews.any? %>
+  <% @reviews.each do |review| %>
+    <h2 class="text-xl">
+      <%= link_to "Review by #{review.author.handle}", proper_review_path(review) %>
+    </h2>
+    <div>
+      <h2 class="text-lg">
+        <%= review.season.show.title %> &mdash; <%= review.season.name %>
+      </h2>
+      <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
+
+      <div>
+        <% if review.rating %>
+          <%= render "star_rating", rating: review.rating %>
+        <% else %>
+          No rating
+        <% end %>
+      </div>
+      <div>
+        <%= link_to "Read", proper_review_path(review) %>
+      </div>
+    </div>
+  <% end %>
+  <p><strong>Note:</strong> this is just the 10 most recent reviews!</p>
+<% else %>
+  <p>No reviews yet!</p>
+<% end %>

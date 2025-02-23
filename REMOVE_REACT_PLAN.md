@@ -19,7 +19,7 @@
 - [x] Port /roadmap (RoadmapPage)
 - [x] Port /admin (AdminPage)
 - [x] Port /:handle (ProfilePage)
-- [ ] Port /:handle/reviews (ProfileReviewsPage)
+- [x] Port /:handle/reviews (ProfileReviewsPage)
 - [ ] Port /:handle/following (ProfileFollowingPage)
 - [ ] Port /:handle/followers (ProfileFollowersPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
