@@ -3,6 +3,7 @@ Bugsnag.configure do |config|
   config.enabled_release_stages = ["production"]
   config.app_version = ENV.fetch("HEROKU_RELEASE_VERSION", nil)
   config.ignore_classes = [
-    ActionController::UnknownFormat
+    "ActionController::UnknownFormat",
+    "ApplicationController::NotAuthorized"
   ]
 end
