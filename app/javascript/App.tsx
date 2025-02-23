@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { BrowserRouter, Link, Route, Routes, useSearchParams } from "react-router";
+import { BrowserRouter, Route, Routes, useSearchParams } from "react-router";
 import { FunctionComponent, useState } from "react";
 import { GuestContext, SetLoadingContext } from "./contexts";
 import { EpisodePage } from "./pages/EpisodePage";
@@ -11,7 +11,6 @@ import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfileFollowersPage } from "./pages/ProfileFollowersPage";
 import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
-import { ProfilePage } from "./pages/ProfilePage";
 import { ProfileReviewsPage } from "./pages/ProfileReviewsPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
@@ -60,9 +59,9 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 )}
                 {guest.authenticated && (
                   <>
-                    <Link to={`/${guest.human.handle}`} className="mr-2">
+                    <a href={`/${guest.human.handle}`} className="mr-2">
                       Your page
-                    </Link>
+                    </a>
                     <a href="/settings" className="mr-2">
                       Settings
                     </a>
@@ -96,7 +95,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                   element={<SeasonReviewPage />}
                 />
 
-                <Route path="/:handle" element={<ProfilePage />} />
                 <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
                 <Route path="/:handle/following" element={<ProfileFollowingPage />} />
                 <Route path="/:handle/followers" element={<ProfileFollowersPage />} />

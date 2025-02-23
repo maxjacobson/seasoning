@@ -1,8 +1,8 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
-import { Link, useParams } from "react-router";
 import { loadData, setHeadTitle } from "../hooks";
 import { Human } from "../types";
 import { useContext } from "react";
+import { useParams } from "react-router";
 
 export const ProfileFollowingPage = () => {
   const guest = useContext(GuestContext);
@@ -43,7 +43,7 @@ export const ProfileFollowingPage = () => {
         {followingData.data.humans.map((human) => {
           return (
             <li key={human.handle}>
-              <Link to={`/${human.handle}`}>{human.handle}</Link>
+              <a href={`/${human.handle}`}>{human.handle}</a>
             </li>
           );
         })}

@@ -16,6 +16,7 @@ export const NewSeasonReviewPage = () => {
   const guest = useContext(GuestContext);
   const setLoading = useContext(SetLoadingContext);
 
+  // FIXME: I actually broke this whoops!
   const settings = loadData<HumanSettings>(guest, "/api/settings.json", [], setLoading);
 
   const navigate = useNavigate();
