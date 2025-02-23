@@ -8,6 +8,7 @@
 - [x] Port /shows (YourShowsPage)
 - [ ] Port /shows/:showSlug (ShowPage)
 - [ ] Port /shows/:showSlug/:seasonSlug (SeasonPage)
+- [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug (SeasonReviewPage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug/:viewing (SeasonReviewPage)
@@ -20,9 +21,8 @@
 - [x] Port /admin (AdminPage)
 - [x] Port /:handle (ProfilePage)
 - [x] Port /:handle/reviews (ProfileReviewsPage)
-- [ ] Port /:handle/following (ProfileFollowingPage)
-- [ ] Port /:handle/followers (ProfileFollowersPage)
-- [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
+- [x] Port /:handle/following (ProfileFollowingPage)
+- [x] Port /:handle/followers (ProfileFollowersPage)
 - [x] Port /search (SearchResultsPage)
 - [ ] Review all of the FIXMEs
 
