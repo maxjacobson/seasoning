@@ -7,7 +7,6 @@ Some things I'm planning to work on:
 1. Like button on reviews
 1. Comments on reviews
 1. Possible to edit reviews after publishing them -- body, star rating, visibility
-1. Option to unfollow someone after following them
 1. Sort following and followers pages by when it happened
 1. Display air dates for shows and seasons
 1. Can display your favorite shows on your page (like Letterboxd)
