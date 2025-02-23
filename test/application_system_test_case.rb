@@ -11,6 +11,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def setup
     Capybara.server = :puma, { Silent: true }
+    Capybara.default_max_wait_time = 10
     super
   end
 

@@ -3,7 +3,10 @@ class SearchesController < ApplicationController
   def show
     authorize! { current_human.present? }
 
-    query = params.require(:q)
-    @shows = Show.where("title ilike ?", "%#{query}%")
+    @shows = if (query = params[:q].to_s.strip.presence)
+               Show.where("title ilike ?", "%#{query}%")
+             else
+               Show.none
+             end
   end
 end

@@ -1,5 +1,7 @@
 # Plan to remove React from Seasoning
 
+## The tedious part
+
 - [x] Make it possible to build some pages with vanilla ERB, still with access to tailwind
 - [x] Port the sign up / sign-in flow
 - [x] Confirm that this can deploy to heroku without issue
@@ -23,6 +25,9 @@
 - [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
 - [x] Port /search (SearchResultsPage)
 - [ ] Review all of the FIXMEs
+
+## The fun part
+
 - [ ] Remove unused JavaScript dependencies (react, vite, etc)
 - [ ] Remove API endpoints
 - [ ] Remove JSON serializer classes
