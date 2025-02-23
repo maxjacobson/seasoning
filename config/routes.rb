@@ -39,5 +39,8 @@ Rails.application.routes.draw do
   get "/check-your-email", to: "check_your_email#show", as: :check_your_email
   get "/knock-knock/:token", to: "magic_links#show", as: :redeem_magic_link
   get "/:handle", to: "human_profiles#show", as: :human_profile
+  scope "/:handle", as: "profile" do
+    resources :reviews, only: [:index]
+  end
   get "/*anything", to: "frontend#show"
 end

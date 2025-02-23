@@ -34,8 +34,7 @@
       <p><em>Joined Seasoning on <%= @human.created_at %></em></p>
       <ul class="list-inside list-disc">
         <li class="inline">
-          <%# FIXME - use route helper %>
-          <%= link_to "reviews (#{@human.season_reviews.count})", "/#{@human.handle}/reviews" %>
+          <%= link_to "reviews (#{@human.season_reviews.count})", profile_reviews_path(@human.handle) %>
         </li>
         <li class="ml-2 inline">
           <%# FIXME - use route helper %>

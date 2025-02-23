@@ -11,7 +11,6 @@ import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfileFollowersPage } from "./pages/ProfileFollowersPage";
 import { ProfileFollowingPage } from "./pages/ProfileFollowingPage";
-import { ProfileReviewsPage } from "./pages/ProfileReviewsPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
 import { ShowPage } from "./pages/ShowPage";
@@ -95,7 +94,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                   element={<SeasonReviewPage />}
                 />
 
-                <Route path="/:handle/reviews" element={<ProfileReviewsPage />} />
                 <Route path="/:handle/following" element={<ProfileFollowingPage />} />
                 <Route path="/:handle/followers" element={<ProfileFollowersPage />} />
                 <Route
