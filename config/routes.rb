@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :shows, only: [:index]
   resource :settings, only: [:show, :update]
   resources :importable_shows, only: [:index, :create], path: "import-shows"
+  resource :search, only: [:show]
   get "/logout", to: "sessions#destroy", as: :logout
   get "/check-your-email", to: "check_your_email#show", as: :check_your_email
   get "/knock-knock/:token", to: "magic_links#show", as: :redeem_magic_link
