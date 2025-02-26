@@ -286,7 +286,7 @@ GEM
     reline (0.6.0)
       io-console (~> 0.5)
     rexml (3.4.1)
-    rubocop (1.72.2)
+    rubocop (1.73.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -297,7 +297,7 @@ GEM
       rubocop-ast (>= 1.38.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.38.0)
+    rubocop-ast (1.38.1)
       parser (>= 3.3.1.0)
     rubocop-capybara (2.21.0)
       rubocop (~> 1.41)
@@ -496,8 +496,8 @@ CHECKSUMS
   regexp_parser (2.10.0) sha256=cb6f0ddde88772cd64bff1dbbf68df66d376043fe2e66a9ef77fcb1b0c548c61
   reline (0.6.0) sha256=57620375dcbe56ec09bac7192bfb7460c716bbf0054dc94345ecaa5438e539d2
   rexml (3.4.1) sha256=c74527a9a0a04b4ec31dbe0dc4ed6004b960af943d8db42e539edde3a871abca
-  rubocop (1.72.2) sha256=0259a32d89fee60882bf4c4d8847e696357719c9db4971839da742bf053ae96b
-  rubocop-ast (1.38.0) sha256=4fdf6792fe443a9a18acb12dbc8225d0d64cd1654e41fedb30e79c18edbb26ae
+  rubocop (1.73.0) sha256=8a86a9030594cda8d90bd39a3b2d4f21319065b29a8ce19c843d02b5a26d648f
+  rubocop-ast (1.38.1) sha256=80ecbe2ac9bb26693cab9405bf72b41b85a1f909f20f021b983c32c2e7d857fe
   rubocop-capybara (2.21.0) sha256=5d264efdd8b6c7081a3d4889decf1451a1cfaaec204d81534e236bc825b280ab
   rubocop-minitest (0.37.1) sha256=dcdcc2c835a859193e50bc67296daaf95ac99f6410838119374df31490460d36
   rubocop-rails (2.30.2) sha256=1948435c001e3e5981f90cc451b800e5386a609baf8a8ebbaf4cb310e071027a
