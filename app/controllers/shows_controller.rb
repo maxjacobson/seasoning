@@ -1,6 +1,6 @@
 # Lists/filters the shows a human has added
 class ShowsController < ApplicationController
-  PAGE_SIZE = 10
+  PAGE_SIZE = 25
 
   def index
     authorize! { current_human.present? }
