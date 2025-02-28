@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     @reviews = SeasonReview
                .where(author: @profile)
                .viewable_by(current_human)
-               .limit(25)
+               .limit(30)
                .order(created_at: :desc)
   end
 end
