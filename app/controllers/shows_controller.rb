@@ -29,7 +29,12 @@ class ShowsController < ApplicationController
     my_shows = my_shows.where(status: filters.statuses) if filters.statuses.present?
 
     if filters.q.present?
-      my_shows.where("shows.title ilike ?", "%#{filters.q}%")
+      my_shows.where(
+        <<~SQL.squish,
+          (shows.title ilike :query) or (my_shows.note_to_self ilike :query)
+        SQL
+        query: "%#{filters.q}%"
+      )
     else
       my_shows
     end
