@@ -9,7 +9,7 @@ module API
       reviews = SeasonReview
                 .where(author: profile)
                 .viewable_by(current_human)
-                .limit(10)
+                .limit(25)
                 .order(created_at: :desc)
 
       render json: {

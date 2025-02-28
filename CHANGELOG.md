@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **February 27, 2025** — Show 25 shows/reviews per page instead of 10
 1. **February 23, 2025** — Humans can unfollow each other
 1. **February 17, 2025** — Start the process of removing React from the frontend
 1. **July 30, 2023** — On show page, you can hover on the checkbox to see how many episodes have been watched for each season
