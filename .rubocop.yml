@@ -3,8 +3,6 @@ inherit_from: .rubocop_todo.yml
 plugins:
   - rubocop-rails
   - rubocop-minitest
-
-require:
   - rubocop-capybara
 
 AllCops:
