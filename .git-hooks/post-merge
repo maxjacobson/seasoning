@@ -3,3 +3,4 @@
 set -e
 
 npm install
+npm run playwright:install
