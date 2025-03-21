@@ -1,13 +1,14 @@
 require "test_helper"
 
+Capybara.register_driver :my_playwright do |app|
+  Capybara::Playwright::Driver.new(app,
+                                   browser_type: ENV["PLAYWRIGHT_BROWSER"]&.to_sym || :chromium,
+                                   headless: (false unless ENV["CI"] || ENV["HEADLESS"]))
+end
+
 # Setup for system tests
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driver = if ENV["CI"] || ENV["HEADLESS"] == "1"
-             :headless_chrome
-           else
-             :chrome
-           end
-  driven_by :selenium, using: driver, screen_size: [1400, 1400]
+  driven_by :my_playwright
 
   def setup
     Capybara.server = :puma, { Silent: true }

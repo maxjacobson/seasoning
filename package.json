@@ -15,6 +15,7 @@
     "eslint": "^9.22.0",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^16.0.0",
+    "playwright": "^1.51.1",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
@@ -34,6 +35,7 @@
     "typescript": "^5.8.2"
   },
   "scripts": {
+    "playwright:install": "playwright install",
     "build:css": "tailwindcss -i ./app/javascript/App.css -o ./app/assets/builds/app.css --minify"
   }
 }
