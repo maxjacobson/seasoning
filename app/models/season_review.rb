@@ -21,12 +21,12 @@ class SeasonReview < ApplicationRecord
       .where(<<~SQL.squish, viewer_id: viewer&.id)
         (visibility = 'anybody')
         or (
-          visibility = 'myself'
+          visibility in ('myself', 'mutuals')
           and author_id = :viewer_id
         ) or (
           visibility = 'mutuals'
-          and author_followers.follower_id = author_follows.followee_id
-          and author_follows.follower_id = author_followers.followee_id
+          and author_followers.follower_id = :viewer_id
+          and author_follows.followee_id = :viewer_id
         )
       SQL
       .distinct

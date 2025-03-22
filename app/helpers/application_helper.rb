@@ -4,14 +4,21 @@ module ApplicationHelper
     Kramdown::Document.new(text, input: "GFM").to_html
   end
 
-  # FIXME: idk what to call this
+  # Generate the proper path for a season review
   def proper_review_path(review)
-    base = "/#{review.author.handle}/shows/#{review.season.show.slug}/#{review.season.slug}"
-
     if review.viewing == 1
-      base
+      profile_season_review_path(
+        handle: review.author.handle,
+        show: review.season.show.slug,
+        season: review.season.slug
+      )
     else
-      "#{base}/#{review.viewing}"
+      profile_season_review_viewing_path(
+        handle: review.author.handle,
+        show: review.season.show.slug,
+        season: review.season.slug,
+        viewing: review.viewing
+      )
     end
   end
 end

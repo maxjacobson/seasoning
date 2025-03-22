@@ -10,7 +10,6 @@ import LogoWithName from "./images/logo-with-name.svg";
 import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SeasonPage } from "./pages/SeasonPage";
-import { SeasonReviewPage } from "./pages/SeasonReviewPage";
 import { ShowPage } from "./pages/ShowPage";
 
 interface Props {
@@ -86,12 +85,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                   path="/shows/:showSlug/:seasonSlug/:episodeNumber"
                   element={<EpisodePage />}
                 />
-                <Route path="/:handle/shows/:showSlug/:seasonSlug" element={<SeasonReviewPage />} />
-                <Route
-                  path="/:handle/shows/:showSlug/:seasonSlug/:viewing"
-                  element={<SeasonReviewPage />}
-                />
-
                 <Route
                   path="/shows/:showSlug/:seasonSlug/reviews/new"
                   element={<NewSeasonReviewPage />}

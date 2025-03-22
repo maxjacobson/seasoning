@@ -43,6 +43,10 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index]
     resources :followers, only: [:index]
     resources :followings, only: [:index], path: "following"
+    
+    # Season review routes
+    get "/shows/:show/:season", to: "season_reviews#show", as: "season_review"
+    get "/shows/:show/:season/:viewing", to: "season_reviews#show", as: "season_review_viewing"
   end
   get "/*anything", to: "frontend#show"
 end

@@ -1,0 +1,44 @@
+<%= content_for :title do %>
+  <%= @review.season.show.title %> - <%= @review.season.name %> Review
+<% end %>
+
+<div>
+  <h1 class="text-2xl"><%= @review.season.show.title %></h1>
+  <h2 class="text-xl"><%= @review.season.name %></h2>
+
+  <div>
+    <h3>
+      <%= link_to @review.author.handle, human_profile_path(@review.author.handle) %>&rsquo;s review of 
+      <%# FIXME: Update with proper route helpers once season and show pages are ported %>
+      <a href="/shows/<%= @review.season.show.slug %>/<%= @review.season.slug %>"><%= @review.season.name %></a> of 
+      <a href="/shows/<%= @review.season.show.slug %>"><%= @review.season.show.title %></a>.
+    </h3>
+
+    <div>
+      <h3 class="text-lg">Poster</h3>
+      <%= render "poster", show: @review.season.show, url: @review.season.poster.url, size: "large" %>
+    </div>
+
+    <div>
+      <h3 class="text-lg">Date</h3>
+      <span><%= @review.created_at.to_date %></span>
+    </div>
+
+    <% if @review.rating.present? %>
+      <div>
+        <h3 class="text-lg">Rating</h3>
+        <%= render "star_rating", rating: @review.rating %>
+      </div>
+    <% end %>
+
+    <div class="my-2 rounded-md border border-solid border-yellow-600 p-4">
+      <%= raw markdown_to_html(@review.body) %>
+    </div>
+
+    <% if current_human && @review.author == current_human %>
+      <div>
+        <%# TODO: Add delete review button functionality %>
+      </div>
+    <% end %>
+  </div>
+</div>
