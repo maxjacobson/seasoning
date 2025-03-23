@@ -6,7 +6,7 @@ module TMDB
     attribute :name, Types::String
     attribute :number_of_episodes, Types::Integer
     attribute :number_of_seasons, Types::Integer
-    attribute :popularity, Types::Float
+    attribute :popularity, Types::Coercible::Float
     attribute :poster_path, Types::String.optional
     attribute :seasons, Types::Array do
       attribute :air_date, Types::String.optional
