@@ -28,4 +28,29 @@ class SigningInTest < ApplicationSystemTestCase
     assert page.has_content?("No shows yet")
     assert_equal "/shows", page.current_path
   end
+
+  test "an expired magic link" do
+    visit root_path
+    fill_in "email", with: "donna@example.com"
+    click_on "Go"
+
+    assert page.has_content?("Check your email")
+
+    assert_equal 1, MagicLinkMailer.deliveries.count
+    assert_equal 1, MagicLink.count
+    token = MagicLink.first!.token
+
+    email = MagicLinkMailer.deliveries.first
+
+    assert_includes email.to_s, "Welcome back to Seasoning"
+
+    assert_match %r{http://127.0.0.1:57081/knock-knock/(#{token})}, email.to_s
+
+    # simulating prune:all running
+    MagicLink.destroy_all
+
+    visit redeem_magic_link_path(token)
+
+    assert page.has_content?("Hmm, that magic link does not seem to be valid.")
+  end
 end
