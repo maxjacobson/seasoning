@@ -35,10 +35,10 @@ But here's some highlights of when things happened.
 1. **December 24, 2022** — add following and followers page to profiles
 1. **December 24, 2022** — add simple admin page with some basic stats
 1. **December 24, 2022** — add [changelog page](/changelog) and [roadmap page](/roadmap)
-1. **December 24, 2022** — limit [the reviews page](/reviews) to your own reviews, and reviews from people you follow
+1. **December 24, 2022** — limit the reviews page to your own reviews, and reviews from people you follow
 1. **December 24, 2022** — limit [an individual's reviews page](/maxjacobson/reviews) to 10 recent reviews
-1. **December 24, 2022** — limit [the reviews page](/reviews) to 10 recent reviews
-1. **December 24, 2022** — limit [the reviews page](/reviews) to authenticated guests
+1. **December 24, 2022** — limit the reviews page to 10 recent reviews
+1. **December 24, 2022** — limit the reviews page to authenticated guests
 1. **December 19, 2022** — Order shows on homepage by title and status, not just status
 1. **June 18, 2022** — Magic links are now more flexibile, and will work even if you type your email with mixed case or trailing spaces
 1. **June 18, 2022** — People can delete their reviews
@@ -54,7 +54,7 @@ But here's some highlights of when things happened.
 1. **April 25, 2021** — People can tick off which seasons of shows that they've seen from the show page
 1. **April 25, 2021** — Link to profile page from review page
 1. **April 11, 2021** — [first review](/maxjacobson/shows/the-man-in-the-high-castle/season-1) is posted
-1. **April 11, 2021** — Show global feed of reviews on [reviews page](/reviews)
+1. **April 11, 2021** — Show global feed of reviews on reviews page
 1. **April 10, 2021** — People can write reviews of seasons of shows, with star ratings, text, and visibility
 1. **April 10, 2021** — People can follow each other
 1. **April 10, 2021** — People can choose whether or not to show their currently watching shows on their profile page
