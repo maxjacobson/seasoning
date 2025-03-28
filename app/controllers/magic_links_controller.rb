@@ -8,7 +8,7 @@ class MagicLinksController < ApplicationController
     if (human = @magic_link&.recipient).present?
       browser_session = human.browser_sessions.create!
       session[:token] = browser_session.token
-      redirect_to root_path, notice: "Success!"
+      redirect_to root_path, notice: "Signed in! Welcome back."
     end
 
     respond_to do |format|
@@ -34,7 +34,7 @@ class MagicLinksController < ApplicationController
 
     if magic_link.save
       magic_link.deliver
-      redirect_to check_your_email_path, notice: "Success!"
+      redirect_to check_your_email_path, notice: "Sent! Check your email."
     else
       flash.now[:alert] = "Bad email!"
       render :new
