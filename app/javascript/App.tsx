@@ -78,7 +78,7 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
               </div>
             </div>
 
-            <div className="mx-auto my-0 max-w-2xl p-2">
+            <div className="mx-auto my-0 max-w-3xl p-2">
               <Routes>
                 <Route path="/shows/:showSlug" element={<ShowPage />} />
                 <Route path="/shows/:showSlug/:seasonSlug" element={<SeasonPage />} />
