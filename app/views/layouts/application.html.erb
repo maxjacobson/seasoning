@@ -32,9 +32,7 @@
             <%= render "show_search_bar" %>
             <%= link_to "Your page", human_profile_path(current_human.handle), class: "mr-2" %>
             <%= link_to "Settings", settings_path, class: "mr-2" %>
-
-            <%# FIXME - make this a DELETE request %>
-            <%= link_to "Log out", logout_path %>
+            <%= button_to "Log out", logout_path, method: :delete, class: "link-looking-button", form_class: "inline" %>
           <% end %>
         </div>
       </div>

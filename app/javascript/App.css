@@ -30,11 +30,13 @@ blockquote {
   padding-left: 5px;
 }
 
-a {
+a,
+.link-looking-button {
   color: var(--color-yellow-600);
 }
 
-a:hover {
+a:hover,
+.link-looking-button:hover {
   text-decoration: underline;
 }
 
@@ -122,4 +124,10 @@ a:hover {
 
 .flash.flash-alert {
   @apply bg-orange-300;
+}
+
+.link-looking-button {
+  all: reset;
+  display: inline;
+  cursor: pointer;
 }

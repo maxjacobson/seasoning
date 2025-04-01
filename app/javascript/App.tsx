@@ -62,17 +62,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                     <a href="/settings" className="mr-2">
                       Settings
                     </a>
-                    <a
-                      href="#"
-                      onClick={() => {
-                        if (confirm("Log out?")) {
-                          // hard navigate
-                          window.location.pathname = "/logout";
-                        }
-                      }}
-                    >
-                      Log out
-                    </a>
                   </>
                 )}
               </div>
