@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_18_013019) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_03_233742) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -149,6 +149,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_18_013019) do
     t.index ["show_id", "slug"], name: "index_seasons_on_show_id_and_slug", unique: true
     t.index ["show_id"], name: "index_seasons_on_show_id"
     t.index ["tmdb_id"], name: "index_seasons_on_tmdb_id", unique: true
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "shows", force: :cascade do |t|
