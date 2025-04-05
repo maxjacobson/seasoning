@@ -23,7 +23,7 @@ RefreshShow = lambda { |show|
           tmdb_poster_path: tmdb_season.poster_path
         )
       else
-        season = show.seasons.create(
+        season = show.seasons.create!(
           tmdb_id: tmdb_season.id,
           name: tmdb_season.name,
           season_number: tmdb_season.season_number,
