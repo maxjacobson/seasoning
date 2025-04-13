@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+path="tmp/digests/Gemfile.lock.txt"
+mkdir -p tmp/digests/
+
+if test -f $path; then
+  if md5 --quiet --check="$(cat $path)" Gemfile.lock > "$path"; then
+    exit 0
+  fi
+fi
+
+bundle install

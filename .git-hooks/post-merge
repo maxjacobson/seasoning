@@ -2,5 +2,5 @@
 
 set -e
 
-npm install
-npm run playwright:install
+bin/maybe-npm-install
+bin/maybe-bundle-install
