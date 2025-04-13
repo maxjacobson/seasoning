@@ -11,7 +11,6 @@ import { NewSeasonReviewPage } from "./pages/NewSeasonReviewPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SeasonPage } from "./pages/SeasonPage";
 import { SeasonReviewPage } from "./pages/SeasonReviewPage";
-import { ShowPage } from "./pages/ShowPage";
 
 interface Props {
   guest: Guest;
@@ -69,7 +68,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
 
             <div className="mx-auto my-0 max-w-3xl p-2">
               <Routes>
-                <Route path="/shows/:showSlug" element={<ShowPage />} />
                 <Route path="/shows/:showSlug/:seasonSlug" element={<SeasonPage />} />
                 <Route
                   path="/shows/:showSlug/:seasonSlug/:episodeNumber"

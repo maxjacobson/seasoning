@@ -1,0 +1,18 @@
+<%# locals: (my_show:) %>
+
+<%= form_with(model: my_show, url: show_your_show_path(my_show.show.slug), method: :patch) do |f| %>
+  <%= f.select(
+      :status,
+      [
+        ["Might watch", "might_watch"],
+        ["Currently watching", "currently_watching"],
+        ["Stopped watching", "stopped_watching"],
+        ["Waiting for more", "waiting_for_more"],
+        ["Finished", "finished"],
+        ["Next up", "next_up"]
+      ],
+      {},
+      class: "select-field"
+    ) %>
+  <%= f.submit "Update status", class: "rounded-button" %>
+<% end %>

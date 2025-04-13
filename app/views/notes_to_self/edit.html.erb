@@ -1,0 +1,18 @@
+<% content_for :title do %>
+  <%= @show.title %> note to self
+<% end %>
+
+<h1 class="text-2xl">
+  <%= @show.title %>
+</h1>
+
+<h2 class="text-xl">Edit note to self</h2>
+
+<p><%= link_to "Back", show_path(@show.slug) %></p>
+
+<%= form_with(model: @my_show, url: show_your_show_path(@show.slug), method: :patch) do |f| %>
+  <p>Put whatever you want in here. It&rsquo;s just for you. Feel free to use <a href="https://commonmark.org/help/" target="_blank" rel="noreferrer">Markdown</a>.</p>
+
+  <%= f.textarea :note_to_self, class: "h-48 w-5/6 focus:border-yellow-400 focus:ring-yellow-400" %>
+  <%= f.submit "Update note to self", class: "rounded-button" %>
+<% end %>

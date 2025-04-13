@@ -6,7 +6,7 @@
 - [x] Port the sign up / sign-in flow
 - [x] Confirm that this can deploy to heroku without issue
 - [x] Port /shows (YourShowsPage)
-- [ ] Port /shows/:showSlug (ShowPage)
+- [x] Port /shows/:showSlug (ShowPage)
 - [ ] Port /shows/:showSlug/:seasonSlug (SeasonPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)

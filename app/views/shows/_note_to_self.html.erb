@@ -1,0 +1,13 @@
+<%# locals: (my_show:) %>
+
+<% if my_show.note_to_self.present? %>
+  <div class="my-4 border-t border-b border-solid border-orange-200 py-4">
+    <h1 class="text-2xl">Note to self</h1>
+    <div class="break-words">
+      <%= markdown_to_html(my_show.note_to_self).html_safe %>
+    </div>
+    <%= link_to "Edit", edit_show_note_to_self_path(my_show.show.slug) %>
+  </div>
+<% else %>
+  <%= link_to "Write note to self", edit_show_note_to_self_path(my_show.show.slug) %>
+<% end %>
