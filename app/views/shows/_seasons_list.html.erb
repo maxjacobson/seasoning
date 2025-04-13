@@ -1,0 +1,24 @@
+<%# locals: (show:) %>
+
+<table class="w-full">
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th class="text-left">Episode count</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% show.seasons.each do |season| %>
+      <tr>
+        <td>
+          <%# FIXME: use the route helper when we have it %>
+          <%= link_to "/shows/#{show.slug}/#{season.slug}" do %>
+            <%= season.name %>
+          <% end %>
+        </td>
+        <td><%= season.episodes.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -31,7 +31,10 @@ Rails.application.routes.draw do
   resource :changelog, only: [:show]
   resources :magic_links, only: [:create], path: "magic-links"
   resources :humans, only: [:create]
-  resources :shows, only: [:index]
+  resources :shows, only: [:index, :show], param: :slug do
+    resource :your_show, only: [:create, :destroy, :update], path: "/relationship"
+    resource :note_to_self, only: [:edit], path: "/note-to-self", controller: "notes_to_self"
+  end
   resource :settings, only: [:show, :update]
   resources :importable_shows, only: [:index, :create], path: "import-shows"
   resource :search, only: [:show]

@@ -21,3 +21,6 @@ Some things I'm planning to work on:
 1. Some way to mark seasons as "skipped" -- for example if you add the bachelor because you want to watch the latest episode of the bachelor but you don't want to watch all 27 seasons, just the new one
 1. Some way to mark episodes as "skipped" -- for example if you start watching saturday night live mid-season and don't feel compelled to go back and watch the old episodes
 1. A "stats" page showing what were your favorite seasons of a given year, or your favorite things you watched that year
+1. Admins can click "refresh now" button shows page
+1. Add a confirmation dialog when removing shows
+1. Add a "seen?" checkbox to the seasons list on the show page

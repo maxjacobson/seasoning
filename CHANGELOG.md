@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **April 13, 2025** — Remove ability to mark an entire season as seen from the seasons list on the show page
 1. **April 13, 2025** — Remove "mutual followers" option from review visibility (it never worked) (sorry)
 1. **February 27, 2025** — Allow searching by note to self, not just title
 1. **February 27, 2025** — Show 30 shows/reviews per page instead of 10

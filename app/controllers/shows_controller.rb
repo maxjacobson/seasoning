@@ -23,6 +23,14 @@ class ShowsController < ApplicationController
                 .offset((current_page - 1) * PAGE_SIZE)
   end
 
+  def show
+    authorize! { true }
+
+    @show = Show.find_by!(slug: params[:slug])
+
+    @my_show = (current_human.my_shows.find_by(show: @show) if current_human.present?)
+  end
+
   private
 
   def search(my_shows, filters)
