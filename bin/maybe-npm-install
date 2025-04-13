@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+path="tmp/digests/package-lock.json.txt"
+mkdir -p tmp/digests/
+
+if test -f $path; then
+  if md5 --quiet --check="$(cat $path)" package-lock.json > "$path"; then
+    exit 0
+  fi
+fi
+
+npm install
+npm run playwright:install
