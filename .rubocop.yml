@@ -19,6 +19,12 @@ Metrics:
 Minitest/MultipleAssertions:
   Enabled: false
 
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/NotNullColumn:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 
@@ -28,8 +34,5 @@ Style/StringLiterals:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-Rails/I18nLocaleTexts:
-  Enabled: false
-
-Rails/NotNullColumn:
-  Enabled: false
+Style/WordArray:
+  EnforcedStyle: brackets

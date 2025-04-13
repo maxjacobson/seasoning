@@ -1,21 +1,21 @@
-RESERVED_WORDS = %w[
-  show
-  shows
-  seasons
-  tv
-  api
-  knock-knock
-  about
-  add-show
-  credits
-  feeds
-  settings
-  review
-  reviews
-  undefined
-  import-show
-  import-shows
-  search
-  changelog
-  roadmap
+RESERVED_WORDS = [
+  "show",
+  "shows",
+  "seasons",
+  "tv",
+  "api",
+  "knock-knock",
+  "about",
+  "add-show",
+  "credits",
+  "feeds",
+  "settings",
+  "review",
+  "reviews",
+  "undefined",
+  "import-show",
+  "import-shows",
+  "search",
+  "changelog",
+  "roadmap"
 ].freeze

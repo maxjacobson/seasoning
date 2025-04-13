@@ -56,7 +56,6 @@ export const NewSeasonReviewPage = () => {
         disabled={!visibility}
       >
         <option value="anybody">Anybody</option>
-        <option value="mutuals">Mutual follows</option>
         <option value="myself">Only myself</option>
       </Select>
 

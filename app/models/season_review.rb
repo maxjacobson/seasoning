@@ -2,7 +2,6 @@
 class SeasonReview < ApplicationRecord
   enum :visibility, {
     viewable_by_anybody: "anybody",
-    viewable_by_mutuals: "mutuals",
     viewable_by_only_me: "myself"
   }
 
@@ -12,23 +11,11 @@ class SeasonReview < ApplicationRecord
   validates :rating, inclusion: { in: (0..10).to_a }, allow_blank: true
   validates :body, presence: true
 
+  scope :authored_by, lambda { |viewer|
+    where(author: viewer)
+  }
+
   scope :viewable_by, lambda { |viewer|
-    joins(<<~SQL.squish)
-      join humans authors on authors.id = season_reviews.author_id
-      left outer join follows author_followers on author_followers.follower_id = authors.id
-      left outer join follows author_follows on author_follows.followee_id = authors.id
-    SQL
-      .where(<<~SQL.squish, viewer_id: viewer&.id)
-        (visibility = 'anybody')
-        or (
-          visibility = 'myself'
-          and author_id = :viewer_id
-        ) or (
-          visibility = 'mutuals'
-          and author_followers.follower_id = author_follows.followee_id
-          and author_follows.follower_id = author_followers.followee_id
-        )
-      SQL
-      .distinct
+    viewable_by_anybody.or(authored_by(viewer))
   }
 end
