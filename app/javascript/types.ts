@@ -67,7 +67,7 @@ export type MyShowStatus =
   | "waiting_for_more"
   | "finished";
 
-export type Visibility = "anybody" | "mutuals" | "myself";
+export type Visibility = "anybody" | "myself";
 
 export interface YourRelationshipToShow {
   added_at: string;

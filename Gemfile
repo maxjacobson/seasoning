@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 ruby file: ".ruby-version"
 
-gem "activerecord-postgres_enum"
 gem "activerecord-session_store"
 gem "bugsnag"
 gem "cssbundling-rails"

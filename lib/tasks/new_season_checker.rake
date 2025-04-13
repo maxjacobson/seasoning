@@ -1,7 +1,7 @@
 namespace :new_season_checker do
   # Run daily via https://dashboard.heroku.com/apps/seasoning/scheduler
   task toggle: :environment do
-    my_shows = MyShow.where(status: %w[waiting_for_more finished])
+    my_shows = MyShow.where(status: ["waiting_for_more", "finished"])
     my_shows.find_each do |my_show|
       show = my_show.show
       human = my_show.human

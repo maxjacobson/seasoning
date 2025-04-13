@@ -53,9 +53,6 @@ GEM
       activemodel (= 8.0.2)
       activesupport (= 8.0.2)
       timeout (>= 0.4.0)
-    activerecord-postgres_enum (2.1.0)
-      activerecord (>= 5.2)
-      pg
     activerecord-session_store (2.2.0)
       actionpack (>= 7.0)
       activerecord (>= 7.0)
@@ -377,7 +374,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord-postgres_enum
   activerecord-session_store
   bugsnag
   capybara
@@ -416,7 +412,6 @@ CHECKSUMS
   activejob (8.0.2) sha256=b0228b45e36b1ef3a081c684e81494147e094a6baf729018756ccf125b1853ca
   activemodel (8.0.2) sha256=0ae1fb7fa1fae0699ba041a9e97702df42ea3b13f2d39f2d0fde51fca5f0656c
   activerecord (8.0.2) sha256=793470b92c44e4198d0262ac60086b7822f0ea585079ad67e32a6e4c86f2d90a
-  activerecord-postgres_enum (2.1.0) sha256=26b91c3c036864e7dbe2f2b53938d23cdaded140df6f679d61c437db0bfd7070
   activerecord-session_store (2.2.0) sha256=65918054573683bf4f87af89e765e1fece14c9d71cfac1f11abe4687c96e2743
   activestorage (8.0.2) sha256=f83d221e0f06ae38f2200e55490bd155c76d0add330f6e300e8646048d672977
   activesupport (8.0.2) sha256=8565cddba31b900cdc17682fd66ecd020441e3eef320a9930285394e8c07a45e

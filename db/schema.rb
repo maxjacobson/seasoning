@@ -10,39 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_03_233742) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_13_215957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_enum :my_show_status, [
-    "might_watch",
-    "currently_watching",
-    "stopped_watching",
-    "waiting_for_more",
-    "finished",
-    "next_up",
-  ], force: :cascade
-
-  create_enum :visibility, [
-    "anybody",
-    "mutuals",
-    "myself",
-  ], force: :cascade
-
-  create_enum :my_show_status, [
-    "might_watch",
-    "currently_watching",
-    "stopped_watching",
-    "waiting_for_more",
-    "finished",
-    "next_up",
-  ], force: :cascade
-
-  create_enum :visibility, [
-    "anybody",
-    "mutuals",
-    "myself",
-  ], force: :cascade
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "my_show_status", ["might_watch", "currently_watching", "stopped_watching", "waiting_for_more", "finished", "next_up"]
+  create_enum "visibility", ["anybody", "mutuals", "myself"]
 
   create_table "browser_sessions", force: :cascade do |t|
     t.string "token", null: false, comment: "A token that is kept in the session"

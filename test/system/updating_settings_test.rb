@@ -18,14 +18,14 @@ class UpdatingSettingsTest < ApplicationSystemTestCase
     assert_nil @human.currently_watching_limit
     assert @human.share_currently_watching
 
-    select "Mutual follows", from: "Default review visibility"
+    select "Myself", from: "Default review visibility"
     select "5", from: "Currently watching limit"
     uncheck "Share currently watching"
     click_on "Update settings"
 
     @human.reload
 
-    assert_equal "mutuals", @human.default_review_visibility
+    assert_equal "myself", @human.default_review_visibility
     assert_equal 5, @human.currently_watching_limit
     assert_not @human.share_currently_watching
   end

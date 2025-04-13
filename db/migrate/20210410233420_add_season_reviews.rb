@@ -1,7 +1,7 @@
 # People should be able to review seasons of shows
 class AddSeasonReviews < ActiveRecord::Migration[6.1]
   def change
-    create_enum :visibility, %w[anybody mutuals myself]
+    create_enum :visibility, ["anybody", "mutuals", "myself"]
 
     create_table :season_reviews do |t|
       t.references :author,
