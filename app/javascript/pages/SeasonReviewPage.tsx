@@ -117,7 +117,7 @@ export const SeasonReviewPage = () => {
         <h3>
           <a href={`/${handle}`}>{handle}</a>&rsquo;s review of{" "}
           <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link> of{" "}
-          <Link to={`/shows/${show.slug}`}>{show.title}</Link>.
+          <a href={`/shows/${show.slug}`}>{show.title}</a>.
         </h3>
 
         <div>

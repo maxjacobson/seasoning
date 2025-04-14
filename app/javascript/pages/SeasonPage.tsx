@@ -80,7 +80,7 @@ export const SeasonPage = () => {
         <h1 className="text-xl">Not found</h1>
         <p>Season does not exist!</p>
         <p>
-          <Link to={`/shows/${showSlug}`}>Back</Link>
+          <a href={`/shows/${showSlug}`}>Back</a>
         </p>
       </div>
     );

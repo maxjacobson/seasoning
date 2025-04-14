@@ -90,7 +90,7 @@ export const EpisodePage = () => {
         url={`https://www.themoviedb.org/tv/${show.tmdb_tv_id}/season/${season.season_number}/episode/${episode.episode_number}`}
       />
       <p>
-        An episode of <Link to={`/shows/${show.slug}`}>{show.title}</Link>,{" "}
+        An episode of <a href={`/shows/${show.slug}`}>{show.title}</a>,{" "}
         <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link>.
       </p>
 
