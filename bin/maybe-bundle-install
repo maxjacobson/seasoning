@@ -5,7 +5,7 @@ set -e
 path="tmp/digests-Gemfile.lock.txt"
 
 if test -f $path; then
-  if md5sum --quiet --strict --check "$path"; then
+  if md5sum --status --strict --check "$path"; then
     exit 0
   fi
 fi

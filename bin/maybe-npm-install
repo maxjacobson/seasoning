@@ -5,7 +5,7 @@ set -e
 path="tmp/digests-package-lock.json.txt"
 
 if test -f $path; then
-  if md5sum --quiet --strict --check "$path"; then
+  if md5sum --status --strict --check "$path"; then
     exit 0
   fi
 fi
