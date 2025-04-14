@@ -21,4 +21,8 @@
       </li>
     <% end %>
   </ul>
+
+  <% if current_human&.admin? %>
+    <%= button_to "Refresh now!", show_refresh_path(show.slug), method: :post, class: "rounded-button" %>
+  <% end %>
 </div>

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :shows, only: [:index, :show], param: :slug do
     resource :your_show, only: [:create, :destroy, :update], path: "/relationship"
     resource :note_to_self, only: [:edit], path: "/note-to-self", controller: "notes_to_self"
+    resource :refresh, only: [:create], controller: "refresh_show"
   end
   resource :settings, only: [:show, :update]
   resources :importable_shows, only: [:index, :create], path: "import-shows"
