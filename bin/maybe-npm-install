@@ -2,14 +2,14 @@
 
 set -e
 
-path="tmp/digests/package-lock.json.txt"
-mkdir -p tmp/digests/
+path="tmp/digests-package-lock.json.txt"
 
 if test -f $path; then
-  if md5 --quiet --check="$(cat $path)" package-lock.json > "$path"; then
+  if md5sum --quiet --strict --check "$path"; then
     exit 0
   fi
 fi
 
-npm install
-npm run playwright:install
+npm install --silent
+npm run --silent playwright:install
+md5sum package-lock.json > "$path"

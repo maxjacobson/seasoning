@@ -2,13 +2,13 @@
 
 set -e
 
-path="tmp/digests/Gemfile.lock.txt"
-mkdir -p tmp/digests/
+path="tmp/digests-Gemfile.lock.txt"
 
 if test -f $path; then
-  if md5 --quiet --check="$(cat $path)" Gemfile.lock > "$path"; then
+  if md5sum --quiet --strict --check "$path"; then
     exit 0
   fi
 fi
 
-bundle install
+bundle install --quiet
+md5sum Gemfile.lock > "$path"
