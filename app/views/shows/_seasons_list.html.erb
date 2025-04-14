@@ -9,7 +9,7 @@
   </thead>
 
   <tbody>
-    <% show.seasons.each do |season| %>
+    <% show.seasons.order(season_number: :asc).each do |season| %>
       <tr>
         <td>
           <%# FIXME: use the route helper when we have it %>
