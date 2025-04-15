@@ -94,7 +94,7 @@ export const SeasonPage = () => {
         url={`https://www.themoviedb.org/tv/${yourSeason.show.tmdb_tv_id}/season/${yourSeason.season.season_number}`}
       />
       <p>
-        <Link to={`/shows/${showSlug}`}>Back</Link>
+        <a href={`/shows/${showSlug}`}>Back</a>
       </p>
 
       <div>
