@@ -3,6 +3,7 @@
 <table class="w-full">
   <thead>
     <tr>
+      <th class="text-left">Number</th>
       <th class="text-left">Name</th>
       <th class="text-left">Episode count</th>
     </tr>
@@ -11,6 +12,9 @@
   <tbody>
     <% show.seasons.order(season_number: :asc).each do |season| %>
       <tr>
+        <td>
+          <%= season.season_number %>
+        </td>
         <td>
           <%# FIXME: use the route helper when we have it %>
           <%= link_to "/shows/#{show.slug}/#{season.slug}" do %>
