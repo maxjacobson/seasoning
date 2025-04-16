@@ -6,11 +6,14 @@
       <th class="text-left">Number</th>
       <th class="text-left">Name</th>
       <th class="text-left">Episode count</th>
+      <% if current_human %>
+        <th class="text-left">Seen?</th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
-    <% show.seasons.order(season_number: :asc).each do |season| %>
+    <% show.seasons.includes(:episodes).order(season_number: :asc).each do |season| %>
       <tr>
         <td>
           <%= season.season_number %>
@@ -22,6 +25,11 @@
           <% end %>
         </td>
         <td><%= season.episodes.count %></td>
+        <% if current_human %>
+          <td>
+            <%= seen_current_season_message(current_human, season) %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
