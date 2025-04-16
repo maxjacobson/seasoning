@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+maybeNodeSetup() {
+  npm_path="tmp/digests-package-lock.json.md5"
+
+  if test -f $npm_path; then
+    if md5sum --status --strict --check "$npm_path"; then
+      return
+    fi
+  fi
+
+  echo "== npm install =="
+  npm install
+  echo "== npm run playwright:install =="
+  npm run playwright:install
+  md5sum package-lock.json > "$npm_path"
+}
+
+maybeRubySetup() {
+  bundler_path="tmp/digests-Gemfile.lock.md5"
+
+  if test -f $bundler_path; then
+    if md5sum --status --strict --check "$bundler_path"; then
+      return
+    fi
+  fi
+
+  echo "== bundle install =="
+  bundle install
+  md5sum Gemfile.lock > "$bundler_path"
+}
+
+
+maybeNodeSetup
+maybeRubySetup

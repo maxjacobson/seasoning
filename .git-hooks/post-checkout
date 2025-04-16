@@ -2,5 +2,4 @@
 
 set -e
 
-bin/maybe-npm-install
-bin/maybe-bundle-install
+bin/maybe-setup
