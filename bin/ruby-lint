@@ -2,5 +2,5 @@
 
 set -ex
 
-bin/rubocop
+bin/rubocop --color
 bin/erb_lint --lint-all
