@@ -5,17 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: oiva_development
+  database: seasoning_development
 
 test:
   <<: *default
-  database: oiva_test
+  database: seasoning_test
   host: localhost
-  username: <%= ENV['OIVA_DATABASE_USERNAME'] %>
-  password: <%= ENV['OIVA_DATABASE_PASSWORD'] %>
+  username: <%= ENV['SEASONING_DATABASE_USERNAME'] %>
+  password: <%= ENV['SEASONING_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
-  database: oiva_production
-  username: oiva
-  password: <%= ENV['OIVA_DATABASE_PASSWORD'] %>
