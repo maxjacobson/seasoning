@@ -15,6 +15,12 @@ class Human < ApplicationRecord
     shows.where(my_shows: { status: "currently_watching" }).alphabetical
   end
 
+  def at_currently_watching_limit?
+    return false if currently_watching_limit.nil?
+
+    currently_watching.count >= currently_watching_limit
+  end
+
   def followers
     human_ids = Follow.where(followee_id: id).pluck(:follower_id)
     Human.where(id: human_ids)
