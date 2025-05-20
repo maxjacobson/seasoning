@@ -7,7 +7,7 @@
         ["Might watch", "might_watch"],
         ["Next up", "next_up"],
         if current_human.at_currently_watching_limit?
-          ["Currently watching (at limit!)", "currently_watching"]
+          ["Currently watching (at limit!)", "currently_watching", { "disabled" => true }]
         else
           ["Currently watching", "currently_watching"]
         end,
@@ -16,8 +16,7 @@
         ["Finished", "finished"]
       ],
       {},
-      class: "select-field",
-      disabled: current_human.at_currently_watching_limit? ? "currently_watching" : false
+      class: "select-field"
     ) %>
   <%= f.submit "Update status", class: "rounded-button" %>
 <% end %>
