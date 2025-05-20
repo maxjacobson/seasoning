@@ -6,13 +6,18 @@
       [
         ["Might watch", "might_watch"],
         ["Next up", "next_up"],
-        ["Currently watching", "currently_watching"],
+        if current_human.at_currently_watching_limit?
+          ["Currently watching (at limit!)", "currently_watching"]
+        else
+          ["Currently watching", "currently_watching"]
+        end,
         ["Waiting for more", "waiting_for_more"],
         ["Stopped watching", "stopped_watching"],
         ["Finished", "finished"]
       ],
       {},
-      class: "select-field"
+      class: "select-field",
+      disabled: [("currently_watching" if current_human.at_currently_watching_limit?)].compact
     ) %>
   <%= f.submit "Update status", class: "rounded-button" %>
 <% end %>
