@@ -17,7 +17,7 @@
       ],
       {},
       class: "select-field",
-      disabled: [("currently_watching" if current_human.at_currently_watching_limit?)].compact
+      disabled: current_human.at_currently_watching_limit? ? "currently_watching" : false
     ) %>
   <%= f.submit "Update status", class: "rounded-button" %>
 <% end %>
