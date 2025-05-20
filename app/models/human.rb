@@ -28,4 +28,8 @@ class Human < ApplicationRecord
   def follows?(other)
     Follow.find_by(follower_id: id, followee_id: other.id)
   end
+
+  def reviews_for(season)
+    SeasonReview.authored_by(self).where(season: season)
+  end
 end

@@ -11,8 +11,8 @@ class SeasonReview < ApplicationRecord
   validates :rating, inclusion: { in: (0..10).to_a }, allow_blank: true
   validates :body, presence: true
 
-  scope :authored_by, lambda { |viewer|
-    where(author: viewer)
+  scope :authored_by, lambda { |human|
+    where(author: human)
   }
 
   scope :viewable_by, lambda { |viewer|

@@ -1,0 +1,19 @@
+<%= content_for :title do %>
+  <%= @show.title %> - <%= @season.name %> - <%= @episode.name %>
+<% end %>
+
+<h1 class="text-xl"><%= @episode.name %></h1>
+
+<%= render "more_info", url: "https://www.themoviedb.org/tv/${show.tmdb_tv_id}/season/#{@season.season_number}/episode/#{@episode.episode_number}" %>
+
+<p>An episode of <%= link_to @show.title, show_path(@show.slug) %>, <%= link_to @season.name, season_show_path(@show.slug, @season.slug) %>.</p>
+
+<% if @episode.still.url.present? %>
+  <%= image_tag @episode.still.url, class: "block" %>
+<% end %>
+
+<div>
+  Air date: <%= render "air_date", episode: @episode %>
+</div>
+
+<%= render "show_metadata", show: @show %>

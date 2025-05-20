@@ -7,9 +7,9 @@
 - [x] Confirm that this can deploy to heroku without issue
 - [x] Port /shows (YourShowsPage)
 - [x] Port /shows/:showSlug (ShowPage)
-- [ ] Port /shows/:showSlug/:seasonSlug (SeasonPage)
+- [x] Port /shows/:showSlug/:seasonSlug (SeasonPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
-- [ ] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)
+- [x] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug (SeasonReviewPage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug/:viewing (SeasonReviewPage)
 - [x] Remove /reviews (ReviewsFeedPage)
