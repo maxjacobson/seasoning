@@ -60,5 +60,11 @@ class ImportingAShowTest < ApplicationSystemTestCase
     assert_equal "/shows/halt-and-catch-fire", page.current_path
 
     assert page.has_content?("Halt and Catch Fire")
+
+    select "Currently watching"
+
+    click_on "Update status"
+
+    assert page.has_content?("Updated Halt and Catch Fire")
   end
 end
