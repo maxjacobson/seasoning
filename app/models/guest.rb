@@ -17,7 +17,7 @@ class Guest
     @token = token
   end
 
-  def authenticated
+  def authenticated?
     human.present?
   end
 end
