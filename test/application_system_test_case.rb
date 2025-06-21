@@ -6,15 +6,12 @@ Capybara.register_driver :my_playwright do |app|
                                    headless: (false unless ENV["CI"] || ENV["HEADLESS"]))
 end
 
+Capybara.server = :puma, { Silent: true }
+Capybara.default_max_wait_time = 10
+
 # Setup for system tests
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :my_playwright
-
-  def setup
-    Capybara.server = :puma, { Silent: true }
-    Capybara.default_max_wait_time = 10
-    super
-  end
 
   def teardown
     ActionMailer::Base.deliveries.clear
