@@ -27,7 +27,11 @@ export const EpisodePage = () => {
   const guest = useContext(GuestContext);
 
   useEffect(() => {
-    if (showSlug === undefined || seasonSlug === undefined || episodeNumber === undefined) {
+    if (
+      showSlug === undefined ||
+      seasonSlug === undefined ||
+      episodeNumber === undefined
+    ) {
       return;
     }
 

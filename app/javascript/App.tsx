@@ -40,7 +40,9 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                     className="md:mr-2 md:inline"
                     onSubmit={(event) => {
                       event.preventDefault();
-                      window.location.replace(`/search?q=${encodeURIComponent(searchQuery)}`);
+                      window.location.replace(
+                        `/search?q=${encodeURIComponent(searchQuery)}`,
+                      );
                     }}
                   >
                     <input
@@ -50,7 +52,11 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                       onChange={(event) => setSearchquery(event.target.value)}
                       className="text-field mr-2"
                     />
-                    <input type="submit" className="rounded-button" value="Search" />
+                    <input
+                      type="submit"
+                      className="rounded-button"
+                      value="Search"
+                    />
                   </form>
                 )}
                 {guest.authenticated && (
@@ -68,12 +74,18 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
 
             <div className="mx-auto my-0 max-w-3xl p-2">
               <Routes>
-                <Route path="/shows/:showSlug/:seasonSlug" element={<SeasonPage />} />
+                <Route
+                  path="/shows/:showSlug/:seasonSlug"
+                  element={<SeasonPage />}
+                />
                 <Route
                   path="/shows/:showSlug/:seasonSlug/:episodeNumber"
                   element={<EpisodePage />}
                 />
-                <Route path="/:handle/shows/:showSlug/:seasonSlug" element={<SeasonReviewPage />} />
+                <Route
+                  path="/:handle/shows/:showSlug/:seasonSlug"
+                  element={<SeasonReviewPage />}
+                />
                 <Route
                   path="/:handle/shows/:showSlug/:seasonSlug/:viewing"
                   element={<SeasonReviewPage />}
@@ -93,7 +105,8 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                     <a href="/admin">Admin</a>
                   </>
                 )}
-                <a href="/roadmap">Roadmap</a> <a href="/changelog">Changelog</a>{" "}
+                <a href="/roadmap">Roadmap</a>{" "}
+                <a href="/changelog">Changelog</a>{" "}
                 <a href="/credits">Credits</a>
               </div>
             </div>

@@ -15,7 +15,9 @@ export const ShowMetadata = ({ show }: { show: Show }) => {
         )}
         {show.tmdb_next_refresh_at && (
           <li>
-            <span className="font-bold">Data will next be refreshed within 24 hours of</span>{" "}
+            <span className="font-bold">
+              Data will next be refreshed within 24 hours of
+            </span>{" "}
             <span title={show.tmdb_next_refresh_at}>
               {new Date(show.tmdb_next_refresh_at).toLocaleDateString()}
             </span>

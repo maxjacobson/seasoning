@@ -13,7 +13,11 @@ const isAvailable = (dateStr: string): boolean => {
     inputDate.getMonth(),
     inputDate.getDate(),
   );
-  const todayWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const todayWithoutTime = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
 
   return inputDateWithoutTime <= todayWithoutTime;
 };

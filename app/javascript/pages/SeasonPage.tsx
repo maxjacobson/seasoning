@@ -44,9 +44,12 @@ export const SeasonPage = () => {
         headers = {};
       }
       setLoading(true);
-      const response = await fetch(`/api/shows/${showSlug}/seasons/${seasonSlug}.json`, {
-        headers: headers,
-      });
+      const response = await fetch(
+        `/api/shows/${showSlug}/seasons/${seasonSlug}.json`,
+        {
+          headers: headers,
+        },
+      );
       setLoading(false);
 
       if (response.status === 404) {
@@ -99,7 +102,11 @@ export const SeasonPage = () => {
 
       <div>
         <div>
-          <Poster url={yourSeason.season.poster_url} size="large" show={yourSeason.show} />
+          <Poster
+            url={yourSeason.season.poster_url}
+            size="large"
+            show={yourSeason.show}
+          />
         </div>
         <div>
           <h2 className="text-lg">Season info</h2>
@@ -120,7 +127,9 @@ export const SeasonPage = () => {
                     <tr key={episode.episode_number}>
                       <td>{episode.episode_number}</td>
                       <td>
-                        <Link to={`/shows/${showSlug}/${seasonSlug}/${episode.episode_number}`}>
+                        <Link
+                          to={`/shows/${showSlug}/${seasonSlug}/${episode.episode_number}`}
+                        >
                           {episode.name}
                         </Link>
                       </td>
@@ -133,7 +142,9 @@ export const SeasonPage = () => {
                             episode={episode}
                             season={yourSeason.season}
                             guest={guest}
-                            yourRelationshipToSeason={yourSeason.your_relationship}
+                            yourRelationshipToSeason={
+                              yourSeason.your_relationship
+                            }
                           />
                         </td>
                       )}
@@ -150,7 +161,9 @@ export const SeasonPage = () => {
         <div>
           <h2 className="text-lg">Your review</h2>
           <div>
-            <Link to={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}>
+            <Link
+              to={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}
+            >
               <span className="underlined">Add review</span>
             </Link>
           </div>

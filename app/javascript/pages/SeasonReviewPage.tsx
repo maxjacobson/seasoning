@@ -27,10 +27,15 @@ interface ReviewDataNotFound {
   season: null;
   show: null;
 }
-type SeasonReviewData = LoadingReviewData | LoadedReviewData | ReviewDataNotFound;
+type SeasonReviewData =
+  | LoadingReviewData
+  | LoadedReviewData
+  | ReviewDataNotFound;
 
 export const SeasonReviewPage = () => {
-  const [reviewData, setReviewData] = useState<SeasonReviewData>({ loading: true });
+  const [reviewData, setReviewData] = useState<SeasonReviewData>({
+    loading: true,
+  });
   const { handle, showSlug, seasonSlug, viewing } = useParams();
   const guest = useContext(GuestContext);
   const setLoading = useContext(SetLoadingContext);
@@ -38,7 +43,12 @@ export const SeasonReviewPage = () => {
   useEffect(() => {
     (async () => {
       if (!handle || !showSlug || !seasonSlug) {
-        setReviewData({ loading: false, review: null, season: null, show: null });
+        setReviewData({
+          loading: false,
+          review: null,
+          season: null,
+          show: null,
+        });
         return;
       }
 
@@ -77,7 +87,12 @@ export const SeasonReviewPage = () => {
           author: data.author,
         });
       } else if (response.status === 404) {
-        setReviewData({ loading: false, review: null, season: null, show: null });
+        setReviewData({
+          loading: false,
+          review: null,
+          season: null,
+          show: null,
+        });
       } else {
         throw new Error("Could not load review");
       }
@@ -116,8 +131,8 @@ export const SeasonReviewPage = () => {
       <div>
         <h3>
           <a href={`/${handle}`}>{handle}</a>&rsquo;s review of{" "}
-          <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link> of{" "}
-          <a href={`/shows/${show.slug}`}>{show.title}</a>.
+          <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link>{" "}
+          of <a href={`/shows/${show.slug}`}>{show.title}</a>.
         </h3>
 
         <div>

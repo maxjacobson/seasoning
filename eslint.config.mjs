@@ -6,7 +6,15 @@ import pluginReact from "eslint-plugin-react";
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
-  { ignores: ["public", "postcss.config.js", "vite.config.mts", "vendor", "eslint.config.mjs"] },
+  {
+    ignores: [
+      "public",
+      "postcss.config.js",
+      "vite.config.mts",
+      "vendor",
+      "eslint.config.mjs",
+    ],
+  },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
