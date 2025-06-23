@@ -11,7 +11,10 @@ export const displayMyShowStatus = (status: MyShowStatus): string => {
   }[status];
 };
 
-export const displayMyShowStatusLimit = (status: MyShowStatus, limits: HumanLimits): string => {
+export const displayMyShowStatusLimit = (
+  status: MyShowStatus,
+  limits: HumanLimits,
+): string => {
   if (atLimit(status, limits)) {
     return "(at limit!)";
   } else {
@@ -23,7 +26,8 @@ export const atLimit = (status: MyShowStatus, limits: HumanLimits): boolean => {
   if (status === "currently_watching") {
     return !!(
       limits.currently_watching_limit.max &&
-      limits.currently_watching_limit.current >= limits.currently_watching_limit.max
+      limits.currently_watching_limit.current >=
+        limits.currently_watching_limit.max
     );
   } else {
     return false;
@@ -66,12 +70,15 @@ export const updateMyEpisode = (
   token: string,
   body: Record<string, unknown>,
 ): Promise<Response> => {
-  return fetch(`/api/your-seasons/${season.id}/episodes/${episode.episode_number}.json`, {
-    method: "PATCH",
-    headers: {
-      "X-SEASONING-TOKEN": token,
-      "Content-Type": "application/json",
+  return fetch(
+    `/api/your-seasons/${season.id}/episodes/${episode.episode_number}.json`,
+    {
+      method: "PATCH",
+      headers: {
+        "X-SEASONING-TOKEN": token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     },
-    body: JSON.stringify(body),
-  });
+  );
 };

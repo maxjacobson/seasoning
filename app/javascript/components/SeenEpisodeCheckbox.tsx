@@ -1,4 +1,9 @@
-import { AuthenticatedGuest, Episode, Season, YourRelationshipToSeason } from "../types";
+import {
+  AuthenticatedGuest,
+  Episode,
+  Season,
+  YourRelationshipToSeason,
+} from "../types";
 import { FunctionComponent, useContext, useState } from "react";
 import { Checkbox } from "./Checkbox";
 import { SetLoadingContext } from "../contexts";
@@ -18,7 +23,9 @@ export const SeenEpisodeCheckbox: FunctionComponent<Props> = ({
   yourRelationshipToSeason,
 }) => {
   const [hasSeen, setHasSeen] = useState(
-    yourRelationshipToSeason.watched_episode_numbers.includes(episode.episode_number),
+    yourRelationshipToSeason.watched_episode_numbers.includes(
+      episode.episode_number,
+    ),
   );
   const [updating, setUpdating] = useState(false);
   const setLoading = useContext(SetLoadingContext);

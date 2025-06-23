@@ -7,7 +7,11 @@ interface Props {
   size: "small" | "large";
 }
 
-export const Poster: FunctionComponent<Props> = ({ url, show, size }: Props) => (
+export const Poster: FunctionComponent<Props> = ({
+  url,
+  show,
+  size,
+}: Props) => (
   <>
     {url && (
       <img

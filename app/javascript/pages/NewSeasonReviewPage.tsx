@@ -1,5 +1,11 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
-import { HumanSettings, Rating, SeasonReview, Visibility, YourSeason } from "../types";
+import {
+  HumanSettings,
+  Rating,
+  SeasonReview,
+  Visibility,
+  YourSeason,
+} from "../types";
 import { loadData, setHeadTitle } from "../hooks";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -9,14 +15,24 @@ import { Textarea } from "../components/Textarea";
 
 export const NewSeasonReviewPage = () => {
   const [body, setBody] = useState("");
-  const [visibility, setVisibility] = useState<Visibility | undefined>(undefined);
+  const [visibility, setVisibility] = useState<Visibility | undefined>(
+    undefined,
+  );
   const [rating, setRating] = useState<Rating | undefined>(undefined);
-  const [validationError, setValidationError] = useState<null | Record<string, string[]>>(null);
+  const [validationError, setValidationError] = useState<null | Record<
+    string,
+    string[]
+  >>(null);
   const { showSlug, seasonSlug } = useParams();
   const guest = useContext(GuestContext);
   const setLoading = useContext(SetLoadingContext);
 
-  const settings = loadData<HumanSettings>(guest, "/api/settings.json", [], setLoading);
+  const settings = loadData<HumanSettings>(
+    guest,
+    "/api/settings.json",
+    [],
+    setLoading,
+  );
 
   const navigate = useNavigate();
 
@@ -46,7 +62,8 @@ export const NewSeasonReviewPage = () => {
   return (
     <div>
       <h1 className="mb-2 text-2xl">
-        New review of {yourSeason.data.show.title} &mdash; {yourSeason.data.season.name}
+        New review of {yourSeason.data.show.title} &mdash;{" "}
+        {yourSeason.data.season.name}
       </h1>
 
       <label className="mr-2">Visible to</label>
@@ -64,14 +81,21 @@ export const NewSeasonReviewPage = () => {
       <label>
         <span>
           Your review (you can use{" "}
-          <a href="https://commonmark.org/help/" target="_blank" rel="noreferrer">
+          <a
+            href="https://commonmark.org/help/"
+            target="_blank"
+            rel="noreferrer"
+          >
             Markdown
           </a>
           )
         </span>
       </label>
       <div>
-        <Textarea value={body} onChange={(event) => setBody(event.target.value)} />
+        <Textarea
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
+        />
       </div>
       <div>
         <Button

@@ -4,7 +4,12 @@ type Props = {
 
 export const MoreInfo = ({ url }: Props) => {
   return (
-    <a href={url} target="_blank" rel="noreferrer" className="my-3 inline-block">
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      className="my-3 inline-block"
+    >
       More info ↗️
     </a>
   );
