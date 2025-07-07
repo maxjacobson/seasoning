@@ -118,6 +118,13 @@ node_modules/.bin/prettier --write app/javascript
 
 **Terminology**: Use "human" not "user" - the core model is `Human`, not `User`. This is deliberate terminology throughout the codebase.
 
+## Migrations
+
+- Always make migrations reversible
+- Test rollback functionality before committing
+- Use `change` method instead of separate `up` and `down` methods when possible
+- Add thoughtful `down` methods for complex schema changes
+
 ## Key Files
 
 - `config/routes.rb` - Defines both Rails and API routes
@@ -129,7 +136,7 @@ node_modules/.bin/prettier --write app/javascript
 
 ## Scheduled Tasks (Heroku Scheduler)
 
-- `prune:all` - Daily cleanup of expired BrowserSession and MagicLink records
+- `prune:all` - Daily cleanup of expired MagicLink records
 - `db:sessions:trim` - Daily cleanup of Rails sessions (midnight UTC, 180-day threshold)
 - `tmdb:refresh_config` - Daily TMDB API configuration refresh
 - `tmdb:refresh_shows` - Daily show data refresh
@@ -140,3 +147,11 @@ node_modules/.bin/prettier --write app/javascript
 - Frontend must be built before running tests
 - Test fixtures and WebMock stubs for TMDB API in `test/webmock/`
 - Run `bin/vite dev --mode=test` when iterating on frontend tests to avoid rebuilding
+
+## Git Workflow
+
+- Never use --no-verify when committing
+
+## Development Best Practices
+
+- It's important to prefix bash commands with rbenv's init thing so that the proper ruby version is activated
