@@ -1,10 +1,10 @@
 import { Episode, Season, Show } from "../types";
-import { GuestContext, SetLoadingContext } from "../contexts";
 import { Link, useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { AirDate } from "../components/AirDate";
 import { MoreInfo } from "../components/MoreInfo";
 import { setHeadTitle } from "../hooks";
+import { SetLoadingContext } from "../contexts";
 import { ShowMetadata } from "../components/ShowMetadata";
 
 interface LoadingEpisode {
@@ -24,7 +24,6 @@ export const EpisodePage = () => {
   const [response, setResponse] = useState<EpisodeData>({ loading: true });
   const setLoading = useContext(SetLoadingContext);
   const { showSlug, seasonSlug, episodeNumber } = useParams();
-  const guest = useContext(GuestContext);
 
   useEffect(() => {
     if (
@@ -36,17 +35,11 @@ export const EpisodePage = () => {
     }
 
     (async () => {
-      let headers;
-      if (guest.authenticated) {
-        headers = { "X-SEASONING_TOKEN": guest.token };
-      } else {
-        headers = {};
-      }
       setLoading(true);
       const response = await fetch(
         `/api/shows/${showSlug}/seasons/${seasonSlug}/episodes/${episodeNumber}.json`,
         {
-          headers: headers,
+          credentials: "same-origin",
         },
       );
       setLoading(false);

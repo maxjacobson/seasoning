@@ -6,8 +6,7 @@ class MagicLinksController < ApplicationController
     @magic_link = MagicLink.find_by(token: params[:token])
 
     if (human = @magic_link&.recipient).present?
-      browser_session = human.browser_sessions.create!
-      session[:token] = browser_session.token
+      session[:human_id] = human.id
       redirect_to root_path, notice: "Signed in! Welcome back."
     end
 

@@ -32,13 +32,9 @@ export const loadData = <T>(
 
   useEffect(() => {
     (async () => {
-      const headers: Record<string, string> = {};
-      if (guest.authenticated) {
-        headers["X-SEASONING-TOKEN"] = guest.token;
-      }
       setCurrentlyLoading(true);
       const response = await fetch(url, {
-        headers: headers,
+        credentials: "same-origin",
       });
       setCurrentlyLoading(false);
 

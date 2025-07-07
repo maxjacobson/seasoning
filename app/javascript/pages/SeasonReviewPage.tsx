@@ -56,9 +56,6 @@ export const SeasonReviewPage = () => {
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
       };
-      if (guest.authenticated) {
-        headers["X-SEASONING-TOKEN"] = guest.token;
-      }
       const response = await fetch(
         `/api/season-review.json?${queryString.stringify({
           handle: handle,
@@ -68,6 +65,7 @@ export const SeasonReviewPage = () => {
         })}`,
         {
           headers: headers,
+          credentials: "same-origin",
         },
       );
       setLoading(false);
@@ -165,9 +163,6 @@ export const SeasonReviewPage = () => {
                   const headers: Record<string, string> = {
                     "Content-Type": "application/json",
                   };
-                  if (guest.authenticated) {
-                    headers["X-SEASONING-TOKEN"] = guest.token;
-                  }
                   const response = await fetch(
                     `/api/season-review.json?${queryString.stringify({
                       handle: handle,
@@ -178,6 +173,7 @@ export const SeasonReviewPage = () => {
                     {
                       headers: headers,
                       method: "DELETE",
+                      credentials: "same-origin",
                     },
                   );
                   setLoading(false);

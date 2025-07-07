@@ -36,30 +36,28 @@ export const atLimit = (status: MyShowStatus, limits: HumanLimits): boolean => {
 
 export const updateMyShow = (
   show: Show,
-  token: string,
   body: Record<string, unknown>,
 ): Promise<Response> => {
   return fetch(`/api/your-shows/${show.slug}.json`, {
     method: "PATCH",
     headers: {
-      "X-SEASONING-TOKEN": token,
       "Content-Type": "application/json",
     },
+    credentials: "same-origin",
     body: JSON.stringify(body),
   });
 };
 
 export const updateMySeason = (
   season: Season,
-  token: string,
   body: Record<string, unknown>,
 ): Promise<Response> => {
   return fetch(`/api/your-seasons/${season.id}.json`, {
     method: "PATCH",
     headers: {
-      "X-SEASONING-TOKEN": token,
       "Content-Type": "application/json",
     },
+    credentials: "same-origin",
     body: JSON.stringify(body),
   });
 };
@@ -67,7 +65,6 @@ export const updateMySeason = (
 export const updateMyEpisode = (
   season: Season,
   episode: Episode,
-  token: string,
   body: Record<string, unknown>,
 ): Promise<Response> => {
   return fetch(
@@ -75,9 +72,9 @@ export const updateMyEpisode = (
     {
       method: "PATCH",
       headers: {
-        "X-SEASONING-TOKEN": token,
         "Content-Type": "application/json",
       },
+      credentials: "same-origin",
       body: JSON.stringify(body),
     },
   );

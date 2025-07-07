@@ -11,9 +11,7 @@ class HumansController < ApplicationController
       handle: human_params[:handle]
     )
 
-    browser_session = human.browser_sessions.create!
-
-    session[:token] = browser_session.token
+    session[:human_id] = human.id
     redirect_to root_path, notice: "Signed up! Welcome."
   end
 end

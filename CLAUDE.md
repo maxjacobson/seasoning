@@ -116,6 +116,8 @@ node_modules/.bin/prettier --write app/javascript
 
 **Comments**: Avoid comments unless absolutely necessary. Code should be self-explanatory.
 
+**Terminology**: Use "human" not "user" - the core model is `Human`, not `User`. This is deliberate terminology throughout the codebase.
+
 ## Key Files
 
 - `config/routes.rb` - Defines both Rails and API routes
