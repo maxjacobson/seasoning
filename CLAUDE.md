@@ -15,6 +15,7 @@ Seasoning is a Ruby on Rails application for tracking TV show viewing progress. 
 - Legacy: React 19 with TypeScript, Vite for bundling (being phased out)
 - Testing: Minitest (Rails), Capybara with Playwright for system tests
 - API: The Movie Database (TMDB) for show data
+- Deployment: Heroku with Heroku Scheduler for background tasks
 
 ## Development Commands
 
@@ -111,6 +112,10 @@ node_modules/.bin/prettier --write app/javascript
 - Key relationships: Human → MyShow → MySeason → Episode tracking
 - Session management with database-backed sessions
 
+## Code Style
+
+**Comments**: Avoid comments unless absolutely necessary. Code should be self-explanatory.
+
 ## Key Files
 
 - `config/routes.rb` - Defines both Rails and API routes
@@ -119,6 +124,13 @@ node_modules/.bin/prettier --write app/javascript
 - `app/controllers/api/` - JSON API controllers for React frontend
 - `vite.config.mts` - Vite configuration with Ruby plugin
 - `eslint.config.mjs` - ESLint configuration with TypeScript and React rules
+
+## Scheduled Tasks (Heroku Scheduler)
+
+- `prune:all` - Daily cleanup of expired BrowserSession and MagicLink records
+- `db:sessions:trim` - Daily cleanup of Rails sessions (midnight UTC, 180-day threshold)
+- `tmdb:refresh_config` - Daily TMDB API configuration refresh
+- `tmdb:refresh_shows` - Daily show data refresh
 
 ## Testing Notes
 
