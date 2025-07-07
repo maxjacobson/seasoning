@@ -6,7 +6,7 @@ class GuestSerializerTest < ActiveSupport::TestCase
     guest = Guest.from(nil)
     serialized = GuestSerializer.one(guest).as_json
 
-    assert_equal serialized, { "authenticated" => false, "human" => nil }
+    assert_equal({ "authenticated" => false, "human" => nil }, serialized)
   end
 
   test "serializes authenticated guest" do
@@ -14,12 +14,12 @@ class GuestSerializerTest < ActiveSupport::TestCase
     guest = Guest.from(human)
     serialized = GuestSerializer.one(guest).as_json
 
-    assert_equal serialized, {
-      "authenticated" => true,
-      "human" => {
-        "handle" => "derek",
-        "admin" => false
-      }
-    }
+    assert_equal({
+                   "authenticated" => true,
+                   "human" => {
+                     "handle" => "derek",
+                     "admin" => false
+                   }
+                 }, serialized)
   end
 end
