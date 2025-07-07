@@ -21,7 +21,6 @@ export interface HumanLimits {
 export interface AuthenticatedGuest {
   authenticated: true;
   human: Human;
-  token: string;
 }
 
 export interface AnonymousGuest {

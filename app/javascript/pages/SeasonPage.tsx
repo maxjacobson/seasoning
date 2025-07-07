@@ -37,17 +37,11 @@ export const SeasonPage = () => {
     }
 
     (async () => {
-      let headers;
-      if (guest.authenticated) {
-        headers = { "X-SEASONING_TOKEN": guest.token };
-      } else {
-        headers = {};
-      }
       setLoading(true);
       const response = await fetch(
         `/api/shows/${showSlug}/seasons/${seasonSlug}.json`,
         {
-          headers: headers,
+          credentials: "same-origin",
         },
       );
       setLoading(false);

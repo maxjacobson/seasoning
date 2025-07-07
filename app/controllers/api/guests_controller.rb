@@ -3,7 +3,7 @@ module API
   class GuestsController < ApplicationController
     def show
       authorize! { true }
-      guest = Guest.from(token)
+      guest = Guest.from(current_human)
 
       render json: GuestSerializer.one(guest)
     end

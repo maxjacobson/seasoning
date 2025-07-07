@@ -1,20 +1,13 @@
 # Someone who is visiting the site, who may or may not be an authenticated human
 class Guest
-  def self.from(token)
-    session = BrowserSession
-              .includes(:human)
-              .where(token:)
-              .active
-              .first
-
-    new(session&.human, token)
+  def self.from(human)
+    new(human)
   end
 
-  attr_reader :human, :token
+  attr_reader :human
 
-  def initialize(human, token)
+  def initialize(human)
     @human = human
-    @token = token
   end
 
   def authenticated?

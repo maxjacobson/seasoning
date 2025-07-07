@@ -105,9 +105,9 @@ export const NewSeasonReviewPage = () => {
             const response = await fetch("/api/season-reviews.json", {
               method: "POST",
               headers: {
-                "X-SEASONING-TOKEN": guest.token,
                 "Content-Type": "application/json",
               },
+              credentials: "same-origin",
               body: JSON.stringify({
                 review: {
                   body: body,

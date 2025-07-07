@@ -17,7 +17,6 @@ type Props = {
 };
 
 export const SeenEpisodeCheckbox: FunctionComponent<Props> = ({
-  guest,
   episode,
   season,
   yourRelationshipToSeason,
@@ -38,7 +37,7 @@ export const SeenEpisodeCheckbox: FunctionComponent<Props> = ({
         setLoading(true);
         setUpdating(true);
 
-        const response = await updateMyEpisode(season, episode, guest.token, {
+        const response = await updateMyEpisode(season, episode, {
           seen: !hasSeen,
         });
 
