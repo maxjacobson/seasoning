@@ -21,6 +21,9 @@ Seasoning is a Ruby on Rails application for tracking TV show viewing progress. 
 ### Setup
 
 ```bash
+# IMPORTANT: Initialize rbenv for correct Ruby version
+eval "$(rbenv init -)"
+
 # Initial setup
 bin/setup
 
@@ -60,6 +63,9 @@ bin/rails test:system
 ### Code Quality
 
 ```bash
+# IMPORTANT: Ensure rbenv is initialized first
+eval "$(rbenv init -)"
+
 # Ruby linting
 bin/rubocop
 
