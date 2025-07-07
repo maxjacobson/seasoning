@@ -6,8 +6,6 @@ namespace :prune do
   #
   # Run daily via https://dashboard.heroku.com/apps/seasoning/scheduler
   task all: :environment do
-    sessions = BrowserSession.inactive.destroy_all
-    puts "Destroyed #{sessions.count} browser sessions"
     links = MagicLink.inactive.destroy_all
     puts "Destroyed #{links.count} magic links"
   end

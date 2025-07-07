@@ -1,6 +1,5 @@
 # Basically a user
 class Human < ApplicationRecord
-  has_many :browser_sessions
   has_many :my_shows
   has_many :shows, through: :my_shows
   has_many :season_reviews, foreign_key: :author_id, inverse_of: :author

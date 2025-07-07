@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_13_223132) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_07_222344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,15 +18,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_223132) do
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "my_show_status", ["might_watch", "currently_watching", "stopped_watching", "waiting_for_more", "finished", "next_up"]
   create_enum "visibility", ["anybody", "myself"]
-
-  create_table "browser_sessions", force: :cascade do |t|
-    t.string "token", null: false, comment: "A token that is kept in the session"
-    t.bigint "human_id", null: false
-    t.datetime "expires_at", precision: nil, null: false, comment: "The time at which we should stop honoring the token and force them to log in again"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["human_id"], name: "index_browser_sessions_on_human_id"
-  end
 
   create_table "episodes", force: :cascade do |t|
     t.string "name", null: false, comment: "The episode's official name"
@@ -159,7 +150,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_223132) do
     t.index ["poster_sizes"], name: "index_tmdb_api_configurations_on_poster_sizes", using: :gin
   end
 
-  add_foreign_key "browser_sessions", "humans", on_delete: :cascade
   add_foreign_key "follows", "humans", column: "followee_id", on_delete: :cascade
   add_foreign_key "follows", "humans", column: "follower_id", on_delete: :cascade
   add_foreign_key "my_seasons", "humans", on_delete: :cascade
