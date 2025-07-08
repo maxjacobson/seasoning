@@ -1,5 +1,24 @@
 # Season review creation and management
 class SeasonReviewsController < ApplicationController
+  def show
+    author = Human.find_by!(handle: params[:handle])
+    show = Show.find_by!(slug: params[:show_slug])
+    season = show.seasons.find_by!(slug: params[:season_slug])
+    viewing = params[:viewing]&.to_i || 1
+
+    @review = SeasonReview.find_by!(
+      author: author,
+      season: season,
+      viewing: viewing
+    )
+
+    authorize! { SeasonReview.viewable_by(current_human).exists?(id: @review.id) }
+
+    @show = show
+    @season = season
+    @author = author
+  end
+
   def new
     authorize! { current_human.present? }
 
@@ -30,15 +49,34 @@ class SeasonReviewsController < ApplicationController
     )
 
     if @review.save
-      # FIXME: Replace with proper Rails helper when season review show page is migrated to ERB
-      review_path = "/#{current_human.handle}/shows/#{show.slug}/#{season.slug}"
-      review_path += "/#{@review.viewing}" if @review.viewing > 1
-      redirect_to review_path, notice: "Review created successfully"
+      redirect_to proper_review_path(@review), notice: "Review created successfully"
     else
       @show = show
       @season = season
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    authorize! { current_human.present? }
+
+    author = Human.find_by!(handle: params[:handle])
+    show = Show.find_by!(slug: params[:show_slug])
+    season = show.seasons.find_by!(slug: params[:season_slug])
+    viewing = params[:viewing]&.to_i || 1
+
+    @review = SeasonReview.find_by!(
+      author: author,
+      season: season,
+      viewing: viewing
+    )
+
+    authorize! { @review.author == current_human }
+
+    @review.destroy!
+
+    # FIXME: Replace with proper Rails helper when season page is migrated to ERB
+    redirect_to "/shows/#{show.slug}/#{season.slug}", notice: "Review deleted successfully"
   end
 
   private

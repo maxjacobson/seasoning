@@ -59,6 +59,12 @@ bin/rails test:all
 # Individual test types
 bin/rails test
 bin/rails test:system
+
+# Run a single test file
+bin/rails test test/path/to/test_file.rb
+
+# Run a specific test method
+bin/rails test test/path/to/test_file.rb:line_number
 ```
 
 ### Code Quality
@@ -147,6 +153,7 @@ node_modules/.bin/prettier --write app/javascript
 - Frontend must be built before running tests
 - Test fixtures and WebMock stubs for TMDB API in `test/webmock/`
 - Run `bin/vite dev --mode=test` when iterating on frontend tests to avoid rebuilding
+- Never add `sleep` statements to system tests to help them pass reliably - use proper Capybara waiting methods instead
 
 ## Git Workflow
 
