@@ -55,3 +55,11 @@ jobs:
           SEASONING_DATABASE_PASSWORD: postgres
           RAILS_ENV: test
           RUBYOPT: "--enable=frozen-string-literal --debug=frozen-string-literal"
+
+      - name: Upload capybara screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: capybara-screenshots
+          path: tmp/screenshots/
+          retention-days: 7
+        if: ${{ failure() }}
