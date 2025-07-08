@@ -3,7 +3,6 @@ import "./App.css";
 import { BrowserRouter, Route, Routes, useSearchParams } from "react-router";
 import { FunctionComponent, useState } from "react";
 import { GuestContext, SetLoadingContext } from "./contexts";
-import { EpisodePage } from "./pages/EpisodePage";
 import { Guest } from "./types";
 import { LoadingRibbon } from "./components/LoadingRibbon";
 import LogoWithName from "./images/logo-with-name.svg";
@@ -75,10 +74,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
                 <Route
                   path="/shows/:showSlug/:seasonSlug"
                   element={<SeasonPage />}
-                />
-                <Route
-                  path="/shows/:showSlug/:seasonSlug/:episodeNumber"
-                  element={<EpisodePage />}
                 />
 
                 <Route path="*" element={<NotFoundPage />} />
