@@ -1,15 +1,13 @@
 <% content_for :title, "#{@show.title} - #{@season.name} Review" %>
 
 <h1 class="text-2xl"><%= @show.title %></h1>
-<h2 class="text-xl">
-  <%# FIXME: Use proper Rails route helper when season show page is migrated to ERB %>
-  <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}" %>
-</h2>
+<h2 class="text-xl"><%= @season.name %></h2>
 
 <div>
   <h3>
     <%= link_to @author.handle, human_profile_path(@author.handle) %>&rsquo;s review of
-    <%= @season.name %> of <%= @show.title %>.
+    <%# FIXME: Use proper Rails route helper when season show page is migrated to ERB %>
+    <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}" %> of <%= link_to @show.title, show_path(@show.slug) %>.
   </h3>
 
   <div>
@@ -19,7 +17,7 @@
 
   <div>
     <h3 class="text-lg">Date</h3>
-    <span><%= @review.created_at.to_date %></span>
+    <span><%= l(@review.created_at.to_date, format: :default) %></span>
   </div>
 
   <% if @review.rating %>
