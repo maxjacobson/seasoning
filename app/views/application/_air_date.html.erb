@@ -1,0 +1,11 @@
+<%# locals: (episode:) %>
+
+<% if episode.air_date.blank? %>
+  —
+<% else %>
+  <% if episode.available? %>
+    <span><%= l(episode.air_date, format: :episode_air_date) %></span>
+  <% else %>
+    <span class="text-slate-400"><%= l(episode.air_date, format: :episode_air_date) %></span>
+  <% end %>
+<% end %>

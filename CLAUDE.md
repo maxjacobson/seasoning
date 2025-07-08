@@ -179,3 +179,7 @@ node_modules/.bin/prettier --write app/javascript
 ## Meaningful Changes Tips
 
 - When making meaningful Rails changes, make sure to run bin/ruby-lint to make sure that rubocop and erb lint are satisfied with the changes too
+
+## Development Practices
+
+- Don't reference strftime formats in views or helpers, instead define them in @config/locales/en.yml and reference them by name

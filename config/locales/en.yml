@@ -34,3 +34,4 @@ en:
   date:
     formats:
       default: "%B %d, %Y"
+      episode_air_date: "%m/%d/%Y"
