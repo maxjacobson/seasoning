@@ -155,11 +155,11 @@ export const SeasonPage = () => {
         <div>
           <h2 className="text-lg">Your review</h2>
           <div>
-            <Link
-              to={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}
+            <a
+              href={`/shows/${yourSeason.show.slug}/${yourSeason.season.slug}/reviews/new`}
             >
               <span className="underlined">Add review</span>
-            </Link>
+            </a>
           </div>
           <div>
             {yourSeason.your_reviews.length ? (

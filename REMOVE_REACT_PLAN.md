@@ -8,7 +8,7 @@
 - [x] Port /shows (YourShowsPage)
 - [x] Port /shows/:showSlug (ShowPage)
 - [ ] Port /shows/:showSlug/:seasonSlug (SeasonPage)
-- [ ] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
+- [x] Port /shows/:showSlug/:seasonSlug/reviews/new (NewSeasonReviewPage)
 - [ ] Port /shows/:showSlug/:seasonSlug/:episodeNumber (EpisodePage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug (SeasonReviewPage)
 - [ ] Port /:handle/shows/:showSlug/:seasonSlug/:viewing (SeasonReviewPage)

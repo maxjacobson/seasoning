@@ -155,3 +155,20 @@ node_modules/.bin/prettier --write app/javascript
 ## Development Best Practices
 
 - It's important to prefix bash commands with rbenv's init thing so that the proper ruby version is activated
+
+## Test Data Generation
+
+- When creating test data, prefer Halt and Catch Fire as the example show, and prefer to name humans after characters in the show (Donna Clark, Gordon Clark, Cameron Howe, Joe MacMillan, John Bosworth, Joanie Clark, or Haley Clark)
+
+## Code Linting Tips
+
+- You can fix rubocop long line offenses by using heredocs, which it will ignore
+- When there are erb lint issues, you can often fix them with bin/erb_lint --lint-all --autocorrect
+
+## SPA Development Tips
+
+- When making meaningful changes to the SPA, make sure to run bin/node-lint to confirm that typescript, eslint, and prettier are all satisfied
+
+## Meaningful Changes Tips
+
+- When making meaningful Rails changes, make sure to run bin/ruby-lint to make sure that rubocop and erb lint are satisfied with the changes too
