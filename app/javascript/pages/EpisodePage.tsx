@@ -1,11 +1,11 @@
 import { Episode, Season, Show } from "../types";
-import { Link, useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { AirDate } from "../components/AirDate";
 import { MoreInfo } from "../components/MoreInfo";
 import { setHeadTitle } from "../hooks";
 import { SetLoadingContext } from "../contexts";
 import { ShowMetadata } from "../components/ShowMetadata";
+import { useParams } from "react-router";
 
 interface LoadingEpisode {
   loading: true;
@@ -88,7 +88,7 @@ export const EpisodePage = () => {
       />
       <p>
         An episode of <a href={`/shows/${show.slug}`}>{show.title}</a>,{" "}
-        <Link to={`/shows/${show.slug}/${season.slug}`}>{season.name}</Link>.
+        <a href={`/shows/${show.slug}/${season.slug}`}>{season.name}</a>.
       </p>
 
       <div>{episode.still_url && <img src={episode.still_url} />}</div>
