@@ -8,6 +8,7 @@ end
 
 Capybara.server = :puma, { Silent: true }
 Capybara.default_max_wait_time = 10
+Capybara.test_id = "data-test-id"
 
 # Setup for system tests
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase

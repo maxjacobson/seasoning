@@ -18,29 +18,6 @@ module API
       }
     end
 
-    def create
-      authorize! { current_human.present? }
-
-      show = Show.find(params.require(:show_id))
-      season = show.seasons.find(params.require(:season_id))
-
-      review = SeasonReview.new(
-        season_review_params.merge(
-          author: current_human,
-          season:,
-          viewing: (SeasonReview.where(author: current_human, season:).maximum(:viewing) || 0) + 1
-        )
-      )
-
-      if review.save
-        render json: {
-          review: SeasonReviewSerializer.one(review)
-        }
-      else
-        render json: review.errors, status: :bad_request
-      end
-    end
-
     def destroy
       review_to_destroy = SeasonReview.joins(:author).joins(season: :show).where(
         author: { handle: params.require(:handle) },
@@ -53,12 +30,6 @@ module API
       review_to_destroy.destroy!
 
       render json: {}
-    end
-
-    private
-
-    def season_review_params
-      params.expect(review: [:body, :visibility, :rating])
     end
   end
 end

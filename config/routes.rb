@@ -17,7 +17,6 @@ Rails.application.routes.draw do
         end
       end
       resource :settings, only: [:show]
-      resources :season_reviews, only: [:create], path: "/season-reviews"
       resource :season_review, only: [:show, :destroy], path: "/season-review"
       resource :human_limits, only: [:show], path: "/human-limits", controller: "human_limits"
     end
@@ -36,6 +35,9 @@ Rails.application.routes.draw do
     resource :note_to_self, only: [:edit], path: "/note-to-self", controller: "notes_to_self"
     resource :refresh, only: [:create], controller: "refresh_show"
   end
+
+  get "/shows/:show_slug/:season_slug/reviews/new", to: "season_reviews#new", as: :new_season_review
+  post "/shows/:show_slug/:season_slug/reviews", to: "season_reviews#create", as: :season_reviews
   resource :settings, only: [:show, :update]
   resources :importable_shows, only: [:index, :create], path: "import-shows"
   resource :search, only: [:show]

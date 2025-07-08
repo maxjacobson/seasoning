@@ -1,0 +1,57 @@
+<% content_for :title, "New review of #{@show.title} — #{@season.name}" %>
+
+<h1 class="mb-2 text-2xl">
+  New review of <%= @show.title %> — <%= @season.name %>
+</h1>
+
+<%= form_with model: @review, url: season_reviews_path(@show.slug, @season.slug) do |form| %>
+  <% if @review.errors.any? %>
+    <div class="mb-4">
+      <% @review.errors.full_messages.each do |error| %>
+        <div class="text-red-600"><%= error %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :visibility, "Visible to", class: "mr-2" %>
+    <%= form.select :visibility,
+        options_for_select([
+          ["Anybody", "viewable_by_anybody"],
+          ["Only myself", "viewable_by_only_me"]
+        ], @review.visibility) %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :rating, "Rating", class: "block mb-2" %>
+    <%= form.select :rating,
+        options_for_select([
+          ["No rating", ""],
+          ["1 star", 1],
+          ["2 stars", 2],
+          ["3 stars", 3],
+          ["4 stars", 4],
+          ["5 stars", 5],
+          ["6 stars", 6],
+          ["7 stars", 7],
+          ["8 stars", 8],
+          ["9 stars", 9],
+          ["10 stars", 10]
+        ], @review.rating) %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :body do %>
+      <span>
+        Your review (you can use
+        <%= link_to "Markdown", "https://commonmark.org/help/", target: "_blank", rel: "noreferrer" %>)
+      </span>
+    <% end %>
+    <%= form.text_area :body,
+        class: "text-field w-full h-48" %>
+  </div>
+
+  <div>
+    <%= form.submit "Save", class: "rounded-button" %>
+  </div>
+<% end %>
