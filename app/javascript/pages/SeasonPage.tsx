@@ -1,5 +1,4 @@
 import { GuestContext, SetLoadingContext } from "../contexts";
-import { Link, useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { AirDate } from "../components/AirDate";
 import { MoreInfo } from "../components/MoreInfo";
@@ -7,6 +6,7 @@ import { Poster } from "../components/Poster";
 import { SeenEpisodeCheckbox } from "../components/SeenEpisodeCheckbox";
 import { setHeadTitle } from "../hooks";
 import { ShowMetadata } from "../components/ShowMetadata";
+import { useParams } from "react-router";
 import { YourSeason } from "../types";
 
 interface LoadingSeason {
@@ -121,11 +121,11 @@ export const SeasonPage = () => {
                     <tr key={episode.episode_number}>
                       <td>{episode.episode_number}</td>
                       <td>
-                        <Link
-                          to={`/shows/${showSlug}/${seasonSlug}/${episode.episode_number}`}
+                        <a
+                          href={`/shows/${showSlug}/${seasonSlug}/${episode.episode_number}`}
                         >
                           {episode.name}
-                        </Link>
+                        </a>
                       </td>
                       <td>
                         <AirDate date={episode.air_date} />
@@ -167,13 +167,13 @@ export const SeasonPage = () => {
                 {yourSeason.your_reviews.map((review, i) => {
                   return (
                     <li key={i}>
-                      <Link
-                        to={`/${guest.human.handle}/shows/${yourSeason.show.slug}/${
+                      <a
+                        href={`/${guest.human.handle}/shows/${yourSeason.show.slug}/${
                           yourSeason.season.slug
                         }${review.viewing === 1 ? "" : `/${review.viewing}`}`}
                       >
                         {new Date(review.created_at).toLocaleDateString()}
-                      </Link>
+                      </a>
                     </li>
                   );
                 })}
