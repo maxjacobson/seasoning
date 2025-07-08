@@ -1,0 +1,51 @@
+<% content_for :title, "#{@show.title} - #{@season.name} Review" %>
+
+<h1 class="text-2xl"><%= @show.title %></h1>
+<h2 class="text-xl">
+  <%# FIXME: Use proper Rails route helper when season show page is migrated to ERB %>
+  <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}" %>
+</h2>
+
+<div>
+  <h3>
+    <%= link_to @author.handle, human_profile_path(@author.handle) %>&rsquo;s review of
+    <%= @season.name %> of <%= @show.title %>.
+  </h3>
+
+  <div>
+    <h3 class="text-lg">Poster</h3>
+    <%= render "poster", show: @show, url: @season.poster.url, size: "large" %>
+  </div>
+
+  <div>
+    <h3 class="text-lg">Date</h3>
+    <span><%= @review.created_at.to_date %></span>
+  </div>
+
+  <% if @review.rating %>
+    <div>
+      <h3 class="text-lg">Rating</h3>
+      <%= render "star_rating", rating: @review.rating %>
+    </div>
+  <% end %>
+
+  <div class="my-2 rounded-md border border-solid border-yellow-600 p-4">
+    <%= markdown_to_html(@review.body).html_safe %>
+  </div>
+
+  <% if current_human && @review.author == current_human %>
+    <div>
+      <% if @review.viewing == 1 %>
+        <%= button_to "Delete review",
+            profile_season_review_path(@author.handle, @show.slug, @season.slug),
+            method: :delete,
+            class: "rounded-button" %>
+      <% else %>
+        <%= button_to "Delete review",
+            profile_season_review_viewing_path(@author.handle, @show.slug, @season.slug, @review.viewing),
+            method: :delete,
+            class: "rounded-button" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

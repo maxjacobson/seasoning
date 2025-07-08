@@ -44,7 +44,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
 
     click_on "Save"
 
-    assert page.has_content?("Delete review")
+    assert_button "Delete review"
     assert page.has_content?("The tech industry drama we needed")
 
     review = SeasonReview.find_by(author: @human, season: @season)
@@ -67,7 +67,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     fill_in "Your review (you can use Markdown)", with: "Just some personal notes for myself."
     click_on "Save"
 
-    assert page.has_content?("Delete review")
+    assert_button "Delete review"
 
     review = SeasonReview.find_by(author: @human, season: @season)
 
@@ -97,16 +97,15 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     fill_in "Your review (you can use Markdown)", with: "First time watching - amazing tech drama!"
     click_on "Save"
 
-    assert page.has_content?("Delete review")
+    assert_button "Delete review"
 
     click_on "Season 1"
-    visit "/shows/halt-and-catch-fire/season-1"
     click_on "Add review"
 
     fill_in "Your review (you can use Markdown)", with: "Second viewing - even better storytelling!"
     click_on "Save"
 
-    assert page.has_content?("Delete review")
+    assert_button "Delete review"
 
     reviews = SeasonReview.where(author: @human, season: @season).order(:viewing)
 
@@ -115,5 +114,31 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     assert_equal 2, reviews.second.viewing
     assert_equal "First time watching - amazing tech drama!", reviews.first.body
     assert_equal "Second viewing - even better storytelling!", reviews.second.body
+  end
+
+  test "deleting a review after creating it" do
+    visit redeem_magic_link_path(@magic_link.token)
+    click_on "Halt and Catch Fire"
+    click_on "Season 1"
+    click_on "Add review"
+
+    fill_in "Your review (you can use Markdown)", with: "This review will be deleted."
+    click_on "Save"
+
+    assert_button "Delete review"
+    assert page.has_content?("This review will be deleted.")
+
+    review = SeasonReview.find_by(author: @human, season: @season)
+
+    assert_not_nil review
+
+    click_on "Delete review"
+
+    # FIXME: Uncomment when SeasonPage is ported to ERB - SPA doesn't show flash messages
+    # assert page.has_content?("Review deleted successfully")
+    assert_equal "/shows/halt-and-catch-fire/season-1", current_path
+    assert_text "Halt and Catch Fire"
+
+    assert_nil SeasonReview.find_by(author: @human, season: @season)
   end
 end

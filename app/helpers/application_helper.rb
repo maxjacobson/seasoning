@@ -4,17 +4,6 @@ module ApplicationHelper
     Kramdown::Document.new(text, input: "GFM").to_html
   end
 
-  # FIXME: idk what to call this
-  def proper_review_path(review)
-    base = "/#{review.author.handle}/shows/#{review.season.show.slug}/#{review.season.slug}"
-
-    if review.viewing == 1
-      base
-    else
-      "#{base}/#{review.viewing}"
-    end
-  end
-
   def seen_current_season_message(human, season)
     my_season = MySeason.find_by(human:, season:)
     denominator = season.episodes.count

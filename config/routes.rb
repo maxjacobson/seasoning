@@ -17,7 +17,6 @@ Rails.application.routes.draw do
         end
       end
       resource :settings, only: [:show]
-      resource :season_review, only: [:show, :destroy], path: "/season-review"
       resource :human_limits, only: [:show], path: "/human-limits", controller: "human_limits"
     end
   end
@@ -49,6 +48,10 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index]
     resources :followers, only: [:index]
     resources :followings, only: [:index], path: "following"
+    get "shows/:show_slug/:season_slug", to: "season_reviews#show", as: :season_review
+    get "shows/:show_slug/:season_slug/:viewing", to: "season_reviews#show", as: :season_review_viewing
+    delete "shows/:show_slug/:season_slug", to: "season_reviews#destroy"
+    delete "shows/:show_slug/:season_slug/:viewing", to: "season_reviews#destroy"
   end
   get "/*anything", to: "frontend#show"
 end

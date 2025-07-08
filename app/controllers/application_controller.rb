@@ -46,4 +46,18 @@ class ApplicationController < ActionController::Base
     1
   end
   helper_method :current_page
+
+  def proper_review_path(review)
+    if review.viewing == 1
+      profile_season_review_path(review.author.handle, review.season.show.slug, review.season.slug)
+    else
+      profile_season_review_viewing_path(
+        review.author.handle,
+        review.season.show.slug,
+        review.season.slug,
+        review.viewing
+      )
+    end
+  end
+  helper_method :proper_review_path
 end
