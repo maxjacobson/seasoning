@@ -1,5 +1,4 @@
 [
   { "command": ["bin/rails", "server"] },
-  { "command": ["bin/vite", "dev"] },
   { "command": ["npm", "run", "build:css", "--", "--watch"] }
 ]

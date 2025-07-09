@@ -5,37 +5,18 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "@eslint/js": "^9.30.1",
     "@tailwindcss/cli": "^4.1.11",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.1.11",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.6.0",
-    "eslint": "^9.30.1",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.3.0",
     "playwright": "^1.52.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.13",
     "run-pty": "^5.0.0",
-    "tailwindcss": "^4.1.10",
-    "typescript-eslint": "^8.36.0",
-    "vite": "^7.0.3",
-    "vite-plugin-ruby": "^5.1.1"
-  },
-  "dependencies": {
-    "query-string": "^9.2.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.1.0",
-    "react-markdown": "^10.1.0",
-    "react-router": "^7.6.3",
-    "remark-gfm": "^4.0.1",
-    "typescript": "^5.8.3"
+    "tailwindcss": "^4.1.10"
   },
   "scripts": {
     "playwright:install": "playwright install",
-    "build:css": "tailwindcss -i ./app/javascript/App.css -o ./app/assets/builds/app.css --minify"
+    "build:css": "tailwindcss --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/app.css --minify"
   }
 }
