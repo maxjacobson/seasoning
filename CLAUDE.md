@@ -100,6 +100,11 @@ node_modules/.bin/prettier --write .
 
 **Terminology**: Use "human" not "user" - the core model is `Human`, not `User`. This is deliberate terminology throughout the codebase.
 
+## UI/UX Style Guide
+
+- Prefer sentence case for buttons and labels (not title case)
+- Brand color is orange
+
 ## Migrations
 
 - Always make migrations reversible
