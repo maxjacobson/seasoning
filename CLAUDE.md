@@ -9,7 +9,8 @@ Seasoning is a Ruby on Rails application for tracking TV show viewing progress.
 **Tech Stack:**
 
 - Backend: Ruby on Rails 8 with PostgreSQL
-- Frontend: ERB templates with Tailwind CSS 4
+- Frontend: ERB templates with Tailwind CSS 4, Turbo Rails for SPA-like navigation
+- JavaScript: jsbundling-rails with esbuild for bundling
 - Testing: Minitest (Rails), Capybara with Playwright for system tests
 - API: The Movie Database (TMDB) for show data
 - Deployment: Heroku with Heroku Scheduler for background tasks
@@ -32,15 +33,21 @@ rails server
 ### Frontend Development
 
 ```bash
-# Build CSS
+# Build JavaScript and CSS
+bin/rails javascript:build
+bin/rails css:build
+
+# Or use npm scripts
 npm run build:css
+npm run build
 ```
 
 ### Testing
 
 ```bash
-# Full test suite (requires CSS build first)
-npm run build:css
+# Full test suite (requires JS/CSS build first)
+bin/rails javascript:build
+bin/rails css:build
 bin/rails test:all
 
 # Individual test types
@@ -106,6 +113,8 @@ node_modules/.bin/prettier --write .
 - `app/models/` - Rails models with business logic
 - `app/controllers/` - Rails controllers for web requests
 - `app/assets/stylesheets/application.css` - Main CSS file with Tailwind imports and custom styles
+- `app/javascript/application.js` - Main JavaScript file with Turbo Rails import
+- `run-pty.json` - Development server configuration for running Rails, CSS, and JS watchers
 
 ## Scheduled Tasks (Heroku Scheduler)
 
@@ -117,7 +126,7 @@ node_modules/.bin/prettier --write .
 ## Testing Notes
 
 - System tests use Capybara with Playwright driver
-- **CSS must be built before running tests** - System tests rely on properly styled elements being visible and interactive
+- **JS/CSS must be built before running tests** - System tests rely on properly styled elements being visible and interactive
 - Test fixtures and WebMock stubs for TMDB API in `test/webmock/`
 - Never add `sleep` statements to system tests to help them pass reliably - use proper Capybara waiting methods instead
 - When running tests you might encounter a segfault when the tests run in parallel which you can always retry with PARALLEL_WORKERS=1 set to make it run non-parallel

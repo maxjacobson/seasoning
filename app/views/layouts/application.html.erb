@@ -15,6 +15,7 @@
       }
     </style>
     <%= stylesheet_link_tag "app" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body>
@@ -32,7 +33,7 @@
             <%= render "show_search_bar" %>
             <%= link_to "Your page", human_profile_path(current_human.handle), class: "mr-2" %>
             <%= link_to "Settings", settings_path, class: "mr-2" %>
-            <%= button_to "Log out", logout_path, method: :delete, class: "link-looking-button", form_class: "inline" %>
+            <%= button_to "Log out", logout_path, method: :delete, class: "link-looking-button", form_class: "inline", data: { turbo_confirm: "Are you sure you want to log out?" } %>
           <% end %>
         </div>
       </div>
