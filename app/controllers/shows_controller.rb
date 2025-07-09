@@ -19,8 +19,12 @@ class ShowsController < ApplicationController
                     SQL
                   )
                 )
-                .limit(PAGE_SIZE)
+                .limit(PAGE_SIZE + 1) # Get one extra to check if there's a next page
                 .offset((current_page - 1) * PAGE_SIZE)
+
+    @has_next_page = @my_shows.size > PAGE_SIZE
+    @my_shows = @my_shows.limit(PAGE_SIZE) if @has_next_page
+    @has_previous_page = current_page > 1
   end
 
   def show
