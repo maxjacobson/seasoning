@@ -62,14 +62,20 @@
       <div>No shows yet. Maybe add some via the search at the top of the page?</div>
     <% end %>
 
-    <div class="flex justify-between">
-      <div>
-        <% if current_page > 1 %>
-          <%= link_to "Previous", @filters.previous_page_path, class: "rounded-button" %>
-        <% end %>
+    <% if @has_previous_page || @has_next_page %>
+      <div class="flex justify-between">
+        <div>
+          <% if @has_previous_page %>
+            <%= link_to "← Previous", @filters.previous_page_path, class: "rounded-button" %>
+          <% end %>
+        </div>
+        <div class="font-bold">Page <%= current_page %></div>
+        <div>
+          <% if @has_next_page %>
+            <%= link_to "Next →", @filters.next_page_path, class: "rounded-button" %>
+          <% end %>
+        </div>
       </div>
-      <div class="font-bold">Page <%= current_page %></div>
-      <%= link_to "Next", @filters.next_page_path, class: "rounded-button" %>
-    </div>
+    <% end %>
   </div>
 </div>
