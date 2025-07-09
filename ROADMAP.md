@@ -3,7 +3,6 @@
 Some things I'm planning to work on:
 
 1. Pagination on [the reviews page](/reviews)
-1. Pagination on a person's reviews page, for example [mine](/maxjacobson/reviews)
 1. Like button on reviews
 1. Comments on reviews
 1. Possible to edit reviews after publishing them -- body, star rating, visibility

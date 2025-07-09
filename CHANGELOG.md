@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **July 8, 2025** — Add pagination to your list of reviews
 1. **April 13, 2025** — Admins can click "refresh now" button shows page
 1. **April 13, 2025** — Remove ability to mark an entire season as seen from the seasons list on the show page
 1. **April 13, 2025** — Remove "mutual followers" option from review visibility (it never worked) (sorry)

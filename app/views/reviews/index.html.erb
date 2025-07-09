@@ -26,7 +26,26 @@
       </div>
     </div>
   <% end %>
-  <p><strong>Note:</strong> this is just the 30 most recent reviews!</p>
+
+  <% if @has_previous_page || @has_next_page %>
+    <div class="mt-4 flex justify-between items-center">
+      <div>
+        <% if @has_previous_page %>
+          <%= link_to "← Previous", url_for(page: @page - 1), class: "rounded-button" %>
+        <% end %>
+      </div>
+
+      <div>
+        Page <%= @page %>
+      </div>
+
+      <div>
+        <% if @has_next_page %>
+          <%= link_to "Next →", url_for(page: @page + 1), class: "rounded-button" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <% else %>
   <p>No reviews yet!</p>
 <% end %>

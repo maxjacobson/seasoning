@@ -7,7 +7,7 @@ Capybara.register_driver :my_playwright do |app|
 end
 
 Capybara.server = :puma, { Silent: true }
-Capybara.default_max_wait_time = 10
+Capybara.default_max_wait_time = 2
 Capybara.test_id = "data-test-id"
 
 # Setup for system tests
