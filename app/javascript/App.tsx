@@ -7,7 +7,6 @@ import { Guest } from "./types";
 import { LoadingRibbon } from "./components/LoadingRibbon";
 import LogoWithName from "./images/logo-with-name.svg";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import { SeasonPage } from "./pages/SeasonPage";
 
 interface Props {
   guest: Guest;
@@ -71,11 +70,6 @@ const App: FunctionComponent<Props> = ({ guest }: Props) => {
 
             <div className="mx-auto my-0 max-w-3xl p-2">
               <Routes>
-                <Route
-                  path="/shows/:showSlug/:seasonSlug"
-                  element={<SeasonPage />}
-                />
-
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
 

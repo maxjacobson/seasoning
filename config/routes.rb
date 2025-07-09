@@ -37,6 +37,10 @@ Rails.application.routes.draw do
 
   get "/shows/:show_slug/:season_slug/reviews/new", to: "season_reviews#new", as: :new_season_review
   post "/shows/:show_slug/:season_slug/reviews", to: "season_reviews#create", as: :season_reviews
+  get "/shows/:show_slug/:season_slug", to: "seasons#show", as: :season
+  post "/shows/:show_slug/:season_slug/episodes/:episode_number/viewing", to: "episode_viewings#create",
+                                                                          as: :episode_viewing
+  delete "/shows/:show_slug/:season_slug/episodes/:episode_number/viewing", to: "episode_viewings#destroy"
   get "/shows/:show_slug/:season_slug/:episode_number", to: "episodes#show", as: :episode
   resource :settings, only: [:show, :update]
   resources :importable_shows, only: [:index, :create], path: "import-shows"
