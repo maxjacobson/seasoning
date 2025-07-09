@@ -33,7 +33,9 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "Add review"
 
-    assert_content "New review of Halt and Catch Fire — Season 1"
+    assert_content "Halt and Catch Fire"
+    assert_content "Season 1"
+    assert_content "Writing your review"
 
     select "8 stars", from: "Rating"
 
@@ -42,7 +44,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
               The tech industry drama we needed. Incredible character development and period details.
             TEXT
 
-    click_on "Save"
+    click_on "Save review"
 
     assert_button "Delete review"
     assert_content "The tech industry drama we needed"
@@ -62,10 +64,10 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "Add review"
 
-    select "Only myself", from: "Visible to"
+    select "Private - Only you can see", from: "Visibility"
 
     fill_in "Your review (you can use Markdown)", with: "Just some personal notes for myself."
-    click_on "Save"
+    click_on "Save review"
 
     assert_button "Delete review"
 
@@ -84,7 +86,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "Add review"
 
-    click_on "Save"
+    click_on "Save review"
 
     assert_content "Body can't be blank"
   end
@@ -95,7 +97,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "Add review"
     fill_in "Your review (you can use Markdown)", with: "First time watching - amazing tech drama!"
-    click_on "Save"
+    click_on "Save review"
 
     assert_button "Delete review"
 
@@ -103,7 +105,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Add review"
 
     fill_in "Your review (you can use Markdown)", with: "Second viewing - even better storytelling!"
-    click_on "Save"
+    click_on "Save review"
 
     assert_button "Delete review"
 
@@ -123,7 +125,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Add review"
 
     fill_in "Your review (you can use Markdown)", with: "This review will be deleted."
-    click_on "Save"
+    click_on "Save review"
 
     assert_button "Delete review"
     assert_content "This review will be deleted."
