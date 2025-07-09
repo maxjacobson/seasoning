@@ -124,7 +124,6 @@ GEM
       dotenv (= 3.1.8)
       railties (>= 6.1)
     drb (2.2.3)
-    dry-cli (1.2.0)
     dry-core (1.1.0)
       concurrent-ruby (~> 1.0)
       logger
@@ -210,7 +209,6 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.25.5)
-    mutex_m (0.3.0)
     net-imap (0.5.8)
       date
       net-protocol
@@ -234,11 +232,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-gnu)
       racc (~> 1.4)
-    oj (3.16.11)
-      bigdecimal (>= 3.0)
-      ostruct (>= 0.2)
-    oj_serializers (2.0.3)
-      oj (>= 3.14.0)
     ostruct (0.6.2)
     parallel (1.27.0)
     parser (3.3.8.0)
@@ -265,8 +258,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.16)
-    rack-proxy (0.7.7)
-      rack
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -357,15 +348,6 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.3)
     useragent (0.16.11)
-    vite_rails (3.0.19)
-      railties (>= 5.1, < 9)
-      vite_ruby (~> 3.0, >= 3.2.2)
-    vite_ruby (3.9.2)
-      dry-cli (>= 0.7, < 2)
-      logger (~> 1.6)
-      mutex_m
-      rack-proxy (~> 0.6, >= 0.6.1)
-      zeitwerk (~> 2.2)
     webmock (3.25.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -402,7 +384,6 @@ DEPENDENCIES
   letter_opener
   listen
   nokogiri
-  oj_serializers
   ostruct
   pg
   propshaft
@@ -413,7 +394,6 @@ DEPENDENCIES
   rubocop-minitest
   rubocop-rails
   sucker_punch
-  vite_rails
   webmock
 
 CHECKSUMS
@@ -450,7 +430,6 @@ CHECKSUMS
   dotenv (3.1.8) sha256=9e1176060ced581f8e6ce4384e91361817763a76e3c625c8bddc18b35bd392c3
   dotenv-rails (3.1.8) sha256=46c9d1226a8b58a83b5f61325aa8cffd25cea1c0fafdfbbbee1e5dfea77980c4
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
-  dry-cli (1.2.0) sha256=8c97df3b290ee6354ee2025a5f0a67226b381627de32741d06f35ea0887cd95b
   dry-core (1.1.0) sha256=0903821a9707649a7da545a2cd88e20f3a663ab1c5288abd7f914fa7751ab195
   dry-inflector (1.2.0) sha256=22f5d0b50fd57074ae57e2ca17e3b300e57564c218269dcf82ff3e42d3f38f2e
   dry-logic (1.6.0) sha256=da6fedbc0f90fc41f9b0cc7e6f05f5d529d1efaef6c8dcc8e0733f685745cea2
@@ -491,7 +470,6 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.9) sha256=0cd7c7f824e010c072e33f68bc02d85a00aeb6fce05bb4819c03dfd3c140c289
   minitest (5.25.5) sha256=391b6c6cb43a4802bfb7c93af1ebe2ac66a210293f4a3fb7db36f2fc7dc2c756
-  mutex_m (0.3.0) sha256=cfcb04ac16b69c4813777022fdceda24e9f798e48092a2b817eb4c0a782b0751
   net-imap (0.5.8) sha256=52aa5fdfc1a8a3df1f793b20a327e95b5a9dfe1d733e1f0d53075d2dbcfcf593
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
@@ -503,8 +481,6 @@ CHECKSUMS
   nokogiri (1.18.8-arm64-darwin) sha256=483b5b9fb33653f6f05cbe00d09ea315f268f0e707cfc809aa39b62993008212
   nokogiri (1.18.8-x86_64-darwin) sha256=024cdfe7d9ae3466bba6c06f348fb2a8395d9426b66a3c82f1961b907945cc0c
   nokogiri (1.18.8-x86_64-linux-gnu) sha256=4a747875db873d18a2985ee2c320a6070c4a414ad629da625fbc58d1a20e5ecc
-  oj (3.16.11) sha256=2aab609d2bc896529bd3c70d737f591c13932a640ba6164a0f7e414efdb052b1
-  oj_serializers (2.0.3) sha256=a2c4bd2900fdb4f04ff11cc73e49ebdb6112400eb823099c7dc2e860d6b6d1d3
   ostruct (0.6.2) sha256=6d7302a299e400a2c248d6ce0dad18fc3a5714e8096facc25ffd0c54ee57cfc0
   parallel (1.27.0) sha256=4ac151e1806b755fb4e2dc2332cbf0e54f2e24ba821ff2d3dcf86bf6dc4ae130
   parser (3.3.8.0) sha256=2476364142b307fa5a1b1ece44f260728be23858a9c71078e956131a75453c45
@@ -519,7 +495,6 @@ CHECKSUMS
   puma (6.6.0) sha256=f25c06873eb3d5de5f0a4ebc783acc81a4ccfe580c760cfe323497798018ad87
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   rack (3.1.16) sha256=efb5606c351efc56b85b10c3493055d0d35209d23f44792ec4e1183eb0234635
-  rack-proxy (0.7.7) sha256=446a4b57001022145d5c3ba73b775f66a2260eaf7420c6907483141900395c8a
   rack-session (2.1.1) sha256=0b6dc07dea7e4b583f58a48e8b806d4c9f1c6c9214ebc202ec94562cbea2e4e9
   rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463
   rackup (2.2.1) sha256=f737191fd5c5b348b7f0a4412a3b86383f88c43e13b8217b63d4c8d90b9e798d
@@ -552,8 +527,6 @@ CHECKSUMS
   unicode-emoji (4.0.4) sha256=2c2c4ef7f353e5809497126285a50b23056cc6e61b64433764a35eff6c36532a
   uri (1.0.3) sha256=e9f2244608eea2f7bc357d954c65c910ce0399ca5e18a7a29207ac22d8767011
   useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
-  vite_rails (3.0.19) sha256=195c44677bc05c1f94e7a69f1264e49d4bad2729ab06538ee858c2962f5bb500
-  vite_ruby (3.9.2) sha256=e10a7c851b590cccab57904bc96c2eb078ed6e22560a778db1dcefa3818a4972
   webmock (3.25.1) sha256=ab9d5d9353bcbe6322c83e1c60a7103988efc7b67cd72ffb9012629c3d396323
   websocket-driver (0.8.0) sha256=ed0dba4b943c22f17f9a734817e808bc84cdce6a7e22045f5315aa57676d4962
   websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241

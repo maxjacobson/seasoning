@@ -4,15 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Seasoning is a Ruby on Rails application for tracking TV show viewing progress. The app is currently in migration from React to vanilla Rails with ERB templates.
-
-**IMPORTANT: New features should be built with Rails ERB, not React. The React components are legacy and being phased out.**
+Seasoning is a Ruby on Rails application for tracking TV show viewing progress.
 
 **Tech Stack:**
 
 - Backend: Ruby on Rails 8 with PostgreSQL
-- Frontend: ERB templates with Tailwind CSS 4 (migrating away from React)
-- Legacy: React 19 with TypeScript, Vite for bundling (being phased out)
+- Frontend: ERB templates with Tailwind CSS 4
 - Testing: Minitest (Rails), Capybara with Playwright for system tests
 - API: The Movie Database (TMDB) for show data
 - Deployment: Heroku with Heroku Scheduler for background tasks
@@ -28,23 +25,13 @@ eval "$(rbenv init -)"
 # Initial setup
 bin/setup
 
-# Start development servers (run in separate terminals)
+# Start development server
 rails server
-bin/vite dev  # Optional but enables hot reloading
 ```
 
 ### Frontend Development
 
 ```bash
-# Build frontend assets
-bin/vite build
-
-# Dev server with hot reloading
-bin/vite dev
-
-# Dev server for testing
-bin/vite dev --mode=test
-
 # Build CSS
 npm run build:css
 ```
@@ -52,8 +39,8 @@ npm run build:css
 ### Testing
 
 ```bash
-# Full test suite (requires frontend build first)
-bin/vite build
+# Full test suite (requires CSS build first)
+npm run build:css
 bin/rails test:all
 
 # Individual test types
@@ -76,14 +63,8 @@ eval "$(rbenv init -)"
 # Ruby linting
 bin/rubocop
 
-# JavaScript/TypeScript linting
-node_modules/.bin/eslint app/javascript
-
-# Type checking
-node_modules/.bin/tsc --noEmit
-
 # Code formatting
-node_modules/.bin/prettier --write app/javascript
+node_modules/.bin/prettier --write .
 ```
 
 ## Architecture
@@ -96,21 +77,9 @@ node_modules/.bin/prettier --write app/javascript
 - **Jobs**: Background processing with SuckerPunch (`RefreshShowJob`, `BoomJob`)
 - **Serializers**: JSON API responses using OJ serializers
 
-### React Frontend
-
-- **Entry Points**: `app/javascript/entrypoints/application.ts` for Rails integration
-- **Components**: Reusable UI components in `app/javascript/components/`
-- **Pages**: Route-specific components in `app/javascript/pages/`
-- **Routing**: React Router 7 for SPA routes, falls back to Rails for unmatched routes
-- **Context**: Guest authentication and loading state management
-- **Types**: TypeScript definitions in `app/javascript/types.ts`
-
 ### Architecture Notes
 
-- Rails handles most routes with server-side rendering using ERB templates
-- Legacy React SPA handles specific routes: `/shows/:showSlug/:seasonSlug/*` (being migrated)
-- API endpoints under `/api` serve JSON for React components (will be deprecated as React is removed)
-- Fallback route `/*anything` in Rails catches unmatched React routes
+- Rails handles all routes with server-side rendering using ERB templates
 
 ### Database
 
@@ -133,12 +102,10 @@ node_modules/.bin/prettier --write app/javascript
 
 ## Key Files
 
-- `config/routes.rb` - Defines both Rails and API routes
-- `app/javascript/App.tsx` - Main React application component
+- `config/routes.rb` - Defines Rails routes
 - `app/models/` - Rails models with business logic
-- `app/controllers/api/` - JSON API controllers for React frontend
-- `vite.config.mts` - Vite configuration with Ruby plugin
-- `eslint.config.mjs` - ESLint configuration with TypeScript and React rules
+- `app/controllers/` - Rails controllers for web requests
+- `app/assets/stylesheets/application.css` - Main CSS file with Tailwind imports and custom styles
 
 ## Scheduled Tasks (Heroku Scheduler)
 
@@ -150,10 +117,10 @@ node_modules/.bin/prettier --write app/javascript
 ## Testing Notes
 
 - System tests use Capybara with Playwright driver
-- Frontend must be built before running tests
+- **CSS must be built before running tests** - System tests rely on properly styled elements being visible and interactive
 - Test fixtures and WebMock stubs for TMDB API in `test/webmock/`
-- Run `bin/vite dev --mode=test` when iterating on frontend tests to avoid rebuilding
 - Never add `sleep` statements to system tests to help them pass reliably - use proper Capybara waiting methods instead
+- When running tests you might encounter a segfault when the tests run in parallel which you can always retry with PARALLEL_WORKERS=1 set to make it run non-parallel
 
 ## Git Workflow
 
@@ -171,10 +138,6 @@ node_modules/.bin/prettier --write app/javascript
 
 - You can fix rubocop long line offenses by using heredocs, which it will ignore
 - When there are erb lint issues, you can often fix them with bin/erb_lint --lint-all --autocorrect
-
-## SPA Development Tips
-
-- When making meaningful changes to the SPA, make sure to run bin/node-lint to confirm that typescript, eslint, and prettier are all satisfied
 
 ## Meaningful Changes Tips
 

@@ -6,6 +6,4 @@ PATH="node_modules/.bin:$PATH"
 
 set -x
 
-tsc --build tsconfig.json
 prettier --check .
-eslint .
