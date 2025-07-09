@@ -10,9 +10,12 @@ class SigningOutTest < ApplicationSystemTestCase
   test "signing out" do
     visit redeem_magic_link_path(@magic_link.token)
 
-    assert page.has_content?("No shows yet")
-    click_on "Log out"
+    assert_content "No shows yet"
 
-    assert page.has_content?("This is seasoning, a website about TV shows")
+    accept_confirm do
+      click_on "Log out"
+    end
+
+    assert_content "This is seasoning, a website about TV shows"
   end
 end

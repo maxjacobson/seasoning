@@ -23,6 +23,8 @@ class UpdatingSettingsTest < ApplicationSystemTestCase
     uncheck "Share currently watching"
     click_on "Update settings"
 
+    assert_content "Saved!"
+
     @human.reload
 
     assert_equal "myself", @human.default_review_visibility

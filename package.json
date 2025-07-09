@@ -8,6 +8,7 @@
     "@tailwindcss/cli": "^4.1.11",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.1.11",
+    "esbuild": "^0.25.6",
     "playwright": "^1.52.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
@@ -17,6 +18,10 @@
   },
   "scripts": {
     "playwright:install": "playwright install",
-    "build:css": "tailwindcss --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/app.css --minify"
+    "build:css": "tailwindcss --input ./app/assets/stylesheets/application.css --output ./app/assets/builds/app.css --minify",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+  },
+  "dependencies": {
+    "@hotwired/turbo-rails": "^8.0.16"
   }
 }

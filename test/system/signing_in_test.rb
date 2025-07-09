@@ -11,7 +11,7 @@ class SigningInTest < ApplicationSystemTestCase
     fill_in "email", with: "donna@example.com"
     click_on "Go"
 
-    assert page.has_content?("Check your email")
+    assert_content "Check your email"
 
     assert_equal 1, MagicLinkMailer.deliveries.count
     assert_equal 1, MagicLink.count
@@ -25,7 +25,7 @@ class SigningInTest < ApplicationSystemTestCase
 
     visit redeem_magic_link_path(token)
 
-    assert page.has_content?("No shows yet")
+    assert_content "No shows yet"
     assert_equal "/shows", page.current_path
   end
 
@@ -34,7 +34,7 @@ class SigningInTest < ApplicationSystemTestCase
     fill_in "email", with: "donna@example.com"
     click_on "Go"
 
-    assert page.has_content?("Check your email")
+    assert_content "Check your email"
 
     assert_equal 1, MagicLinkMailer.deliveries.count
     assert_equal 1, MagicLink.count
@@ -51,6 +51,6 @@ class SigningInTest < ApplicationSystemTestCase
 
     visit redeem_magic_link_path(token)
 
-    assert page.has_content?("Hmm, that magic link does not seem to be valid.")
+    assert_content "Hmm, that magic link does not seem to be valid."
   end
 end

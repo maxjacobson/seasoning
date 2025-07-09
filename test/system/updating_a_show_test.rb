@@ -19,7 +19,7 @@ class UpdatingAShowTest < ApplicationSystemTestCase
     select "Finished", from: "my_show[status]"
     click_on "Update status"
 
-    assert page.has_content?("Updated Halt and Catch Fire")
+    assert_content "Updated Halt and Catch Fire"
   end
 
   test "can update note to self" do
@@ -31,8 +31,8 @@ class UpdatingAShowTest < ApplicationSystemTestCase
     fill_in "my_show[note_to_self]", with: "I love it so much"
     click_on "Update note to self"
 
-    assert page.has_content?("Updated Halt and Catch Fire")
-    assert page.has_content?("I love it so much")
+    assert_content "Updated Halt and Catch Fire"
+    assert_content "I love it so much"
   end
 
   test "currently watching limit is respected" do
@@ -44,7 +44,7 @@ class UpdatingAShowTest < ApplicationSystemTestCase
     select "Currently watching", from: "my_show[status]"
     click_on "Update status"
 
-    assert page.has_content?("Updated Halt and Catch Fire")
+    assert_content "Updated Halt and Catch Fire"
     fill_in "Search", with: "Zoey"
     click_on "Search"
     click_on "Zoey's Extraordinary Playlist"

@@ -63,19 +63,19 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert page.has_content?("Halt and Catch Fire")
-    assert page.has_content?("Season 1")
-    assert page.has_content?("More info")
-    assert page.has_content?("Back")
-    assert page.has_content?("Season info")
-    assert page.has_content?("I/O")
-    assert page.has_content?("FUD")
-    assert page.has_content?("High Plains Hardware")
-    assert page.has_content?("06/01/2014")
-    assert page.has_content?("06/08/2014")
-    assert page.has_content?("06/15/2014")
-    assert page.has_content?("FYI")
-    assert page.has_content?("Data last refreshed:")
+    assert_content "Halt and Catch Fire"
+    assert_content "Season 1"
+    assert_content "More info"
+    assert_content "Back"
+    assert_content "Season info"
+    assert_content "I/O"
+    assert_content "FUD"
+    assert_content "High Plains Hardware"
+    assert_content "06/01/2014"
+    assert_content "06/08/2014"
+    assert_content "06/15/2014"
+    assert_content "FYI"
+    assert_content "Data last refreshed:"
 
     assert page.has_link?("Back", href: "/shows/halt-and-catch-fire")
     assert page.has_link?("More info", href: "https://www.themoviedb.org/tv/59659/season/1")
@@ -92,9 +92,9 @@ class SeasonPageTest < ApplicationSystemTestCase
     assert page.has_button?("Mark seen")
     first("input[value='Mark seen']").click
 
-    assert page.has_content?("I/O marked as seen")
+    assert_content "I/O marked as seen"
     assert page.has_button?("Mark not seen")
-    assert page.has_content?("✅")
+    assert_content "✅"
 
     my_season = MySeason.find_by(human: @human, season: @season)
 
@@ -109,10 +109,10 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Season 1"
 
     assert page.has_button?("Mark not seen")
-    assert page.has_content?("✅")
+    assert_content "✅"
     first("input[value='Mark not seen']").click
 
-    assert page.has_content?("I/O marked as not seen")
+    assert_content "I/O marked as not seen"
     assert page.has_button?("Mark seen")
 
     my_season.reload
@@ -126,9 +126,9 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert page.has_content?("Your review")
-    assert page.has_content?("Add review")
-    assert page.has_content?("None yet")
+    assert_content "Your review"
+    assert_content "Add review"
+    assert_content "None yet"
     assert page.has_link?("Add review", href: "/shows/halt-and-catch-fire/season-1/reviews/new")
   end
 
@@ -146,7 +146,7 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert page.has_content?("Your review")
+    assert_content "Your review"
     assert page.has_link?(review.created_at.to_date.to_s, href: "/donna/shows/halt-and-catch-fire/season-1")
   end
 end

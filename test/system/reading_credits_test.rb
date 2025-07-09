@@ -5,6 +5,6 @@ class ReadingCreditsTest < ApplicationSystemTestCase
   test "credits page loads" do
     visit credits_path
 
-    assert page.has_content?("Letterboxd")
+    assert_content "Letterboxd"
   end
 end

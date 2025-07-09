@@ -14,7 +14,7 @@ class ProfilePageTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     click_on "Your page"
 
+    assert_content "cam is not currently watching anything"
     assert_equal "/cam", page.current_path
-    assert page.has_content?("cam is not currently watching anything")
   end
 end
