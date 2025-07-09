@@ -121,6 +121,10 @@ node_modules/.bin/prettier --write .
 - Test fixtures and WebMock stubs for TMDB API in `test/webmock/`
 - Never add `sleep` statements to system tests to help them pass reliably - use proper Capybara waiting methods instead
 - When running tests you might encounter a segfault when the tests run in parallel which you can always retry with PARALLEL_WORKERS=1 set to make it run non-parallel
+- **Do not use controller tests. Use system tests**
+- In system tests, act as a user, so prefer clicking around instead of directly navigating to pages
+- In system tests, do not use fixtures. just create the records right in the system test
+- **System test authentication pattern**: Create a Human, then create a MagicLink for their email, then visit `redeem_magic_link_path(@magic_link.token)` to authenticate
 
 ## Git Workflow
 
