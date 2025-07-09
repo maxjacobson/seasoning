@@ -6,8 +6,7 @@
 <div>
   <h3>
     <%= link_to @author.handle, human_profile_path(@author.handle) %>&rsquo;s review of
-    <%# FIXME: Use proper Rails route helper when season show page is migrated to ERB %>
-    <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}" %> of <%= link_to @show.title, show_path(@show.slug) %>.
+    <%= link_to @season.name, season_path(@show.slug, @season.slug) %> of <%= link_to @show.title, show_path(@show.slug) %>.
   </h3>
 
   <div>

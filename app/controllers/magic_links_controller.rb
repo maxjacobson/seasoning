@@ -18,8 +18,7 @@ class MagicLinksController < ApplicationController
   def new
     authorize! { true }
 
-    # FIXME: use the route helper
-    redirect_to "/shows" if current_human.present?
+    redirect_to shows_path if current_human.present?
 
     respond_to do |format|
       format.html

@@ -35,8 +35,7 @@
     <ol class="list-inside list-decimal">
       <% Human.order(created_at: :desc).limit(50).each do |human| %>
         <li>
-          <%# FIXME - use the route helper method %>
-          <%= link_to human.handle, "/#{human.handle}" %>
+          <%= link_to human.handle, human_profile_path(human.handle) %>
         </li>
       <% end %>
     </ol>

@@ -75,8 +75,7 @@ class SeasonReviewsController < ApplicationController
 
     @review.destroy!
 
-    # FIXME: Replace with proper Rails helper when season page is migrated to ERB
-    redirect_to "/shows/#{show.slug}/#{season.slug}", notice: "Review deleted successfully"
+    redirect_to season_path(show.slug, season.slug), notice: "Review deleted successfully"
   end
 
   private

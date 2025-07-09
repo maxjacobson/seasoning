@@ -134,8 +134,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
 
     click_on "Delete review"
 
-    # FIXME: Uncomment when SeasonPage is ported to ERB - SPA doesn't show flash messages
-    # assert page.has_content?("Review deleted successfully")
+    assert page.has_content?("Review deleted successfully")
     assert_equal "/shows/halt-and-catch-fire/season-1", current_path
     assert_text "Halt and Catch Fire"
 
