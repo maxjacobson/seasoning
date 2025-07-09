@@ -10,10 +10,19 @@
 
 <p class="mt-2 mb-2">To sign up or log in, just enter your email address and we&rsquo;ll send you a link to get started:</p>
 
-<%# FIXME: figure out how to enable turbo for this form and have validations show up %>
-<%= form_with model: MagicLink.new, html: { "data-turbo": "false" } do |f| %>
-  <%= f.text_field :email, placeholder: "email", class: "text-field" %>
-  <%= f.submit "Go", class: "rounded-button ml-2" %>
+<%= form_with model: @magic_link, url: magic_links_path do |f| %>
+  <% if @magic_link.errors.any? %>
+    <div class="mb-4">
+      <% @magic_link.errors.full_messages.each do |error| %>
+        <div class="text-red-600"><%= error %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="flex items-center">
+    <%= f.text_field :email, placeholder: "email", class: "text-field" %>
+    <%= f.submit "Go", class: "rounded-button ml-2" %>
+  </div>
 <% end %>
 
 <div class="mt-2">
