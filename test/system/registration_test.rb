@@ -35,6 +35,6 @@ class RegistrationTest < ApplicationSystemTestCase
     fill_in "email", with: "donna"
     click_on "Go"
 
-    assert_content "Bad email!"
+    assert_content "Email is invalid"
   end
 end

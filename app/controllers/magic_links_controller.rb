@@ -20,6 +20,8 @@ class MagicLinksController < ApplicationController
 
     redirect_to shows_path if current_human.present?
 
+    @magic_link = MagicLink.new
+
     respond_to do |format|
       format.html
     end
@@ -28,14 +30,13 @@ class MagicLinksController < ApplicationController
   def create
     authorize! { true }
 
-    magic_link = MagicLink.new(magic_link_params)
+    @magic_link = MagicLink.new(magic_link_params)
 
-    if magic_link.save
-      magic_link.deliver
+    if @magic_link.save
+      @magic_link.deliver
       redirect_to check_your_email_path, notice: "Sent! Check your email."
     else
-      flash.now[:alert] = "Bad email!"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
