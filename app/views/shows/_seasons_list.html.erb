@@ -19,8 +19,7 @@
           <%= season.season_number %>
         </td>
         <td>
-          <%# FIXME: use the route helper when we have it %>
-          <%= link_to "/shows/#{show.slug}/#{season.slug}" do %>
+          <%= link_to season_path(show.slug, season.slug) do %>
             <%= season.name %>
           <% end %>
         </td>

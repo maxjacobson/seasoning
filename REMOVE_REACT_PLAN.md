@@ -24,7 +24,7 @@
 - [x] Port /:handle/following (ProfileFollowingPage)
 - [x] Port /:handle/followers (ProfileFollowersPage)
 - [x] Port /search (SearchResultsPage)
-- [ ] Review all of the FIXMEs
+- [x] Review all of the FIXMEs
 
 ## The fun part
 

@@ -53,8 +53,7 @@
           <div class="flex flex-wrap gap-1">
             <% @human.currently_watching.each do |show| %>
               <div class="w-32">
-                <%# FIXME - use route helper %>
-                <%= link_to "/shows/#{show.slug}" do %>
+                <%= link_to show_path(show.slug) do %>
                   <div>
                     <%= render "poster", size: "small", url: show.poster.url, show: show %>
                   </div>

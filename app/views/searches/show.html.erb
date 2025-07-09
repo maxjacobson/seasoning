@@ -8,8 +8,7 @@
   <ul class="list-inside list-disc">
     <% @shows.each do |show| %>
       <li>
-        <%# FIXME - use the nice helper %>
-        <%= link_to "/shows/#{show.slug}" do %>
+        <%= link_to show_path(show.slug) do %>
           <%= show.title %>
           <% if show.first_air_date %>
             (<%= show.first_air_date.year %>)

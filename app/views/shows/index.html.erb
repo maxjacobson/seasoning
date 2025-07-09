@@ -28,8 +28,7 @@
           <div class="w-60 rounded-lg border-2 border-dashed border-yellow-500 p-2">
             <div class="flex flex-col">
               <div class="self-center">
-                <%# FIXME - use route helper %>
-                <%= link_to "/shows/#{my_show.show.slug}" do %>
+                <%= link_to show_path(my_show.show.slug) do %>
                   <div>
                     <%= render "poster", size: "large", url: my_show.show.poster.url, show: my_show.show %>
                   </div>

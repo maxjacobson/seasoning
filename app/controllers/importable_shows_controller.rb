@@ -15,7 +15,6 @@ class ImportableShowsController < ApplicationController
 
     MyShow.create_or_find_by(human: current_human, show:)
 
-    # FIXME: use the nice helper method
-    redirect_to "/shows/#{show.slug}", notice: "You've imported #{show.title}! Thanks."
+    redirect_to show_path(show.slug), notice: "You've imported #{show.title}! Thanks."
   end
 end
