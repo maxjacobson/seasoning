@@ -10,4 +10,8 @@ class MySeason < ApplicationRecord
   def watched?
     watched_episode_numbers.uniq.sort == season.episodes.pluck(:episode_number).uniq.sort
   end
+
+  def episode_watched?(episode_number)
+    watched_episode_numbers.include?(episode_number)
+  end
 end
