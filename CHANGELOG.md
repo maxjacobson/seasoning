@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **July 8, 2025** — Improve design of reviews page to make it easier to scan (remove redundant author names, add visual separation, show dates, better layout)
 1. **July 8, 2025** — Fix pagination on shows page so "Next" button only appears when there are actually more pages
 1. **July 8, 2025** — Add pagination to your list of reviews
 1. **April 13, 2025** — Admins can click "refresh now" button shows page
