@@ -5,24 +5,29 @@
 <h1 class="text-2xl"><%= @profile.handle %>&rsquo;s reviews</h1>
 <% if @reviews.any? %>
   <% @reviews.each do |review| %>
-    <h2 class="text-xl">
-      <%= link_to "Review by #{review.author.handle}", proper_review_path(review) %>
-    </h2>
-    <div>
-      <h2 class="text-lg">
-        <%= review.season.show.title %> &mdash; <%= review.season.name %>
-      </h2>
-      <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
-
-      <div>
-        <% if review.rating %>
-          <%= render "star_rating", rating: review.rating %>
-        <% else %>
-          No rating
-        <% end %>
-      </div>
-      <div>
-        <%= link_to "Read", proper_review_path(review) %>
+    <div class="mb-6 rounded-lg border border-gray-200 p-4">
+      <div class="flex gap-4">
+        <div class="flex-shrink-0">
+          <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold mb-1">
+            <%= link_to "#{review.season.show.title} — #{review.season.name}", proper_review_path(review), class: "hover:underline" %>
+          </h2>
+          <div class="text-sm text-gray-600 mb-2">
+            <%= l(review.created_at, format: :default) %>
+          </div>
+          <div class="mb-3">
+            <% if review.rating %>
+              <%= render "star_rating", rating: review.rating %>
+            <% else %>
+              <span class="text-gray-500">No rating</span>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to "Read full review", proper_review_path(review), class: "rounded-button" %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
