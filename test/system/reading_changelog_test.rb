@@ -5,6 +5,6 @@ class ReadingChangelogTest < ApplicationSystemTestCase
   test "changelog page loads" do
     visit changelog_path
 
-    assert page.has_content?("Development starts")
+    assert_content "Development starts"
   end
 end

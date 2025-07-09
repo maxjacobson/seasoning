@@ -47,14 +47,14 @@ class EpisodePageTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "I/O"
 
-    assert page.has_content?("I/O")
-    assert page.has_content?("An episode of Halt and Catch Fire")
-    assert page.has_content?("Season 1")
-    assert page.has_content?("06/01/2014")
-    assert page.has_content?("More info")
-    assert page.has_content?("FYI")
-    assert page.has_content?("Data last refreshed:")
-    assert page.has_content?("Data will next be refreshed within 24 hours of")
+    assert_content "I/O"
+    assert_content "An episode of Halt and Catch Fire"
+    assert_content "Season 1"
+    assert_content "06/01/2014"
+    assert_content "More info"
+    assert_content "FYI"
+    assert_content "Data last refreshed:"
+    assert_content "Data will next be refreshed within 24 hours of"
 
     assert page.has_link?("Halt and Catch Fire", href: "/shows/halt-and-catch-fire")
     assert page.has_link?("Season 1", href: "/shows/halt-and-catch-fire/season-1")
@@ -69,10 +69,10 @@ class EpisodePageTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "I/O"
 
-    assert page.has_content?("I/O")
+    assert_content "I/O"
     formatted_date = Date.tomorrow.strftime("%m/%d/%Y")
 
-    assert page.has_content?(formatted_date)
+    assert_content formatted_date
   end
 
   test "visiting episode page with no air date shows dash" do
@@ -83,8 +83,8 @@ class EpisodePageTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "I/O"
 
-    assert page.has_content?("I/O")
-    assert page.has_content?("—")
+    assert_content "I/O"
+    assert_content "—"
   end
 
   test "visiting episode page with no still image works" do
@@ -95,7 +95,7 @@ class EpisodePageTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "I/O"
 
-    assert page.has_content?("I/O")
-    assert page.has_content?("An episode of Halt and Catch Fire")
+    assert_content "I/O"
+    assert_content "An episode of Halt and Catch Fire"
   end
 end

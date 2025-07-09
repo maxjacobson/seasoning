@@ -8,7 +8,7 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit admin_path
 
-    assert page.has_content?("Humans count: 1")
+    assert_content "Humans count: 1"
   end
 
   test "non-admin can't see stats" do
@@ -17,6 +17,6 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit admin_path
 
-    assert page.has_content?("401 Unauthorized")
+    assert_content "401 Unauthorized"
   end
 end

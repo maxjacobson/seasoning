@@ -23,7 +23,7 @@ class FilteringShowsTest < ApplicationSystemTestCase
   test "seeing unfiltered list" do
     visit shows_path
 
-    assert page.has_content?("Halt and Catch Fire")
+    assert_content "Halt and Catch Fire"
   end
 
   test "filtering by title" do
@@ -32,12 +32,12 @@ class FilteringShowsTest < ApplicationSystemTestCase
     fill_in "Filter your shows", with: "Sopranos"
     click_on "Apply filters"
 
-    assert page.has_content?("No shows yet")
+    assert_content "No shows yet"
 
     fill_in "Filter your shows", with: "Fire"
     click_on "Apply filters"
 
-    assert page.has_content?("Halt and Catch Fire")
+    assert_content "Halt and Catch Fire"
   end
 
   test "filtering by status" do
@@ -47,11 +47,11 @@ class FilteringShowsTest < ApplicationSystemTestCase
     select "Might watch", from: "statuses"
     click_on "Apply filters"
 
-    assert page.has_content?("No shows yet")
+    assert_content "No shows yet"
 
     select "Currently watching", from: "statuses"
     click_on "Apply filters"
 
-    assert page.has_content?("Halt and Catch Fire")
+    assert_content "Halt and Catch Fire"
   end
 end

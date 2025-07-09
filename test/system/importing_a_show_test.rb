@@ -16,7 +16,7 @@ class ImportingAShowTest < ApplicationSystemTestCase
     fill_in "Search", with: "halt and catch fire"
     click_on "Search"
 
-    assert page.has_content?(
+    assert_content(
       <<~TEXT.squish
         Not seeing what you’re looking for?
         You might be the first person to want to add it.
@@ -32,9 +32,8 @@ class ImportingAShowTest < ApplicationSystemTestCase
 
     click_on "import it here"
 
+    assert_content "Halt and Catch Fire (2014)"
     assert_request_requested search_request
-
-    assert page.has_content?("Halt and Catch Fire (2014)")
 
     tv_request = stub_request(:get, "https://api.themoviedb.org/3/tv/59659?api_key=xxxx")
                  .to_return(
@@ -52,6 +51,8 @@ class ImportingAShowTest < ApplicationSystemTestCase
 
     click_on "Import"
 
+    assert_content "You've imported Halt and Catch Fire! Thanks."
+
     assert_request_requested tv_request, times: 2
     seasons_requests.each do |req|
       assert_request_requested req
@@ -59,12 +60,10 @@ class ImportingAShowTest < ApplicationSystemTestCase
 
     assert_equal "/shows/halt-and-catch-fire", page.current_path
 
-    assert page.has_content?("Halt and Catch Fire")
-
     select "Currently watching"
 
     click_on "Update status"
 
-    assert page.has_content?("Updated Halt and Catch Fire")
+    assert_content "Updated Halt and Catch Fire"
   end
 end

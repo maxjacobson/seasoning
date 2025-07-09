@@ -33,7 +33,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Season 1"
     click_on "Add review"
 
-    assert page.has_content?("New review of Halt and Catch Fire — Season 1")
+    assert_content "New review of Halt and Catch Fire — Season 1"
 
     select "8 stars", from: "Rating"
 
@@ -45,7 +45,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Save"
 
     assert_button "Delete review"
-    assert page.has_content?("The tech industry drama we needed")
+    assert_content "The tech industry drama we needed"
 
     review = SeasonReview.find_by(author: @human, season: @season)
 
@@ -86,7 +86,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
 
     click_on "Save"
 
-    assert page.has_content?("Body can't be blank")
+    assert_content "Body can't be blank"
   end
 
   test "multiple reviews for same season create different viewing numbers" do
@@ -126,15 +126,17 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     click_on "Save"
 
     assert_button "Delete review"
-    assert page.has_content?("This review will be deleted.")
+    assert_content "This review will be deleted."
 
     review = SeasonReview.find_by(author: @human, season: @season)
 
     assert_not_nil review
 
-    click_on "Delete review"
+    accept_confirm do
+      click_on "Delete review"
+    end
 
-    assert page.has_content?("Review deleted successfully")
+    assert_content "Review deleted successfully"
     assert_equal "/shows/halt-and-catch-fire/season-1", current_path
     assert_text "Halt and Catch Fire"
 
