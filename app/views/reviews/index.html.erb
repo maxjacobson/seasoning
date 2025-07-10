@@ -15,7 +15,10 @@
             <%= link_to "#{review.season.show.title} — #{review.season.name}", proper_review_path(review), class: "hover:underline" %>
           </h2>
           <div class="text-sm text-gray-600 mb-2">
-            <%= l(review.created_at, format: :default) %>
+            <%= l(review.created_at.to_date, format: :default) %>
+            <% if review.viewable_by_only_me? %>
+              <span title="Private review - only you can see this">🔒</span>
+            <% end %>
           </div>
           <div class="mb-3">
             <% if review.rating %>
