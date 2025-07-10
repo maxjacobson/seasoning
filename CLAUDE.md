@@ -164,3 +164,7 @@ node_modules/.bin/prettier --write .
 ## Development Practices
 
 - Don't reference strftime formats in views or helpers, instead define them in @config/locales/en.yml and reference them by name
+
+## Changelog Practices
+
+- When checking what the current date is while updating the changelog, shell out to date to double check the date in local time

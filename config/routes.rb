@@ -31,8 +31,12 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index]
     resources :followers, only: [:index]
     resources :followings, only: [:index], path: "following"
+    get "shows/:show_slug/:season_slug/edit", to: "season_reviews#edit", as: :edit_season_review
+    get "shows/:show_slug/:season_slug/:viewing/edit", to: "season_reviews#edit", as: :edit_season_review_viewing
     get "shows/:show_slug/:season_slug", to: "season_reviews#show", as: :season_review
     get "shows/:show_slug/:season_slug/:viewing", to: "season_reviews#show", as: :season_review_viewing
+    patch "shows/:show_slug/:season_slug", to: "season_reviews#update"
+    patch "shows/:show_slug/:season_slug/:viewing", to: "season_reviews#update"
     delete "shows/:show_slug/:season_slug", to: "season_reviews#destroy"
     delete "shows/:show_slug/:season_slug/:viewing", to: "season_reviews#destroy"
   end

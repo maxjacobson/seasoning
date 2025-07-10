@@ -35,17 +35,15 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
 
     assert_content "Halt and Catch Fire"
     assert_content "Season 1"
-    assert_content "Writing your review"
 
-    select "8 stars", from: "Rating"
-
+    select "⭐⭐⭐⭐⭐⭐⭐⭐ 8 stars", from: "Rating"
     fill_in "Your review (you can use Markdown)",
             with: <<~TEXT.chomp
               The tech industry drama we needed. Incredible character development and period details.
             TEXT
-
     click_on "Save review"
 
+    assert_link "Edit review"
     assert_button "Delete review"
     assert_content "The tech industry drama we needed"
 
@@ -69,6 +67,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     fill_in "Your review (you can use Markdown)", with: "Just some personal notes for myself."
     click_on "Save review"
 
+    assert_link "Edit review"
     assert_button "Delete review"
 
     review = SeasonReview.find_by(author: @human, season: @season)
@@ -99,6 +98,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     fill_in "Your review (you can use Markdown)", with: "First time watching - amazing tech drama!"
     click_on "Save review"
 
+    assert_link "Edit review"
     assert_button "Delete review"
 
     click_on "Season 1"
@@ -107,6 +107,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     fill_in "Your review (you can use Markdown)", with: "Second viewing - even better storytelling!"
     click_on "Save review"
 
+    assert_link "Edit review"
     assert_button "Delete review"
 
     reviews = SeasonReview.where(author: @human, season: @season).order(:viewing)
@@ -118,6 +119,42 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     assert_equal "Second viewing - even better storytelling!", reviews.second.body
   end
 
+  test "editing a review after creating it" do
+    visit redeem_magic_link_path(@magic_link.token)
+    click_on "Halt and Catch Fire"
+    click_on "Season 1"
+    click_on "Add review"
+
+    select "⭐⭐⭐⭐⭐ 5 stars", from: "Rating"
+    fill_in "Your review (you can use Markdown)", with: "Initial review content."
+    click_on "Save review"
+
+    assert_link "Edit review"
+    assert_button "Delete review"
+    assert_content "Initial review content."
+
+    click_on "Edit review"
+
+    assert_content "Halt and Catch Fire"
+    assert_content "Season 1"
+
+    select "⭐⭐⭐⭐⭐⭐⭐⭐ 8 stars", from: "Rating"
+    select "Private - Only you can see", from: "Visibility"
+    fill_in "Your review (you can use Markdown)", with: "Updated review content with new rating and visibility."
+    click_on "Update review"
+
+    assert_link "Edit review"
+    assert_button "Delete review"
+    assert_content "Updated review content with new rating and visibility."
+
+    review = SeasonReview.find_by(author: @human, season: @season)
+
+    assert_not_nil review
+    assert_equal "Updated review content with new rating and visibility.", review.body
+    assert_equal 8, review.rating
+    assert_equal "viewable_by_only_me", review.visibility
+  end
+
   test "deleting a review after creating it" do
     visit redeem_magic_link_path(@magic_link.token)
     click_on "Halt and Catch Fire"
@@ -127,6 +164,7 @@ class CreatingSeasonReviewTest < ApplicationSystemTestCase
     fill_in "Your review (you can use Markdown)", with: "This review will be deleted."
     click_on "Save review"
 
+    assert_link "Edit review"
     assert_button "Delete review"
     assert_content "This review will be deleted."
 
