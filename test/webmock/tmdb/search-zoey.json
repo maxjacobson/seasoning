@@ -1,0 +1,23 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/8P2hs6Ok5DvieM9N2VjDZfJ6v59.jpg",
+      "genre_ids": [18, 35],
+      "id": 82815,
+      "origin_country": ["US"],
+      "original_language": "en",
+      "original_name": "Zoey's Extraordinary Playlist",
+      "overview": "A computer programmer discovers she can hear people's thoughts as songs.",
+      "popularity": 15.5,
+      "poster_path": "/zoey_poster.jpg",
+      "first_air_date": "2020-01-07",
+      "name": "Zoey's Extraordinary Playlist",
+      "vote_average": 7.5,
+      "vote_count": 125
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 1
+}

@@ -11,26 +11,16 @@ class ImportingAShowTest < ApplicationSystemTestCase
   end
 
   test "searching for and importing a show" do
-    visit redeem_magic_link_path(@magic_link.token)
-
-    fill_in "Search", with: "halt and catch fire"
-    click_on "Search"
-
-    assert_content(
-      <<~TEXT.squish
-        Not seeing what you’re looking for?
-        You might be the first person to want to add it.
-        Feel free to import it here.
-      TEXT
-    )
-
     search_request = stub_request(:get, "https://api.themoviedb.org/3/search/tv?api_key=xxxx&query=halt%20and%20catch%20fire")
                      .to_return(
                        status: 200,
                        body: Rails.root.join("test/webmock/tmdb/search-halt-and-catch-fire.json").read
                      )
 
-    click_on "import it here"
+    visit redeem_magic_link_path(@magic_link.token)
+
+    fill_in "Search", with: "halt and catch fire"
+    click_on "Search"
 
     assert_content "Halt and Catch Fire (2014)"
     assert_request_requested search_request
@@ -49,7 +39,8 @@ class ImportingAShowTest < ApplicationSystemTestCase
         )
     end
 
-    click_on "Import"
+    # Click on the poster to import the show (TMDB ID 59659 for Halt and Catch Fire)
+    click_button "import-show-59659"
 
     assert_content "You've imported Halt and Catch Fire! Thanks."
 

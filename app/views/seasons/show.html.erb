@@ -12,9 +12,7 @@
 
   <div>
     <div>
-      <% if @season.tmdb_poster_path.present? %>
-        <%= image_tag @season.poster.url, alt: "#{@season.name} poster" %>
-      <% end %>
+      <%= image_tag @season.poster.url, alt: "#{@season.name} poster" %>
     </div>
 
     <div>

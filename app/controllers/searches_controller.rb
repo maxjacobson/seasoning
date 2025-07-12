@@ -3,10 +3,11 @@ class SearchesController < ApplicationController
   def show
     authorize! { current_human.present? }
 
-    @shows = if (query = params[:q].to_s.strip.presence)
-               Show.where("title ilike ?", "%#{query}%")
-             else
-               Show.none
-             end
+    @results = if (query = params[:q].to_s.strip.presence)
+                 tmdb_results = TMDB::Client.new.search_tv(query).results
+                 ImportableShow.from(tmdb_results)
+               else
+                 []
+               end
   end
 end

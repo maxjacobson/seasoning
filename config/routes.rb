@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   delete "/shows/:show_slug/:season_slug/episodes/:episode_number/viewing", to: "episode_viewings#destroy"
   get "/shows/:show_slug/:season_slug/:episode_number", to: "episodes#show", as: :episode
   resource :settings, only: [:show, :update]
-  resources :importable_shows, only: [:index, :create], path: "import-shows"
+  resources :importable_shows, only: [:create], path: "import-shows"
   resource :search, only: [:show]
   delete "/logout", to: "sessions#destroy", as: :logout
   get "/check-your-email", to: "check_your_email#show", as: :check_your_email
