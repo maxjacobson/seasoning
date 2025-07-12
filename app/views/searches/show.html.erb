@@ -4,24 +4,29 @@
 
 <h1 class="text-2xl">Search results</h1>
 
-<% if @shows.any? %>
-  <ul class="list-inside list-disc">
-    <% @shows.each do |show| %>
-      <li>
-        <%= link_to show_path(show.slug) do %>
-          <%= show.title %>
-          <% if show.first_air_date %>
-            (<%= show.first_air_date.year %>)
+<% if @results.any? %>
+  <div>
+    <% @results.each do |result| %>
+      <div class="mx-0 my-2 rounded-md border border-dotted border-blue-500 p-1">
+        <% if result.already_imported_show %>
+          <%= link_to show_path(result.already_imported_show.slug), data: { test_id: "imported-show-#{result.id}" } do %>
+            <%= image_tag result.poster_url, class: "border-2 border-solid border-yellow-700 p-1" %>
+          <% end %>
+        <% else %>
+          <%= button_to importable_shows_path, params: { id: result.id }, method: :post, class: "border-0 bg-transparent p-0", data: { test_id: "import-show-#{result.id}" } do %>
+            <%= image_tag result.poster_url, class: "border-2 border-solid border-yellow-700 p-1 cursor-pointer" %>
           <% end %>
         <% end %>
-      </li>
+
+        <div>
+          <%= result.name %>
+          <% if result.year %>
+            (<%= result.year %>)
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <p>No results. Try searching something else.</p>
 <% end %>
-
-<p>
-  Not seeing what you&rsquo;re looking for? You might be the first person to want to add it.
-  Feel free to <%= link_to "import it here", importable_shows_path(params.permit(:q)) %>.
-</p>

@@ -20,14 +20,10 @@
     <% end %>
   </div>
 
-  <% if @show.poster.url %>
-    <div>
-      <h2 class="text-xl">Poster</h2>
-      <%= render "poster", size: "large", url: @show.poster.url, show: @show %>
-    </div>
-  <% else %>
-    <div>No poster...</div>
-  <% end %>
+  <div>
+    <h2 class="text-xl">Poster</h2>
+    <%= render "poster", size: "large", url: @show.poster.url, show: @show %>
+  </div>
 
   <% if @show.seasons.length > 0 %>
     <div>
