@@ -13,7 +13,7 @@ echo "== Installing dependencies =="
 gem update --system --silent
 gem install bundler --conservative
 bundle check || bundle install --quiet
-npm install --silent
+npm clean-install --silent
 npm run --silent playwright:install
 
 echo "== Preparing database =="
