@@ -44,7 +44,7 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm install
+      - run: npm clean-install
       - run: npm run playwright:install
       - run: bin/ruby-lint
       - run: bin/node-lint
