@@ -100,6 +100,11 @@ node_modules/.bin/prettier --write .
 
 **Terminology**: Use "human" not "user" - the core model is `Human`, not `User`. This is deliberate terminology throughout the codebase.
 
+**SQL Writing**:
+
+- Prefer lowercase keywords
+- When writing complex sql queries, and creating aliases for tables, prefer long descriptive names (e.g. humans_seasons) over short, non-obvious aliases like s2
+
 ## UI/UX Style Guide
 
 - Prefer sentence case for buttons and labels (not title case)
@@ -168,3 +173,7 @@ node_modules/.bin/prettier --write .
 ## Changelog Practices
 
 - When checking what the current date is while updating the changelog, shell out to date to double check the date in local time
+
+## File References
+
+- Reference @db/schema.rb to see the database schema
