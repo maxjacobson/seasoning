@@ -78,4 +78,28 @@ class MyShowTest < ActiveSupport::TestCase
 
     assert_in_delta(75.0, my_show.watched_percentage)
   end
+
+  test "aired_episodes? returns false when show has no first_air_date" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123, first_air_date: nil)
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
+
+    assert_not_predicate my_show, :aired_episodes?
+  end
+
+  test "aired_episodes? returns false when show has future first_air_date" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123, first_air_date: 1.day.from_now)
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
+
+    assert_not_predicate my_show, :aired_episodes?
+  end
+
+  test "aired_episodes? returns true when show has past first_air_date" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123, first_air_date: 1.day.ago)
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
+
+    assert_predicate my_show, :aired_episodes?
+  end
 end

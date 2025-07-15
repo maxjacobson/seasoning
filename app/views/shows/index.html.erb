@@ -44,7 +44,8 @@
                 <% else %>
                   <span>&mdash;</span>
                 <% end %>
-                <% if (percentage = my_show.watched_percentage) > 0 %>
+                <% if my_show.aired_episodes? %>
+                  <% percentage = my_show.watched_percentage %>
                   <div class="mt-2">
                     <div class="flex justify-end text-xs text-gray-600 mb-1">
                       <span><%= percentage %>%</span>

@@ -19,3 +19,5 @@ linters:
         Enabled: false
       Rails/OutputSafety:
         Enabled: false
+      Lint/UselessAssignment:
+        Enabled: false
