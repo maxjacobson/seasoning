@@ -54,8 +54,4 @@ class MyShow < ApplicationRecord
 
     result.first["percentage"].to_f
   end
-
-  def aired_episodes?
-    show.first_air_date.present? && show.first_air_date <= Time.zone.today
-  end
 end
