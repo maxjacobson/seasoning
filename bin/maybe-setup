@@ -2,6 +2,15 @@
 
 set -e
 
+if [ -t 1 ] ; then
+  # Yes, a TTY
+  true
+else
+  echo "Not a TTY, exiting"
+
+  exit 0
+fi
+
 maybeNodeSetup() {
   npm_path="tmp/digests-package-lock.json.md5"
 
@@ -11,10 +20,21 @@ maybeNodeSetup() {
     fi
   fi
 
+  echo "== OK to run npm clean-install and npm run playwright:install? [Yn] =="
+  printf "> "
+  read -r ok
+
+  if [ "$ok" = 'n' ] || [ "$ok" = "N" ]; then
+    echo "== Skipping npm setup =="
+    return
+  fi
+
   echo "== npm clean-install =="
   npm clean-install
+
   echo "== npm run playwright:install =="
   npm run playwright:install
+
   md5sum package-lock.json > "$npm_path"
 }
 
@@ -25,6 +45,15 @@ maybeRubySetup() {
     if md5sum --status --strict --check "$bundler_path"; then
       return
     fi
+  fi
+
+  echo "== OK to run bundle install? [Yn] =="
+  printf "> "
+  read -r ok
+
+  if [ "$ok" = 'n' ] || [ "$ok" = "N" ]; then
+    echo "== Skipping ruby setup =="
+    return
   fi
 
   echo "== bundle install =="
