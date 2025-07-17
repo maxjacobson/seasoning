@@ -36,12 +36,6 @@
         <li class="inline">
           <%= link_to "reviews (#{@human.season_reviews.count})", profile_reviews_path(@human.handle) %>
         </li>
-        <li class="ml-2 inline">
-          <%= link_to "followers (#{@human.followers.count})", profile_followers_path(@human.handle) %>
-        </li>
-        <li class="ml-2 inline">
-          <%= link_to "following (#{@human.followings.count})", profile_followings_path(@human.handle) %>
-        </li>
       </ul>
     </div>
 

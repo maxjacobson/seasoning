@@ -1,6 +1,5 @@
 require "test_helper"
 
-# unit tests for RefreshEpisodes service
 class RefreshEpisodesTest < ActiveSupport::TestCase
   test ".call when the episodes have not yet been imported imports the episodes" do
     request = stub_request(:get, "https://api.themoviedb.org/3/tv/202101/season/1?api_key=xxxx")

@@ -3,14 +3,17 @@ ENV["RAILS_ENV"] ||= "test"
 if ENV["COVERAGE"]
   require "simplecov"
   SimpleCov.start "rails" do
-    minimum_coverage 77
+    minimum_coverage 87
     minimum_coverage_by_file 0
+
+    add_group "Services", "app/services"
   end
 end
 
 require_relative "../config/environment"
 require "rails/test_help"
 require "webmock/minitest"
+require "minitest/mock"
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
