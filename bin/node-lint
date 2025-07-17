@@ -1,9 +1,9 @@
 #!/bin/sh
 
 set -e
-
 PATH="node_modules/.bin:$PATH"
 
-set -x
+set -ex
 
 prettier --check .
+herb-lint app/views
