@@ -4,4 +4,4 @@ set -e
 
 bin/lint
 bin/rails css:build
-RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal" bin/rails test:all
+COVERAGE=1 RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal" bin/rails test:all
