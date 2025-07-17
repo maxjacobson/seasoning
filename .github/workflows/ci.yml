@@ -9,6 +9,7 @@ on:
 env:
   RAILS_ENV: test
   CI: 1
+  COVERAGE: 1
   SEASONING_DATABASE_USERNAME: postgres
   SEASONING_DATABASE_PASSWORD: postgres
   RUBYOPT: "--enable=frozen-string-literal --debug=frozen-string-literal"
