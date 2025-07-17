@@ -20,15 +20,6 @@ maybeNodeSetup() {
     fi
   fi
 
-  echo "== OK to run npm clean-install and npm run playwright:install? [Yn] =="
-  printf "> "
-  read -r ok
-
-  if [ "$ok" = 'n' ] || [ "$ok" = "N" ]; then
-    echo "== Skipping npm setup =="
-    return
-  fi
-
   echo "== npm clean-install =="
   npm clean-install
 
@@ -45,15 +36,6 @@ maybeRubySetup() {
     if md5sum --status --strict --check "$bundler_path"; then
       return
     fi
-  fi
-
-  echo "== OK to run bundle install? [Yn] =="
-  printf "> "
-  read -r ok
-
-  if [ "$ok" = 'n' ] || [ "$ok" = "N" ]; then
-    echo "== Skipping ruby setup =="
-    return
   fi
 
   echo "== bundle install =="
