@@ -47,7 +47,7 @@ class MyShowTest < ActiveSupport::TestCase
     assert_in_delta(50.0, my_show.watched_percentage)
   end
 
-  test "watched_percentage excludes future episodes" do
+  test "watched_percentage includes future episodes in total" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 3)
@@ -57,7 +57,7 @@ class MyShowTest < ActiveSupport::TestCase
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
     MySeason.create!(human: human, season: season, watched_episode_numbers: [1, 2])
 
-    assert_in_delta(100.0, my_show.watched_percentage)
+    assert_in_delta(66.7, my_show.watched_percentage)
   end
 
   test "watched_percentage works across multiple seasons" do
@@ -79,7 +79,7 @@ class MyShowTest < ActiveSupport::TestCase
     assert_in_delta(75.0, my_show.watched_percentage)
   end
 
-  test "watched_percentage caps at 100 when watching unaired episodes" do
+  test "watched_percentage returns 100 when all episodes watched including unaired" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 3)
