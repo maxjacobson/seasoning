@@ -7,7 +7,9 @@ class Episode < ApplicationRecord
     Still.new(still_path)
   end
 
-  def available?
-    air_date.present? && air_date <= Time.zone.today.end_of_day
+  def available?(human)
+    return false if air_date.blank?
+
+    air_date <= human.time_zone.today
   end
 end
