@@ -37,7 +37,7 @@ class MyShow < ApplicationRecord
       select
         case
           when total_episodes = 0 then 0.0
-          else round((watched_episodes::numeric / total_episodes * 100), 1)
+          else least(100.0, round((watched_episodes::numeric / total_episodes * 100), 1))
         end as percentage
       from (
         select
