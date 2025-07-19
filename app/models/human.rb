@@ -33,4 +33,9 @@ class Human < ApplicationRecord
   def follows?(other)
     Follow.find_by(follower_id: id, followee_id: other.id)
   end
+
+  def time_zone
+    # TODO: make this editable by the user instead of hardcoded
+    ActiveSupport::TimeZone["America/New_York"]
+  end
 end
