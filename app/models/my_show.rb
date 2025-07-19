@@ -33,22 +33,20 @@ class MyShow < ApplicationRecord
   end
 
   def watched_percentage
-    current_date_in_timezone = human.time_zone.today
-
     sql = ApplicationRecord.sanitize_sql_array(
       [
         <<~SQL.squish,
           select
             case
               when total_episodes = 0 then 0.0
-              else least(100.0, round((watched_episodes::numeric / total_episodes * 100), 1))
+              else round((watched_episodes::numeric / total_episodes * 100), 1)
             end as percentage
           from (
             select
               (select count(*)
                from seasons all_seasons
                join episodes all_episodes on all_episodes.season_id = all_seasons.id
-               where all_seasons.show_id = :show_id and all_episodes.air_date <= :current_date) as total_episodes,
+               where all_seasons.show_id = :show_id) as total_episodes,
               coalesce(sum(array_length(my_seasons.watched_episode_numbers, 1)), 0) as watched_episodes
             from my_seasons
             join seasons on seasons.id = my_seasons.season_id
@@ -57,8 +55,7 @@ class MyShow < ApplicationRecord
         SQL
         {
           show_id: show.id,
-          human_id: human.id,
-          current_date: current_date_in_timezone
+          human_id: human.id
         }
       ]
     )
