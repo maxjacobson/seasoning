@@ -12,13 +12,13 @@ class EpisodeTest < ActiveSupport::TestCase
     episode = Episode.create!(season: @season, air_date: @human.time_zone.today, name: "Pilot", tmdb_id: 42,
                               episode_number: 1)
 
-    assert episode.available?(@human)
+    assert episode.available?(@human.time_zone)
   end
 
   test "#available? when air_date is in the past" do
     episode = Episode.create!(season: @season, air_date: 4.days.ago, name: "Pilot", tmdb_id: 42, episode_number: 1)
 
-    assert episode.available?(@human)
+    assert episode.available?(@human.time_zone)
   end
 
   test "#available? when air_date is in the future" do
@@ -30,7 +30,7 @@ class EpisodeTest < ActiveSupport::TestCase
       episode_number: 1
     )
 
-    assert_not episode.available?(@human)
+    assert_not episode.available?(@human.time_zone)
   end
 
   test "#available? when air_date is not set" do
@@ -42,6 +42,6 @@ class EpisodeTest < ActiveSupport::TestCase
       episode_number: 1
     )
 
-    assert_not episode.available?(@human)
+    assert_not episode.available?(@human.time_zone)
   end
 end
