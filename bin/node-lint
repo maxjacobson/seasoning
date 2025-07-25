@@ -7,3 +7,4 @@ set -ex
 
 prettier --check .
 herb-lint app/views
+herb-format --check
