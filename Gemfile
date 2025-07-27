@@ -15,7 +15,7 @@ gem "ostruct"
 gem "pg"
 gem "propshaft"
 gem "puma"
-gem "rails"
+gem "rails", github: "rails", branch: "main"
 gem "sucker_punch"
 gem "turbo-rails"
 
