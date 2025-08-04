@@ -4,4 +4,4 @@ set -ex
 
 bin/rubocop
 bin/erb_lint --lint-all
-bin/herb analyze . --no-log-file --non-interactive
+bin/herb analyze app/views --no-log-file --non-interactive
