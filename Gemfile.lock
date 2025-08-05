@@ -284,7 +284,7 @@ GEM
     pg (1.6.1-arm64-darwin)
     pg (1.6.1-x86_64-darwin)
     pg (1.6.1-x86_64-linux)
-    playwright-ruby-client (1.54.0)
+    playwright-ruby-client (1.54.1)
       concurrent-ruby (>= 1.1.6)
       mime-types (>= 3.0)
     pp (0.6.2)
@@ -536,7 +536,7 @@ CHECKSUMS
   pg (1.6.1-arm64-darwin) sha256=3b502915de30cf5983d62aabae927cb7c3628b0ca46cdf3a6b888af4ff7f42b3
   pg (1.6.1-x86_64-darwin) sha256=c8930170622c39ee24b318a2265655b5f8f34628444ee00e4ae44068865309f7
   pg (1.6.1-x86_64-linux) sha256=6ac0d5c8efafc3f22a7eca2a264300037598fabe27a88e5029bc0e6d90caeb1f
-  playwright-ruby-client (1.54.0) sha256=d4053c946c3e5fa4044d4942feeb6661cf67f1bcfb3445e992bc887e737a4381
+  playwright-ruby-client (1.54.1) sha256=c097731a9c027ed5a54adaac61ad9e62a318c2ace86fce7c3f85bbd7767682e2
   pp (0.6.2) sha256=947ec3120c6f92195f8ee8aa25a7b2c5297bb106d83b41baa02983686577b6ff
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
   prism (1.4.0) sha256=dc0e3e00e93160213dc2a65519d9002a4a1e7b962db57d444cf1a71565bb703e
