@@ -67,7 +67,7 @@ class SeasonPageTest < ApplicationSystemTestCase
     assert_content "Season 1"
     assert_content "More info"
     assert_content "Back"
-    assert_content "Season info"
+    assert_content "FYI"
     assert_content "I/O"
     assert_content "FUD"
     assert_content "High Plains Hardware"
@@ -89,12 +89,11 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert page.has_button?("Mark seen")
-    first("input[value='Mark seen']").click
+    assert page.has_button?("🔲 Mark seen")
+    first("input[value='🔲 Mark seen']").click
 
     assert_content "I/O marked as seen"
-    assert page.has_button?("Mark not seen")
-    assert_content "✅"
+    assert page.has_button?("✅ Mark not seen")
 
     my_season = MySeason.find_by(human: @human, season: @season)
 
@@ -108,12 +107,11 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert page.has_button?("Mark not seen")
-    assert_content "✅"
-    first("input[value='Mark not seen']").click
+    assert page.has_button?("✅ Mark not seen")
+    first("input[value='✅ Mark not seen']").click
 
     assert_content "I/O marked as not seen"
-    assert page.has_button?("Mark seen")
+    assert page.has_button?("🔲 Mark seen")
 
     my_season.reload
 
@@ -128,7 +126,7 @@ class SeasonPageTest < ApplicationSystemTestCase
 
     assert_content "Your review"
     assert_content "Add review"
-    assert_content "None yet"
+    assert_content "No reviews yet"
     assert page.has_link?("Add review", href: "/shows/halt-and-catch-fire/season-1/reviews/new")
   end
 

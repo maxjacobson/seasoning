@@ -53,8 +53,6 @@ class ImportingAShowTest < ApplicationSystemTestCase
 
     select "Currently watching"
 
-    click_on "Update status"
-
     assert_content "Updated Halt and Catch Fire"
   end
 end

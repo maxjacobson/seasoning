@@ -4,6 +4,8 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **August 16, 2025** — Show "added by X people" counts on search page for shows that have already been imported
+1. **August 16, 2025** — Apply consistent card-based design to shows index page
 1. **July 14, 2025** — Add watch progress bars showing percentage of episodes watched for each show on both the shows index and individual show pages
 1. **July 12, 2025** — Unified search and import experience: Search now queries TMDB directly and shows importable shows alongside imported ones, eliminating the separate import page
 1. **July 9, 2025** — Show lock emoji on private reviews with tooltip explaining visibility

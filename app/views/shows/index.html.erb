@@ -2,8 +2,9 @@
   Your shows
 <% end %>
 
-<div>
-  <div class="mb-2">
+<div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-900 mb-6">Your shows</h1>
+  <div class="mb-8">
     <%= form_with(url: shows_path, method: :get) do |f| %>
       <%= f.text_field :q, placeholder: "Filter your shows", class: "text-field block", value: @filters.q %>
       <%=
@@ -21,71 +22,68 @@
 
       <%= f.submit "Apply filters", class: "rounded-button mt-2 block" %>
     <% end %>
+  </div>
 
-    <% if @my_shows.any? %>
-      <div class="mx-0 my-2 flex flex-wrap gap-4">
-        <% @my_shows.each do |my_show| %>
-          <div class="w-60 rounded-lg border-2 border-dashed border-yellow-500 p-2">
-            <div class="flex flex-col">
-              <div class="self-center">
-                <%= link_to show_path(my_show.show.slug) do %>
-                  <div>
-                    <%= render "poster", size: "large", url: my_show.show.poster.url, show: my_show.show %>
-                  </div>
-
+  <% if @my_shows.any? %>
+    <div class="space-y-4">
+      <% @my_shows.each do |my_show| %>
+        <%= link_to show_path(my_show.show.slug), class: "block no-underline" do %>
+          <div class="rounded-md border border-gray-200 p-4 hover:border-gray-400 hover:bg-orange-50 transition-colors cursor-pointer">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0">
+                <%= image_tag my_show.show.poster.url, alt: "#{my_show.show.title} poster", class: "w-20 h-auto rounded shadow-sm" %>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-medium text-gray-900">
                   <%= my_show.show.title %>
-                <% end %>
-              </div>
-              <div class="self-center">
-                <% if my_show.status %>
-                  <span>
-                    <%= my_show.status.humanize %>
-                  </span>
-                <% else %>
-                  <span>&mdash;</span>
-                <% end %>
-              </div>
-            </div>
-
-            <% percentage = my_show.watched_percentage %>
-            <div class="mt-2">
-              <div class="flex justify-end text-xs text-gray-600 mb-1">
-                <span><%= number_to_percentage(percentage, precision: 0, round_mode: :down) %></span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-2">
-                <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" style="width: <%= percentage %>%"></div>
-              </div>
-            </div>
-
-            <% if my_show.note_to_self.present? %>
-              <div class="mx-0 my-2.5 border-t border-dotted border-slate-300 p-0.5 break-words">
-                <h2 class="text-lg font-bold">Note to self</h2>
-                <div class="rendered-markdown">
-                  <%= markdown_to_html(my_show.note_to_self).html_safe %>
                 </div>
+                <div class="text-sm text-gray-500 mt-1">
+                  <%= my_show.status.humanize %>
+                </div>
+                <% percentage = my_show.watched_percentage %>
+                <div class="mt-2">
+                  <div class="flex justify-between text-xs text-gray-600 mb-1">
+                    <span>Progress</span>
+                    <span><%= number_to_percentage(percentage, precision: 0, round_mode: :down) %></span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" style="width: <%= percentage %>%"></div>
+                  </div>
+                </div>
+                <% if my_show.note_to_self.present? %>
+                  <div class="mt-3 pt-3 border-t border-gray-200">
+                    <div class="text-xs font-medium text-gray-700 mb-1">Note to self</div>
+                    <div class="text-sm text-gray-600 rendered-markdown">
+                      <%= markdown_to_html(my_show.note_to_self).html_safe %>
+                    </div>
+                  </div>
+                <% end %>
               </div>
-            <% end %>
+              <div class="text-gray-400 mt-1">
+                →
+              </div>
+            </div>
           </div>
         <% end %>
-      </div>
-    <% else %>
-      <div>No shows yet. Maybe add some via the search at the top of the page?</div>
-    <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div>No shows yet. Maybe add some via the search at the top of the page?</div>
+  <% end %>
 
-    <% if @has_previous_page || @has_next_page %>
-      <div class="flex justify-between">
-        <div>
-          <% if @has_previous_page %>
-            <%= link_to "← Previous", @filters.previous_page_path, class: "rounded-button" %>
-          <% end %>
-        </div>
-        <div class="font-bold">Page <%= current_page %></div>
-        <div>
-          <% if @has_next_page %>
-            <%= link_to "Next →", @filters.next_page_path, class: "rounded-button" %>
-          <% end %>
-        </div>
+  <% if @has_previous_page || @has_next_page %>
+    <div class="flex justify-between">
+      <div>
+        <% if @has_previous_page %>
+          <%= link_to "← Previous", @filters.previous_page_path, class: "rounded-button" %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+      <div class="font-bold">Page <%= current_page %></div>
+      <div>
+        <% if @has_next_page %>
+          <%= link_to "Next →", @filters.next_page_path, class: "rounded-button" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
