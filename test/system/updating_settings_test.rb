@@ -12,23 +12,38 @@ class UpdatingSettingsTest < ApplicationSystemTestCase
 
   test "updating settings" do
     visit redeem_magic_link_path(@magic_link.token)
+
+    # Test default review visibility
     click_on "Settings"
 
     assert_equal "anybody", @human.default_review_visibility
-    assert_nil @human.currently_watching_limit
-    assert @human.share_currently_watching
-
     select "Myself", from: "Default review visibility"
-    select "5", from: "Currently watching limit"
-    uncheck "Share currently watching"
-    click_on "Update settings"
 
     assert_content "Saved!"
-
     @human.reload
 
     assert_equal "myself", @human.default_review_visibility
+
+    # Test currently watching limit
+    visit current_path # Refresh page
+
+    assert_nil @human.currently_watching_limit
+    select "5", from: "Currently watching limit"
+
+    assert_content "Saved!"
+    @human.reload
+
     assert_equal 5, @human.currently_watching_limit
+
+    # Test share currently watching
+    visit current_path # Refresh page
+
+    assert @human.share_currently_watching
+    uncheck "Share currently watching"
+
+    assert_content "Saved!"
+    @human.reload
+
     assert_not @human.share_currently_watching
   end
 end

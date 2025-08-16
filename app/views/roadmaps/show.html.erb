@@ -2,6 +2,8 @@
   Roadmap
 <% end %>
 
-<div class="rendered-markdown">
-  <%= markdown_to_html(Rails.root.join("ROADMAP.md").read).html_safe %>
+<div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+  <div class="rendered-markdown">
+    <%= markdown_to_html(Rails.root.join("ROADMAP.md").read).html_safe %>
+  </div>
 </div>

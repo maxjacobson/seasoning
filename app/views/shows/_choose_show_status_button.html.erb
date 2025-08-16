@@ -16,7 +16,9 @@
         ["Finished", "finished"]
       ],
       {},
-      class: "select-field"
+      {
+        class: "select-field",
+        onchange: "this.form.requestSubmit()"
+      }
     ) %>
-  <%= f.submit "Update status", class: "rounded-button" %>
 <% end %>

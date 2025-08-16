@@ -1,60 +1,64 @@
 <% content_for :title, "#{@show.title} - #{@season.name}" %>
 
-<div>
-  <h1 class="text-xl"><%= @show.title %></h1>
-  <h2 class="text-lg"><%= @season.name %></h2>
+<p class="mb-6">
+  <%= link_to "← Back", show_path(@show.slug) %>
+</p>
 
-  <%= render "more_info", url: "https://www.themoviedb.org/tv/#{@show.tmdb_tv_id}/season/#{@season.season_number}" %>
-
-  <p>
-    <%= link_to "Back", show_path(@show.slug) %>
-  </p>
-
-  <div>
-    <div>
-      <%= image_tag @season.poster.url, alt: "#{@season.name} poster" %>
+<div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+  <div class="flex items-start gap-6 mb-6">
+    <div class="flex-shrink-0">
+      <%= image_tag @season.poster.url, alt: "#{@season.name} poster", class: "w-24 h-auto rounded-md shadow-sm" %>
     </div>
 
-    <div>
-      <h2 class="text-lg">Season info</h2>
+    <div class="flex-1">
+      <h1 class="text-2xl font-bold text-gray-900 mb-1">
+        <%= @show.title %>
+      </h1>
+      <h2 class="text-lg text-gray-600 mb-3">
+        <%= @season.name %>
+      </h2>
 
-      <div>
-        <table class="w-full">
+      <%= render "more_info", url: "https://www.themoviedb.org/tv/#{@show.tmdb_tv_id}/season/#{@season.season_number}" %>
+    </div>
+  </div>
+
+  <div class="space-y-8">
+    <div>
+      <h2 class="text-lg font-medium text-gray-900 mb-4">Episodes</h2>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
           <thead>
-            <tr>
-              <th class="text-left">Number</th>
-              <th class="text-left">Name</th>
-              <th class="text-left">Air date</th>
+            <tr class="border-b border-gray-200">
+              <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">Number</th>
+              <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">Name</th>
+              <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">Air date</th>
               <% if current_human.present? %>
-                <th class="text-left">Seen?</th>
+                <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">Seen?</th>
               <% end %>
             </tr>
           </thead>
           <tbody>
             <% @episodes.each do |episode| %>
-              <tr>
-                <td><%= episode.episode_number %></td>
-                <td>
-                  <%= link_to episode.name, episode_path(@show.slug, @season.slug, episode.episode_number) %>
+              <tr class="border-b border-gray-100 hover:bg-gray-50">
+                <td class="py-3 px-3 text-sm text-gray-900"><%= episode.episode_number %></td>
+                <td class="py-3 px-3 text-sm">
+                  <%= link_to episode.name, episode_path(@show.slug, @season.slug, episode.episode_number), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
                 </td>
-                <td>
+                <td class="py-3 px-3 text-sm text-gray-600">
                   <%= render "air_date", episode: episode %>
                 </td>
                 <% if current_human.present? %>
-                  <td>
-                    <div class="flex items-center gap-2">
-                      <% if @my_season.episode_watched?(episode.episode_number) %>
-                        <span>✅</span>
-                        <%= button_to "Mark not seen", episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
-                                     method: :delete,
-                                     class: "link-looking-button" %>
-                      <% else %>
-                        <span> </span>
-                        <%= button_to "Mark seen", episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
-                                     method: :post,
-                                     class: "link-looking-button" %>
-                      <% end %>
-                    </div>
+                  <td class="py-3 px-3 text-sm">
+                    <% if @my_season.episode_watched?(episode.episode_number) %>
+                      <%= button_to "✅ Mark not seen", episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
+                                   method: :delete,
+                                   class: "link-looking-button" %>
+                    <% else %>
+                      <%= button_to "🔲 Mark seen", episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
+                                   method: :post,
+                                   class: "link-looking-button" %>
+                    <% end %>
                   </td>
                 <% end %>
               </tr>
@@ -63,31 +67,27 @@
         </table>
       </div>
     </div>
-  </div>
 
-  <% if current_human.present? %>
-    <div>
-      <h2 class="text-lg">Your review</h2>
+    <% if current_human.present? %>
       <div>
-        <%= link_to new_season_review_path(@show.slug, @season.slug) do %>
-          <span class="underlined">Add review</span>
-        <% end %>
+        <h2 class="text-lg font-medium text-gray-900 mb-4">Your review</h2>
+        <div class="bg-gray-50 rounded-lg p-4">
+          <% if @my_season.reviews.any? %>
+            <ul class="space-y-2 mb-4">
+              <% @my_season.reviews.order(created_at: :desc).each do |review| %>
+                <li>
+                  <%= link_to review.created_at.to_date, proper_review_path(review), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="text-gray-600 mb-4">No reviews yet</p>
+          <% end %>
+          <%= link_to "Add review", new_season_review_path(@show.slug, @season.slug), class: "rounded-button" %>
+        </div>
       </div>
-      <div>
-        <% if @my_season.reviews.any? %>
-          <ul>
-            <% @my_season.reviews.order(created_at: :desc).each do |review| %>
-              <li>
-                <%= link_to review.created_at.to_date, proper_review_path(review) %>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>None yet</p>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <%= render "shows/show_metadata", show: @show %>
 </div>

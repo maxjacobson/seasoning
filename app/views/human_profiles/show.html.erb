@@ -2,62 +2,62 @@
   <%= @human.handle %>
 <% end %>
 
-<div>
-  <h1 class="text-2xl"><%= @human.handle %></h1>
+<div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-900 mb-6"><%= @human.handle %></h1>
 
-  <% if current_human && current_human != @human %>
-    <% if (follow = current_human.follows?(@human)) %>
-      <%=
-        button_to(
-          "Unfollow",
-          follow_path(follow),
-          class: "rounded-button",
-          params: { followee_id: @human.id },
-          method: :delete
-        )
-      %>
-    <% else %>
-      <%=
-        button_to(
-          "Follow",
-          follows_path,
-          class: "rounded-button",
-          params: { followee_id: @human.id },
-          method: :post
-        )
-      %>
+  <div class="space-y-6">
+    <% if current_human && current_human != @human %>
+      <div>
+        <% if (follow = current_human.follows?(@human)) %>
+          <%=
+            button_to(
+              "Unfollow",
+              follow_path(follow),
+              class: "rounded-button",
+              params: { followee_id: @human.id },
+              method: :delete
+            )
+          %>
+        <% else %>
+          <%=
+            button_to(
+              "Follow",
+              follows_path,
+              class: "rounded-button",
+              params: { followee_id: @human.id },
+              method: :post
+            )
+          %>
+        <% end %>
+      </div>
     <% end %>
-  <% end %>
 
-  <div>
     <div>
-      <p><em>Joined Seasoning on <%= @human.created_at %></em></p>
-      <ul class="list-inside list-disc">
-        <li class="inline">
-          <%= link_to "reviews (#{@human.season_reviews.count})", profile_reviews_path(@human.handle) %>
-        </li>
-      </ul>
+      <p class="text-gray-600 italic mb-3">Joined Seasoning on <%= l(@human.created_at, format: :default) %></p>
+      <div>
+        <%= link_to "reviews (#{@human.season_reviews.count})", profile_reviews_path(@human.handle), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
+      </div>
     </div>
 
     <% if @human.share_currently_watching? %>
       <div>
-        <h2 class="text-xl">Currently watching</h2>
+        <h2 class="text-lg font-medium text-gray-900 mb-4">Currently watching</h2>
 
         <% if @human.currently_watching.any? %>
-          <div class="flex flex-wrap gap-1">
+          <div class="flex flex-wrap gap-4">
             <% @human.currently_watching.each do |show| %>
               <div class="w-32">
-                <%= link_to show_path(show.slug) do %>
-                  <div>
+                <%= link_to show_path(show.slug), class: "block hover:opacity-75 transition-opacity" do %>
+                  <div class="mb-2">
                     <%= render "poster", size: "small", url: show.poster.url, show: show %>
                   </div>
-                  <%= show.title %>
+                  <div class="text-sm text-gray-700 leading-tight"><%= show.title %></div>
                 <% end %>
               </div>
             <% end %>
           </div>
         <% else %>
-          <p><%= @human.handle %> is not currently watching anything</p>
+          <p class="text-gray-600"><%= @human.handle %> is not currently watching anything</p>
         <% end %>
       </div>
     <% end %>

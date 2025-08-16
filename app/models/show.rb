@@ -55,4 +55,8 @@ class Show < ApplicationRecord
   def refresh_async
     RefreshShowJob.perform_async(id)
   end
+
+  def watchers_count
+    MyShow.where(show: self).count
+  end
 end

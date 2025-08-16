@@ -1,22 +1,26 @@
 <% content_for :title, "#{@show.title} - #{@season.name} - #{@episode.name}" %>
 
-<h1 class="text-xl"><%= @episode.name %></h1>
+<div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-900 mb-6"><%= @episode.name %></h1>
 
-<%= render "more_info", url: "https://www.themoviedb.org/tv/#{@show.tmdb_tv_id}/season/#{@season.season_number}/episode/#{@episode.episode_number}" %>
+  <%= render "more_info", url: "https://www.themoviedb.org/tv/#{@show.tmdb_tv_id}/season/#{@season.season_number}/episode/#{@episode.episode_number}" %>
 
-<p>
-  An episode of <%= link_to @show.title, show_path(@show.slug) %>,
-  <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}" %>.
-</p>
+  <div class="space-y-6">
+    <p class="text-gray-600">
+      An episode of <%= link_to @show.title, show_path(@show.slug), class: "text-blue-600 hover:text-blue-800 hover:underline" %>,
+      <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}", class: "text-blue-600 hover:text-blue-800 hover:underline" %>.
+    </p>
 
-<% if @episode.still_path.present? %>
-  <div>
-    <%= image_tag @episode.still.url %>
+    <% if @episode.still_path.present? %>
+      <div>
+        <%= image_tag @episode.still.url, class: "rounded-lg shadow-sm max-w-full h-auto" %>
+      </div>
+    <% end %>
+
+    <div class="text-sm text-gray-600">
+      <span class="font-medium">Air date:</span> <%= render "air_date", episode: @episode %>
+    </div>
   </div>
-<% end %>
 
-<div>
-  Air date: <%= render "air_date", episode: @episode %>
+  <%= render "shows/show_metadata", show: @show %>
 </div>
-
-<%= render "shows/show_metadata", show: @show %>
