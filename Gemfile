@@ -16,6 +16,7 @@ gem "pg"
 gem "propshaft"
 gem "puma"
 gem "rails", github: "rails", branch: "main"
+gem "rails_autolink"
 gem "sucker_punch"
 gem "turbo-rails"
 
