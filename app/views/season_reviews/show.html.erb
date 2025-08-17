@@ -38,7 +38,7 @@
   <div class="mt-6">
     <h3 class="text-lg font-medium text-gray-900 mb-3">Review</h3>
     <div class="prose max-w-none">
-      <%= markdown_to_html(@review.body).html_safe %>
+      <%= auto_link(markdown_to_html(@review.body)).html_safe %>
     </div>
   </div>
 

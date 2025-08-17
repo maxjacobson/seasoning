@@ -54,7 +54,7 @@
                   <div class="mt-3 pt-3 border-t border-gray-200">
                     <div class="text-xs font-medium text-gray-700 mb-1">Note to self</div>
                     <div class="text-sm text-gray-600 rendered-markdown">
-                      <%= markdown_to_html(my_show.note_to_self).html_safe %>
+                      <%= auto_link(markdown_to_html(my_show.note_to_self)).html_safe %>
                     </div>
                   </div>
                 <% end %>
