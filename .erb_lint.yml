@@ -6,6 +6,9 @@ exclude:
 linters:
   PartialInstanceVariable:
     enabled: true
+  SpaceInHtmlTag:
+    # conflicts with herb-format
+    enabled: false
   StrictLocals:
     enabled: true
   Rubocop:
