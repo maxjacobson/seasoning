@@ -20,7 +20,8 @@ RefreshShow = lambda { |show|
           name: tmdb_season.name,
           episode_count: tmdb_season.episode_count,
           tmdb_id: tmdb_season.id,
-          tmdb_poster_path: tmdb_season.poster_path
+          tmdb_poster_path: tmdb_season.poster_path,
+          air_date: tmdb_season.air_date
         )
       else
         season = show.seasons.create!(
@@ -28,7 +29,8 @@ RefreshShow = lambda { |show|
           name: tmdb_season.name,
           season_number: tmdb_season.season_number,
           episode_count: tmdb_season.episode_count,
-          tmdb_poster_path: tmdb_season.poster_path
+          tmdb_poster_path: tmdb_season.poster_path,
+          air_date: tmdb_season.air_date
         )
       end
       RefreshEpisodes.call(show, season)
