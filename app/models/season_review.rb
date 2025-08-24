@@ -18,4 +18,8 @@ class SeasonReview < ApplicationRecord
   scope :viewable_by, lambda { |viewer|
     viewable_by_anybody.or(authored_by(viewer))
   }
+
+  scope :written_in, lambda { |year|
+    where("EXTRACT(year FROM created_at) = ?", year)
+  }
 end

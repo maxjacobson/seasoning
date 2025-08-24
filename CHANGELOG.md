@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **August 24, 2025** — Add personal stats pages showing year-by-year review statistics with top 10 favorite seasons. Available at `/your-handle/stats` with year navigation. Future plans include stats based on original air dates.
 1. **August 17, 2025** — Auto-link links in markdown text fields
 1. **August 16, 2025** — Show "added by X people" counts on search page for shows that have already been imported
 1. **August 16, 2025** — Apply consistent card-based design to shows index page
