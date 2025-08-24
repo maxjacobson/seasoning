@@ -1,0 +1,53 @@
+<%= content_for :title do %>
+  <%= @human.handle %>&rsquo;s stats for <%= @year %>
+<% end %>
+
+<div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">
+      <%= link_to @human.handle, human_profile_path(@human.handle), class: "text-blue-600 hover:text-blue-800 hover:underline" %>'s <%= @year %> stats
+    </h1>
+    <p class="text-lg text-gray-600"><%= @human.handle %> reviewed <%= pluralize(@reviews.count, "season") %> in <%= @year %></p>
+  </div>
+
+  <% if @reviews.any? %>
+    <div class="top-favorites mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4"><%= @human.handle %>'s favorites</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <% @reviews.order(rating: :desc).limit(10).each do |review| %>
+          <div class="text-center">
+            <div class="mb-3">
+              <%= link_to proper_review_path(review), class: "block hover:opacity-75" do %>
+                <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
+              <% end %>
+            </div>
+            <div class="text-sm font-semibold mb-1"><%= review.season.show.title %> - <%= review.season.name %></div>
+            <div class="text-sm">
+              <% if review.rating %>
+                <%= render "star_rating", rating: review.rating %>
+              <% else %>
+                <span class="text-gray-500">No rating</span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <p class="text-gray-600 text-center mb-8">No reviews yet!</p>
+  <% end %>
+
+  <div class="year-navigation flex justify-between items-center">
+    <div>
+      <%= link_to "← #{@previous_year}", profile_stat_path(handle: @human.handle, year: @previous_year), class: "rounded-button" %>
+    </div>
+
+    <div class="text-xl font-semibold"><%= @year %></div>
+
+    <div>
+      <% if @has_next_year %>
+        <%= link_to "#{@next_year} →", profile_stat_path(handle: @human.handle, year: @next_year), class: "rounded-button" %>
+      <% end %>
+    </div>
+  </div>
+</div>

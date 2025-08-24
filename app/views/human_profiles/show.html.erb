@@ -34,8 +34,11 @@
 
     <div>
       <p class="text-gray-600 italic mb-3">Joined Seasoning on <%= l(@human.created_at, format: :default) %></p>
-      <div>
-        <%= link_to "reviews (#{@human.season_reviews.count})", profile_reviews_path(@human.handle), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
+      <div class="space-y-2">
+        <%= link_to "reviews (#{@human.season_reviews.count})", profile_reviews_path(@human.handle), class: "text-blue-600 hover:text-blue-800 hover:underline block" %>
+        <% if current_human == @human %>
+          <%= link_to "Stats", profile_stats_path(@human.handle), class: "text-blue-600 hover:text-blue-800 hover:underline block" %>
+        <% end %>
       </div>
     </div>
 
