@@ -11,7 +11,7 @@
   </div>
 
   <% if @reviews.any? %>
-    <% rated_reviews = @reviews.where.not(rating: nil).order(rating: :desc, created_at: :desc).limit(10) %>
+    <% rated_reviews = @reviews.where.not(rating: nil).order(rating: :desc, created_at: :desc).limit(25) %>
     <% if rated_reviews.any? %>
       <div class="top-favorites mb-8">
         <h2 class="text-2xl font-bold text-gray-900 mb-4"><%= @human.handle %>'s favorites</h2>
@@ -40,6 +40,19 @@
         </div>
       </div>
     <% end %>
+
+    <div class="all-reviews mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Everything from <%= @year %></h2>
+      <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
+        <% @reviews.order(created_at: :asc).each do |review| %>
+          <div class="text-center">
+            <%= link_to proper_review_path(review), class: "block hover:opacity-75" do %>
+              <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <% else %>
     <p class="text-gray-600 text-center mb-8">No reviews yet!</p>
   <% end %>
