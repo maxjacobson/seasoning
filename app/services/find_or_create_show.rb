@@ -20,7 +20,8 @@ FindOrCreateShow = lambda { |tmdb_show|
       name: tmdb_season.name,
       season_number: tmdb_season.season_number,
       episode_count: tmdb_season.episode_count,
-      tmdb_poster_path: tmdb_season.poster_path
+      tmdb_poster_path: tmdb_season.poster_path,
+      air_date: tmdb_season.air_date
     )
 
     RefreshEpisodes.call(show, season)
