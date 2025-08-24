@@ -89,11 +89,12 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert page.has_button?("🔲 Mark seen")
-    first("input[value='🔲 Mark seen']").click
+    checkbox = first("input[type='checkbox'][name='watched']")
+
+    assert_not_predicate checkbox, :checked?
+    checkbox.check
 
     assert_content "I/O marked as seen"
-    assert page.has_button?("✅ Mark not seen")
 
     my_season = MySeason.find_by(human: @human, season: @season)
 
@@ -107,11 +108,12 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert page.has_button?("✅ Mark not seen")
-    first("input[value='✅ Mark not seen']").click
+    checkbox = first("input[type='checkbox'][name='watched']")
+
+    assert_predicate checkbox, :checked?
+    checkbox.uncheck
 
     assert_content "I/O marked as not seen"
-    assert page.has_button?("🔲 Mark seen")
 
     my_season.reload
 

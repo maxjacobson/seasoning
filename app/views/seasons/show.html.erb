@@ -50,14 +50,12 @@
                 </td>
                 <% if current_human.present? %>
                   <td class="py-3 px-3 text-sm">
-                    <% if @my_season.episode_watched?(episode.episode_number) %>
-                      <%= button_to "✅ Mark not seen", episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
-                                   method: :delete,
-                                   class: "link-looking-button" %>
-                    <% else %>
-                      <%= button_to "🔲 Mark seen", episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
-                                   method: :post,
-                                   class: "link-looking-button" %>
+                    <%= form_with url: episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
+                                  method: @my_season.episode_watched?(episode.episode_number) ? :delete : :post do |f| %>
+                      <%= f.check_box :watched,
+                                      checked: @my_season.episode_watched?(episode.episode_number),
+                                      class: "rounded border-gray-300 text-orange-500 focus:ring-orange-500",
+                                      onchange: "this.form.requestSubmit()" %>
                     <% end %>
                   </td>
                 <% end %>
