@@ -14,4 +14,12 @@ class MySeason < ApplicationRecord
   def episode_watched?(episode_number)
     watched_episode_numbers.include?(episode_number)
   end
+
+  def watched_percentage
+    total_episodes = season.episode_count
+    return 0 if total_episodes.zero?
+
+    watched_episodes = watched_episode_numbers.length
+    (watched_episodes.to_f / total_episodes * 100).floor
+  end
 end
