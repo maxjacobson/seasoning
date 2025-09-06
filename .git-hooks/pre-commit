@@ -2,15 +2,6 @@
 
 set -e
 
-if [ -t 1 ] ; then
-  # Yes, a TTY
-  true
-else
-  echo "Not a TTY, exiting"
-
-  exit 0
-fi
-
 bin/lint
 
 bin/rails css:build
