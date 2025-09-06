@@ -16,7 +16,7 @@ class Show < ApplicationRecord
 
     self.slug = slug
   }
-  has_many :seasons
+  has_many :seasons, dependent: :destroy
 
   scope :needs_refreshing, lambda {
     where(tmdb_next_refresh_at: nil).or(where(tmdb_next_refresh_at: ..(Time.zone.now)))
