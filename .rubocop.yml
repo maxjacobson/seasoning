@@ -19,6 +19,9 @@ Metrics:
 Minitest/MultipleAssertions:
   Enabled: false
 
+Naming/VariableNumber:
+  Enabled: false
+
 Rails/I18nLocaleTexts:
   Enabled: false
 

@@ -7,7 +7,22 @@
     <h1 class="text-4xl font-bold text-gray-900 mb-2">
       <%= link_to @human.handle, human_profile_path(@human.handle), class: "text-blue-600 hover:text-blue-800 hover:underline" %>'s <%= @year %> stats
     </h1>
-    <p class="text-lg text-gray-600"><%= @human.handle %> reviewed <%= pluralize(@reviews.count, "season") %> in <%= @year %></p>
+    <% if @filter == 'reviewed-in' %>
+      <p class="text-lg text-gray-600"><%= @human.handle %> reviewed <%= pluralize(@reviews.count, "season") %> in <%= @year %></p>
+    <% else %>
+      <p class="text-lg text-gray-600"><%= @human.handle %> reviewed <%= pluralize(@reviews.count, "season") %> that aired in <%= @year %></p>
+    <% end %>
+  </div>
+
+  <div class="flex bg-gray-100 rounded-lg p-1 mb-6 max-w-fit mx-auto">
+    <%= link_to profile_stat_path(@human.handle, @year, filter: "reviewed-in"),
+        class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'reviewed-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
+      Reviewed in <%= @year %>
+    <% end %>
+    <%= link_to profile_stat_path(@human.handle, @year, filter: "aired-in"),
+        class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'aired-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
+      Aired in <%= @year %>
+    <% end %>
   </div>
 
   <% if @reviews.any? %>
@@ -42,7 +57,11 @@
     <% end %>
 
     <div class="all-reviews mb-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Everything from <%= @year %></h2>
+      <% if @filter == 'reviewed-in' %>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Everything reviewed in <%= @year %></h2>
+      <% else %>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Everything that aired in <%= @year %></h2>
+      <% end %>
       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
         <% @reviews.order(created_at: :asc).each do |review| %>
           <div class="text-center">
@@ -59,14 +78,14 @@
 
   <div class="year-navigation flex justify-between items-center">
     <div>
-      <%= link_to "← #{@previous_year}", profile_stat_path(handle: @human.handle, year: @previous_year), class: "rounded-button" %>
+      <%= link_to "← #{@previous_year}", profile_stat_path(@human.handle, @previous_year, filter: @filter), class: "rounded-button" %>
     </div>
 
     <div class="text-xl font-semibold"><%= @year %></div>
 
     <div>
       <% if @has_next_year %>
-        <%= link_to "#{@next_year} →", profile_stat_path(handle: @human.handle, year: @next_year), class: "rounded-button" %>
+        <%= link_to "#{@next_year} →", profile_stat_path(@human.handle, @next_year, filter: @filter), class: "rounded-button" %>
       <% end %>
     </div>
   </div>

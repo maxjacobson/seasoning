@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **September 6, 2025** — Add toggle to stats pages allowing users to view seasons reviewed during a year vs seasons that originally aired during a year, providing richer insights into viewing habits
 1. **August 24, 2025** — Can mark episodes as seen from the episode show page
 1. **August 24, 2025** — Add personal stats pages showing year-by-year review statistics with top 25 favorite seasons. Available at `/your-handle/stats` with year navigation.
 1. **August 17, 2025** — Auto-link links in markdown text fields
