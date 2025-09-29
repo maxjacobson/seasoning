@@ -15,9 +15,7 @@
   <tbody>
     <% show.seasons.includes(:episodes).order(season_number: :asc).each do |season| %>
       <tr>
-        <td>
-          <%= season.season_number %>
-        </td>
+        <td><%= season.season_number %></td>
         <td>
           <%= link_to season_path(show.slug, season.slug) do %>
             <%= season.name %>
@@ -25,9 +23,7 @@
         </td>
         <td><%= season.episodes.count %></td>
         <% if current_human %>
-          <td>
-            <%= seen_current_season_message(current_human, season) %>
-          </td>
+          <td><%= seen_current_season_message(current_human, season) %></td>
         <% end %>
       </tr>
     <% end %>

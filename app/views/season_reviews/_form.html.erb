@@ -1,4 +1,5 @@
 <%# locals: (show:, season:, review:, form_url:, submit_text:) %>
+
 <div class="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
   <div class="flex items-start gap-6 mb-6">
     <div class="flex-shrink-0">
@@ -6,12 +7,8 @@
     </div>
 
     <div class="flex-1">
-      <h1 class="text-2xl font-bold text-gray-900 mb-1">
-        <%= show.title %>
-      </h1>
-      <h2 class="text-lg text-gray-600 mb-3">
-        <%= season.name %>
-      </h2>
+      <h1 class="text-2xl font-bold text-gray-900 mb-1"><%= show.title %></h1>
+      <h2 class="text-lg text-gray-600 mb-3"><%= season.name %></h2>
     </div>
   </div>
 

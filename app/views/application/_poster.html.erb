@@ -1,12 +1,10 @@
 <%# locals: (url:, size:, show:) %>
 
 <% if url %>
-  <%=
-    image_tag(
+  <%= image_tag(
       url,
       alt: "#{show.title} poster",
       width: size == "small" ? "100" : "185",
       class: "border-2 border-solid border-yellow-700 p-1"
-    )
-  %>
+    ) %>
 <% end %>
