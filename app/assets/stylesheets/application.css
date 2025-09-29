@@ -117,3 +117,39 @@ a.no-underline:hover {
   display: inline;
   cursor: pointer;
 }
+
+/* Collapsible Note to Self */
+.collapsible-note {
+  position: relative;
+}
+
+.collapsible-note-toggle {
+  display: none;
+}
+
+.collapsible-note-header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.collapsible-note-caret {
+  font-size: 0.875rem;
+  transform: rotate(0deg);
+}
+
+.collapsible-note-toggle:checked
+  ~ .collapsible-note-header
+  .collapsible-note-caret {
+  transform: rotate(90deg);
+}
+
+.collapsible-note-content {
+  display: none;
+}
+
+.collapsible-note-toggle:checked ~ .collapsible-note-content {
+  display: block;
+}
