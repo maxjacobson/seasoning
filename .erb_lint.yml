@@ -6,6 +6,8 @@ exclude:
 linters:
   PartialInstanceVariable:
     enabled: true
+  SpaceInHtmlTag:
+    enabled: false
   StrictLocals:
     enabled: true
   Rubocop:

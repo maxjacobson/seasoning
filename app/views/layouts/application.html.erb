@@ -1,12 +1,15 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <% if content_for?(:title) %>
-      <title><%= yield(:title) %> &mdash; Seasoning</title>
+      <title><%= yield(:title) %>&mdash; Seasoning</title>
     <% else %>
       <title>Seasoning</title>
     <% end %>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csp_meta_tag %>
 
     <style type="text/css">
@@ -14,14 +17,19 @@
         background-color: rgb(246, 246, 247);
       }
     </style>
+
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body>
-
     <div>
-      <div class="sticky top-0 z-10 bg-gray-100 mx-1 my-2 pb-4 flex flex-col justify-between md:flex-row border-b border-gray-200">
+      <div
+        class="
+          sticky top-0 z-10 bg-gray-100 mx-1 my-2 pb-4 flex flex-col
+          justify-between md:flex-row border-b border-gray-200
+        "
+      >
         <div class="flex flex-col md:flex-row">
           <%= link_to root_path do %>
             <%= image_tag "logo_with_name.svg", class: "h-full" %>

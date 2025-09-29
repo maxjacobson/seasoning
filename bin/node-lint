@@ -6,4 +6,5 @@ PATH="node_modules/.bin:$PATH"
 set -ex
 
 prettier --check .
+herb-format --check app/views
 herb-lint app/views

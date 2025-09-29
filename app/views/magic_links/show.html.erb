@@ -1,7 +1,9 @@
 <div>
   <% if @magic_link %>
     <h1 class="mb-2 text-xl">Complete your sign up</h1>
-    <p class="mb-2">Just one more question... what would you like to be called?</p>
+    <p class="mb-2">
+      Just one more question... what would you like to be called?
+    </p>
     <%= form_with model: Human.new(email: @magic_link.email) do |f| %>
       <%= f.text_field :handle, placeholder: "Your handle", class: "mr-2 text-field" %>
       <%= hidden_field_tag "human[magic_link_token]", @magic_link.token %>
@@ -10,8 +12,6 @@
   <% else %>
     <p>Hmm, that magic link does not seem to be valid.</p>
     <p>Perhaps it has expired.</p>
-    <p>
-      <%= link_to "Try again?", root_path %>
-    </p>
+    <p><%= link_to "Try again?", root_path %></p>
   <% end %>
 </div>
