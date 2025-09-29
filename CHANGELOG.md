@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **September 28, 2025** — Add collapsible note-to-self sections with clickable caret arrows for easier reading
 1. **September 28, 2025** — Add Cmd+Enter (Mac) and Ctrl+Enter (Windows/Linux) keyboard shortcuts to submit forms when focused on textareas
 1. **September 11, 2025** — Improve profile page design with horizontal navigation menu for reviews/stats links, friendlier join date formatting, and currently watching show count display
 1. **September 6, 2025** — Add season progress bars to individual season pages showing percentage of episodes watched in that season
