@@ -200,13 +200,11 @@ GEM
     globalid (1.3.0)
       activesupport (>= 6.1)
     hashdiff (1.2.0)
-    herb (0.7.4)
-    herb (0.7.4-aarch64-linux-gnu)
-    herb (0.7.4-arm-linux-gnu)
-    herb (0.7.4-arm64-darwin)
-    herb (0.7.4-x86-linux-gnu)
-    herb (0.7.4-x86_64-darwin)
-    herb (0.7.4-x86_64-linux-gnu)
+    herb (0.7.5)
+    herb (0.7.5-arm64-darwin)
+    herb (0.7.5-x86-linux-gnu)
+    herb (0.7.5-x86_64-darwin)
+    herb (0.7.5-x86_64-linux-gnu)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -493,13 +491,11 @@ CHECKSUMS
   ffi (1.17.2-x86_64-linux-gnu) sha256=05d2026fc9dbb7cfd21a5934559f16293815b7ce0314846fee2ac8efbdb823ea
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
   hashdiff (1.2.0) sha256=c984f13e115bfc9953332e8e83bd9d769cfde9944e2d54e07eb9df7b76e140b5
-  herb (0.7.4) sha256=cc19720237c17d1947126581d25a292cfeb2520e64ee3199d7ffe279f1497e64
-  herb (0.7.4-aarch64-linux-gnu) sha256=45ef8202fa0674c03ffe94a543303690102752b16a8ca244254d8f66d61022c5
-  herb (0.7.4-arm-linux-gnu) sha256=0fdb28801856b396c3ced6b490c01a8a5bd6797ef58aba2a9172ee571901a87f
-  herb (0.7.4-arm64-darwin) sha256=ff29c65d9230d5da55f9e5ec668dae250713de5e4fe595de34bd5df634483315
-  herb (0.7.4-x86-linux-gnu) sha256=5f2ab3058a065ab66257dc4eab4560d15f13b2bec69cfbd09303454a52ae177e
-  herb (0.7.4-x86_64-darwin) sha256=8ac2562e8baf68a41dcdffac44db19811c8cf9fc19146b021fd5a317c8407c1f
-  herb (0.7.4-x86_64-linux-gnu) sha256=a469625f615e26b15eeb7b4de37fe437b34f936a2f91e09625b2d761096c73b2
+  herb (0.7.5) sha256=1542a07ed8d91d1b0d36c66dd74918664e251ba42aa487765cf2420777727248
+  herb (0.7.5-arm64-darwin) sha256=cc2485601f65b12eaa944ba0d78d89be60d5fcf5dfc5bd1d82fc5898d09c34e2
+  herb (0.7.5-x86-linux-gnu) sha256=6027f5fc71ee3edae03cc85208045d65bb714defef43d5698e6a99ac6371036f
+  herb (0.7.5-x86_64-darwin) sha256=c8eaba50f0fc907457b66a9c4d4001901fb39b124786148c13cc83e66dca7b98
+  herb (0.7.5-x86_64-linux-gnu) sha256=597df846865be8dd063161956031ec64619795da655659cb173ce668eb5ab0b8
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
   ice_nine (0.11.2) sha256=5d506a7d2723d5592dc121b9928e4931742730131f22a1a37649df1c1e2e63db
   io-console (0.8.1) sha256=1e15440a6b2f67b6ea496df7c474ed62c860ad11237f29b3bd187f054b925fcb
