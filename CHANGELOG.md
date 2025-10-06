@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **October 6, 2025** — Add in-app notifications for returning shows: when the daily checker detects new seasons for shows you're waiting for or have finished, you'll see dismissible "[Show Name] is back!" banners on every page
 1. **September 28, 2025** — Add collapsible note-to-self sections with clickable caret arrows for easier reading
 1. **September 28, 2025** — Add Cmd+Enter (Mac) and Ctrl+Enter (Windows/Linux) keyboard shortcuts to submit forms when focused on textareas
 1. **September 11, 2025** — Improve profile page design with horizontal navigation menu for reviews/stats links, friendlier join date formatting, and currently watching show count display

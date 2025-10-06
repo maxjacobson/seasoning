@@ -7,6 +7,13 @@ namespace :new_season_checker do
       human = my_show.human
       if my_show.any_new_unwatched_seasons?
         puts "Moving #{show.slug} to next up for #{human.handle}"
+
+        # Create notification for the returning show
+        ReturningShowNotification.create_or_find_by!(
+          human:,
+          show:
+        )
+
         my_show.status = "next_up"
         my_show.save!
       end

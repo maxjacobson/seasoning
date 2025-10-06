@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_08_24_173229) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_06_033107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -87,6 +87,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_24_173229) do
     t.index ["show_id"], name: "index_my_shows_on_show_id"
   end
 
+  create_table "returning_show_notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "human_id", null: false, comment: "Which human should receive this notification"
+    t.bigint "show_id", null: false, comment: "Which show is returning"
+    t.datetime "updated_at", null: false
+    t.index ["human_id", "show_id"], name: "index_returning_show_notifications_on_human_and_show", unique: true
+    t.index ["human_id"], name: "index_returning_show_notifications_on_human_id"
+    t.index ["show_id"], name: "index_returning_show_notifications_on_show_id"
+  end
+
   create_table "season_reviews", force: :cascade do |t|
     t.bigint "author_id", null: false, comment: "Who wrote this review"
     t.text "body", null: false, comment: "The body of the review"
@@ -156,6 +166,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_08_24_173229) do
   add_foreign_key "my_seasons", "seasons", on_delete: :cascade
   add_foreign_key "my_shows", "humans", on_delete: :cascade
   add_foreign_key "my_shows", "shows", on_delete: :cascade
+  add_foreign_key "returning_show_notifications", "humans", on_delete: :cascade
+  add_foreign_key "returning_show_notifications", "shows", on_delete: :cascade
   add_foreign_key "season_reviews", "humans", column: "author_id", on_delete: :cascade
   add_foreign_key "season_reviews", "seasons", on_delete: :cascade
 end
