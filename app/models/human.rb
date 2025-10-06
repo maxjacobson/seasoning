@@ -3,6 +3,7 @@ class Human < ApplicationRecord
   has_many :my_shows, dependent: :destroy
   has_many :shows, through: :my_shows
   has_many :season_reviews, foreign_key: :author_id, inverse_of: :author, dependent: :destroy
+  has_many :returning_show_notifications, dependent: :destroy
 
   normalizes :email, with: ->(email) { email.to_s.strip.downcase.presence }
   normalizes :handle, with: ->(handle) { handle.to_s.parameterize.underscore.presence }

@@ -45,6 +45,29 @@
           <% end %>
         </div>
       </div>
+
+      <% if returning_show_notifications.any? %>
+        <div class="mx-auto my-0 max-w-3xl p-2">
+          <div class="mb-4 space-y-3">
+            <% returning_show_notifications.each do |notification| %>
+              <div
+                class="
+                  bg-orange-50 border border-orange-200 rounded-lg p-4 flex
+                  items-center justify-between
+                "
+              >
+                <div class="flex-1">
+                  <p class="text-orange-800">
+                    <%= link_to "#{notification.show.title} is back!", show_path(notification.show.slug), class: "font-medium text-orange-900 hover:text-orange-700 underline" %>
+                  </p>
+                </div>
+                <%= button_to "×", returning_show_notification_path(notification), method: :delete, class: "ml-3 text-orange-600 hover:text-orange-800 font-bold text-xl leading-none cursor-pointer bg-transparent border-none p-0", title: "Dismiss notification" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
       <div class="mx-auto my-0 max-w-3xl p-2">
         <% flash.each do |key, message| %>
           <div class="flash flash-<%= key %>"><%= message %></div>

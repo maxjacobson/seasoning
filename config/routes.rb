@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: "magic_links#new"
   resource :admin, only: [:show]
   resources :follows, only: [:create, :destroy]
+  resources :returning_show_notifications, only: [:destroy]
   resource :credits, only: [:show]
   resource :roadmap, only: [:show]
   resource :changelog, only: [:show]
