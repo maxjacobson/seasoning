@@ -103,7 +103,7 @@
             <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                  <%= link_to review.author.handle, profile_path(review.author.handle), class: "font-medium text-blue-600 hover:text-blue-800 hover:underline" %>
+                  <span class="font-medium text-gray-900"><%= review.author.handle %></span>
                   <% if review.rating.present? %>
                     <div class="flex items-center">
                       <span class="text-yellow-500 mr-1">★</span>
@@ -111,7 +111,7 @@
                     </div>
                   <% end %>
                 </div>
-                <span class="text-sm text-gray-500"><%= l(review.created_at.to_date, format: :default) %></span>
+                <%= link_to l(review.created_at.to_date, format: :default), proper_review_path(review), class: "text-sm text-blue-600 hover:text-blue-800 hover:underline" %>
               </div>
             </div>
           <% end %>
