@@ -89,25 +89,37 @@
       </div>
     </div>
 
-    <% if current_human.present? %>
-      <div>
-        <h2 class="text-lg font-medium text-gray-900 mb-4">Your review</h2>
-        <div class="bg-gray-50 rounded-lg p-4">
-          <% if @my_season.reviews.any? %>
-            <ul class="space-y-2 mb-4">
-              <% @my_season.reviews.order(created_at: :desc).each do |review| %>
-                <li>
-                  <%= link_to review.created_at.to_date, proper_review_path(review), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <p class="text-gray-600 mb-4">No reviews yet</p>
-          <% end %>
+    <div>
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-medium text-gray-900">Reviews</h2>
+        <% if current_human.present? %>
           <%= link_to "Add review", new_season_review_path(@show.slug, @season.slug), class: "rounded-button" %>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+
+      <% if @season_reviews.any? %>
+        <div class="space-y-3">
+          <% @season_reviews.each do |review| %>
+            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <%= link_to review.author.handle, profile_path(review.author.handle), class: "font-medium text-blue-600 hover:text-blue-800 hover:underline" %>
+                  <% if review.rating.present? %>
+                    <div class="flex items-center">
+                      <span class="text-yellow-500 mr-1">★</span>
+                      <span class="text-sm font-medium text-gray-700"><%= review.rating %>/10</span>
+                    </div>
+                  <% end %>
+                </div>
+                <span class="text-sm text-gray-500"><%= l(review.created_at.to_date, format: :default) %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-gray-600">No reviews yet</p>
+      <% end %>
+    </div>
   </div>
 
   <%= render "shows/show_metadata", show: @show %>

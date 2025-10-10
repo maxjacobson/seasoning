@@ -3,6 +3,7 @@
 class Season < ApplicationRecord
   belongs_to :show
   has_many :episodes, dependent: :destroy
+  has_many :season_reviews, dependent: :destroy
   before_save -> { self.slug = name&.gsub(/[^a-z0-9\s]/i, "")&.parameterize }
 
   scope :aired_in, lambda { |year|

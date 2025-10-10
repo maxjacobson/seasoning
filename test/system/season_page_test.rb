@@ -126,7 +126,7 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert_content "Your review"
+    assert_content "Reviews"
     assert_content "Add review"
     assert_content "No reviews yet"
     assert page.has_link?("Add review", href: "/shows/halt-and-catch-fire/season-1/reviews/new")
@@ -146,7 +146,10 @@ class SeasonPageTest < ApplicationSystemTestCase
     click_on "Halt and Catch Fire"
     click_on "Season 1"
 
-    assert_content "Your review"
-    assert page.has_link?(review.created_at.to_date.to_s, href: "/donna/shows/halt-and-catch-fire/season-1")
+    assert_content "Reviews"
+    assert_content "donna"
+    assert_content "★"
+    assert_content "9/10"
+    assert_content review.created_at.to_date.strftime("%B %d, %Y")
   end
 end
