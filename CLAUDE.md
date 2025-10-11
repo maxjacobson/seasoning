@@ -8,7 +8,7 @@ Seasoning is a Ruby on Rails application for tracking TV show viewing progress.
 
 **Tech Stack:**
 
-- Backend: Ruby on Rails 8 with PostgreSQL
+- Backend: Ruby on Rails 8.1.0.beta1 with PostgreSQL
 - Frontend: ERB templates with Tailwind CSS 4, Turbo Rails for SPA-like navigation
 - JavaScript: jsbundling-rails with esbuild for bundling
 - Testing: Minitest (Rails), Capybara with Playwright for system tests
@@ -26,7 +26,10 @@ eval "$(rbenv init -)"
 # Initial setup
 bin/setup
 
-# Start development server
+# Start development server with all watchers (Rails + CSS + JS)
+bin/dev
+
+# Or start individual components
 rails server
 ```
 
@@ -67,8 +70,17 @@ bin/rails test test/path/to/test_file.rb:line_number
 # IMPORTANT: Ensure rbenv is initialized first
 eval "$(rbenv init -)"
 
-# Ruby linting
+# All linting (includes Ruby, ERB, and JS)
+bin/lint
+
+# Ruby only linting
+bin/ruby-lint
+
+# Ruby linting only
 bin/rubocop
+
+# ERB linting only
+bin/erb_lint --lint-all
 
 # Code formatting
 node_modules/.bin/prettier --write .
@@ -78,11 +90,10 @@ node_modules/.bin/prettier --write .
 
 ### Rails Backend
 
-- **Models**: Core entities include Human, Show, Season, Episode, SeasonReview, Follow
-- **Controllers**: Split between traditional Rails controllers and API controllers under `/api`
-- **Services**: Business logic in `app/services/` (e.g., `RefreshShow`, `FindOrCreateShow`)
+- **Models**: Core entities include Human, Show, Season, Episode, SeasonReview, Follow, MySeason, MyShow, ReturningShowNotification, MagicLink
+- **Controllers**: Traditional Rails controllers (no API controllers currently)
+- **Services**: Business logic in `app/services/` (e.g., `RefreshShow`, `FindOrCreateShow`, `RefreshEpisodes`, `RemoveMyShow`)
 - **Jobs**: Background processing with SuckerPunch (`RefreshShowJob`, `BoomJob`)
-- **Serializers**: JSON API responses using OJ serializers
 
 ### Architecture Notes
 
@@ -161,10 +172,11 @@ node_modules/.bin/prettier --write .
 
 - You can fix rubocop long line offenses by using heredocs, which it will ignore
 - When there are erb lint issues, you can often fix them with bin/erb_lint --lint-all --autocorrect
+- The project uses Herb tools (@herb-tools/linter and @herb-tools/formatter) for ERB template linting and formatting
 
 ## Meaningful Changes Tips
 
-- When making meaningful Rails changes, make sure to run bin/ruby-lint to make sure that rubocop and erb lint are satisfied with the changes too
+- When making meaningful Rails changes, make sure to run bin/lint to make sure that all linting (Ruby, ERB, and JS) passes
 
 ## Development Practices
 
