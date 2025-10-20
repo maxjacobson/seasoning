@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **October 19, 2025** — Season review textareas now auto-expand to fit content as you type, matching the behavior of note-to-self textareas
 1. **October 9, 2025** — Display season reviews in card format on season pages showing author username, star rating, and date instead of just date links
 1. **October 6, 2025** — Add in-app notifications for returning shows: when the daily checker detects new seasons for shows you're waiting for or have finished, you'll see dismissible "[Show Name] is back!" banners on every page
 1. **September 28, 2025** — Add collapsible note-to-self sections with clickable caret arrows for easier reading
