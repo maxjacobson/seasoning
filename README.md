@@ -32,3 +32,7 @@ bin/rails test:all
 ```
 
 Note: The CSS must be built before running tests, as the system tests rely on properly styled elements being visible and interactive.
+
+Aren't I so cool?
+
+Make some more changes to the README.
