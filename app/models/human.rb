@@ -11,6 +11,10 @@ class Human < ApplicationRecord
   validates :handle, exclusion: { in: RESERVED_WORDS, message: "%<value>s is reserved" }
   validates :currently_watching_limit, numericality: { in: 1..10, allow_nil: true }
 
+  def coolio?
+    false
+  end
+
   def currently_watching
     shows.where(my_shows: { status: "currently_watching" }).alphabetical
   end
