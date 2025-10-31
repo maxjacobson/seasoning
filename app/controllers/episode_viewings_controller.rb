@@ -12,7 +12,7 @@ class EpisodeViewingsController < ApplicationController
       Set.new(my_season.watched_episode_numbers).add(episode.episode_number).to_a.sort
     my_season.save!
 
-    redirect_to season_path(show.slug, season.slug), notice: "#{episode.name} marked as seen"
+    redirect_back_or_to season_path(show.slug, season.slug), notice: "#{episode.name} marked as seen"
   end
 
   def destroy
@@ -27,6 +27,6 @@ class EpisodeViewingsController < ApplicationController
       Set.new(my_season.watched_episode_numbers).delete(episode.episode_number).to_a.sort
     my_season.save!
 
-    redirect_to season_path(show.slug, season.slug), notice: "#{episode.name} marked as not seen"
+    redirect_back_or_to season_path(show.slug, season.slug), notice: "#{episode.name} marked as not seen"
   end
 end
