@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **November 3, 2025** — Improve new season checker to notify you when shows you've added (but haven't watched) finally have aired episodes
 1. **October 31, 2025** — Episode checkbox now keeps you on the episode page instead of redirecting to the season page
 1. **October 19, 2025** — Season review textareas now auto-expand to fit content as you type, matching the behavior of note-to-self textareas
 1. **October 9, 2025** — Display season reviews in card format on season pages showing author username, star rating, and date instead of just date links

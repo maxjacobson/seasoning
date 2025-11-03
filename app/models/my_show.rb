@@ -29,7 +29,7 @@ class MyShow < ApplicationRecord
                            .map(&:season_number)
                            .max
 
-    most_recent_watched.present? && most_recent_watched < most_recent_released
+    most_recent_released.present? && (most_recent_watched.nil? || most_recent_watched < most_recent_released)
   end
 
   def watched_percentage
