@@ -2,19 +2,29 @@
 
 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
   <% show.seasons.includes(:episodes).order(season_number: :asc).each do |season| %>
-    <% available_count = current_human ? season.available_episodes_count_for(current_human) : 0 %>
+    <% badge = current_human ? season.available_episodes_count_for(current_human) : EpisodeBadge.new(0, 0) %>
     <div class="flex flex-col">
       <%= link_to season_path(show.slug, season.slug), class: "block no-underline cursor-pointer flex-shrink-0 relative mb-2" do %>
         <%= image_tag season.poster.url, alt: "#{season.name} poster", class: "w-full h-auto rounded shadow-sm" %>
-        <% if current_human && available_count > 0 %>
+        <% if badge.available > 0 %>
           <div
             class="
               absolute -top-2 -right-2 inline-flex items-center justify-center
               w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold
             "
-            title="<%= pluralize(available_count, "available episode") %>"
+            title="<%= pluralize(badge.available, "available episode") %>"
           >
-            <%= available_count > 9 ? "…" : available_count %>
+            <%= badge.available > 9 ? "…" : badge.available %>
+          </div>
+        <% elsif badge.upcoming > 0 %>
+          <div
+            class="
+              absolute -top-2 -right-2 inline-flex items-center justify-center
+              w-6 h-6 rounded-full bg-gray-400 text-white text-xs font-bold
+            "
+            title="<%= pluralize(badge.upcoming, "upcoming episode") %>"
+          >
+            <%= badge.upcoming > 9 ? "…" : badge.upcoming %>
           </div>
         <% end %>
       <% end %>

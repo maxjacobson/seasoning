@@ -147,15 +147,18 @@ class MyShowTest < ActiveSupport::TestCase
     assert_not my_show.any_new_unwatched_seasons?
   end
 
-  test "available_episodes_count returns 0 when no episodes exist" do
+  test "available_episodes_count returns 0 available and 0 upcoming when no episodes exist" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
 
-    assert_equal 0, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 0, badge.available
+    assert_equal 0, badge.upcoming
   end
 
-  test "available_episodes_count returns 0 when no episodes are available (all future)" do
+  test "available_episodes_count returns 0 available and counts upcoming when all episodes are future" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 2)
@@ -163,7 +166,10 @@ class MyShowTest < ActiveSupport::TestCase
     Episode.create!(season: season, episode_number: 2, air_date: 2.days.from_now, tmdb_id: 790, name: "Episode 2")
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
 
-    assert_equal 0, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 0, badge.available
+    assert_equal 2, badge.upcoming
   end
 
   test "available_episodes_count returns 0 when all available episodes are watched" do
@@ -175,7 +181,9 @@ class MyShowTest < ActiveSupport::TestCase
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
     MySeason.create!(human: human, season: season, watched_episode_numbers: [1, 2])
 
-    assert_equal 0, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 0, badge.available
   end
 
   test "available_episodes_count returns correct count of available unwatched episodes" do
@@ -189,10 +197,12 @@ class MyShowTest < ActiveSupport::TestCase
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
     MySeason.create!(human: human, season: season, watched_episode_numbers: [1, 2])
 
-    assert_equal 2, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 2, badge.available
   end
 
-  test "available_episodes_count ignores future episodes" do
+  test "available_episodes_count counts future episodes as upcoming" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 4)
@@ -202,7 +212,10 @@ class MyShowTest < ActiveSupport::TestCase
     Episode.create!(season: season, episode_number: 4, air_date: 2.days.from_now, tmdb_id: 792, name: "Episode 4")
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
 
-    assert_equal 2, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 2, badge.available
+    assert_equal 2, badge.upcoming
   end
 
   test "available_episodes_count works across multiple seasons" do
@@ -222,7 +235,9 @@ class MyShowTest < ActiveSupport::TestCase
     MySeason.create!(human: human, season: season1, watched_episode_numbers: [1, 2])
     MySeason.create!(human: human, season: season2, watched_episode_numbers: [1])
 
-    assert_equal 2, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 2, badge.available
   end
 
   test "available_episodes_count handles season with no MySeason record" do
@@ -234,7 +249,9 @@ class MyShowTest < ActiveSupport::TestCase
     Episode.create!(season: season, episode_number: 3, air_date: 1.day.ago, tmdb_id: 791, name: "Episode 3")
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
 
-    assert_equal 3, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 3, badge.available
   end
 
   test "available_episodes_count excludes episodes with no air_date" do
@@ -245,6 +262,8 @@ class MyShowTest < ActiveSupport::TestCase
     Episode.create!(season: season, episode_number: 2, air_date: nil, tmdb_id: 790, name: "Episode 2")
     my_show = MyShow.create!(human: human, show: show, status: "currently_watching")
 
-    assert_equal 1, my_show.available_episodes_count
+    badge = my_show.available_episodes_count
+
+    assert_equal 1, badge.available
   end
 end
