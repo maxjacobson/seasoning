@@ -5,70 +5,22 @@
 <div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
   <h1 class="text-2xl font-bold text-gray-900 mb-6">Search results</h1>
 
-  <% if @results.any? %>
+  <% if @database_results.present? %>
     <div class="space-y-4">
-      <% @results.each do |result| %>
-        <% if result.already_imported_show %>
-          <% my_show_count = result.already_imported_show.watchers_count %>
-          <%= link_to show_path(result.already_imported_show.slug), data: { test_id: "imported-show-#{result.id}" }, class: "block no-underline" do %>
-            <div
-              class="
-                rounded-md border border-gray-200 p-4 hover:border-gray-400
-                hover:bg-orange-50 transition-colors cursor-pointer
-              "
-            >
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0">
-                  <%= image_tag result.poster_url, class: "w-16 h-auto rounded shadow-sm" %>
-                </div>
-
-                <div class="flex-1 min-w-0">
-                  <div class="font-medium text-gray-900">
-                    <%= result.name %>
-                    <% if result.year %>
-                      <span class="text-gray-500">(<%= result.year %>)</span>
-                    <% end %>
-                  </div>
-                  <div class="text-sm text-gray-500 mt-1">
-                    Added by <%= pluralize(my_show_count, "person", "people") %>
-                  </div>
-                </div>
-
-                <div class="text-gray-400 mt-1">
-                  →
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <%= button_to importable_shows_path, params: { id: result.id }, method: :post, class: "block w-full text-left border-0 bg-transparent p-0", data: { test_id: "import-show-#{result.id}" } do %>
-            <div
-              class="
-                rounded-md border border-gray-200 p-4 hover:border-gray-400
-                hover:bg-orange-50 transition-colors cursor-pointer
-              "
-            >
-              <div class="flex items-center gap-4">
-                <div class="flex-shrink-0">
-                  <%= image_tag result.poster_url, class: "w-16 h-auto rounded shadow-sm" %>
-                </div>
-
-                <div class="flex-1">
-                  <div class="font-medium text-gray-900">
-                    <%= result.name %>
-                    <% if result.year %>
-                      <span class="text-gray-500">(<%= result.year %>)</span>
-                    <% end %>
-                  </div>
-                </div>
-
-                <div class="text-gray-400">
-                  +
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+      <% @database_results.each do |show| %>
+        <%= render "database_show_result", show: show %>
+      <% end %>
+    </div>
+    <div class="mt-6 pt-6 border-t border-gray-200 text-center">
+      <p class="text-sm text-gray-600 mb-3">
+        Not seeing what you're looking for?
+      </p>
+      <%= link_to "Include results from TMDB", search_path(q: @query, tmdb: 1), class: "inline-block px-4 py-2 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 transition-colors" %>
+    </div>
+  <% elsif @tmdb_results.present? %>
+    <div class="space-y-4">
+      <% @tmdb_results.each do |result| %>
+        <%= render "tmdb_show_result", result: result %>
       <% end %>
     </div>
   <% else %>
