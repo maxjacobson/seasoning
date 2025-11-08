@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **November 8, 2025** — Available episodes badge: Red notification badges now appear on show cards showing how many unwatched episodes are available to watch. Badges overhang the poster in the top-right corner like iOS app notifications. Shows "…" if 10+ episodes are available, and hover tooltips display the full count
 1. **November 7, 2025** — Improved search experience: search now prioritizes results from your library first, and only hits the TMDB API if you need additional results. When your library has matching shows, you'll see a "Include results from TMDB" link at the bottom to expand the search
 1. **November 3, 2025** — Improve new season checker to notify you when shows you've added (but haven't watched) finally have aired episodes
 1. **October 31, 2025** — Episode checkbox now keeps you on the episode page instead of redirecting to the season page

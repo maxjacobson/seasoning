@@ -120,6 +120,7 @@ node_modules/.bin/prettier --write .
 
 - Prefer sentence case for buttons and labels (not title case)
 - Brand color is orange
+- Available episodes badge: Shows on each show card in the shows list, displays the count of available unwatched episodes. If count > 9, shows "•" instead of the number. If count is 0, no badge is shown.
 
 ## Migrations
 
@@ -170,6 +171,7 @@ node_modules/.bin/prettier --write .
 
 ## Code Linting Tips
 
+- **Prefer using `bin/fix-lints` to automatically fix linting issues** instead of manually fixing indentation and formatting problems. This is much faster and more reliable than manual fixes.
 - You can fix rubocop long line offenses by using heredocs, which it will ignore
 - When there are erb lint issues, you can often fix them with bin/erb_lint --lint-all --autocorrect
 - **Formatting tools by file type:**
