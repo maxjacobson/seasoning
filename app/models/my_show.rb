@@ -32,6 +32,32 @@ class MyShow < ApplicationRecord
     most_recent_released.present? && (most_recent_watched.nil? || most_recent_watched < most_recent_released)
   end
 
+  def available_episodes_count
+    sql = ApplicationRecord.sanitize_sql_array(
+      [
+        <<~SQL.squish,
+          select count(*) as count
+          from episodes
+          join seasons on seasons.id = episodes.season_id
+          left join my_seasons on my_seasons.season_id = episodes.season_id
+            and my_seasons.human_id = :human_id
+          where seasons.show_id = :show_id
+          and episodes.air_date <= :today
+          and (my_seasons.id is null
+            or not (my_seasons.watched_episode_numbers @> array[episodes.episode_number]::integer[]))
+        SQL
+        {
+          human_id: human.id,
+          show_id: show.id,
+          today: human.time_zone.today
+        }
+      ]
+    )
+
+    result = ApplicationRecord.connection.exec_query(sql, "MyShow#available_episodes_count")
+    result.first["count"].to_i
+  end
+
   def watched_percentage
     sql = ApplicationRecord.sanitize_sql_array(
       [
