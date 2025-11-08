@@ -172,7 +172,11 @@ node_modules/.bin/prettier --write .
 
 - You can fix rubocop long line offenses by using heredocs, which it will ignore
 - When there are erb lint issues, you can often fix them with bin/erb_lint --lint-all --autocorrect
-- The project uses Herb tools (@herb-tools/linter and @herb-tools/formatter) for ERB template linting and formatting
+- **Formatting tools by file type:**
+  - **Prettier** is used for: yml, json, css, js, md files
+  - **Herb tools** (@herb-tools/linter and @herb-tools/formatter) are used for: html.erb files (NOT Prettier)
+  - Use `node_modules/.bin/herb-format --write app/views` to format ERB files
+  - Use `node_modules/.bin/herb-lint app/views` to lint ERB files
 
 ## Meaningful Changes Tips
 
