@@ -36,13 +36,14 @@ class MyShow < ApplicationRecord
     sql = ApplicationRecord.sanitize_sql_array(
       [
         <<~SQL.squish,
-          select count(*) as count
+          select
+            count(*) filter (where episodes.air_date <= :today) as available,
+            count(*) filter (where episodes.air_date > :today) as upcoming
           from episodes
           join seasons on seasons.id = episodes.season_id
           left join my_seasons on my_seasons.season_id = episodes.season_id
             and my_seasons.human_id = :human_id
           where seasons.show_id = :show_id
-          and episodes.air_date <= :today
           and (my_seasons.id is null
             or not (my_seasons.watched_episode_numbers @> array[episodes.episode_number]::integer[]))
         SQL
@@ -55,7 +56,9 @@ class MyShow < ApplicationRecord
     )
 
     result = ApplicationRecord.connection.exec_query(sql, "MyShow#available_episodes_count")
-    result.first["count"].to_i
+    available = result.first["available"].to_i
+    upcoming = result.first["upcoming"].to_i
+    EpisodeBadge.new(available, upcoming)
   end
 
   def watched_percentage
