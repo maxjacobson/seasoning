@@ -1,6 +1,10 @@
 #!/bin/sh
 
-set -ex
+set -e
+
+echo "Reminder: if this script fails, you can run bin/fix-lints to fix most issues"
+
+set -x
 
 bin/node-lint
 bin/ruby-lint

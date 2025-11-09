@@ -20,9 +20,6 @@ Seasoning is a Ruby on Rails application for tracking TV show viewing progress.
 ### Setup
 
 ```bash
-# IMPORTANT: Initialize rbenv for correct Ruby version
-eval "$(rbenv init -)"
-
 # Initial setup
 bin/setup
 
@@ -67,9 +64,6 @@ bin/rails test test/path/to/test_file.rb:line_number
 ### Code Quality
 
 ```bash
-# IMPORTANT: Ensure rbenv is initialized first
-eval "$(rbenv init -)"
-
 # All linting (includes Ruby, ERB, and JS)
 bin/lint
 
@@ -163,7 +157,7 @@ node_modules/.bin/prettier --write .
 
 ## Development Best Practices
 
-- It's important to prefix bash commands with rbenv's init thing so that the proper ruby version is activated
+- Claude Code properly inherits rbenv configuration from the parent shell, so no special Ruby version initialization is needed
 
 ## Test Data Generation
 
@@ -177,8 +171,9 @@ node_modules/.bin/prettier --write .
 - **Formatting tools by file type:**
   - **Prettier** is used for: yml, json, css, js, md files
   - **Herb tools** (@herb-tools/linter and @herb-tools/formatter) are used for: html.erb files (NOT Prettier)
-  - Use `node_modules/.bin/herb-format --write app/views` to format ERB files
-  - Use `node_modules/.bin/herb-lint app/views` to lint ERB files
+  - **Note**: You rarely need to run herb-format or herb-lint directly since `bin/fix-lints` runs them for you
+  - If you do need to run herb-format directly, use `herb-format app/views` (formats by default, no --write flag needed)
+  - Claude Code inherits node_modules/.bin in PATH, so no need to prefix commands with `node_modules/.bin/`
 
 ## Meaningful Changes Tips
 

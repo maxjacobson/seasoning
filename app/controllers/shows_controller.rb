@@ -30,9 +30,11 @@ class ShowsController < ApplicationController
   def show
     authorize! { true }
 
-    @show = Show.find_by!(slug: params[:slug])
-
-    @my_show = (current_human.my_shows.find_by(show: @show) if current_human.present?)
+    @page = ShowDetailsPage.new(
+      show: Show.find_by!(slug: params[:slug]),
+      current_human: current_human,
+      include_skipped: params[:include_skipped] == "1"
+    )
   end
 
   private

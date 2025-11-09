@@ -60,4 +60,16 @@ class Show < ApplicationRecord
   def watchers_count
     MyShow.where(show: self).count
   end
+
+  def skipped_seasons_for?(human)
+    return false if human.nil?
+
+    MySeason
+      .joins(:season)
+      .exists?(
+        human: human,
+        skipped: true,
+        season: { show: self }
+      )
+  end
 end
