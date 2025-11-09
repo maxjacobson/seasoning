@@ -25,6 +25,7 @@ class Season < ApplicationRecord
           left join my_seasons on my_seasons.season_id = episodes.season_id
             and my_seasons.human_id = :human_id
           where episodes.season_id = :season_id
+          and (my_seasons.id is null or my_seasons.skipped = false)
           and (my_seasons.id is null
             or not (my_seasons.watched_episode_numbers @> array[episodes.episode_number]::integer[]))
         SQL

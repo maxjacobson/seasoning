@@ -17,15 +17,26 @@ class MyShow < ApplicationRecord
                           .joins(:season)
                           .where(
                             human:,
-                            season: { show: }
+                            season: { show: },
+                            skipped: false
                           )
                           .select(&:watched?)
                           .map { |my_season| my_season.season.season_number }
                           .max
 
+    skipped_season_numbers = MySeason
+                             .includes(:season)
+                             .where(
+                               human:,
+                               skipped: true,
+                               season: { show: }
+                             )
+                             .map { |my_season| my_season.season.season_number }
+
     most_recent_released = show
                            .seasons
                            .select { |season| season.episodes.any?(&:available?) }
+                           .reject { |season| skipped_season_numbers.include?(season.season_number) }
                            .map(&:season_number)
                            .max
 
@@ -44,6 +55,7 @@ class MyShow < ApplicationRecord
           left join my_seasons on my_seasons.season_id = episodes.season_id
             and my_seasons.human_id = :human_id
           where seasons.show_id = :show_id
+          and (my_seasons.id is null or my_seasons.skipped = false)
           and (my_seasons.id is null
             or not (my_seasons.watched_episode_numbers @> array[episodes.episode_number]::integer[]))
         SQL
@@ -75,11 +87,16 @@ class MyShow < ApplicationRecord
               (select count(*)
                from seasons all_seasons
                join episodes all_episodes on all_episodes.season_id = all_seasons.id
-               where all_seasons.show_id = :show_id) as total_episodes,
+               left join my_seasons skipped_seasons on skipped_seasons.season_id = all_seasons.id
+                 and skipped_seasons.human_id = :human_id
+               where all_seasons.show_id = :show_id
+               and (skipped_seasons.id is null or skipped_seasons.skipped = false)) as total_episodes,
               coalesce(sum(array_length(my_seasons.watched_episode_numbers, 1)), 0) as watched_episodes
             from my_seasons
             join seasons on seasons.id = my_seasons.season_id
-            where seasons.show_id = :show_id and my_seasons.human_id = :human_id
+            where seasons.show_id = :show_id
+            and my_seasons.human_id = :human_id
+            and my_seasons.skipped = false
           ) counts
         SQL
         {
