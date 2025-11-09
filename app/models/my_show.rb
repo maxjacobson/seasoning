@@ -109,4 +109,8 @@ class MyShow < ApplicationRecord
     result = ApplicationRecord.connection.exec_query(sql, "MyShow#watched_percentage")
     result.first["percentage"].to_f
   end
+
+  def skipped_season?(season)
+    MySeason.exists?(human: human, season: season, skipped: true)
+  end
 end

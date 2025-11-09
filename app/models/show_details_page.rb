@@ -32,18 +32,7 @@ class ShowDetailsPage
   end
 
   def seasons
-    @seasons ||= begin
-      seasons = show.seasons.includes(:episodes).order(season_number: :asc)
-      if should_filter_skipped_seasons?
-        skipped_season_ids = MySeason
-                             .where(human: current_human, skipped: true)
-                             .where(season_id: seasons.map(&:id))
-                             .pluck(:season_id)
-        seasons.reject { |season| skipped_season_ids.include?(season.id) }
-      else
-        seasons
-      end
-    end
+    @seasons ||= show.seasons.includes(:episodes).order(season_number: :asc).reject { |season| skipped_season?(season) }
   end
 
   def tmdb_url
@@ -58,7 +47,10 @@ class ShowDetailsPage
 
   private
 
-  def should_filter_skipped_seasons?
-    !include_skipped && my_show && current_human.present?
+  def skipped_season?(season)
+    return false if include_skipped
+    return false unless added?
+
+    my_show.skipped_season?(season)
   end
 end
