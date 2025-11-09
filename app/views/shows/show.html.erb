@@ -54,7 +54,7 @@
           <h2 class="text-lg font-medium text-gray-900">Seasons</h2>
           <% if @page.skipped_seasons? %>
             <%= form_with url: show_path(@page.slug), method: :get, class: "flex items-center gap-2" do |f| %>
-              <%= f.check_box :include_skipped, { checked: @page.include_skipped, onchange: "this.form.requestSubmit()", class: "rounded border-gray-300 text-orange-500 focus:ring-orange-500" }, "1", "0" %>
+              <%= check_box_tag :include_skipped, "1", @page.include_skipped, onchange: "this.form.requestSubmit()", class: "rounded border-gray-300 text-orange-500 focus:ring-orange-500" %>
               <%= f.label :include_skipped, "Show skipped seasons", class: "text-sm text-gray-700" %>
             <% end %>
           <% end %>

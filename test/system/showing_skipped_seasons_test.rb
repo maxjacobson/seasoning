@@ -108,4 +108,16 @@ class ShowingSkippedSeasonsTest < ApplicationSystemTestCase
     assert_content "Season 1"
     assert_content "Season 2"
   end
+
+  test "checking 'Show skipped seasons' sets correct query param" do
+    visit redeem_magic_link_path(@magic_link.token)
+    click_on "Halt and Catch Fire"
+
+    check "Show skipped seasons"
+
+    # Wait for content to appear, confirming the page has loaded
+    assert_content "Season 1"
+
+    assert_equal "include_skipped=1", URI.parse(page.current_url).query
+  end
 end
