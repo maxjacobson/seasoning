@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_06_033107) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_09_172219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,6 +18,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_06_033107) do
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "my_show_status", ["might_watch", "currently_watching", "stopped_watching", "waiting_for_more", "finished", "next_up"]
   create_enum "visibility", ["anybody", "myself"]
+
   create_table "episodes", force: :cascade do |t|
     t.date "air_date", comment: "What date did this episode first air?"
     t.datetime "created_at", null: false
@@ -68,6 +69,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_06_033107) do
     t.datetime "created_at", null: false
     t.bigint "human_id", null: false, comment: "Which human saved this season"
     t.bigint "season_id", null: false, comment: "Which season did this human save"
+    t.boolean "skipped", default: false, null: false
     t.datetime "updated_at", null: false
     t.integer "watched_episode_numbers", default: [], null: false, comment: "Which episodes has this person watched?", array: true
     t.index ["human_id", "season_id"], name: "index_my_seasons_on_human_id_and_season_id", unique: true

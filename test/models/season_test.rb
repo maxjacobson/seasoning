@@ -109,4 +109,48 @@ class SeasonTest < ActiveSupport::TestCase
 
     assert_equal 2, badge.available
   end
+
+  test "#available_episodes_count_for returns 0 for skipped season" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 3)
+    Episode.create!(season: season, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
+    Episode.create!(season: season, episode_number: 2, air_date: 1.day.ago, tmdb_id: 790, name: "Episode 2")
+    Episode.create!(season: season, episode_number: 3, air_date: 1.day.ago, tmdb_id: 791, name: "Episode 3")
+    MySeason.create!(human: human, season: season, skipped: true)
+
+    badge = season.available_episodes_count_for(human)
+
+    assert_equal 0, badge.available
+    assert_equal 0, badge.upcoming
+  end
+
+  test "#available_episodes_count_for returns 0 upcoming for skipped season" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 2)
+    Episode.create!(season: season, episode_number: 1, air_date: 1.day.from_now, tmdb_id: 789, name: "Episode 1")
+    Episode.create!(season: season, episode_number: 2, air_date: 2.days.from_now, tmdb_id: 790, name: "Episode 2")
+    MySeason.create!(human: human, season: season, skipped: true)
+
+    badge = season.available_episodes_count_for(human)
+
+    assert_equal 0, badge.available
+    assert_equal 0, badge.upcoming
+  end
+
+  test "#available_episodes_count_for ignores watched episodes when season is skipped" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 3)
+    Episode.create!(season: season, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
+    Episode.create!(season: season, episode_number: 2, air_date: 1.day.ago, tmdb_id: 790, name: "Episode 2")
+    Episode.create!(season: season, episode_number: 3, air_date: 1.day.ago, tmdb_id: 791, name: "Episode 3")
+    MySeason.create!(human: human, season: season, skipped: true, watched_episode_numbers: [1, 2])
+
+    badge = season.available_episodes_count_for(human)
+
+    assert_equal 0, badge.available
+    assert_equal 0, badge.upcoming
+  end
 end
