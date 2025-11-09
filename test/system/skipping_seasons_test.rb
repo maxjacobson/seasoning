@@ -111,6 +111,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
 
     visit redeem_magic_link_path(@magic_link.token)
     click_on "Halt and Catch Fire"
+    check "Show skipped seasons"
     click_on "Season 1"
 
     episode_checkbox = first("input[type='checkbox'][name='watched']")
@@ -135,6 +136,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
 
     visit redeem_magic_link_path(@magic_link.token)
     click_on "Halt and Catch Fire"
+    check "Show skipped seasons"
     click_on "Season 1"
 
     assert_no_content "33%"
@@ -176,17 +178,17 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
     MySeason.create!(human: @human, season: season2, skipped: true)
 
     visit redeem_magic_link_path(@magic_link.token)
-    click_on "Halt and Catch Fire"
+    visit show_path(@show.slug, include_skipped: "1")
 
     season1_links = all("a[href='/shows/halt-and-catch-fire/season-1']")
-    season1_poster_link = season1_links.find { |link| link[:class].include?("relative") }
+    season1_poster_link = season1_links.find { |link| link[:class]&.include?("relative") }
 
     within(season1_poster_link) do
       assert_selector "div[title*='available episode']"
     end
 
     season2_links = all("a[href='/shows/halt-and-catch-fire/season-2']")
-    season2_poster_link = season2_links.find { |link| link[:class].include?("relative") }
+    season2_poster_link = season2_links.find { |link| link[:class]&.include?("relative") }
 
     within(season2_poster_link) do
       assert_no_selector "div[title*='available episode']"
