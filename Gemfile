@@ -26,7 +26,6 @@ end
 
 group :development do
   gem "erb_lint"
-  gem "herb"
   gem "letter_opener"
   gem "listen"
   gem "rubocop"
