@@ -8,5 +8,6 @@ set -x
 
 prettier --write .
 bin/rubocop --autocorrect-all
-herb-format app/views
+herb-format .
 bin/erb_lint --lint-all --show-linter-names --autocorrect
+herb-lint --fix .
