@@ -1,0 +1,12 @@
+files:
+  exclude:
+    - "coverage/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "vendor/**/*"
+
+linter:
+  enabled: true
+
+formatter:
+  enabled: true

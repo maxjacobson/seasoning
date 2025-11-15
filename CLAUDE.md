@@ -172,7 +172,7 @@ node_modules/.bin/prettier --write .
   - **Prettier** is used for: yml, json, css, js, md files
   - **Herb tools** (@herb-tools/linter and @herb-tools/formatter) are used for: html.erb files (NOT Prettier)
   - **Note**: You rarely need to run herb-format or herb-lint directly since `bin/fix-lints` runs them for you
-  - If you do need to run herb-format directly, use `herb-format app/views` (formats by default, no --write flag needed)
+  - If you do need to run herb-format directly, use `herb-format .` (formats by default, no --write flag needed)
   - Claude Code inherits node_modules/.bin in PATH, so no need to prefix commands with `node_modules/.bin/`
 
 ## Meaningful Changes Tips

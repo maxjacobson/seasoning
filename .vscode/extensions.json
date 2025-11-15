@@ -3,6 +3,7 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "kaiwood.endwise",
-    "shopify.ruby-lsp"
+    "shopify.ruby-lsp",
+    "marcoroth.herb-lsp"
   ]
 }
