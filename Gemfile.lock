@@ -199,10 +199,6 @@ GEM
     globalid (1.3.0)
       activesupport (>= 6.1)
     hashdiff (1.2.1)
-    herb (0.8.0)
-    herb (0.8.0-aarch64-linux-gnu)
-    herb (0.8.0-arm-linux-gnu)
-    herb (0.8.0-x86-linux-gnu)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -414,7 +410,6 @@ DEPENDENCIES
   dry-struct
   email_validator
   erb_lint
-  herb
   jsbundling-rails
   kramdown
   kramdown-parser-gfm
@@ -489,10 +484,6 @@ CHECKSUMS
   ffi (1.17.2-x86_64-linux-gnu) sha256=05d2026fc9dbb7cfd21a5934559f16293815b7ce0314846fee2ac8efbdb823ea
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
-  herb (0.8.0) sha256=0ef005bcb19a98ec2dbe259f512b13fdd59a35bffb8ce216632906004567269c
-  herb (0.8.0-aarch64-linux-gnu) sha256=e3537a92cf0419c2ec0f48971ef6eacd125c99ae390e8e96c7b0ebbd1bbe8533
-  herb (0.8.0-arm-linux-gnu) sha256=681f646fab07c389fbfbaab7a9afce88d6b5cd46ea7cf2a8b984cc0c05cb6d87
-  herb (0.8.0-x86-linux-gnu) sha256=761a14255846f8cd6af565468641acb5b2c5e6e45f6039d37802db144e80a408
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
   ice_nine (0.11.2) sha256=5d506a7d2723d5592dc121b9928e4931742730131f22a1a37649df1c1e2e63db
   io-console (0.8.1) sha256=1e15440a6b2f67b6ea496df7c474ed62c860ad11237f29b3bd187f054b925fcb
