@@ -11,14 +11,7 @@ class ShowsController < ApplicationController
                 .my_shows
                 .joins(:show)
                 .then { |relation| search(relation, @filters) }
-                .order(
-                  Arel.sql(
-                    <<~SQL.squish
-                      status asc,
-                      regexp_replace(title, '^(The|A)\s', '', 'i')
-                    SQL
-                  )
-                )
+                .order(status: :asc, sort_by_title: :asc)
                 .limit(PAGE_SIZE + 1) # Get one extra to check if there's a next page
                 .offset((current_page - 1) * PAGE_SIZE)
 

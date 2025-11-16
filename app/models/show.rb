@@ -26,13 +26,7 @@ class Show < ApplicationRecord
   }
 
   scope :alphabetical, lambda {
-    order(
-      Arel.sql(
-        <<~SQL.squish
-          regexp_replace(title, '^(The|A)\s', '', 'i')
-        SQL
-      )
-    )
+    order(:sort_by_title)
   }
 
   def self.refresh_interval(tmdb_show)
