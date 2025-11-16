@@ -68,4 +68,46 @@ class ShowTest < ActiveSupport::TestCase
 
     assert_not show.skipped_seasons_for?(nil)
   end
+
+  test "sets sort_by_title on create by stripping leading articles" do
+    # Test "The"
+    show1 = Show.create!(title: "The Wire", tmdb_tv_id: 1)
+
+    assert_equal "Wire", show1.sort_by_title
+
+    # Test "A"
+    show2 = Show.create!(title: "A Good Show", tmdb_tv_id: 2)
+
+    assert_equal "Good Show", show2.sort_by_title
+
+    # Test "An"
+    show3 = Show.create!(title: "An Amazing Show", tmdb_tv_id: 3)
+
+    assert_equal "Amazing Show", show3.sort_by_title
+
+    # Test case-insensitivity
+    show4 = Show.create!(title: "the Office", tmdb_tv_id: 4)
+
+    assert_equal "Office", show4.sort_by_title
+
+    # Test no leading article
+    show5 = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 5)
+
+    assert_equal "Halt and Catch Fire", show5.sort_by_title
+
+    # Test article not at the beginning
+    show6 = Show.create!(title: "Breaking the Law", tmdb_tv_id: 6)
+
+    assert_equal "Breaking the Law", show6.sort_by_title
+  end
+
+  test "updates sort_by_title when title changes" do
+    show = Show.create!(title: "Original Title", tmdb_tv_id: 1)
+
+    assert_equal "Original Title", show.sort_by_title
+
+    show.update!(title: "The New Title")
+
+    assert_equal "New Title", show.sort_by_title
+  end
 end

@@ -1,6 +1,8 @@
 # A TV show!
 # Data is mostly from the movie database
 class Show < ApplicationRecord
+  before_save :set_sort_by_title, if: :title_changed?
+
   before_create lambda {
     slug = nil
     n = nil
@@ -71,5 +73,11 @@ class Show < ApplicationRecord
         skipped: true,
         season: { show: self }
       )
+  end
+
+  private
+
+  def set_sort_by_title
+    self.sort_by_title = title&.gsub(/\A(the|a|an)\s+/i, "")
   end
 end
