@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_09_172219) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_16_213731) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -142,6 +142,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_09_172219) do
     t.datetime "created_at", null: false
     t.date "first_air_date", comment: "What date did this show first air?"
     t.string "slug", null: false, comment: "The show's title, in slug form, to go in a URL"
+    t.string "sort_by_title", comment: "The show's title normalized for sorting (strips leading articles like 'The', 'A', 'An')"
     t.string "title", null: false, comment: "The show's official title"
     t.datetime "tmdb_last_refreshed_at", precision: nil, comment: "When did we last refresh this show's info from TMDB?"
     t.datetime "tmdb_next_refresh_at", precision: nil
