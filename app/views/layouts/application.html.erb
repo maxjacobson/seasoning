@@ -69,9 +69,11 @@
       <% end %>
 
       <div class="mx-auto my-0 max-w-3xl p-2">
-        <% flash.each do |key, message| %>
-          <div class="flash flash-<%= key %>"><%= message %></div>
-        <% end %>
+        <div class="min-h-[2.5rem]">
+          <% flash.each do |key, message| %>
+            <div class="flash flash-<%= key %>"><%= message %></div>
+          <% end %>
+        </div>
 
         <%= yield %>
 

@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **November 16, 2025** — Reserve vertical space for flash messages to prevent content shifting when navigating between pages with and without flash messages
 1. **November 9, 2025** — Add ability to skip seasons: mark individual seasons as skipped to exclude them from progress calculations and available episodes badges. Perfect for jumping into a show at a specific season (like watching only the latest season of Dancing with the Stars). Skipped seasons hide their progress bars and disable episode checkboxes. Skipped seasons won't trigger "next up" notifications or status changes when new episodes are released
 1. **November 8, 2025** — Redesigned seasons list on show page: replaced table layout with a responsive grid showing season posters with available episodes badges. Click any poster to view that season's details
 1. **November 8, 2025** — Available episodes badge: Red notification badges now appear on show cards showing how many unwatched episodes are available to watch. Badges overhang the poster in the top-right corner like iOS app notifications. Shows "…" if 10+ episodes are available, and hover tooltips display the full count
