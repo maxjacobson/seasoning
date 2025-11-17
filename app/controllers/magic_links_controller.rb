@@ -36,7 +36,7 @@ class MagicLinksController < ApplicationController
       @magic_link.deliver
       redirect_to check_your_email_path, notice: "Sent! Check your email."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

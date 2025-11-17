@@ -73,7 +73,7 @@ class SeasonReviewsController < ApplicationController
     else
       @show = show
       @season = season
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -98,7 +98,7 @@ class SeasonReviewsController < ApplicationController
     else
       @show = show
       @season = season
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

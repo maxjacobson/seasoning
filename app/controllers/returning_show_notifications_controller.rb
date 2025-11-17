@@ -5,6 +5,6 @@ class ReturningShowNotificationsController < ApplicationController
     @notification = current_human.returning_show_notifications.find(params[:id])
     @notification.destroy!
 
-    redirect_back(fallback_location: shows_path)
+    redirect_back_or_to(shows_path)
   end
 end
