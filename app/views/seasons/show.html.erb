@@ -21,6 +21,7 @@
     <div>
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-medium text-gray-900">Episodes</h2>
+
         <% if current_human.present? && @my_season %>
           <%= form_with url: season_skipping_path(@show.slug, @season.slug),
                         method: @my_season.skipped? ? :delete : :post,
@@ -29,6 +30,7 @@
                             checked: @my_season.skipped?,
                             class: "rounded border-gray-300 text-orange-500 focus:ring-orange-500",
                             onchange: "this.form.requestSubmit()" %>
+
             <%= f.label :skipped, "Skip this season", class: "text-sm text-gray-700" %>
           <% end %>
         <% end %>
@@ -40,6 +42,7 @@
           <div class="flex justify-end text-sm text-gray-600 mb-2">
             <span><%= number_to_percentage(percentage, precision: 0) %></span>
           </div>
+
           <div
             class="w-full bg-gray-200 rounded-full h-3"
             title="Season watch progress"
@@ -59,12 +62,15 @@
               <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">
                 Number
               </th>
+
               <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">
                 Name
               </th>
+
               <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">
                 Air date
               </th>
+
               <% if current_human.present? %>
                 <th class="text-left py-2 px-3 text-sm font-medium text-gray-700">
                   Seen?
@@ -72,18 +78,22 @@
               <% end %>
             </tr>
           </thead>
+
           <tbody>
             <% @episodes.each do |episode| %>
               <tr class="border-b border-gray-100 hover:bg-gray-50">
                 <td class="py-3 px-3 text-sm text-gray-900">
                   <%= episode.episode_number %>
                 </td>
+
                 <td class="py-3 px-3 text-sm">
                   <%= link_to episode.name, episode_path(@show.slug, @season.slug, episode.episode_number), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
                 </td>
+
                 <td class="py-3 px-3 text-sm text-gray-600">
                   <%= render "air_date", episode: episode %>
                 </td>
+
                 <% if current_human.present? %>
                   <td class="py-3 px-3 text-sm">
                     <%= form_with url: episode_viewing_path(@show.slug, @season.slug, episode.episode_number),
@@ -106,6 +116,7 @@
     <div>
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-medium text-gray-900">Reviews</h2>
+
         <% if current_human.present? %>
           <%= link_to "Add review", new_season_review_path(@show.slug, @season.slug), class: "rounded-button" %>
         <% end %>
@@ -117,14 +128,21 @@
             <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                  <span class="font-medium text-gray-900"><%= review.author.handle %></span>
+                  <span class="font-medium text-gray-900">
+                    <%= review.author.handle %>
+                  </span>
+
                   <% if review.rating.present? %>
                     <div class="flex items-center">
                       <span class="text-yellow-500 mr-1">★</span>
-                      <span class="text-sm font-medium text-gray-700"><%= review.rating %>/10</span>
+
+                      <span class="text-sm font-medium text-gray-700">
+                        <%= review.rating %>/10
+                      </span>
                     </div>
                   <% end %>
                 </div>
+
                 <%= link_to l(review.created_at.to_date, format: :default), proper_review_path(review), class: "text-sm text-blue-600 hover:text-blue-800 hover:underline" %>
               </div>
             </div>

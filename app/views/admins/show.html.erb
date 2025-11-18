@@ -10,11 +10,12 @@
       <h2 class="text-lg font-medium text-gray-900 mb-4">Stats</h2>
 
       <ul class="list-inside list-disc space-y-2">
-        <li><strong>Humans count:</strong>&nbsp;<%= Human.count %></li>
-        <li><strong>Shows count:</strong>&nbsp;<%= Show.count %></li>
-        <li><strong>Seasons count:</strong>&nbsp;<%= Season.count %></li>
-        <li><strong>Reviews count:</strong>&nbsp;<%= SeasonReview.count %></li>
-        <li><strong>Episodes count:</strong>&nbsp;<%= Episode.count %></li>
+        <li><strong>Humans count:</strong> <%= Human.count %></li>
+        <li><strong>Shows count:</strong> <%= Show.count %></li>
+        <li><strong>Seasons count:</strong> <%= Season.count %></li>
+        <li><strong>Reviews count:</strong> <%= SeasonReview.count %></li>
+        <li><strong>Episodes count:</strong> <%= Episode.count %></li>
+
         <li>
           <strong>Last refreshed TMDB config:</strong>
           <%= TMDBAPIConfiguration.only.fetched_at %>
@@ -24,6 +25,7 @@
 
     <div class="border-2 border-dashed border-yellow-600 p-4 rounded-lg">
       <h2 class="text-lg font-medium text-gray-900 mb-4">Recent humans</h2>
+
       <ol class="list-inside list-decimal space-y-1">
         <% Human.order(created_at: :desc).limit(50).each do |human| %>
           <li><%= link_to human.handle, human_profile_path(human.handle) %></li>

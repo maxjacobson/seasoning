@@ -8,6 +8,7 @@
   <div class="mb-8">
     <%= form_with(url: shows_path, method: :get) do |f| %>
       <%= f.text_field :q, placeholder: "Filter your shows", class: "text-field block", value: @filters.q %>
+
       <%= f.select(
           :statuses,
           MyShow.statuses.keys.map { [it.humanize, it] },
@@ -33,11 +34,13 @@
           "
         >
           <% badge = my_show.available_episodes_count %>
+
           <%= link_to show_path(my_show.show.slug), class: "block no-underline cursor-pointer" do %>
             <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
               <div class="flex items-start gap-2 sm:gap-4 w-full sm:flex-1">
                 <div class="flex-shrink-0 relative">
                   <%= image_tag my_show.show.poster.url, alt: "#{my_show.show.title} poster", class: "w-20 h-auto rounded shadow-sm" %>
+
                   <% if badge.available > 0 %>
                     <div
                       class="
@@ -73,11 +76,16 @@
                   </div>
 
                   <% percentage = my_show.watched_percentage %>
+
                   <div class="mt-2">
                     <div class="flex justify-between text-xs text-gray-600 mb-1">
                       <span>Progress</span>
-                      <span><%= number_to_percentage(percentage, precision: 0, round_mode: :down) %></span>
+
+                      <span>
+                        <%= number_to_percentage(percentage, precision: 0, round_mode: :down) %>
+                      </span>
                     </div>
+
                     <div class="w-full bg-gray-200 rounded-full h-2">
                       <div
                         class="bg-orange-500 h-2 rounded-full transition-all duration-300"
@@ -91,6 +99,7 @@
                   →
                 </div>
               </div>
+
               <div class="hidden sm:block text-gray-400 mt-1">
                 →
               </div>
@@ -105,11 +114,13 @@
                 class="collapsible-note-toggle"
                 checked
               >
+
               <label
                 for="note-toggle-index-<%= my_show.id %>"
                 class="collapsible-note-header"
               >
                 <span class="collapsible-note-caret text-xs">▶</span>
+
                 <div class="text-xs font-medium text-gray-700">
                   Note to self
                 </div>

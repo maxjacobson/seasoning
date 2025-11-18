@@ -8,10 +8,8 @@
   <div class="space-y-6">
     <p class="text-gray-600">
       An episode of
-      <%= link_to @show.title, show_path(@show.slug), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
-      ,
-      <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}", class: "text-blue-600 hover:text-blue-800 hover:underline" %>
-      .
+      <%= link_to @show.title, show_path(@show.slug), class: "text-blue-600 hover:text-blue-800 hover:underline" %>,
+      <%= link_to @season.name, "/shows/#{@show.slug}/#{@season.slug}", class: "text-blue-600 hover:text-blue-800 hover:underline" %>.
     </p>
 
     <% if @episode.still_path.present? %>
@@ -28,6 +26,7 @@
     <% if @my_season %>
       <div class="flex items-center gap-2">
         <span class="text-sm font-medium text-gray-700">Seen?</span>
+
         <%= form_with url: episode_viewing_path(@show.slug, @season.slug, @episode.episode_number),
                       method: @my_season.episode_watched?(@episode.episode_number) ? :delete : :post do |f| %>
           <%= f.check_box :watched,

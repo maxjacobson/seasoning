@@ -1,12 +1,12 @@
 <%= content_for :title do %>
-  <%= @profile.handle %>
-  &rsquo;s reviews
+  <%= @profile.handle %> &rsquo;s reviews
 <% end %>
 
 <div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
   <h1 class="text-2xl font-bold text-gray-900 mb-6">
     <%= @profile.handle %>&rsquo;s reviews
   </h1>
+
   <% if @reviews.any? %>
     <div class="space-y-6">
       <% @reviews.each do |review| %>
@@ -15,6 +15,7 @@
             <div class="flex-shrink-0">
               <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
             </div>
+
             <div class="flex-1">
               <h2 class="text-lg font-semibold mb-1">
                 <%= link_to "#{review.season.show.title} — #{review.season.name}", proper_review_path(review), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
@@ -22,6 +23,7 @@
 
               <div class="text-sm text-gray-600 mb-2">
                 <%= l(review.created_at.to_date, format: :default) %>
+
                 <% if review.viewable_by_only_me? %>
                   <span title="Private review - only you can see this">🔒</span>
                 <% end %>

@@ -15,10 +15,12 @@
       <div class="flex-1 min-w-0">
         <div class="font-medium text-gray-900">
           <%= show.title %>
+
           <% if show.first_air_date.present? %>
             <span class="text-gray-500">(<%= show.first_air_date.year %>)</span>
           <% end %>
         </div>
+
         <div class="text-sm text-gray-500 mt-1">
           Added by <%= pluralize(show.watchers_count, "person", "people") %>
         </div>

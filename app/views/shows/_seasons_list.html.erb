@@ -3,9 +3,11 @@
 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
   <% seasons.each do |season| %>
     <% badge = current_human ? season.available_episodes_count_for(current_human) : EpisodeBadge.new(0, 0) %>
+
     <div class="flex flex-col">
       <%= link_to season_path(show.slug, season.slug), class: "block no-underline cursor-pointer flex-shrink-0 relative mb-2" do %>
         <%= image_tag season.poster.url, alt: "#{season.name} poster", class: "w-full h-auto rounded shadow-sm" %>
+
         <% if badge.available > 0 %>
           <div
             class="
@@ -28,6 +30,7 @@
           </div>
         <% end %>
       <% end %>
+
       <div class="flex-1">
         <%= link_to season_path(show.slug, season.slug), class: "text-sm font-medium text-gray-900 hover:text-orange-600 no-underline" do %>
           <%= season.name %>

@@ -13,6 +13,7 @@
       class="collapsible-note-toggle"
       checked
     >
+
     <label for="note-toggle-<%= my_show.id %>" class="collapsible-note-header">
       <span class="collapsible-note-caret">▶</span>
       <h1 class="text-2xl">Note to self</h1>
@@ -22,6 +23,7 @@
       <div class="break-words rendered-markdown mt-3">
         <%= auto_link(markdown_to_html(my_show.note_to_self)).html_safe %>
       </div>
+
       <div class="mt-3">
         <%= link_to "Edit", edit_show_note_to_self_path(my_show.show.slug), class: "rounded-button" %>
       </div>
