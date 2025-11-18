@@ -8,17 +8,26 @@
       <span class="font-medium">Added by:</span>
       <span><%= pluralize(show.watchers_count, "person", "people") %></span>
     </li>
+
     <% if show.tmdb_next_refresh_at %>
       <li>
         <span class="font-medium">Data last refreshed:</span>
-        <span title="<%= show.tmdb_last_refreshed_at %>"><%= time_ago_in_words show.tmdb_last_refreshed_at %> ago</span>
+
+        <span title="<%= show.tmdb_last_refreshed_at %>">
+          <%= time_ago_in_words show.tmdb_last_refreshed_at %> ago
+        </span>
       </li>
     <% end %>
 
     <% if show.tmdb_next_refresh_at %>
       <li>
-        <span class="font-medium">Data will next be refreshed within 24 hours of</span>
-        <span title="<%= show.tmdb_next_refresh_at %>"><%= show.tmdb_next_refresh_at.to_date %></span>
+        <span class="font-medium">
+          Data will next be refreshed within 24 hours of
+        </span>
+
+        <span title="<%= show.tmdb_next_refresh_at %>">
+          <%= show.tmdb_next_refresh_at.to_date %>
+        </span>
       </li>
     <% end %>
   </ul>

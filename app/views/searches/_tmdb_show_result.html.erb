@@ -16,12 +16,15 @@
         <div class="flex-1 min-w-0">
           <div class="font-medium text-gray-900">
             <%= result.name %>
+
             <% if result.year %>
               <span class="text-gray-500">(<%= result.year %>)</span>
             <% end %>
           </div>
+
           <div class="text-sm text-gray-500 mt-1">
-            Added by <%= pluralize(result.already_imported_show.watchers_count, "person", "people") %>
+            Added by
+            <%= pluralize(result.already_imported_show.watchers_count, "person", "people") %>
           </div>
         </div>
 
@@ -47,6 +50,7 @@
         <div class="flex-1">
           <div class="font-medium text-gray-900">
             <%= result.name %>
+
             <% if result.year %>
               <span class="text-gray-500">(<%= result.year %>)</span>
             <% end %>

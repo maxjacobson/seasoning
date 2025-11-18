@@ -1,24 +1,23 @@
 <%= content_for :title do %>
-  <%= @human.handle %>
-  &rsquo;s stats for
-  <%= @year %>
+  <%= @human.handle %> &rsquo;s stats for <%= @year %>
 <% end %>
 
 <div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
   <div class="text-center mb-8">
     <h1 class="text-4xl font-bold text-gray-900 mb-2">
       <%= link_to @human.handle, human_profile_path(@human.handle), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
-      's
-      <%= @year %>
-      stats
+      's <%= @year %> stats
     </h1>
+
     <% if @filter == 'reviewed-in' %>
       <p class="text-lg text-gray-600">
-        <%= @human.handle %> reviewed <%= pluralize(@reviews.count, "season") %> in <%= @year %>
+        <%= @human.handle %> reviewed
+        <%= pluralize(@reviews.count, "season") %> in <%= @year %>
       </p>
     <% else %>
       <p class="text-lg text-gray-600">
-        <%= @human.handle %> reviewed <%= pluralize(@reviews.count, "season") %> that aired in <%= @year %>
+        <%= @human.handle %> reviewed
+        <%= pluralize(@reviews.count, "season") %> that aired in <%= @year %>
       </p>
     <% end %>
   </div>
@@ -26,13 +25,12 @@
   <div class="flex bg-gray-100 rounded-lg p-1 mb-6 max-w-fit mx-auto">
     <%= link_to profile_stat_path(@human.handle, @year, filter: "reviewed-in"),
         class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'reviewed-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
-      Reviewed in
-      <%= @year %>
+      Reviewed in <%= @year %>
     <% end %>
+
     <%= link_to profile_stat_path(@human.handle, @year, filter: "aired-in"),
         class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'aired-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
-      Aired in
-      <%= @year %>
+      Aired in <%= @year %>
     <% end %>
   </div>
 
@@ -43,6 +41,7 @@
         <h2 class="text-2xl font-bold text-gray-900 mb-4">
           <%= @human.handle %>'s favorites
         </h2>
+
         <div class="space-y-3">
           <% rated_reviews.each_with_index do |review, index| %>
             <div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
@@ -60,9 +59,13 @@
                 <div class="font-semibold text-gray-900 mb-1">
                   <%= review.season.show.title %> - <%= review.season.name %>
                 </div>
+
                 <div class="flex items-center gap-2">
                   <%= render "star_rating", rating: review.rating %>
-                  <span class="text-sm text-gray-600">(<%= review.rating %>/10)</span>
+
+                  <span class="text-sm text-gray-600">
+                    (<%= review.rating %>/10)
+                  </span>
                 </div>
               </div>
             </div>
@@ -80,6 +83,7 @@
           Everything that aired in <%= @year %>
         </h2>
       <% end %>
+
       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
         <% @reviews.order(created_at: :asc).each do |review| %>
           <div class="text-center">

@@ -1,6 +1,5 @@
 <% content_for :title do %>
-  <%= @show.title %>
-  note to self
+  <%= @show.title %> note to self
 <% end %>
 
 <p class="mb-6"><%= link_to "← Back", show_path(@show.slug) %></p>
@@ -13,11 +12,11 @@
   <%= form_with(model: @my_show, url: show_your_show_path(@show.slug), method: :patch, class: "space-y-6") do |f| %>
     <p class="text-gray-600">
       Put whatever you want in here. It's just for you. Feel free to use
-      <%= link_to "Markdown", "https://commonmark.org/help/", target: "_blank", rel: "noreferrer", class: "text-blue-600 hover:text-blue-800 hover:underline" %>
-      .
+      <%= link_to "Markdown", "https://commonmark.org/help/", target: "_blank", rel: "noreferrer", class: "text-blue-600 hover:text-blue-800 hover:underline" %>.
     </p>
 
     <%= f.textarea :note_to_self, class: "text-field w-full min-h-[12rem] field-sizing-content", placeholder: "Add your personal notes about this show..." %>
+
     <div class="flex justify-end">
       <%= f.submit "Update note to self", class: "rounded-button" %>
     </div>

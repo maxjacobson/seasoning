@@ -23,10 +23,14 @@
         <% if @page.added? %>
           <div class="space-y-4">
             <%= render "choose_show_status_button", my_show: @page.my_show %>
+
             <div class="max-w-full sm:max-w-md">
               <div class="flex justify-end text-sm text-gray-600 mb-2">
-                <span><%= number_to_percentage(@page.watched_percentage, precision: 0, round_mode: :down) %></span>
+                <span>
+                  <%= number_to_percentage(@page.watched_percentage, precision: 0, round_mode: :down) %>
+                </span>
               </div>
+
               <div
                 class="w-full bg-gray-200 rounded-full h-3"
                 title="Watch progress"
@@ -52,6 +56,7 @@
       <div>
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-medium text-gray-900">Seasons</h2>
+
           <% if @page.skipped_seasons? %>
             <%= form_with url: show_path(@page.slug), method: :get, class: "flex items-center gap-2" do |f| %>
               <%= check_box_tag :include_skipped, "1", @page.include_skipped, onchange: "this.form.requestSubmit()", class: "rounded border-gray-300 text-orange-500 focus:ring-orange-500" %>
@@ -59,6 +64,7 @@
             <% end %>
           <% end %>
         </div>
+
         <%= render "seasons_list", show: @page.show, seasons: @page.seasons %>
       </div>
     <% else %>
