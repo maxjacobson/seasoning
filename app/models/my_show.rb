@@ -35,7 +35,7 @@ class MyShow < ApplicationRecord
 
     most_recent_released = show
                            .seasons
-                           .select { |season| season.episodes.any?(&:available?) }
+                           .select { |season| season.episodes.any? { |episode| episode.available?(human.time_zone) } }
                            .reject { |season| skipped_season_numbers.include?(season.season_number) }
                            .map(&:season_number)
                            .max

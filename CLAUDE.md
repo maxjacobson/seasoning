@@ -145,7 +145,7 @@ node_modules/.bin/prettier --write .
 - **JS/CSS must be built before running tests** - System tests rely on properly styled elements being visible and interactive
 - Test fixtures and WebMock stubs for TMDB API in `test/webmock/`
 - Never add `sleep` statements to system tests to help them pass reliably - use proper Capybara waiting methods instead
-- When running tests you might encounter a segfault when the tests run in parallel which you can always retry with PARALLEL_WORKERS=1 set to make it run non-parallel
+- **Always run tests with `PARALLEL_WORKERS=1 HEADLESS=1`** - parallel test execution consistently causes segfaults locally, and headless mode prevents browser windows from popping up
 - **Do not use controller tests. Use system tests**
 - In system tests, act as a user, so prefer clicking around instead of directly navigating to pages
 - In system tests, do not use fixtures. just create the records right in the system test
