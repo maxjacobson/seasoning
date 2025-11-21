@@ -46,8 +46,14 @@
         </div>
       </div>
 
-      <% if returning_show_notifications.any? %>
-        <div class="mx-auto my-0 max-w-3xl p-2">
+      <div class="mx-auto my-0 max-w-3xl p-2">
+        <div class="min-h-[2.5rem]">
+          <% flash.each do |key, message| %>
+            <div class="flash flash-<%= key %>"><%= message %></div>
+          <% end %>
+        </div>
+
+        <% if returning_show_notifications.any? %>
           <div class="mb-4 space-y-3">
             <% returning_show_notifications.each do |notification| %>
               <div
@@ -66,15 +72,7 @@
               </div>
             <% end %>
           </div>
-        </div>
-      <% end %>
-
-      <div class="mx-auto my-0 max-w-3xl p-2">
-        <div class="min-h-[2.5rem]">
-          <% flash.each do |key, message| %>
-            <div class="flash flash-<%= key %>"><%= message %></div>
-          <% end %>
-        </div>
+        <% end %>
 
         <%= yield %>
 
