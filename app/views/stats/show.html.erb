@@ -87,7 +87,7 @@
       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
         <% @reviews.order(created_at: :asc).each do |review| %>
           <div class="text-center">
-            <%= link_to proper_review_path(review), class: "block hover:opacity-75", title: "#{review.season.show.title} - #{review.season.name}" do %>
+            <%= link_to proper_review_path(review), class: "block hover:opacity-75", title: "#{review.season.show.title} - #{review.season.name}\nReviewed #{l(review.created_at.to_date)}" do %>
               <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
             <% end %>
           </div>
