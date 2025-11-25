@@ -49,7 +49,7 @@
       <div class="mt-8 flex justify-between items-center">
         <div>
           <% if @has_previous_page %>
-            <%= link_to "← Previous", url_for(page: @page - 1), class: "rounded-button" %>
+            <%= link_to "← Previous", url_for(page: @page - 1) %>
           <% end %>
         </div>
 
@@ -57,7 +57,7 @@
 
         <div>
           <% if @has_next_page %>
-            <%= link_to "Next →", url_for(page: @page + 1), class: "rounded-button" %>
+            <%= link_to "Next →", url_for(page: @page + 1) %>
           <% end %>
         </div>
       </div>

@@ -143,18 +143,18 @@
   <% end %>
 
   <% if @has_previous_page || @has_next_page %>
-    <div class="flex justify-between">
+    <div class="mt-8 flex justify-between items-center">
       <div>
         <% if @has_previous_page %>
-          <%= link_to "← Previous", @filters.previous_page_path, class: "rounded-button" %>
+          <%= link_to "← Previous", @filters.previous_page_path %>
         <% end %>
       </div>
 
-      <div class="font-bold">Page <%= current_page %></div>
+      <div class="text-gray-600">Page <%= current_page %></div>
 
       <div>
         <% if @has_next_page %>
-          <%= link_to "Next →", @filters.next_page_path, class: "rounded-button" %>
+          <%= link_to "Next →", @filters.next_page_path %>
         <% end %>
       </div>
     </div>
