@@ -3,12 +3,4 @@
 set -e
 
 bin/lint
-
-bin/rails css:build
-bin/rails javascript:build
-
-export HEADLESS=1
-export COVERAGE=1
-export RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal"
-
-bin/rails test:all
+bin/build-and-test
