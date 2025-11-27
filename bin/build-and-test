@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+bin/rails css:build
+bin/rails javascript:build
+
+export PARALLEL_WORKERS=1
+export HEADLESS=1
+export COVERAGE=1
+export RUBYOPT="--enable=frozen-string-literal --debug=frozen-string-literal"
+
+bin/rails test:all

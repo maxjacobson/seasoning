@@ -45,14 +45,13 @@ npm run build
 ### Testing
 
 ```bash
-# Full test suite (requires JS/CSS build first)
-bin/rails javascript:build
-bin/rails css:build
-bin/rails test:all
+# Build and run full test suite - validates changes before committing
+bin/build-and-test
 
-# Individual test types
+# Individual test types (requires JS/CSS build first)
 bin/rails test
 bin/rails test:system
+bin/rails test:all
 
 # Run a single test file
 bin/rails test test/path/to/test_file.rb
@@ -67,17 +66,13 @@ bin/rails test test/path/to/test_file.rb:line_number
 # All linting (includes Ruby, ERB, and JS)
 bin/lint
 
-# Ruby only linting
-bin/ruby-lint
+# Auto-fix linting issues
+bin/fix-lints
 
-# Ruby linting only
-bin/rubocop
-
-# ERB linting only
-bin/erb_lint --lint-all
-
-# Code formatting
-node_modules/.bin/prettier --write .
+# Individual linters
+bin/rubocop                      # Ruby only
+bin/erb_lint --lint-all          # ERB only
+node_modules/.bin/prettier --write .  # Formatting
 ```
 
 ## Architecture
@@ -88,10 +83,7 @@ node_modules/.bin/prettier --write .
 - **Controllers**: Traditional Rails controllers (no API controllers currently)
 - **Services**: Business logic in `app/services/` (e.g., `RefreshShow`, `FindOrCreateShow`, `RefreshEpisodes`, `RemoveMyShow`)
 - **Jobs**: Background processing with SuckerPunch (`RefreshShowJob`, `BoomJob`)
-
-### Architecture Notes
-
-- Rails handles all routes with server-side rendering using ERB templates
+- **Rendering**: Server-side rendering with ERB templates (no separate frontend framework)
 
 ### Database
 
@@ -104,6 +96,8 @@ node_modules/.bin/prettier --write .
 **Comments**: Avoid comments unless absolutely necessary. Code should be self-explanatory.
 
 **Terminology**: Use "human" not "user" - the core model is `Human`, not `User`. This is deliberate terminology throughout the codebase.
+
+**Shell Scripts**: Prefer `#!/bin/sh` over `#!/bin/bash` for shell scripts to maximize portability.
 
 **SQL Writing**:
 
@@ -142,26 +136,21 @@ node_modules/.bin/prettier --write .
 ## Testing Notes
 
 - System tests use Capybara with Playwright driver
-- **JS/CSS must be built before running tests** - System tests rely on properly styled elements being visible and interactive
+- **Use `bin/build-and-test` for full validation** - Builds JS/CSS, sets required env vars (PARALLEL_WORKERS=1, HEADLESS=1, COVERAGE=1), and runs all tests
 - Test fixtures and WebMock stubs for TMDB API in `test/webmock/`
-- Never add `sleep` statements to system tests to help them pass reliably - use proper Capybara waiting methods instead
-- **Always run tests with `PARALLEL_WORKERS=1 HEADLESS=1`** - parallel test execution consistently causes segfaults locally, and headless mode prevents browser windows from popping up
+- Never add `sleep` statements to system tests - use proper Capybara waiting methods instead
 - **Do not use controller tests. Use system tests**
 - In system tests, act as a user, so prefer clicking around instead of directly navigating to pages
-- In system tests, do not use fixtures. just create the records right in the system test
+- In system tests, do not use fixtures. Just create the records right in the system test
 - **System test authentication pattern**: Create a Human, then create a MagicLink for their email, then visit `redeem_magic_link_path(@magic_link.token)` to authenticate
-
-## Git Workflow
-
-- Never use --no-verify when committing
 
 ## Development Best Practices
 
-- Claude Code properly inherits rbenv configuration from the parent shell, so no special Ruby version initialization is needed
-
-## Test Data Generation
-
-- When creating test data, prefer Halt and Catch Fire as the example show, and prefer to name humans after characters in the show (Donna Clark, Gordon Clark, Cameron Howe, Joe MacMillan, John Bosworth, Joanie Clark, or Haley Clark)
+- **Git commits**: Never use --no-verify when committing
+- **Ruby version**: Claude Code properly inherits rbenv configuration from the parent shell, so no special Ruby version initialization is needed
+- **Test data**: When creating test data, prefer Halt and Catch Fire as the example show, and prefer to name humans after characters in the show (Donna Clark, Gordon Clark, Cameron Howe, Joe MacMillan, John Bosworth, Joanie Clark, or Haley Clark)
+- **Date formats**: Don't reference strftime formats in views or helpers, instead define them in @config/locales/en.yml and reference them by name
+- **Changelog updates**: When checking what the current date is while updating the changelog, shell out to date to double check the date in local time
 
 ## Code Linting Tips
 
@@ -175,17 +164,10 @@ node_modules/.bin/prettier --write .
   - If you do need to run herb-format directly, use `herb-format .` (formats by default, no --write flag needed)
   - Claude Code inherits node_modules/.bin in PATH, so no need to prefix commands with `node_modules/.bin/`
 
-## Meaningful Changes Tips
+## Validating Changes
 
-- When making meaningful Rails changes, make sure to run bin/lint to make sure that all linting (Ruby, ERB, and JS) passes
-
-## Development Practices
-
-- Don't reference strftime formats in views or helpers, instead define them in @config/locales/en.yml and reference them by name
-
-## Changelog Practices
-
-- When checking what the current date is while updating the changelog, shell out to date to double check the date in local time
+- **Before committing**: Run `bin/lint` and `bin/build-and-test` to ensure code quality and all tests pass
+- The pre-commit hook automatically runs both of these scripts
 
 ## File References
 
