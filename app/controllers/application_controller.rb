@@ -1,5 +1,7 @@
 # Base class for all controllers
 class ApplicationController < ActionController::Base
+  protect_from_forgery using: :header_or_legacy_token
+
   before_action :redirect_apex_domain
   after_action :verify_authorization_occurred
   before_bugsnag_notify :add_human_info_to_bugsnag
