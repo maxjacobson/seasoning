@@ -1,7 +1,7 @@
 # Helpers for the /shows page filters
 class MyShowFilters
   include ActiveModel::Model
-  include Rails.application.routes.url_helpers
+  include Rails.app.routes.url_helpers
 
   attr_writer :statuses
   attr_accessor :q, :page
