@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.app.routes.draw do
   root to: "magic_links#new"
   resource :admin, only: [:show]
   resources :follows, only: [:create, :destroy]
