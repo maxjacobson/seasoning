@@ -1,6 +1,0 @@
-#!/bin/sh
-
-set -ex
-
-bin/rubocop
-bin/erb_lint --lint-all --show-linter-names

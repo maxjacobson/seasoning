@@ -4,7 +4,12 @@ set -e
 
 echo "Reminder: if this script fails, you can run bin/fix-lints to fix most issues"
 
+PATH="node_modules/.bin:$PATH"
+
 set -x
 
-bin/node-lint
-bin/ruby-lint
+prettier --check .
+herb-format --check .
+herb-lint .
+bin/rubocop
+bin/erb_lint --lint-all --show-linter-names

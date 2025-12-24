@@ -48,8 +48,7 @@ jobs:
           cache: npm
       - run: npm clean-install
       - run: npm run playwright:install
-      - run: bin/ruby-lint
-      - run: bin/node-lint
+      - run: bin/lint
       - run: bundle exec rake assets:precompile
       - run: bin/rails db:create db:schema:load
       - run: bin/rails test:all
