@@ -1,5 +1,8 @@
 Rails.app.routes.draw do
   root to: "magic_links#new"
+  resource :signup, only: [:show, :create], controller: "signups"
+  resource :login, only: [:show, :create], controller: "password_sessions"
+  resource :password, only: [:edit, :update], controller: "passwords"
   resource :admin, only: [:show]
   resources :follows, only: [:create, :destroy]
   resources :returning_show_notifications, only: [:destroy]

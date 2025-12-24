@@ -8,8 +8,12 @@ class SigningInTest < ApplicationSystemTestCase
 
   test "signing in test" do
     visit root_path
-    fill_in "email", with: "donna@example.com"
-    click_on "Go"
+    click_link "Sign in"
+
+    within "[data-test-id='magic-link-section']" do
+      fill_in "Email", with: "donna@example.com"
+      click_on "Send magic link"
+    end
 
     assert_content "Check your email"
 
@@ -31,8 +35,12 @@ class SigningInTest < ApplicationSystemTestCase
 
   test "an expired magic link" do
     visit root_path
-    fill_in "email", with: "donna@example.com"
-    click_on "Go"
+    click_link "Sign in"
+
+    within "[data-test-id='magic-link-section']" do
+      fill_in "Email", with: "donna@example.com"
+      click_on "Send magic link"
+    end
 
     assert_content "Check your email"
 

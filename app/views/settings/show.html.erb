@@ -64,4 +64,22 @@
       </div>
     </div>
   <% end %>
+
+  <div class="mt-8 pt-8 border-t">
+    <h2 class="text-lg font-medium text-gray-900 mb-4">Password</h2>
+
+    <p class="text-sm text-gray-600 mb-4">
+      <% if current_human.uses_password? %>
+        You have a password set. You can sign in with either magic links or your
+        password.
+      <% else %>
+        You currently sign in with magic links only. You can optionally set a
+        password.
+      <% end %>
+    </p>
+
+    <%= link_to current_human.uses_password? ? "Change password" : "Set password",
+                edit_password_path,
+                class: "inline-block rounded-button" %>
+  </div>
 </div>

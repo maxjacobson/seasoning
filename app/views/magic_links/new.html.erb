@@ -1,7 +1,5 @@
 <h1 class="text-2xl">Welcome</h1>
 
-<h2 class="text-lg">This is seasoning, a website about TV shows</h2>
-
 <p>
   This is <strong>Seasoning</strong>. It&rsquo;s a simple website to help you
   survive the age of <em>Peak TV</em>.
@@ -18,22 +16,7 @@
   <a href="https://www.hardscrabble.net/" target="_blank" rel="noreferrer">Max</a>
 </p>
 
-<p class="mt-2 mb-2">
-  To sign up or log in, just enter your email address and we&rsquo;ll send you a
-  link to get started:
-</p>
-
-<%= form_with model: @magic_link, url: magic_links_path do |f| %>
-  <% if @magic_link.errors.any? %>
-    <div class="mb-4">
-      <% @magic_link.errors.full_messages.each do |error| %>
-        <div class="text-red-600"><%= error %></div>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div class="flex items-center">
-    <%= f.text_field :email, placeholder: "email", class: "text-field" %>
-    <%= f.submit "Go", class: "rounded-button ml-2" %>
-  </div>
-<% end %>
+<div class="mt-8 flex gap-4">
+  <%= link_to "Sign up", signup_path, class: "rounded-button" %>
+  <%= link_to "Sign in", login_path, class: "rounded-button" %>
+</div>

@@ -17,5 +17,8 @@ RESERVED_WORDS = [
   "import-shows",
   "search",
   "changelog",
-  "roadmap"
+  "roadmap",
+  "login",
+  "password",
+  "signup"
 ].freeze
