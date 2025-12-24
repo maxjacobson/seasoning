@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **December 24, 2025** — Add optional password authentication: users can now sign in with a password in addition to magic links. Passwords are completely optional and can be set during signup or added later in settings. Both authentication methods work simultaneously, providing flexibility while maintaining the passwordless option
 1. **November 19, 2025** — Fix new season detection to respect your time zone: previously, checking for unwatched seasons used the server's time zone to determine if episodes had aired, which could incorrectly show episodes as available before they've actually aired in your location
 1. **November 16, 2025** — Reserve vertical space for flash messages to prevent content shifting when navigating between pages with and without flash messages
 1. **November 9, 2025** — Add ability to skip seasons: mark individual seasons as skipped to exclude them from progress calculations and available episodes badges. Perfect for jumping into a show at a specific season (like watching only the latest season of Dancing with the Stars). Skipped seasons hide their progress bars and disable episode checkboxes. Skipped seasons won't trigger "next up" notifications or status changes when new episodes are released

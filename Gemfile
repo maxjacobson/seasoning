@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby file: ".ruby-version"
 
 gem "activerecord-session_store"
+gem "bcrypt"
 gem "bugsnag"
 gem "cssbundling-rails"
 gem "dry-struct"

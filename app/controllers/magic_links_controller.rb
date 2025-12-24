@@ -10,6 +10,8 @@ class MagicLinksController < ApplicationController
       redirect_to root_path, notice: "Signed in! Welcome back."
     end
 
+    @human = Human.new(email: @magic_link&.email) if @magic_link
+
     respond_to do |format|
       format.html
     end
@@ -36,7 +38,7 @@ class MagicLinksController < ApplicationController
       @magic_link.deliver
       redirect_to check_your_email_path, notice: "Sent! Check your email."
     else
-      render :new, status: :unprocessable_content
+      render "password_sessions/show", status: :unprocessable_content
     end
   end
 

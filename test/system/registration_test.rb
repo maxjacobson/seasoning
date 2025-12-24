@@ -4,8 +4,12 @@ require "application_system_test_case"
 class RegistrationTest < ApplicationSystemTestCase
   test "registering with valid email" do
     visit root_path
-    fill_in "email", with: "donna@example.com"
-    click_on "Go"
+    click_link "Sign up"
+
+    within "[data-test-id='signup-form']" do
+      fill_in "Email", with: "donna@example.com"
+      click_on "Send magic link"
+    end
 
     assert_content "Check your email"
 
@@ -31,9 +35,12 @@ class RegistrationTest < ApplicationSystemTestCase
 
   test "registering with invalid email" do
     visit root_path
+    click_link "Sign up"
 
-    fill_in "email", with: "donna"
-    click_on "Go"
+    within "[data-test-id='signup-form']" do
+      fill_in "Email", with: "donna"
+      click_on "Send magic link"
+    end
 
     assert_content "Email is invalid"
   end

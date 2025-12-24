@@ -1,5 +1,7 @@
 # Basically a user
 class Human < ApplicationRecord
+  has_secure_password validations: false
+
   has_many :my_shows, dependent: :destroy
   has_many :shows, through: :my_shows
   has_many :season_reviews, foreign_key: :author_id, inverse_of: :author, dependent: :destroy
@@ -10,6 +12,9 @@ class Human < ApplicationRecord
 
   validates :handle, exclusion: { in: RESERVED_WORDS, message: "%<value>s is reserved" }
   validates :currently_watching_limit, numericality: { in: 1..10, allow_nil: true }
+  validates :password, length: { minimum: 12 }, if: -> { password.present? }
+  validates :password, confirmation: true, if: -> { password.present? }
+  validates :password_confirmation, presence: true, if: -> { password.present? }
 
   def currently_watching
     shows.where(my_shows: { status: "currently_watching" }).alphabetical
@@ -38,5 +43,9 @@ class Human < ApplicationRecord
   def time_zone
     # TODO: make this editable by the user instead of hardcoded
     ActiveSupport::TimeZone["America/New_York"]
+  end
+
+  def uses_password?
+    password_digest.present?
   end
 end
