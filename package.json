@@ -5,8 +5,8 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "@herb-tools/formatter": "^0.8.5",
-    "@herb-tools/linter": "^0.8.5",
+    "@herb-tools/formatter": "^0.8.6",
+    "@herb-tools/linter": "^0.8.6",
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/forms": "^0.5.11",
     "esbuild": "^0.27.2",
