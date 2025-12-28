@@ -4,14 +4,15 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 1000
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 1000
+    groups:
+      herb:
+        patterns:
+          - "@herb-tools/*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 1000
