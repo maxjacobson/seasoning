@@ -8,7 +8,8 @@ class SettingsController < ApplicationController
     authorize! { current_human.present? }
 
     current_human.update!(
-      params.expect(human: [:default_review_visibility, :currently_watching_limit, :share_currently_watching])
+      params.expect(human: [:default_review_visibility, :currently_watching_limit, :share_currently_watching,
+                            :time_zone_name])
     )
 
     redirect_to settings_path, notice: "Saved!"

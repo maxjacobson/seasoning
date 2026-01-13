@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_12_24_193028) do
+ActiveRecord::Schema[8.2].define(version: 2026_01_09_013807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_24_193028) do
     t.string "handle", null: false, comment: "The handle is the human's nickname, username, or whatever you want to call it"
     t.string "password_digest", comment: "Optional bcrypt password hash. Humans can use either magic links or passwords to authenticate."
     t.boolean "share_currently_watching", default: true, null: false, comment: "Whether or not to publicly display your currently watching list on the profile page"
+    t.string "time_zone_name", default: "Eastern Time (US & Canada)", null: false, comment: "The human's time zone name (e.g., 'Eastern Time (US & Canada)')"
     t.datetime "updated_at", null: false
     t.index ["email"], name: "humans_email_unique", unique: true
     t.index ["handle"], name: "humans_handle_unique", unique: true

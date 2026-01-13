@@ -45,5 +45,16 @@ class UpdatingSettingsTest < ApplicationSystemTestCase
     @human.reload
 
     assert_not @human.share_currently_watching
+
+    # Test time zone
+    visit current_path # Refresh page
+
+    assert_equal "Eastern Time (US & Canada)", @human.time_zone_name
+    select "Pacific Time (US & Canada)", from: "Time zone"
+
+    assert_content "Saved!"
+    @human.reload
+
+    assert_equal "Pacific Time (US & Canada)", @human.time_zone_name
   end
 end
