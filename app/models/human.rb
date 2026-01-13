@@ -15,6 +15,7 @@ class Human < ApplicationRecord
   validates :password, length: { minimum: 12 }, if: -> { password.present? }
   validates :password, confirmation: true, if: -> { password.present? }
   validates :password_confirmation, presence: true, if: -> { password.present? }
+  validate :time_zone_must_be_valid
 
   def currently_watching
     shows.where(my_shows: { status: "currently_watching" }).alphabetical
@@ -41,11 +42,18 @@ class Human < ApplicationRecord
   end
 
   def time_zone
-    # TODO: make this editable by the user instead of hardcoded
-    ActiveSupport::TimeZone["America/New_York"]
+    ActiveSupport::TimeZone[time_zone_name]
   end
 
   def uses_password?
     password_digest.present?
+  end
+
+  private
+
+  def time_zone_must_be_valid
+    return if time_zone_name.blank?
+
+    errors.add(:time_zone_name, "is not a valid time zone") if ActiveSupport::TimeZone[time_zone_name].nil?
   end
 end

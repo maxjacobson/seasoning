@@ -90,4 +90,68 @@ class HumanTest < ActiveSupport::TestCase
     assert human.authenticate("new-password-here-long")
     assert_not human.authenticate("old-password-here-long")
   end
+
+  test "has default time zone" do
+    human = Human.create!(
+      handle: "joanie",
+      email: "joanie@example.com"
+    )
+
+    assert_equal "Eastern Time (US & Canada)", human.time_zone_name
+  end
+
+  test "time_zone returns ActiveSupport::TimeZone object" do
+    human = Human.create!(
+      handle: "ryan",
+      email: "ryan@example.com"
+    )
+
+    assert_instance_of ActiveSupport::TimeZone, human.time_zone
+    assert_equal "Eastern Time (US & Canada)", human.time_zone.name
+  end
+
+  test "can update time zone" do
+    human = Human.create!(
+      handle: "bos",
+      email: "bos@example.com"
+    )
+
+    human.update!(time_zone_name: "Pacific Time (US & Canada)")
+    human.reload
+
+    assert_equal "Pacific Time (US & Canada)", human.time_zone_name
+    assert_equal "America/Los_Angeles", human.time_zone.tzinfo.name
+  end
+
+  test "accepts valid time zone names" do
+    human = Human.new(
+      handle: "alice",
+      email: "alice@example.com",
+      time_zone_name: "Central Time (US & Canada)"
+    )
+
+    assert_predicate human, :valid?
+  end
+
+  test "rejects invalid time zone names" do
+    human = Human.new(
+      handle: "bob",
+      email: "bob@example.com",
+      time_zone_name: "Not A Real Time Zone"
+    )
+
+    assert_not human.valid?
+    assert_includes human.errors[:time_zone_name], "is not a valid time zone"
+  end
+
+  test "time_zone object can call today" do
+    human = Human.create!(
+      handle: "jacob",
+      email: "jacob@example.com",
+      time_zone_name: "Hawaii"
+    )
+
+    assert_respond_to human.time_zone, :today
+    assert_instance_of Date, human.time_zone.today
+  end
 end
