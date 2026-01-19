@@ -10,6 +10,8 @@ linters:
     enabled: false
   StrictLocals:
     enabled: true
+  TrailingWhitespace:
+    enabled: false
   Rubocop:
     enabled: true
     rubocop_config:

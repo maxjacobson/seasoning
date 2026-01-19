@@ -1,10 +1,15 @@
 <%# locals: (url:, size:, show:) %>
 
 <% if url %>
+  <% width = case size
+             when "extra-small" then "60"
+             when "small" then "100"
+             else "185"
+             end %>
   <%= image_tag(
       url,
       alt: "#{show.title} poster",
-      width: size == "small" ? "100" : "185",
+      width: width,
       class: "border-2 border-solid border-yellow-700 p-1"
     ) %>
 <% end %>

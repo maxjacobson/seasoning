@@ -172,3 +172,5 @@ node_modules/.bin/prettier --write .  # Formatting
 ## File References
 
 - Reference @db/schema.rb to see the database schema
+- Don't worry about linters and formatters until the very end of the process, after we've gotten the feature working with passing tests
+- When running on a mac, you need to use PARALLEL_WORKERS=1 when running tests. You can use `uname` to check if you're on a mac. I dunno why but parallel tests don't work on mac for me. Until I fix that, keep that min mind.

@@ -154,4 +154,183 @@ class HumanTest < ActiveSupport::TestCase
     assert_respond_to human.time_zone, :today
     assert_instance_of Date, human.time_zone.today
   end
+
+  test "recent_activity_reviews returns reviews from followed humans" do
+    donna = Human.create!(handle: "donna", email: "donna@example.com")
+    cameron = Human.create!(handle: "cameron", email: "cameron@example.com")
+    gordon = Human.create!(handle: "gordon", email: "gordon@example.com")
+
+    # Donna follows Cameron
+    Follow.create!(follower_id: donna.id, followee_id: cameron.id)
+
+    # Create a show and season
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
+    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
+                            episode_count: 10)
+
+    # Cameron writes a review
+    cameron_review = SeasonReview.create!(
+      author: cameron,
+      season: season,
+      body: "Great season!",
+      viewing: 1,
+      visibility: "viewable_by_anybody"
+    )
+
+    # Gordon writes a review (Donna doesn't follow Gordon)
+    SeasonReview.create!(
+      author: gordon,
+      season: season,
+      body: "Also great!",
+      viewing: 1,
+      visibility: "viewable_by_anybody"
+    )
+
+    # Donna should only see Cameron's review
+    reviews = donna.recent_activity_reviews
+
+    assert_equal 1, reviews.count
+    assert_equal cameron_review.id, reviews.first.id
+  end
+
+  test "recent_activity_reviews respects visibility settings" do
+    donna = Human.create!(handle: "donna", email: "donna@example.com")
+    cameron = Human.create!(handle: "cameron", email: "cameron@example.com")
+
+    Follow.create!(follower_id: donna.id, followee_id: cameron.id)
+
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
+    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
+                            episode_count: 10)
+
+    # Cameron writes a private review
+    SeasonReview.create!(
+      author: cameron,
+      season: season,
+      body: "Private review",
+      viewing: 1,
+      visibility: "viewable_by_only_me"
+    )
+
+    # Cameron writes a public review
+    public_review = SeasonReview.create!(
+      author: cameron,
+      season: season,
+      body: "Public review",
+      viewing: 2,
+      visibility: "viewable_by_anybody"
+    )
+
+    # Donna should only see the public review
+    reviews = donna.recent_activity_reviews
+
+    assert_equal 1, reviews.count
+    assert_equal public_review.id, reviews.first.id
+  end
+
+  test "recent_activity_reviews filters by time window" do
+    donna = Human.create!(handle: "donna", email: "donna@example.com")
+    cameron = Human.create!(handle: "cameron", email: "cameron@example.com")
+
+    Follow.create!(follower_id: donna.id, followee_id: cameron.id)
+
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
+    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
+                            episode_count: 10)
+
+    # Recent review
+    recent_review = SeasonReview.create!(
+      author: cameron,
+      season: season,
+      body: "Recent review",
+      viewing: 1,
+      visibility: "viewable_by_anybody"
+    )
+
+    # Old review (created 31 days ago)
+    travel_to 31.days.ago do
+      SeasonReview.create!(
+        author: cameron,
+        season: season,
+        body: "Old review",
+        viewing: 2,
+        visibility: "viewable_by_anybody"
+      )
+    end
+
+    # Should only see recent review
+    reviews = donna.recent_activity_reviews
+
+    assert_equal 1, reviews.count
+    assert_equal recent_review.id, reviews.first.id
+  end
+
+  test "recent_activity_reviews respects limit" do
+    donna = Human.create!(handle: "donna", email: "donna@example.com")
+    cameron = Human.create!(handle: "cameron", email: "cameron@example.com")
+
+    Follow.create!(follower_id: donna.id, followee_id: cameron.id)
+
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
+    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
+                            episode_count: 10)
+
+    # Create 20 reviews
+    20.times do |i|
+      SeasonReview.create!(
+        author: cameron,
+        season: season,
+        body: "Review #{i}",
+        viewing: i + 1,
+        visibility: "viewable_by_anybody"
+      )
+    end
+
+    # Should only return 15 (default limit)
+    reviews = donna.recent_activity_reviews
+
+    assert_equal 15, reviews.count
+  end
+
+  test "recent_activity_reviews returns empty when user follows nobody" do
+    donna = Human.create!(handle: "donna", email: "donna@example.com")
+
+    reviews = donna.recent_activity_reviews
+
+    assert_equal 0, reviews.count
+  end
+
+  test "recent_activity_reviews orders by most recent first" do
+    donna = Human.create!(handle: "donna", email: "donna@example.com")
+    cameron = Human.create!(handle: "cameron", email: "cameron@example.com")
+
+    Follow.create!(follower_id: donna.id, followee_id: cameron.id)
+
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
+    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
+                            episode_count: 10)
+
+    # Create reviews in non-chronological order
+    first_review = SeasonReview.create!(
+      author: cameron,
+      season: season,
+      body: "First review",
+      viewing: 1,
+      visibility: "viewable_by_anybody"
+    )
+
+    second_review = SeasonReview.create!(
+      author: cameron,
+      season: season,
+      body: "Second review",
+      viewing: 2,
+      visibility: "viewable_by_anybody"
+    )
+
+    reviews = donna.recent_activity_reviews
+
+    assert_equal 2, reviews.count
+    assert_equal second_review.id, reviews.first.id
+    assert_equal first_review.id, reviews.last.id
+  end
 end
