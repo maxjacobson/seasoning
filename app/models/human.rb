@@ -41,6 +41,16 @@ class Human < ApplicationRecord
     Follow.find_by(follower_id: id, followee_id: other.id)
   end
 
+  def recent_activity_reviews(days: 30, limit: 15)
+    SeasonReview
+      .where(author: followings)
+      .viewable_by(self)
+      .where("season_reviews.created_at > ?", days.days.ago)
+      .includes(:author, season: [:show])
+      .order(created_at: :desc)
+      .limit(limit)
+  end
+
   def time_zone
     ActiveSupport::TimeZone[time_zone_name]
   end

@@ -18,6 +18,8 @@ class ShowsController < ApplicationController
     @has_next_page = @my_shows.size > PAGE_SIZE
     @my_shows = @my_shows.limit(PAGE_SIZE) if @has_next_page
     @has_previous_page = current_page > 1
+
+    @activity_reviews = current_human.recent_activity_reviews
   end
 
   def show
