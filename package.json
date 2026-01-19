@@ -13,7 +13,7 @@
     "playwright": "^1.57.0",
     "prettier": "^3.8.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "run-pty": "^5.0.0",
+    "run-pty": "^6.0.0",
     "tailwindcss": "^4.1.17"
   },
   "scripts": {
