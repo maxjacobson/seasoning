@@ -35,6 +35,9 @@ Rails/NotNullColumn:
 Style/Documentation:
   Enabled: false
 
+Style/EmptyClassDefinition:
+  EnforcedStyle: class_new
+
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 
