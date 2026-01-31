@@ -5,4 +5,8 @@ class EpisodeBadge
     @available = available
     @upcoming = upcoming
   end
+
+  def any_available?
+    available.positive?
+  end
 end

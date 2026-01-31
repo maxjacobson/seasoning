@@ -2,7 +2,7 @@
 
 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
   <% seasons.each do |season| %>
-    <% badge = current_human ? season.available_episodes_count_for(current_human) : EpisodeBadge.new(0, 0) %>
+    <% badge = current_human ? season.unwatched_episode_badge_for(current_human) : EpisodeBadge.new(0, 0) %>
 
     <div class="flex flex-col">
       <%= link_to season_path(show.slug, season.slug), class: "block no-underline cursor-pointer flex-shrink-0 relative mb-2" do %>
