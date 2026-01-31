@@ -5,30 +5,8 @@
     <% badge = current_human ? season.unwatched_episode_badge_for(current_human) : EpisodeBadge.new(0, 0) %>
 
     <div class="flex flex-col">
-      <%= link_to season_path(show.slug, season.slug), class: "block no-underline cursor-pointer flex-shrink-0 relative mb-2" do %>
-        <%= image_tag season.poster.url, alt: "#{season.name} poster", class: "w-full h-auto rounded shadow-sm" %>
-
-        <% if badge.available > 0 %>
-          <div
-            class="
-              absolute -top-2 -right-2 inline-flex items-center justify-center
-              w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold
-            "
-            title="<%= pluralize(badge.available, "available episode") %>"
-          >
-            <%= badge.available > 9 ? "…" : badge.available %>
-          </div>
-        <% elsif badge.upcoming > 0 %>
-          <div
-            class="
-              absolute -top-2 -right-2 inline-flex items-center justify-center
-              w-6 h-6 rounded-full bg-gray-400 text-white text-xs font-bold
-            "
-            title="<%= pluralize(badge.upcoming, "upcoming episode") %>"
-          >
-            <%= badge.upcoming > 9 ? "…" : badge.upcoming %>
-          </div>
-        <% end %>
+      <%= link_to season_path(show.slug, season.slug), class: "block no-underline cursor-pointer flex-shrink-0 mb-2" do %>
+        <%= render "poster", url: season.poster.url, show: show, size: "full", badge: badge %>
       <% end %>
 
       <div class="flex-1">

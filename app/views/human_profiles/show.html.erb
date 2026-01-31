@@ -52,12 +52,18 @@
         </h2>
 
         <% if @human.currently_watching.any? %>
+          <% my_shows_by_show_id = if current_human == @human
+              current_human.my_shows.currently_watching.index_by(&:show_id)
+            else
+              {}
+            end %>
           <div class="flex flex-wrap gap-4">
             <% @human.currently_watching.each do |show| %>
               <div class="w-32">
                 <%= link_to show_path(show.slug), class: "block hover:opacity-75 transition-opacity" do %>
                   <div class="mb-2">
-                    <%= render "poster", size: "small", url: show.poster.url, show: show %>
+                    <% badge = my_shows_by_show_id[show.id]&.unwatched_episode_badge %>
+                    <%= render "poster", size: "small", url: show.poster.url, show: show, badge: badge %>
                   </div>
 
                   <div class="text-sm text-gray-700 leading-tight">
