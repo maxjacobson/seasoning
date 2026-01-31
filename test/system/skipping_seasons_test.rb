@@ -181,14 +181,14 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
     visit show_path(@show.slug, include_skipped: "1")
 
     season1_links = all("a[href='/shows/halt-and-catch-fire/season-1']")
-    season1_poster_link = season1_links.find { |link| link[:class]&.include?("relative") }
+    season1_poster_link = season1_links.first
 
     within(season1_poster_link) do
       assert_selector "div[title*='available episode']"
     end
 
     season2_links = all("a[href='/shows/halt-and-catch-fire/season-2']")
-    season2_poster_link = season2_links.find { |link| link[:class]&.include?("relative") }
+    season2_poster_link = season2_links.first
 
     within(season2_poster_link) do
       assert_no_selector "div[title*='available episode']"
