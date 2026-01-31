@@ -24,12 +24,14 @@
 
   <div class="flex bg-gray-100 rounded-lg p-1 mb-6 max-w-fit mx-auto">
     <%= link_to profile_stat_path(@human.handle, @year, filter: "reviewed-in"),
-        class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'reviewed-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
+        class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'reviewed-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}",
+        "aria-current": (@filter == "reviewed-in" ? "page" : nil) do %>
       Reviewed in <%= @year %>
     <% end %>
 
     <%= link_to profile_stat_path(@human.handle, @year, filter: "aired-in"),
-        class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'aired-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}" do %>
+        class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'aired-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}",
+        "aria-current": (@filter == "aired-in" ? "page" : nil) do %>
       Aired in <%= @year %>
     <% end %>
   </div>

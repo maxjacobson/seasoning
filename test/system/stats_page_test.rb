@@ -175,12 +175,8 @@ class StatsPageTest < ApplicationSystemTestCase
     assert_link "Reviewed in 1988", href: "/donna/stats/1988?filter=reviewed-in"
     assert_link "Aired in 1988", href: "/donna/stats/1988?filter=aired-in"
 
-    # Check active state styling
-    reviewed_link = find_link("Reviewed in 1988")
-    aired_link = find_link("Aired in 1988")
-
-    assert_match(/bg-white/, reviewed_link[:class])
-    assert_no_match(/bg-white/, aired_link[:class])
+    assert_selector "a[aria-current='page']", text: "Reviewed in 1988"
+    assert_no_selector "a[aria-current='page']", text: "Aired in 1988"
   end
 
   test "filter toggle preserves year in navigation" do
