@@ -14,7 +14,7 @@ class Season < ApplicationRecord
     Poster.new(tmdb_poster_path.presence || show.tmdb_poster_path)
   end
 
-  def available_episodes_count_for(human)
+  def unwatched_episode_badge_for(human)
     sql = ApplicationRecord.sanitize_sql_array(
       [
         <<~SQL.squish,
@@ -37,7 +37,7 @@ class Season < ApplicationRecord
       ]
     )
 
-    result = ApplicationRecord.connection.exec_query(sql, "Season#available_episodes_count_for")
+    result = ApplicationRecord.connection.exec_query(sql, "Season#unwatched_episode_badge_for")
     available = result.first["available"].to_i
     upcoming = result.first["upcoming"].to_i
     EpisodeBadge.new(available, upcoming)

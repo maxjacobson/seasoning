@@ -1,5 +1,5 @@
 CheckForNewSeasons = lambda do |my_show|
-  if my_show.any_new_unwatched_seasons?
+  if my_show.available_unwatched_content?
     my_show.status = "next_up"
     my_show.save!
 

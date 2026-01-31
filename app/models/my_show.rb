@@ -11,39 +11,11 @@ class MyShow < ApplicationRecord
     finished: "finished"
   }
 
-  def any_new_unwatched_seasons?
-    # might be nil
-    most_recent_watched = MySeason
-                          .joins(:season)
-                          .where(
-                            human:,
-                            season: { show: },
-                            skipped: false
-                          )
-                          .select(&:watched?)
-                          .map { |my_season| my_season.season.season_number }
-                          .max
-
-    skipped_season_numbers = MySeason
-                             .includes(:season)
-                             .where(
-                               human:,
-                               skipped: true,
-                               season: { show: }
-                             )
-                             .map { |my_season| my_season.season.season_number }
-
-    most_recent_released = show
-                           .seasons
-                           .select { |season| season.episodes.any? { |episode| episode.available?(human.time_zone) } }
-                           .reject { |season| skipped_season_numbers.include?(season.season_number) }
-                           .map(&:season_number)
-                           .max
-
-    most_recent_released.present? && (most_recent_watched.nil? || most_recent_watched < most_recent_released)
+  def available_unwatched_content?
+    unwatched_episode_badge.any_available?
   end
 
-  def available_episodes_count
+  def unwatched_episode_badge
     sql = ApplicationRecord.sanitize_sql_array(
       [
         <<~SQL.squish,
@@ -67,7 +39,7 @@ class MyShow < ApplicationRecord
       ]
     )
 
-    result = ApplicationRecord.connection.exec_query(sql, "MyShow#available_episodes_count")
+    result = ApplicationRecord.connection.exec_query(sql, "MyShow#unwatched_episode_badge")
     available = result.first["available"].to_i
     upcoming = result.first["upcoming"].to_i
     EpisodeBadge.new(available, upcoming)
