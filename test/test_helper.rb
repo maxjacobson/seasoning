@@ -19,8 +19,11 @@ WebMock.disable_net_connect!(allow_localhost: true)
 module ActiveSupport
   # Global test setup/configuration
   class TestCase
-    # Run tests in parallel with specified workers (disabled when collecting coverage)
-    parallelize(workers: :number_of_processors) unless ENV["COVERAGE"]
+    parallelize(workers: :number_of_processors)
+
+    parallelize_setup do |worker|
+      SimpleCov.at_fork.call(worker) if ENV["COVERAGE"]
+    end
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
