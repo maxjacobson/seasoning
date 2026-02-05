@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_01_09_013807) do
+ActiveRecord::Schema[8.2].define(version: 2026_02_05_223023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -120,6 +120,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_01_09_013807) do
     t.datetime "created_at", null: false
     t.integer "episode_count", null: false
     t.string "name", null: false
+    t.boolean "orphaned", default: false, null: false, comment: "No longer present in the TMDB API response"
     t.integer "season_number", null: false
     t.bigint "show_id", null: false, comment: "Which show this season is part of"
     t.string "slug", null: false, comment: "A URL-friendly slug"
@@ -143,6 +144,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_01_09_013807) do
   create_table "shows", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.date "first_air_date", comment: "What date did this show first air?"
+    t.boolean "orphaned", default: false, null: false, comment: "No longer present in the TMDB API response"
     t.string "slug", null: false, comment: "The show's title, in slug form, to go in a URL"
     t.string "sort_by_title", null: false, comment: "The show's title normalized for sorting (strips leading articles like 'The', 'A', 'An')"
     t.string "title", null: false, comment: "The show's official title"

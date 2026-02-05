@@ -5,6 +5,8 @@ module TMDB
   # https://developers.themoviedb.org/3/getting-started
   #
   class Client
+    NotFound = Class.new(StandardError)
+
     def search_tv(query)
       data = get("/search/tv", query:)
       ::TMDB::TVSearchResults.new(data)
@@ -36,6 +38,7 @@ module TMDB
       uri.query = URI.encode_www_form(params)
       response = Net::HTTP.get_response(uri)
 
+      raise NotFound, response.inspect if response.is_a?(Net::HTTPNotFound)
       raise response.inspect unless response.is_a?(Net::HTTPSuccess)
 
       JSON.parse(response.body).deep_symbolize_keys
