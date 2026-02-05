@@ -16,6 +16,24 @@
         <li><strong>Reviews count:</strong> <%= SeasonReview.count %></li>
         <li><strong>Episodes count:</strong> <%= Episode.count %></li>
 
+        <% orphaned_shows_count = Show.where(orphaned: true).count %>
+
+        <% if orphaned_shows_count > 0 %>
+          <li>
+            <strong>Orphaned shows count:</strong>
+            <%= orphaned_shows_count %>
+          </li>
+        <% end %>
+
+        <% orphaned_seasons_count = Season.where(orphaned: true).count %>
+
+        <% if orphaned_seasons_count > 0 %>
+          <li>
+            <strong>Orphaned seasons count:</strong>
+            <%= orphaned_seasons_count %>
+          </li>
+        <% end %>
+
         <li>
           <strong>Last refreshed TMDB config:</strong>
           <%= TMDBAPIConfiguration.only.fetched_at %>
