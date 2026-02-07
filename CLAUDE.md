@@ -53,11 +53,15 @@ bin/rails test
 bin/rails test:system
 bin/rails test:all
 
-# Run a single test file
+# Run a single test file (works for both unit and system tests)
 bin/rails test test/path/to/test_file.rb
 
 # Run a specific test method
 bin/rails test test/path/to/test_file.rb:line_number
+
+# IMPORTANT: Do NOT use `bin/rails test:system test/system/some_test.rb`
+# The test:system task ignores file arguments and runs ALL system tests.
+# Always use `bin/rails test test/system/some_test.rb` instead.
 ```
 
 ### Code Quality

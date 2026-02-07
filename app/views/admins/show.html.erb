@@ -16,21 +16,35 @@
         <li><strong>Reviews count:</strong> <%= SeasonReview.count %></li>
         <li><strong>Episodes count:</strong> <%= Episode.count %></li>
 
-        <% orphaned_shows_count = Show.where(orphaned: true).count %>
+        <% orphaned_shows = Show.where(orphaned: true) %>
 
-        <% if orphaned_shows_count > 0 %>
+        <% if orphaned_shows.any? %>
           <li>
             <strong>Orphaned shows count:</strong>
-            <%= orphaned_shows_count %>
+            <%= orphaned_shows.count %>
+
+            <ul class="list-inside list-disc ml-4">
+              <% orphaned_shows.each do |show| %>
+                <li><%= link_to show.title, show_path(show.slug) %></li>
+              <% end %>
+            </ul>
           </li>
         <% end %>
 
-        <% orphaned_seasons_count = Season.where(orphaned: true).count %>
+        <% orphaned_seasons = Season.where(orphaned: true).includes(:show) %>
 
-        <% if orphaned_seasons_count > 0 %>
+        <% if orphaned_seasons.any? %>
           <li>
             <strong>Orphaned seasons count:</strong>
-            <%= orphaned_seasons_count %>
+            <%= orphaned_seasons.count %>
+
+            <ul class="list-inside list-disc ml-4">
+              <% orphaned_seasons.each do |season| %>
+                <li>
+                  <%= link_to "#{season.show.title} - #{season.name}", season_path(season.show.slug, season.slug) %>
+                </li>
+              <% end %>
+            </ul>
           </li>
         <% end %>
 
