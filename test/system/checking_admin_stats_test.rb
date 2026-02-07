@@ -22,6 +22,7 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
     visit admin_path
 
     assert_content "Orphaned seasons count: 1"
+    assert_link "Halt and Catch Fire - Season 1"
   end
 
   test "admin does not see orphaned seasons count when there are none" do
@@ -44,6 +45,7 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
     visit admin_path
 
     assert_content "Orphaned shows count: 1"
+    assert_link "Halt and Catch Fire"
   end
 
   test "admin does not see orphaned shows count when there are none" do
