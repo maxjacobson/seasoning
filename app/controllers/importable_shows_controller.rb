@@ -5,7 +5,7 @@ class ImportableShowsController < ApplicationController
 
     tmdb_show = TMDB::Client.new.tv_details(params.require(:id))
 
-    show = FindOrCreateShow.call(tmdb_show)
+    show = Show.find_or_create_from_tmdb(tmdb_show)
 
     MyShow.create_or_find_by(human: current_human, show:)
 

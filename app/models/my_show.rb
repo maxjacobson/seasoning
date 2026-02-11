@@ -82,6 +82,27 @@ class MyShow < ApplicationRecord
     result.first["percentage"].to_f
   end
 
+  def self.remove!(show:, human:)
+    my_show = find_by(human:, show:) or raise ArgumentError, "No relationship to destroy"
+    my_show.destroy!
+  end
+
+  def check_for_new_seasons
+    if available_unwatched_content?
+      self.status = "next_up"
+      save!
+
+      ReturningShowNotification.create_or_find_by!(
+        human: human,
+        show: show
+      )
+
+      true
+    else
+      false
+    end
+  end
+
   def skipped_season?(season)
     MySeason.exists?(human: human, season: season, skipped: true)
   end
