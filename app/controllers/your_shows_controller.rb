@@ -24,7 +24,7 @@ class YourShowsController < ApplicationController
     authorize! { current_human.present? }
 
     show = Show.find_by!(slug: params[:show_slug])
-    RemoveMyShow.call(show, current_human)
+    MyShow.remove!(show:, human: current_human)
     redirect_to show_path(show.slug), notice: "Removed #{show.title}"
   end
 end

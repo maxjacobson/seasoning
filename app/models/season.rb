@@ -14,6 +14,30 @@ class Season < ApplicationRecord
     Poster.new(tmdb_poster_path.presence || show.tmdb_poster_path)
   end
 
+  def refresh_episodes!
+    Rails.logger.info "Refreshing show slug=#{show.slug} season slug=#{slug}"
+
+    data = TMDB::Client.new.season_details(show.tmdb_tv_id, season_number)
+
+    episodes.destroy_all
+    data.episodes.each do |tmdb_episode|
+      Rails.logger.info(
+        <<~MSG.squish
+          Inserting episode show slug=#{show.slug}
+          season slug=#{slug}
+          episode number=#{tmdb_episode.episode_number}
+          tmdb_id=#{tmdb_episode.id}
+        MSG
+      )
+      episode = episodes.new(episode_number: tmdb_episode.episode_number)
+      episode.name = tmdb_episode.name
+      episode.still_path = tmdb_episode.still_path
+      episode.tmdb_id = tmdb_episode.id
+      episode.air_date = tmdb_episode.air_date
+      episode.save!
+    end
+  end
+
   def unwatched_episode_badge_for(human)
     sql = ApplicationRecord.sanitize_sql_array(
       [
