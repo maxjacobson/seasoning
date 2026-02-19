@@ -14,7 +14,7 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "run-pty": "^6.0.2",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.2.0"
   },
   "scripts": {
     "playwright:install": "playwright install",
