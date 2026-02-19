@@ -7,7 +7,7 @@
   "devDependencies": {
     "@herb-tools/formatter": "^0.8.10",
     "@herb-tools/linter": "^0.8.10",
-    "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/cli": "^4.2.0",
     "@tailwindcss/forms": "^0.5.11",
     "esbuild": "^0.27.3",
     "playwright": "^1.58.2",
