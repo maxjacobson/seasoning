@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: f5255a4089cff69af0ce3b63fda751bdc6dd93cb
+  revision: e905b2e3cda49e17f20ee65ef2b851b035f813a2
   branch: main
   specs:
     actioncable (8.2.0.alpha)
@@ -31,7 +31,7 @@ GIT
       rack-session (>= 1.0.1)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.2)
-      rails-html-sanitizer (~> 1.6)
+      rails-html-sanitizer (~> 1.7)
       useragent (~> 0.16)
     actiontext (8.2.0.alpha)
       action_text-trix (~> 2.1.16)
@@ -46,7 +46,7 @@ GIT
       builder (~> 3.1)
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
-      rails-html-sanitizer (~> 1.6)
+      rails-html-sanitizer (~> 1.7)
     activejob (8.2.0.alpha)
       activesupport (= 8.2.0.alpha)
       globalid (>= 0.3.6)
@@ -182,7 +182,7 @@ GEM
       zeitwerk (~> 2.6)
     email_validator (2.2.4)
       activemodel
-    erb (6.0.1)
+    erb (6.0.2)
     erb_lint (0.9.0)
       activesupport
       better_html (>= 2.0.1)
@@ -246,7 +246,8 @@ GEM
     mime-types-data (3.2026.0203)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (6.0.1)
+    minitest (6.0.2)
+      drb (~> 2.0)
       prism (~> 1.5)
     minitest-mock (5.27.0)
     net-imap (0.6.3)
@@ -313,8 +314,8 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.6.2)
-      loofah (~> 2.21)
+    rails-html-sanitizer (1.7.0)
+      loofah (~> 2.25)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     rails_autolink (1.1.8)
       actionview (> 3.1)
@@ -480,7 +481,7 @@ CHECKSUMS
   dry-struct (1.8.0) sha256=74c38b559924fb6462ac43ec780c4533a082d7b1d238a8d7857b773b3b8e2966
   dry-types (1.9.0) sha256=7b656fe0a78d2432500ae1f29fefd6762f5a032ca7000e4f36bc111453d45d4d
   email_validator (2.2.4) sha256=5ab238095bec7aef9389f230e9e0c64c5081cdf91f19d6c5cecee0a93af20604
-  erb (6.0.1) sha256=28ecdd99c5472aebd5674d6061e3c6b0a45c049578b071e5a52c2a7f13c197e5
+  erb (6.0.2) sha256=9fe6264d44f79422c87490a1558479bd0e7dad4dd0e317656e67ea3077b5242b
   erb_lint (0.9.0) sha256=dfb5e40ad839e8d1f0d56ca85ec9a7ac4c9cd966ec281138282f35b323ca7c31
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   ffi (1.17.3-aarch64-linux-gnu) sha256=28ad573df26560f0aedd8a90c3371279a0b2bd0b4e834b16a2baa10bd7a97068
@@ -513,7 +514,7 @@ CHECKSUMS
   mime-types-data (3.2026.0203) sha256=54353d693af028847391c28361c07d4b8b689cad78c3e1cc272fb1205c6d2a2f
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.9) sha256=0cd7c7f824e010c072e33f68bc02d85a00aeb6fce05bb4819c03dfd3c140c289
-  minitest (6.0.1) sha256=7854c74f48e2e975969062833adc4013f249a4b212f5e7b9d5c040bf838d54bb
+  minitest (6.0.2) sha256=db6e57956f6ecc6134683b4c87467d6dd792323c7f0eea7b93f66bd284adbc3d
   minitest-mock (5.27.0) sha256=7040ed7185417a966920987eaa6eaf1be4ea1fc5b25bb03ff4703f98564a55b0
   net-imap (0.6.3) sha256=9bab75f876596d09ee7bf911a291da478e0cd6badc54dfb82874855ccc82f2ad
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
@@ -549,7 +550,7 @@ CHECKSUMS
   rackup (2.3.1) sha256=6c79c26753778e90983761d677a48937ee3192b3ffef6bc963c0950f94688868
   rails (8.2.0.alpha)
   rails-dom-testing (2.3.0) sha256=8acc7953a7b911ca44588bf08737bc16719f431a1cc3091a292bca7317925c1d
-  rails-html-sanitizer (1.6.2) sha256=35fce2ca8242da8775c83b6ba9c1bcaad6751d9eb73c1abaa8403475ab89a560
+  rails-html-sanitizer (1.7.0) sha256=28b145cceaf9cc214a9874feaa183c3acba036c9592b19886e0e45efc62b1e89
   rails_autolink (1.1.8) sha256=fbcb9d2e5f2cea9435a32e5f12556c7a9b7ed6867889fb9cf5eac405049bfc3a
   railties (8.2.0.alpha)
   rainbow (3.1.1) sha256=039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
