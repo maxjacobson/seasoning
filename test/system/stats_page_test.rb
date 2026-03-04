@@ -11,10 +11,10 @@ class StatsPageTest < ApplicationSystemTestCase
 
   test "user can navigate directly to their stats year page" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1988"
+    visit "/donna/stats/reviewed-in/1988"
 
     assert_content "donna"
-    assert_equal "/donna/stats/1988", page.current_path
+    assert_equal "/donna/stats/reviewed-in/1988", page.current_path
   end
 
   test "user is redirected to current year when visiting stats index" do
@@ -22,7 +22,7 @@ class StatsPageTest < ApplicationSystemTestCase
     visit "/donna/stats"
 
     assert_content "donna"
-    assert_match %r{/donna/stats/\d{4}}, page.current_path
+    assert_match %r{/donna/stats/reviewed-in/\d{4}}, page.current_path
   end
 
   test "user cannot view another user's stats page" do
@@ -32,14 +32,14 @@ class StatsPageTest < ApplicationSystemTestCase
     )
 
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/cameron/stats/1988"
+    visit "/cameron/stats/reviewed-in/1988"
 
     assert_content "401 Unauthorized"
   end
 
   test "visiting a future year returns 404" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/3000"
+    visit "/donna/stats/reviewed-in/3000"
 
     assert_content "The page you were looking for doesn't exist"
   end
@@ -68,7 +68,7 @@ class StatsPageTest < ApplicationSystemTestCase
     )
 
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1988"
+    visit "/donna/stats/reviewed-in/1988"
 
     assert_content "donna reviewed 2 seasons in 1988"
   end
@@ -100,7 +100,7 @@ class StatsPageTest < ApplicationSystemTestCase
     )
 
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1988"
+    visit "/donna/stats/reviewed-in/1988"
 
     # Check that seasons are displayed with ratings, ordered by rating
     within first(".top-favorites") do
@@ -113,11 +113,11 @@ class StatsPageTest < ApplicationSystemTestCase
 
   test "displays year navigation links" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1989"
+    visit "/donna/stats/reviewed-in/1989"
 
     within ".year-navigation" do
-      assert_link "← 1988", href: "/donna/stats/1988?filter=reviewed-in"
-      assert_link "1990 →", href: "/donna/stats/1990?filter=reviewed-in"
+      assert_link "← 1988", href: "/donna/stats/reviewed-in/1988"
+      assert_link "1990 →", href: "/donna/stats/reviewed-in/1990"
     end
   end
 
@@ -126,17 +126,17 @@ class StatsPageTest < ApplicationSystemTestCase
 
     # Visit a year that's close to current year to test future year logic
     current_year = Date.current.year
-    visit "/donna/stats/#{current_year}"
+    visit "/donna/stats/reviewed-in/#{current_year}"
 
     within ".year-navigation" do
-      assert_link "← #{current_year - 1}", href: "/donna/stats/#{current_year - 1}?filter=reviewed-in"
+      assert_link "← #{current_year - 1}", href: "/donna/stats/reviewed-in/#{current_year - 1}"
       assert_no_link "#{current_year + 1} →"
     end
   end
 
   test "displays zero state when no reviews exist for the year" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1987"
+    visit "/donna/stats/reviewed-in/1987"
 
     assert_content "donna reviewed 0 seasons in 1987"
     assert_no_css ".top-favorites"
@@ -163,17 +163,17 @@ class StatsPageTest < ApplicationSystemTestCase
 
   test "redirects to reviewed-in filter by default" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1988"
+    visit "/donna/stats"
 
-    assert_includes page.current_url, "filter=reviewed-in"
+    assert_match %r{/donna/stats/reviewed-in/\d{4}}, page.current_path
   end
 
   test "displays toggle between reviewed-in and aired-in filters" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1988?filter=reviewed-in"
+    visit "/donna/stats/reviewed-in/1988"
 
-    assert_link "Reviewed in 1988", href: "/donna/stats/1988?filter=reviewed-in"
-    assert_link "Aired in 1988", href: "/donna/stats/1988?filter=aired-in"
+    assert_link "Reviewed in 1988", href: "/donna/stats/reviewed-in/1988"
+    assert_link "Aired in 1988", href: "/donna/stats/aired-in/1988"
 
     assert_selector "a[aria-current='page']", text: "Reviewed in 1988"
     assert_no_selector "a[aria-current='page']", text: "Aired in 1988"
@@ -181,11 +181,11 @@ class StatsPageTest < ApplicationSystemTestCase
 
   test "filter toggle preserves year in navigation" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1989?filter=aired-in"
+    visit "/donna/stats/aired-in/1989"
 
     within ".year-navigation" do
-      assert_link "← 1988", href: "/donna/stats/1988?filter=aired-in"
-      assert_link "1990 →", href: "/donna/stats/1990?filter=aired-in"
+      assert_link "← 1988", href: "/donna/stats/aired-in/1988"
+      assert_link "1990 →", href: "/donna/stats/aired-in/1990"
     end
   end
 
@@ -236,13 +236,13 @@ class StatsPageTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
 
     # Test reviewed-in filter - should show both seasons
-    visit "/donna/stats/1990?filter=reviewed-in"
+    visit "/donna/stats/reviewed-in/1990"
 
     assert_content "donna reviewed 2 seasons in 1990"
     assert_content "Everything reviewed in 1990"
 
     # Test aired-in filter for 1988 - should show only season that aired in 1988
-    visit "/donna/stats/1988?filter=aired-in"
+    visit "/donna/stats/aired-in/1988"
 
     assert_content "donna reviewed 1 season that aired in 1988"
     assert_content "Everything that aired in 1988"
@@ -250,7 +250,7 @@ class StatsPageTest < ApplicationSystemTestCase
     assert_no_content "Halt and Catch Fire - Season 2"
 
     # Test aired-in filter for 1989 - should show only season that aired in 1989
-    visit "/donna/stats/1989?filter=aired-in"
+    visit "/donna/stats/aired-in/1989"
 
     assert_content "donna reviewed 1 season that aired in 1989"
     assert_content "Everything that aired in 1989"
@@ -258,10 +258,10 @@ class StatsPageTest < ApplicationSystemTestCase
     assert_no_content "Halt and Catch Fire - Season 1"
   end
 
-  test "invalid filter parameter redirects to reviewed-in" do
+  test "invalid filter path returns 404" do
     visit redeem_magic_link_path(@magic_link.token)
-    visit "/donna/stats/1988?filter=invalid"
+    visit "/donna/stats/invalid/1988"
 
-    assert_includes page.current_url, "filter=reviewed-in"
+    assert_content "The page you were looking for doesn't exist"
   end
 end

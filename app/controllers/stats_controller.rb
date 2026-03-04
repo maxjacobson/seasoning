@@ -2,7 +2,7 @@ class StatsController < ApplicationController
   def index
     authorize! { current_human&.handle == params[:handle] }
 
-    redirect_to profile_stat_path(handle: params[:handle], year: Date.current.year)
+    redirect_to profile_stat_path(handle: params[:handle], filter: "reviewed-in", year: Date.current.year)
   end
 
   def show
@@ -14,18 +14,6 @@ class StatsController < ApplicationController
     raise ActionController::RoutingError, "Not Found" if @year > Date.current.year
 
     @filter = params[:filter]
-
-    # Redirect to default filter if none specified
-    if @filter.blank?
-      redirect_to profile_stat_path(params[:handle], params[:year], filter: "reviewed-in")
-      return
-    end
-
-    # Validate filter parameter
-    unless ["reviewed-in", "aired-in"].include?(@filter)
-      redirect_to profile_stat_path(params[:handle], params[:year], filter: "reviewed-in")
-      return
-    end
 
     @reviews = if @filter == "reviewed-in"
                  SeasonReview
