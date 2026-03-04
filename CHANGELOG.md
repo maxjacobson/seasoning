@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **March 3, 2026** — Stats filter is now part of the URL path: links like `/maxjacobson/stats/2026?filter=reviewed-in` are now `/maxjacobson/stats/reviewed-in/2026` (and likewise `/aired-in/2026`)
 1. **January 31, 2026** — Show episode badges on your profile page: when viewing your own profile, you'll now see the red available episodes badge on your currently watching shows, matching the badges shown on the main shows list
 1. **January 31, 2026** — Improve new content detection: shows marked as "waiting for more" will now transition to "next up" when new episodes are added to any non-skipped season, not just when entirely new seasons are released. This catches bonus episodes, specials, or newly-added content in older seasons
 1. **January 19, 2026** — Add activity feed to shows page: see recent season reviews from people you follow in a sidebar widget. Shows the last 30 days of activity (up to 15 reviews) with season posters, author handles, and time stamps. Click posters to read full reviews, or handles/show titles to navigate. On mobile the feed appears above your shows list, on desktop it's a left sidebar

@@ -23,13 +23,13 @@
   </div>
 
   <div class="flex bg-gray-100 rounded-lg p-1 mb-6 max-w-fit mx-auto">
-    <%= link_to profile_stat_path(@human.handle, @year, filter: "reviewed-in"),
+    <%= link_to profile_stat_path(@human.handle, "reviewed-in", @year),
         class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'reviewed-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}",
         "aria-current": (@filter == "reviewed-in" ? "page" : nil) do %>
       Reviewed in <%= @year %>
     <% end %>
 
-    <%= link_to profile_stat_path(@human.handle, @year, filter: "aired-in"),
+    <%= link_to profile_stat_path(@human.handle, "aired-in", @year),
         class: "px-4 py-2 rounded-md text-sm font-medium transition-colors #{@filter == 'aired-in' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}",
         "aria-current": (@filter == "aired-in" ? "page" : nil) do %>
       Aired in <%= @year %>
@@ -102,14 +102,14 @@
 
   <div class="year-navigation flex justify-between items-center">
     <div>
-      <%= link_to "← #{@previous_year}", profile_stat_path(@human.handle, @previous_year, filter: @filter), class: "rounded-button" %>
+      <%= link_to "← #{@previous_year}", profile_stat_path(@human.handle, @filter, @previous_year), class: "rounded-button" %>
     </div>
 
     <div class="text-xl font-semibold"><%= @year %></div>
 
     <div>
       <% if @has_next_year %>
-        <%= link_to "#{@next_year} →", profile_stat_path(@human.handle, @next_year, filter: @filter), class: "rounded-button" %>
+        <%= link_to "#{@next_year} →", profile_stat_path(@human.handle, @filter, @next_year), class: "rounded-button" %>
       <% end %>
     </div>
   </div>

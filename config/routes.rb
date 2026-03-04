@@ -36,7 +36,9 @@ Rails.app.routes.draw do
   get "/:handle", to: "human_profiles#show", as: :human_profile
   scope "/:handle", as: "profile" do
     resources :reviews, only: [:index]
-    resources :stats, only: [:index, :show], param: :year, constraints: { year: /\d{4}/ }
+    get "stats", to: "stats#index", as: "stats"
+    get "stats/:filter/:year", to: "stats#show", as: "stat",
+                               constraints: { year: /\d{4}/, filter: /reviewed-in|aired-in/ }
     get "shows/:show_slug/:season_slug/edit", to: "season_reviews#edit", as: :edit_season_review
     get "shows/:show_slug/:season_slug/:viewing/edit", to: "season_reviews#edit", as: :edit_season_review_viewing
     get "shows/:show_slug/:season_slug", to: "season_reviews#show", as: :season_review
