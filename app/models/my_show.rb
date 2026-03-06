@@ -82,6 +82,13 @@ class MyShow < ApplicationRecord
     result.first["percentage"].to_f
   end
 
+  def watched_episodes?
+    MySeason.joins(:season)
+            .where(seasons: { show_id: show_id }, human_id: human_id)
+            .where("cardinality(watched_episode_numbers) > 0")
+            .exists?
+  end
+
   def skipped_season?(season)
     MySeason.exists?(human: human, season: season, skipped: true)
   end

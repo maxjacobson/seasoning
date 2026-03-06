@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **March 6, 2026** — Distinguish debuting shows from returning shows: when a show you've never watched has its first episodes become available, you'll now see a "[Show Name] is here!" notification instead of "[Show Name] is back!"
 1. **March 3, 2026** — Stats filter is now part of the URL path: links like `/maxjacobson/stats/2026?filter=reviewed-in` are now `/maxjacobson/stats/reviewed-in/2026` (and likewise `/aired-in/2026`)
 1. **January 31, 2026** — Show episode badges on your profile page: when viewing your own profile, you'll now see the red available episodes badge on your currently watching shows, matching the badges shown on the main shows list
 1. **January 31, 2026** — Improve new content detection: shows marked as "waiting for more" will now transition to "next up" when new episodes are added to any non-skipped season, not just when entirely new seasons are released. This catches bonus episodes, specials, or newly-added content in older seasons

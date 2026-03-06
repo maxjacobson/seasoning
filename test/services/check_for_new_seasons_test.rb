@@ -35,7 +35,8 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
 
     assert result
     assert_predicate my_show.reload, :next_up?
-    assert ReturningShowNotification.exists?(human:, show:)
+    assert DebutingShowNotification.exists?(human:, show:)
+    assert_not ReturningShowNotification.exists?(human:, show:)
   end
 
   test "returns false and does not update status when no new seasons available" do
@@ -56,7 +57,7 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
     assert_not ReturningShowNotification.exists?(human:, show:)
   end
 
-  test "creates a notification when new seasons are available" do
+  test "creates a debuting notification when new content is available and human has not watched any episodes" do
     human = Human.create!(handle: "donna", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 123)
 
@@ -65,10 +66,10 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
 
     my_show = MyShow.create!(human:, show:, status: "waiting_for_more")
 
-    assert_difference -> { ReturningShowNotification.count } do
+    assert_difference -> { DebutingShowNotification.count } do
       CheckForNewSeasons.call(my_show)
     end
 
-    assert ReturningShowNotification.exists?(human:, show:)
+    assert DebutingShowNotification.exists?(human:, show:)
   end
 end

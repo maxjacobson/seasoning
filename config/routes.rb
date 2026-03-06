@@ -6,6 +6,7 @@ Rails.app.routes.draw do
   resource :admin, only: [:show]
   resources :follows, only: [:create, :destroy]
   resources :returning_show_notifications, only: [:destroy]
+  resources :debuting_show_notifications, only: [:destroy]
   resource :credits, only: [:show]
   resource :roadmap, only: [:show]
   resource :changelog, only: [:show]

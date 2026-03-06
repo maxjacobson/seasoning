@@ -448,6 +448,45 @@ class MyShowTest < ActiveSupport::TestCase
     assert_in_delta(100.0, my_show.watched_percentage)
   end
 
+  test "watched_episodes? returns false when human has no my_seasons for the show" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+
+    assert_not my_show.watched_episodes?
+  end
+
+  test "watched_episodes? returns false when human has a my_season with no watched episodes" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    MySeason.create!(human: human, season: season, watched_episode_numbers: [])
+
+    assert_not my_show.watched_episodes?
+  end
+
+  test "watched_episodes? returns true when human has watched at least one episode" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 2)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    MySeason.create!(human: human, season: season, watched_episode_numbers: [1])
+
+    assert_predicate my_show, :watched_episodes?
+  end
+
+  test "watched_episodes? only considers episodes for the relevant show" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show1 = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    show2 = Show.create!(title: "Some Other Show", tmdb_tv_id: 124)
+    season2 = Season.create!(show: show2, season_number: 1, name: "Season 1", tmdb_id: 457, episode_count: 1)
+    my_show1 = MyShow.create!(human: human, show: show1, status: "waiting_for_more")
+    MySeason.create!(human: human, season: season2, watched_episode_numbers: [1])
+
+    assert_not my_show1.watched_episodes?
+  end
+
   test "watched_percentage returns 0 when only skipped seasons exist" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
