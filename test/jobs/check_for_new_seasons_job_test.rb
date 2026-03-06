@@ -16,7 +16,8 @@ class CheckForNewSeasonsJobTest < ActiveJob::TestCase
     my_show.reload
 
     assert_equal "next_up", my_show.status
-    assert ReturningShowNotification.exists?(human: human, show: show)
+    assert DebutingShowNotification.exists?(human: human, show: show)
+    assert_not ReturningShowNotification.exists?(human: human, show: show)
   end
 
   test "perform does nothing when no new seasons available" do

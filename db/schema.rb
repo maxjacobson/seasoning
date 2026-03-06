@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_02_05_223023) do
+ActiveRecord::Schema[8.2].define(version: 2026_03_06_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,6 +18,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_05_223023) do
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "my_show_status", ["might_watch", "currently_watching", "stopped_watching", "waiting_for_more", "finished", "next_up"]
   create_enum "visibility", ["anybody", "myself"]
+
+  create_table "debuting_show_notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "human_id", null: false, comment: "Which human should receive this notification"
+    t.bigint "show_id", null: false, comment: "Which show is debuting"
+    t.datetime "updated_at", null: false
+    t.index ["human_id", "show_id"], name: "index_debuting_show_notifications_on_human_and_show", unique: true
+    t.index ["human_id"], name: "index_debuting_show_notifications_on_human_id"
+    t.index ["show_id"], name: "index_debuting_show_notifications_on_show_id"
+  end
 
   create_table "episodes", force: :cascade do |t|
     t.date "air_date", comment: "What date did this episode first air?"
@@ -167,6 +177,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_05_223023) do
     t.index ["poster_sizes"], name: "index_tmdb_api_configurations_on_poster_sizes", using: :gin
   end
 
+  add_foreign_key "debuting_show_notifications", "humans", on_delete: :cascade
+  add_foreign_key "debuting_show_notifications", "shows", on_delete: :cascade
   add_foreign_key "follows", "humans", column: "followee_id", on_delete: :cascade
   add_foreign_key "follows", "humans", column: "follower_id", on_delete: :cascade
   add_foreign_key "my_seasons", "humans", on_delete: :cascade

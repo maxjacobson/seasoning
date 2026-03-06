@@ -42,6 +42,14 @@ class ApplicationController < ActionController::Base
 
   helper_method :returning_show_notifications
 
+  def debuting_show_notifications
+    return [] if current_human.blank?
+
+    @debuting_show_notifications ||= current_human.debuting_show_notifications.includes(:show)
+  end
+
+  helper_method :debuting_show_notifications
+
   def add_human_info_to_bugsnag(event)
     return if current_human.blank?
 
