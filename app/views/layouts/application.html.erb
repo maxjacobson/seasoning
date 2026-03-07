@@ -49,6 +49,10 @@
         </div>
 
         <div class="pr-2">
+          <button id="install-app-button" hidden class="rounded-button mr-2">
+            Install app
+          </button>
+
           <% if current_human.present? %>
             <%= render "show_search_bar" %>
             <%= link_to "Your page", human_profile_path(current_human.handle), class: "mr-2" %>
