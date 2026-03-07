@@ -130,6 +130,13 @@ node_modules/.bin/prettier --write .  # Formatting
 - `app/javascript/application.js` - Main JavaScript file with Turbo Rails import
 - `run-pty.json` - Development server configuration for running Rails, CSS, and JS watchers
 
+## PWA
+
+- `public/manifest.json` and `public/service-worker.js` are plain static files — no build step, no controller, no route
+- Icons live in `public/` (icon-192.png, icon-512.png, icon-maskable-192.png, apple-touch-icon.png) and are generated from `app/assets/images/icon.svg` using `rsvg-convert` (e.g. `rsvg-convert -w 192 -h 192 app/assets/images/icon.svg -o public/icon-192.png`)
+- The maskable icon is generated with ImageMagick: orange background + icon centered at ~80% size
+- Install prompt logic is in `app/javascript/install-prompt.js`; intercepts `beforeinstallprompt` and shows a hidden nav button
+
 ## Scheduled Tasks (Heroku Scheduler)
 
 - `prune:all` - Daily cleanup of expired MagicLink records
