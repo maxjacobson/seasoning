@@ -1,4 +1,6 @@
 Rails.app.routes.draw do
+  get "/offline", to: "offline#show", as: :offline
+
   root to: "magic_links#new"
   resource :signup, only: [:show, :create], controller: "signups"
   resource :login, only: [:show, :create], controller: "password_sessions"
