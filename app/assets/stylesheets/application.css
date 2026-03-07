@@ -118,6 +118,17 @@ a.no-underline:hover {
   cursor: pointer;
 }
 
+/* PWA standalone mode: pad sticky nav for notch/dynamic island */
+@media (display-mode: standalone) {
+  .sticky.top-0 {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* Collapsible Note to Self */
 .collapsible-note {
   position: relative;
