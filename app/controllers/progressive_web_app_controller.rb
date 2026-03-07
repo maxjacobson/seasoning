@@ -1,4 +1,4 @@
-class PwaController < ApplicationController
+class ProgressiveWebAppController < ApplicationController
   def manifest
     authorize! { true }
     render layout: false, content_type: "application/manifest+json"

@@ -1,6 +1,6 @@
 Rails.app.routes.draw do
-  get "/manifest.json", to: "pwa#manifest", as: :pwa_manifest
-  get "/service-worker.js", to: "pwa#service_worker", as: :pwa_service_worker
+  get "/manifest.json", to: "progressive_web_app#manifest", as: :pwa_manifest
+  get "/service-worker.js", to: "progressive_web_app#service_worker", as: :pwa_service_worker
   get "/offline", to: "offline#show", as: :offline
 
   root to: "magic_links#new"
