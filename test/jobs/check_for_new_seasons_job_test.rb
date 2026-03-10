@@ -6,7 +6,7 @@ class CheckForNewSeasonsJobTest < ActiveJob::TestCase
 
     human = Human.create!(handle: "cameron", email: "cameron@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
@@ -25,13 +25,13 @@ class CheckForNewSeasonsJobTest < ActiveJob::TestCase
 
     human = Human.create!(handle: "cameron", email: "cameron@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     job.perform(my_show.id)
 
     my_show.reload
 
-    assert_equal "waiting_for_more", my_show.status
+    assert_equal "waiting", my_show.status
     assert_not ReturningShowNotification.exists?(human: human, show: show)
   end
 
@@ -48,7 +48,7 @@ class CheckForNewSeasonsJobTest < ActiveJob::TestCase
 
     human = Human.create!(handle: "cameron", email: "cameron@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     season1 = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season1, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
@@ -63,7 +63,7 @@ class CheckForNewSeasonsJobTest < ActiveJob::TestCase
 
     my_show.reload
 
-    assert_equal "waiting_for_more", my_show.status
+    assert_equal "waiting", my_show.status
     assert_not ReturningShowNotification.exists?(human: human, show: show)
   end
 end

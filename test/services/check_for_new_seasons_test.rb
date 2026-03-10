@@ -12,7 +12,7 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
     season2 = show.seasons.create!(season_number: 2, name: "Season 2", tmdb_id: 457, episode_count: 1)
     Episode.create!(season: season2, episode_number: 1, air_date: 1.day.ago, tmdb_id: 791, name: "Episode 1")
 
-    my_show = MyShow.create!(human:, show:, status: "waiting_for_more")
+    my_show = MyShow.create!(human:, show:, status: "waiting")
     MySeason.create!(human:, season: season1, watched_episode_numbers: [1, 2])
 
     result = CheckForNewSeasons.call(my_show)
@@ -29,7 +29,7 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
     season1 = show.seasons.create!(season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season1, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
 
-    my_show = MyShow.create!(human:, show:, status: "waiting_for_more")
+    my_show = MyShow.create!(human:, show:, status: "waiting")
 
     result = CheckForNewSeasons.call(my_show)
 
@@ -47,13 +47,13 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
     Episode.create!(season: season1, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
     Episode.create!(season: season1, episode_number: 2, air_date: 1.day.ago, tmdb_id: 790, name: "Episode 2")
 
-    my_show = MyShow.create!(human:, show:, status: "waiting_for_more")
+    my_show = MyShow.create!(human:, show:, status: "waiting")
     MySeason.create!(human:, season: season1, watched_episode_numbers: [1, 2])
 
     result = CheckForNewSeasons.call(my_show)
 
     assert_not result
-    assert_predicate my_show.reload, :waiting_for_more?
+    assert_predicate my_show.reload, :waiting?
     assert_not ReturningShowNotification.exists?(human:, show:)
   end
 
@@ -64,7 +64,7 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
     season1 = show.seasons.create!(season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season1, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
 
-    my_show = MyShow.create!(human:, show:, status: "waiting_for_more")
+    my_show = MyShow.create!(human:, show:, status: "waiting")
 
     assert_difference -> { DebutingShowNotification.count } do
       CheckForNewSeasons.call(my_show)
@@ -80,12 +80,12 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
     season1 = show.seasons.create!(season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season1, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
 
-    my_show = MyShow.create!(human:, show:, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+    my_show = MyShow.create!(human:, show:, status: "waiting", snoozed_until: 1.week.from_now)
 
     result = CheckForNewSeasons.call(my_show)
 
     assert_not result
-    assert_predicate my_show.reload, :waiting_for_more?
+    assert_predicate my_show.reload, :waiting?
     assert_not ReturningShowNotification.exists?(human:, show:)
     assert_not DebutingShowNotification.exists?(human:, show:)
   end

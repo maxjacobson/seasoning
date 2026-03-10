@@ -61,7 +61,7 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
 
     assert_no_text "Halt and Catch Fire is back!"
     assert_not ReturningShowNotification.exists?(human: human, show: show)
-    assert_predicate my_show.reload, :waiting_for_more?
+    assert_predicate my_show.reload, :waiting?
     assert_predicate my_show.reload, :snoozed?
   end
 
@@ -81,7 +81,7 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
 
     assert_no_text "Halt and Catch Fire is back!"
     assert_not ReturningShowNotification.exists?(human: human, show: show)
-    assert_predicate my_show.reload, :waiting_for_more?
+    assert_predicate my_show.reload, :waiting?
     assert_operator my_show.reload.snoozed_until, :>, 28.days.from_now
   end
 
@@ -89,7 +89,7 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
     human = Human.create!(email: "donna@example.com", handle: "donna")
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
                         first_air_date: Time.zone.today)
-    MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 7.days.from_now)
+    MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 7.days.from_now)
 
     magic_link = MagicLink.create!(email: human.email)
     visit redeem_magic_link_path(magic_link.token)

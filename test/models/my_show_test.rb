@@ -97,7 +97,7 @@ class MyShowTest < ActiveSupport::TestCase
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     assert_predicate my_show, :available_unwatched_content?
   end
@@ -112,7 +112,7 @@ class MyShowTest < ActiveSupport::TestCase
     season2 = Season.create!(show: show, season_number: 2, name: "Season 2", tmdb_id: 457, episode_count: 1)
     Episode.create!(season: season2, episode_number: 1, air_date: 1.day.ago, tmdb_id: 790, name: "Episode 1")
 
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season1, watched_episode_numbers: [1])
 
     assert_predicate my_show, :available_unwatched_content?
@@ -123,7 +123,7 @@ class MyShowTest < ActiveSupport::TestCase
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season, watched_episode_numbers: [1])
 
     assert_not my_show.available_unwatched_content?
@@ -134,7 +134,7 @@ class MyShowTest < ActiveSupport::TestCase
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season, episode_number: 1, air_date: 1.day.from_now, tmdb_id: 789, name: "Episode 1")
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     assert_not my_show.available_unwatched_content?
   end
@@ -142,7 +142,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "available_unwatched_content? returns false when show has no seasons" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     assert_not my_show.available_unwatched_content?
   end
@@ -157,7 +157,7 @@ class MyShowTest < ActiveSupport::TestCase
     season2 = Season.create!(show: show, season_number: 2, name: "Season 2", tmdb_id: 457, episode_count: 1)
     Episode.create!(season: season2, episode_number: 1, air_date: 1.day.ago, tmdb_id: 790, name: "Episode 1")
 
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season1, watched_episode_numbers: [1])
     MySeason.create!(human: human, season: season2, skipped: true)
 
@@ -177,7 +177,7 @@ class MyShowTest < ActiveSupport::TestCase
     season3 = Season.create!(show: show, season_number: 3, name: "Season 3", tmdb_id: 458, episode_count: 1)
     Episode.create!(season: season3, episode_number: 1, air_date: 1.day.ago, tmdb_id: 791, name: "Episode 1")
 
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season1, watched_episode_numbers: [1])
     MySeason.create!(human: human, season: season2, skipped: true)
 
@@ -199,7 +199,7 @@ class MyShowTest < ActiveSupport::TestCase
     season3 = Season.create!(show: show, season_number: 3, name: "Season 3", tmdb_id: 458, episode_count: 1)
     Episode.create!(season: season3, episode_number: 1, air_date: 1.day.ago, tmdb_id: 793, name: "Episode 1")
 
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season1, watched_episode_numbers: [1, 2])
     MySeason.create!(human: human, season: season2, watched_episode_numbers: [1])
     MySeason.create!(human: human, season: season3, watched_episode_numbers: [1])
@@ -217,7 +217,7 @@ class MyShowTest < ActiveSupport::TestCase
     season2 = Season.create!(show: show, season_number: 2, name: "Season 2", tmdb_id: 457, episode_count: 1)
     Episode.create!(season: season2, episode_number: 1, air_date: 1.day.ago, tmdb_id: 790, name: "Episode 1")
 
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season2, watched_episode_numbers: [1])
 
     assert_predicate my_show, :available_unwatched_content?
@@ -451,7 +451,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "watched_episodes? returns false when human has no my_seasons for the show" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     assert_not my_show.watched_episodes?
   end
@@ -460,7 +460,7 @@ class MyShowTest < ActiveSupport::TestCase
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season, watched_episode_numbers: [])
 
     assert_not my_show.watched_episodes?
@@ -470,7 +470,7 @@ class MyShowTest < ActiveSupport::TestCase
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 2)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
     MySeason.create!(human: human, season: season, watched_episode_numbers: [1])
 
     assert_predicate my_show, :watched_episodes?
@@ -481,7 +481,7 @@ class MyShowTest < ActiveSupport::TestCase
     show1 = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     show2 = Show.create!(title: "Some Other Show", tmdb_tv_id: 124)
     season2 = Season.create!(show: show2, season_number: 1, name: "Season 1", tmdb_id: 457, episode_count: 1)
-    my_show1 = MyShow.create!(human: human, show: show1, status: "waiting_for_more")
+    my_show1 = MyShow.create!(human: human, show: show1, status: "waiting")
     MySeason.create!(human: human, season: season2, watched_episode_numbers: [1])
 
     assert_not my_show1.watched_episodes?
@@ -505,7 +505,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "snoozed? returns true when snoozed_until is set" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 1.week.from_now)
 
     assert_predicate my_show, :snoozed?
   end
@@ -513,7 +513,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "snoozed? returns true when snoozed_until is in the past" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.day.ago)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 1.day.ago)
 
     assert_predicate my_show, :snoozed?
   end
@@ -521,7 +521,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "snoozed? returns false when snoozed_until is nil" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     assert_not_predicate my_show, :snoozed?
   end
@@ -529,7 +529,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "still_snoozing? returns true when snoozed_until is in the future" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 1.week.from_now)
 
     assert_predicate my_show, :still_snoozing?
   end
@@ -537,7 +537,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "still_snoozing? returns false when snoozed_until is in the past" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.day.ago)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 1.day.ago)
 
     assert_not_predicate my_show, :still_snoozing?
   end
@@ -545,7 +545,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "still_snoozing? returns false when snoozed_until is nil" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+    my_show = MyShow.create!(human: human, show: show, status: "waiting")
 
     assert_not_predicate my_show, :still_snoozing?
   end
@@ -553,7 +553,7 @@ class MyShowTest < ActiveSupport::TestCase
   test "snooze_days_remaining returns ceiling of days left" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 6.5.days.from_now)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 6.5.days.from_now)
 
     assert_equal 7, my_show.snooze_days_remaining
   end
@@ -561,26 +561,26 @@ class MyShowTest < ActiveSupport::TestCase
   test "snooze_days_remaining returns 0 when snooze has expired" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.day.ago)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 1.day.ago)
 
     assert_equal 0, my_show.snooze_days_remaining
   end
 
-  test "clears snoozed_until when status changes away from waiting_for_more" do
+  test "clears snoozed_until when status changes away from waiting" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 1.week.from_now)
 
     my_show.update!(status: "currently_watching")
 
     assert_nil my_show.reload.snoozed_until
   end
 
-  test "does not clear snoozed_until when status stays at waiting_for_more" do
+  test "does not clear snoozed_until when status stays at waiting" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     snoozed_until = 1.week.from_now
-    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: snoozed_until)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: snoozed_until)
 
     my_show.update!(note_to_self: "cool show")
 
