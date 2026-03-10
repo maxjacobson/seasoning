@@ -73,7 +73,7 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
     assert DebutingShowNotification.exists?(human:, show:)
   end
 
-  test "returns false and skips notification when show is snoozed" do
+  test "returns false and skips notification when show is still snoozing" do
     human = Human.create!(handle: "donna", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 123)
 

@@ -14,11 +14,15 @@ class MyShow < ApplicationRecord
   before_save :clear_snooze_on_status_change
 
   def snoozed?
+    snoozed_until.present?
+  end
+
+  def still_snoozing?
     snoozed_until.present? && snoozed_until > Time.current
   end
 
   def snooze_days_remaining
-    return 0 unless snoozed?
+    return 0 unless still_snoozing?
 
     ((snoozed_until - Time.current) / 1.day).ceil
   end

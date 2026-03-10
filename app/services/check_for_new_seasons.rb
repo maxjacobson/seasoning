@@ -1,5 +1,5 @@
 CheckForNewSeasons = lambda do |my_show|
-  return false if my_show.snoozed?
+  return false if my_show.still_snoozing?
 
   if my_show.available_unwatched_content?
     my_show.status = "next_up"
