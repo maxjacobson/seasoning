@@ -72,4 +72,21 @@ class CheckForNewSeasonsTest < ActiveSupport::TestCase
 
     assert DebutingShowNotification.exists?(human:, show:)
   end
+
+  test "returns false and skips notification when show is snoozed" do
+    human = Human.create!(handle: "donna", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 123)
+
+    season1 = show.seasons.create!(season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
+    Episode.create!(season: season1, episode_number: 1, air_date: 1.day.ago, tmdb_id: 789, name: "Episode 1")
+
+    my_show = MyShow.create!(human:, show:, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+
+    result = CheckForNewSeasons.call(my_show)
+
+    assert_not result
+    assert_predicate my_show.reload, :waiting_for_more?
+    assert_not ReturningShowNotification.exists?(human:, show:)
+    assert_not DebutingShowNotification.exists?(human:, show:)
+  end
 end

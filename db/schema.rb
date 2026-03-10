@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_03_06_000001) do
+ActiveRecord::Schema[8.2].define(version: 2026_03_10_002556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -94,6 +94,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_06_000001) do
     t.bigint "human_id", null: false, comment: "Which human has saved this show"
     t.text "note_to_self", comment: "An optional blob of Markdown-formatted text that the human can write to remind themselves why they've added the show, or however they want to use it"
     t.bigint "show_id", null: false, comment: "Which show this human has saved"
+    t.datetime "snoozed_until"
     t.enum "status", default: "might_watch", null: false, enum_type: "my_show_status"
     t.datetime "updated_at", null: false
     t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true

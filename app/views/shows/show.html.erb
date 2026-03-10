@@ -24,6 +24,12 @@
           <div class="space-y-4">
             <%= render "choose_show_status_button", my_show: @page.my_show %>
 
+            <% if @page.my_show.snoozed? %>
+              <p class="text-sm text-gray-500">
+                snoozed <%= @page.my_show.snooze_days_remaining %>d 💤
+              </p>
+            <% end %>
+
             <div class="max-w-full sm:max-w-md">
               <div class="flex justify-end text-sm text-gray-600 mb-2">
                 <span>

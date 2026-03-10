@@ -84,7 +84,12 @@
                   </p>
                 </div>
 
-                <%= button_to "×", returning_show_notification_path(notification), method: :delete, class: "ml-3 text-orange-600 hover:text-orange-800 font-bold text-xl leading-none cursor-pointer bg-transparent border-none p-0", title: "Dismiss notification" %>
+                <div class="ml-3 flex items-center gap-2">
+                  <span class="text-sm text-orange-700">Snooze</span>
+                  <%= button_to "1 week", snooze_returning_show_notification_path(notification), params: { duration: "1_week" }, method: :post, class: "text-sm text-orange-600 hover:text-orange-800 underline cursor-pointer bg-transparent border-none p-0", title: "Snooze for 1 week" %>
+                  <%= button_to "1 month", snooze_returning_show_notification_path(notification), params: { duration: "1_month" }, method: :post, class: "text-sm text-orange-600 hover:text-orange-800 underline cursor-pointer bg-transparent border-none p-0", title: "Snooze for 1 month" %>
+                  <%= button_to "×", returning_show_notification_path(notification), method: :delete, class: "text-orange-600 hover:text-orange-800 font-bold text-xl leading-none cursor-pointer bg-transparent border-none p-0", title: "Dismiss notification" %>
+                </div>
               </div>
             <% end %>
 
@@ -101,7 +106,12 @@
                   </p>
                 </div>
 
-                <%= button_to "×", debuting_show_notification_path(notification), method: :delete, class: "ml-3 text-orange-600 hover:text-orange-800 font-bold text-xl leading-none cursor-pointer bg-transparent border-none p-0", title: "Dismiss notification" %>
+                <div class="ml-3 flex items-center gap-2">
+                  <span class="text-sm text-orange-700">Snooze</span>
+                  <%= button_to "1 week", snooze_debuting_show_notification_path(notification), params: { duration: "1_week" }, method: :post, class: "text-sm text-orange-600 hover:text-orange-800 underline cursor-pointer bg-transparent border-none p-0", title: "Snooze for 1 week" %>
+                  <%= button_to "1 month", snooze_debuting_show_notification_path(notification), params: { duration: "1_month" }, method: :post, class: "text-sm text-orange-600 hover:text-orange-800 underline cursor-pointer bg-transparent border-none p-0", title: "Snooze for 1 month" %>
+                  <%= button_to "×", debuting_show_notification_path(notification), method: :delete, class: "text-orange-600 hover:text-orange-800 font-bold text-xl leading-none cursor-pointer bg-transparent border-none p-0", title: "Dismiss notification" %>
+                </div>
               </div>
             <% end %>
           </div>
