@@ -11,7 +11,7 @@
         else
           ["Currently watching", "currently_watching"]
         end,
-        ["Waiting for more", "waiting_for_more"],
+        [my_show.watched_episodes? ? "Waiting for more" : "Waiting for debut", "waiting"],
         ["Stopped watching", "stopped_watching"],
         ["Finished", "finished"]
       ],

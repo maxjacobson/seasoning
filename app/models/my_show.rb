@@ -7,7 +7,7 @@ class MyShow < ApplicationRecord
     next_up: "next_up",
     currently_watching: "currently_watching",
     stopped_watching: "stopped_watching",
-    waiting_for_more: "waiting_for_more",
+    waiting: "waiting",
     finished: "finished"
   }
 
@@ -98,6 +98,14 @@ class MyShow < ApplicationRecord
     result.first["percentage"].to_f
   end
 
+  def status_label
+    if waiting?
+      watched_episodes? ? "Waiting for more" : "Waiting for debut"
+    else
+      status.humanize
+    end
+  end
+
   def watched_episodes?
     MySeason.joins(:season)
             .where(seasons: { show_id: show_id }, human_id: human_id)
@@ -113,7 +121,7 @@ class MyShow < ApplicationRecord
 
   def clear_snooze_on_status_change
     return unless status_changed?
-    return unless status_was == "waiting_for_more"
+    return unless status_was == "waiting"
 
     self.snoozed_until = nil
   end
