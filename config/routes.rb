@@ -7,8 +7,12 @@ Rails.app.routes.draw do
   resource :password, only: [:edit, :update], controller: "passwords"
   resource :admin, only: [:show]
   resources :follows, only: [:create, :destroy]
-  resources :returning_show_notifications, only: [:destroy]
-  resources :debuting_show_notifications, only: [:destroy]
+  resources :returning_show_notifications, only: [:destroy] do
+    resource :snooze, only: [:create], controller: "returning_show_notifications/snoozes"
+  end
+  resources :debuting_show_notifications, only: [:destroy] do
+    resource :snooze, only: [:create], controller: "debuting_show_notifications/snoozes"
+  end
   resource :credits, only: [:show]
   resource :roadmap, only: [:show]
   resource :changelog, only: [:show]

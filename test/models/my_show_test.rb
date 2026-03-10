@@ -501,4 +501,89 @@ class MyShowTest < ActiveSupport::TestCase
 
     assert_in_delta(0.0, my_show.watched_percentage)
   end
+
+  test "snoozed? returns true when snoozed_until is set" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+
+    assert_predicate my_show, :snoozed?
+  end
+
+  test "snoozed? returns true when snoozed_until is in the past" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.day.ago)
+
+    assert_predicate my_show, :snoozed?
+  end
+
+  test "snoozed? returns false when snoozed_until is nil" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+
+    assert_not_predicate my_show, :snoozed?
+  end
+
+  test "still_snoozing? returns true when snoozed_until is in the future" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+
+    assert_predicate my_show, :still_snoozing?
+  end
+
+  test "still_snoozing? returns false when snoozed_until is in the past" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.day.ago)
+
+    assert_not_predicate my_show, :still_snoozing?
+  end
+
+  test "still_snoozing? returns false when snoozed_until is nil" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more")
+
+    assert_not_predicate my_show, :still_snoozing?
+  end
+
+  test "snooze_days_remaining returns ceiling of days left" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 6.5.days.from_now)
+
+    assert_equal 7, my_show.snooze_days_remaining
+  end
+
+  test "snooze_days_remaining returns 0 when snooze has expired" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.day.ago)
+
+    assert_equal 0, my_show.snooze_days_remaining
+  end
+
+  test "clears snoozed_until when status changes away from waiting_for_more" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: 1.week.from_now)
+
+    my_show.update!(status: "currently_watching")
+
+    assert_nil my_show.reload.snoozed_until
+  end
+
+  test "does not clear snoozed_until when status stays at waiting_for_more" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    snoozed_until = 1.week.from_now
+    my_show = MyShow.create!(human: human, show: show, status: "waiting_for_more", snoozed_until: snoozed_until)
+
+    my_show.update!(note_to_self: "cool show")
+
+    assert_not_nil my_show.reload.snoozed_until
+  end
 end

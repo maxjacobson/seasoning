@@ -11,6 +11,22 @@ class MyShow < ApplicationRecord
     finished: "finished"
   }
 
+  before_save :clear_snooze_on_status_change
+
+  def snoozed?
+    snoozed_until.present?
+  end
+
+  def still_snoozing?
+    snoozed_until.present? && snoozed_until > Time.current
+  end
+
+  def snooze_days_remaining
+    return 0 unless still_snoozing?
+
+    ((snoozed_until - Time.current) / 1.day).ceil
+  end
+
   def available_unwatched_content?
     unwatched_episode_badge.any_available?
   end
@@ -91,5 +107,14 @@ class MyShow < ApplicationRecord
 
   def skipped_season?(season)
     MySeason.exists?(human: human, season: season, skipped: true)
+  end
+
+  private
+
+  def clear_snooze_on_status_change
+    return unless status_changed?
+    return unless status_was == "waiting_for_more"
+
+    self.snoozed_until = nil
   end
 end
