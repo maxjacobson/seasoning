@@ -2,11 +2,14 @@
 
 <html>
   <head>
-    <% if content_for?(:title) %>
-      <title><%= yield(:title) %>&mdash; Seasoning</title>
-    <% else %>
-      <title>Seasoning</title>
-    <% end %>
+    <title>
+      <% if content_for?(:title) %>
+        <%= yield(:title) %>
+        &mdash; Seasoning
+      <% else %>
+        Seasoning
+      <% end %>
+    </title>
 
     <meta
       name="viewport"
@@ -26,7 +29,7 @@
 
     <style type="text/css">
       body {
-        background-color: rgb(246, 246, 247);
+      background-color: rgb(246, 246, 247);
       }
     </style>
 
