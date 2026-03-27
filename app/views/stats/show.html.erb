@@ -9,17 +9,21 @@
       's <%= @year %> stats
     </h1>
 
-    <% if @filter == 'reviewed-in' %>
-      <p class="text-lg text-gray-600">
-        <%= @human.handle %> reviewed
-        <%= pluralize(@reviews.count, "season") %> in <%= @year %>
-      </p>
-    <% else %>
-      <p class="text-lg text-gray-600">
-        <%= @human.handle %> reviewed
-        <%= pluralize(@reviews.count, "season") %> that aired in <%= @year %>
-      </p>
-    <% end %>
+    <p class="text-lg text-gray-600">
+      <% if @filter == 'reviewed-in' %>
+        <%= @human.handle %>
+        reviewed
+        <%= pluralize(@reviews.count, "season") %>
+        in
+        <%= @year %>
+      <% else %>
+        <%= @human.handle %>
+        reviewed
+        <%= pluralize(@reviews.count, "season") %>
+        that aired in
+        <%= @year %>
+      <% end %>
+    </p>
   </div>
 
   <div class="flex bg-gray-100 rounded-lg p-1 mb-6 max-w-fit mx-auto">
@@ -76,15 +80,15 @@
       </div>
     <% end %>
     <div class="all-reviews mb-8">
-      <% if @filter == 'reviewed-in' %>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">
-          Everything reviewed in <%= @year %>
-        </h2>
-      <% else %>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">
-          Everything that aired in <%= @year %>
-        </h2>
-      <% end %>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        <% if @filter == 'reviewed-in' %>
+          Everything reviewed in
+          <%= @year %>
+        <% else %>
+          Everything that aired in
+          <%= @year %>
+        <% end %>
+      </h2>
 
       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
         <% @reviews.order(created_at: :asc).each do |review| %>

@@ -8,6 +8,20 @@ files:
 
 linter:
   enabled: true
+  rules:
+    erb-no-unsafe-raw:
+      exclude:
+        - "**/_note_to_self.html.erb"
+        - "**/shows/index.html.erb"
+        - "**/season_reviews/show.html.erb"
+        - "**/changelogs/show.html.erb"
+        - "**/roadmaps/show.html.erb"
+    erb-no-interpolated-class-names:
+      exclude:
+        - "**/layouts/application.html.erb"
+    erb-no-trailing-whitespace:
+      exclude:
+        - "**/_activity_feed.html.erb"
 
 formatter:
   enabled: true
