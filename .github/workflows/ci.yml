@@ -46,8 +46,8 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm clean-install
-      - run: npm run playwright:install
+      - run: corepack npm clean-install
+      - run: corepack npm run playwright:install
       - run: bin/lint
       - run: bundle exec rake assets:precompile
       - run: bin/rails db:create db:schema:load

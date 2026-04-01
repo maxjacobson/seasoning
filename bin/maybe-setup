@@ -20,11 +20,11 @@ maybeNodeSetup() {
     fi
   fi
 
-  echo "== npm clean-install =="
-  npm clean-install
+  echo "== corepack npm clean-install =="
+  corepack npm clean-install
 
-  echo "== npm run playwright:install =="
-  npm run playwright:install
+  echo "== corepack npm run playwright:install =="
+  corepack npm run playwright:install
 
   md5sum package-lock.json > "$npm_path"
 }
