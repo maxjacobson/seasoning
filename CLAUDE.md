@@ -38,8 +38,8 @@ bin/rails javascript:build
 bin/rails css:build
 
 # Or use npm scripts
-npm run build:css
-npm run build
+corepack npm run build:css
+corepack npm run build
 ```
 
 ### Testing

@@ -27,7 +27,7 @@ And visit <http://localhost:3000>
 To run the tests locally:
 
 ```
-npm run build:css
+corepack npm run build:css
 bin/rails test:all
 ```
 
