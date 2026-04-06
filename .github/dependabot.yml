@@ -2,12 +2,26 @@ version: 2
 updates:
   - package-ecosystem: "bundler"
     directory: "/"
+    cooldown:
+      semver-major-days: 21
+      semver-minor-days: 14
+      semver-patch-days: 7
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      time: "05:30"
+      timezone: "America/New_York"
+      day: "saturday"
   - package-ecosystem: "npm"
     directory: "/"
+    cooldown:
+      semver-major-days: 21
+      semver-minor-days: 14
+      semver-patch-days: 7
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      time: "05:30"
+      timezone: "America/New_York"
+      day: "saturday"
     groups:
       herb:
         patterns:
@@ -15,4 +29,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      time: "05:30"
+      timezone: "America/New_York"
+      day: "saturday"
+    cooldown:
+      default-days: 21
