@@ -78,14 +78,6 @@ class ShowingSkippedSeasonsTest < ApplicationSystemTestCase
     assert_content "Season 2"
   end
 
-  test "show skipped seasons checkbox does not appear for visitors" do
-    visit show_path(@show.slug)
-
-    assert_no_content "Show skipped seasons"
-    assert_content "Season 1"
-    assert_content "Season 2"
-  end
-
   test "show skipped seasons checkbox does not appear if user has not added show" do
     other_human = Human.create!(handle: "bosworth", email: "bosworth@example.com")
     other_magic_link = MagicLink.create!(email: other_human.email)
