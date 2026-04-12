@@ -23,7 +23,7 @@ class ShowsController < ApplicationController
   end
 
   def show
-    authorize! { true }
+    authorize! { current_human.present? }
 
     @page = ShowDetailsPage.new(
       show: Show.find_by!(slug: params[:slug]),

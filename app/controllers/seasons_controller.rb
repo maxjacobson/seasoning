@@ -1,7 +1,7 @@
 # Controller for displaying season pages
 class SeasonsController < ApplicationController
   def show
-    authorize! { true }
+    authorize! { current_human.present? }
 
     @show = Show.find_by!(slug: params[:show_slug])
     @season = @show.seasons.find_by!(slug: params[:season_slug])
