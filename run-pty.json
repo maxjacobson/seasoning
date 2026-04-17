@@ -1,5 +1,5 @@
 [
   { "command": ["bin/rails", "server"] },
-  { "command": ["corepack", "npm", "run", "build:css", "--", "--watch"] },
-  { "command": ["corepack", "npm", "run", "build", "--", "--watch"] }
+  { "command": ["npm", "run", "build:css", "--", "--watch"] },
+  { "command": ["npm", "run", "build", "--", "--watch"] }
 ]

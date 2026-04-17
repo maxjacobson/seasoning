@@ -13,8 +13,8 @@ echo "== Installing dependencies =="
 gem update --system --silent
 gem install bundler --conservative
 bundle check || bundle install --quiet
-corepack npm clean-install --silent
-corepack npm run --silent playwright:install
+npm clean-install --silent
+npm run --silent playwright:install
 
 echo "== Preparing database =="
 bin/rails db:prepare
