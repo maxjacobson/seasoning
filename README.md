@@ -6,7 +6,7 @@
 
 Your couch away from your couch.
 
-Deploying to: <http://seasoning.herokuapp.com/> aka <https://www.seasoning.tv>
+Deploying to: <https://www.seasoning.tv>
 
 Demo: <https://www.youtube.com/watch?v=4aB6LbN2ff8>
 
@@ -27,7 +27,7 @@ And visit <http://localhost:3000>
 To run the tests locally:
 
 ```
-corepack npm run build:css
+npm run build:css
 bin/rails test:all
 ```
 

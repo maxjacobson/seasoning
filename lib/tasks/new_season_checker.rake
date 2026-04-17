@@ -1,5 +1,5 @@
 namespace :new_season_checker do
-  # Run daily via https://dashboard.heroku.com/apps/seasoning/scheduler
+  # Run daily via systemd timer (seasoning-nightly.service)
   task toggle: :environment do
     my_shows = MyShow.where(status: ["waiting", "finished"])
     my_shows.find_each do |my_show|

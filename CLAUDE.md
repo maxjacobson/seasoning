@@ -13,7 +13,7 @@ Seasoning is a Ruby on Rails application for tracking TV show viewing progress.
 - JavaScript: jsbundling-rails with esbuild for bundling
 - Testing: Minitest (Rails), Capybara with Playwright for system tests
 - API: The Movie Database (TMDB) for show data
-- Deployment: Heroku with Heroku Scheduler for background tasks
+- Deployment: Raspberry Pi 5 with systemd for background tasks, Cloudflare tunnel for public access
 
 ## Development Commands
 
@@ -137,7 +137,7 @@ node_modules/.bin/prettier --write .  # Formatting
 - The maskable icon is generated with ImageMagick: orange background + icon centered at ~80% size
 - Install prompt logic is in `app/javascript/install-prompt.js`; intercepts `beforeinstallprompt` and shows a hidden nav button
 
-## Scheduled Tasks (Heroku Scheduler)
+## Scheduled Tasks (systemd timer: seasoning-nightly.service)
 
 - `prune:all` - Daily cleanup of expired MagicLink records
 - `db:sessions:trim` - Daily cleanup of Rails sessions (midnight UTC, 180-day threshold)
