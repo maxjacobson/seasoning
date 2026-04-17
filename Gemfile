@@ -6,6 +6,7 @@ gem "activerecord-session_store"
 gem "bcrypt"
 gem "bugsnag"
 gem "cssbundling-rails"
+gem "dotenv-rails"
 gem "dry-struct"
 gem "email_validator"
 gem "jsbundling-rails"
@@ -18,10 +19,6 @@ gem "rails", github: "rails", branch: "main"
 gem "rails_autolink"
 gem "sucker_punch"
 gem "turbo-rails"
-
-group :development, :test do
-  gem "dotenv-rails"
-end
 
 group :development do
   gem "erb_lint"
