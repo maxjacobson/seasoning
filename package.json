@@ -7,14 +7,10 @@
   "devDependencies": {
     "@herb-tools/formatter": "^0.8.10",
     "@herb-tools/linter": "^0.8.10",
-    "@tailwindcss/cli": "^4.2.2",
-    "@tailwindcss/forms": "^0.5.11",
-    "esbuild": "^0.28.0",
     "playwright": "^1.59.1",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "run-pty": "^6.0.2",
-    "tailwindcss": "^4.2.2"
+    "run-pty": "^6.0.2"
   },
   "scripts": {
     "playwright:install": "playwright install",
@@ -22,6 +18,10 @@
     "build": "esbuild app/javascript/application.js --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
   },
   "dependencies": {
-    "@hotwired/turbo-rails": "^8.0.23"
+    "@hotwired/turbo-rails": "^8.0.23",
+    "@tailwindcss/cli": "^4.2.2",
+    "@tailwindcss/forms": "^0.5.11",
+    "esbuild": "^0.28.0",
+    "tailwindcss": "^4.2.2"
   }
 }
