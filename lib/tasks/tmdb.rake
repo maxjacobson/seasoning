@@ -1,7 +1,7 @@
 namespace :tmdb do
   # Refresh the configuration record
   #
-  # Run daily via https://dashboard.heroku.com/apps/seasoning/scheduler
+  # Run daily via systemd timer (seasoning-nightly.service)
   task refresh_config: :environment do
     TMDBAPIConfiguration.refresh!
   end
@@ -12,7 +12,7 @@ namespace :tmdb do
   #
   # Plus other various changes, like the default poster changing...
   #
-  # Run daily via https://dashboard.heroku.com/apps/seasoning/scheduler
+  # Run daily via systemd timer (seasoning-nightly.service)
   task refresh_shows: :environment do
     Show.needs_refreshing.find_each do |show|
       puts "Refreshing #{show.slug} asynchronously"

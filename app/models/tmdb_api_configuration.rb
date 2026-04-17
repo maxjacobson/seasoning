@@ -1,7 +1,7 @@
 # Persists the TMDB API configuration as recommended here:
 # https://developers.themoviedb.org/3/configuration/get-api-configuration
 #
-# Is refreshed every few days via https://dashboard.heroku.com/apps/seasoning/scheduler
+# Is refreshed daily via systemd timer (seasoning-nightly.service)
 #
 # There should always be exactly one record in this table
 class TMDBAPIConfiguration < ApplicationRecord
