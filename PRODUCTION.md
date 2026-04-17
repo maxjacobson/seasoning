@@ -36,8 +36,16 @@ sudo systemctl restart cloudflared
 # App logs (Puma + Rails)
 journalctl -u seasoning -f
 
-# Nightly task logs
-journalctl -u seasoning-nightly.service -f
+# Nightly task logs (all services)
+journalctl -u "seasoning-*" --since today
+
+# Individual nightly task logs
+journalctl -u seasoning-backup-db -f
+journalctl -u seasoning-prune -f
+journalctl -u seasoning-tmdb-refresh-config -f
+journalctl -u seasoning-tmdb-refresh-shows -f
+journalctl -u seasoning-new-season-checker -f
+journalctl -u seasoning-trim-sessions -f
 
 # nginx logs
 sudo tail -f /var/log/nginx/access.log
@@ -46,20 +54,89 @@ sudo tail -f /var/log/nginx/error.log
 
 ## Scheduled Tasks
 
-A systemd timer fires nightly at midnight and runs these tasks in sequence:
+A systemd timer fires nightly at midnight. Each task runs as its own independent service so a failure in one doesn't affect the others.
 
-- `prune:all` — removes expired magic links
-- `tmdb:refresh_config` — refreshes TMDB API configuration
-- `tmdb:refresh_shows` — refreshes show data from TMDB
-- `new_season_checker:toggle` — checks for new seasons
-- `db:sessions:trim` — cleans up old sessions
+- `seasoning-prune` — removes expired magic links (`prune:all`)
+- `seasoning-tmdb-refresh-config` — refreshes TMDB API configuration (`tmdb:refresh_config`)
+- `seasoning-tmdb-refresh-shows` — refreshes show data from TMDB (`tmdb:refresh_shows`)
+- `seasoning-new-season-checker` — checks for new seasons (`new_season_checker:toggle`)
+- `seasoning-trim-sessions` — cleans up old sessions (`db:sessions:trim`)
+- `seasoning-backup-db` — dumps the database and uploads to S3 (`bin/backup-db`)
 
 ```sh
 # Check when timer last ran and next fires
 systemctl list-timers seasoning-nightly.timer
 
-# Run tasks manually right now
-sudo systemctl start seasoning-nightly.service
+# Run all nightly tasks manually right now
+sudo systemctl start seasoning-nightly.target
+
+# Run a single task manually
+sudo systemctl start seasoning-backup-db
+```
+
+### Systemd unit files
+
+These live in `/etc/systemd/system/`. After changing any of them, run `sudo systemctl daemon-reload`.
+
+**`/etc/systemd/system/seasoning-nightly.target`**
+
+```ini
+[Unit]
+Description=Seasoning Nightly Tasks
+Wants=seasoning-prune.service seasoning-tmdb-refresh-config.service seasoning-tmdb-refresh-shows.service seasoning-new-season-checker.service seasoning-trim-sessions.service seasoning-backup-db.service
+```
+
+**`/etc/systemd/system/seasoning-nightly.timer`**
+
+```ini
+[Unit]
+Description=Run Seasoning Nightly Tasks
+
+[Timer]
+OnCalendar=*-*-* 00:00:00
+Persistent=true
+Unit=seasoning-nightly.target
+
+[Install]
+WantedBy=timers.target
+```
+
+**Shared service template** (each service below follows this pattern):
+
+```ini
+[Unit]
+Description=Seasoning: <task description>
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=oneshot
+User=maxwell
+WorkingDirectory=/home/maxwell/Documents/seasoning
+Environment=PATH=/home/maxwell/.rbenv/shims:/home/maxwell/.rbenv/bin:/usr/local/bin:/usr/bin:/bin
+Environment=RAILS_ENV=production
+ExecStart=<command>
+```
+
+**Individual services:**
+
+| File | ExecStart |
+|------|-----------|
+| `seasoning-prune.service` | `/home/maxwell/.rbenv/shims/bundle exec rails prune:all` |
+| `seasoning-tmdb-refresh-config.service` | `/home/maxwell/.rbenv/shims/bundle exec rails tmdb:refresh_config` |
+| `seasoning-tmdb-refresh-shows.service` | `/home/maxwell/.rbenv/shims/bundle exec rails tmdb:refresh_shows` |
+| `seasoning-new-season-checker.service` | `/home/maxwell/.rbenv/shims/bundle exec rails new_season_checker:toggle` |
+| `seasoning-trim-sessions.service` | `/home/maxwell/.rbenv/shims/bundle exec rails db:sessions:trim` |
+| `seasoning-backup-db.service` | `/home/maxwell/Documents/seasoning/bin/backup-db` |
+
+To set up from scratch:
+
+```sh
+# Write all unit files to /etc/systemd/system/, then:
+sudo systemctl daemon-reload
+sudo systemctl disable seasoning-nightly.service  # remove old combined service
+sudo systemctl enable seasoning-nightly.timer
+sudo systemctl start seasoning-nightly.timer
 ```
 
 ## Database
