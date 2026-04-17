@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
 
   before_action :redirect_apex_domain
   after_action :verify_authorization_occurred
-  before_bugsnag_notify :add_human_info_to_bugsnag
 
   NotAuthorized = Class.new(StandardError)
 
@@ -49,12 +48,6 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :debuting_show_notifications
-
-  def add_human_info_to_bugsnag(event)
-    return if current_human.blank?
-
-    event.set_user(current_human.id.to_s, current_human.email, current_human.handle)
-  end
 
   def current_page
     Integer(params[:page]).tap do |val|
