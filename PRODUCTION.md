@@ -120,14 +120,14 @@ ExecStart=<command>
 
 **Individual services:**
 
-| File | ExecStart |
-|------|-----------|
-| `seasoning-prune.service` | `/home/maxwell/.rbenv/shims/bundle exec rails prune:all` |
-| `seasoning-tmdb-refresh-config.service` | `/home/maxwell/.rbenv/shims/bundle exec rails tmdb:refresh_config` |
-| `seasoning-tmdb-refresh-shows.service` | `/home/maxwell/.rbenv/shims/bundle exec rails tmdb:refresh_shows` |
-| `seasoning-new-season-checker.service` | `/home/maxwell/.rbenv/shims/bundle exec rails new_season_checker:toggle` |
-| `seasoning-trim-sessions.service` | `/home/maxwell/.rbenv/shims/bundle exec rails db:sessions:trim` |
-| `seasoning-backup-db.service` | `/home/maxwell/Documents/seasoning/bin/backup-db` |
+| File                                    | ExecStart                                                                |
+| --------------------------------------- | ------------------------------------------------------------------------ |
+| `seasoning-prune.service`               | `/home/maxwell/.rbenv/shims/bundle exec rails prune:all`                 |
+| `seasoning-tmdb-refresh-config.service` | `/home/maxwell/.rbenv/shims/bundle exec rails tmdb:refresh_config`       |
+| `seasoning-tmdb-refresh-shows.service`  | `/home/maxwell/.rbenv/shims/bundle exec rails tmdb:refresh_shows`        |
+| `seasoning-new-season-checker.service`  | `/home/maxwell/.rbenv/shims/bundle exec rails new_season_checker:toggle` |
+| `seasoning-trim-sessions.service`       | `/home/maxwell/.rbenv/shims/bundle exec rails db:sessions:trim`          |
+| `seasoning-backup-db.service`           | `/home/maxwell/Documents/seasoning/bin/backup-db`                        |
 
 To set up from scratch:
 
