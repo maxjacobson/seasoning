@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+FILENAME="seasoning_production_${TIMESTAMP}.dump.gz"
+TMPFILE="/tmp/${FILENAME}"
+BUCKET="seasoning-backups-874432646837-us-east-1-an"
+
+pg_dump -h /var/run/postgresql -Fc seasoning_production | gzip > "$TMPFILE"
+aws s3 cp "$TMPFILE" "s3://${BUCKET}/${FILENAME}"
+rm "$TMPFILE"
+
+echo "Backed up to s3://${BUCKET}/${FILENAME}"
