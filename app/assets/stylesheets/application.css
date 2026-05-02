@@ -81,7 +81,7 @@ a.no-underline:hover {
 }
 
 .text-field {
-  @apply focus:border-yellow-400 focus:ring-yellow-400;
+  @apply rounded-md focus:border-yellow-400 focus:ring-yellow-400;
 }
 
 .select-field {
@@ -121,7 +121,7 @@ a.no-underline:hover {
 /* PWA standalone mode: pad sticky nav for notch/dynamic island */
 @media (display-mode: standalone) {
   .sticky.top-0 {
-    padding-top: env(safe-area-inset-top);
+    padding-top: calc(0.5rem + env(safe-area-inset-top));
   }
 
   body {
