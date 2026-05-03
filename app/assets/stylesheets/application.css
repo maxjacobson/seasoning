@@ -85,7 +85,7 @@ a.no-underline:hover {
 }
 
 .select-field {
-  @apply focus:border-yellow-400 focus:ring-yellow-400;
+  @apply rounded-md focus:border-yellow-400 focus:ring-yellow-400;
 }
 
 .flash {
