@@ -2,4 +2,3 @@ public/assets/**/*
 tmp/**/*
 .rubocop_todo.yml
 vendor/**/*
-.claude/
