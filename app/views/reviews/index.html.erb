@@ -41,7 +41,9 @@
                 <%= link_to "Read full review", proper_review_path(review), class: "rounded-button" %>
 
                 <% if review.likes.size > 0 %>
-                  <span class="text-sm text-gray-500"><%= pluralize(review.likes.size, "like") %></span>
+                  <span class="text-sm text-gray-500">
+                    <%= pluralize(review.likes.size, "like") %>
+                  </span>
                 <% end %>
               </div>
             </div>

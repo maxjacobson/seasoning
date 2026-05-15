@@ -11,11 +11,13 @@ class SeasonReviewLikeTest < ActiveSupport::TestCase
 
   test "a human can like another human's review" do
     like = SeasonReviewLike.new(human: @reader, season_review: @review)
-    assert like.valid?
+
+    assert_predicate like, :valid?
   end
 
   test "a human cannot like their own review" do
     like = SeasonReviewLike.new(human: @author, season_review: @review)
+
     assert_not like.valid?
     assert_includes like.errors[:base], "Cannot like your own review"
   end
@@ -42,6 +44,7 @@ class SeasonReviewLikeTest < ActiveSupport::TestCase
 
   test "SeasonReview#likes returns associated likes" do
     like = SeasonReviewLike.create!(human: @reader, season_review: @review)
+
     assert_includes @review.likes, like
   end
 end
