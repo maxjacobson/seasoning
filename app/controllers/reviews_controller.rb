@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
     @reviews = SeasonReview
                .where(author: @profile)
                .viewable_by(current_human)
+               .includes(:likes)
                .limit(PER_PAGE + 1) # Get one extra to check if there's a next page
                .offset(offset)
                .order(created_at: :desc)

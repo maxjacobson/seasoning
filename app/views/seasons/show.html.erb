@@ -145,6 +145,12 @@
 
                 <%= link_to l(review.created_at.to_date, format: :default), proper_review_path(review), class: "text-sm text-blue-600 hover:text-blue-800 hover:underline" %>
               </div>
+
+              <% if review.likes.size > 0 %>
+                <div class="mt-1 text-sm text-gray-500">
+                  <%= pluralize(review.likes.size, "like") %>
+                </div>
+              <% end %>
             </div>
           <% end %>
         </div>

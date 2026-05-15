@@ -48,6 +48,25 @@
     </div>
   </div>
 
+  <div class="mt-4 flex items-center gap-3">
+    <span class="text-gray-600"><%= pluralize(@review.likes.count, "like") %></span>
+
+    <% if current_human && @review.author != current_human %>
+      <% if @current_like %>
+        <%= button_to "Unlike",
+            season_review_like_path(@current_like),
+            method: :delete,
+            class: "rounded-button" %>
+      <% else %>
+        <%= button_to "Like",
+            season_review_likes_path,
+            method: :post,
+            params: { season_review_id: @review.id },
+            class: "rounded-button" %>
+      <% end %>
+    <% end %>
+  </div>
+
   <% if current_human && @review.author == current_human %>
     <div class="flex gap-2">
       <% if @review.viewing == 1 %>

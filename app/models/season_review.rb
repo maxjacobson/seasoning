@@ -8,6 +8,8 @@ class SeasonReview < ApplicationRecord
   belongs_to :author, class_name: "Human"
   belongs_to :season
 
+  has_many :likes, class_name: "SeasonReviewLike", dependent: :destroy
+
   validates :rating, inclusion: { in: (0..10).to_a }, allow_blank: true
   validates :body, presence: true
 

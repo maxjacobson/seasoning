@@ -7,6 +7,7 @@ Rails.app.routes.draw do
   resource :password, only: [:edit, :update], controller: "passwords"
   resource :admin, only: [:show]
   resources :follows, only: [:create, :destroy]
+  resources :season_review_likes, only: [:create, :destroy], path: "season-review-likes"
   resources :returning_show_notifications, only: [:destroy] do
     resource :snooze, only: [:create], controller: "returning_show_notifications/snoozes"
   end

@@ -17,6 +17,7 @@ class SeasonReviewsController < ApplicationController
     @show = show
     @season = season
     @author = author
+    @current_like = current_human ? @review.likes.find_by(human: current_human) : nil
   end
 
   def new
