@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -ex
+
+export RAILS_ENV=production
+
+git pull origin main
+bundle install
+npm clean-install
+bin/rails db:prepare
+bin/rails assets:precompile
+sudo systemctl restart seasoning
