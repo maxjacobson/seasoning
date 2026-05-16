@@ -4,7 +4,7 @@ Seasoning runs on a Raspberry Pi 5 on Maxwell's home network, exposed publicly a
 
 ## Stack
 
-- **Ruby**: 4.0.3 (via rbenv)
+- **Ruby**: 4.x (via rbenv)
 - **Web server**: Puma, listening on a Unix socket at `/run/seasoning/puma.sock`
 - **Reverse proxy**: nginx on port 80, proxying to Puma
 - **Database**: PostgreSQL 17
