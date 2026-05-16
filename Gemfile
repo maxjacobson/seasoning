@@ -33,6 +33,6 @@ group :test do
   gem "capybara"
   gem "capybara-playwright-driver"
   gem "minitest-mock", require: "minitest/mock"
-  gem "simplecov", require: false
+  gem "simplecov", require: false, github: "simplecov-ruby/simplecov"
   gem "webmock"
 end
