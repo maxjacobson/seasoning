@@ -18,9 +18,6 @@ linter:
     erb-no-interpolated-class-names:
       enabled: false
 
-    erb-no-trailing-whitespace:
-      enabled: false
-
     # FIXME: enable
     erb-no-unsafe-raw:
       enabled: false

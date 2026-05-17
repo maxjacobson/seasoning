@@ -18,7 +18,7 @@
             <%= link_to review.season.name, season_path(review.season.show.slug, review.season.slug), class: "text-gray-900 hover:underline" %>
             of
             <%= link_to review.season.show.title, show_path(review.season.show.slug), class: "text-gray-900 hover:underline" %>
-            
+
             <span class="text-gray-500"><%= time_ago_in_words(review.created_at) %> ago</span>
           </div>
         </div>
