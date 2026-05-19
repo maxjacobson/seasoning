@@ -32,7 +32,7 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit show_path(@show.slug)
 
-    assert_content "Episodes available day they air"
+    assert_content "New episodes are available to me on air date"
   end
 
   test "unchecking saves the setting and shows confirmation" do
