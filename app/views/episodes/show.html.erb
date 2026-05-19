@@ -20,7 +20,7 @@
 
     <div class="text-sm text-gray-600">
       <span class="font-medium">Air date:</span>
-      <%= render "air_date", episode: @episode, available_same_day: @my_show&.available_same_day != false %>
+      <%= render "air_date", episode: @episode, available_same_day: @my_show.nil? || @my_show.available_same_day %>
     </div>
 
     <% if @my_season %>

@@ -73,7 +73,7 @@
           <% end %>
         </div>
 
-        <%= render "seasons_list", show: @page.show, seasons: @page.seasons %>
+        <%= render "seasons_list", show: @page.show, seasons: @page.seasons, my_show: @page.my_show %>
       </div>
     <% else %>
       <div class="text-gray-600">No seasons...</div>
