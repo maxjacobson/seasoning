@@ -2,6 +2,7 @@
 
 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
   <% my_show = current_human&.my_shows&.find_by(show: show) %>
+
   <% seasons.each do |season| %>
     <% badge = current_human ? season.unwatched_episode_badge_for(current_human, available_same_day: my_show&.available_same_day != false) : EpisodeBadge.new(0, 0) %>
 

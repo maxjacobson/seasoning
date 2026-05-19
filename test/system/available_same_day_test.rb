@@ -52,6 +52,7 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     visit show_path(@show.slug)
 
     checkbox = find("input[type='checkbox'][name='my_show[available_same_day]']")
+
     assert_not_predicate checkbox, :checked?
 
     checkbox.check
@@ -71,6 +72,7 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     visit show_path(@show.slug)
 
     checkbox = find("input[type='checkbox'][name='my_show[available_same_day]']")
+
     assert_not_predicate checkbox, :checked?
   end
 
