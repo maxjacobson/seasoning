@@ -30,6 +30,8 @@
               </p>
             <% end %>
 
+            <%= render "available_same_day", my_show: @page.my_show %>
+
             <div class="max-w-full sm:max-w-md">
               <div class="flex justify-end text-sm text-gray-600 mb-2">
                 <span>
@@ -71,7 +73,7 @@
           <% end %>
         </div>
 
-        <%= render "seasons_list", show: @page.show, seasons: @page.seasons %>
+        <%= render "seasons_list", show: @page.show, seasons: @page.seasons, my_show: @page.my_show %>
       </div>
     <% else %>
       <div class="text-gray-600">No seasons...</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_03_10_100000) do
+ActiveRecord::Schema[8.2].define(version: 2026_05_19_190310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -97,6 +97,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_10_100000) do
     t.datetime "snoozed_until"
     t.enum "status", default: "might_watch", null: false, enum_type: "my_show_status"
     t.datetime "updated_at", null: false
+    t.boolean "available_same_day", default: true, null: false
     t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true
     t.index ["human_id"], name: "index_my_shows_on_human_id"
     t.index ["show_id"], name: "index_my_shows_on_show_id"
@@ -110,6 +111,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_10_100000) do
     t.index ["human_id", "show_id"], name: "index_returning_show_notifications_on_human_and_show", unique: true
     t.index ["human_id"], name: "index_returning_show_notifications_on_human_id"
     t.index ["show_id"], name: "index_returning_show_notifications_on_show_id"
+  end
+
+  create_table "season_review_likes", force: :cascade do |t|
+    t.bigint "human_id", null: false, comment: "Who liked the review"
+    t.bigint "season_review_id", null: false, comment: "Which review was liked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["human_id", "season_review_id"], name: "index_season_review_likes_on_human_and_review", unique: true
+    t.index ["human_id"], name: "index_season_review_likes_on_human_id"
+    t.index ["season_review_id"], name: "index_season_review_likes_on_season_review_id"
   end
 
   create_table "season_reviews", force: :cascade do |t|
@@ -188,6 +199,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_10_100000) do
   add_foreign_key "my_shows", "shows", on_delete: :cascade
   add_foreign_key "returning_show_notifications", "humans", on_delete: :cascade
   add_foreign_key "returning_show_notifications", "shows", on_delete: :cascade
+  add_foreign_key "season_review_likes", "humans", on_delete: :cascade
+  add_foreign_key "season_review_likes", "season_reviews", on_delete: :cascade
   add_foreign_key "season_reviews", "humans", column: "author_id", on_delete: :cascade
   add_foreign_key "season_reviews", "seasons", on_delete: :cascade
 end

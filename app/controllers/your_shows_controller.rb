@@ -15,7 +15,7 @@ class YourShowsController < ApplicationController
     show = Show.find_by!(slug: params[:show_slug])
     my_show = current_human.my_shows.find_by!(show: show)
 
-    my_show.update!(params.expect(my_show: [:status, :note_to_self]))
+    my_show.update!(params.expect(my_show: [:status, :note_to_self, :available_same_day]))
 
     redirect_to show_path(show.slug), notice: "Updated #{show.title}"
   end

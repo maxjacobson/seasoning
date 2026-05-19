@@ -586,4 +586,70 @@ class MyShowTest < ActiveSupport::TestCase
 
     assert_not_nil my_show.reload.snoozed_until
   end
+
+  test "available_same_day defaults to true" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "might_watch")
+
+    assert_predicate my_show, :available_same_day
+  end
+
+  test "unwatched_episode_badge treats episode aired today as available when available_same_day is true" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
+    Episode.create!(season: season, episode_number: 1, air_date: human.time_zone.today, tmdb_id: 789, name: "Episode 1")
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: true)
+
+    badge = my_show.unwatched_episode_badge
+
+    assert_equal 1, badge.available
+    assert_equal 0, badge.upcoming
+  end
+
+  test "unwatched_episode_badge treats episode aired today as upcoming when available_same_day is false" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
+    Episode.create!(season: season, episode_number: 1, air_date: human.time_zone.today, tmdb_id: 789, name: "Episode 1")
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: false)
+
+    badge = my_show.unwatched_episode_badge
+
+    assert_equal 0, badge.available
+    assert_equal 1, badge.upcoming
+  end
+
+  test "unwatched_episode_badge treats episode aired yesterday as available when available_same_day is false" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
+    Episode.create!(season: season, episode_number: 1, air_date: human.time_zone.today - 1.day, tmdb_id: 789,
+                    name: "Episode 1")
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: false)
+
+    badge = my_show.unwatched_episode_badge
+
+    assert_equal 1, badge.available
+    assert_equal 0, badge.upcoming
+  end
+
+  test "unwatched_episode_badge with available_same_day false: today is upcoming, yesterday is available" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 3)
+    Episode.create!(season: season, episode_number: 1, air_date: human.time_zone.today - 1.day, tmdb_id: 789,
+                    name: "Episode 1")
+    Episode.create!(season: season, episode_number: 2, air_date: human.time_zone.today, tmdb_id: 790,
+                    name: "Episode 2")
+    Episode.create!(season: season, episode_number: 3, air_date: human.time_zone.today + 1.day, tmdb_id: 791,
+                    name: "Episode 3")
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: false)
+
+    badge = my_show.unwatched_episode_badge
+
+    assert_equal 1, badge.available
+    assert_equal 2, badge.upcoming
+  end
 end

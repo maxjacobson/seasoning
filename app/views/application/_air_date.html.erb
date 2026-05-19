@@ -1,9 +1,9 @@
-<%# locals: (episode:) %>
+<%# locals: (episode:, available_same_day: true) %>
 
 <% if episode.air_date.blank? %>
   —
 <% else %>
-  <% if current_human.present? && episode.available?(current_human.time_zone) %>
+  <% if current_human.present? && episode.available?(current_human.time_zone, available_same_day: available_same_day) %>
     <span><%= l(episode.air_date, format: :episode_air_date) %></span>
   <% elsif current_human.blank? && episode.air_date <= Date.current %>
     <span><%= l(episode.air_date, format: :episode_air_date) %></span>
