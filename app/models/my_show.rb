@@ -50,7 +50,7 @@ class MyShow < ApplicationRecord
         {
           human_id: human.id,
           show_id: show.id,
-          today: human.time_zone.today
+          today: available_same_day ? human.time_zone.today : human.time_zone.yesterday
         }
       ]
     )
