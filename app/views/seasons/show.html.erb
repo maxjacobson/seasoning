@@ -91,7 +91,7 @@
                 </td>
 
                 <td class="py-3 px-3 text-sm text-gray-600">
-                  <%= render "air_date", episode: episode %>
+                  <%= render "air_date", episode: episode, available_same_day: @my_show&.available_same_day != false %>
                 </td>
 
                 <% if current_human.present? %>

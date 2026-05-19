@@ -7,9 +7,10 @@ class Episode < ApplicationRecord
     Still.new(still_path)
   end
 
-  def available?(time_zone = Time.zone)
+  def available?(time_zone = Time.zone, available_same_day: true)
     return false if air_date.blank?
 
-    air_date <= time_zone.today
+    effective_today = available_same_day ? time_zone.today : time_zone.yesterday
+    air_date <= effective_today
   end
 end
