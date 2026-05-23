@@ -9,4 +9,5 @@ bundle install
 npm clean-install
 bin/rails db:prepare
 bin/rails assets:precompile
+rm -rf tmp/cache/bootsnap*
 sudo systemctl restart seasoning
