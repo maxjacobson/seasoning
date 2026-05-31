@@ -26,7 +26,7 @@ class ShowsController < ApplicationController
     authorize! { current_human.present? }
 
     @page = ShowDetailsPage.new(
-      show: Show.find_by!(slug: params[:slug]),
+      show: Show.find_by!(slug: params.expect(:slug)),
       current_human: current_human,
       include_skipped: params[:include_skipped] == "1"
     )

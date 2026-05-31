@@ -3,7 +3,7 @@ class FollowsController < ApplicationController
   def create
     authorize! { current_human.present? }
 
-    followee = Human.find(params[:followee_id])
+    followee = Human.find(params.expect(:followee_id))
 
     Follow.create_or_find_by!(
       followee_id: followee.id,
@@ -16,7 +16,7 @@ class FollowsController < ApplicationController
   def destroy
     authorize! { current_human.present? }
 
-    followee = Human.find(params[:followee_id])
+    followee = Human.find(params.expect(:followee_id))
 
     Follow.where(
       followee_id: followee.id,

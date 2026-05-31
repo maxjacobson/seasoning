@@ -3,7 +3,7 @@ class NotesToSelfController < ApplicationController
   def edit
     authorize! { current_human.present? }
 
-    @show = Show.find_by!(slug: params[:show_slug])
+    @show = Show.find_by!(slug: params.expect(:show_slug))
     @my_show = MyShow.find_by!(human: current_human, show: @show)
   end
 end

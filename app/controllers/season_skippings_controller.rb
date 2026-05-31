@@ -3,8 +3,8 @@ class SeasonSkippingsController < ApplicationController
   def create
     authorize! { current_human.present? }
 
-    show = Show.find_by!(slug: params[:show_slug])
-    season = show.seasons.find_by!(slug: params[:season_slug])
+    show = Show.find_by!(slug: params.expect(:show_slug))
+    season = show.seasons.find_by!(slug: params.expect(:season_slug))
 
     my_season = MySeason.create_or_find_by!(human: current_human, season: season)
     my_season.update!(skipped: true)
@@ -15,8 +15,8 @@ class SeasonSkippingsController < ApplicationController
   def destroy
     authorize! { current_human.present? }
 
-    show = Show.find_by!(slug: params[:show_slug])
-    season = show.seasons.find_by!(slug: params[:season_slug])
+    show = Show.find_by!(slug: params.expect(:show_slug))
+    season = show.seasons.find_by!(slug: params.expect(:season_slug))
 
     my_season = MySeason.create_or_find_by!(human: current_human, season: season)
     my_season.update!(skipped: false)
