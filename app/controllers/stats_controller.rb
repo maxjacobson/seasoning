@@ -8,7 +8,7 @@ class StatsController < ApplicationController
   def show
     authorize! { current_human&.handle == params[:handle] }
 
-    @human = Human.find_by!(handle: params[:handle])
+    @human = Human.find_by!(handle: params.expect(:handle))
     @year = params[:year].to_i
 
     raise ActionController::RoutingError, "Not Found" if @year > Date.current.year

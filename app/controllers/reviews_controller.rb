@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   def index
     authorize! { true }
 
-    @profile = Human.find_by!(handle: params[:handle])
+    @profile = Human.find_by!(handle: params.expect(:handle))
     @page = current_page
     offset = (@page - 1) * PER_PAGE
 

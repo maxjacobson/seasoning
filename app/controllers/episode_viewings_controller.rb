@@ -3,9 +3,9 @@ class EpisodeViewingsController < ApplicationController
   def create
     authorize! { current_human.present? }
 
-    show = Show.find_by!(slug: params[:show_slug])
-    season = show.seasons.find_by!(slug: params[:season_slug])
-    episode = season.episodes.find_by!(episode_number: params[:episode_number])
+    show = Show.find_by!(slug: params.expect(:show_slug))
+    season = show.seasons.find_by!(slug: params.expect(:season_slug))
+    episode = season.episodes.find_by!(episode_number: params.expect(:episode_number))
 
     my_season = MySeason.create_or_find_by!(human: current_human, season: season)
     my_season.watched_episode_numbers =
@@ -18,9 +18,9 @@ class EpisodeViewingsController < ApplicationController
   def destroy
     authorize! { current_human.present? }
 
-    show = Show.find_by!(slug: params[:show_slug])
-    season = show.seasons.find_by!(slug: params[:season_slug])
-    episode = season.episodes.find_by!(episode_number: params[:episode_number])
+    show = Show.find_by!(slug: params.expect(:show_slug))
+    season = show.seasons.find_by!(slug: params.expect(:season_slug))
+    episode = season.episodes.find_by!(episode_number: params.expect(:episode_number))
 
     my_season = MySeason.create_or_find_by!(human: current_human, season: season)
     my_season.watched_episode_numbers =

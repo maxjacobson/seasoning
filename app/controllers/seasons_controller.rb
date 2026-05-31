@@ -3,8 +3,8 @@ class SeasonsController < ApplicationController
   def show
     authorize! { current_human.present? }
 
-    @show = Show.find_by!(slug: params[:show_slug])
-    @season = @show.seasons.find_by!(slug: params[:season_slug])
+    @show = Show.find_by!(slug: params.expect(:show_slug))
+    @season = @show.seasons.find_by!(slug: params.expect(:season_slug))
     @my_show = current_human.my_shows.find_by(show: @show)
     @my_season = MySeason.find_or_initialize_by(human: current_human, season: @season)
     @episodes = @season.episodes.order(episode_number: :asc)
@@ -16,8 +16,8 @@ class SeasonsController < ApplicationController
   def destroy
     authorize! { current_human&.admin? }
 
-    show = Show.find_by!(slug: params[:show_slug])
-    season = show.seasons.find_by!(slug: params[:season_slug])
+    show = Show.find_by!(slug: params.expect(:show_slug))
+    season = show.seasons.find_by!(slug: params.expect(:season_slug))
 
     unless season.orphaned?
       redirect_to season_path(show.slug, season.slug), alert: "Only orphaned seasons can be deleted"
