@@ -12,4 +12,3 @@ prettier --check .
 herb-format --check .
 herb-lint .
 bin/rubocop
-bin/erb_lint --lint-all --show-linter-names

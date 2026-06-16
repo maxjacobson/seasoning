@@ -21,7 +21,6 @@ gem "sucker_punch"
 gem "turbo-rails"
 
 group :development do
-  gem "erb_lint"
   gem "letter_opener"
   gem "listen"
   gem "rubocop"
