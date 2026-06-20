@@ -52,6 +52,7 @@ jobs:
       - run: bundle exec rake assets:precompile
       - run: bin/rails db:create db:schema:load
       - run: bin/rails test:all
+      - run: bin/assert-no-pending-allow-scripts
 
       - name: Upload capybara screenshots
         uses: actions/upload-artifact@v7
