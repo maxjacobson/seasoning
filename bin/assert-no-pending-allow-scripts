@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+count="$(npm approve-scripts --allow-scripts-pending --json | \
+  jq '.allowScripts | length')"
+
+if test "$count" -eq 0; then
+  exit 0
+else
+  echo "There are $count packages with scripts to approve"
+  exit "$count"
+fi
+
