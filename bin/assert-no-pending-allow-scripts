@@ -2,7 +2,7 @@
 
 set -e
 
-count="$(npm approve-scripts --allow-scripts-pending --json | \
+count="$(corepack npm approve-scripts --allow-scripts-pending --json | \
   jq '.allowScripts | length')"
 
 if test "$count" -eq 0; then
