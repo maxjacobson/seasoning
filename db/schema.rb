@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_05_19_190310) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -90,6 +90,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_05_19_190310) do
   end
 
   create_table "my_shows", force: :cascade do |t|
+    t.boolean "available_same_day", default: true, null: false
     t.datetime "created_at", null: false
     t.bigint "human_id", null: false, comment: "Which human has saved this show"
     t.text "note_to_self", comment: "An optional blob of Markdown-formatted text that the human can write to remind themselves why they've added the show, or however they want to use it"
@@ -97,7 +98,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_05_19_190310) do
     t.datetime "snoozed_until"
     t.enum "status", default: "might_watch", null: false, enum_type: "my_show_status"
     t.datetime "updated_at", null: false
-    t.boolean "available_same_day", default: true, null: false
     t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true
     t.index ["human_id"], name: "index_my_shows_on_human_id"
     t.index ["show_id"], name: "index_my_shows_on_show_id"
@@ -114,9 +114,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_05_19_190310) do
   end
 
   create_table "season_review_likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.bigint "human_id", null: false, comment: "Who liked the review"
     t.bigint "season_review_id", null: false, comment: "Which review was liked"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["human_id", "season_review_id"], name: "index_season_review_likes_on_human_and_review", unique: true
     t.index ["human_id"], name: "index_season_review_likes_on_human_id"

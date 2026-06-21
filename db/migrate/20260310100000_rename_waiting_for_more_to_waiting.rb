@@ -1,4 +1,4 @@
-class RenameWaitingForMoreToWaiting < ActiveRecord::Migration[8.2]
+class RenameWaitingForMoreToWaiting < ActiveRecord::Migration[8.1]
   def change
     rename_enum_value :my_show_status, from: "waiting_for_more", to: "waiting"
   end

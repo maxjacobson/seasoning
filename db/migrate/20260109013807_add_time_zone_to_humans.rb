@@ -1,4 +1,4 @@
-class AddTimeZoneToHumans < ActiveRecord::Migration[8.2]
+class AddTimeZoneToHumans < ActiveRecord::Migration[8.1]
   def change
     add_column :humans, :time_zone_name, :string,
                null: false,
