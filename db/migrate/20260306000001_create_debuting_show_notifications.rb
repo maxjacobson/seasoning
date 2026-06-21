@@ -1,4 +1,4 @@
-class CreateDebutingShowNotifications < ActiveRecord::Migration[8.2]
+class CreateDebutingShowNotifications < ActiveRecord::Migration[8.1]
   def change
     create_table :debuting_show_notifications do |t|
       t.references :human, null: false, foreign_key: { on_delete: :cascade },

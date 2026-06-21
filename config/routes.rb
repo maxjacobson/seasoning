@@ -1,4 +1,4 @@
-Rails.app.routes.draw do
+Rails.application.routes.draw do
   get "/offline", to: "offline#show", as: :offline
 
   root to: "magic_links#new"
