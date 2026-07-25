@@ -113,16 +113,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
     t.index ["show_id"], name: "index_returning_show_notifications_on_show_id"
   end
 
-  create_table "season_review_likes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.bigint "human_id", null: false, comment: "Who liked the review"
-    t.bigint "season_review_id", null: false, comment: "Which review was liked"
-    t.datetime "updated_at", null: false
-    t.index ["human_id", "season_review_id"], name: "index_season_review_likes_on_human_and_review", unique: true
-    t.index ["human_id"], name: "index_season_review_likes_on_human_id"
-    t.index ["season_review_id"], name: "index_season_review_likes_on_season_review_id"
-  end
-
   create_table "season_reviews", force: :cascade do |t|
     t.bigint "author_id", null: false, comment: "Who wrote this review"
     t.text "body", null: false, comment: "The body of the review"
@@ -199,8 +189,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
   add_foreign_key "my_shows", "shows", on_delete: :cascade
   add_foreign_key "returning_show_notifications", "humans", on_delete: :cascade
   add_foreign_key "returning_show_notifications", "shows", on_delete: :cascade
-  add_foreign_key "season_review_likes", "humans", on_delete: :cascade
-  add_foreign_key "season_review_likes", "season_reviews", on_delete: :cascade
   add_foreign_key "season_reviews", "humans", column: "author_id", on_delete: :cascade
   add_foreign_key "season_reviews", "seasons", on_delete: :cascade
 end
