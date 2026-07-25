@@ -9,7 +9,7 @@
     "@herb-tools/linter": "^0.10.2",
     "playwright": "^1.61.1",
     "prettier": "^3.9.5",
-    "prettier-plugin-tailwindcss": "^0.8.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "run-pty": "^6.0.2"
   },
   "scripts": {
