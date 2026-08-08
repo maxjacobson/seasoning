@@ -6,6 +6,8 @@ export RAILS_ENV=production
 
 git pull origin main
 bundle install
+npm install -g corepack
+corepack enable npm
 npm clean-install
 bin/rails db:prepare
 bin/rails assets:precompile
