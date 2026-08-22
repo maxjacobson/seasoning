@@ -87,8 +87,8 @@ GEM
     base64 (0.3.0)
     bcrypt (3.1.22)
     bigdecimal (4.1.2)
-    bootsnap (1.24.6)
-      msgpack (~> 1.2)
+    bootsnap (1.25.0)
+      msgpack (~> 1.5)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -205,7 +205,7 @@ GEM
       drb (~> 2.0)
       prism (~> 1.5)
     minitest-mock (5.27.0)
-    msgpack (1.8.3)
+    msgpack (1.8.4)
     net-imap (0.6.6)
       date
       net-protocol
@@ -428,7 +428,7 @@ CHECKSUMS
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bcrypt (3.1.22) sha256=1f0072e88c2d705d94aff7f2c5cb02eb3f1ec4b8368671e19112527489f29032
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
-  bootsnap (1.24.6) sha256=c60bab88c70332290f0a2636a288f675299eb4f804a02a3c085b42eca9da164a
+  bootsnap (1.25.0) sha256=41059e7d0f9cb4023a33465d095f64b913fc9d1b808d6524c307da945fbcffcf
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   bundler (4.0.14) sha256=d09a0a965cf772266a7e49e83610be7c2f4e49e61134c42a56804bb383cc24b8
   capybara (3.40.0) sha256=42dba720578ea1ca65fd7a41d163dd368502c191804558f6e0f71b391054aeef
@@ -484,7 +484,7 @@ CHECKSUMS
   mini_portile2 (2.8.9) sha256=0cd7c7f824e010c072e33f68bc02d85a00aeb6fce05bb4819c03dfd3c140c289
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   minitest-mock (5.27.0) sha256=7040ed7185417a966920987eaa6eaf1be4ea1fc5b25bb03ff4703f98564a55b0
-  msgpack (1.8.3) sha256=8bda4a6428d3244e50d6bd55854d354edbada88a4e1f4f5731a39a0f86bee6a1
+  msgpack (1.8.4) sha256=4411c22d350dd1c20250f7eada3cca2695438c2f769cf0782f0cd065d90a3e7b
   net-imap (0.6.6) sha256=96aa4ee50df3060203e649efc341f53480b791d49e150f2fdebf68beb141a8df
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
