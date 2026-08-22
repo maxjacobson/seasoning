@@ -1,0 +1,16 @@
+{
+  "disable_ai": true,
+  "format_on_save": "on",
+  "languages": {
+    "Ruby": {
+      "language_servers": ["ruby-lsp"]
+    }
+  },
+  "lsp": {
+    "ruby-lsp": {
+      "settings": {
+        "use_bundler": false
+      }
+    }
+  }
+}
