@@ -1,7 +1,8 @@
 # Controller for displaying season pages
 class SeasonsController < ApplicationController
   def show
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     @show = Show.find_by!(slug: params.expect(:show_slug))
     @season = @show.seasons.find_by!(slug: params.expect(:season_slug))
@@ -14,7 +15,8 @@ class SeasonsController < ApplicationController
   end
 
   def destroy
-    authorize! { current_human&.admin? }
+    require_authentication!
+    authorize! { current_human.admin? }
 
     show = Show.find_by!(slug: params.expect(:show_slug))
     season = show.seasons.find_by!(slug: params.expect(:season_slug))

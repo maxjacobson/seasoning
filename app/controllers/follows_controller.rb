@@ -1,7 +1,8 @@
 # CRUD actions for human follows
 class FollowsController < ApplicationController
   def create
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     followee = Human.find(params.expect(:followee_id))
 
@@ -14,7 +15,8 @@ class FollowsController < ApplicationController
   end
 
   def destroy
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     followee = Human.find(params.expect(:followee_id))
 

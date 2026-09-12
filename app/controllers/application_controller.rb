@@ -6,8 +6,17 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorization_occurred
 
   NotAuthorized = Class.new(StandardError)
+  AuthenticationRequired = Class.new(StandardError)
+
+  rescue_from AuthenticationRequired do
+    redirect_to login_path, alert: "Please sign in to continue."
+  end
 
   private
+
+  def require_authentication!
+    raise AuthenticationRequired if current_human.blank?
+  end
 
   def redirect_apex_domain
     return unless request.host == "seasoning.tv"

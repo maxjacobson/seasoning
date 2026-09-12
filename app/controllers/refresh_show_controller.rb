@@ -1,7 +1,8 @@
 # A way to let me force a refresh just to see if something weird is going on
 class RefreshShowController < ApplicationController
   def create
-    authorize! { current_human&.admin? }
+    require_authentication!
+    authorize! { current_human.admin? }
 
     show = Show.find_by!(slug: params.expect(:show_slug))
     show.refresh!

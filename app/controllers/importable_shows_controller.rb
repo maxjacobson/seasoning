@@ -1,7 +1,8 @@
 # Lets people import new shows into the application
 class ImportableShowsController < ApplicationController
   def create
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     tmdb_show = TMDB::Client.new.tv_details(params.require(:id))
 

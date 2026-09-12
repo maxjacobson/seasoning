@@ -1,12 +1,14 @@
 class StatsController < ApplicationController
   def index
-    authorize! { current_human&.handle == params[:handle] }
+    require_authentication!
+    authorize! { current_human.handle == params[:handle] }
 
     redirect_to profile_stat_path(handle: params[:handle], filter: "reviewed-in", year: Date.current.year)
   end
 
   def show
-    authorize! { current_human&.handle == params[:handle] }
+    require_authentication!
+    authorize! { current_human.handle == params[:handle] }
 
     @human = Human.find_by!(handle: params.expect(:handle))
     @year = params[:year].to_i
