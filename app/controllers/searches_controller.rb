@@ -1,7 +1,8 @@
 # Shows show search results
 class SearchesController < ApplicationController
   def show
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     query = params[:q].to_s.strip.presence
     return unless query

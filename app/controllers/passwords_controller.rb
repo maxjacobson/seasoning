@@ -1,11 +1,13 @@
 # Set or change password
 class PasswordsController < ApplicationController
   def edit
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
   end
 
   def update
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     password_params = params.expect(human: [:password, :password_confirmation])
 

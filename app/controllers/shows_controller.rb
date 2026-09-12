@@ -3,7 +3,8 @@ class ShowsController < ApplicationController
   PAGE_SIZE = 30
 
   def index
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true } # any authenticated human can view their shows
 
     @filters = MyShowFilters.new(params.permit(:q, statuses: []).merge(page: current_page))
 
@@ -23,7 +24,8 @@ class ShowsController < ApplicationController
   end
 
   def show
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true } # any authenticated human can view the details of a show
 
     @page = ShowDetailsPage.new(
       show: Show.find_by!(slug: params.expect(:slug)),

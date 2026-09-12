@@ -1,7 +1,8 @@
 # Controller for marking seasons as skipped or not skipped
 class SeasonSkippingsController < ApplicationController
   def create
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     show = Show.find_by!(slug: params.expect(:show_slug))
     season = show.seasons.find_by!(slug: params.expect(:season_slug))
@@ -13,7 +14,8 @@ class SeasonSkippingsController < ApplicationController
   end
 
   def destroy
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     show = Show.find_by!(slug: params.expect(:show_slug))
     season = show.seasons.find_by!(slug: params.expect(:season_slug))

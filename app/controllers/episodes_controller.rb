@@ -1,7 +1,8 @@
 # Controller for displaying individual episode pages
 class EpisodesController < ApplicationController
   def show
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     @show = Show.find_by!(slug: params.expect(:show_slug))
     @season = @show.seasons.find_by!(slug: params.expect(:season_slug))

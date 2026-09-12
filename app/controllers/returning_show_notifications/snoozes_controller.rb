@@ -1,7 +1,8 @@
 module ReturningShowNotifications
   class SnoozesController < ApplicationController
     def create
-      authorize! { current_human.present? }
+      require_authentication!
+      authorize! { true }
 
       notification = current_human.returning_show_notifications.find(params.expect(:returning_show_notification_id))
       my_show = current_human.my_shows.find_by!(show: notification.show)

@@ -1,7 +1,8 @@
 # actions for a human to manage their relationship to a show
 class YourShowsController < ApplicationController
   def create
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     show = Show.find_by!(slug: params.expect(:show_slug))
 
@@ -10,7 +11,8 @@ class YourShowsController < ApplicationController
   end
 
   def update
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     show = Show.find_by!(slug: params.expect(:show_slug))
     my_show = current_human.my_shows.find_by!(show: show)
@@ -21,7 +23,8 @@ class YourShowsController < ApplicationController
   end
 
   def destroy
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     show = Show.find_by!(slug: params.expect(:show_slug))
     RemoveMyShow.call(show, current_human)

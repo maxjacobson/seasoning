@@ -1,6 +1,7 @@
 class ReturningShowNotificationsController < ApplicationController
   def destroy
-    authorize! { current_human.present? }
+    require_authentication!
+    authorize! { true }
 
     @notification = current_human.returning_show_notifications.find(params.expect(:id))
     @notification.destroy!
