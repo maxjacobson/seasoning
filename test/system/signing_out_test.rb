@@ -16,6 +16,6 @@ class SigningOutTest < ApplicationSystemTestCase
       click_on "Log out"
     end
 
-    assert_content "survive the age of Peak TV"
+    assert_content "keep track of which TV shows you're watching"
   end
 end
