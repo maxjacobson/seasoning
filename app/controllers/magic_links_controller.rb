@@ -3,7 +3,7 @@ class MagicLinksController < ApplicationController
   def show
     authorize! { true }
 
-    @magic_link = MagicLink.find_by(token: params[:token])
+    @magic_link = MagicLink.active.find_by(token: params[:token])
 
     if (human = @magic_link&.recipient).present?
       session[:human_id] = human.id
