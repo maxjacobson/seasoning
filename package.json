@@ -5,8 +5,8 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "@herb-tools/formatter": "^0.10.3",
-    "@herb-tools/linter": "^0.10.3",
+    "@herb-tools/formatter": "^0.10.4",
+    "@herb-tools/linter": "^0.10.4",
     "playwright": "^1.63.0",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
