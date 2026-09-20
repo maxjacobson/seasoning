@@ -61,4 +61,24 @@ class SigningInTest < ApplicationSystemTestCase
 
     assert_content "Hmm, that magic link does not seem to be valid."
   end
+
+  test "a magic link past its expiration" do
+    visit root_path
+    click_link "Sign in"
+
+    within "[data-test-id='magic-link-section']" do
+      fill_in "Email", with: "donna@example.com"
+      click_on "Send magic link"
+    end
+
+    assert_content "Check your email"
+
+    token = MagicLink.first!.token
+
+    MagicLink.first!.update!(expires_at: 1.minute.ago)
+
+    visit redeem_magic_link_path(token)
+
+    assert_content "Hmm, that magic link does not seem to be valid."
+  end
 end
