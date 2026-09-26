@@ -2,10 +2,6 @@ version: 2
 updates:
   - package-ecosystem: "bundler"
     directory: "/"
-    cooldown:
-      semver-major-days: 21
-      semver-minor-days: 14
-      semver-patch-days: 7
     schedule:
       interval: "weekly"
       time: "05:30"
@@ -13,10 +9,6 @@ updates:
       day: "saturday"
   - package-ecosystem: "npm"
     directory: "/"
-    cooldown:
-      semver-major-days: 21
-      semver-minor-days: 14
-      semver-patch-days: 7
     schedule:
       interval: "weekly"
       time: "05:30"
@@ -33,5 +25,3 @@ updates:
       time: "05:30"
       timezone: "America/New_York"
       day: "saturday"
-    cooldown:
-      default-days: 21
