@@ -1,0 +1,53 @@
+/*
+  Cross-page component partials rendered from app/views/application/.
+*/
+
+.poster {
+  position: relative;
+  display: inline-block;
+}
+
+.poster__image {
+  display: block;
+  width: 12rem;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+}
+
+.poster--extra-small .poster__image {
+  width: 4rem;
+}
+
+.poster--small .poster__image {
+  width: 6rem;
+}
+
+.poster--medium .poster__image {
+  width: 5rem;
+}
+
+.poster--full .poster__image {
+  width: 100%;
+}
+
+.episode-badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--danger-badge);
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+}
+
+.episode-badge--upcoming {
+  background: var(--ink-ghost);
+}
