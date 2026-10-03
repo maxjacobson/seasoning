@@ -62,7 +62,8 @@
   flex-direction: column;
 }
 
-.season-card__poster-link {
+.season-card__poster-link,
+.season-card__poster-link:hover {
   display: block;
   text-decoration: none;
   cursor: pointer;
@@ -74,7 +75,8 @@
   flex: 1 1 0%;
 }
 
-.season-card__link {
+.season-card__link,
+.season-card__link:hover {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
