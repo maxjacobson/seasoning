@@ -1,8 +1,5 @@
 /*
-  Vanilla CSS pilot: the /shows index page (and its activity feed partial).
-  Values match the Tailwind v4 tokens they replace so the rendered page is
-  visually unchanged. Reuses the existing .text-field, .select-field, and
-  .rounded-button component classes from application.css.
+  The /shows index page and its activity feed partial.
 */
 
 .shows-layout {

@@ -1,6 +1,5 @@
 /*
-  Shared design tokens, copied verbatim from the Tailwind v4 CSS this app used
-  to ship so the rendered pages stay visually unchanged.
+  Shared design tokens for colors, radii, shadows, and motion.
 */
 
 :root {

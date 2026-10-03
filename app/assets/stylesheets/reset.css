@@ -1,7 +1,5 @@
 /*
-  Minimal reset, ported from Tailwind v4's preflight and the pieces of the
-  @tailwindcss/forms plugin this app relied on, so pages render identically
-  now that Tailwind is gone.
+  Minimal reset so pages render consistently across browsers.
 */
 
 *,
