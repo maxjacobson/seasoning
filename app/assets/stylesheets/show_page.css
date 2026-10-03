@@ -132,3 +132,24 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+.note-to-self {
+  margin-block: 1rem;
+  border-top: 1px solid var(--accent-line);
+  border-bottom: 1px solid var(--accent-line);
+  padding-block: 1rem;
+}
+
+.collapsible-note__title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.note-to-self__body {
+  overflow-wrap: break-word;
+  margin-top: 0.75rem;
+}
+
+.note-to-self__edit {
+  margin-top: 0.75rem;
+}

@@ -2,6 +2,7 @@
 @import "./tokens.css";
 @import "./components.css";
 @import "./shows.css";
+@import "./show_page.css";
 
 @plugin "@tailwindcss/forms";
 
