@@ -1,0 +1,172 @@
+/*
+  Season review pages: season_reviews/new.html.erb, edit.html.erb, show.html.erb,
+  _form.html.erb, and reviews/index.html.erb.
+*/
+
+.review-form__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.review-form__poster {
+  flex-shrink: 0;
+}
+
+.review-form__details {
+  flex: 1 1 0%;
+}
+
+.review-form__season-name {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.75rem;
+}
+
+.review-form__body > :not(:last-child) {
+  margin-block-end: 1.5rem;
+}
+
+.review-form__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.review-form__submit {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.form-errors {
+  background: var(--danger-soft);
+  border: 1px solid var(--danger-line);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.form-errors__heading {
+  color: var(--danger-deep-ink);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-errors__list {
+  color: var(--danger-soft-ink);
+}
+
+.form-errors__list > :not(:last-child) {
+  margin-block-end: 0.25rem;
+}
+
+.review-detail__meta {
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+}
+
+.review-detail__columns {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.review-detail__poster {
+  flex-shrink: 0;
+}
+
+.review-detail__facts {
+  flex: 1 1 0%;
+}
+
+.review-detail__facts > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.review-detail__label {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.review-detail__label--tight {
+  margin-bottom: 0.25rem;
+}
+
+.review-detail__label--roomy {
+  margin-bottom: 0.75rem;
+}
+
+.review-detail__body {
+  margin-top: 1.5rem;
+}
+
+.review-detail__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.review-list > :not(:last-child) {
+  margin-block-end: 1.5rem;
+}
+
+.review-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.review-card__row {
+  display: flex;
+  gap: 1rem;
+}
+
+.review-card__poster {
+  flex-shrink: 0;
+}
+
+.review-card__details {
+  flex: 1 1 0%;
+}
+
+.review-card__title {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.review-card__meta {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+
+.review-card__rating {
+  margin-bottom: 0.75rem;
+}
+
+.review-card__no-rating {
+  color: var(--ink-faint);
+}
+
+.review-list__pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.review-list__pagination-page {
+  color: var(--ink-muted);
+}
+
+@media (min-width: 768px) {
+  .review-form__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

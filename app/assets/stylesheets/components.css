@@ -159,3 +159,13 @@
   border-radius: var(--radius-pill);
   transition: all 300ms var(--ease);
 }
+
+.select-field--full {
+  width: 100%;
+}
+
+.text-area {
+  width: 100%;
+  min-height: 12rem;
+  field-sizing: content;
+}
