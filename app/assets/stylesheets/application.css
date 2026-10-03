@@ -134,6 +134,17 @@ a:hover,
   print-color-adjust: exact;
 }
 
+/* Multi-line listbox selects show their options instead of a value, so they
+   don't need the dropdown chevron. */
+.select-field:where([multiple], [size]:not([size="1"])) {
+  background-image: initial;
+  background-position: initial;
+  background-repeat: unset;
+  background-size: initial;
+  padding-right: 0.75rem;
+  print-color-adjust: unset;
+}
+
 .flash {
   margin-bottom: 0.5rem;
   border-radius: var(--radius-sm);
