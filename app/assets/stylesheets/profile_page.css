@@ -1,0 +1,62 @@
+/*
+  Profile page: human_profiles/show.html.erb.
+*/
+
+.profile-sections > :not(:last-child) {
+  margin-block-end: 1.5rem;
+}
+
+.profile-joined {
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.profile-nav {
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-nav__tabs {
+  display: flex;
+  gap: 2rem;
+}
+
+.profile-nav__link {
+  padding: 0.5rem 0.25rem;
+  border-bottom: 2px solid transparent;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+.profile-nav__link:hover {
+  border-bottom-color: var(--line-strong);
+}
+
+.watching-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.watching-list__item {
+  width: 8rem;
+}
+
+.watching-list__link {
+  display: block;
+  transition: opacity 150ms var(--ease);
+}
+
+.watching-list__link:hover {
+  opacity: 0.75;
+}
+
+.watching-list__poster {
+  margin-bottom: 0.5rem;
+}
+
+.watching-list__title {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: var(--ink-soft);
+}

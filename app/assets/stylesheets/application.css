@@ -8,6 +8,7 @@
 @import "./reviews.css";
 @import "./search_page.css";
 @import "./stats_page.css";
+@import "./profile_page.css";
 
 @plugin "@tailwindcss/forms";
 
