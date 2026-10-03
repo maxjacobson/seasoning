@@ -5,6 +5,7 @@
 @import "./show_page.css";
 @import "./season_page.css";
 @import "./episode_page.css";
+@import "./reviews.css";
 
 @plugin "@tailwindcss/forms";
 
@@ -389,4 +390,36 @@ a.no-underline:hover {
 
 .muted-text {
   color: var(--ink-muted);
+}
+
+.error-text {
+  color: var(--danger);
+}
+
+.field-label {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+
+.field-label--tight {
+  margin-bottom: 0.25rem;
+}
+
+.field-label__hint {
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.field-hint {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
+}
+
+.page__title--close {
+  margin-bottom: 0.5rem;
 }
