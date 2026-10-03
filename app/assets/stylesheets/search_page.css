@@ -33,7 +33,8 @@
   background: var(--accent-line);
 }
 
-.result-card__link {
+.result-card__link,
+.result-card__link:hover {
   display: block;
   text-decoration: none;
 }
