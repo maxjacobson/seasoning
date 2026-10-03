@@ -25,8 +25,9 @@
   --accent-soft: oklch(98% 0.016 73.684);
   --accent-mist: oklch(95.4% 0.038 75.164);
   --accent-line: oklch(90.1% 0.076 70.697);
-  --accent-ink: oklch(47% 0.157 37.304);
-  --accent-deep: oklch(40.8% 0.123 38.172);
+  --accent-ink: oklch(55.3% 0.195 38.402);
+  --accent-deep-ink: oklch(47% 0.157 37.304);
+  --accent-darkest-ink: oklch(40.8% 0.123 38.172);
 
   --link: oklch(68.1% 0.162 75.834);
 
