@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "./reset.css";
 @import "./tokens.css";
 @import "./components.css";
 @import "./shows.css";
@@ -13,26 +13,6 @@
 @import "./admin_page.css";
 @import "./content_pages.css";
 @import "./auth.css";
-
-@plugin "@tailwindcss/forms";
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--line);
-  }
-}
 
 p {
   margin: 15px 0;
@@ -54,14 +34,6 @@ a:hover,
 .link-looking-button:hover {
   color: var(--accent-strong);
   text-decoration: underline dotted;
-}
-
-a.no-underline {
-  text-decoration: none;
-}
-
-a.no-underline:hover {
-  text-decoration: none;
 }
 
 .rendered-markdown h1 {
@@ -130,13 +102,36 @@ a.no-underline:hover {
 
 .text-field,
 .select-field {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid var(--ink-faint);
   border-radius: var(--radius-md);
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-field::placeholder,
+.text-area::placeholder {
+  color: var(--ink-faint);
+  opacity: 1;
 }
 
 .text-field:focus,
 .select-field:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   border-color: var(--star);
   box-shadow: 0 0 0 1px var(--star);
+}
+
+.select-field {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='oklch(55.1%25 0.027 264.364)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  print-color-adjust: exact;
 }
 
 .flash {
