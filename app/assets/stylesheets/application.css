@@ -11,6 +11,7 @@
 @import "./profile_page.css";
 @import "./settings_page.css";
 @import "./admin_page.css";
+@import "./content_pages.css";
 
 @plugin "@tailwindcss/forms";
 

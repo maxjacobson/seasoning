@@ -1,0 +1,41 @@
+/*
+  Simple content pages: credits/show.html.erb, changelogs/show.html.erb,
+  roadmaps/show.html.erb, offline/show.html.erb, and notes_to_self/edit.html.erb.
+*/
+
+.credits-list {
+  list-style: disc inside;
+  color: var(--ink-soft);
+}
+
+.credits-list > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.offline {
+  text-align: center;
+  padding-block: 4rem;
+}
+
+.offline__title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.note-editor__intro {
+  color: var(--ink-muted);
+}
+
+.note-editor__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.note-editor__heading {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+}
