@@ -52,6 +52,8 @@
   --star: oklch(85.2% 0.199 91.936);
   --star-muted: oklch(79.5% 0.184 86.047);
 
+  --date-future: oklch(70.4% 0.04 256.788);
+
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
