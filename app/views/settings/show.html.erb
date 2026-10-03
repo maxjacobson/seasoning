@@ -10,7 +10,7 @@
       <h2 class="section-heading">Profile page</h2>
 
       <div class="checkbox-row checkbox-row--wide">
-        <%= f.checkbox :share_currently_watching, class: "checkbox", onchange: "this.form.requestSubmit()" %>
+        <%= f.checkbox :share_currently_watching, onchange: "this.form.requestSubmit()" %>
         <%= f.label :share_currently_watching, "Share currently watching", class: "checkbox-row__label checkbox-row__label--plain" %>
       </div>
     </div>
@@ -30,7 +30,6 @@
               ],
               {},
               {
-                class: "select-field",
                 onchange: "this.form.requestSubmit()"
               }
             ) %>
@@ -57,7 +56,6 @@
             ].flatten(1),
             {},
             {
-              class: "select-field",
               onchange: "this.form.requestSubmit()"
             }
           ) %>
@@ -70,7 +68,7 @@
       <div>
         <%= f.label :time_zone_name, "Time zone", class: "field-label" %>
 
-        <%= f.time_zone_select(:time_zone_name, nil, {}, { class: "select-field", onchange: "this.form.requestSubmit()" }) %>
+        <%= f.time_zone_select(:time_zone_name, nil, {}, { onchange: "this.form.requestSubmit()" }) %>
 
         <p class="field-hint field-hint--spaced">
           Where do you watch TV? This determines when episodes become available.

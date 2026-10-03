@@ -2,7 +2,7 @@
 
 <%= form_with(model: my_show, url: show_your_show_path(my_show.show.slug), method: :patch) do |f| %>
   <div class="checkbox-row">
-    <%= f.check_box :available_same_day, onchange: "this.form.requestSubmit()", class: "checkbox" %>
+    <%= f.check_box :available_same_day, onchange: "this.form.requestSubmit()" %>
     <%= f.label :available_same_day, "New episodes are available to me on air date", class: "checkbox-row__label" %>
   </div>
 <% end %>

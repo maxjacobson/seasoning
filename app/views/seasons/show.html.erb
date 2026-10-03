@@ -28,7 +28,6 @@
                         class: "checkbox-row" do |f| %>
             <%= f.check_box :skipped,
                             checked: @my_season.skipped?,
-                            class: "checkbox",
                             onchange: "this.form.requestSubmit()" %>
 
             <%= f.label :skipped, "Skip this season", class: "checkbox-row__label" %>
@@ -85,7 +84,6 @@
                       <%= f.check_box :watched,
                                       checked: @my_season.episode_watched?(episode.episode_number),
                                       disabled: @my_season.skipped?,
-                                      class: "checkbox #{'checkbox--disabled' if @my_season.skipped?}",
                                       onchange: "this.form.requestSubmit()" %>
                     <% end %>
                   </td>

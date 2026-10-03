@@ -44,7 +44,7 @@
               ["⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ 10 stars", 10]
             ], review.rating),
             { include_blank: false },
-            { class: "select-field select-field--full" } %>
+            { class: "field--full" } %>
       </div>
 
       <div>
@@ -56,7 +56,7 @@
               ["Private - Only you can see", "viewable_by_only_me"]
             ], review.visibility),
             { include_blank: false },
-            { class: "select-field select-field--full" } %>
+            { class: "field--full" } %>
       </div>
     </div>
 
@@ -67,7 +67,7 @@
       <% end %>
 
       <%= form.text_area :body,
-          class: "text-field text-area",
+          
           placeholder: "Share your thoughts about this season..." %>
     </div>
 

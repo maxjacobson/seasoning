@@ -14,7 +14,7 @@
       <% end %>
 
       <div>
-        <%= f.text_field :handle, placeholder: "Your handle", class: "text-field" %>
+        <%= f.text_field :handle, placeholder: "Your handle" %>
       </div>
 
       <div class="auth-password-section">
@@ -30,12 +30,12 @@
         <div class="auth-password-fields">
           <div>
             <%= f.label :password, "Password (optional)", class: "field-label field-label--tight" %>
-            <%= f.password_field :password, placeholder: "At least 12 characters", class: "text-field", autocomplete: "new-password" %>
+            <%= f.password_field :password, placeholder: "At least 12 characters", autocomplete: "new-password" %>
           </div>
 
           <div>
             <%= f.label :password_confirmation, "Confirm password", class: "field-label field-label--tight" %>
-            <%= f.password_field :password_confirmation, class: "text-field", autocomplete: "new-password" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
         </div>
       </div>
