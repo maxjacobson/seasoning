@@ -389,7 +389,8 @@ input[type="checkbox"] {
   position: relative;
 }
 
-.collapsible-note-toggle {
+/* Specificity needs to beat the global input[type="checkbox"] rule. */
+input.collapsible-note-toggle {
   display: none;
 }
 
