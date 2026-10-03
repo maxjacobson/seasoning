@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./tokens.css";
 @import "./shows.css";
 
 @plugin "@tailwindcss/forms";

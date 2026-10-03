@@ -5,27 +5,6 @@
   .rounded-button component classes from application.css.
 */
 
-:root {
-  --surface: #ffffff;
-  --ink: oklch(21% 0.034 264.665);
-  --ink-soft: oklch(37.3% 0.034 259.733);
-  --ink-muted: oklch(44.6% 0.03 256.802);
-  --ink-faint: oklch(55.1% 0.027 264.364);
-  --ink-ghost: oklch(70.7% 0.022 261.325);
-  --line: oklch(92.8% 0.006 264.531);
-  --line-strong: oklch(70.7% 0.022 261.325);
-  --track: oklch(92.8% 0.006 264.531);
-  --accent: oklch(70.5% 0.213 47.604);
-  --accent-soft: oklch(98% 0.016 73.684);
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-pill: 9999px;
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-card:
-    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-}
-
 .shows-layout {
   display: flex;
   flex-direction: column;
