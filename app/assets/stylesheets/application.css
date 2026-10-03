@@ -10,6 +10,7 @@
 @import "./stats_page.css";
 @import "./profile_page.css";
 @import "./settings_page.css";
+@import "./admin_page.css";
 
 @plugin "@tailwindcss/forms";
 
