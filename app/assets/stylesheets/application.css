@@ -12,6 +12,7 @@
 @import "./settings_page.css";
 @import "./admin_page.css";
 @import "./content_pages.css";
+@import "./auth.css";
 
 @plugin "@tailwindcss/forms";
 

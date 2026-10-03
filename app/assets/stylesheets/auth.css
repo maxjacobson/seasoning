@@ -1,0 +1,79 @@
+/*
+  Authentication pages: magic_links/new.html.erb, magic_links/show.html.erb,
+  passwords/edit.html.erb, password_sessions/show.html.erb, and
+  signups/show.html.erb.
+*/
+
+.auth-heading {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.auth-heading--spaced {
+  margin-bottom: 1.5rem;
+}
+
+.auth-heading--sub {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-heading--minor {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-heading--column {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.auth-welcome-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.auth-form > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.auth-password-section {
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.auth-password-fields > :not(:last-child) {
+  margin-block-end: 0.75rem;
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.auth-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .auth-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
