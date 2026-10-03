@@ -1,0 +1,134 @@
+/*
+  Show detail page: shows/show.html.erb and its partials
+  (_seasons_list, _show_metadata, _note_to_self, _available_same_day,
+  _add_or_remove_show, _choose_show_status_button).
+*/
+
+.show-page__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.show-page__poster-wrap {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.show-page__details {
+  flex: 1 1 0%;
+}
+
+.show-page__title {
+  margin-bottom: 0.75rem;
+}
+
+.show-page__actions {
+  margin-top: 1rem;
+}
+
+.show-page__actions > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.show-page__action-stack > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.show-page__snooze-note {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-faint);
+}
+
+.show-page__add-remove {
+  margin-bottom: 0.5rem;
+}
+
+.show-page__no-seasons {
+  color: var(--ink-muted);
+}
+
+.seasons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.season-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.season-card__poster-link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-bottom: 0.5rem;
+}
+
+.season-card__details {
+  flex: 1 1 0%;
+}
+
+.season-card__link {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.metadata-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.metadata-list {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
+}
+
+.metadata-list > :not(:last-child) {
+  margin-block-end: 0.5rem;
+}
+
+.metadata-list__label {
+  font-weight: 500;
+}
+
+.metadata-list__warning {
+  color: var(--warning-ink);
+  background: var(--warning-soft);
+  border: 1px solid var(--warning-line);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+}
+
+.metadata-section__action {
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .show-page__header {
+    flex-direction: row;
+  }
+
+  .show-page__poster-wrap {
+    align-self: flex-start;
+  }
+
+  .seasons-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .seasons-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

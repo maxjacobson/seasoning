@@ -64,3 +64,98 @@
   display: inline-block;
   margin-block: 0.75rem;
 }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-row__label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-soft);
+}
+
+.checkbox {
+  appearance: none;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  background-origin: border-box;
+  print-color-adjust: exact;
+  cursor: pointer;
+}
+
+.checkbox:focus {
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--accent);
+}
+
+.checkbox:checked {
+  border-color: transparent;
+  background-color: currentColor;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.checkbox:checked:hover,
+.checkbox:checked:focus {
+  border-color: transparent;
+  background-color: currentColor;
+}
+
+.checkbox--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.watch-progress {
+  max-width: 28rem;
+}
+
+.watch-progress__labels {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+
+.watch-progress__track {
+  width: 100%;
+  height: 0.75rem;
+  background: var(--track);
+  border-radius: var(--radius-pill);
+}
+
+.watch-progress__bar {
+  height: 0.75rem;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  transition: all 300ms var(--ease);
+}

@@ -333,3 +333,53 @@ a.no-underline:hover {
 .collapsible-note-toggle:checked ~ .collapsible-note-content {
   display: block;
 }
+
+/* Shared page scaffolding */
+
+.page {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.page--narrow {
+  max-width: 42rem;
+}
+
+.page__title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.page__title--tight {
+  margin-bottom: 0.75rem;
+}
+
+.page__subtitle {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+}
+
+.page-sections > :not(:last-child) {
+  margin-block-end: 2rem;
+}
+
+.section-heading {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.muted-text {
+  color: var(--ink-muted);
+}
