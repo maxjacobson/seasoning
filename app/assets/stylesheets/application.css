@@ -3,6 +3,7 @@
 @import "./components.css";
 @import "./shows.css";
 @import "./show_page.css";
+@import "./season_page.css";
 
 @plugin "@tailwindcss/forms";
 
@@ -360,6 +361,10 @@ a.no-underline:hover {
 
 .page__title--tight {
   margin-bottom: 0.75rem;
+}
+
+.page__title--snug {
+  margin-bottom: 0.25rem;
 }
 
 .page__subtitle {

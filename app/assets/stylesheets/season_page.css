@@ -1,0 +1,123 @@
+/*
+  Season detail page: seasons/show.html.erb and seasons/_season_metadata.html.erb.
+*/
+
+.season-page__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.season-page__poster {
+  flex-shrink: 0;
+}
+
+.season-page__details {
+  flex: 1 1 0%;
+}
+
+.season-page__name {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.75rem;
+}
+
+.watch-progress--spaced {
+  margin-bottom: 1.5rem;
+}
+
+.episode-table__wrap {
+  overflow-x: auto;
+}
+
+.episode-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.episode-table thead tr {
+  border-bottom: 1px solid var(--line);
+}
+
+.episode-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.episode-table tbody tr {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.episode-table tbody tr:hover {
+  background: var(--muted-surface);
+}
+
+.episode-table td {
+  padding: 0.75rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.episode-table__number {
+  color: var(--ink);
+}
+
+.episode-table__air-date {
+  color: var(--ink-muted);
+}
+
+.season-review-cards > :not(:last-child) {
+  margin-block-end: 0.75rem;
+}
+
+.season-review-card {
+  background: var(--muted-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.season-review-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.season-review-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.season-review-card__author {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.season-review-card__rating {
+  display: flex;
+  align-items: center;
+}
+
+.season-review-card__rating-star {
+  color: var(--star-muted);
+  margin-right: 0.25rem;
+}
+
+.season-review-card__rating-value {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.season-review-card__date-link {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
