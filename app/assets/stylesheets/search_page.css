@@ -1,0 +1,114 @@
+/*
+  Search page: searches/show.html.erb, _tmdb_show_result.html.erb, and
+  _database_show_result.html.erb.
+*/
+
+.search-results > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.search-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.search-footer__hint {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.75rem;
+}
+
+.search-footer__link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--accent-mist);
+  border-radius: var(--radius-sm);
+  transition: background-color 150ms var(--ease);
+}
+
+.search-footer__link:hover {
+  background: var(--accent-line);
+}
+
+.result-card__link {
+  display: block;
+  text-decoration: none;
+}
+
+.result-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  cursor: pointer;
+  transition:
+    border-color 150ms var(--ease),
+    background-color 150ms var(--ease);
+}
+
+.result-card:hover {
+  border-color: var(--ink-ghost);
+  background: var(--accent-soft);
+}
+
+.result-card__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.result-card__row--center {
+  align-items: center;
+}
+
+.result-card__poster-wrap {
+  flex-shrink: 0;
+}
+
+.result-card__poster {
+  width: 4rem;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+}
+
+.result-card__details {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.result-card__title {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.result-card__year {
+  color: var(--ink-faint);
+}
+
+.result-card__added-by {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-faint);
+  margin-top: 0.25rem;
+}
+
+.result-card__arrow {
+  color: var(--ink-ghost);
+  margin-top: 0.25rem;
+}
+
+.result-card__plus {
+  color: var(--ink-ghost);
+}
+
+.result-card__import {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 0;
+}

@@ -6,6 +6,7 @@
 @import "./season_page.css";
 @import "./episode_page.css";
 @import "./reviews.css";
+@import "./search_page.css";
 
 @plugin "@tailwindcss/forms";
 
