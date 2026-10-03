@@ -51,3 +51,16 @@
 .episode-badge--upcoming {
   background: var(--ink-ghost);
 }
+
+.star--filled {
+  color: var(--star);
+}
+
+.air-date--future {
+  color: var(--date-future);
+}
+
+.more-info {
+  display: inline-block;
+  margin-block: 0.75rem;
+}
