@@ -1,0 +1,33 @@
+/*
+  Admin page: admins/show.html.erb.
+*/
+
+.admin-sections > :not(:last-child) {
+  margin-block-end: 1.5rem;
+}
+
+.admin-panel {
+  border: 2px dashed var(--warning-strong);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.admin-list {
+  list-style: disc inside;
+}
+
+.admin-list > :not(:last-child) {
+  margin-block-end: 0.5rem;
+}
+
+.admin-list--ordered {
+  list-style: decimal inside;
+}
+
+.admin-list--tight > :not(:last-child) {
+  margin-block-end: 0.25rem;
+}
+
+.admin-list--nested {
+  margin-left: 1rem;
+}
