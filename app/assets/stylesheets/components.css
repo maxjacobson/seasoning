@@ -169,3 +169,12 @@
   min-height: 12rem;
   field-sizing: content;
 }
+
+.checkbox-row--wide {
+  gap: 0.75rem;
+}
+
+.checkbox-row__label--plain {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
