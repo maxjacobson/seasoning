@@ -30,7 +30,6 @@
                       method: @my_season.episode_watched?(@episode.episode_number) ? :delete : :post do |f| %>
           <%= f.check_box :watched,
                           checked: @my_season.episode_watched?(@episode.episode_number),
-                          class: "checkbox",
                           onchange: "this.form.requestSubmit()" %>
         <% end %>
       </div>

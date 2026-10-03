@@ -100,8 +100,24 @@ a:hover,
   color: var(--accent-strong);
 }
 
-.text-field,
-.select-field {
+/*
+  Form controls are styled globally by element so new forms pick up the
+  app's look without styling classes. Add a modifier class for variants.
+*/
+
+input:where(
+  :not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="file"],
+    [type="hidden"],
+    [type="submit"],
+    [type="button"],
+    [type="reset"]
+  )
+),
+textarea,
+select {
   appearance: none;
   background-color: #fff;
   border: 1px solid var(--ink-faint);
@@ -109,40 +125,93 @@ a:hover,
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5rem;
+
+  &::placeholder {
+    color: var(--ink-faint);
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: var(--star);
+    box-shadow: 0 0 0 1px var(--star);
+  }
 }
 
-.text-field::placeholder,
-.text-area::placeholder {
-  color: var(--ink-faint);
-  opacity: 1;
+textarea {
+  width: 100%;
+  min-height: 12rem;
+  field-sizing: content;
 }
 
-.text-field:focus,
-.select-field:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: var(--star);
-  box-shadow: 0 0 0 1px var(--star);
-}
-
-.select-field {
+select {
   background-image: url("icons/chevron-down.svg");
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
   print-color-adjust: exact;
+
+  /* Multi-line listbox selects show their options instead of a value, so
+     they don't need the dropdown chevron. */
+  &:where([multiple], [size]:not([size="1"])) {
+    background-image: initial;
+    background-position: initial;
+    background-repeat: unset;
+    background-size: initial;
+    padding-right: 0.75rem;
+    print-color-adjust: unset;
+  }
 }
 
-/* Multi-line listbox selects show their options instead of a value, so they
-   don't need the dropdown chevron. */
-.select-field:where([multiple], [size]:not([size="1"])) {
-  background-image: initial;
-  background-position: initial;
-  background-repeat: unset;
-  background-size: initial;
-  padding-right: 0.75rem;
-  print-color-adjust: unset;
+input[type="checkbox"] {
+  appearance: none;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  background-origin: border-box;
+  print-color-adjust: exact;
+  cursor: pointer;
+
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 4px var(--accent);
+  }
+
+  &:checked {
+    border-color: transparent;
+    background-color: currentColor;
+    background-image: url("icons/checkbox-check.svg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &:checked:hover,
+  &:checked:focus {
+    border-color: transparent;
+    background-color: currentColor;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.field--full {
+  width: 100%;
 }
 
 .flash {

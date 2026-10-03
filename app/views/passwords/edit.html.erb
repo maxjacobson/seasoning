@@ -18,14 +18,14 @@
 
     <div>
       <%= f.label :password, "New password", class: "field-label" %>
-      <%= f.password_field :password, class: "text-field", autocomplete: "new-password" %>
+      <%= f.password_field :password, autocomplete: "new-password" %>
 
       <p class="field-hint">Minimum 12 characters</p>
     </div>
 
     <div>
       <%= f.label :password_confirmation, "Confirm new password", class: "field-label" %>
-      <%= f.password_field :password_confirmation, class: "text-field", autocomplete: "new-password" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
     <div class="auth-actions">
