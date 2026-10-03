@@ -9,6 +9,7 @@
 @import "./search_page.css";
 @import "./stats_page.css";
 @import "./profile_page.css";
+@import "./settings_page.css";
 
 @plugin "@tailwindcss/forms";
 
@@ -425,4 +426,8 @@ a.no-underline:hover {
 
 .page__title--close {
   margin-bottom: 0.5rem;
+}
+
+.field-hint--spaced {
+  margin-top: 0.5rem;
 }

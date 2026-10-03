@@ -1,0 +1,21 @@
+/*
+  Settings page: settings/show.html.erb.
+*/
+
+.settings-form > :not(:last-child) {
+  margin-block-end: 2rem;
+}
+
+.settings-block > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+
+.settings-password {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.settings-password__link {
+  display: inline-block;
+}
