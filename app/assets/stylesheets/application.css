@@ -18,7 +18,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--line);
   }
 }
 
@@ -27,20 +27,20 @@ p {
 }
 
 blockquote {
-  border-left: var(--color-yellow-600) solid 1px;
+  border-left: var(--link) solid 1px;
   margin-left: 1em;
   padding-left: 5px;
 }
 
 a,
 .link-looking-button {
-  color: var(--color-yellow-600);
+  color: var(--link);
   text-decoration: underline;
 }
 
 a:hover,
 .link-looking-button:hover {
-  color: var(--color-orange-600);
+  color: var(--accent-strong);
   text-decoration: underline dotted;
 }
 
@@ -53,45 +53,84 @@ a.no-underline:hover {
 }
 
 .rendered-markdown h1 {
-  @apply text-2xl;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .rendered-markdown h2 {
-  @apply text-xl;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .rendered-markdown h3,
 .rendered-markdown h4,
 .rendered-markdown h5,
 .rendered-markdown h6 {
-  @apply text-lg;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .rendered-markdown ol {
-  @apply list-decimal;
-  @apply list-inside;
+  list-style-type: decimal;
+  list-style-position: inside;
 }
 
 .rendered-markdown ul {
-  @apply list-disc;
-  @apply list-outside;
-  @apply ml-6;
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-left: 1.5rem;
 }
 
 .rounded-button {
-  @apply cursor-pointer rounded-2xl border border-orange-200 bg-orange-100 px-4 py-1 text-sm font-semibold text-orange-600 hover:border-transparent hover:bg-orange-600 hover:text-white focus:ring-2 focus:ring-orange-600 focus:ring-offset-2 focus:outline-hidden disabled:cursor-default disabled:hover:border-orange-200 disabled:hover:bg-orange-100 disabled:hover:text-orange-600;
+  cursor: pointer;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--accent-line);
+  background: var(--accent-mist);
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: var(--accent-strong);
 }
 
-.text-field {
-  @apply rounded-md focus:border-yellow-400 focus:ring-yellow-400;
+.rounded-button:hover {
+  border-color: transparent;
+  background: var(--accent-strong);
+  color: #fff;
 }
 
+.rounded-button:focus {
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--accent-strong);
+  outline: none;
+}
+
+.rounded-button:disabled {
+  cursor: default;
+}
+
+.rounded-button:disabled:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-mist);
+  color: var(--accent-strong);
+}
+
+.text-field,
 .select-field {
-  @apply rounded-md focus:border-yellow-400 focus:ring-yellow-400;
+  border-radius: var(--radius-md);
+}
+
+.text-field:focus,
+.select-field:focus {
+  border-color: var(--star);
+  box-shadow: 0 0 0 1px var(--star);
 }
 
 .flash {
-  @apply mb-2 rounded-sm p-2;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
   animation: flash-fade-in 0.5s ease-in-out;
 }
 
@@ -107,11 +146,11 @@ a.no-underline:hover {
 }
 
 .flash.flash-notice {
-  @apply bg-green-200;
+  background: var(--flash-notice);
 }
 
 .flash.flash-alert {
-  @apply bg-orange-300;
+  background: var(--flash-alert);
 }
 
 .link-looking-button {
@@ -196,12 +235,6 @@ a.no-underline:hover {
 
 .notification__link {
   font-weight: 500;
-  color: var(--accent-darkest-ink);
-  text-decoration: underline;
-}
-
-.notification__link:hover {
-  color: var(--accent-ink);
 }
 
 .notification__actions {
