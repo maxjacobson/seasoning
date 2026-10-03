@@ -4,6 +4,7 @@
 @import "./shows.css";
 @import "./show_page.css";
 @import "./season_page.css";
+@import "./episode_page.css";
 
 @plugin "@tailwindcss/forms";
 
