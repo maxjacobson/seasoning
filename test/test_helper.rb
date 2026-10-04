@@ -4,7 +4,7 @@ if ENV["COVERAGE"]
   require "simplecov"
   SimpleCov.start "rails" do
     minimum_coverage 87
-    coverage(:line) { minimum_per_file 0 }
+    coverage(:line) { minimum 0, per: :file }
 
     group "Services", "app/services"
   end
