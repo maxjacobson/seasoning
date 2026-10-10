@@ -31,6 +31,10 @@ Rails/I18nLocaleTexts:
 Rails/NotNullColumn:
   Enabled: false
 
+Style/DisableCopsWithinSourceCodeDirective:
+  Enabled: true
+  AllowWithReason: true
+
 Style/Documentation:
   Enabled: false
 
