@@ -6,9 +6,6 @@ set -e
 # This script is idempotent, so that you can run it at any time and get an expectable outcome.
 # Add necessary setup steps to this file.
 
-echo "== Enabling git hooks =="
-git config core.hooksPath .git-hooks
-
 echo "== Installing dependencies =="
 gem update --system --silent
 gem install bundler --conservative
