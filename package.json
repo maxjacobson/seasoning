@@ -13,7 +13,7 @@
   },
   "scripts": {
     "playwright:install": "playwright install",
-    "build:css": "esbuild app/assets/stylesheets/application.css --bundle --loader:.svg=file --sourcemap --outfile=app/assets/builds/application.css",
+    "build:css": "esbuild app/assets/stylesheets/application.css --bundle --sourcemap --outfile=app/assets/builds/application.css",
     "build": "esbuild app/javascript/application.js --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
   },
   "dependencies": {
