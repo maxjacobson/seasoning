@@ -1,5 +1,4 @@
-# rubocop:disable Rails/BulkChangeTable
-# We're making the switch, baby
+# rubocop:disable-next Rails/BulkChangeTable -- We're making the switch, baby
 class ReplaceWikipediaWithTMDB < ActiveRecord::Migration[6.1]
   def change
     add_column :shows, :tmdb_tv_id, :integer, null: true
@@ -9,4 +8,3 @@ class ReplaceWikipediaWithTMDB < ActiveRecord::Migration[6.1]
     remove_column :shows, :number_of_seasons, :integer, null: false, default: -1
   end
 end
-# rubocop:enable Rails/BulkChangeTable
