@@ -13,7 +13,7 @@
 
     <% if @episode.still_path.present? %>
       <div>
-        <%= image_tag @episode.still.url, class: "episode-page__still" %>
+        <%= image_tag @episode.still.url, alt: @episode.name, class: "episode-page__still" %>
       </div>
     <% end %>
 

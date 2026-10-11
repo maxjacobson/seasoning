@@ -28,9 +28,5 @@ linter:
     erb-no-unsafe-raw:
       enabled: false
 
-    # FIXME: enable
-    html-img-require-alt:
-      enabled: false
-
 formatter:
   enabled: true
