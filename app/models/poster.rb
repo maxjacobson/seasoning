@@ -2,7 +2,6 @@
 # https://developers.themoviedb.org/3/getting-started/images
 class Poster
   PREFERRED_SIZE = "w185"
-  MissingConfiguration = Class.new(StandardError)
   MissingSizes = Class.new(StandardError)
 
   def initialize(poster_path)
@@ -37,6 +36,6 @@ class Poster
   end
 
   def config
-    @config ||= TMDBAPIConfiguration.only || (raise MissingConfiguration)
+    @config ||= TMDBAPIConfiguration.sole
   end
 end

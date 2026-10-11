@@ -2,7 +2,6 @@
 # https://developers.themoviedb.org/3/getting-started/images
 class Still
   PREFERRED_SIZE = "w300"
-  MissingConfiguration = Class.new(StandardError)
   MissingSizes = Class.new(StandardError)
 
   def initialize(still_path)
@@ -35,6 +34,6 @@ class Still
   end
 
   def config
-    @config ||= TMDBAPIConfiguration.only || (raise MissingConfiguration)
+    @config ||= TMDBAPIConfiguration.sole
   end
 end

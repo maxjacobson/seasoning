@@ -2,7 +2,6 @@
 # https://developers.themoviedb.org/3/getting-started/images
 class ProviderLogo
   PREFERRED_SIZE = "w154"
-  MissingConfiguration = Class.new(StandardError)
 
   def initialize(logo_path)
     @logo_path = logo_path
@@ -35,6 +34,6 @@ class ProviderLogo
   end
 
   def config
-    @config ||= TMDBAPIConfiguration.only || (raise MissingConfiguration)
+    @config ||= TMDBAPIConfiguration.sole
   end
 end
