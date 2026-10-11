@@ -1,0 +1,32 @@
+{
+  "id": 59659,
+  "results": {
+    "US": {
+      "link": "https://www.themoviedb.org/tv/59659-halt-and-catch-fire/watch?locale=US",
+      "flatrate": [
+        {
+          "display_priority": 6,
+          "logo_path": "/8NW7r5anZzIbBE33XmVWuyHtUDj.jpg",
+          "provider_id": 4460,
+          "provider_name": "AMC+"
+        }
+      ],
+      "buy": [
+        {
+          "display_priority": 2,
+          "logo_path": "/9iyInoBWR3ltDmT7CyXbGzLK2UG.jpg",
+          "provider_id": 350,
+          "provider_name": "Apple TV"
+        }
+      ],
+      "rent": [
+        {
+          "display_priority": 4,
+          "logo_path": "/jb2V4OoDkkfk3LKNK4DmugB6MzA.jpg",
+          "provider_id": 10,
+          "provider_name": "Amazon Video"
+        }
+      ]
+    }
+  }
+}

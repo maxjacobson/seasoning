@@ -47,6 +47,12 @@
   margin-bottom: 0.5rem;
 }
 
+.show-page__where-to-watch {
+  margin-block: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .show-page__no-seasons {
   color: var(--ink-muted);
 }

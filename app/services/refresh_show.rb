@@ -49,5 +49,7 @@ RefreshShow = lambda { |show|
     show.seasons.where.not(id: seen_season_ids).find_each do |season|
       season.update!(orphaned: true)
     end
+
+    RefreshProviders.call(show)
   end
 }

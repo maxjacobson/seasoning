@@ -31,6 +31,12 @@ class SearchingTest < ApplicationSystemTestCase
         )
     end
 
+    stub_request(:get, "https://api.themoviedb.org/3/tv/59659/watch/providers?api_key=xxxx&watch_region=US")
+      .to_return(
+        status: 200,
+        body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-watch-providers.json").read
+      )
+
     visit redeem_magic_link_path(@magic_link.token)
 
     # Import a show through normal flow

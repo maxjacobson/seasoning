@@ -19,6 +19,8 @@ class Show < ApplicationRecord
     self.slug = slug
   }
   has_many :seasons, dependent: :destroy
+  has_many :show_providers, dependent: :destroy
+  has_many :providers, through: :show_providers
   has_many :returning_show_notifications, dependent: :destroy
 
   scope :needs_refreshing, lambda {

@@ -27,6 +27,7 @@ class TMDBAPIConfiguration < ApplicationRecord
         fetched_at: Time.zone.now,
         secure_base_url: api_configuration.images.secure_base_url,
         poster_sizes: api_configuration.images.poster_sizes,
+        logo_sizes: api_configuration.images.logo_sizes,
         still_sizes: api_configuration.images.still_sizes
       )
     end

@@ -24,6 +24,12 @@ module TMDB
       ::TMDB::SeasonDetails.new(data)
     end
 
+    def watch_providers(tv_id, region:)
+      path = "/tv/#{tv_id}/watch/providers"
+      data = get(path, watch_region: region)
+      ::TMDB::WatchProviders.new(data).region(region)
+    end
+
     def api_configuration
       data = get("/configuration")
       ::TMDB::APIConfiguration.new(data)

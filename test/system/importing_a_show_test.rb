@@ -31,6 +31,14 @@ class ImportingAShowTest < ApplicationSystemTestCase
                    body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire.json").read
                  )
 
+    watch_providers_request = stub_request(
+      :get,
+      "https://api.themoviedb.org/3/tv/59659/watch/providers?api_key=xxxx&watch_region=US"
+    ).to_return(
+      status: 200,
+      body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-watch-providers.json").read
+    )
+
     seasons_requests = [1, 2, 3, 4].map do |season_number|
       stub_request(:get, "https://api.themoviedb.org/3/tv/59659/season/#{season_number}?api_key=xxxx")
         .to_return(
@@ -45,9 +53,15 @@ class ImportingAShowTest < ApplicationSystemTestCase
     assert_content "You've imported Halt and Catch Fire! Thanks."
 
     assert_request_requested tv_request, times: 2
+    assert_request_requested watch_providers_request
     seasons_requests.each do |req|
       assert_request_requested req
     end
+
+    show = Show.find_by!(slug: "halt-and-catch-fire")
+
+    assert_predicate show.show_providers.count, :positive?,
+                     "Importing a show should also ingest its watch providers"
 
     assert_equal "/shows/halt-and-catch-fire", page.current_path
 

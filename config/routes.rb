@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resource :your_show, only: [:create, :destroy, :update], path: "/relationship"
     resource :note_to_self, only: [:edit], path: "/note-to-self", controller: "notes_to_self"
     resource :refresh, only: [:create], controller: "refresh_show"
+    resource :providers, only: [:show], controller: "show_providers"
   end
 
   get "/shows/:show_slug/:season_slug/reviews/new", to: "season_reviews#new", as: :new_season_review
