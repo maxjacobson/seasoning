@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_10_100100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -103,6 +103,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
     t.index ["show_id"], name: "index_my_shows_on_show_id"
   end
 
+  create_table "providers", force: :cascade do |t|
+    t.string "name", null: false, comment: "e.g. Netflix, AMC+, Apple TV"
+    t.integer "tmdb_provider_id", null: false, comment: "TMDB's id for the provider (their data comes from JustWatch)"
+    t.string "tmdb_logo_path", comment: "Path part of the provider's logo image URL"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tmdb_provider_id"], name: "index_providers_on_tmdb_provider_id", unique: true
+  end
+
   create_table "returning_show_notifications", force: :cascade do |t|
     t.bigint "human_id", null: false, comment: "Which human should receive this notification"
     t.bigint "show_id", null: false, comment: "Which show is returning"
@@ -153,6 +162,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
+  create_table "show_providers", force: :cascade do |t|
+    t.bigint "provider_id", null: false, comment: "Where the show can be watched"
+    t.bigint "show_id", null: false, comment: "The show being watched"
+    t.string "category", null: false, comment: "How it can be watched there: flatrate, rent, buy, free, or ads"
+    t.integer "display_priority", default: 0, null: false, comment: "TMDB's suggested ordering within a category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider_id"], name: "index_show_providers_on_provider_id"
+    t.index ["show_id", "provider_id", "category"], name: "index_show_providers_on_show_provider_and_category", unique: true
+    t.index ["show_id"], name: "index_show_providers_on_show_id"
+  end
+
   create_table "shows", force: :cascade do |t|
     t.string "title", null: false, comment: "The show's official title"
     t.string "slug", null: false, comment: "The show's title, in slug form, to go in a URL"
@@ -176,6 +197,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "still_sizes", null: false, comment: "Available sizes for episode stills", array: true
+    t.string "logo_sizes", default: [], null: false, array: true
     t.index ["poster_sizes"], name: "index_tmdb_api_configurations_on_poster_sizes", using: :gin
   end
 
@@ -191,4 +213,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_190310) do
   add_foreign_key "returning_show_notifications", "shows", on_delete: :cascade
   add_foreign_key "season_reviews", "humans", column: "author_id", on_delete: :cascade
   add_foreign_key "season_reviews", "seasons", on_delete: :cascade
+  add_foreign_key "show_providers", "providers", on_delete: :cascade
+  add_foreign_key "show_providers", "shows", on_delete: :cascade
 end

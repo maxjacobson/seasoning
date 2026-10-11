@@ -2,6 +2,7 @@
 
 Some things I'm planning to work on:
 
+1. Track watch provider data for regions besides the US, and let humans pick the region they care about on the "where to watch" page
 1. Like button on reviews
 1. Comments on reviews
 1. Sort following and followers pages by when it happened

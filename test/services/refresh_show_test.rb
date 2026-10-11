@@ -41,6 +41,12 @@ class RefreshShowTest < ActiveSupport::TestCase
         )
     end
 
+    stub_request(:get, "https://api.themoviedb.org/3/tv/59659/watch/providers?api_key=xxxx&watch_region=US")
+      .to_return(
+        status: 200,
+        body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-watch-providers.json").read
+      )
+
     RefreshShow.call(show)
 
     orphan_season.reload
@@ -82,11 +88,70 @@ class RefreshShowTest < ActiveSupport::TestCase
         )
     end
 
+    stub_request(:get, "https://api.themoviedb.org/3/tv/59659/watch/providers?api_key=xxxx&watch_region=US")
+      .to_return(
+        status: 200,
+        body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-watch-providers.json").read
+      )
+
     RefreshShow.call(show)
 
     season_1.reload
 
     assert_not season_1.orphaned?, "Previously orphaned season should be un-orphaned when it reappears"
+  end
+
+  test "ingests watch providers from TMDB" do
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 59_659
+    )
+
+    stale_provider = Provider.create!(name: "Netflix", tmdb_provider_id: 8, tmdb_logo_path: "/netflix.jpg")
+    show.show_providers.create!(provider: stale_provider, category: "flatrate", display_priority: 0)
+
+    stub_request(:get, "https://api.themoviedb.org/3/tv/59659?api_key=xxxx")
+      .to_return(
+        status: 200,
+        body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire.json").read
+      )
+
+    (1..4).each do |season_number|
+      stub_request(:get, "https://api.themoviedb.org/3/tv/59659/season/#{season_number}?api_key=xxxx")
+        .to_return(
+          status: 200,
+          body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-season-#{season_number}.json").read
+        )
+    end
+
+    watch_providers_request = stub_request(
+      :get,
+      "https://api.themoviedb.org/3/tv/59659/watch/providers?api_key=xxxx&watch_region=US"
+    ).to_return(
+      status: 200,
+      body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-watch-providers.json").read
+    )
+
+    RefreshShow.call(show)
+
+    assert_request_requested watch_providers_request
+
+    # N.B. sort in Ruby: database collation order is not the same on macOS and CI
+    providers_and_categories = show.show_providers.joins(:provider).pluck("providers.name", :category).sort
+
+    assert_equal [
+      ["AMC+", "flatrate"],
+      ["Amazon Video", "rent"],
+      ["Apple TV", "buy"]
+    ], providers_and_categories
+
+    amc_plus = Provider.find_by!(name: "AMC+")
+
+    assert_equal "/8NW7r5anZzIbBE33XmVWuyHtUDj.jpg", amc_plus.tmdb_logo_path
+
+    assert_not show.show_providers.exists?(provider: stale_provider),
+               "Provider no longer in TMDB response should be removed"
   end
 
   test "marks show as orphaned when TMDB returns 404" do
@@ -131,6 +196,12 @@ class RefreshShowTest < ActiveSupport::TestCase
           body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-season-#{season_number}.json").read
         )
     end
+
+    stub_request(:get, "https://api.themoviedb.org/3/tv/59659/watch/providers?api_key=xxxx&watch_region=US")
+      .to_return(
+        status: 200,
+        body: Rails.root.join("test/webmock/tmdb/halt-and-catch-fire-watch-providers.json").read
+      )
 
     RefreshShow.call(show)
 

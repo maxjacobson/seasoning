@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **October 10, 2026** — New "where to watch" pages for shows: every show page now links to a page listing where you can stream, rent, or buy it in the US, with provider logos (Netflix, AMC+, Apple TV, and friends). Availability data comes from JustWatch via TMDB, and is refreshed nightly along with the rest of the show data
 1. **September 12, 2026** — Friendlier sign-in: if you're signed out and try to visit a page that requires signing in — your shows, a show's page, your settings, someone's stats, the pages only admins can see, and so on — you're now sent to the sign-in page with a "Please sign in to continue" message, instead of being shown a bare 401 error page
 1. **May 19, 2026** — Control when new episodes show as available: on any show you've added, you can now configure whether new episodes show as available (red badge) on their air date or the following day. Useful when a show airs on broadcast or cable but only appears on your streaming service the next day — for example, Top Chef airs Tuesdays on Bravo but is only on Peacock on Wednesdays. The setting is per-show, defaults to same-day, and can be toggled with a checkbox on the show's page
 1. **April 11, 2026** — Block unauthenticated visitors from show, season, and episode pages

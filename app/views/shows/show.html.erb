@@ -15,6 +15,10 @@
 
       <%= render "more_info", url: @page.tmdb_url %>
 
+      <p class="show-page__where-to-watch">
+        <%= link_to "Where to watch", show_providers_path(@page.slug), data: { test_id: "where-to-watch" } %>
+      </p>
+
       <div class="show-page__actions">
         <% if current_human %>
           <div>

@@ -27,5 +27,7 @@ FindOrCreateShow = lambda { |tmdb_show|
     RefreshEpisodes.call(show, season)
   end
 
+  RefreshProviders.call(show)
+
   show
 }
