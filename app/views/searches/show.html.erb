@@ -7,9 +7,7 @@
 
   <% if @database_results.present? %>
     <div class="search-results">
-      <% @database_results.each do |show| %>
-        <%= render "database_show_result", show: show %>
-      <% end %>
+      <%= render partial: "database_show_result", collection: @database_results, as: :show %>
     </div>
     <div class="search-footer">
       <p class="search-footer__hint">
@@ -20,9 +18,7 @@
     </div>
   <% elsif @tmdb_results.present? %>
     <div class="search-results">
-      <% @tmdb_results.each do |result| %>
-        <%= render "tmdb_show_result", result: result %>
-      <% end %>
+      <%= render partial: "tmdb_show_result", collection: @tmdb_results, as: :result %>
     </div>
   <% else %>
     <p class="muted-text">No results. Try searching something else.</p>

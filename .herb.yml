@@ -1,3 +1,5 @@
+framework: "actionview"
+
 files:
   exclude:
     - "coverage/**/*"
@@ -10,6 +12,10 @@ linter:
   enabled: true
 
   rules:
+    # FIXME: enable
+    actionview-prefer-qualified-partial-path:
+      enabled: false
+
     # FIXME: enable
     erb-no-duplicate-branch-elements:
       enabled: false
