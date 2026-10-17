@@ -8,7 +8,7 @@
     "@herb-tools/formatter": "^0.11.0",
     "@herb-tools/linter": "^0.11.0",
     "playwright": "^1.64.0",
-    "prettier": "^3.9.9",
+    "prettier": "^3.9.10",
     "run-pty": "^6.0.2"
   },
   "scripts": {
