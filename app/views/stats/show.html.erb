@@ -53,7 +53,7 @@
 
               <div class="favorite-item__poster">
                 <%= link_to proper_review_path(review), class: "favorite-item__poster-link" do %>
-                  <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
+                  <%= render "application/poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
                 <% end %>
               </div>
 
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="favorite-item__rating">
-                  <%= render "star_rating", rating: review.rating %>
+                  <%= render "application/star_rating", rating: review.rating %>
 
                   <span class="favorite-item__rating-value">
                     (<%= review.rating %>/10)
@@ -90,7 +90,7 @@
         <% @reviews.order(created_at: :asc).each do |review| %>
           <div class="stats-grid__item">
             <%= link_to proper_review_path(review), class: "stats-grid__link", title: "#{review.season.show.title} - #{review.season.name}\nReviewed #{l(review.created_at.to_date)}" do %>
-              <%= render "poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
+              <%= render "application/poster", url: review.season.poster.url, show: review.season.show, size: "small" %>
             <% end %>
           </div>
         <% end %>

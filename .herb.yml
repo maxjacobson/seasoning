@@ -11,12 +11,9 @@ files:
 
 linter:
   enabled: true
+  failLevel: "hint"
 
   rules:
-    # FIXME: enable
-    actionview-prefer-qualified-partial-path:
-      enabled: false
-
     # FIXME: enable
     erb-no-duplicate-branch-elements:
       enabled: false

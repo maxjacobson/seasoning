@@ -49,7 +49,7 @@
           </button>
 
           <% if current_human.present? %>
-            <%= render "show_search_bar" %>
+            <%= render "application/show_search_bar" %>
             <%= link_to "Your page", human_profile_path(current_human.handle) %>
             <%= link_to "Settings", settings_path %>
             <%= button_to "Log out", logout_path, method: :delete, class: "link-looking-button", form_class: "inline", data: { turbo_confirm: "Are you sure you want to log out?" } %>
