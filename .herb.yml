@@ -21,9 +21,5 @@ linter:
     erb-no-unsafe-raw:
       enabled: false
 
-    # FIXME: enable
-    html-navigation-has-label:
-      enabled: false
-
 formatter:
   enabled: true
