@@ -184,14 +184,14 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
     season1_poster_link = season1_links.first
 
     within(season1_poster_link) do
-      assert_selector "div[title*='available episode']"
+      assert_selector "div[aria-label*='available episode']"
     end
 
     season2_links = all("a[href='/shows/halt-and-catch-fire/season-2']")
     season2_poster_link = season2_links.first
 
     within(season2_poster_link) do
-      assert_no_selector "div[title*='available episode']"
+      assert_no_selector "div[aria-label*='available episode']"
     end
   end
 end

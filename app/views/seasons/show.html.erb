@@ -42,7 +42,14 @@
             <span><%= number_to_percentage(percentage, precision: 0) %></span>
           </div>
 
-          <div class="watch-progress__track" title="Season watch progress">
+          <div
+            class="watch-progress__track"
+            role="progressbar"
+            aria-label="Season watch progress"
+            aria-valuenow="<%= percentage.floor %>"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
             <% bar_classes = "watch-progress__bar progress--#{percentage.floor}" %>
 
             <div class="<%= bar_classes %>"></div>
