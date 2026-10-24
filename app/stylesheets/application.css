@@ -15,6 +15,10 @@
 @import "./content_pages.css";
 @import "./auth.css";
 
+body {
+  background-color: rgb(246, 246, 247);
+}
+
 p {
   margin: 15px 0;
 }
