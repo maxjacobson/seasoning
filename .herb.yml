@@ -22,10 +22,6 @@ linter:
       enabled: false
 
     # FIXME: enable
-    html-no-title-attribute:
-      enabled: false
-
-    # FIXME: enable
     html-navigation-has-label:
       enabled: false
 

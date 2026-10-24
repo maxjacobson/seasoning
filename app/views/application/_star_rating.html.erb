@@ -1,6 +1,6 @@
 <%# locals: (rating:) %>
 
-<span title="<%= rating %>/10 rating">
+<span role="img" aria-label="<%= rating %> out of 10">
   <%= render "application/star", position: 1, rating: rating %>
   <%= render "application/star", position: 2, rating: rating %>
   <%= render "application/star", position: 3, rating: rating %>

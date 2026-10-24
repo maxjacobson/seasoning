@@ -25,7 +25,7 @@
                 <%= l(review.created_at.to_date, format: :default) %>
 
                 <% if review.viewable_by_only_me? %>
-                  <span title="Private review - only you can see this">🔒</span>
+                  <span role="img" aria-label="Private review">🔒</span>
                 <% end %>
               </div>
 

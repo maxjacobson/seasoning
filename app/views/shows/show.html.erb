@@ -45,7 +45,14 @@
                 </span>
               </div>
 
-              <div class="watch-progress__track" title="Watch progress">
+              <div
+                class="watch-progress__track"
+                role="progressbar"
+                aria-label="Watch progress"
+                aria-valuenow="<%= @page.watched_percentage.floor %>"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
                 <% bar_classes = "watch-progress__bar progress--#{@page.watched_percentage.floor}" %>
 
                 <div class="<%= bar_classes %>"></div>
