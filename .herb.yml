@@ -18,10 +18,6 @@ linter:
       enabled: true
 
     # FIXME: enable
-    actionview-strict-locals-first-line:
-      enabled: false
-
-    # FIXME: enable
     erb-no-duplicate-branch-elements:
       enabled: false
 
