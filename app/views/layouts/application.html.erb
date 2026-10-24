@@ -61,7 +61,13 @@
       <main class="site-content">
         <div class="site-flash">
           <% flash.each do |key, message| %>
-            <div class="flash flash-<%= key %>"><%= message %></div>
+            <% if key == "notice" %>
+              <div class="flash flash-notice"><%= message %></div>
+            <% elsif key == "alert" %>
+              <div class="flash flash-alert"><%= message %></div>
+            <% else %>
+              <div class="flash"><%= message %></div>
+            <% end %>
           <% end %>
         </div>
 
