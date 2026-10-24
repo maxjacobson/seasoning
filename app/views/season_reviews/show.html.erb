@@ -15,7 +15,7 @@
   <div class="review-detail__columns">
     <div class="review-detail__poster">
       <h3 class="review-detail__label">Poster</h3>
-      <%= render "poster", show: @show, url: @season.poster.url, size: "large" %>
+      <%= render "application/poster", show: @show, url: @season.poster.url, size: "large" %>
     </div>
 
     <div class="review-detail__facts">
@@ -37,7 +37,7 @@
             Rating
           </h3>
 
-          <%= render "star_rating", rating: @review.rating %>
+          <%= render "application/star_rating", rating: @review.rating %>
         </div>
       <% end %>
     </div>

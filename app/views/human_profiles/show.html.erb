@@ -63,7 +63,7 @@
                 <%= link_to show_path(show.slug), class: "watching-list__link" do %>
                   <div class="watching-list__poster">
                     <% badge = my_shows_by_show_id[show.id]&.unwatched_episode_badge %>
-                    <%= render "poster", size: "small", url: show.poster.url, show: show, badge: badge %>
+                    <%= render "application/poster", size: "small", url: show.poster.url, show: show, badge: badge %>
                   </div>
 
                   <div class="watching-list__title">
