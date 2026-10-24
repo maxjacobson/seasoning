@@ -66,10 +66,9 @@
                         </div>
 
                         <div class="progress__track">
-                          <div
-                            class="progress__bar"
-                            style="width: <%= percentage %>%"
-                          ></div>
+                          <% bar_classes = "progress__bar progress--#{percentage.floor}" %>
+
+                          <div class="<%= bar_classes %>"></div>
                         </div>
                       </div>
                     </div>
