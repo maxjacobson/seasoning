@@ -23,7 +23,7 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit show_path(@show.slug)
 
-    checkbox = find("input[type='checkbox'][name='my_show[available_same_day]']")
+    checkbox = find_field(type: "checkbox", name: "my_show[available_same_day]")
 
     assert_predicate checkbox, :checked?
   end
@@ -39,7 +39,7 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit show_path(@show.slug)
 
-    find("input[type='checkbox'][name='my_show[available_same_day]']").uncheck
+    find_field(type: "checkbox", name: "my_show[available_same_day]").uncheck
 
     assert_content "Updated Top Chef"
     assert_not @my_show.reload.available_same_day
@@ -51,7 +51,7 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit show_path(@show.slug)
 
-    checkbox = find("input[type='checkbox'][name='my_show[available_same_day]']")
+    checkbox = find_field(type: "checkbox", name: "my_show[available_same_day]")
 
     assert_not_predicate checkbox, :checked?
 
@@ -65,13 +65,13 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit show_path(@show.slug)
 
-    find("input[type='checkbox'][name='my_show[available_same_day]']").uncheck
+    find_field(type: "checkbox", name: "my_show[available_same_day]").uncheck
 
     assert_content "Updated Top Chef"
 
     visit show_path(@show.slug)
 
-    checkbox = find("input[type='checkbox'][name='my_show[available_same_day]']")
+    checkbox = find_field(type: "checkbox", name: "my_show[available_same_day]")
 
     assert_not_predicate checkbox, :checked?
   end
