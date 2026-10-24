@@ -9,17 +9,15 @@
       <%= @year %> stats
     </h1>
 
-    <% if @filter == 'reviewed-in' %>
-      <p class="stats-header__summary">
-        <%= @human.handle %> reviewed
-        <%= pluralize(@reviews.count, "season") %> in <%= @year %>
-      </p>
-    <% else %>
-      <p class="stats-header__summary">
-        <%= @human.handle %> reviewed
-        <%= pluralize(@reviews.count, "season") %> that aired in <%= @year %>
-      </p>
-    <% end %>
+    <p class="stats-header__summary">
+      <%= @human.handle %> reviewed <%= pluralize(@reviews.count, "season") %>
+      <% if @filter == "reviewed-in" %>
+        in
+      <% else %>
+        that aired in
+      <% end %>
+      <%= @year %>
+    </p>
   </div>
 
   <div class="stats-tabs">
@@ -76,15 +74,15 @@
       </div>
     <% end %>
     <div class="stats-all-reviews">
-      <% if @filter == 'reviewed-in' %>
-        <h2 class="stats-section-title">
-          Everything reviewed in <%= @year %>
-        </h2>
-      <% else %>
-        <h2 class="stats-section-title">
-          Everything that aired in <%= @year %>
-        </h2>
-      <% end %>
+      <h2 class="stats-section-title">
+        <% if @filter == "reviewed-in" %>
+          Everything reviewed in
+        <% else %>
+          Everything that aired in
+        <% end %>
+
+        <%= @year %>
+      </h2>
 
       <div class="stats-grid">
         <% @reviews.order(created_at: :asc).each do |review| %>
