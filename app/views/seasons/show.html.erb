@@ -43,7 +43,9 @@
           </div>
 
           <div class="watch-progress__track" title="Season watch progress">
-            <div class="watch-progress__bar" style="width: <%= percentage %>%"></div>
+            <% bar_classes = "watch-progress__bar progress--#{percentage.floor}" %>
+
+            <div class="<%= bar_classes %>"></div>
           </div>
         </div>
       <% end %>
