@@ -18,10 +18,6 @@ linter:
       enabled: true
 
     # FIXME: enable
-    erb-no-duplicate-branch-elements:
-      enabled: false
-
-    # FIXME: enable
     erb-no-interpolated-class-names:
       enabled: false
 
