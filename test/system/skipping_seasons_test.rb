@@ -65,7 +65,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
 
     assert_content "Skip this season"
 
-    skip_checkbox = find("input[type='checkbox'][name='skipped']")
+    skip_checkbox = find_field(type: "checkbox", name: "skipped")
 
     assert_not_predicate skip_checkbox, :checked?
   end
@@ -79,7 +79,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
 
     assert_not_predicate episode_checkbox, :disabled?
 
-    skip_checkbox = find("input[type='checkbox'][name='skipped']")
+    skip_checkbox = find_field(type: "checkbox", name: "skipped")
     skip_checkbox.check
 
     assert_content "Season 1 marked as skipped"
@@ -98,7 +98,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
 
     assert_content "33%"
 
-    skip_checkbox = find("input[type='checkbox'][name='skipped']")
+    skip_checkbox = find_field(type: "checkbox", name: "skipped")
     skip_checkbox.check
 
     assert_content "Season 1 marked as skipped"
@@ -118,7 +118,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
 
     assert_predicate episode_checkbox, :disabled?
 
-    skip_checkbox = find("input[type='checkbox'][name='skipped']")
+    skip_checkbox = find_field(type: "checkbox", name: "skipped")
 
     assert_predicate skip_checkbox, :checked?
 
@@ -141,7 +141,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
 
     assert_no_content "33%"
 
-    skip_checkbox = find("input[type='checkbox'][name='skipped']")
+    skip_checkbox = find_field(type: "checkbox", name: "skipped")
     skip_checkbox.uncheck
 
     assert_content "Season 1 unmarked as skipped"
