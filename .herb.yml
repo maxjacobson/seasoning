@@ -22,10 +22,6 @@ linter:
       enabled: false
 
     # FIXME: enable
-    html-no-block-inside-inline:
-      enabled: false
-
-    # FIXME: enable
     html-no-style-attributes:
       enabled: false
 
