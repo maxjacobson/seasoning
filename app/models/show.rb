@@ -39,7 +39,7 @@ class Show < ApplicationRecord
       # N.B. don't need to refresh as often
       #
       # adding a little randomness to spread out the work over multiple days
-      (5..12).to_a.sample.days.from_now
+      (14..28).to_a.sample.days.from_now
     end
   end
 
