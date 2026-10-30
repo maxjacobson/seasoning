@@ -157,7 +157,6 @@ select:where(:not([multiple], [size]:not([size="1"]))) {
 
 input[type="checkbox"],
 input[type="radio"] {
-  accent-color: var(--accent);
   cursor: pointer;
 }
 
