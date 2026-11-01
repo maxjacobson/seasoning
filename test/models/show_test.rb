@@ -101,6 +101,42 @@ class ShowTest < ActiveSupport::TestCase
     assert_equal "Breaking the Law", show6.sort_by_title
   end
 
+  test "#estimated_next_refresh_at returns the next midnight Eastern at or after the scheduled refresh time" do
+    show = Show.create!(title: "Test Show", tmdb_tv_id: 12_345)
+
+    travel_to Time.zone.parse("2026-11-15 12:00:00") do
+      show.tmdb_next_refresh_at = Time.zone.parse("2026-11-16 18:00:00")
+
+      assert_equal Time.find_zone!("America/New_York").parse("2026-11-17 00:00:00"), show.estimated_next_refresh_at
+    end
+  end
+
+  test "#estimated_next_refresh_at uses the next midnight Eastern after now when the scheduled time has passed" do
+    show = Show.create!(title: "Test Show", tmdb_tv_id: 12_345)
+
+    travel_to Time.zone.parse("2026-11-15 12:00:00") do
+      show.tmdb_next_refresh_at = Time.zone.parse("2026-11-14 00:00:00")
+
+      assert_equal Time.find_zone!("America/New_York").parse("2026-11-16 00:00:00"), show.estimated_next_refresh_at
+    end
+  end
+
+  test "#estimated_next_refresh_at treats a scheduled refresh time of exactly midnight Eastern as that midnight" do
+    show = Show.create!(title: "Test Show", tmdb_tv_id: 12_345)
+
+    travel_to Time.zone.parse("2026-11-15 12:00:00") do
+      show.tmdb_next_refresh_at = Time.zone.parse("2026-11-16 05:00:00")
+
+      assert_equal Time.find_zone!("America/New_York").parse("2026-11-16 00:00:00"), show.estimated_next_refresh_at
+    end
+  end
+
+  test "#estimated_next_refresh_at returns nil when there is no scheduled refresh time" do
+    show = Show.create!(title: "Test Show", tmdb_tv_id: 12_345)
+
+    assert_nil show.estimated_next_refresh_at
+  end
+
   test "updates sort_by_title when title changes" do
     show = Show.create!(title: "Original Title", tmdb_tv_id: 1)
 

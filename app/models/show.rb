@@ -43,6 +43,16 @@ class Show < ApplicationRecord
     end
   end
 
+  def estimated_next_refresh_at
+    return unless tmdb_next_refresh_at
+
+    zone = Time.find_zone!("America/New_York")
+    reference = [tmdb_next_refresh_at, Time.current].max.in_time_zone(zone)
+    midnight = reference.beginning_of_day
+    midnight += 1.day if midnight < reference
+    midnight
+  end
+
   def poster
     Poster.new(tmdb_poster_path)
   end
