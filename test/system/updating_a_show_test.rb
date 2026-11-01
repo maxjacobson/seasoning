@@ -32,7 +32,7 @@ class UpdatingAShowTest < ApplicationSystemTestCase
     # Click on the already imported show (TMDB ID 59659)
     click_link "imported-show-59659"
 
-    assert_content "Added by: 0 people"
+    assert_content "Added by 0 people"
     click_on "Add"
 
     # Auto-submit happens when status changes
@@ -47,7 +47,7 @@ class UpdatingAShowTest < ApplicationSystemTestCase
     # Click on the already imported show (TMDB ID 59659)
     click_link "imported-show-59659"
 
-    assert_content "Added by: 0 people"
+    assert_content "Added by 0 people"
     click_on "Add"
 
     click_on "Write note to self"
@@ -64,7 +64,7 @@ class UpdatingAShowTest < ApplicationSystemTestCase
     # Click on the already imported show (TMDB ID 59659)
     click_link "imported-show-59659"
 
-    assert_content "Added by: 0 people"
+    assert_content "Added by 0 people"
     click_on "Add"
 
     select "Currently watching", from: "my_show[status]"
@@ -76,7 +76,7 @@ class UpdatingAShowTest < ApplicationSystemTestCase
     # Click on the already imported show (TMDB ID 82815)
     click_link "imported-show-82815"
 
-    assert_content "Added by: 0 people"
+    assert_content "Added by 0 people"
     click_on "Add"
 
     assert page.has_selector?("option[value='currently_watching'][disabled='disabled']")
