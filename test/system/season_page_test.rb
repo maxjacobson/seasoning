@@ -75,7 +75,7 @@ class SeasonPageTest < ApplicationSystemTestCase
     assert_content "06/08/2014"
     assert_content "06/15/2014"
     assert_content "FYI"
-    assert_content "Data last refreshed:"
+    assert_content "Data last refreshed"
 
     assert page.has_link?("Back", href: "/shows/halt-and-catch-fire")
     assert page.has_link?("More info", href: "https://www.themoviedb.org/tv/59659/season/1")

@@ -99,17 +99,15 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--ink-muted);
+  list-style: disc inside;
 }
 
 .metadata-list > :not(:last-child) {
   margin-block-end: 0.5rem;
 }
 
-.metadata-list__label {
-  font-weight: 500;
-}
-
 .metadata-list__warning {
+  list-style: none;
   color: var(--warning-ink);
   background: var(--warning-soft);
   border: 1px solid var(--warning-line);
