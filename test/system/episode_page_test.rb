@@ -54,7 +54,8 @@ class EpisodePageTest < ApplicationSystemTestCase
     assert_content "More info"
     assert_content "FYI"
     assert_content "Data last refreshed:"
-    assert_content "Data will next be refreshed within 24 hours of"
+    assert_content "Data will next be refreshed:"
+    assert_content(/in (about )?\d+ (day|days|hour|hours)/)
 
     assert page.has_link?("Halt and Catch Fire", href: "/shows/halt-and-catch-fire")
     assert page.has_link?("Season 1", href: "/shows/halt-and-catch-fire/season-1")

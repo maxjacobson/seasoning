@@ -27,13 +27,12 @@
 
     <% if show.tmdb_next_refresh_at %>
       <li>
-        <span class="metadata-list__label">
-          Data will next be refreshed within 24 hours of
-        </span>
+        <span class="metadata-list__label">Data will next be refreshed:</span>
 
-        <time datetime="<%= show.tmdb_next_refresh_at.iso8601 %>">
-          <%= show.tmdb_next_refresh_at.to_date %>
-        </time>
+        <span>
+          in
+          <%= distance_of_time_in_words(Time.current, show.estimated_next_refresh_at) %>
+        </span>
       </li>
     <% end %>
   </ul>
