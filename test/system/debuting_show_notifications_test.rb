@@ -35,4 +35,24 @@ class DebutingShowNotificationsTest < ApplicationSystemTestCase
 
     assert_current_path show_path("halt-and-catch-fire")
   end
+
+  test "can start watching from debuting show notification" do
+    human = Human.create!(email: "donna@example.com", handle: "donna")
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
+                        first_air_date: Time.zone.today)
+    my_show = MyShow.create!(human: human, show: show, status: "next_up")
+    DebutingShowNotification.create!(human: human, show: show)
+
+    magic_link = MagicLink.create!(email: human.email)
+    visit redeem_magic_link_path(magic_link.token)
+
+    assert_text "Halt and Catch Fire is here!"
+
+    click_button "Watch now"
+
+    assert_current_path show_path("halt-and-catch-fire")
+    assert_text "Updated Halt and Catch Fire"
+    assert_not DebutingShowNotification.exists?(human: human, show: show)
+    assert_predicate my_show.reload, :currently_watching?
+  end
 end

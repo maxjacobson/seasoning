@@ -4,6 +4,7 @@ As mentioned on [the credits page](/credits), this whole thing is open source, s
 
 But here's some highlights of when things happened.
 
+1. **November 5, 2026** — Add "Watch now" to show notifications: when a "[Show] is back!" or "[Show] is here!" notification appears, you can now click "Watch now" to mark the show as currently watching, dismiss the notification, and jump straight to the show page
 1. **November 1, 2026** — Clearer next-refresh timing on show pages: the FYI section now says roughly how long until the show's data will next be refreshed (e.g. "in 1 day"), based on the nightly refresh schedule, instead of "within 24 hours of [date]"
 1. **October 10, 2026** — New "where to watch" pages for shows: every show page now links to a page listing where you can stream, rent, or buy it in the US, with provider logos (Netflix, AMC+, Apple TV, and friends). Availability data comes from JustWatch via TMDB, and is refreshed nightly along with the rest of the show data
 1. **September 12, 2026** — Friendlier sign-in: if you're signed out and try to visit a page that requires signing in — your shows, a show's page, your settings, someone's stats, the pages only admins can see, and so on — you're now sent to the sign-in page with a "Please sign in to continue" message, instead of being shown a bare 401 error page

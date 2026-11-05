@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   resources :follows, only: [:create, :destroy]
   resources :returning_show_notifications, only: [:destroy] do
     resource :snooze, only: [:create], controller: "returning_show_notifications/snoozes"
+    resource :watching, only: [:create], controller: "returning_show_notifications/watchings"
   end
   resources :debuting_show_notifications, only: [:destroy] do
     resource :snooze, only: [:create], controller: "debuting_show_notifications/snoozes"
+    resource :watching, only: [:create], controller: "debuting_show_notifications/watchings"
   end
   resource :credits, only: [:show]
   resource :roadmap, only: [:show]
