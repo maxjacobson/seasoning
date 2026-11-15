@@ -19,10 +19,16 @@
 .provider-card {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
   padding: 0.75rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
+}
+
+.provider-card--pinned {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
 }
 
 .provider-card__logo {
@@ -33,9 +39,34 @@
 }
 
 .provider-card__name {
+  flex: 1;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
+}
+
+.provider-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-basis: 100%;
+}
+
+.provider-card__action {
+  cursor: pointer;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  padding: 0.125rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.provider-card__action:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-mist);
+  color: var(--accent-deep-ink);
 }
 
 .providers-page__empty {
@@ -49,6 +80,13 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--ink-faint);
+}
+
+.providers-page__hint {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
 }
 
 @media (min-width: 640px) {

@@ -21,6 +21,8 @@ class ShowsController < ApplicationController
     @has_previous_page = current_page > 1
 
     @activity_reviews = current_human.recent_activity_reviews
+
+    @pinned_providers_by_show_id = current_human.pinned_providers_by_show_id(@my_shows.map(&:show_id))
   end
 
   def show

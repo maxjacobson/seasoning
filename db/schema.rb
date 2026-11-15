@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_10_100100) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_15_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "my_show_status", ["might_watch", "currently_watching", "stopped_watching", "waiting", "finished", "next_up"]
+  create_enum "provider_preference_status", ["pinned", "hidden"]
   create_enum "visibility", ["anybody", "myself"]
 
   create_table "debuting_show_notifications", force: :cascade do |t|
@@ -101,6 +102,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_100100) do
     t.index ["human_id", "show_id"], name: "index_my_shows_on_human_id_and_show_id", unique: true
     t.index ["human_id"], name: "index_my_shows_on_human_id"
     t.index ["show_id"], name: "index_my_shows_on_show_id"
+  end
+
+  create_table "provider_preferences", force: :cascade do |t|
+    t.bigint "human_id", null: false, comment: "Who has the preference"
+    t.bigint "provider_id", null: false, comment: "The watch provider they feel a way about"
+    t.enum "status", null: false, comment: "How they feel about it: pinned or hidden", enum_type: "provider_preference_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["human_id", "provider_id"], name: "index_provider_preferences_on_human_id_and_provider_id", unique: true
+    t.index ["human_id"], name: "index_provider_preferences_on_human_id"
+    t.index ["provider_id"], name: "index_provider_preferences_on_provider_id"
   end
 
   create_table "providers", force: :cascade do |t|
@@ -209,6 +221,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_100100) do
   add_foreign_key "my_seasons", "seasons", on_delete: :cascade
   add_foreign_key "my_shows", "humans", on_delete: :cascade
   add_foreign_key "my_shows", "shows", on_delete: :cascade
+  add_foreign_key "provider_preferences", "humans", on_delete: :cascade
+  add_foreign_key "provider_preferences", "providers", on_delete: :cascade
   add_foreign_key "returning_show_notifications", "humans", on_delete: :cascade
   add_foreign_key "returning_show_notifications", "shows", on_delete: :cascade
   add_foreign_key "season_reviews", "humans", column: "author_id", on_delete: :cascade

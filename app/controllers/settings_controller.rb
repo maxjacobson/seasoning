@@ -3,6 +3,8 @@ class SettingsController < ApplicationController
   def show
     require_authentication!
     authorize! { true }
+
+    @provider_preferences = current_human.provider_preferences.includes(:provider).order(:created_at)
   end
 
   def update

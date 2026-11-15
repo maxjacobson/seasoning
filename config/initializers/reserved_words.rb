@@ -20,5 +20,6 @@ RESERVED_WORDS = [
   "roadmap",
   "login",
   "password",
+  "provider-preferences",
   "signup"
 ].freeze

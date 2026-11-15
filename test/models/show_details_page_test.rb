@@ -183,4 +183,37 @@ class ShowDetailsPageTest < ActiveSupport::TestCase
 
     assert_not page.seasons?
   end
+
+  test "pinned_providers returns an empty array when no current_human" do
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
+    page = ShowDetailsPage.new(show: show, current_human: nil, include_skipped: false)
+
+    assert_equal [], page.pinned_providers
+  end
+
+  test "pinned_providers returns providers the current_human pinned that carry the show" do
+    donna = Human.create!(email: "donna@example.com", handle: "donna")
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
+    amc_plus = Provider.create!(name: "AMC+", tmdb_provider_id: 4_460)
+    apple_tv = Provider.create!(name: "Apple TV", tmdb_provider_id: 350)
+    show.show_providers.create!(provider: amc_plus, category: "flatrate", display_priority: 6)
+    show.show_providers.create!(provider: apple_tv, category: "buy", display_priority: 2)
+    ProviderPreference.create!(human: donna, provider: amc_plus, status: "pinned")
+
+    page = ShowDetailsPage.new(show: show, current_human: donna, include_skipped: false)
+
+    assert_equal [amc_plus], page.pinned_providers
+  end
+
+  test "pinned_providers excludes providers the current_human hid" do
+    donna = Human.create!(email: "donna@example.com", handle: "donna")
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
+    amc_plus = Provider.create!(name: "AMC+", tmdb_provider_id: 4_460)
+    show.show_providers.create!(provider: amc_plus, category: "flatrate", display_priority: 6)
+    ProviderPreference.create!(human: donna, provider: amc_plus, status: "hidden")
+
+    page = ShowDetailsPage.new(show: show, current_human: donna, include_skipped: false)
+
+    assert_equal [], page.pinned_providers
+  end
 end

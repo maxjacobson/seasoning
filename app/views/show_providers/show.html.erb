@@ -23,15 +23,47 @@
 
         <ul class="providers-grid">
           <% category_providers.each do |show_provider| %>
+            <%
+              provider = show_provider.provider
+              preference = @preferences[provider.id]
+              pinned = preference&.pinned?
+            %>
+
             <li
-              class="provider-card"
-              data-test-id="provider-<%= show_provider.provider.tmdb_provider_id %>"
+              class="provider-card <% if pinned %> provider-card--pinned <% end %>"
+              data-test-id="provider-<%= provider.tmdb_provider_id %>"
             >
-              <% if show_provider.provider.logo.url %>
-                <%= image_tag show_provider.provider.logo.url, alt: "", class: "provider-card__logo", loading: "lazy" %>
+              <% if provider.logo.url %>
+                <%= image_tag provider.logo.url, alt: "", class: "provider-card__logo", loading: "lazy" %>
               <% end %>
 
-              <span class="provider-card__name"><%= show_provider.provider.name %></span>
+              <span class="provider-card__name">
+                <% if pinned %>
+                  📌
+                <% end %><%= provider.name %>
+              </span>
+
+              <div class="provider-card__actions">
+                <% if pinned %>
+                  <%= button_to "Unpin",
+                                provider_preference_path(provider.id),
+                                method: :delete,
+                                class: "provider-card__action",
+                                data: { test_id: "unpin-#{provider.tmdb_provider_id}" } %>
+                <% else %>
+                  <%= button_to "Pin",
+                                provider_preferences_path,
+                                params: { provider_id: provider.id, status: "pinned" },
+                                class: "provider-card__action",
+                                data: { test_id: "pin-#{provider.tmdb_provider_id}" } %>
+                <% end %>
+
+                <%= button_to "Hide",
+                              provider_preferences_path,
+                              params: { provider_id: provider.id, status: "hidden" },
+                              class: "provider-card__action",
+                              data: { test_id: "hide-#{provider.tmdb_provider_id}" } %>
+              </div>
             </li>
           <% end %>
         </ul>
@@ -42,6 +74,11 @@
       We don't know of anywhere to watch this show right now.
     </p>
   <% end %>
+
+  <p class="providers-page__hint">
+    Pinned providers show up on your shows. Hidden ones stop showing up here.
+    Manage them in <%= link_to "settings", settings_path %>.
+  </p>
 
   <p class="providers-page__attribution" data-test-id="justwatch-attribution">
     Availability data by
