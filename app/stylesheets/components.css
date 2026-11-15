@@ -428,3 +428,27 @@
   font-size: 1rem;
   line-height: 1.5rem;
 }
+.pinned-providers {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pinned-providers__pin {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.pinned-providers__logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.pinned-providers__name {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
+}

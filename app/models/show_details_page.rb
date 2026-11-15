@@ -27,6 +27,12 @@ class ShowDetailsPage
     end
   end
 
+  def pinned_providers
+    return [] if current_human.blank?
+
+    @pinned_providers ||= current_human.pinned_providers_by_show_id([show.id]).fetch(show.id, [])
+  end
+
   def skipped_seasons?
     show.skipped_seasons_for?(current_human)
   end

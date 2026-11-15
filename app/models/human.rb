@@ -7,6 +7,7 @@ class Human < ApplicationRecord
   has_many :season_reviews, foreign_key: :author_id, inverse_of: :author, dependent: :destroy
   has_many :returning_show_notifications, dependent: :destroy
   has_many :debuting_show_notifications, dependent: :destroy
+  has_many :provider_preferences, dependent: :destroy
 
   normalizes :email, with: ->(email) { email.to_s.strip.downcase.presence }
   normalizes :handle, with: ->(handle) { handle.to_s.parameterize.underscore.presence }
@@ -40,6 +41,17 @@ class Human < ApplicationRecord
 
   def follows?(other)
     Follow.find_by(follower_id: id, followee_id: other.id)
+  end
+
+  def pinned_providers_by_show_id(show_ids)
+    pinned_provider_ids = provider_preferences.where(status: :pinned).pluck(:provider_id)
+    return {} if pinned_provider_ids.empty?
+
+    ShowProvider
+      .where(show_id: show_ids, provider_id: pinned_provider_ids)
+      .includes(:provider)
+      .group_by(&:show_id)
+      .transform_values { |show_providers| show_providers.map(&:provider).uniq }
   end
 
   def recent_activity_reviews(days: 30, limit: 15)

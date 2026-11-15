@@ -19,3 +19,49 @@
 .settings-password__link {
   display: inline-block;
 }
+
+.settings-provider-preferences {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.provider-preferences-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.provider-preference {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.provider-preference__logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.provider-preference__name {
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+.provider-preference__status {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-muted);
+}
+
+.provider-preference__action {
+  flex-shrink: 0;
+}
