@@ -49,12 +49,12 @@ class ShowProvidersPageTest < ApplicationSystemTestCase
     find("[data-test-id='pin-4460']").click
 
     assert_selector "[data-test-id='provider-4460'].provider-card--pinned"
-    assert_content "📌 AMC+"
     assert_selector "[data-test-id='unpin-4460']"
 
     visit show_path(@show.slug)
 
     assert_selector "[data-test-id='pinned-providers']"
+    assert_content "📌 Pinned providers"
     assert_selector "[data-test-id='pinned-providers'] img.pinned-providers__logo[alt='AMC+']"
     assert_selector "[data-test-id='pinned-providers'] img.pinned-providers__logo[alt='Apple TV']", count: 0
   end
@@ -80,6 +80,27 @@ class ShowProvidersPageTest < ApplicationSystemTestCase
     assert_selector "[data-test-id='provider-350']", count: 0
     assert_no_content "Apple TV"
     assert_content "AMC+"
+  end
+
+  test "including hidden providers shows them dimmed with an unhide button" do
+    ProviderPreference.create!(human: @human, provider: Provider.find_by!(tmdb_provider_id: 350), status: "hidden")
+
+    visit redeem_magic_link_path(@magic_link.token)
+    visit show_providers_path(@show.slug)
+
+    assert_selector "[data-test-id='provider-350']", count: 0
+
+    find("[data-test-id='include-hidden']").check
+
+    assert_selector "[data-test-id='provider-350'].provider-card--hidden"
+    assert_match(/all=1/, page.current_url)
+    assert_content "Apple TV"
+    assert_selector "[data-test-id='unhide-350']"
+
+    find("[data-test-id='unhide-350']").click
+
+    assert_selector "[data-test-id='provider-350']:not(.provider-card--hidden)"
+    assert_selector "[data-test-id='pin-350']"
   end
 
   test "hidden and pinned providers can be managed from settings" do
