@@ -6,6 +6,10 @@
   margin-block: 0.5rem 1.5rem;
 }
 
+.providers-page__include-hidden {
+  margin-block-end: 1.5rem;
+}
+
 .providers-page__section {
   margin-block-end: 1.5rem;
 }
@@ -18,8 +22,7 @@
 
 .provider-card {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.75rem;
   padding: 0.75rem;
   border: 1px solid var(--line);
@@ -29,6 +32,17 @@
 .provider-card--pinned {
   border-color: var(--accent-line);
   background: var(--accent-soft);
+}
+
+.provider-card--hidden {
+  border-style: dashed;
+  opacity: 0.7;
+}
+
+.provider-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .provider-card__logo {
@@ -45,28 +59,25 @@
   font-weight: 500;
 }
 
-.provider-card__actions {
-  display: flex;
-  gap: 0.5rem;
-  flex-basis: 100%;
-}
-
-.provider-card__action {
-  cursor: pointer;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  padding: 0.125rem 0.75rem;
+.provider-card__hidden-tag {
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 600;
-  color: var(--ink-soft);
+  color: var(--ink-faint);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-pill);
+  padding: 0.125rem 0.5rem;
 }
 
-.provider-card__action:hover {
-  border-color: var(--accent-line);
-  background: var(--accent-mist);
-  color: var(--accent-deep-ink);
+.provider-card__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.provider-card__action {
+  padding: 0.125rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .providers-page__empty {
