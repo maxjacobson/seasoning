@@ -71,7 +71,7 @@
 
     <% if @page.pinned_providers.any? %>
       <div>
-        <%= render "shows/pinned_providers", providers: @page.pinned_providers %>
+        <%= render "shows/pinned_providers", providers: @page.pinned_providers, linked: true %>
       </div>
     <% end %>
 

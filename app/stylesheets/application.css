@@ -335,14 +335,6 @@ input[type="radio"] {
   border-top: 1px dashed #000;
 }
 
-.site-footer__note {
-  flex-basis: 100%;
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--ink-faint);
-}
-
 @media (min-width: 768px) {
   .site-nav {
     flex-direction: row;
