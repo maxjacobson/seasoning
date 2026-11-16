@@ -443,13 +443,19 @@
 }
 
 .pinned-providers__logo {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
   object-fit: contain;
   border-radius: var(--radius-sm);
 }
 
 .pinned-providers__name {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--ink-muted);
+}
+
+.pinned-providers__via {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--ink-muted);

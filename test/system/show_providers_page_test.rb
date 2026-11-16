@@ -56,7 +56,10 @@ class ShowProvidersPageTest < ApplicationSystemTestCase
     assert_selector "[data-test-id='pinned-providers']"
     assert_content "📌 Pinned providers"
     assert_selector "[data-test-id='pinned-providers'] img.pinned-providers__logo[alt='AMC+']"
+    assert_selector "[data-test-id='pinned-providers'] img.pinned-providers__logo[alt='AMC+'][title='Watch on AMC+']"
     assert_selector "[data-test-id='pinned-providers'] img.pinned-providers__logo[alt='Apple TV']", count: 0
+    assert_selector "[data-test-id='pinned-providers'] [data-test-id='justwatch-attribution'] a[href='https://www.justwatch.com']",
+                    text: "JustWatch"
   end
 
   test "unpinning a provider removes the pin" do
@@ -127,5 +130,6 @@ class ShowProvidersPageTest < ApplicationSystemTestCase
     visit shows_path
 
     assert_selector "[data-test-id='pinned-providers'] img.pinned-providers__logo[alt='AMC+']"
+    assert_selector "[data-test-id='pinned-providers'] [data-test-id='justwatch-attribution']", text: "(via JustWatch)"
   end
 end
