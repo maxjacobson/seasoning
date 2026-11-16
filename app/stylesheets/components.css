@@ -435,6 +435,10 @@
   gap: 0.5rem;
 }
 
+.progress + .pinned-providers {
+  margin-top: 0.5rem;
+}
+
 .pinned-providers__label {
   font-size: 0.75rem;
   line-height: 1rem;
