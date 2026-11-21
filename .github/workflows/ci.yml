@@ -39,7 +39,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1.343.0
         with:
-          ruby-version: 4.0.10
+          ruby-version: .ruby-version
           bundler-cache: true
       - name: Use Node.js
         uses: actions/setup-node@v7.1.0
