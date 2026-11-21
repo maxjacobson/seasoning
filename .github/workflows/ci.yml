@@ -37,9 +37,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v1.341.0
+        uses: ruby/setup-ruby@v1.343.0
         with:
-          ruby-version: 4.0.9
+          ruby-version: 4.0.10
           bundler-cache: true
       - name: Use Node.js
         uses: actions/setup-node@v7.1.0
