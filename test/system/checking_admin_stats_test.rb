@@ -102,6 +102,51 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
       assert_selector("td", text: "1", count: 2)
     end
   end
+
+  test "admin can delete a human who has added no shows" do
+    admin = Human.create!(handle: "cam", email: "cam@example.com", admin: true)
+    Human.create!(handle: "donna", email: "donna@example.com")
+
+    @magic_link = MagicLink.create!(email: admin.email)
+    visit redeem_magic_link_path(@magic_link.token)
+    visit admin_path
+
+    within("tr", text: "donna") do
+      accept_confirm do
+        click_on "Delete"
+      end
+    end
+
+    assert_content "Deleted donna"
+    assert_equal 1, Human.count
+  end
+
+  test "admin does not see a delete button for themself" do
+    admin = Human.create!(handle: "cam", email: "cam@example.com", admin: true)
+    @magic_link = MagicLink.create!(email: admin.email)
+    visit redeem_magic_link_path(@magic_link.token)
+    visit admin_path
+
+    within("tr", text: "cam") do
+      assert_no_button "Delete"
+    end
+  end
+
+  test "admin does not see a delete button for humans who have added shows" do
+    admin = Human.create!(handle: "cam", email: "cam@example.com", admin: true)
+    human = Human.create!(handle: "donna", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 59_659)
+    human.my_shows.create!(show:, status: "currently_watching")
+
+    @magic_link = MagicLink.create!(email: admin.email)
+    visit redeem_magic_link_path(@magic_link.token)
+    visit admin_path
+
+    within("tr", text: "donna") do
+      assert_no_button "Delete"
+    end
+  end
+
   test "non-admin can't see stats" do
     human = Human.create!(handle: "cam", email: "cam@example.com", admin: false)
     @magic_link = MagicLink.create!(email: human.email)
