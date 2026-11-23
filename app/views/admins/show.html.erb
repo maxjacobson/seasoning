@@ -101,9 +101,10 @@
 
               <td class="admin-table__last-active">
                 <% if human.last_active_at %>
-                  <%= time_ago_in_words(human.last_active_at) %> ago
+                  <time datetime="<%= human.last_active_at.iso8601 %>"><%= time_ago_in_words(human.last_active_at) %> ago</time>
                 <% else %>
-                  Never
+                  Joined
+                  <time datetime="<%= human.created_at.iso8601 %>"><%= time_ago_in_words(human.created_at) %> ago</time>
                 <% end %>
               </td>
 

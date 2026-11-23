@@ -34,7 +34,7 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
     visit redeem_magic_link_path(@magic_link.token)
     visit admin_path
 
-    assert_content "Never"
+    assert_content "Joined less than a minute ago"
   end
 
   test "admin can see orphaned seasons count when orphaned seasons exist" do
