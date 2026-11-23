@@ -62,6 +62,8 @@
         <thead>
           <tr>
             <th>Human</th>
+            <th>Shows added</th>
+            <th>Reviews</th>
             <th>Last active</th>
           </tr>
         </thead>
@@ -71,6 +73,14 @@
             <tr>
               <td>
                 <%= link_to human.handle, human_profile_path(human.handle) %>
+              </td>
+
+              <td>
+                <%= human.added_shows_count %>
+              </td>
+
+              <td>
+                <%= human.season_reviews_count %>
               </td>
 
               <td class="admin-table__last-active">
