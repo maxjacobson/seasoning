@@ -10,18 +10,32 @@
       <h2 class="section-heading">Stats</h2>
 
       <ul class="admin-list">
-        <li><strong>Humans count:</strong> <%= Human.count %></li>
-        <li><strong>Shows count:</strong> <%= Show.count %></li>
-        <li><strong>Seasons count:</strong> <%= Season.count %></li>
-        <li><strong>Reviews count:</strong> <%= SeasonReview.count %></li>
-        <li><strong>Episodes count:</strong> <%= Episode.count %></li>
+        <li>
+          <strong>Humans count:</strong> <%= number_with_delimiter(Human.count) %>
+        </li>
+
+        <li>
+          <strong>Shows count:</strong> <%= number_with_delimiter(Show.count) %>
+        </li>
+
+        <li>
+          <strong>Seasons count:</strong> <%= number_with_delimiter(Season.count) %>
+        </li>
+
+        <li>
+          <strong>Reviews count:</strong> <%= number_with_delimiter(SeasonReview.count) %>
+        </li>
+
+        <li>
+          <strong>Episodes count:</strong> <%= number_with_delimiter(Episode.count) %>
+        </li>
 
         <% orphaned_shows = Show.where(orphaned: true) %>
 
         <% if orphaned_shows.any? %>
           <li>
             <strong>Orphaned shows count:</strong>
-            <%= orphaned_shows.count %>
+            <%= number_with_delimiter(orphaned_shows.count) %>
 
             <ul class="admin-list admin-list--nested">
               <% orphaned_shows.each do |show| %>
@@ -36,7 +50,7 @@
         <% if orphaned_seasons.any? %>
           <li>
             <strong>Orphaned seasons count:</strong>
-            <%= orphaned_seasons.count %>
+            <%= number_with_delimiter(orphaned_seasons.count) %>
 
             <ul class="admin-list admin-list--nested">
               <% orphaned_seasons.each do |season| %>
@@ -76,11 +90,11 @@
               </td>
 
               <td>
-                <%= human.added_shows_count %>
+                <%= number_with_delimiter(human.added_shows_count) %>
               </td>
 
               <td>
-                <%= human.season_reviews_count %>
+                <%= number_with_delimiter(human.season_reviews_count) %>
               </td>
 
               <td class="admin-table__last-active">
