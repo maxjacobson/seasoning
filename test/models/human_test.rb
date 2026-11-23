@@ -55,10 +55,7 @@ class HumanTest < ActiveSupport::TestCase
   end
 
   test "can create human without password" do
-    human = Human.create!(
-      handle: "donna",
-      email: "donna@example.com"
-    )
+    human = Human.create!(handle: "donna", email: "donna@example.com")
 
     assert_not human.uses_password?
   end
@@ -100,17 +97,11 @@ class HumanTest < ActiveSupport::TestCase
   end
 
   test "can add password to existing passwordless account" do
-    human = Human.create!(
-      handle: "bosworth",
-      email: "bosworth@example.com"
-    )
+    human = Human.create!(handle: "bosworth", email: "bosworth@example.com")
 
     assert_not human.uses_password?
 
-    human.update!(
-      password: "cardiff-electric-1983",
-      password_confirmation: "cardiff-electric-1983"
-    )
+    human.update!(password: "cardiff-electric-1983", password_confirmation: "cardiff-electric-1983")
 
     human.reload
 
@@ -126,10 +117,7 @@ class HumanTest < ActiveSupport::TestCase
       password_confirmation: "old-password-here-long"
     )
 
-    human.update!(
-      password: "new-password-here-long",
-      password_confirmation: "new-password-here-long"
-    )
+    human.update!(password: "new-password-here-long", password_confirmation: "new-password-here-long")
 
     human.reload
 
@@ -138,29 +126,20 @@ class HumanTest < ActiveSupport::TestCase
   end
 
   test "has default time zone" do
-    human = Human.create!(
-      handle: "joanie",
-      email: "joanie@example.com"
-    )
+    human = Human.create!(handle: "joanie", email: "joanie@example.com")
 
     assert_equal "Eastern Time (US & Canada)", human.time_zone_name
   end
 
   test "time_zone returns ActiveSupport::TimeZone object" do
-    human = Human.create!(
-      handle: "ryan",
-      email: "ryan@example.com"
-    )
+    human = Human.create!(handle: "ryan", email: "ryan@example.com")
 
     assert_instance_of ActiveSupport::TimeZone, human.time_zone
     assert_equal "Eastern Time (US & Canada)", human.time_zone.name
   end
 
   test "can update time zone" do
-    human = Human.create!(
-      handle: "bos",
-      email: "bos@example.com"
-    )
+    human = Human.create!(handle: "bos", email: "bos@example.com")
 
     human.update!(time_zone_name: "Pacific Time (US & Canada)")
     human.reload
@@ -170,32 +149,20 @@ class HumanTest < ActiveSupport::TestCase
   end
 
   test "accepts valid time zone names" do
-    human = Human.new(
-      handle: "alice",
-      email: "alice@example.com",
-      time_zone_name: "Central Time (US & Canada)"
-    )
+    human = Human.new(handle: "alice", email: "alice@example.com", time_zone_name: "Central Time (US & Canada)")
 
     assert_predicate human, :valid?
   end
 
   test "rejects invalid time zone names" do
-    human = Human.new(
-      handle: "bob",
-      email: "bob@example.com",
-      time_zone_name: "Not A Real Time Zone"
-    )
+    human = Human.new(handle: "bob", email: "bob@example.com", time_zone_name: "Not A Real Time Zone")
 
     assert_not human.valid?
     assert_includes human.errors[:time_zone_name], "is not a valid time zone"
   end
 
   test "time_zone object can call today" do
-    human = Human.create!(
-      handle: "jacob",
-      email: "jacob@example.com",
-      time_zone_name: "Hawaii"
-    )
+    human = Human.create!(handle: "jacob", email: "jacob@example.com", time_zone_name: "Hawaii")
 
     assert_respond_to human.time_zone, :today
     assert_instance_of Date, human.time_zone.today
@@ -211,8 +178,14 @@ class HumanTest < ActiveSupport::TestCase
 
     # Create a show and season
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Cameron writes a review
     cameron_review = SeasonReview.create!(
@@ -246,8 +219,14 @@ class HumanTest < ActiveSupport::TestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Cameron writes a private review
     SeasonReview.create!(
@@ -281,8 +260,14 @@ class HumanTest < ActiveSupport::TestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Recent review
     recent_review = SeasonReview.create!(
@@ -318,8 +303,14 @@ class HumanTest < ActiveSupport::TestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Create 20 reviews
     20.times do |i|
@@ -353,8 +344,14 @@ class HumanTest < ActiveSupport::TestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Create reviews in non-chronological order
     first_review = SeasonReview.create!(

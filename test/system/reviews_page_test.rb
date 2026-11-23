@@ -3,10 +3,7 @@ require "application_system_test_case"
 # System tests for the reviews page pagination
 class ReviewsPageTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "donna",
-      email: "donna@example.com"
-    )
+    @human = Human.create!(handle: "donna", email: "donna@example.com")
     @magic_link = MagicLink.create!(email: @human.email)
   end
 
@@ -29,18 +26,18 @@ class ReviewsPageTest < ApplicationSystemTestCase
 
   test "pagination works with multiple pages" do
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Create 35 reviews to test pagination (30 per page)
     35.times do |i|
-      SeasonReview.create!(
-        author: @human,
-        season: season,
-        rating: 5,
-        body: "Review #{i}",
-        viewing: i + 1
-      )
+      SeasonReview.create!(author: @human, season: season, rating: 5, body: "Review #{i}", viewing: i + 1)
     end
 
     visit redeem_magic_link_path(@magic_link.token)
@@ -68,18 +65,18 @@ class ReviewsPageTest < ApplicationSystemTestCase
 
   test "handles invalid page parameter gracefully" do
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Create enough reviews to have pagination
     35.times do |i|
-      SeasonReview.create!(
-        author: @human,
-        season: season,
-        rating: 5,
-        body: "Review #{i}",
-        viewing: i + 1
-      )
+      SeasonReview.create!(author: @human, season: season, rating: 5, body: "Review #{i}", viewing: i + 1)
     end
 
     visit redeem_magic_link_path(@magic_link.token)

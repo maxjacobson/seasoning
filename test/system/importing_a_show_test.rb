@@ -3,10 +3,7 @@ require "application_system_test_case"
 # System test covering viewing and upating settings
 class ImportingAShowTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "cam",
-      email: "cam@example.com"
-    )
+    @human = Human.create!(handle: "cam", email: "cam@example.com")
     @magic_link = MagicLink.create!(email: @human.email)
   end
 
@@ -60,8 +57,7 @@ class ImportingAShowTest < ApplicationSystemTestCase
 
     show = Show.find_by!(slug: "halt-and-catch-fire")
 
-    assert_predicate show.show_providers.count, :positive?,
-                     "Importing a show should also ingest its watch providers"
+    assert_predicate show.show_providers.count, :positive?, "Importing a show should also ingest its watch providers"
 
     assert_equal "/shows/halt-and-catch-fire", page.current_path
 

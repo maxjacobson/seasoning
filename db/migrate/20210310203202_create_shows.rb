@@ -2,12 +2,8 @@
 class CreateShows < ActiveRecord::Migration[6.1]
   def change
     create_table :shows do |t|
-      t.string :title,
-               null: false,
-               comment: "The show's official title"
-      t.string :slug,
-               null: false,
-               comment: "The show's title, in slug form, to go in a URL"
+      t.string :title, null: false, comment: "The show's official title"
+      t.string :slug, null: false, comment: "The show's title, in slug form, to go in a URL"
 
       t.timestamps
     end

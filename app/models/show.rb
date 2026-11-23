@@ -23,13 +23,15 @@ class Show < ApplicationRecord
   has_many :providers, through: :show_providers
   has_many :returning_show_notifications, dependent: :destroy
 
-  scope :needs_refreshing, lambda {
-    where(tmdb_next_refresh_at: nil).or(where(tmdb_next_refresh_at: ..(Time.zone.now)))
-  }
+  scope :needs_refreshing,
+        lambda {
+          where(tmdb_next_refresh_at: nil).or(where(tmdb_next_refresh_at: ..(Time.zone.now)))
+        }
 
-  scope :alphabetical, lambda {
-    order(:sort_by_title)
-  }
+  scope :alphabetical,
+        lambda {
+          order(:sort_by_title)
+        }
 
   def self.refresh_interval(tmdb_show)
     if tmdb_show.in_production
@@ -72,13 +74,7 @@ class Show < ApplicationRecord
   def skipped_seasons_for?(human)
     return false if human.nil?
 
-    MySeason
-      .joins(:season)
-      .exists?(
-        human: human,
-        skipped: true,
-        season: { show: self }
-      )
+    MySeason.joins(:season).exists?(human: human, skipped: true, season: { show: self })
   end
 
   private

@@ -2,14 +2,15 @@
 class MyShow < ApplicationRecord
   belongs_to :human
   belongs_to :show
-  enum :status, {
-    might_watch: "might_watch",
-    next_up: "next_up",
-    currently_watching: "currently_watching",
-    stopped_watching: "stopped_watching",
-    waiting: "waiting",
-    finished: "finished"
-  }
+  enum :status,
+       {
+         might_watch: "might_watch",
+         next_up: "next_up",
+         currently_watching: "currently_watching",
+         stopped_watching: "stopped_watching",
+         waiting: "waiting",
+         finished: "finished"
+       }
 
   before_save :clear_snooze_on_status_change
 

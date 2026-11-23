@@ -4,9 +4,7 @@
 class AddSeasonCountToShows < ActiveRecord::Migration[6.1]
   def change
     change_table :shows do |t|
-      t.integer :number_of_seasons,
-                null: true,
-                comment: "How many seasons there are"
+      t.integer :number_of_seasons, null: true, comment: "How many seasons there are"
     end
   end
 end

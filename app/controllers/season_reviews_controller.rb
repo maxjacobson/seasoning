@@ -6,11 +6,7 @@ class SeasonReviewsController < ApplicationController
     season = show.seasons.find_by!(slug: params.expect(:season_slug))
     viewing = params[:viewing]&.to_i || 1
 
-    @review = SeasonReview.find_by!(
-      author: author,
-      season: season,
-      viewing: viewing
-    )
+    @review = SeasonReview.find_by!(author: author, season: season, viewing: viewing)
 
     authorize! { SeasonReview.viewable_by(current_human).exists?(id: @review.id) }
 
@@ -43,11 +39,7 @@ class SeasonReviewsController < ApplicationController
     season = show.seasons.find_by!(slug: params.expect(:season_slug))
     viewing = params[:viewing]&.to_i || 1
 
-    @review = SeasonReview.find_by!(
-      author: author,
-      season: season,
-      viewing: viewing
-    )
+    @review = SeasonReview.find_by!(author: author, season: season, viewing: viewing)
 
     authorize! { @review.author == current_human }
 
@@ -87,11 +79,7 @@ class SeasonReviewsController < ApplicationController
     season = show.seasons.find_by!(slug: params.expect(:season_slug))
     viewing = params[:viewing]&.to_i || 1
 
-    @review = SeasonReview.find_by!(
-      author: author,
-      season: season,
-      viewing: viewing
-    )
+    @review = SeasonReview.find_by!(author: author, season: season, viewing: viewing)
 
     authorize! { @review.author == current_human }
 
@@ -112,11 +100,7 @@ class SeasonReviewsController < ApplicationController
     season = show.seasons.find_by!(slug: params.expect(:season_slug))
     viewing = params[:viewing]&.to_i || 1
 
-    @review = SeasonReview.find_by!(
-      author: author,
-      season: season,
-      viewing: viewing
-    )
+    @review = SeasonReview.find_by!(author: author, season: season, viewing: viewing)
 
     authorize! { @review.author == current_human }
 

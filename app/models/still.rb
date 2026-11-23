@@ -11,14 +11,7 @@ class Still
   def url
     return nil if still_path.blank?
 
-    format(
-      "%<base>s%<size>s%<path>s",
-      {
-        base: config.secure_base_url,
-        size: still_size,
-        path: still_path
-      }
-    )
+    format("%<base>s%<size>s%<path>s", { base: config.secure_base_url, size: still_size, path: still_path })
   end
 
   private

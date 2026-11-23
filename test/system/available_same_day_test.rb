@@ -6,17 +6,9 @@ class AvailableSameDayTest < ApplicationSystemTestCase
     @human = Human.create!(handle: "donna", email: "donna@example.com")
     @magic_link = MagicLink.create!(email: @human.email)
 
-    @show = Show.create!(
-      title: "Top Chef",
-      tmdb_tv_id: 59_659,
-      slug: "top-chef"
-    )
+    @show = Show.create!(title: "Top Chef", tmdb_tv_id: 59_659, slug: "top-chef")
 
-    @my_show = MyShow.create!(
-      human: @human,
-      show: @show,
-      status: "currently_watching"
-    )
+    @my_show = MyShow.create!(human: @human, show: @show, status: "currently_watching")
   end
 
   test "checkbox is checked by default when show is added" do

@@ -3,11 +3,7 @@ require "application_system_test_case"
 # System test covering the episode page display
 class EpisodePageTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "donna",
-      email: "donna@example.com",
-      default_review_visibility: "anybody"
-    )
+    @human = Human.create!(handle: "donna", email: "donna@example.com", default_review_visibility: "anybody")
     @magic_link = MagicLink.create!(email: @human.email)
 
     @show = Show.create!(
@@ -34,11 +30,7 @@ class EpisodePageTest < ApplicationSystemTestCase
       still_path: "/6lWCAwVqOXdTB7ay5MIjff0rGpB.jpg"
     )
 
-    @my_show = MyShow.create!(
-      human: @human,
-      show: @show,
-      status: "currently_watching"
-    )
+    @my_show = MyShow.create!(human: @human, show: @show, status: "currently_watching")
   end
 
   test "visiting episode page shows episode information" do

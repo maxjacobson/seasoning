@@ -15,12 +15,7 @@ class DeletingOrphanedSeasonTest < ApplicationSystemTestCase
       tmdb_id: 62_139,
       orphaned: true
     )
-    @episode = Episode.create!(
-      season: @season,
-      name: "I/O",
-      episode_number: 1,
-      tmdb_id: 976_455
-    )
+    @episode = Episode.create!(season: @season, name: "I/O", episode_number: 1, tmdb_id: 976_455)
   end
 
   test "admin can delete an orphaned season" do
@@ -49,13 +44,7 @@ class DeletingOrphanedSeasonTest < ApplicationSystemTestCase
     MyShow.create!(human: human, show: @show, status: "currently_watching")
     magic_link = MagicLink.create!(email: human.email)
 
-    SeasonReview.create!(
-      author: human,
-      season: @season,
-      body: "Great season!",
-      viewing: 1,
-      visibility: "anybody"
-    )
+    SeasonReview.create!(author: human, season: @season, body: "Great season!", viewing: 1, visibility: "anybody")
 
     visit redeem_magic_link_path(magic_link.token)
     click_on "Halt and Catch Fire"

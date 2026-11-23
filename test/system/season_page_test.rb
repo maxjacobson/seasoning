@@ -3,11 +3,7 @@ require "application_system_test_case"
 # System test covering the season page display and episode marking
 class SeasonPageTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "donna",
-      email: "donna@example.com",
-      default_review_visibility: "anybody"
-    )
+    @human = Human.create!(handle: "donna", email: "donna@example.com", default_review_visibility: "anybody")
     @magic_link = MagicLink.create!(email: @human.email)
 
     @show = Show.create!(
@@ -51,11 +47,7 @@ class SeasonPageTest < ApplicationSystemTestCase
       air_date: Date.new(2014, 6, 15)
     )
 
-    @my_show = MyShow.create!(
-      human: @human,
-      show: @show,
-      status: "currently_watching"
-    )
+    @my_show = MyShow.create!(human: @human, show: @show, status: "currently_watching")
   end
 
   test "visiting season page shows season information" do

@@ -3,28 +3,14 @@ require "application_system_test_case"
 # System test covering the season review creation flow
 class CreatingSeasonReviewTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "donna",
-      email: "donna@example.com",
-      default_review_visibility: "anybody"
-    )
+    @human = Human.create!(handle: "donna", email: "donna@example.com", default_review_visibility: "anybody")
     @magic_link = MagicLink.create!(email: @human.email)
 
     @show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 59_659)
-    @season = Season.create!(
-      show: @show,
-      name: "Season 1",
-      season_number: 1,
-      episode_count: 10,
-      tmdb_id: 62_139
-    )
+    @season = Season.create!(show: @show, name: "Season 1", season_number: 1, episode_count: 10, tmdb_id: 62_139)
 
     # Create a MyShow so the show appears on the human's list
-    @my_show = MyShow.create!(
-      human: @human,
-      show: @show,
-      status: "currently_watching"
-    )
+    @my_show = MyShow.create!(human: @human, show: @show, status: "currently_watching")
   end
 
   test "creating a season review with rating and visibility" do

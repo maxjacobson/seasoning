@@ -6,15 +6,9 @@ CheckForNewSeasons = lambda do |my_show|
     my_show.save!
 
     if my_show.watched_episodes?
-      ReturningShowNotification.create_or_find_by!(
-        human: my_show.human,
-        show: my_show.show
-      )
+      ReturningShowNotification.create_or_find_by!(human: my_show.human, show: my_show.show)
     else
-      DebutingShowNotification.create_or_find_by!(
-        human: my_show.human,
-        show: my_show.show
-      )
+      DebutingShowNotification.create_or_find_by!(human: my_show.human, show: my_show.show)
     end
 
     true

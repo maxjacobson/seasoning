@@ -13,11 +13,7 @@ class RefreshShowTest < ActiveSupport::TestCase
   end
 
   test "marks seasons not in TMDB response as orphaned" do
-    show = Show.create!(
-      title: "Halt and Catch Fire",
-      slug: "halt-and-catch-fire",
-      tmdb_tv_id: 59_659
-    )
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 59_659)
 
     orphan_season = show.seasons.create!(
       tmdb_id: 99_999,
@@ -59,11 +55,7 @@ class RefreshShowTest < ActiveSupport::TestCase
   end
 
   test "un-orphans a previously orphaned season when it reappears in TMDB" do
-    show = Show.create!(
-      title: "Halt and Catch Fire",
-      slug: "halt-and-catch-fire",
-      tmdb_tv_id: 59_659
-    )
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 59_659)
 
     season_1 = show.seasons.create!(
       tmdb_id: 60_448,
@@ -102,11 +94,7 @@ class RefreshShowTest < ActiveSupport::TestCase
   end
 
   test "ingests watch providers from TMDB" do
-    show = Show.create!(
-      title: "Halt and Catch Fire",
-      slug: "halt-and-catch-fire",
-      tmdb_tv_id: 59_659
-    )
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 59_659)
 
     stale_provider = Provider.create!(name: "Netflix", tmdb_provider_id: 8, tmdb_logo_path: "/netflix.jpg")
     show.show_providers.create!(provider: stale_provider, category: "flatrate", display_priority: 0)
@@ -140,11 +128,7 @@ class RefreshShowTest < ActiveSupport::TestCase
     # N.B. sort in Ruby: database collation order is not the same on macOS and CI
     providers_and_categories = show.show_providers.joins(:provider).pluck("providers.name", :category).sort
 
-    assert_equal [
-      ["AMC+", "flatrate"],
-      ["Amazon Video", "rent"],
-      ["Apple TV", "buy"]
-    ], providers_and_categories
+    assert_equal [["AMC+", "flatrate"], ["Amazon Video", "rent"], ["Apple TV", "buy"]], providers_and_categories
 
     amc_plus = Provider.find_by!(name: "AMC+")
 
@@ -155,11 +139,7 @@ class RefreshShowTest < ActiveSupport::TestCase
   end
 
   test "marks show as orphaned when TMDB returns 404" do
-    show = Show.create!(
-      title: "Halt and Catch Fire",
-      slug: "halt-and-catch-fire",
-      tmdb_tv_id: 59_659
-    )
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 59_659)
 
     not_found_body = <<~JSON
       {"status_code":34,"status_message":"The resource you requested could not be found."}
@@ -176,12 +156,7 @@ class RefreshShowTest < ActiveSupport::TestCase
   end
 
   test "un-orphans a previously orphaned show on successful refresh" do
-    show = Show.create!(
-      title: "Halt and Catch Fire",
-      slug: "halt-and-catch-fire",
-      tmdb_tv_id: 59_659,
-      orphaned: true
-    )
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 59_659, orphaned: true)
 
     stub_request(:get, "https://api.themoviedb.org/3/tv/59659?api_key=xxxx")
       .to_return(
@@ -211,11 +186,7 @@ class RefreshShowTest < ActiveSupport::TestCase
   end
 
   test "handles transaction rollback on API errors" do
-    show = Show.create!(
-      title: "Halt and Catch Fire",
-      slug: "halt-and-catch-fire",
-      tmdb_tv_id: 59_659
-    )
+    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 59_659)
 
     # Stub API to return error
     stub_request(:get, "https://api.themoviedb.org/3/tv/59659?api_key=xxxx")

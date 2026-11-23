@@ -4,8 +4,12 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
   test "can dismiss returning show notifications" do
     # Create test data
     human = Human.create!(email: "donna@example.com", handle: "donna")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     ReturningShowNotification.create!(human: human, show: show)
 
     # Create magic link and authenticate
@@ -27,8 +31,12 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
   test "notification link works correctly" do
     # Create test data
     human = Human.create!(email: "cameron@example.com", handle: "cameron")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     ReturningShowNotification.create!(human: human, show: show)
 
     # Create magic link and authenticate
@@ -47,8 +55,12 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
 
   test "can snooze returning show notification for 1 week" do
     human = Human.create!(email: "donna@example.com", handle: "donna")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     my_show = MyShow.create!(human: human, show: show, status: "next_up")
     ReturningShowNotification.create!(human: human, show: show)
 
@@ -67,8 +79,12 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
 
   test "can snooze returning show notification for 1 month" do
     human = Human.create!(email: "donna@example.com", handle: "donna")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     my_show = MyShow.create!(human: human, show: show, status: "next_up")
     ReturningShowNotification.create!(human: human, show: show)
 
@@ -87,8 +103,12 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
 
   test "can start watching from returning show notification" do
     human = Human.create!(email: "donna@example.com", handle: "donna")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     my_show = MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 1.week.from_now)
     ReturningShowNotification.create!(human: human, show: show)
 
@@ -108,8 +128,12 @@ class ReturningShowNotificationsTest < ApplicationSystemTestCase
 
   test "snoozed show displays snooze status on show page" do
     human = Human.create!(email: "donna@example.com", handle: "donna")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     MyShow.create!(human: human, show: show, status: "waiting", snoozed_until: 7.days.from_now)
 
     magic_link = MagicLink.create!(email: human.email)

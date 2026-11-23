@@ -2,10 +2,7 @@ require "application_system_test_case"
 
 class StatsPageTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "donna",
-      email: "donna@example.com"
-    )
+    @human = Human.create!(handle: "donna", email: "donna@example.com")
     @magic_link = MagicLink.create!(email: @human.email)
   end
 
@@ -26,10 +23,7 @@ class StatsPageTest < ApplicationSystemTestCase
   end
 
   test "user cannot view another user's stats page" do
-    Human.create!(
-      handle: "cameron",
-      email: "cameron@example.com"
-    )
+    Human.create!(handle: "cameron", email: "cameron@example.com")
 
     visit redeem_magic_link_path(@magic_link.token)
     visit "/cameron/stats/reviewed-in/1988"
@@ -46,8 +40,14 @@ class StatsPageTest < ApplicationSystemTestCase
 
   test "displays review count in hero section" do
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
-    season = Season.create!(show: show, tmdb_id: 23_456, name: "Season 1", season_number: 1, episode_count: 10,
-                            slug: "season-1")
+    season = Season.create!(
+      show: show,
+      tmdb_id: 23_456,
+      name: "Season 1",
+      season_number: 1,
+      episode_count: 10,
+      slug: "season-1"
+    )
 
     SeasonReview.create!(
       author: @human,
@@ -75,10 +75,22 @@ class StatsPageTest < ApplicationSystemTestCase
 
   test "displays top 10 favorite seasons with ratings" do
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
-    season1 = Season.create!(show: show, tmdb_id: 23_456, name: "Season 1", season_number: 1, episode_count: 10,
-                             slug: "season-1")
-    season2 = Season.create!(show: show, tmdb_id: 23_457, name: "Season 2", season_number: 2, episode_count: 10,
-                             slug: "season-2")
+    season1 = Season.create!(
+      show: show,
+      tmdb_id: 23_456,
+      name: "Season 1",
+      season_number: 1,
+      episode_count: 10,
+      slug: "season-1"
+    )
+    season2 = Season.create!(
+      show: show,
+      tmdb_id: 23_457,
+      name: "Season 2",
+      season_number: 2,
+      episode_count: 10,
+      slug: "season-2"
+    )
 
     # Create reviews with different ratings (higher rating should appear first)
     SeasonReview.create!(
@@ -144,10 +156,7 @@ class StatsPageTest < ApplicationSystemTestCase
   end
 
   test "shows stats link on own profile page but not on others" do
-    Human.create!(
-      handle: "gordon",
-      email: "gordon@example.com"
-    )
+    Human.create!(handle: "gordon", email: "gordon@example.com")
 
     # Visit own profile - should show stats link
     visit redeem_magic_link_path(@magic_link.token)

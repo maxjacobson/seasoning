@@ -12,14 +12,7 @@ class Poster
     if poster_path.blank?
       ActionController::Base.helpers.asset_path("default_poster.svg")
     else
-      format(
-        "%<base>s%<size>s%<path>s",
-        {
-          base: config.secure_base_url,
-          size: poster_size,
-          path: poster_path
-        }
-      )
+      format("%<base>s%<size>s%<path>s", { base: config.secure_base_url, size: poster_size, path: poster_path })
     end
   end
 

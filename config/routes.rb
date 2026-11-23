@@ -35,8 +35,9 @@ Rails.application.routes.draw do
   delete "/shows/:show_slug/:season_slug", to: "seasons#destroy"
   post "/shows/:show_slug/:season_slug/skipping", to: "season_skippings#create", as: :season_skipping
   delete "/shows/:show_slug/:season_slug/skipping", to: "season_skippings#destroy"
-  post "/shows/:show_slug/:season_slug/episodes/:episode_number/viewing", to: "episode_viewings#create",
-                                                                          as: :episode_viewing
+  post "/shows/:show_slug/:season_slug/episodes/:episode_number/viewing",
+       to: "episode_viewings#create",
+       as: :episode_viewing
   delete "/shows/:show_slug/:season_slug/episodes/:episode_number/viewing", to: "episode_viewings#destroy"
   get "/shows/:show_slug/:season_slug/:episode_number", to: "episodes#show", as: :episode
   resource :settings, only: [:show, :update]
@@ -49,8 +50,10 @@ Rails.application.routes.draw do
   scope "/:handle", as: "profile" do
     resources :reviews, only: [:index]
     get "stats", to: "stats#index", as: "stats"
-    get "stats/:filter/:year", to: "stats#show", as: "stat",
-                               constraints: { year: /\d{4}/, filter: /reviewed-in|aired-in/ }
+    get "stats/:filter/:year",
+        to: "stats#show",
+        as: "stat",
+        constraints: { year: /\d{4}/, filter: /reviewed-in|aired-in/ }
     get "shows/:show_slug/:season_slug/edit", to: "season_reviews#edit", as: :edit_season_review
     get "shows/:show_slug/:season_slug/:viewing/edit", to: "season_reviews#edit", as: :edit_season_review_viewing
     get "shows/:show_slug/:season_slug", to: "season_reviews#show", as: :season_review

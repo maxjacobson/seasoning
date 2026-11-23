@@ -20,16 +20,17 @@ class Human < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { password.present? }
   validate :time_zone_must_be_valid
 
-  scope :with_last_active_at, lambda {
-    left_joins(:my_seasons)
-      .select(
-        "humans.*",
-        "MAX(my_seasons.updated_at) AS last_active_at",
-        "(SELECT COUNT(*) FROM my_shows WHERE my_shows.human_id = humans.id) AS added_shows_count",
-        "(SELECT COUNT(*) FROM season_reviews WHERE season_reviews.author_id = humans.id) AS season_reviews_count"
-      )
-      .group("humans.id")
-  }
+  scope :with_last_active_at,
+        lambda {
+          left_joins(:my_seasons)
+            .select(
+              "humans.*",
+              "MAX(my_seasons.updated_at) AS last_active_at",
+              "(SELECT COUNT(*) FROM my_shows WHERE my_shows.human_id = humans.id) AS added_shows_count",
+              "(SELECT COUNT(*) FROM season_reviews WHERE season_reviews.author_id = humans.id) AS season_reviews_count"
+            )
+            .group("humans.id")
+        }
 
   def currently_watching
     shows.where(my_shows: { status: "currently_watching" }).alphabetical

@@ -3,9 +3,7 @@
 class CreateEpisodes < ActiveRecord::Migration[7.0]
   def change
     create_table :episodes do |t|
-      t.string :name,
-               null: false,
-               comment: "The episode's official name"
+      t.string :name, null: false, comment: "The episode's official name"
       t.string :still_path, null: true, comment: "TMDB path to a photo related to the episode"
       t.integer :tmdb_id, null: false, comment: "The episode's id on TMDB"
       t.integer :episode_number, null: false, comment: "The position of the episode in the season"
