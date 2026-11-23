@@ -3,11 +3,7 @@ require "application_system_test_case"
 # System test covering skipping/unskipping seasons
 class SkippingSeasonsTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "gordon",
-      email: "gordon@example.com",
-      default_review_visibility: "anybody"
-    )
+    @human = Human.create!(handle: "gordon", email: "gordon@example.com", default_review_visibility: "anybody")
     @magic_link = MagicLink.create!(email: @human.email)
 
     @show = Show.create!(
@@ -51,11 +47,7 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
       air_date: Date.new(2014, 6, 15)
     )
 
-    @my_show = MyShow.create!(
-      human: @human,
-      show: @show,
-      status: "currently_watching"
-    )
+    @my_show = MyShow.create!(human: @human, show: @show, status: "currently_watching")
   end
 
   test "season page shows skip checkbox when authenticated" do
@@ -159,21 +151,9 @@ class SkippingSeasonsTest < ApplicationSystemTestCase
       slug: "season-2"
     )
 
-    Episode.create!(
-      season: season2,
-      name: "SETI",
-      episode_number: 1,
-      tmdb_id: 976_458,
-      air_date: 1.day.ago
-    )
+    Episode.create!(season: season2, name: "SETI", episode_number: 1, tmdb_id: 976_458, air_date: 1.day.ago)
 
-    Episode.create!(
-      season: season2,
-      name: "Giant",
-      episode_number: 2,
-      tmdb_id: 976_459,
-      air_date: 1.day.ago
-    )
+    Episode.create!(season: season2, name: "Giant", episode_number: 2, tmdb_id: 976_459, air_date: 1.day.ago)
 
     MySeason.create!(human: @human, season: season2, skipped: true)
 

@@ -9,9 +9,7 @@ class SeasonsController < ApplicationController
     @my_show = current_human.my_shows.find_by(show: @show)
     @my_season = MySeason.find_or_initialize_by(human: current_human, season: @season)
     @episodes = @season.episodes.order(episode_number: :asc)
-    @season_reviews = @season.season_reviews.viewable_by(current_human)
-                             .includes(:author)
-                             .order(created_at: :desc)
+    @season_reviews = @season.season_reviews.viewable_by(current_human).includes(:author).order(created_at: :desc)
   end
 
   def destroy

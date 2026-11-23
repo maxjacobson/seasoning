@@ -53,8 +53,14 @@ class ShowDetailsPageTest < ActiveSupport::TestCase
   test "skipped_seasons? returns true when current_human has skipped seasons" do
     donna = Human.create!(email: "donna@example.com", handle: "donna")
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
-    season = Season.create!(show: show, name: "Season 1", season_number: 1, slug: "season-1", tmdb_id: 54_321,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      season_number: 1,
+      slug: "season-1",
+      tmdb_id: 54_321,
+      episode_count: 10
+    )
     MySeason.create!(human: donna, season: season, skipped: true)
 
     page = ShowDetailsPage.new(show: show, current_human: donna, include_skipped: false)
@@ -65,8 +71,14 @@ class ShowDetailsPageTest < ActiveSupport::TestCase
   test "seasons returns all seasons in order when include_skipped is true" do
     donna = Human.create!(email: "donna@example.com", handle: "donna")
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
-    season = Season.create!(show: show, name: "Season 1", season_number: 1, slug: "season-1", tmdb_id: 54_321,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      season_number: 1,
+      slug: "season-1",
+      tmdb_id: 54_321,
+      episode_count: 10
+    )
     MySeason.create!(human: donna, season: season, skipped: true)
 
     page = ShowDetailsPage.new(show: show, current_human: donna, include_skipped: true)
@@ -97,10 +109,22 @@ class ShowDetailsPageTest < ActiveSupport::TestCase
     donna = Human.create!(email: "donna@example.com", handle: "donna")
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345)
     MyShow.create!(human: donna, show: show)
-    season1 = Season.create!(show: show, name: "Season 1", season_number: 1, slug: "season-1", tmdb_id: 54_321,
-                             episode_count: 10)
-    season2 = Season.create!(show: show, name: "Season 2", season_number: 2, slug: "season-2", tmdb_id: 54_322,
-                             episode_count: 10)
+    season1 = Season.create!(
+      show: show,
+      name: "Season 1",
+      season_number: 1,
+      slug: "season-1",
+      tmdb_id: 54_321,
+      episode_count: 10
+    )
+    season2 = Season.create!(
+      show: show,
+      name: "Season 2",
+      season_number: 2,
+      slug: "season-2",
+      tmdb_id: 54_322,
+      episode_count: 10
+    )
     MySeason.create!(human: donna, season: season1, skipped: true)
 
     page = ShowDetailsPage.new(show: show, current_human: donna, include_skipped: false)

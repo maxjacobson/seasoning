@@ -3,11 +3,7 @@ require "application_system_test_case"
 # System test for showing/hiding skipped seasons on show page
 class ShowingSkippedSeasonsTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "joe",
-      email: "joe@example.com",
-      default_review_visibility: "anybody"
-    )
+    @human = Human.create!(handle: "joe", email: "joe@example.com", default_review_visibility: "anybody")
     @magic_link = MagicLink.create!(email: @human.email)
 
     @show = Show.create!(
@@ -36,11 +32,7 @@ class ShowingSkippedSeasonsTest < ApplicationSystemTestCase
       slug: "season-2"
     )
 
-    @my_show = MyShow.create!(
-      human: @human,
-      show: @show,
-      status: "currently_watching"
-    )
+    @my_show = MyShow.create!(human: @human, show: @show, status: "currently_watching")
 
     MySeason.create!(human: @human, season: @season1, skipped: true)
   end

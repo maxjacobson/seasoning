@@ -8,9 +8,7 @@ class ProviderPreferencesController < ApplicationController
     status = params.expect(:status)
 
     if ProviderPreference::STATUSES.include?(status)
-      ProviderPreference
-        .find_or_initialize_by(human: current_human, provider: provider)
-        .update!(status: status)
+      ProviderPreference.find_or_initialize_by(human: current_human, provider: provider).update!(status: status)
 
       notice = status == "pinned" ? "Pinned!" : "Hidden!"
       redirect_back_or_to settings_path, notice: notice

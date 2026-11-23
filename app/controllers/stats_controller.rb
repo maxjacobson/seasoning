@@ -18,11 +18,7 @@ class StatsController < ApplicationController
     @filter = params[:filter]
 
     @reviews = if @filter == "reviewed-in"
-                 SeasonReview
-                   .authored_by(@human)
-                   .written_in(@year)
-                   .viewable_by(current_human)
-                   .includes(season: :show)
+                 SeasonReview.authored_by(@human).written_in(@year).viewable_by(current_human).includes(season: :show)
                else # aired-in
                  SeasonReview
                    .authored_by(@human)

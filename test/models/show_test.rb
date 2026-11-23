@@ -2,11 +2,7 @@ require "test_helper"
 
 class ShowTest < ActiveSupport::TestCase
   test "#watchers_count returns count of humans who have added the show" do
-    show = Show.create!(
-      title: "Test Show",
-      slug: "test-show",
-      tmdb_tv_id: 12_345
-    )
+    show = Show.create!(title: "Test Show", slug: "test-show", tmdb_tv_id: 12_345)
 
     # Initially no watchers
     assert_equal 0, show.watchers_count

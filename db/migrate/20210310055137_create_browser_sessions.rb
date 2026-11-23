@@ -7,9 +7,7 @@ class CreateBrowserSessions < ActiveRecord::Migration[6.1]
                comment: "The token that will be kept in localstorage and included with API requests"
 
       t.references :human, null: false
-      t.timestamp :last_seen_at,
-                  null: false,
-                  comment: "When the human last visited during this session"
+      t.timestamp :last_seen_at, null: false, comment: "When the human last visited during this session"
 
       t.timestamp :expires_at,
                   null: false,

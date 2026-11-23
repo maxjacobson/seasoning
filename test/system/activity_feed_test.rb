@@ -11,8 +11,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
 
     # Create a show and season
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Cameron writes a review
     SeasonReview.create!(
@@ -72,8 +78,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Cameron writes a private review
     SeasonReview.create!(
@@ -104,8 +116,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
     Follow.create!(follower_id: donna.id, followee_id: gordon.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Both write reviews
     SeasonReview.create!(
@@ -142,8 +160,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     # Cameron writes a review
     SeasonReview.create!(
@@ -179,8 +203,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     SeasonReview.create!(
       author: cameron,
@@ -210,8 +240,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     SeasonReview.create!(
       author: cameron,
@@ -241,8 +277,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     SeasonReview.create!(
       author: cameron,
@@ -272,8 +314,14 @@ class ActivityFeedTest < ApplicationSystemTestCase
     Follow.create!(follower_id: donna.id, followee_id: cameron.id)
 
     show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 1)
-    season = Season.create!(show: show, name: "Season 1", slug: "season-1", season_number: 1, tmdb_id: 1,
-                            episode_count: 10)
+    season = Season.create!(
+      show: show,
+      name: "Season 1",
+      slug: "season-1",
+      season_number: 1,
+      tmdb_id: 1,
+      episode_count: 10
+    )
 
     SeasonReview.create!(
       author: cameron,

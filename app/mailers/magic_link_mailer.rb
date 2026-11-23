@@ -5,22 +5,13 @@ class MagicLinkMailer < ApplicationMailer
   def welcome_email(recipient, token)
     @token = token
 
-    mail(
-      to: recipient,
-      subject: "Welcome to Seasoning!"
-    )
+    mail(to: recipient, subject: "Welcome to Seasoning!")
   end
 
   def log_in_email(recipient, token)
     @token = token
-    @greeting = [
-      "Oh good, the commercials are over, come back in!",
-      "Welcome back to Seasoning!"
-    ].sample
+    @greeting = ["Oh good, the commercials are over, come back in!", "Welcome back to Seasoning!"].sample
 
-    mail(
-      to: recipient,
-      subject: "Welcome back to Seasoning!"
-    )
+    mail(to: recipient, subject: "Welcome back to Seasoning!")
   end
 end

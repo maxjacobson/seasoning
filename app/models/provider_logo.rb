@@ -10,14 +10,7 @@ class ProviderLogo
   def url
     return nil if logo_path.blank?
 
-    format(
-      "%<base>s%<size>s%<path>s",
-      {
-        base: config.secure_base_url,
-        size: logo_size,
-        path: logo_path
-      }
-    )
+    format("%<base>s%<size>s%<path>s", { base: config.secure_base_url, size: logo_size, path: logo_path })
   end
 
   private

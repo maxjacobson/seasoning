@@ -3,10 +3,7 @@ require "application_system_test_case"
 # System tests for the shows page pagination
 class ShowsPaginationTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "donna",
-      email: "donna@example.com"
-    )
+    @human = Human.create!(handle: "donna", email: "donna@example.com")
     @magic_link = MagicLink.create!(email: @human.email)
   end
 

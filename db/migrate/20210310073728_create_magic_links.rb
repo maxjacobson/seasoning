@@ -9,13 +9,9 @@ class CreateMagicLinks < ActiveRecord::Migration[6.1]
                  Following the link proves they are this human.
                COMMENT
 
-      t.string :token,
-               null: false,
-               comment: "The thing that makes this link unique, which will be part of the link"
+      t.string :token, null: false, comment: "The thing that makes this link unique, which will be part of the link"
 
-      t.timestamp :expires_at,
-                  null: false,
-                  comment: "When the magic link stops working"
+      t.timestamp :expires_at, null: false, comment: "When the magic link stops working"
 
       t.timestamps
     end

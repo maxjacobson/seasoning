@@ -1,6 +1,10 @@
 class AddOrphanedToShows < ActiveRecord::Migration[8.1]
   def change
-    add_column :shows, :orphaned, :boolean, default: false, null: false,
-                                            comment: "No longer present in the TMDB API response"
+    add_column :shows,
+               :orphaned,
+               :boolean,
+               default: false,
+               null: false,
+               comment: "No longer present in the TMDB API response"
   end
 end

@@ -3,10 +3,7 @@ require "application_system_test_case"
 # System test covering viewing and upating settings
 class ProfilePageTest < ApplicationSystemTestCase
   setup do
-    @human = Human.create!(
-      handle: "cam",
-      email: "cam@example.com"
-    )
+    @human = Human.create!(handle: "cam", email: "cam@example.com")
     @magic_link = MagicLink.create!(email: @human.email)
   end
 

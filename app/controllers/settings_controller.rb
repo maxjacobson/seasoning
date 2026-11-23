@@ -12,8 +12,14 @@ class SettingsController < ApplicationController
     authorize! { true }
 
     current_human.update!(
-      params.expect(human: [:default_review_visibility, :currently_watching_limit, :share_currently_watching,
-                            :time_zone_name])
+      params.expect(
+        human: [
+          :default_review_visibility,
+          :currently_watching_limit,
+          :share_currently_watching,
+          :time_zone_name
+        ]
+      )
     )
 
     redirect_to settings_path, notice: "Saved!"

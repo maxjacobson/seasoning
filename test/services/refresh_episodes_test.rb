@@ -54,23 +54,11 @@ class RefreshEpisodesTest < ActiveSupport::TestCase
       tmdb_poster_path: "/ctTaOOAg9iZtvVBOyH2UE5ifBHg.jpg"
     )
 
-    season.episodes.create!(
-      name: "Pilot",
-      tmdb_id: 3_724_869,
-      episode_number: 1
-    )
+    season.episodes.create!(name: "Pilot", tmdb_id: 3_724_869, episode_number: 1)
 
-    season.episodes.create!(
-      name: "The Nighthawks",
-      tmdb_id: 4_149_045,
-      episode_number: 2
-    )
+    season.episodes.create!(name: "The Nighthawks", tmdb_id: 4_149_045, episode_number: 2)
 
-    season.episodes.create!(
-      name: "Just Tuesday",
-      tmdb_id: 4_044_637,
-      episode_number: 3
-    )
+    season.episodes.create!(name: "Just Tuesday", tmdb_id: 4_044_637, episode_number: 3)
 
     RefreshEpisodes.call(show, season)
 
@@ -104,17 +92,9 @@ class RefreshEpisodesTest < ActiveSupport::TestCase
       tmdb_poster_path: "/ctTaOOAg9iZtvVBOyH2UE5ifBHg.jpg"
     )
 
-    season.episodes.create!(
-      name: "Pilot",
-      tmdb_id: 3_724_869,
-      episode_number: 1
-    )
+    season.episodes.create!(name: "Pilot", tmdb_id: 3_724_869, episode_number: 1)
 
-    season.episodes.create!(
-      name: "The Nighthawks",
-      tmdb_id: 4_149_045,
-      episode_number: 2
-    )
+    season.episodes.create!(name: "The Nighthawks", tmdb_id: 4_149_045, episode_number: 2)
 
     RefreshEpisodes.call(show, season)
 
@@ -147,23 +127,11 @@ class RefreshEpisodesTest < ActiveSupport::TestCase
       tmdb_poster_path: "/ctTaOOAg9iZtvVBOyH2UE5ifBHg.jpg"
     )
 
-    season.episodes.create!(
-      name: "Pilot",
-      tmdb_id: 3_724_869,
-      episode_number: 1
-    )
+    season.episodes.create!(name: "Pilot", tmdb_id: 3_724_869, episode_number: 1)
 
-    season.episodes.create!(
-      name: "Just Tuesday",
-      tmdb_id: 4_044_637,
-      episode_number: 2
-    )
+    season.episodes.create!(name: "Just Tuesday", tmdb_id: 4_044_637, episode_number: 2)
 
-    season.episodes.create!(
-      name: "The Nighthawks",
-      tmdb_id: 4_149_045,
-      episode_number: 3
-    )
+    season.episodes.create!(name: "The Nighthawks", tmdb_id: 4_149_045, episode_number: 3)
 
     RefreshEpisodes.call(show, season)
 

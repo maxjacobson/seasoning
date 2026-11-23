@@ -12,17 +12,13 @@ class AddSeasonReviews < ActiveRecord::Migration[6.1]
                    foreign_key: { on_delete: :cascade },
                    null: false,
                    comment: "Which season are they reviewing"
-      t.text :body,
-             null: false,
-             comment: "The body of the review"
+      t.text :body, null: false, comment: "The body of the review"
 
       t.integer :rating, null: true, comment: "The rating between 0 and 10 (optional)"
 
       t.boolean :spoilers, null: false, default: false, comment: "Whether this review contains spoilers"
 
-      t.integer :viewing,
-                null: false,
-                comment: "Is this the person's first, second, third etc viewing of the season?"
+      t.integer :viewing, null: false, comment: "Is this the person's first, second, third etc viewing of the season?"
 
       t.enum :visibility, enum_type: :visibility, default: "anybody", null: false, comment: "Who can see this review"
 

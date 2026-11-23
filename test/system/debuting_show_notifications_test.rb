@@ -3,8 +3,12 @@ require "application_system_test_case"
 class DebutingShowNotificationsTest < ApplicationSystemTestCase
   test "can dismiss debuting show notifications" do
     human = Human.create!(email: "donna@example.com", handle: "donna")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     DebutingShowNotification.create!(human: human, show: show)
 
     magic_link = MagicLink.create!(email: human.email)
@@ -21,8 +25,12 @@ class DebutingShowNotificationsTest < ApplicationSystemTestCase
 
   test "notification link works correctly" do
     human = Human.create!(email: "cameron@example.com", handle: "cameron")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     DebutingShowNotification.create!(human: human, show: show)
 
     magic_link = MagicLink.create!(email: human.email)
@@ -38,8 +46,12 @@ class DebutingShowNotificationsTest < ApplicationSystemTestCase
 
   test "can start watching from debuting show notification" do
     human = Human.create!(email: "donna@example.com", handle: "donna")
-    show = Show.create!(title: "Halt and Catch Fire", slug: "halt-and-catch-fire", tmdb_tv_id: 12_345,
-                        first_air_date: Time.zone.today)
+    show = Show.create!(
+      title: "Halt and Catch Fire",
+      slug: "halt-and-catch-fire",
+      tmdb_tv_id: 12_345,
+      first_air_date: Time.zone.today
+    )
     my_show = MyShow.create!(human: human, show: show, status: "next_up")
     DebutingShowNotification.create!(human: human, show: show)
 
