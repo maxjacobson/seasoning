@@ -3,6 +3,7 @@ class Human < ApplicationRecord
   has_secure_password validations: false
 
   has_many :my_shows, dependent: :destroy
+  has_many :my_seasons, dependent: :destroy
   has_many :shows, through: :my_shows
   has_many :season_reviews, foreign_key: :author_id, inverse_of: :author, dependent: :destroy
   has_many :returning_show_notifications, dependent: :destroy
@@ -18,6 +19,12 @@ class Human < ApplicationRecord
   validates :password, confirmation: true, if: -> { password.present? }
   validates :password_confirmation, presence: true, if: -> { password.present? }
   validate :time_zone_must_be_valid
+
+  scope :with_last_active_at, lambda {
+    left_joins(:my_seasons)
+      .select("humans.*, MAX(my_seasons.updated_at) AS last_active_at")
+      .group("humans.id")
+  }
 
   def currently_watching
     shows.where(my_shows: { status: "currently_watching" }).alphabetical

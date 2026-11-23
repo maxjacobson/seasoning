@@ -8,6 +8,26 @@ class HumanTest < ActiveSupport::TestCase
     assert_equal "marc_paffi", human.handle
   end
 
+  test "#with_last_active_at returns the most recent my_seasons.updated_at per human" do
+    human = Human.create!(handle: "cam", email: "cam@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 59_659)
+    season = show.seasons.create!(tmdb_id: 60_448, name: "Season 1", season_number: 1, episode_count: 10)
+    my_season = MySeason.create!(human:, season:)
+    my_season.update!(updated_at: 3.days.ago)
+
+    result = Human.with_last_active_at.find(human.id)
+
+    assert_in_delta 3.days.ago.to_i, result.last_active_at.to_i, 1
+  end
+
+  test "#with_last_active_at returns nil last_active_at for humans without my_seasons" do
+    human = Human.create!(handle: "donna", email: "donna@example.com")
+
+    result = Human.with_last_active_at.find(human.id)
+
+    assert_nil result.last_active_at
+  end
+
   test "can create human without password" do
     human = Human.create!(
       handle: "donna",
