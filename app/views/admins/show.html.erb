@@ -58,11 +58,32 @@
     <div class="admin-panel">
       <h2 class="section-heading">Recent humans</h2>
 
-      <ol class="admin-list admin-list--ordered admin-list--tight">
-        <% Human.order(created_at: :desc).limit(50).each do |human| %>
-          <li><%= link_to human.handle, human_profile_path(human.handle) %></li>
-        <% end %>
-      </ol>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Human</th>
+            <th>Last active</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% Human.with_last_active_at.order(created_at: :desc).limit(50).each do |human| %>
+            <tr>
+              <td>
+                <%= link_to human.handle, human_profile_path(human.handle) %>
+              </td>
+
+              <td class="admin-table__last-active">
+                <% if human.last_active_at %>
+                  <%= time_ago_in_words(human.last_active_at) %> ago
+                <% else %>
+                  Never
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

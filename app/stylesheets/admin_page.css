@@ -31,3 +31,39 @@
 .admin-list--nested {
   margin-left: 1rem;
 }
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table thead tr {
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.admin-table tbody tr {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.admin-table tbody tr:hover {
+  background: var(--muted-surface);
+}
+
+.admin-table td {
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.admin-table__last-active {
+  color: var(--ink-muted);
+}
