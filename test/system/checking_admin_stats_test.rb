@@ -24,7 +24,7 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
     visit admin_path
 
     within(".admin-table") do
-      assert_content "less than a minute ago"
+      assert_content "Active less than a minute ago"
     end
   end
 
