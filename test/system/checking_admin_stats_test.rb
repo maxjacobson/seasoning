@@ -84,6 +84,24 @@ class CheckingAdminStatsTest < ApplicationSystemTestCase
     assert_no_content "Orphaned shows count"
   end
 
+  test "admin sees show and review counts for each human" do
+    human = Human.create!(handle: "cam", email: "cam@example.com", admin: true)
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 59_659)
+    season = show.seasons.create!(tmdb_id: 60_448, name: "Season 1", season_number: 1, episode_count: 10)
+    MySeason.create!(human:, season:)
+    human.my_shows.create!(show:, status: "currently_watching")
+    SeasonReview.create!(author: human, season:, viewing: 1, rating: 5, body: "Great")
+
+    @magic_link = MagicLink.create!(email: human.email)
+    visit redeem_magic_link_path(@magic_link.token)
+    visit admin_path
+
+    within(".admin-table") do
+      assert_content "Shows added"
+      assert_content "Reviews"
+      assert_selector("td", text: "1", count: 2)
+    end
+  end
   test "non-admin can't see stats" do
     human = Human.create!(handle: "cam", email: "cam@example.com", admin: false)
     @magic_link = MagicLink.create!(email: human.email)

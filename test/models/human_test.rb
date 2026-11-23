@@ -20,6 +20,32 @@ class HumanTest < ActiveSupport::TestCase
     assert_in_delta 3.days.ago.to_i, result.last_active_at.to_i, 1
   end
 
+  test "#with_last_active_at returns added shows count and season reviews count" do
+    human = Human.create!(handle: "cam", email: "cam@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 59_659)
+    other_show = Show.create!(title: "Night Court", tmdb_tv_id: 2175)
+    season = show.seasons.create!(tmdb_id: 60_448, name: "Season 1", season_number: 1, episode_count: 10)
+    other_season = other_show.seasons.create!(tmdb_id: 24_594, name: "Season 1", season_number: 1, episode_count: 22)
+    human.my_shows.create!(show:, status: "currently_watching")
+    human.my_shows.create!(show: other_show, status: "finished")
+    SeasonReview.create!(author: human, season:, viewing: 1, rating: 5, body: "Great")
+    SeasonReview.create!(author: human, season: other_season, viewing: 1, rating: 3, body: "Fine")
+
+    result = Human.with_last_active_at.find(human.id)
+
+    assert_equal 2, result.added_shows_count
+    assert_equal 2, result.season_reviews_count
+  end
+
+  test "#with_last_active_at returns zero counts for humans without my_shows or reviews" do
+    human = Human.create!(handle: "donna", email: "donna@example.com")
+
+    result = Human.with_last_active_at.find(human.id)
+
+    assert_equal 0, result.added_shows_count
+    assert_equal 0, result.season_reviews_count
+  end
+
   test "#with_last_active_at returns nil last_active_at for humans without my_seasons" do
     human = Human.create!(handle: "donna", email: "donna@example.com")
 

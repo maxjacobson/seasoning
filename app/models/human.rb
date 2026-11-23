@@ -22,7 +22,12 @@ class Human < ApplicationRecord
 
   scope :with_last_active_at, lambda {
     left_joins(:my_seasons)
-      .select("humans.*, MAX(my_seasons.updated_at) AS last_active_at")
+      .select(
+        "humans.*",
+        "MAX(my_seasons.updated_at) AS last_active_at",
+        "(SELECT COUNT(*) FROM my_shows WHERE my_shows.human_id = humans.id) AS added_shows_count",
+        "(SELECT COUNT(*) FROM season_reviews WHERE season_reviews.author_id = humans.id) AS season_reviews_count"
+      )
       .group("humans.id")
   }
 
