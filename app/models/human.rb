@@ -84,6 +84,14 @@ class Human < ApplicationRecord
     password_digest.present?
   end
 
+  def added_shows?
+    if has_attribute?(:added_shows_count)
+      added_shows_count.to_i.positive?
+    else
+      my_shows.exists?
+    end
+  end
+
   private
 
   def time_zone_must_be_valid

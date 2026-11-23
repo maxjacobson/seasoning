@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :login, only: [:show, :create], controller: "password_sessions"
   resource :password, only: [:edit, :update], controller: "passwords"
   resource :admin, only: [:show]
+  resources :admin_humans, only: [:destroy], path: "admin/humans", controller: "admins/humans"
   resources :follows, only: [:create, :destroy]
   resources :provider_preferences, only: [:create, :destroy], path: "provider-preferences", param: :provider_id
   resources :returning_show_notifications, only: [:destroy] do
