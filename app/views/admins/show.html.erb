@@ -64,7 +64,8 @@
 
         <li>
           <strong>Last refreshed TMDB config:</strong>
-          <%= TMDBAPIConfiguration.sole.fetched_at %>
+          <% fetched_at = TMDBAPIConfiguration.sole.fetched_at %>
+          <time datetime="<%= fetched_at.iso8601 %>"><%= time_ago_in_words(fetched_at) %> ago</time>
         </li>
       </ul>
     </div>
