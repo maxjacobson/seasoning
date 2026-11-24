@@ -73,54 +73,56 @@
     <div class="admin-panel">
       <h2 class="section-heading">Recent humans</h2>
 
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>Human</th>
-            <th>Shows added</th>
-            <th>Reviews</th>
-            <th>Last active</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% Human.with_last_active_at.order(created_at: :desc).limit(50).each do |human| %>
+      <div class="admin-table__wrap">
+        <table class="admin-table">
+          <thead>
             <tr>
-              <td>
-                <%= link_to human.handle, human_profile_path(human.handle) %>
-              </td>
-
-              <td>
-                <%= number_with_delimiter(human.added_shows_count) %>
-              </td>
-
-              <td>
-                <%= number_with_delimiter(human.season_reviews_count) %>
-              </td>
-
-              <td class="admin-table__last-active">
-                <% if human.last_active_at %>
-                  <time datetime="<%= human.last_active_at.iso8601 %>">Active <%= time_ago_in_words(human.last_active_at) %> ago</time>
-                <% else %>
-                  <time datetime="<%= human.created_at.iso8601 %>">Joined <%= time_ago_in_words(human.created_at) %> ago</time>
-                <% end %>
-              </td>
-
-              <td>
-                <% if current_human != human && !human.added_shows? %>
-                  <%= button_to "Delete",
-                    admin_human_path(human),
-                    method: :delete,
-                    class: "link-looking-button",
-                    form_class: "inline",
-                    data: { turbo_confirm: "Are you sure you want to delete #{human.handle}? This cannot be undone." } %>
-                <% end %>
-              </td>
+              <th>Human</th>
+              <th>Shows added</th>
+              <th>Reviews</th>
+              <th>Last active</th>
+              <th>Actions</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            <% Human.with_last_active_at.order(created_at: :desc).limit(50).each do |human| %>
+              <tr>
+                <td>
+                  <%= link_to human.handle, human_profile_path(human.handle) %>
+                </td>
+
+                <td>
+                  <%= number_with_delimiter(human.added_shows_count) %>
+                </td>
+
+                <td>
+                  <%= number_with_delimiter(human.season_reviews_count) %>
+                </td>
+
+                <td class="admin-table__last-active">
+                  <% if human.last_active_at %>
+                    <time datetime="<%= human.last_active_at.iso8601 %>">Active <%= time_ago_in_words(human.last_active_at) %> ago</time>
+                  <% else %>
+                    <time datetime="<%= human.created_at.iso8601 %>">Joined <%= time_ago_in_words(human.created_at) %> ago</time>
+                  <% end %>
+                </td>
+
+                <td>
+                  <% if current_human != human && !human.added_shows? %>
+                    <%= button_to "Delete",
+                      admin_human_path(human),
+                      method: :delete,
+                      class: "link-looking-button",
+                      form_class: "inline",
+                      data: { turbo_confirm: "Are you sure you want to delete #{human.handle}? This cannot be undone." } %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
