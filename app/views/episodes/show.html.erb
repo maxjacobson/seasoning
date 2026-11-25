@@ -19,7 +19,7 @@
 
     <div class="episode-page__air-date">
       <span class="episode-page__air-date-label">Air date:</span>
-      <%= render "application/air_date", episode: @episode, available_same_day: @my_show.nil? || @my_show.available_same_day %>
+      <%= render "application/air_date", episode: @episode, availability_offset: @my_show&.availability_offset || 0 %>
     </div>
 
     <% if @my_season %>

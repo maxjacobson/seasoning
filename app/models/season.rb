@@ -15,7 +15,7 @@ class Season < ApplicationRecord
     Poster.new(tmdb_poster_path.presence || show.tmdb_poster_path)
   end
 
-  def unwatched_episode_badge_for(human, available_same_day: true)
+  def unwatched_episode_badge_for(human, availability_offset: 0)
     sql = ApplicationRecord.sanitize_sql_array(
       [
         <<~SQL.squish,
@@ -33,7 +33,7 @@ class Season < ApplicationRecord
         {
           human_id: human.id,
           season_id: id,
-          today: available_same_day ? human.time_zone.today : human.time_zone.yesterday
+          today: human.time_zone.today - availability_offset
         }
       ]
     )

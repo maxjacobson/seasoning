@@ -587,20 +587,44 @@ class MyShowTest < ActiveSupport::TestCase
     assert_not_nil my_show.reload.snoozed_until
   end
 
-  test "available_same_day defaults to true" do
+  test "availability_offset defaults to 0" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     my_show = MyShow.create!(human: human, show: show, status: "might_watch")
 
-    assert_predicate my_show, :available_same_day
+    assert_equal 0, my_show.availability_offset
   end
 
-  test "unwatched_episode_badge treats episode aired today as available when available_same_day is true" do
+  test "availability_offset allows -3 through 3" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "might_watch")
+
+    [-3, 0, 3].each do |offset|
+      my_show.update!(availability_offset: offset)
+
+      assert_equal offset, my_show.reload.availability_offset
+    end
+  end
+
+  test "availability_offset rejects values outside -3 through 3" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    my_show = MyShow.create!(human: human, show: show, status: "might_watch")
+
+    [-4, 4].each do |offset|
+      my_show.availability_offset = offset
+
+      assert_not my_show.valid?
+    end
+  end
+
+  test "unwatched_episode_badge treats episode aired today as available when availability_offset is 0" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season, episode_number: 1, air_date: human.time_zone.today, tmdb_id: 789, name: "Episode 1")
-    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: true)
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", availability_offset: 0)
 
     badge = my_show.unwatched_episode_badge
 
@@ -608,12 +632,12 @@ class MyShowTest < ActiveSupport::TestCase
     assert_equal 0, badge.upcoming
   end
 
-  test "unwatched_episode_badge treats episode aired today as upcoming when available_same_day is false" do
+  test "unwatched_episode_badge treats episode aired today as upcoming when availability_offset is 1" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
     Episode.create!(season: season, episode_number: 1, air_date: human.time_zone.today, tmdb_id: 789, name: "Episode 1")
-    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: false)
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", availability_offset: 1)
 
     badge = my_show.unwatched_episode_badge
 
@@ -621,7 +645,7 @@ class MyShowTest < ActiveSupport::TestCase
     assert_equal 1, badge.upcoming
   end
 
-  test "unwatched_episode_badge treats episode aired yesterday as available when available_same_day is false" do
+  test "unwatched_episode_badge treats episode aired yesterday as available when availability_offset is 1" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
@@ -632,7 +656,7 @@ class MyShowTest < ActiveSupport::TestCase
       tmdb_id: 789,
       name: "Episode 1"
     )
-    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: false)
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", availability_offset: 1)
 
     badge = my_show.unwatched_episode_badge
 
@@ -640,7 +664,26 @@ class MyShowTest < ActiveSupport::TestCase
     assert_equal 0, badge.upcoming
   end
 
-  test "unwatched_episode_badge with available_same_day false: today is upcoming, yesterday is available" do
+  test "unwatched_episode_badge treats episode aired 2 days from now as available when availability_offset is -2" do
+    human = Human.create!(handle: "donna_clark", email: "donna@example.com")
+    show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
+    season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 1)
+    Episode.create!(
+      season: season,
+      episode_number: 1,
+      air_date: human.time_zone.today + 2.days,
+      tmdb_id: 789,
+      name: "Episode 1"
+    )
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", availability_offset: -2)
+
+    badge = my_show.unwatched_episode_badge
+
+    assert_equal 1, badge.available
+    assert_equal 0, badge.upcoming
+  end
+
+  test "unwatched_episode_badge with availability_offset 1: today is upcoming, yesterday is available" do
     human = Human.create!(handle: "donna_clark", email: "donna@example.com")
     show = Show.create!(title: "Halt and Catch Fire", tmdb_tv_id: 123)
     season = Season.create!(show: show, season_number: 1, name: "Season 1", tmdb_id: 456, episode_count: 3)
@@ -665,7 +708,7 @@ class MyShowTest < ActiveSupport::TestCase
       tmdb_id: 791,
       name: "Episode 3"
     )
-    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", available_same_day: false)
+    my_show = MyShow.create!(human: human, show: show, status: "currently_watching", availability_offset: 1)
 
     badge = my_show.unwatched_episode_badge
 

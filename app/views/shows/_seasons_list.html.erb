@@ -2,7 +2,7 @@
 
 <div class="seasons-grid">
   <% seasons.each do |season| %>
-    <% badge = current_human ? season.unwatched_episode_badge_for(current_human, available_same_day: my_show.nil? || my_show.available_same_day) : EpisodeBadge.new(0, 0) %>
+    <% badge = current_human ? season.unwatched_episode_badge_for(current_human, availability_offset: my_show&.availability_offset || 0) : EpisodeBadge.new(0, 0) %>
 
     <div class="season-card">
       <%= link_to season_path(show.slug, season.slug), class: "season-card__poster-link" do %>

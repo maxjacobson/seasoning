@@ -1,6 +1,6 @@
 /*
   Show detail page: shows/show.html.erb and its partials
-  (_seasons_list, _show_metadata, _note_to_self, _available_same_day,
+  (_seasons_list, _show_metadata, _note_to_self, _availability_offset,
   _add_or_remove_show, _choose_show_status_button).
 */
 
@@ -144,6 +144,29 @@
   border-top: 1px solid var(--accent-line);
   border-bottom: 1px solid var(--accent-line);
   padding-block: 1rem;
+}
+
+.availability-offset {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.availability-offset__label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-soft);
+}
+
+.availability-offset input {
+  width: 3.5rem;
+}
+
+.availability-offset__hint {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--ink-faint);
+  margin-top: 0.25rem;
 }
 
 .collapsible-note__title {

@@ -1,0 +1,20 @@
+<%# locals: (my_show:) %>
+
+<%= form_with(model: my_show, url: show_your_show_path(my_show.show.slug), method: :patch) do |f| %>
+  <div class="availability-offset">
+    <%= f.label :availability_offset, "New episodes are available to me this many days from air date", class: "availability-offset__label" %>
+
+    <%= f.number_field(
+        :availability_offset,
+        min: -3,
+        max: 3,
+        step: 1,
+        onchange: "this.form.requestSubmit()",
+        data: { test_id: "availability-offset" }
+      ) %>
+  </div>
+
+  <p class="availability-offset__hint">
+    0 means on the air date, negative means early, positive means later
+  </p>
+<% end %>

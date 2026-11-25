@@ -12,6 +12,8 @@ class MyShow < ApplicationRecord
          finished: "finished"
        }
 
+  validates :availability_offset, numericality: { in: -3..3, only_integer: true }
+
   before_save :clear_snooze_on_status_change
 
   def snoozed?
@@ -51,7 +53,7 @@ class MyShow < ApplicationRecord
         {
           human_id: human.id,
           show_id: show.id,
-          today: available_same_day ? human.time_zone.today : human.time_zone.yesterday
+          today: human.time_zone.today - availability_offset
         }
       ]
     )

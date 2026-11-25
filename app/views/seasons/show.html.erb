@@ -83,7 +83,7 @@
                 </td>
 
                 <td class="episode-table__air-date">
-                  <%= render "application/air_date", episode: episode, available_same_day: @my_show.nil? || @my_show.available_same_day %>
+                  <%= render "application/air_date", episode: episode, availability_offset: @my_show&.availability_offset || 0 %>
                 </td>
 
                 <% if current_human.present? %>
